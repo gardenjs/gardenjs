@@ -14,9 +14,9 @@ const port = config.serverport
 
 app.use(express.static(__dirname + '/../public'))
 app.use(express.static(__dirname + '/assets'))
-app.use('Fonts', express.static(__dirname + '/assets/fonts'))
 app.use(express.static(config.destination))
 
+app.get("/", componentRoute)
 app.get("/garden", componentRoute)
 app.get("/garden/*", componentRoute)
 
