@@ -1,0 +1,46 @@
+
+@import '../../assets/scss/abstracts/variables';
+
+.topbar {
+  width: 100%;
+  height: $height-topbar;
+  background-color: $background-topbar;
+}
+.topbar--fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+}
+.btn-burger {
+  border: none;
+  background: none;
+  display: inline-block;
+  cursor: pointer;
+  .toggleIcon {
+    display: inline-block;
+    padding-top: 5px;
+    padding-left: 10px;
+    .bar1,
+    .bar2,
+    .bar3 {
+      width: 35px;
+      height: 3px;
+      background-color: #fff;
+      margin: 8px 0;
+      transition: 0.4s;
+    }  
+    &.active {
+      .bar1 {
+      transform: rotate(-45deg) translate(-9px, 6px);
+      }
+      .bar2 {
+        opacity: 0;
+      }
+      .bar3 {
+        transform: rotate(45deg) translate(-8px, -8px);
+      }
+    }
+  }
+}

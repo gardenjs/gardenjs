@@ -1,0 +1,67 @@
+//
+// @Project: css framework
+// @Author: Martin Farkas
+// @Email:  info@websites-graphix.com
+// @Date:   2020-06-10
+//
+
+@import '../abstracts/variables';
+
+* {
+  box-sizing: border-box;
+}
+html {
+  line-height: 1.3;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family-default;
+}
+// responsive layouts
+img, embed, object, video {
+	max-width: 100%;
+	width: auto;
+	height: auto;
+}
+img {
+  display: block;
+  border-style: none;
+  line-height: 0 !important;
+}
+figure {
+  margin: 0;
+}
+
+// ie
+main {
+  display: block;
+}
+
+.full {
+  height: 100%;
+  width: auto;
+  overflow-y: auto;
+}
+.flexfix {
+  flex-grow: 0;
+}
+.flexgrow {
+  flex-grow: 1;
+}
+.flex-row {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.flex-column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.bg-primary {
+  background-color: $primary-color;
+}

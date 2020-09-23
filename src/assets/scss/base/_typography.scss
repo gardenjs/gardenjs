@@ -1,0 +1,45 @@
+//
+// @Project: css framework
+// @Author: Martin Farkas
+// @Email:  info@websites-graphix.com
+// @Date:   2020-07-08
+//
+
+@import '../../assets/scss/abstracts/variables';
+
+html {
+  font-family: $font-family-default;
+  color: $color-text-default;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+}
+
+/* basic fonts settings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-headline;
+  color: $color-headline;
+  margin: 0;
+}
+
+p {
+  padding: 5px 0;
+}
+
+a, a:visited {
+  color: $primary-color;
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+  /* ie 10 */
+  background-color: transparent;
+}
+// a:hover {
+//   color: $color-ci-main-darker;
+// }
+a:focus {
+  outline: $primary-color;
+}
+
+b, strong {
+  font-family: $font-family-bold;
+}

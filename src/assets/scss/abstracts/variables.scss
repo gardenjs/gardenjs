@@ -1,0 +1,139 @@
+//
+// @Project: css framework
+// @Author: Martin Farkas
+// @Email:  info@websites-graphix.com
+// @Date:   2020-06-10
+//
+
+
+//  general variables 
+// -----------------------------------------------------------------------------------------------
+
+// colors
+// -------------------------------------------------
+$primary-color:    #3c93dc !default;
+
+$color-grey:       #808080 !default;
+$color-blue:       #3c93dc !default;
+$color-green:      #6ea644 !default;
+$color-yellow:     #f0ab4b !default;
+$color-red:        #d14e49 !default;
+
+// breakpoints
+// -------------------------------------------------
+$breakpoint-s:       650px !default;
+$breakpoint-m:       768px !default;
+$breakpoint-l:      1024px !default;
+$breakpoint-xl:     1440px !default;
+$breakpoint-xxl:    1920px !default;
+
+// gap
+// -------------------------------------------------
+// $gap-xs:    0.5rem !default;
+// $gap-s:     1rem !default;
+// $gap-m:     2rem !default;
+// $gap-l:     2.5rem !default;
+// $gap-xl:    3.5rem !default;
+// $gap-xxl:   4.5rem !default;
+
+// font-family
+// -------------------------------------------------
+$font-family-light:             'Roboto Light', sans-serif !default;
+$font-family-regular:           'Roboto Regular', sans-serif !default;
+$font-family-medium:            'Roboto Medium', sans-serif !default;
+$font-family-bold:              'Roboto Bold', sans-serif !default;
+$font-family-black:             'Roboto Black', sans-serif !default;
+$font-family-default:           $font-family-regular !default;
+$font-family-headline:          $font-family-light !default;
+
+// fluid font size
+// -------------------------------------------------
+$font-vp-min-width:   $breakpoint-s !default;
+$font-vp-max-width:   $breakpoint-xxl !default;
+$font-min-size-xxl:   37px !default;
+$font-max-size-xxl:   74px !default;
+$font-min-size-xl:    32px !default;
+$font-max-size-xl:    40px !default;
+$font-min-size-l:     26px !default;
+$font-max-size-l:     30px !default;
+$font-min-size-m:     21px !default;
+$font-max-size-m:     24px !default;
+$font-min-size-s:     18px !default;
+$font-max-size-s:     20px !default;
+$font-min-size-xs:    16px !default;
+$font-max-size-xs:    19px !default;
+$font-min-size-xxs:   15px !default;
+$font-max-size-xxs:   16px !default;
+
+// font color
+// -------------------------------------------------
+$color-text-default:  #222 !default;
+$color-headline: rgb(92, 90, 90) !default;
+
+// table
+// -------------------------------------------------
+$border-color:    $primary-color !default;
+
+
+
+// components variables
+// -----------------------------------------------------------------------------------------------
+
+// layouts
+// -------------------------------------------------
+
+
+
+// grid
+// -------------------------------------------------
+$col-options: (10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 80, 90, 100) !default;
+$gap:         2% !default;
+$gap-s:       0.5% !default;
+
+
+// topbar
+// -------------------------------------------------
+$position-topbar:       fixed !default;
+$height-topbar:         50px !default;
+$background-topbar:    #414141 !default;
+
+// sidenav
+// -------------------------------------------------
+$width-sidenav:            420px !default;
+$background-sidenav:       $primary-color !default;
+$color-sidenav-nav:      #fff !default;
+$background-mobile-nav:    $primary-color !default;
+
+// footer
+// -------------------------------------------------
+
+// dragbar
+// -------------------------------------------------
+$border-dragbar:                    1px solid hsl(0, 0%, 67%) !default;
+$background-color-dragbar:        hsl(0, 0%, 92%) !default;
+$background-color-dragbar-hover:  hsl(0, 0%, 87%) !default;
+
+// info-panel
+// -------------------------------------------------
+$border-color-infopanel-nav-hover:     #474747 !default;
+$border-color-infopanel-nav-inactive:  hsl(0, 0%, 67%) !default;
+$border-color-infopanel-nav-active:      $primary-color !default;
+$background-infopanel-content:         hsl(0, 0%, 97%) !default;
+$color-infopanel-inactive:               $border-color-infopanel-nav-hover !default;
+$color-infopanel-active:               #000 !default;
+
+
+// button
+// -------------------------------------------------
+$color-btn-grey:         $color-grey;
+$color-btn-blue:         $color-blue;
+$color-btn-success:      $color-green;
+$color-btn-warning:      $color-yellow;
+$color-btn-alert:        $color-red;
+
+
+// forms
+// -------------------------------------------------
+$border-input:          none;
+$background-input:    #eee;
+$border-radio-and-checkbox: 1px solid $color-grey;

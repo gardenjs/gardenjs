@@ -1,0 +1,32 @@
+env:
+  browser: true
+  commonjs: false
+  es6: true
+  node: true
+  mocha: true
+extends: 'eslint:recommended'
+plugins: ['svelte3']
+overrides: 
+  - files: ['*.svelte']
+    processor: 'svelte3/svelte3'
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+  globalThis: readonly
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: module
+rules:
+  no-console: 0
+  indent:
+    - error
+    - 2
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - never

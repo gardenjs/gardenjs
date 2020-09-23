@@ -1,0 +1,38 @@
+//
+// @Project: css framework
+// @Author: Martin Farkas
+// @Email:  info@websites-graphix.com
+// @Date:   2020-06-12
+//
+
+@import '../../assets/scss/abstracts/variables';
+
+.dragbar-vertical {
+  width: 15px;
+  border-left: $border-dragbar;
+  border-right: $border-dragbar;
+  background-color: $background-color-dragbar;
+  background-image: url('../icons/iconset/drag_handle-vertical.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: col-resize;
+  &:hover {
+    background-color: $background-color-dragbar-hover;
+  }
+  z-index: 10;
+}
+.dragbar-horizontal {
+  height: 15px;
+  border-top: $border-dragbar;
+  border-bottom: $border-dragbar;
+  background-color: $background-color-dragbar;
+  background-image: url('../icons/iconset/drag_handle-horizontal.svg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: row-resize;
+  &:hover {
+    background-color: $background-color-dragbar-hover;
+  }
+  z-index: 10;
+}
+

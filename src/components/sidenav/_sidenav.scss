@@ -1,0 +1,40 @@
+@import '../../assets/scss/abstracts/variables';
+
+// specific layouts: (collapsed) toggle-sidebar & content
+.sidenav {
+  width: 0;
+  max-width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  padding: 50px 0;
+  background: $background-sidenav;
+  transition: .4s;
+  color: $color-sidenav-nav;
+  margin: 0;
+  ul {
+    margin: 0;
+    color: $color-sidenav-nav;
+    list-style: none;
+    li {
+      padding: 10px 0;
+      list-style: none;
+      color: $color-sidenav-nav;
+      text-transform: uppercase;
+      a {
+        display: block;
+        text-transform: initial;
+        text-decoration: none;
+        font-family: $font-family-regular;
+        color: $color-sidenav-nav;
+      }
+    }
+  }
+  @include max(bp-l) {
+    width: 0px;
+  }
+  @include min(bp-l) {
+  }
+}
+.show-sidenav {
+  width: $width-sidenav;
+}

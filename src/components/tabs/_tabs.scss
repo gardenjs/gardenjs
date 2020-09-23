@@ -1,0 +1,50 @@
+//
+// @Project: css framework
+// @Author: Martin Farkas
+// @Email:  info@websites-graphix.com
+// @Date:   2020-06-12
+//
+
+@import '../../assets/scss/abstracts/variables';
+
+// panel nav
+.tabs__nav {
+  nav {
+    ul {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: row;
+      overflow-x: auto;
+      height: 50px;
+      margin: 0;
+      padding: 0;
+      li {
+        display: flex;
+        flex: auto;
+        height: 100%;
+        button {
+          width: 100%;
+          min-width: 150px;
+          height: 100%;
+          text-align: center;
+          cursor: pointer;
+          border: none;
+          background: none;
+          border-bottom: 3px solid $border-color-infopanel-nav-inactive;
+          &:hover {
+            border-bottom: 3px solid $border-color-infopanel-nav-hover;
+          }
+          &.active {
+            border-bottom: 3px solid $border-color-infopanel-nav-active;
+          }
+          // fonts
+          color: $color-infopanel-inactive;
+          &:hover,
+          &.active {
+            color: $color-infopanel-active;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+.vimsession
+.vscode
+/node_modules
+.git
+*.swp
+/public/build
