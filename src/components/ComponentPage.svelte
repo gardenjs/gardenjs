@@ -64,7 +64,7 @@ function tabselectionchange(evt) {
 
 <HorizontalSplitPane topheight='50vh'>
 <div slot="top" class="full overflow">
-  <iframe class="myframe" title="preview" bind:this={myframe} src="http://localhost:3010/gardenframe/"></iframe>
+  <iframe class="myframe" title="preview" bind:this={myframe} src="/gardenframe/"></iframe>
 </div>
 <div slot="bottom" class="full">
   <TabsComponent tabs={tabs} on:out={tabselectionchange}>
