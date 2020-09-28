@@ -10,7 +10,7 @@ const __dirname = dirname(__filename)
 // the provided config object has the same effect as passing "--format es"
 // on the command line and will override the format of all outputs
 
-let loadedOptions = {}
+let loadedOptions
 
 loadConfigFile(path.resolve(__dirname, 'rollup.config.js'), { format: 'es' }).then(
   async ({ options, warnings }) => {
@@ -38,6 +38,10 @@ loadConfigFile(path.resolve(__dirname, 'rollup.config.js'), { format: 'es' }).th
 )
 
 export async function generateGardenBundle() {
+  if (!loadedOptions) {
+    setTimeout(generateGardenBundle, 100)
+    return
+  }
   for (const optionsObj of loadedOptions) {
     const bundle = await rollup(optionsObj);
     await Promise.all(optionsObj.output.map(bundle.write));
