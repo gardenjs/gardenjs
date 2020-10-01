@@ -38,30 +38,3 @@ figure {
 main {
   display: block;
 }
-
-.full {
-  height: 100%;
-  width: auto;
-  overflow-y: auto;
-}
-.flexfix {
-  flex-grow: 0;
-}
-.flexgrow {
-  flex-grow: 1;
-}
-.flex-row {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-.flex-column {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-}
-.bg-primary {
-  background-color: $primary-color;
-}
