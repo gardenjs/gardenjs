@@ -74,6 +74,11 @@ describe('generate component', () => {
       const expectedRouteEntry = `'/base/node/nested/folder/sample': ${JSON.stringify(description, null, 2)}`
       expect(createRouteEntry(description)).deep.equals(expectedRouteEntry)
     })
+    it('generates route entry where relativepath is empty', () => {
+      const description = createSampleComponentDescription({relativepath: ''})
+      const expectedRouteEntry = `'/base/node/sample': ${JSON.stringify(description, null, 2)}`
+      expect(createRouteEntry(description)).deep.equals(expectedRouteEntry)
+    })
   })
   describe('generateNavigationEntry', () => {
     it('generates navigation entry', () => {

@@ -2,7 +2,7 @@ import svelte from 'rollup-plugin-svelte'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import scss from 'rollup-plugin-scss'
-import {scss as sveltescss} from 'svelte-preprocess';
+import {scss as sveltescss} from 'svelte-preprocess'
 
 import {config} from './config.js'
 
@@ -10,12 +10,12 @@ function addLivereload () {
   return {
     transform ( code, id ) {
       if (id.indexOf('gardenapp.js') > 0) {
-        console.log('ADD RELOAD')
+        console.log('Rabbit livereload added')
       code += `const socket = new WebSocket('ws://localhost:${config.wssocketport}/', 'autoreload')
 socket.onmessage = (msg) => {
   if (/reload/.test(msg.data)) {
     setTimeout(() => {
-    location.reload(true)
+      location.reload(true)
     }, 1)
   }
 }`
@@ -23,9 +23,9 @@ socket.onmessage = (msg) => {
       return {
         code, 
         map: null 
-      };
+      }
     }
-  };
+  }
 }
 
 export default [
