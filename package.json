@@ -6,10 +6,8 @@
   "svelte": "src/index.js",
   "type": "module",
   "bin": {
-    "buildGarden": "bin/generate.js",
     "initGarden": "bin/initgarden.js",
-    "serveGarden": "bin/servegarden.js",
-    "watchGarden": "bin/watch.js"
+    "serveGarden": "bin/servegarden.js"
   },
   "scripts": {
     "test": "mocha --require @babel/polyfill --require @babel/register --recursive"
@@ -47,7 +45,7 @@
       "test/component_app_generator_test_folder/*",
       "public/*"
     ],
-    "ext": "svelte,json"
+    "ext": "svelte,json,js"
   },
   "dependencies": {
     "node-watch": "^0.6.4"

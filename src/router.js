@@ -29,7 +29,7 @@ export function onUpdateRoute(listener) {
 
 function dispatchUpdateRoute(state, title, url) {
   listeners.forEach((listener) => {
-    listener(findRoute(url))
+    listener(findRoute(url), state)
   })
 }
 
