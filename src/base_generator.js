@@ -115,10 +115,11 @@ export function createComponentDescription({das, navbasenode, basepath, relative
 }
 
 export function createRoute(navfolder, relativepath, name) {
-  return ['']
+  return '/' + []
     .concat(navfolder.split('/'))
     .concat(relativepath.split('/'))
     .concat([name.toLocaleLowerCase()])
+    .filter(p => p.length > 0)
     .join('/')
 }
 
