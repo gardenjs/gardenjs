@@ -14,6 +14,7 @@ const port = config.serverport
 
 app.use(express.static(__dirname + '/../public'))
 app.use(express.static(__dirname + '/assets'))
+app.use(express.static('src/assets/'))
 app.use(express.static(config.destination))
 
 app.get("/", componentRoute)
