@@ -14,6 +14,7 @@
 }
 .flexfix {
   flex-grow: 0;
+  flex-shrink: 0;
 }
 .flexgrow {
   flex-grow: 1;
@@ -32,4 +33,12 @@
 }
 .bg-primary {
   background-color: $primary-color;
+}
+
+.pane__container {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  background-color: #ebebeb;
 }

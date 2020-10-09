@@ -46,7 +46,7 @@ function handleTopbarOut(evt) {
         <div slot="left" class="flexfix bg-primary">
           <Sidenav show={showSidenav} rootnode={navtree} />
         </div>
-        <div slot="right" class="full flexgrow">
+        <div slot="right" class="full flexgrow pane__container">
           <ComponentPage componentname={componentname} das={das} />
         </div>
       </LeftRightLayout>

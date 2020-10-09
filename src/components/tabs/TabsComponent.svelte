@@ -30,7 +30,7 @@ const dispatch = createEventDispatcher()
     </ul>
   </nav>
 </div>
-<div class="tabcontent">
+<div class="tabs__content-area">
   {#if selected && selected.page }
   <TabContent item={selected} on:out={handleout} />
   {:else}

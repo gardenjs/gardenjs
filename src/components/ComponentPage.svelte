@@ -43,10 +43,10 @@ $: {
 }
 
 $: tabs = [
-  {name: 'description', props: {text: das.name}},
-  {name: 'css', props: {text:'css'}},
-  {name: 'html', props: {text:'html'} },
-  {name: 'example', props: {selected: selectedExample.story, items: examples.map(ex => ex.story)}, page: InputSelectionComponent, out: handleSelectionChange},
+  {name: 'Description', props: {text: das.name}},
+  {name: 'CSS', props: {text:'css'}},
+  {name: 'HTML', props: {text:'html'} },
+  {name: 'Examples', props: {selected: selectedExample.story, items: examples.map(ex => ex.story)}, page: InputSelectionComponent, out: handleSelectionChange},
 ]
 
 $: selectedtab = tabs[0] || {}
@@ -62,15 +62,17 @@ function tabselectionchange(evt) {
 
 </script>
 
-<HorizontalSplitPane topheight='50vh'>
-<div slot="top" class="full overflow">
+
+<HorizontalSplitPane topheight='65vh'>
+<div slot="top" class="full flex-column">
+  <h1 class="h1">{das.name}</h1>
   <iframe class="myframe" title="preview" bind:this={myframe} src="/gardenframe/"></iframe>
 </div>
-<div slot="bottom" class="full">
+<div slot="bottom" class="full flex-column">
   <TabsComponent tabs={tabs} on:out={tabselectionchange}>
-    {#if selectedtab.name == 'description'}
+    {#if selectedtab.name == 'Description'}
       <h2>{das.name}</h2>
-      <p>{das.description}</p>
+      <p><b>Info:</b> {@html das.description}</p>
       <div>Input</div>
       <ul>
       {#if das.in}
@@ -88,18 +90,29 @@ function tabselectionchange(evt) {
       {/each}
       {/if}
       </ul>
-    {:else if selectedtab.name == 'html'}
-      <div> Test </div>
+    {:else if selectedtab.name == 'CSS'}
+      <h2>CSS...</h2>
+    {:else if selectedtab.name == 'HTML'}
+      <h2>HTML...</h2>
     {/if}
   </TabsComponent>
 </div>
 </HorizontalSplitPane>
 
 <style>
- .myframe {
-   border-width: 5px;
-   display: blocK;
-   height: 100%;
-   width: 100%;
- }
+  .h1 {
+    color: #333;
+    font-size: 1.2em;
+    font-weight: 800;
+    padding: 0 0 5px;
+  }
+  .myframe {
+    display: blocK;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ababab;
+    border-bottom: none;
+    border-radius: 2px;
+  }
 </style>

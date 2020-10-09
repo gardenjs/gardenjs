@@ -12,13 +12,12 @@ const handleselect = item => () => {
 
 </script>
 
-<div>
-  <ul>
-    {#each items as item}
-    <li class:active="{selected == item}" on:click={handleselect(item)}>{item}</li>
-    {/each}
-  </ul>
-</div>
+<h3>Options:</h3>
+<ul>
+  {#each items as item}
+  <li class:active="{selected == item}" on:click={handleselect(item)}>{item}</li>
+  {/each}
+</ul>
 
 <style>
 ul {
@@ -26,11 +25,13 @@ ul {
   padding: 0;
 }
  li {
+  border: 1px solid transparent;
    padding: 5px 12px;
    cursor: pointer;
  }
  .active {
    border: 1px solid green;
-   color: gray;   
+   color: green;
+   font-weight: bold; 
  }
 </style>
