@@ -12,7 +12,6 @@ const handleselect = item => () => {
 
 </script>
 
-<h3>Options:</h3>
 <ul>
   {#each items as item}
   <li class:active="{selected == item}" on:click={handleselect(item)}>{item}</li>
