@@ -16,14 +16,16 @@ export let navtree
 export let componentmap
 
 let das = {}
+let historystate
 
-initRouter(routes, baseurl, (routeobj) => {
+initRouter(routes, baseurl, (routeobj, state) => {
   if (!routeobj) {
     das = {}
     componentname = ''
   } else {
     das = routeobj.das || {}
     componentname = routeobj.fullname
+    historystate = state
   }
 })
 
@@ -47,7 +49,7 @@ function handleTopbarOut(evt) {
           <Sidenav show={showSidenav} rootnode={navtree} />
         </div>
         <div slot="right" class="full flexgrow pane__container">
-          <ComponentPage componentname={componentname} das={das} />
+          <ComponentPage componentname={componentname} das={das} historystate={historystate}/>
         </div>
       </LeftRightLayout>
     </div>

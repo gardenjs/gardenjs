@@ -5,6 +5,7 @@ import InputSelectionComponent from './InputSelectionComponent.svelte'
 
 export let componentname
 export let das = {}
+export let historystate
 
 let selectedExample = {}
 let examples = {}
@@ -37,9 +38,13 @@ $: {
   }
 }
 
+
 $: {
   examples = das.examples || []
   selectedExample = examples[0] || {}
+  if (historystate && historystate.selectedstory) {
+    selectedExample = examples.find(ex => ex.story == historystate.selectedstory) || {}
+  }
 }
 
 $: tabs = [
@@ -53,7 +58,7 @@ $: selectedtab = tabs[0] || {}
 
     
 function handleSelectionChange(evt) {
-  selectedExample = examples.find(ex => ex.story == evt.detail.selecteditem) || {}
+  globalThis.history.pushState({selectedstory: evt.detail.selecteditem}, '', window.location.pathname.substring('/garden'.length))
 }
 
 function tabselectionchange(evt) {
