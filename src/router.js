@@ -5,9 +5,14 @@ let currentUrl = initialUrl
 let baseurl = ''
 let routes
 
+let initialState = {url: currentUrl};
+
 (function storeInitialUrlInHistory() {
   if (globalThis.history) {
-    globalThis.history.replaceState({url: currentUrl}, null, currentUrl)
+    if (globalThis.history.state && globalThis.history.state.url == currentUrl) {
+      initialState = globalThis.history.state
+    }
+    globalThis.history.replaceState(initialState, null, currentUrl)
   }
 })()
 
@@ -15,7 +20,7 @@ export function initRouter(nRoutes, newBaseUrl, listener) {
   routes = nRoutes 
   baseurl = newBaseUrl 
   if (listener) onUpdateRoute(listener)
-  dispatchUpdateRoute({}, '', currentUrl)
+  dispatchUpdateRoute(initialState, '', currentUrl)
 }
 
 export function setRoutes(nRoutes) {

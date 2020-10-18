@@ -14,9 +14,7 @@ function addLivereload () {
       code += `const socket = new WebSocket('ws://localhost:${config.wssocketport}/', 'autoreload')
 socket.onmessage = (msg) => {
   if (/reload/.test(msg.data)) {
-    setTimeout(() => {
-      location.reload(true)
-    }, 1)
+    location.reload(true)
   }
 }`
       }
