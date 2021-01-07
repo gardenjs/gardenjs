@@ -13,7 +13,7 @@ let componentname = ''
 
 export let routes
 export let navtree
-export let componentmap
+// export let componentmap 
 
 let das = {}
 let historystate
