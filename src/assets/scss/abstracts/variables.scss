@@ -100,7 +100,7 @@ $background-topbar:     $primary-color-lighter !default;
 
 // sidenav
 // -------------------------------------------------
-$width-sidenav:            420px !default;
+$width-sidenav:            340px !default;
 $background-sidenav:       $primary-color !default;
 $color-sidenav-nav:      #fff !default;
 $background-mobile-nav:    $primary-color !default;
@@ -118,7 +118,7 @@ $background-color-dragbar-hover:  hsl(0, 0%, 87%) !default;
 // -------------------------------------------------
 $border-color-infopanel-nav-hover:     #474747 !default;
 $border-color-infopanel-nav-inactive:  hsl(0, 0%, 67%) !default;
-$border-color-infopanel-nav-active:    $primary-color-lighter !default;
+$border-color-infopanel-nav-active:    hsl(207, 70%, 35%) !default;
 $background-infopanel-content:         hsl(0, 0%, 97%) !default;
 $color-infopanel-inactive:               $border-color-infopanel-nav-hover !default;
 $color-infopanel-active:               #000 !default;
