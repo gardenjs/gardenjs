@@ -1,6 +1,6 @@
 <script> 
-export let routes 
-export let dynamicImport
+// export let routes 
+// export let dynamicImport
 export let componentmap
 
 let component
@@ -30,7 +30,7 @@ function handlecomponentout(evt) {
 }
 </script>
 
-<div class="full overflow">
-      <svelte:component this={component} {...selectedExample.input} {...redirectdata} on:out={handlecomponentout} />
+<div class="full">
+  <svelte:component this={component} {...selectedExample.input} {...redirectdata} on:out={handlecomponentout} />
 </div>
 
