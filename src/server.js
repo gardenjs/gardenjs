@@ -5,7 +5,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
 import { config } from './config.js'
-// import { createServer as createViteServer } from 'vite'
+import { createServer as createViteServer } from 'vite'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -22,14 +22,14 @@ async function createServer() {
 
   // Create vite server in middleware mode. This disables Vite's own HTML
   // serving logic and let the parent server take control.
-//  const vite = await createViteServer({
-//    server: { middlewareMode: true },
-//    configFile: false,
-//    root: '../public/gardenapp.html'
-//  })
-//  // use vite's connect instance as middleware
-//  app.use(vite.middlewares)
-//
+  const vite = await createViteServer({
+    server: { middlewareMode: true },
+    configFile: false,
+    root: '../public/gardenapp.html'
+  })
+  // use vite's connect instance as middleware
+  app.use(vite.middlewares)
+
 
   app.get("/", componentRoute)
   app.get("/garden", componentRoute)
@@ -38,8 +38,8 @@ async function createServer() {
   function componentRoute(req, res, next) {
     const filepath = path.resolve(__dirname, '../public/gardenapp.html')
     const html = fs.readFileSync(filepath, 'utf-8')
-    res.send(html)
-  //  res.send(vite.transformIndexHtml(req.url, html))
+//    res.send(html)
+    res.send(vite.transformIndexHtml(req.url, html))
   }
 
   app.get("/gardenframe", componentframeRoute)
@@ -47,8 +47,8 @@ async function createServer() {
   function componentframeRoute(req, res, next) {
     const filepath = path.resolve(__dirname, '../public/gardenframe.html')
     const html = fs.readFileSync(filepath, 'utf-8')
-    res.send(html)
-  //  res.send(vite.transformIndexHtml(req.url, html))
+  //  res.send(html)
+    res.send(vite.transformIndexHtml(req.url, html))
   }
 
   app.listen(port, () => console.log(`Listening to port ${port}`))
