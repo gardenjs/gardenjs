@@ -51,7 +51,6 @@ export const componentmap = {
 }
 
 export const dynamicImport = {
-  Sidenav: () => import ('componentlib/src/components/sidenav/SidenavExample.svelte')
 }
 `
 }

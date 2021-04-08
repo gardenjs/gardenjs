@@ -12,7 +12,7 @@ watch(config.watch.directories, {include: config.watch.include}, async () => {
 async function generate() {
   console.log('generate component app')
   await generateGardenBase()
-  await generateGardenBundle()
+//  await generateGardenBundle()
   console.log('generate component app finished')
   updateClients()    
 }
