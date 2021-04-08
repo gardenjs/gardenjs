@@ -71,7 +71,7 @@ function tabselectionchange(evt) {
 <HorizontalSplitPane topheight='65vh'>
 <div slot="top" class="full flex-column">
   <h1 class="h1">{das.name}</h1>
-  <iframe class="myframe" title="preview" bind:this={myframe} src="/gardenframe/"></iframe>
+  <iframe class="myframe" title="preview" bind:this={myframe} src="/garden/gardenframe/"></iframe>
 </div>
 <div slot="bottom" class="full flex-column">
   <TabsComponent tabs={tabs} on:out={tabselectionchange}>

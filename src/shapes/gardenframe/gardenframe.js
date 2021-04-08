@@ -1,11 +1,10 @@
 import {GardenFrame} from 'garden'
-import {componentmap} from './clbase'
-import '../src/assets/scss/main.scss'
+import {routes, dynamicImport, componentmap} from '../clbase'
 
 const app = new GardenFrame({
   target: document.body,
   hydrate: true,
-  props: {componentmap}
+  props: {routes, dynamicImport, componentmap}
 })
 
 export default app
