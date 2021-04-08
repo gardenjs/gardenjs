@@ -65,7 +65,7 @@ async function createServer() {
   console.log('PROJECT ROOT', process.cwd())
   const server = await createViteServer({
     server: {
-      port 
+      port
     }
   })
   console.log(`Listening to port ${port}`)

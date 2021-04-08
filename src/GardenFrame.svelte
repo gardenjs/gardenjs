@@ -1,7 +1,5 @@
 <script> 
-// export let routes 
-// export let dynamicImport
-export let componentmap
+  export let componentmap = {}
 
 let component
 let das = {}
@@ -12,7 +10,8 @@ window.addEventListener('message', (evt) => {
   selectedExample = evt.data.selectedExample || {}
   das = evt.data.das || {}
   redirectdata = {}
-  component = evt.data.componentname ? componentmap[evt.data.componentname] : {}
+  component = evt.data.componentname ? componentmap[evt.data.componentname] : undefined
+  console.log(evt.data.componentname, componentmap, component)
 })
 
 function handlecomponentout(evt) {
@@ -31,6 +30,8 @@ function handlecomponentout(evt) {
 </script>
 
 <div class="full">
+{#if component}
   <svelte:component this={component} {...selectedExample.input} {...redirectdata} on:out={handlecomponentout} />
+{/if}
 </div>
 
