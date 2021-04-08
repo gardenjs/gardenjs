@@ -42,13 +42,16 @@ export default [
     svelte({
       preprocess: sveltescss({}),
       // enable run-time checks when not in production
-      dev: true,
-      hydratable: true,
-      // we'll extract any component CSS out into
-      // a separate file - better for performance
-      css: css => {
-        css.write('customgardenapp.css');
-      }
+      compilerOptions: {
+        dev: true,
+        hydratable: true,
+        // we'll extract any component CSS out into
+        // a separate file - better for performance
+        css: css => {
+          css.write('customgardenapp.css');
+        }
+      },
+      emitCss: false
     }),
 
     // If you have external dependencies installed from
@@ -79,13 +82,14 @@ export default [
     svelte({
       preprocess: sveltescss({}),
       // enable run-time checks when not in production
-      dev: true,
-      hydratable: true,
-      // we'll extract any component CSS out into
-      // a separate file - better for performance
-      css: css => {
-        css.write('customgardenframe.css');
-      }
+      compilerOptions: {
+        dev: true,
+        hydratable: true,
+        css: css => {
+          css.write('customgardenframe.css');
+        }
+      },
+      emitCss: false
     }),
 
     // If you have external dependencies installed from
