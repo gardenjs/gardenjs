@@ -40,9 +40,10 @@ function copyFile(file, target) {
 function copyFileOrDirectory(fileOrDirectory, sourcefolder, targetfolder) {
   const filename = fileOrDirectory.name
   if (fileOrDirectory.isFile()) {
+    console.log('COPY FILE', sourcefolder + filename, 'TO', targetfolder + filename)
     fs.copyFile(sourcefolder + filename, targetfolder + filename, callback)
   } else if (fileOrDirectory.isDirectory()) {
-    copyFolder(sourcefolder + filename, targetfolder + filename)
+    copyFolder(sourcefolder + filename + '/', targetfolder + filename + '/')
   }
 }
 
