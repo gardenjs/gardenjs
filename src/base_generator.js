@@ -4,7 +4,13 @@ import {findAndReadDasFiles} from './das_file_finder.js'
 import {config} from './config.js'
 
 export async function generateGardenBase(targetFile = config.destination + 'clbase.js') {
-
+  
+  let oldcode = ''
+  try {
+    oldcode = (await fs.promises.readFile(targetFile)).toString()
+  } catch (e) {
+    console.log(e)
+  }
   const basefolders = getDasBaseFolders(config.structure)
 
   const cds = await basefolders.reduce(async (acc, basePathAndNode) => {
@@ -18,7 +24,9 @@ export async function generateGardenBase(targetFile = config.destination + 'clba
   }, [])
 
   const code = generateCode(cds)
-  await fs.promises.writeFile(targetFile, code)
+  if (oldcode !== code) {
+    await fs.promises.writeFile(targetFile, code)
+  }
 }
 
 export function getDasBaseFolders(structure, navbasenode) {

@@ -5,7 +5,7 @@ import {generateGardenBundle} from './bundle_generator.js'
 import {updateClients} from './reloadserver.js'
 
 generate()
-watch(config.watch.directories, {include: config.watch.include}, async () => {
+watch(config.watch.directories, {include: config.watch.include}, async (evt) => {
   await generate()
 })
 
