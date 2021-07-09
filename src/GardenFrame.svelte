@@ -11,7 +11,6 @@ window.addEventListener('message', (evt) => {
   das = evt.data.das || {}
   redirectdata = {}
   component = evt.data.componentname ? componentmap[evt.data.componentname] : undefined
-  console.log(evt.data.componentname, componentmap, component)
 })
 
 function handlecomponentout(evt) {
