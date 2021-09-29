@@ -1,5 +1,6 @@
 import { config } from './config.js'
 import { createServer as createViteServer } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 const port = config.serverport
 
@@ -17,7 +18,10 @@ async function createServer() {
           },
         }
       }
-    }
+    },
+    plugins: [svelte(
+      {compilerOptions: {hydratable: true}}
+    )]
   })
   console.log(`Listening to port ${port}`)
   server.listen()
