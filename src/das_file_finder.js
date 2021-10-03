@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import {createHash} from 'crypto'
 
 export async function findAndReadDasFiles({basepath, navbasenode}) {
   const promises = (await findDasFiles(basepath)).map(async file => {
@@ -33,15 +34,21 @@ async function findDasFiles(basepath, relativepath = '') {
 }
 
 async function readDasFile({filename, relativepath, basepath}) {
+  let content = await fs.promises.readFile(path.resolve(basepath, relativepath, filename), {encoding: 'utf-8'})
   if (isJsonFile(filename)) {
-    let content = await fs.promises.readFile(path.resolve(basepath, relativepath, filename), {encoding: 'utf-8'})
     return JSON.parse(content)
   }
   // js file
-  const module = await import(path.resolve(basepath, relativepath, filename) + '?' +  Math.random() * 10000)
+  const module = await import(path.resolve(basepath, relativepath, filename) + '?' + createMd5Hash(content))
   return module.default
 }
 
 function isJsonFile(filename) {
   return filename.match(/.*\.json$/)
+}
+
+function createMd5Hash(str) {
+  const hash = createHash('md5')
+  hash.update(str)
+  return hash.digest('hex')
 }
