@@ -42,17 +42,18 @@ describe('generate component', () => {
     })
   })
   describe('findAndReadDasFiles', () => {
-    it('returns all das-json files as json and file information relative to basefolder', async () => {
+    it('returns all das-json and das-js files as json and file information relative to basefolder', async () => {
       const basepath = './test/dasfiles_test_folder'
       const navbasenode = 'base'
       const dasfiles = await findAndReadDasFiles({basepath, navbasenode})
       const das = {some: 'value'}
       expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f1.das.json', relativepath: ''})
+      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'fjs1.das.js', relativepath: 'folder_with_das_js'})
       expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f2.das.json', relativepath: 'subfolder'})
       expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f3.das.json', relativepath: 'anotherfolder'})
       expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f4.das.json', relativepath: 'anotherfolder'})
       expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f5.das.json', relativepath: 'anotherfolder/deepfolder'})
-      expect(dasfiles.length).equals(5)
+      expect(dasfiles.length).equals(6)
     })
   })
 

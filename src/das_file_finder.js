@@ -17,7 +17,7 @@ async function findDasFiles(basepath, relativepath = '') {
         if (err) {
           reject(err)
         } else {
-          const dasfiles = files.filter(file => file.name.match(/^.*\.das\.json$/i) ).map(file => {return {filename: file.name, relativepath, basepath}})
+          const dasfiles = files.filter(file => file.name.match(/^.*\.das\.(js|json)$/i) ).map(file => {return {filename: file.name, relativepath, basepath}})
           const promises = files.filter(file => file.isDirectory()).map(dir => {
             return findDasFiles(basepath, path.join(relativepath, dir.name))
           })
@@ -33,6 +33,15 @@ async function findDasFiles(basepath, relativepath = '') {
 }
 
 async function readDasFile({filename, relativepath, basepath}) {
-  let content = await fs.promises.readFile(path.resolve(basepath, relativepath, filename), {encoding: 'utf-8'})
-  return JSON.parse(content)
+  if (isJsonFile(filename)) {
+    let content = await fs.promises.readFile(path.resolve(basepath, relativepath, filename), {encoding: 'utf-8'})
+    return JSON.parse(content)
+  }
+  // js file
+  const module = await import(path.resolve(basepath, relativepath, filename) + '?' +  Math.random() * 10000)
+  return module.default
+}
+
+function isJsonFile(filename) {
+  return filename.match(/.*\.json$/)
 }
