@@ -1,6 +1,6 @@
 const listeners = []
 
-const initialUrl = globalThis.location ? globalThis.location.pathname : ''
+const initialUrl = globalThis.location ? globalThis.location.pathname + globalThis.location.search : ''
 let currentUrl = initialUrl
 let baseurl = ''
 let routes

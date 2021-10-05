@@ -1,17 +1,33 @@
 <script> 
-export let componentmap = {}
+
+export let componentmap
+export let routes
+
+let urlParams = new URLSearchParams(window.location.search);
+let currentPath = window.location.pathname.substring('direct/'.length)
+
+let currentRoute = routes[currentPath]
+let story = decodeURI(urlParams.get('story'))
+
+console.log(currentRoute, currentPath, story, 'HIHU')
 
 let component
-let das = {}
+let das 
 let selectedExample = {}
 let redirectdata = {}
 
-window.addEventListener('message', (evt) => {
-  selectedExample = evt.data.selectedExample || {}
-  das = evt.data.das || {}
-  redirectdata = {}
-  component = evt.data.componentname ? componentmap[evt.data.componentname] : undefined
-})
+$: {
+  if (currentRoute) {
+    das = currentRoute.das
+    component = componentmap[currentRoute.fullname]
+  }
+  if (das) {
+    selectedExample = das.examples.find(ex => {
+      console.log('IS', ex.story, story, ex.story == story)
+      return ex.story == story
+    })
+  }
+}
 
 function handlecomponentout(evt) {
   if (das.out) {
