@@ -1,23 +1,22 @@
 import {default as chai} from 'chai'
 const expect = chai.expect
-import {generateCode, createImportStmt, createRouteEntry, createNavigationEntry, createNavItemTree, createComponentDescription, getDasBaseFolders } from '../src/base_generator.js'
+import {generateBaseCode, generateComponentMapCode, createImportStmt, createRouteEntry, createNavigationEntry, createNavItemTree, createComponentDescription, getDasBaseFolders } from '../src/base_generator.js'
 import {findAndReadDasFiles} from '../src/das_file_finder.js'
 
 describe('generate component', () => {
-  it.skip('generates code', () => {
-    const componentfiles = [
-      {filename: './AnyComponent.svelte'}, {filename: './AnotherComponent.svelte'}]
-    const code = 'todo' + componentfiles //generateCodeFor(componentfiles)
-    console.log(code)
-  })
-  it.skip('todo, test if this works', () => {
-    // generateComponentApp('/test/component_app_generator_test_folder/ComponentApp.svelte', './components/')
-  })
-  describe('generateCode', () => {
-    it('creates code for given componentdescriptions', () => {
+  describe('generateBaseCode', () => {
+    it('creates base code for given componentdescriptions', () => {
       const cds = [createSampleComponentDescription({name: 'C1'}), createSampleComponentDescription({name: 'C2'})]
-      const code = generateCode(cds)
-      const expectedCode = getExpectedCode1()
+      const code = generateBaseCode(cds)
+      const expectedCode = getExpectedBaseCode()
+      expect(code).equals(expectedCode)
+    })
+  })
+  describe('generateComponentMapCode', () => {
+    it('creates component map code for given componentdescriptions', () => {
+      const cds = [createSampleComponentDescription({name: 'C1'}), createSampleComponentDescription({name: 'C2'})]
+      const code = generateComponentMapCode(cds)
+      const expectedCode = getExpectedComponentMapCode()
       expect(code).equals(expectedCode)
     })
   })
@@ -100,10 +99,6 @@ describe('generate component', () => {
       expect(navitemtree).deep.equals(expectedNavItemTree)
     })
   })
-  describe.skip('TODO generateDynamicImportStmt', () => {
-    it('generates import stmt', () => {
-    })
-  })
   describe('generateComponentDescription', () => {
     it('generates component description from das file and given path and basefolder', () => {
       const das = createSampleDas()
@@ -143,11 +138,8 @@ function createSampleDas(name = 'Sample') {
   }
 }
 
-function getExpectedCode1() {
+function getExpectedBaseCode() {
   return `
-import BaseNodeNestedFolderC1 from '../base/path/nested/folder/Sample.svelte'
-import BaseNodeNestedFolderC2 from '../base/path/nested/folder/Sample.svelte'
-
 export const routes = {
   '/base/node/nested/folder/c1': {
   "das": {
@@ -243,13 +235,16 @@ export const navtree = {
     }
   }
 }
+`
+}
+function getExpectedComponentMapCode() {
+  return `
+import BaseNodeNestedFolderC1 from '../base/path/nested/folder/Sample.svelte'
+import BaseNodeNestedFolderC2 from '../base/path/nested/folder/Sample.svelte'
 
 export const componentmap = {
   'BaseNodeNestedFolderC1': BaseNodeNestedFolderC1,
 'BaseNodeNestedFolderC2': BaseNodeNestedFolderC2
-}
-
-export const dynamicImport = {
 }
 `
 }

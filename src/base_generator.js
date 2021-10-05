@@ -1,17 +1,14 @@
 import path from 'path'
 import fs from 'fs'
 import {findAndReadDasFiles} from './das_file_finder.js'
-import {config} from './config.js'
+import config from './config.js'
+const {structure, destination} = config
 
-export async function generateGardenBase(targetFile = config.destination + 'clbase.js') {
+export async function generateGardenBase() {
+  const targetBaseFile = destination + 'base.js'
+  const targetComponentMapFile= destination + 'componentmap.js'
   
-  let oldcode = ''
-  try {
-    oldcode = (await fs.promises.readFile(targetFile)).toString()
-  } catch (e) {
-    console.log(e)
-  }
-  const basefolders = getDasBaseFolders(config.structure)
+  const basefolders = getDasBaseFolders(structure)
 
   const cds = await basefolders.reduce(async (acc, basePathAndNode) => {
     const filemetaAndDasArray = await findAndReadDasFiles(basePathAndNode)
@@ -23,11 +20,23 @@ export async function generateGardenBase(targetFile = config.destination + 'clba
     }
   }, [])
 
-  const code = generateCode(cds)
-  if (oldcode !== code) {
-    await fs.promises.writeFile(targetFile, code)
+  await writeFileIfNotChanged(targetBaseFile, generateBaseCode(cds))
+  await writeFileIfNotChanged(targetComponentMapFile, generateComponentMapCode(cds))
+
+}
+
+async function writeFileIfNotChanged(file, content) {
+  let oldcontent = ''
+  try {
+    oldcontent = (await fs.promises.readFile(file)).toString()
+  } catch (e) {
+    console.log(e)
+  }
+  if (oldcontent !== content) {
+    await fs.promises.writeFile(file, content)
   }
 }
+
 
 export function getDasBaseFolders(structure, navbasenode) {
   let folders = []
@@ -44,21 +53,24 @@ export function getDasBaseFolders(structure, navbasenode) {
   return folders
 }
 
-export function generateCode(componentdescriptions) {
-  return `
-${componentdescriptions.map(createImportStmt).join('\n')}
+export function generateBaseCode(componentdescriptions) {
 
+  return `
 export const routes = {
   ${componentdescriptions.map(createRouteEntry).join(',\n')}
 }
 
 export const navtree = ${JSON.stringify(createNavItemTree(componentdescriptions), null, 2)}
+`
+}
+
+export function generateComponentMapCode(componentdescriptions) {
+
+  return `
+${componentdescriptions.map(createImportStmt).join('\n')}
 
 export const componentmap = {
   ${componentdescriptions.map(createComponentKeyMapEntry).join(',\n')}
-}
-
-export const dynamicImport = {
 }
 `
 }
