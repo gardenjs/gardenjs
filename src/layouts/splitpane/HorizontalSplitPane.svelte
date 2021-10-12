@@ -5,8 +5,7 @@
   }
 
   const drag = (e) => {
-//    console.log(e.pageY, e.pageX, e)
-    document.selection ? document.selection.empty() : window.getSelection().removeAllRanges()
+    window.getSelection().removeAllRanges()
     topheight = (e.pageY - element.offsetTop - 7) + 'px'
   }
 

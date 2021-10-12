@@ -1,13 +1,11 @@
 <script>
-  let mousedown
   function register() {
-    mousedown = true
     document.addEventListener('mousemove', drag)
     document.addEventListener('mouseup', unregister)
   }
 
   const drag = (e) => {
-    document.selection ? document.selection.empty() : window.getSelection().removeAllRanges()
+    window.getSelection().removeAllRanges()
     leftwidth = (e.pageX - element.offsetLeft - 7) + 'px'
   }
 
