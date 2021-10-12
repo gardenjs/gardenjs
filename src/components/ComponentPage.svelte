@@ -76,8 +76,10 @@ function toggleSize() {
 
 <HorizontalSplitPane topheight='65vh'>
 <div slot="top" class="full flex-column">
-  <h1 class="h1">{das.name}</h1>
-  <button on:click={toggleSize} >togglesize</button>
+  <div class="flex-row gardenframetopbar">
+    <h1 class="h1">{das.name}</h1>
+    <button on:click={toggleSize} >togglesize</button>
+  </div>
   <iframe class="myframe" title="preview" bind:this={myframe} src="/garden/gardenframe/" style="width: {size}; height: {size}"></iframe>
 </div>
 <div slot="bottom" class="full flex-column">
@@ -127,5 +129,10 @@ function toggleSize() {
     border: 1px solid #ababab;
     border-bottom: none;
     border-radius: 2px;
+  }
+  .gardenframetopbar {
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 25px;
   }
 </style>
