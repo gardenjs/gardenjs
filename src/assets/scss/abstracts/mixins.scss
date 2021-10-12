@@ -1,17 +1,17 @@
 //
-// @Project: css framework
+// @Project: Garden by Rabbit Development 
 // @Author: Martin Farkas
 // @Email:  info@websites-graphix.com
-// @Date:   2020-06-10
 //
 
-@import 'variables';
+@use "sass:math";
 
 // 1) media queries
 // 2) fluid fonts
 
-/* media queries
---------------------------------------------------------------------------------------------------------- */
+// -----------------------------------------------------------------------------------------------
+// breakpoints
+// -----------------------------------------------------------------------------------------------
 $breakpoints: (
   // screensize:
   bp-s:       $breakpoint-s,
@@ -22,8 +22,7 @@ $breakpoints: (
   // typs:
 ) !default;
 
-/*  min
-------------------------------------------------- */
+//  min-width
 @mixin min($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
@@ -34,9 +33,7 @@ $breakpoints: (
     @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
-
-/*  max
-------------------------------------------------- */
+//  max-width
 @mixin max($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
@@ -47,9 +44,7 @@ $breakpoints: (
     @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
-
-/*  minmax
-------------------------------------------------- */
+//  min-with & max-width
 @mixin minmax($lower, $upper) {
   @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
     $lower-breakpoint: map-get($breakpoints, $lower);

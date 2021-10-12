@@ -1,4 +1,8 @@
-@import '../../assets/scss/abstracts/variables';
+//
+// @Project: Garden by Rabbit Development 
+// @Author: Martin Farkas
+// @Email:  info@websites-graphix.com
+//
 
 // specific layouts: (collapsed) toggle-sidebar & content
 .sidenav {
@@ -36,13 +40,13 @@
   // logo
   .logo {
     margin: 0 0 30px;
-    svg {
-      display: block;
-      margin: auto;
-    }
     a {
       text-decoration: none;
       font-family: $font-family-bold;
+      svg {
+        display: block;
+        margin: auto;
+      }
       .logo__title {
         display: block;
         color: #fff;

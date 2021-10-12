@@ -1,8 +1,7 @@
 //
-// @Project: css framework
+// @Project: Garden by Rabbit Development 
 // @Author: Martin Farkas
 // @Email:  info@websites-graphix.com
-// @Date:   2020-06-10
 //
 
 // abstract
@@ -10,16 +9,16 @@
 @import './abstracts/mixins';
 
 // base
-@import './base/normalize';
+@import './base/modern-normalize';
 @import './base/general';
 @import './base/modifiers';
 @import './base/fonts';
 @import './base/typography';
 
 // layouts
-@import '../../layouts/splitpane/splitpane';
 
 // components
-@import '../../components/topbar/topbar';
-@import '../../components/sidenav/sidenav';
-@import '../../components/tabs/tabs';
+@import './components/splitpane';
+@import './components/topbar';
+@import './components/sidenav';
+@import './components/tabs';
