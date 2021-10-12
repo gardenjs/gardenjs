@@ -49,8 +49,6 @@ $: {
 
 $: tabs = [
   {name: 'Description', props: {text: das.name}},
-  {name: 'CSS', props: {text:'css'}},
-  {name: 'HTML', props: {text:'html'} },
   {name: 'Examples', props: {selected: selectedExample.story, items: examples.map(ex => ex.story)}, page: InputSelectionComponent, out: handleSelectionChange},
 ]
 
