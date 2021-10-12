@@ -63,13 +63,22 @@ function tabselectionchange(evt) {
   selectedtab = evt.detail.selecteditem
 }
 
+let size = "100%"
+function toggleSize() {
+  size = size == "100%" ? "500px" : "100%"
+  if (size != "100%") {
+
+  }
+}
+
 </script>
 
 
 <HorizontalSplitPane topheight='65vh'>
 <div slot="top" class="full flex-column">
   <h1 class="h1">{das.name}</h1>
-  <iframe class="myframe" title="preview" bind:this={myframe} src="/garden/gardenframe/"></iframe>
+  <button on:click={toggleSize} >togglesize</button>
+  <iframe class="myframe" title="preview" bind:this={myframe} src="/garden/gardenframe/" style="width: {size}; height: {size}"></iframe>
 </div>
 <div slot="bottom" class="full flex-column">
   <TabsComponent tabs={tabs} on:out={tabselectionchange}>
@@ -110,6 +119,7 @@ function tabselectionchange(evt) {
     padding: 0 0 5px;
   }
   .myframe {
+    align-self: center;
     display: blocK;
     height: 100%;
     width: 100%;
