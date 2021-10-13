@@ -96,12 +96,12 @@ $gap-s:       0.5% !default;
 // -------------------------------------------------
 $position-topbar:       fixed !default;
 $height-topbar:         50px !default;
-$background-topbar:     #282828 !default;
+$background-topbar:     hsl(0, 0%, 16%) !default;
 
 // sidenav
 // -------------------------------------------------
-$width-sidenav:            340px !default;
-$background-sidenav:       #282828 !default;
+$width-sidenav:            280px !default;
+$background-sidenav:     hsl(0, 0%, 16%) !default;
 $color-sidenav-nav:      #fff !default;
 // $background-mobile-nav:    #282828 !default;
 
@@ -110,15 +110,15 @@ $color-sidenav-nav:      #fff !default;
 
 // dragbar
 // -------------------------------------------------
-$border-dragbar:                    1px solid hsl(0, 0%, 67%) !default;
-$background-color-dragbar:        hsl(0, 0%, 92%) !default;
-$background-color-dragbar-hover:  hsl(0, 0%, 87%) !default;
+$border-dragbar:                  1px solid hsl(0, 0%, 67%) !default;
+$background-color-dragbar:        hsl(0, 0%, 16%) !default;
+$background-color-dragbar-hover:  hsl(0, 0%, 25%) !default;
 
 // info-panel
 // -------------------------------------------------
-$border-color-infopanel-nav-hover:     #474747 !default;
+$border-color-infopanel-nav-hover:     hsl(0, 0%, 87%) !default;
 $border-color-infopanel-nav-inactive:  hsl(0, 0%, 67%) !default;
-$border-color-infopanel-nav-active:    hsl(207, 70%, 35%) !default;
+$border-color-infopanel-nav-active:    #ea5b21 !default;
 $background-infopanel-content:         hsl(0, 0%, 97%) !default;
 $color-infopanel-inactive:               $border-color-infopanel-nav-hover !default;
 $color-infopanel-active:               #000 !default;
@@ -126,27 +126,27 @@ $color-infopanel-active:               #000 !default;
 
 // button
 // -------------------------------------------------
-$color-btn-grey:         $color-grey;
-$color-btn-blue:         $color-blue;
-$color-btn-success:      $color-green;
-$color-btn-warning:      $color-yellow;
-$color-btn-alert:        $color-red;
+// $color-btn-grey:         $color-grey;
+// $color-btn-blue:         $color-blue;
+// $color-btn-success:      $color-green;
+// $color-btn-warning:      $color-yellow;
+// $color-btn-alert:        $color-red;
 
 
 // dropdowns
 // -------------------------------------------------
-$dropdown-list-padding:                   0 !default;
-$dropdown-list-right:                     0 !default;
-$dropdown-link-padding:                   0.5rem 0.5rem !default;
-$dropdown-link-color:                     #fff !default;
-$dropdown-link-color-hover:               #fff !default;
-$dropdown-link-svg-margin:                0 0.5rem 0 0 !default;
-$dropdown-link-background:                #fff !default;
-$dropdown-link-background-hover:          $background-topbar !default;
+// $dropdown-list-padding:                   0 !default;
+// $dropdown-list-right:                     0 !default;
+// $dropdown-link-padding:                   0.5rem 0.5rem !default;
+// $dropdown-link-color:                     #fff !default;
+// $dropdown-link-color-hover:               #fff !default;
+// $dropdown-link-svg-margin:                0 0.5rem 0 0 !default;
+// $dropdown-link-background:                #fff !default;
+// $dropdown-link-background-hover:          $background-topbar !default;
 
 
 // forms
 // -------------------------------------------------
-$border-input:              none;
-$background-input:          #eee;
-$border-radio-and-checkbox: 1px solid $color-grey;
+// $border-input:              none;
+// $background-input:          #eee;
+// $border-radio-and-checkbox: 1px solid $color-grey;
