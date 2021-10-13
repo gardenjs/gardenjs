@@ -4,20 +4,13 @@
 // @Email:  info@websites-graphix.com
 //
 
-// .dragbar-vertical {
-//   width: 15px;
-//   border-left: $border-dragbar;
-//   border-right: $border-dragbar;
-//   background-color: $background-color-dragbar;
-//   background-image: url('../icons/iconset/drag_handle-vertical.svg');
-//   background-position: center center;
-//   background-repeat: no-repeat;
-//   cursor: col-resize;
-//   &:hover {
-//     background-color: $background-color-dragbar-hover;
-//   }
-//   z-index: 10;
-// }
+.infopanel {
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  background-color: #1e1e1e;
+}
 .dragbar-horizontal {
   display: flex;
   align-items: center;
@@ -39,4 +32,3 @@
   }
   z-index: 10;
 }
-
