@@ -33,9 +33,35 @@
 }
 
 .pane__container {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  width: auto;
+  overflow-y: auto;
   box-sizing: border-box;
   height: 100%;
   width: 100%;
-  padding: 10px;
-  background-color: #ebebeb;
+  background-color: $background-topbar;
+}
+
+.title__h1 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: 0.125rem;
+}
+.myframe {
+  align-self: center;
+  display: blocK;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-bottom: none;
+  border-radius: 2px;
+}
+.gardenframetopbar {
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 25px;
 }
