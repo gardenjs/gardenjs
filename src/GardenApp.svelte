@@ -45,10 +45,10 @@ function handleTopbarOut(evt) {
     </div>
     <div slot="bottom" class="full flexgrow">
       <LeftRightLayout>
-        <div slot="left" class="flexfix bg-primary">
+        <div slot="left" class="flexfix">
           <Sidebar show={showSidebar} rootnode={navtree} />
         </div>
-        <div slot="right" class="full flexgrow pane__container">
+        <div slot="right" class="pane__container">
           <ComponentPage componentname={componentname} das={das} historystate={historystate}/>
         </div>
       </LeftRightLayout>
