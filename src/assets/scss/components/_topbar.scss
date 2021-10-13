@@ -8,17 +8,34 @@
   width: 100%;
   height: $height-topbar;
   background-color: $background-topbar;
+  background-color: #080;
 }
-// .topbar--fixed {
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   z-index: 99999;
-// }
-.topbar__nav-icon {
-  border: none;
-  background: none;
-  display: inline-block;
-  cursor: pointer;
+.topbar__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: $height-topbar;
+  padding: 0 2rem;
+  .topbar__nav-btn {
+    display: block;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  .topbar__nav {
+    .switch-mode {
+      display: block;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      svg {
+        fill: #fff;
+      }
+    }
+  }
 }
