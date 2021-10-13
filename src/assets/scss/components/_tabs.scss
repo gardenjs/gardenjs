@@ -48,9 +48,8 @@
   }
 }
 // content area
-.tabs__content-area {
+.infopanel__pane {
   padding: 20px;
-  // height: 100%; // if not activated is does not solve the problem if rescaled, maybe dynamic solution neccesary?
   background-color: #1e1e1e;
   color: hsl(0, 0%, 87%);
   h2,h3,h4,h5,h6,li {
@@ -66,14 +65,15 @@
   }
   li {
     margin: 0.25rem 0;
-    padding: 0.25rem 0.75rem;
+    padding: 0.125rem 0.75rem;
+    font-size: 0.9rem;
     border-radius: 0.125rem;
     cursor: pointer;
     &:hover,
     &:focus,
     &.active {
       color: hsl(0, 0%, 97%);
-      background-color: hsl(0, 7%, 25%);
+      background-color: hsl(0, 0, 25%);
     }
   }
 }
