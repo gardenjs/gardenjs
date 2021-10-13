@@ -39,13 +39,13 @@ $breakpoint-xxl:    1920px !default;
 
 // font-family
 // -------------------------------------------------
-$font-family-light:             'Roboto Light', sans-serif !default;
-$font-family-regular:           'Roboto Regular', sans-serif !default;
-$font-family-medium:            'Roboto Medium', sans-serif !default;
-$font-family-bold:              'Roboto Bold', sans-serif !default;
-$font-family-black:             'Roboto Black', sans-serif !default;
-$font-family-default:           $font-family-regular !default;
-$font-family-headline:          $font-family-light !default;
+// $font-family-light:             'Roboto Light', sans-serif !default;
+// $font-family-regular:           'Roboto Regular', sans-serif !default;
+// $font-family-medium:            'Roboto Medium', sans-serif !default;
+// $font-family-bold:              'Roboto Bold', sans-serif !default;
+// $font-family-black:             'Roboto Black', sans-serif !default;
+// $font-family-default:           $font-family-regular !default;
+// $font-family-headline:          $font-family-light !default;
 
 // fluid font size
 // -------------------------------------------------
@@ -96,14 +96,14 @@ $gap-s:       0.5% !default;
 // -------------------------------------------------
 $position-topbar:       fixed !default;
 $height-topbar:         50px !default;
-$background-topbar:     $primary-color-lighter !default;
+$background-topbar:     #282828 !default;
 
 // sidenav
 // -------------------------------------------------
 $width-sidenav:            340px !default;
-$background-sidenav:       $primary-color !default;
+$background-sidenav:       #282828 !default;
 $color-sidenav-nav:      #fff !default;
-$background-mobile-nav:    $primary-color !default;
+// $background-mobile-nav:    #282828 !default;
 
 // footer
 // -------------------------------------------------
@@ -133,8 +133,20 @@ $color-btn-warning:      $color-yellow;
 $color-btn-alert:        $color-red;
 
 
+// dropdowns
+// -------------------------------------------------
+$dropdown-list-padding:                   0 !default;
+$dropdown-list-right:                     0 !default;
+$dropdown-link-padding:                   0.5rem 0.5rem !default;
+$dropdown-link-color:                     #fff !default;
+$dropdown-link-color-hover:               #fff !default;
+$dropdown-link-svg-margin:                0 0.5rem 0 0 !default;
+$dropdown-link-background:                #fff !default;
+$dropdown-link-background-hover:          $background-topbar !default;
+
+
 // forms
 // -------------------------------------------------
-$border-input:          none;
-$background-input:    #eee;
+$border-input:              none;
+$background-input:          #eee;
 $border-radio-and-checkbox: 1px solid $color-grey;

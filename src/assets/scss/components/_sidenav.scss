@@ -29,7 +29,6 @@
         display: block;
         text-transform: initial;
         text-decoration: none;
-        font-family: $font-family-regular;
         color: $color-sidenav-nav;
       }
     }
@@ -42,7 +41,7 @@
     margin: 0 0 30px;
     a {
       text-decoration: none;
-      font-family: $font-family-bold;
+      font-weight: 800;
       svg {
         display: block;
         margin: auto;
