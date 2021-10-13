@@ -8,7 +8,6 @@
   width: 100%;
   height: $height-topbar;
   background-color: $background-topbar;
-  background-color: #080;
 }
 .topbar__inner {
   display: flex;
@@ -18,18 +17,19 @@
   height: $height-topbar;
   padding: 0 2rem;
   .topbar__nav-btn {
-    display: block;
     padding: 0;
     border: none;
     background: none;
     cursor: pointer;
   }
   .topbar__nav {
+    display: flex;
+    align-items: center;
     .switch-mode {
-      display: block;
-      padding: 0;
       width: 24px;
       height: 24px;
+      margin: 0;
+      padding: 0;
       border: none;
       background: none;
       cursor: pointer;
