@@ -9,41 +9,16 @@
   height: $height-topbar;
   background-color: $background-topbar;
 }
-.topbar--fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 99999;
-}
-.btn-burger {
+// .topbar--fixed {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   z-index: 99999;
+// }
+.topbar__nav-icon {
   border: none;
   background: none;
   display: inline-block;
   cursor: pointer;
-  .toggleIcon {
-    display: inline-block;
-    padding-top: 5px;
-    padding-left: 10px;
-    .bar1,
-    .bar2,
-    .bar3 {
-      width: 30px;
-      height: 3px;
-      background-color: #fff;
-      margin: 6px 0;
-      transition: 0.4s;
-    }  
-    &.active {
-      .bar1 {
-      transform: rotate(-45deg) translate(-8px, 7px);
-      }
-      .bar2 {
-        opacity: 0;
-      }
-      .bar3 {
-        transform: rotate(45deg) translate(-5px, -6px);
-      }
-    }
-  }
 }
