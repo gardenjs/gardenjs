@@ -7,16 +7,13 @@
 // panel nav
 .tabs__nav {
   nav {
-    background-color: #fff;
-    border: 1px solid #ababab;
-    border-top: none;
-    border-bottom: none;
+    background-color: hsl(0, 0%, 16%);
     ul {
       display: flex;
       flex: 1 1 auto;
       flex-direction: row;
       overflow-x: auto;
-      height: 50px;
+      height: 2.75rem;
       margin: 0;
       padding: 0;
       li {
@@ -39,10 +36,10 @@
             border-bottom: 3px solid $border-color-infopanel-nav-active;
           }
           // fonts
-          color: $color-infopanel-inactive;
+          color: hsl(0, 0%, 87%);
           &:hover,
           &.active {
-            color: $color-infopanel-active;
+            color: hsl(0, 0%, 97%);
           }
         }
       }
@@ -53,7 +50,28 @@
 .tabs__content-area {
   padding: 20px;
   height: 100%;
-  background-color: #fff;
-  border: 1px solid #ababab;
-  border-top: none;
+  background-color: #1e1e1e;
+  color: hsl(0, 0%, 87%);
+  h2,h3,h4,h5,h6,li {
+    color: hsl(0, 0%, 87%);
+  }
+  a {
+    color: #fff;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    margin: 0.25rem 0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.125rem;
+    cursor: pointer;
+    &:hover,
+    &:focus,
+    &.active {
+      color: hsl(0, 0%, 97%);
+      background-color: hsl(0, 7%, 25%);
+    }
+  }
 }
