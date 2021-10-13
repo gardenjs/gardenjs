@@ -76,9 +76,22 @@ function toggleSize() {
 
 <HorizontalSplitPane topheight='65vh'>
 <div slot="top" class="full flex-column">
-  <div class="flex-row gardenframetopbar">
-    <h1 class="h1">{das.name}</h1>
-    <button on:click={toggleSize} >togglesize</button>
+  <div class="actionbar">
+    <h1 class="title__h1">{das.name}</h1>
+    <div class="framesize-nav">
+      <button on:click={toggleSize} >
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M15.5 1h-8A2.5 2.5 0 005 3.5v17A2.5 2.5 0 007.5 23h8a2.5 2.5 0 002.5-2.5v-17A2.5 2.5 0 0015.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/></svg>
+      </button>
+      <button on:click={toggleSize} >
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M18.5 0h-14A2.5 2.5 0 002 2.5v19A2.5 2.5 0 004.5 24h14a2.5 2.5 0 002.5-2.5v-19A2.5 2.5 0 0018.5 0zm-7 23c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7.5-4H4V3h15v16z"/></svg>
+      </button>
+      <button on:click={toggleSize} >
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+      </button>
+      <button on:click={toggleSize} >
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/></svg>
+      </button>
+    </div>
   </div>
   <iframe class="myframe" title="preview" bind:this={myframe} src="/garden/gardenframe/" style="width: {size}; height: {size}"></iframe>
 </div>
@@ -112,27 +125,3 @@ function toggleSize() {
   </TabsComponent>
 </div>
 </HorizontalSplitPane>
-
-<style>
-  .h1 {
-    color: #333;
-    font-size: 1.2em;
-    font-weight: 800;
-    padding: 0 0 5px;
-  }
-  .myframe {
-    align-self: center;
-    display: blocK;
-    height: 100%;
-    width: 100%;
-    background-color: #fff;
-    border: 1px solid #ababab;
-    border-bottom: none;
-    border-radius: 2px;
-  }
-  .gardenframetopbar {
-    align-items: flex-start;
-    justify-content: space-between;
-    height: 25px;
-  }
-</style>
