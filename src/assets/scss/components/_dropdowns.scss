@@ -1,0 +1,68 @@
+//
+// @Project: carrots framework
+// @Author: Martin Farkas
+// @Email:  info@martinfarkas.com
+// @Date:   2020-06-10
+//
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  .dropdown__label {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    svg {
+      fill: #fff;
+      margin-right: 0.25rem;
+    }
+  }
+  .dropdown__items {
+    visibility: hidden;
+    position: absolute;
+    background-color: $background-topbar;
+    right: 0;
+    z-index: 9;
+    ul {
+      padding: $dropdown-list-padding;
+      li {
+        display: block;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        // @include fluid-font($dropdown-li-font-size-min, $dropdown-li-font-size-max);
+        a {
+          display: flex;
+          align-items: center;
+          padding: $dropdown-link-padding;
+          // @include fluid-font($dropdown-link-font-size-min, $dropdown-link-font-size-max);
+          color: #fff;
+          text-decoration: none;
+          white-space: nowrap;
+          // &:hover,
+          // &:focus {
+          //   color: $dropdown-link-color-hover;
+          //   background-color: $dropdown-link-background-hover;
+          // }
+          // if icons
+          svg {
+            display: inline;
+            margin: $dropdown-link-svg-margin;
+            height: 20px;
+            width: 20px;
+            path,
+            rect {
+              fill: #a8a8a8;
+            }
+          }
+        }
+      }
+    }
+  }
+  &:hover > .dropdown__items,
+  &:focus > .dropdown__items {
+    display: block;
+    visibility: visible;
+  }
+}
