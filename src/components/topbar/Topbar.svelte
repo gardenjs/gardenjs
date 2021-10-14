@@ -21,7 +21,7 @@
 const dispatch = createEventDispatcher()
 
 export let active = true
-export let dark = true
+export let dark = false
 
 $: {
   if (dark)
