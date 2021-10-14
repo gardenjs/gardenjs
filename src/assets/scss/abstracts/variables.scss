@@ -25,6 +25,8 @@
   --actionbar-svg-color:                    hsl(0, 0%, 33%);
   --actionbar-svg-act-color:                hsl(0, 0%, 3%);
   --actionbar-title-color:                  hsl(0, 0%, 3%);
+  --actionbar-tooltip-color:                #fff;
+  --actionbar-tooltip-bg-color:             #000;
 
   --dragbar-border-color:                   hsl(0, 0%, 13%);
   --dragbar-bg-color:                       hsl(0, 0%, 85%);
@@ -61,6 +63,8 @@
   --actionbar-svg-color:                    hsl(0, 0%, 67%);
   --actionbar-svg-act-color:                hsl(0, 0%, 97%);
   --actionbar-title-color:                  hsl(0, 0%, 97%);
+  --actionbar-tooltip-color:                #000;
+  --actionbar-tooltip-bg-color:             #fff;
 
   --dragbar-border-color:                   hsl(0, 0%, 87%); 
   --dragbar-bg-color:                       hsl(0, 0%, 15%);
@@ -137,19 +141,21 @@ $color-sidebarnav:             var(--sidebar-nav-color) !default;
 $color-sidebarnav-hover:       var(--sidebar-nav-hover-color) !default;
 $bg-color-sidebarnav-hover:    var(--sidebar-nav-hover-bg-color) !default;
 
+// actionbar
+// -------------------------------------------------
+$bg-color-actionbar:                  var(--actionbar-bg-color) !default;
+$color-h1-actionbar:                  var(--actionbar-title-color) !default;
+$fill-color-actionbar:                var(--actionbar-svg-color) !default;
+$fill-color-hover-actionbar:          var(--actionbar-svg-act-color) !default;
+$color-tooltip-actionbar:             var(--actionbar-tooltip-color) !default;
+$bg-color-tooltip-actionbar:          var(--actionbar-tooltip-bg-color) !default;
+
 // dragbar
 // -------------------------------------------------
 $border-dragbar:                  1px solid var(--dragbar-border-color) !default;
 $background-color-dragbar:        var(--dragbar-bg-color) !default;
 $background-color-dragbar-hover:  var(--dragbar-bg--hovercolor) !default;
 $fill-icon-dragbar:               var(--dragbar-icon-color) !default;
-
-// actionbar
-// -------------------------------------------------
-$bg-color-actionbar:                 var(--actionbar-bg-color) !default;
-$color-h1-actionbar:                     var(--actionbar-title-color) !default;
-$fill-color-actionbar:               var(--actionbar-svg-color) !default;
-$fill-color-hover-actionbar:         var(--actionbar-svg-act-color) !default;
 
 // stage
 // -------------------------------------------------

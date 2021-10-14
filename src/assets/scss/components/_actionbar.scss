@@ -39,6 +39,17 @@
           fill: $fill-color-hover-actionbar;
         }
       }
+      &.tooltip:hover::after {
+        position: absolute;
+        display: block;
+        margin-top: -2.75rem;
+        padding: 0.25rem;
+        content: attr(rel);
+        font-size: 0.75rem;
+        color: $color-tooltip-actionbar;
+        background-color: $bg-color-tooltip-actionbar;
+        border-radius: 0.125rem;
+       }
     }
   }
 }
