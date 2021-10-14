@@ -13,14 +13,15 @@
 // color variables
 // -------------------------------------------------
 :root {
-  --topbar-bg-color:                        hsl(0, 0%, 85%);
+  --topbar-bg-color:                        hsl(0, 0%, 95%);
   --topbar-icon-color:                      #000;
 
-  --sidebar-bg-color:                       hsl(0, 0%, 85%);
+  --sidebar-bg-color:                       hsl(0, 0%, 95%);
   --sidebar-nav-color:                      hsl(0, 0%, 13%);
   --sidebar-nav-hover-color:                hsl(0, 0%, 3%);
-  --sidebar-nav-hover-bg-color:             hsl(0, 0%, 75%);
+  --sidebar-nav-hover-bg-color:             hsl(0, 0%, 85%);
 
+  --actionbar-bg-color:                     hsl(0, 0%, 95%);
   --actionbar-svg-color:                    hsl(0, 0%, 33%);
   --actionbar-svg-act-color:                hsl(0, 0%, 3%);
   --actionbar-title-color:                  hsl(0, 0%, 3%);
@@ -31,6 +32,7 @@
   --dragbar-icon-color:                     #000;
 
   --stage-bg-color:                         #fff;
+  --stage-border-color:                     hsl(0, 0%, 3%);
 
   --infopanel-bg-color:                     hsl(0, 0%, 92%);
   --infopanel-nav-bg-color:                 hsl(0, 0%, 85%);
@@ -38,7 +40,8 @@
   --infopanel-nav-border-hover-color:       hsl(0, 0%, 3%);
   --infopanel-nav-color:                    hsl(0, 0%, 13%);
   --infopanel-nav-hover-color:              hsl(0, 0%, 3%);
-  --infopanel-nav-border-act-color:         #090;
+  --infopanel-nav-border-act-color:         hsl(120, 100%, 30%);
+  --infopanel-nav-border-act-hover-color:   hsl(120, 100%, 40%);
   --infopanel-pane-bg-color:                hsl(0, 0%, 92%);
   --infopanel-pane-text-color:             hsl(0, 0%, 13%);
   --infopanel-pane-links-color:            hsl(0, 0%, 3%);
@@ -54,6 +57,7 @@
   --sidebar-nav-hover-color:                hsl(0, 0%, 97%);
   --sidebar-nav-hover-bg-color:             hsl(0, 0%, 25%);
 
+  --actionbar-bg-color:                     hsl(0, 0%, 15%);
   --actionbar-svg-color:                    hsl(0, 0%, 67%);
   --actionbar-svg-act-color:                hsl(0, 0%, 97%);
   --actionbar-title-color:                  hsl(0, 0%, 97%);
@@ -64,6 +68,7 @@
   --dragbar-icon-color:                     #fff;
 
   --stage-bg-color:                         #fff;
+  --stage-border-color:                     #fff;
 
   --infopanel-bg-color:                     hsl(0, 0%, 8%);
   --infopanel-nav-bg-color:                 hsl(0, 0%, 15%);
@@ -71,7 +76,8 @@
   --infopanel-nav-border-hover-color:       hsl(0, 0%, 97%);
   --infopanel-nav-color:                    hsl(0, 0%, 87%);
   --infopanel-nav-hover-color:              hsl(0, 0%, 97%);
-  --infopanel-nav-border-act-color:         #090;
+  --infopanel-nav-border-act-color:         hsl(120, 100%, 30%);
+  --infopanel-nav-border-act-hover-color:   hsl(120, 100%, 40%);
   --infopanel-pane-bg-color:                hsl(0, 0%, 8%);
   --infopanel-pane-text-color:             hsl(0, 0%, 87%);
   --infopanel-pane-links-color:            hsl(0, 0%, 97%);
@@ -140,24 +146,27 @@ $fill-icon-dragbar:               var(--dragbar-icon-color) !default;
 
 // actionbar
 // -------------------------------------------------
-$color-h1-title:           var(--actionbar-title-color) !default;
-$fill-color:               var(--actionbar-svg-color) !default;
-$fill-color-hover:         var(--actionbar-svg-act-color) !default;
+$bg-color-actionbar:                 var(--actionbar-bg-color) !default;
+$color-h1-actionbar:                     var(--actionbar-title-color) !default;
+$fill-color-actionbar:               var(--actionbar-svg-color) !default;
+$fill-color-hover-actionbar:         var(--actionbar-svg-act-color) !default;
 
 // stage
 // -------------------------------------------------
-$bg-color-iframe:     var(--stage-bg-color) !default;     
+$bg-color-iframe:       var(--stage-bg-color) !default;   
+$border-color-iframe:   var(--stage-border-color) !default;
 
 // infopanel
 // -------------------------------------------------
-$bg-color-infopanel:                    var(--infopanel-bg-color) !default;
-$bg-color-infopanel-nav:                var(--infopanel-nav-bg-color) !default;
-$border-color-infopanel-nav-default:    var(--infopanel-nav-border-color) !default;
-$border-color-infopanel-nav-hover:      var(--infopanel-nav-border-hover-color) !default;
-$border-color-infopanel-nav-active:     var(--infopanel-nav-border-act-color) !default;
-$color-infopanel-nav:                   var(--infopanel-nav-color) !default;
-$color-infopanel-nav-hover:             var(--infopanel-nav-hover-color) !default;
-$bg-color-infopanel-pane:               var(--infopanel-pane-bg-color) !default;
-$bg-color-infopanel-comp-hover:         var(--infopanel-pane-comp-hover-bg-color) !default;
-$color-infopanel:                       var(--infopanel-pane-text-color) !default;
-$color-infopanel-links:                 var(--infopanel-pane-links-color) !default;
+$bg-color-infopanel:                          var(--infopanel-bg-color) !default;
+$bg-color-infopanel-nav:                      var(--infopanel-nav-bg-color) !default;
+$border-color-infopanel-nav-default:          var(--infopanel-nav-border-color) !default;
+$border-color-infopanel-nav-hover:            var(--infopanel-nav-border-hover-color) !default;
+$border-color-infopanel-nav-active:           var(--infopanel-nav-border-act-color) !default;
+$border-color-infopanel-nav-active-hover:     var(--infopanel-nav-border-act-hover-color) !default;
+$color-infopanel-nav:                         var(--infopanel-nav-color) !default;
+$color-infopanel-nav-hover:                   var(--infopanel-nav-hover-color) !default;
+$bg-color-infopanel-pane:                     var(--infopanel-pane-bg-color) !default;
+$bg-color-infopanel-comp-hover:               var(--infopanel-pane-comp-hover-bg-color) !default;
+$color-infopanel:                             var(--infopanel-pane-text-color) !default;
+$color-infopanel-links:                       var(--infopanel-pane-links-color) !default;
