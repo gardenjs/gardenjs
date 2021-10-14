@@ -13,9 +13,41 @@
 // color variables
 // -------------------------------------------------
 :root {
+  --topbar-bg-color:                        hsl(0, 0%, 85%);
+  --topbar-icon-color:                      #000;
+
+  --sidebar-bg-color:                       hsl(0, 0%, 85%);
+  --sidebar-nav-color:                      hsl(0, 0%, 13%);
+  --sidebar-nav-hover-color:                hsl(0, 0%, 3%);
+  --sidebar-nav-hover-bg-color:             hsl(0, 0%, 75%);
+
+  --actionbar-svg-color:                    hsl(0, 0%, 33%);
+  --actionbar-svg-act-color:                hsl(0, 0%, 3%);
+  --actionbar-title-color:                  hsl(0, 0%, 3%);
+
+  --dragbar-border-color:                   hsl(0, 0%, 13%);
+  --dragbar-bg-color:                       hsl(0, 0%, 85%);
+  --dragbar-bg-hover-color:                 hsl(0, 0%, 75%);
+  --dragbar-icon-color:                     #000;
+
+  --stage-bg-color:                         #fff;
+
+  --infopanel-bg-color:                     hsl(0, 0%, 92%);
+  --infopanel-nav-bg-color:                 hsl(0, 0%, 85%);
+  --infopanel-nav-border-color:             hsl(0, 0%, 33%);
+  --infopanel-nav-border-hover-color:       hsl(0, 0%, 3%);
+  --infopanel-nav-color:                    hsl(0, 0%, 13%);
+  --infopanel-nav-hover-color:              hsl(0, 0%, 3%);
+  --infopanel-nav-border-act-color:         #090;
+  --infopanel-pane-bg-color:                hsl(0, 0%, 92%);
+  --infopanel-pane-text-color:             hsl(0, 0%, 13%);
+  --infopanel-pane-links-color:            hsl(0, 0%, 3%);
+  --infopanel-pane-comp-hover-bg-color:    hsl(0, 0%, 75%); 
+}
+
+.dark {
   --topbar-bg-color:                        hsl(0, 0%, 15%);
   --topbarnav-icon-color:                   #fff;
-
 
   --sidebar-bg-color:                       hsl(0, 0%, 15%);
   --sidebar-nav-color:                      hsl(0, 0%, 87%);
@@ -47,9 +79,6 @@
   
 }
 
-// .light {
-  
-// }
 
 
 // breakpoints
