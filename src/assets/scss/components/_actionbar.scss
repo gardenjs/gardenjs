@@ -8,13 +8,14 @@
   display: flex;
   width: 100%;
   height: 2rem;
+  background-color: $bg-color-actionbar;
   &::after{content: ''; flex: 1}
   .title__h1 {
     flex: 1;
     padding: 0;
     margin: 0;
     font-size: 1.3rem;
-    color: $color-h1-title;
+    color: $color-h1-actionbar;
     line-height: 2rem;
   }
   .framesize-nav {
@@ -28,14 +29,14 @@
       cursor: pointer;
       svg {
         height: 18px;
-        fill: $fill-color;
+        fill: $fill-color-actionbar;
         &:hover {
-          fill: $fill-color-hover;
+          fill: $fill-color-hover-actionbar;
         }
       }
       &.active {
         svg {
-          fill: $fill-color-hover;
+          fill: $fill-color-hover-actionbar;
         }
       }
     }
