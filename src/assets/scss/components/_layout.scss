@@ -4,6 +4,7 @@
 // @Email:  info@websites-graphix.com
 //
 
+// modifiers
 .full {
   height: 100%;
   width: auto;
@@ -28,20 +29,30 @@
   flex-direction: column;
   flex-wrap: nowrap;
 }
-.bg-primary {
-  background-color: $primary-color;
-}
 
-.pane__container {
+//  specific containers
+.fullscreen {
   display: flex;
-  flex-grow: 1;
-  height: 100%;
-  width: auto;
-  overflow-y: auto;
-  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.top-bottom {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
   height: 100%;
   width: 100%;
-  background-color: $background-topbar;
+  overflow-y: auto;
+}
+.left-right {
+  display: flex;
+  flex-wrap: no-wrap;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
 }
 .myframe {
   align-self: center;
@@ -50,4 +61,13 @@
   width: 100%;
   background-color: #fff;
   border: none;
+}
+.pane__container {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background-color: $background-topbar;
 }
