@@ -32,7 +32,6 @@ initRouter(routes, baseurl, (routeobj, state) => {
 let showSidebar = true
 
 function handleTopbarOut(evt) {
-  console.log('side', evt.detail)
   showSidebar = evt.detail.active
 }
 
