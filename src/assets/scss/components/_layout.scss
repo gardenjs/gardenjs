@@ -60,7 +60,7 @@
   height: 100%;
   width: 100%;
   background-color: $bg-color-iframe;
-  border: none;
+  border: 1px solid $border-color-iframe;
 }
 .pane__container {
   display: flex;
