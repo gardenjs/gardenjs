@@ -21,7 +21,7 @@ const dispatch = createEventDispatcher()
  
 </script>
 
-<div class="tabs__nav">
+<div class="infopanel__nav">
   <nav>
     <ul>
       {#each tabs as tab, index}
