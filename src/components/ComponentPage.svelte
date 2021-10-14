@@ -111,7 +111,7 @@ function toggleFull() {
       </button>
     </div>
   </div>
-  <iframe class="myframe" title="preview" bind:this={myframe} src="/garden/gardenframe/" style="width: {size}; height: {size}"></iframe>
+  <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style="width: {size}; height: {size}"></iframe>
 </div>
 <div slot="bottom" class="full flex-column">
   <TabsComponent tabs={tabs} on:out={tabselectionchange}>

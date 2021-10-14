@@ -4,10 +4,18 @@
 // @Email:  info@websites-graphix.com
 //
 
+.infopanel {
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  background-color: $bg-color-infopanel;
+}
+
 // panel nav
-.tabs__nav {
+.infopanel__nav {
   nav {
-    background-color: hsl(0, 0%, 16%);
+    background-color: $bg-color-infopanel-nav;
     ul {
       display: flex;
       flex: 1 1 auto;
@@ -29,7 +37,7 @@
           cursor: pointer;
           border: none;
           background: none;
-          border-bottom: 3px solid $border-color-infopanel-nav-inactive;
+          border-bottom: 3px solid $border-color-infopanel-nav-default;
           &:hover {
             border-bottom: 3px solid $border-color-infopanel-nav-hover;
           }
@@ -37,27 +45,27 @@
             border-bottom: 3px solid $border-color-infopanel-nav-active;
           }
           // fonts
-          color: hsl(0, 0%, 87%);
+          color: $color-infopanel-nav;
           &:hover,
           &.active {
-            color: hsl(0, 0%, 97%);
+            color: $color-infopanel-nav-hover;
           }
         }
       }
     }
   }
 }
+
 // content area
-.tabs__content-area {
+.infopanel__pane {
   padding: 20px;
-  // height: 100%; // if not activated is does not solve the problem if rescaled, maybe dynamic solution neccesary?
-  background-color: #1e1e1e;
-  color: hsl(0, 0%, 87%);
+  background-color: $bg-color-infopanel-pane;
+  color: $color-infopanel;
   h2,h3,h4,h5,h6,li {
-    color: hsl(0, 0%, 87%);
+    color: $color-infopanel;
   }
   a {
-    color: #fff;
+    color: $color-infopanel-links;
   }
   ul {
     list-style: none;
@@ -66,14 +74,15 @@
   }
   li {
     margin: 0.25rem 0;
-    padding: 0.25rem 0.75rem;
+    padding: 0.125rem 0.75rem;
+    font-size: 0.9rem;
     border-radius: 0.125rem;
     cursor: pointer;
     &:hover,
     &:focus,
     &.active {
-      color: hsl(0, 0%, 97%);
-      background-color: hsl(0, 7%, 25%);
+      color: $color-infopanel-links;
+      background-color: $bg-color-infopanel-comp-hover;
     }
   }
 }

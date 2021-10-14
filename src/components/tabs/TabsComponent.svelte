@@ -21,7 +21,7 @@ const dispatch = createEventDispatcher()
  
 </script>
 
-<div class="tabs__nav">
+<div class="infopanel__nav">
   <nav>
     <ul>
       {#each tabs as tab, index}
@@ -30,7 +30,7 @@ const dispatch = createEventDispatcher()
     </ul>
   </nav>
 </div>
-<div class="tabs__content-area">
+<div class="infopanel__pane">
   {#if selected && selected.page }
   <TabContent item={selected} on:out={handleout} />
   {:else}

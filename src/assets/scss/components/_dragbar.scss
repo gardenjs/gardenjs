@@ -1,0 +1,23 @@
+//
+// @Project: Garden by Rabbit Development 
+// @Author: Martin Farkas
+// @Email:  info@websites-graphix.com
+//
+
+.dragbar-horizontal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15px;
+  border-top: $border-dragbar;
+  border-bottom: $border-dragbar;
+  cursor: row-resize;
+  &:hover {
+    background-color: $background-color-dragbar-hover;
+  }
+  svg {
+    width: 16px;
+    fill: $fill-icon-dragbar;
+  }
+  z-index: 10;
+}

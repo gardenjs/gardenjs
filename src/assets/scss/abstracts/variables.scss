@@ -6,147 +6,129 @@
 
 @use "sass:math";
 
+// -----------------------------------------------------------------------------------------------
 //  general variables 
 // -----------------------------------------------------------------------------------------------
 
-// colors
+// color variables
 // -------------------------------------------------
-$primary-color:           hsl(207, 70%, 10%) !default;
-$primary-color-lighter:   hsl(207, 70%, 20%) !default;
+:root {
+  --topbar-bg-color:                        hsl(0, 0%, 15%);
+  --topbarnav-icon-color:                   #fff;
 
-$color-grey:       #808080 !default;
-$color-blue:       #3c93dc !default;
-$color-green:      #6ea644 !default;
-$color-yellow:     #f0ab4b !default;
-$color-red:        #d14e49 !default;
+
+  --sidebar-bg-color:                       hsl(0, 0%, 15%);
+  --sidebar-nav-color:                      hsl(0, 0%, 87%);
+  --sidebar-nav-hover-color:                hsl(0, 0%, 97%);
+  --sidebar-nav-hover-bg-color:             hsl(0, 0%, 25%);
+
+  --actionbar-svg-color:                    hsl(0, 0%, 67%);
+  --actionbar-svg-act-color:                hsl(0, 0%, 97%);
+  --actionbar-title-color:                  hsl(0, 0%, 97%);
+
+  --dragbar-border-color:                   hsl(0, 0%, 87%); 
+  --dragbar-bg-color:                       hsl(0, 0%, 15%);
+  --dragbar-bg-hover-color:                 hsl(0, 0%, 25%);
+  --dragbar-icon-color:                     #fff;
+
+  --stage-bg-color:                         #fff;
+
+  --infopanel-bg-color:                     hsl(0, 0%, 8%);
+  --infopanel-nav-bg-color:                 hsl(0, 0%, 15%);
+  --infopanel-nav-border-color:             hsl(0, 0%, 67%);
+  --infopanel-nav-border-hover-color:       hsl(0, 0%, 97%);
+  --infopanel-nav-color:                    hsl(0, 0%, 87%);
+  --infopanel-nav-hover-color:              hsl(0, 0%, 97%);
+  --infopanel-nav-border-act-color:         #090;
+  --infopanel-pane-bg-color:                hsl(0, 0%, 8%);
+  --infopanel-pane-text-color:             hsl(0, 0%, 87%);
+  --infopanel-pane-links-color:            hsl(0, 0%, 97%);
+  --infopanel-pane-comp-hover-bg-color:    hsl(0, 0%, 25%);
+  
+}
+
+// .light {
+  
+// }
+
 
 // breakpoints
 // -------------------------------------------------
-$breakpoint-s:       650px !default;
-$breakpoint-m:       768px !default;
-$breakpoint-l:      1024px !default;
-$breakpoint-xl:     1440px !default;
-$breakpoint-xxl:    1920px !default;
+$breakpoint-xs:      640px !default;
+$breakpoint-sm:      768px !default;
+$breakpoint-md:     1024px !default;
+$breakpoint-lg:     1280px !default;
+$breakpoint-xl:     1680px !default;
+$breakpoints: (
+  // screensize:
+  'xs':      $breakpoint-xs,
+  'sm':      $breakpoint-sm,
+  'md':      $breakpoint-md,
+  'lg':      $breakpoint-lg,
+  'xl':      $breakpoint-xl,
+  // typs:
+) !default;
 
-// gap
+
+// type
 // -------------------------------------------------
-// $gap-xs:    0.5rem !default;
-// $gap-s:     1rem !default;
-// $gap-m:     2rem !default;
-// $gap-l:     2.5rem !default;
-// $gap-xl:    3.5rem !default;
-// $gap-xxl:   4.5rem !default;
-
-// font-family
-// -------------------------------------------------
-// $font-family-light:             'Roboto Light', sans-serif !default;
-// $font-family-regular:           'Roboto Regular', sans-serif !default;
-// $font-family-medium:            'Roboto Medium', sans-serif !default;
-// $font-family-bold:              'Roboto Bold', sans-serif !default;
-// $font-family-black:             'Roboto Black', sans-serif !default;
-// $font-family-default:           $font-family-regular !default;
-// $font-family-headline:          $font-family-light !default;
-
-// fluid font size
-// -------------------------------------------------
-$font-vp-min-width:   $breakpoint-s !default;
-$font-vp-max-width:   $breakpoint-xxl !default;
-$font-min-size-xxl:   37px !default;
-$font-max-size-xxl:   74px !default;
-$font-min-size-xl:    32px !default;
-$font-max-size-xl:    40px !default;
-$font-min-size-l:     26px !default;
-$font-max-size-l:     30px !default;
-$font-min-size-m:     21px !default;
-$font-max-size-m:     24px !default;
-$font-min-size-s:     18px !default;
-$font-max-size-s:     20px !default;
-$font-min-size-xs:    16px !default;
-$font-max-size-xs:    19px !default;
-$font-min-size-xxs:   15px !default;
-$font-max-size-xxs:   16px !default;
-
-// font color
-// -------------------------------------------------
-$color-text-default:  #222 !default;
-$color-headline: rgb(92, 90, 90) !default;
-
-// table
-// -------------------------------------------------
-$border-color:    $primary-color !default;
+$font-size-base:    1rem !default;
+$font-size-3xs:     0.625rem !default;
+$font-size-2xs:     .75rem !default;
+$font-size-xs:      .875rem !default;
+$font-size-sm:      $font-size-base !default;
+$font-size-md:      $font-size-base * 1.125 !default;
+$font-size-lg:      $font-size-base * 1.25 !default;
+$font-size-xl:      $font-size-base * 1.375 !default;
+$font-size-2xl:     $font-size-base * 1.5 !default;
+$font-size-3xl:     $font-size-base * 1.7 !default;
+$font-size-4xl:     $font-size-base * 2.0 !default;
 
 
 
+// -----------------------------------------------------------------------------------------------
 // components variables
 // -----------------------------------------------------------------------------------------------
 
-// layouts
-// -------------------------------------------------
-
-
-
-// grid
-// -------------------------------------------------
-$col-options: (10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 80, 90, 100) !default;
-$gap:         2% !default;
-$gap-s:       0.5% !default;
-
-
 // topbar
 // -------------------------------------------------
-$position-topbar:       fixed !default;
-$height-topbar:         50px !default;
-$background-topbar:     hsl(0, 0%, 16%) !default;
+$background-topbar:     var(--topbar-bg-color) !default;
+$fill-topbarnav-icon:   var(--topbarnav-icon-color) !default;
 
 // sidenav
 // -------------------------------------------------
-$width-sidenav:            260px !default;
-$background-sidenav:     hsl(0, 0%, 16%) !default;
-$color-sidenav-nav:      #fff !default;
-// $background-mobile-nav:    #282828 !default;
-
-// footer
-// -------------------------------------------------
+$background-sidebar:           var(--sidebar-bg-color) !default;
+$color-sidebarnav:             var(--sidebar-nav-color) !default;
+$color-sidebarnav-hover:       var(--sidebar-nav-hover-color) !default;
+$bg-color-sidebarnav-hover:    var(--sidebar-nav-hover-bg-color) !default;
 
 // dragbar
 // -------------------------------------------------
-$border-dragbar:                  1px solid hsl(0, 0%, 67%) !default;
-$background-color-dragbar:        hsl(0, 0%, 16%) !default;
-$background-color-dragbar-hover:  hsl(0, 0%, 25%) !default;
+$border-dragbar:                  1px solid var(--dragbar-border-color) !default;
+$background-color-dragbar:        var(--dragbar-bg-color) !default;
+$background-color-dragbar-hover:  var(--dragbar-bg--hovercolor) !default;
+$fill-icon-dragbar:               var(--dragbar-icon-color) !default;
 
-// info-panel
+// actionbar
 // -------------------------------------------------
-$border-color-infopanel-nav-hover:     hsl(0, 0%, 87%) !default;
-$border-color-infopanel-nav-inactive:  hsl(0, 0%, 67%) !default;
-$border-color-infopanel-nav-active:    #090 !default;
-$background-infopanel-content:         hsl(0, 0%, 97%) !default;
-$color-infopanel-inactive:               $border-color-infopanel-nav-hover !default;
-$color-infopanel-active:               #000 !default;
+$color-h1-title:           var(--actionbar-title-color) !default;
+$fill-color:               var(--actionbar-svg-color) !default;
+$fill-color-hover:         var(--actionbar-svg-act-color) !default;
 
-
-// button
+// stage
 // -------------------------------------------------
-// $color-btn-grey:         $color-grey;
-// $color-btn-blue:         $color-blue;
-// $color-btn-success:      $color-green;
-// $color-btn-warning:      $color-yellow;
-// $color-btn-alert:        $color-red;
+$bg-color-iframe:     var(--stage-bg-color) !default;     
 
-
-// dropdowns
+// infopanel
 // -------------------------------------------------
-// $dropdown-list-padding:                   0 !default;
-// $dropdown-list-right:                     0 !default;
-// $dropdown-link-padding:                   0.5rem 0.5rem !default;
-// $dropdown-link-color:                     #fff !default;
-// $dropdown-link-color-hover:               #fff !default;
-// $dropdown-link-svg-margin:                0 0.5rem 0 0 !default;
-// $dropdown-link-background:                #fff !default;
-// $dropdown-link-background-hover:          $background-topbar !default;
-
-
-// forms
-// -------------------------------------------------
-// $border-input:              none;
-// $background-input:          #eee;
-// $border-radio-and-checkbox: 1px solid $color-grey;
+$bg-color-infopanel:                    var(--infopanel-bg-color) !default;
+$bg-color-infopanel-nav:                var(--infopanel-nav-bg-color) !default;
+$border-color-infopanel-nav-default:    var(--infopanel-nav-border-color) !default;
+$border-color-infopanel-nav-hover:      var(--infopanel-nav-border-hover-color) !default;
+$border-color-infopanel-nav-active:     var(--infopanel-nav-border-act-color) !default;
+$color-infopanel-nav:                   var(--infopanel-nav-color) !default;
+$color-infopanel-nav-hover:             var(--infopanel-nav-hover-color) !default;
+$bg-color-infopanel-pane:               var(--infopanel-pane-bg-color) !default;
+$bg-color-infopanel-comp-hover:         var(--infopanel-pane-comp-hover-bg-color) !default;
+$color-infopanel:                       var(--infopanel-pane-text-color) !default;
+$color-infopanel-links:                 var(--infopanel-pane-links-color) !default;
