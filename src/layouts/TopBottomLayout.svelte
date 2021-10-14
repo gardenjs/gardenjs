@@ -1,4 +1,4 @@
-<div class="full flex-column">
+<div class="top-bottom">
   <slot name="top" />
   <slot name="bottom" />
 </div>
