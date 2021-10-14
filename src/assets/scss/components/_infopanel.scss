@@ -43,6 +43,9 @@
           }
           &.active {
             border-bottom: 3px solid $border-color-infopanel-nav-active;
+            &:hover {
+              border-bottom: 3px solid $border-color-infopanel-nav-active-hover;
+            }
           }
           // fonts
           color: $color-infopanel-nav;
