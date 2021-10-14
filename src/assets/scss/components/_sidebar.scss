@@ -12,7 +12,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   padding: 1rem 2rem;
-  background: $background-sidenav;
+  background: $background-sidebar;
   // transition: .1s;
 
   a.logo {
@@ -32,7 +32,7 @@
         list-style: none;
         margin: 0.5rem 0;
         padding: 0.5rem 0;
-        color: hsl(0, 0, 80%);
+        color: $color-sidebarnav;
         font-size: 0.9rem;
         font-weight: 600;
         text-transform: uppercase;
@@ -43,11 +43,11 @@
           text-transform: initial;
           text-decoration: none;
           font-weight: 400;
-          color: hsl(0, 0, 80%);
+          color: $color-sidebarnav;
           &:focus,
           &:hover {
-            background-color: hsl(0, 0, 25%);
-            color: #fff;
+            color: $color-sidebarnav-hover;
+            background-color: $bg-color-sidebarnav-hover;
           }
           border-radius: 0.25rem;
         }
@@ -62,5 +62,5 @@
   }
 }
 .show-sidebar {
-  width: $width-sidenav;
+  width: 260px;
 }

@@ -8,7 +8,6 @@
 
 html {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-  color: $color-text-default;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
@@ -16,7 +15,6 @@ html {
 
 /* basic fonts settings */
 h1, h2, h3, h4, h5, h6 {
-  color: $color-headline;
   margin: 0;
 }
 
@@ -25,17 +23,10 @@ p {
 }
 
 a, a:visited {
-  color: $primary-color;
   text-decoration: underline;
   text-decoration-skip-ink: auto;
   /* ie 10 */
   background-color: transparent;
-}
-// a:hover {
-//   color: $color-ci-main-darker;
-// }
-a:focus {
-  outline: $primary-color;
 }
 
 b, strong {

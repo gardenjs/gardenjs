@@ -12,16 +12,6 @@
 // -----------------------------------------------------------------------------------------------
 // breakpoints
 // -----------------------------------------------------------------------------------------------
-$breakpoints: (
-  // screensize:
-  bp-s:       $breakpoint-s,
-  bp-m:       $breakpoint-m,
-  bp-l:       $breakpoint-l,
-  bp-xl:      $breakpoint-xl,
-  bp-xxl:     $breakpoint-xxl,
-  // typs:
-) !default;
-
 //  min-width
 @mixin min($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
@@ -61,28 +51,50 @@ $breakpoints: (
     }
   }
 }
+// write like this:
+// --------------------------------
+// @include min({breakpoint-name}) {
+//   scss code...
+// }
 
-/* fluid fonts (https://css-tricks.com/snippets/css/fluid-typography/)
---------------------------------------------------------------------------------------------------------- */
-@function strip-unit($value) {
-  @return $value / ($value * 0 + 1);
-}
 
-@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
-  $u1: unit($min-vw);
-  $u2: unit($max-vw);
-  $u3: unit($min-font-size);
-  $u4: unit($max-font-size);
 
-  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
-    & {
-      font-size: $min-font-size;
-      @media screen and (min-width: $min-vw) {
-        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
-      }
-      @media screen and (min-width: $max-vw) {
-        font-size: $max-font-size;
-      }
-    }
+// -----------------------------------------------------------------------------------------------
+// font-size
+// -----------------------------------------------------------------------------------------------
+@mixin fluid-font($min, $max, $min-vw: $min-vp-fontsize, $max-vw: $max-vp-fontsize, $fallback: false) {
+  $min-no-unit : strip-units($min);
+  $max-no-unit : strip-units($max);
+  
+  $min-vw-no-unit : strip-units($min-vw);
+  $max-vw-no-unit : strip-units($max-vw);
+  
+  @if getUnit($min) == 'rem' or getUnit($min) == 'em' {
+    $min-no-unit : strip-units($min) * 16;
+    $max-no-unit : strip-units($max) * 16;
   }
+  
+   $responsive : calc(#{$min-no-unit}px + (#{$max-no-unit} - #{$min-no-unit}) * ((100vw - #{$min-vw}) / (#{$max-vw-no-unit} - #{$min-vw-no-unit})));
+  
+  @if $fallback { font-size: $fallback; }
+  @else { font-size: $max; }
+
+  font-size:  $responsive;
+
+  @media screen and (max-width: #{$min-vw}) { font-size: $min; }
+  @media screen and (min-width: #{$max-vw}) { font-size: $max; }
 }
+
+@function strip-units($number) {
+  @return math.div($number, ($number * 0 + 1));
+}
+
+@function getUnit($value) {
+  @return str-slice($value * 0 + '', 2, -1);
+}
+
+// write like this:
+// --------------------------------
+// p {
+//   @include fluid-font(.9rem, 1.2rem)
+// }

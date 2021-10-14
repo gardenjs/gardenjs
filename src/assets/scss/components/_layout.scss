@@ -54,12 +54,12 @@
   width: 100%;
   height: 100%;
 }
-.myframe {
+.stage {
   align-self: center;
   display: blocK;
   height: 100%;
   width: 100%;
-  background-color: #fff;
+  background-color: $bg-color-iframe;
   border: none;
 }
 .pane__container {

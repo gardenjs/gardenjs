@@ -9,26 +9,80 @@
   height: 100%;
   width: 100%;
   overflow-y: auto;
-  background-color: #1e1e1e;
+  background-color: $bg-color-infopanel;
 }
-.dragbar-horizontal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 15px;
-  border-top: $border-dragbar;
-  border-bottom: $border-dragbar;
-  // background-color: $background-color-dragbar;
-  // background-image: url('../icons/iconset/drag_handle-horizontal.svg');
-  // background-position: center center;
-  // background-repeat: no-repeat;
-  cursor: row-resize;
-  &:hover {
-    background-color: $background-color-dragbar-hover;
+
+// panel nav
+.infopanel__nav {
+  nav {
+    background-color: $bg-color-infopanel-nav;
+    ul {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: row;
+      overflow-x: auto;
+      height: 2rem;
+      margin: 0;
+      padding: 0;
+      li {
+        display: flex;
+        flex: auto;
+        height: 100%;
+        button {
+          width: 100%;
+          min-width: 150px;
+          height: 100%;
+          font-size: 0.9rem;
+          text-align: center;
+          cursor: pointer;
+          border: none;
+          background: none;
+          border-bottom: 3px solid $border-color-infopanel-nav-default;
+          &:hover {
+            border-bottom: 3px solid $border-color-infopanel-nav-hover;
+          }
+          &.active {
+            border-bottom: 3px solid $border-color-infopanel-nav-active;
+          }
+          // fonts
+          color: $color-infopanel-nav;
+          &:hover,
+          &.active {
+            color: $color-infopanel-nav-hover;
+          }
+        }
+      }
+    }
   }
-  svg {
-    width: 16px;
-    fill: #fff;
+}
+
+// content area
+.infopanel__pane {
+  padding: 20px;
+  background-color: $bg-color-infopanel-pane;
+  color: $color-infopanel;
+  h2,h3,h4,h5,h6,li {
+    color: $color-infopanel;
   }
-  z-index: 10;
+  a {
+    color: $color-infopanel-links;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    margin: 0.25rem 0;
+    padding: 0.125rem 0.75rem;
+    font-size: 0.9rem;
+    border-radius: 0.125rem;
+    cursor: pointer;
+    &:hover,
+    &:focus,
+    &.active {
+      color: $color-infopanel-links;
+      background-color: $bg-color-infopanel-comp-hover;
+    }
+  }
 }

@@ -14,6 +14,7 @@
     padding: 0;
     margin: 0;
     font-size: 1.3rem;
+    color: $color-h1-title;
     line-height: 2rem;
   }
   .framesize-nav {
@@ -26,14 +27,14 @@
       margin: 0 0.125rem;
       svg {
         height: 18px;
-        fill: hsl(0, 0%, 67%);
+        fill: $fill-color;
         &:hover {
-          fill: hsl(0, 0%, 97%);
+          fill: $fill-color-hover;
         }
       }
       &.active {
         svg {
-          fill: hsl(0, 0%, 97%);
+          fill: $fill-color-hover;
         }
       }
     }
