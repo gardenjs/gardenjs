@@ -63,30 +63,28 @@ function tabselectionchange(evt) {
   selectedtab = evt.detail.selecteditem
 }
 
-let size = "100%"
-function toggleMobile() {
-  size = size == "100%" ? "642px" : "100%"
-  if (size != "100%") {
-    
-  }
+let frameheight = "100%"
+let framewidth = "100%"
+function setFramesizeMobile() {
+  frameheight = "200px"
+  framewidth = "642px"
 }
-function toggleTablet() {
-  size = size == "100%" ? "820px" : "100%"
-  if (size != "100%") {
-
-  }
+function setFramesizeFullTablet() {
+  frameheight = "320px"
+  framewidth = "820px"
 }
-function toggleLaptop() {
-  size = size == "100%" ? "1280px" : "100%"
-  if (size != "100%") {
-
-  }
+function setFramesizeFullDesktop() {
+  frameheight = "680px"
+  framewidth = "1280px"
 }
-function toggleFull() {
-  size = size == "100%" ? "0" : "100%"
-  if (size != "100%") {
-
-  }
+function setFramesizeFull() {
+  frameheight = "100%"
+  framewidth = "100%"
+}
+function toggleOrientation() {
+  const tmp = frameheight
+  frameheight = framewidth
+  framewidth = tmp 
 }
 
 </script>
@@ -97,21 +95,24 @@ function toggleFull() {
   <div class="actionbar">
     <h1 class="title__h1">{das.name}</h1>
     <div class="framesize-nav">
-      <button on:click={toggleMobile} >
+      <button on:click={setFramesizeMobile} >
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M15.5 1h-8A2.5 2.5 0 005 3.5v17A2.5 2.5 0 007.5 23h8a2.5 2.5 0 002.5-2.5v-17A2.5 2.5 0 0015.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/></svg>
       </button>
-      <button on:click={toggleTablet} >
+      <button on:click={setFramesizeFullTablet} >
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M18.5 0h-14A2.5 2.5 0 002 2.5v19A2.5 2.5 0 004.5 24h14a2.5 2.5 0 002.5-2.5v-19A2.5 2.5 0 0018.5 0zm-7 23c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7.5-4H4V3h15v16z"/></svg>
       </button>
-      <button on:click={toggleLaptop} >
+      <button on:click={setFramesizeFullDesktop} >
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
       </button>
-      <button on:click={toggleFull} >
+      <button on:click={setFramesizeFull} >
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/></svg>
+      </button>
+      <button on:click={toggleOrientation} >
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/></svg>
       </button>
     </div>
   </div>
-  <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style="width: {size}; height: {size}"></iframe>
+  <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style="width: {framewidth}; height: {frameheight}"></iframe>
 </div>
 <div slot="bottom" class="full flex-column">
   <TabsComponent tabs={tabs} on:out={tabselectionchange}>
@@ -135,10 +136,6 @@ function toggleFull() {
       {/each}
       {/if}
       </ul>
-    {:else if selectedtab.name == 'CSS'}
-      <h2>CSS...</h2>
-    {:else if selectedtab.name == 'HTML'}
-      <h2>HTML...</h2>
     {/if}
   </TabsComponent>
 </div>
