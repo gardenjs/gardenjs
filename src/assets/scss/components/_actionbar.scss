@@ -18,13 +18,14 @@
     line-height: 2rem;
   }
   .framesize-nav {
-    align-self: flex-end;
+    align-self: center;
+    height: 18px;
     button {
+      margin: 0 0.125rem;
+      padding: 0;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 0;
-      margin: 0 0.125rem;
       svg {
         height: 18px;
         fill: $fill-color;
