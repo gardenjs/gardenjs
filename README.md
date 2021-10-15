@@ -56,3 +56,9 @@ or add it to your package.json and run via `npm run garden`
 open in browser: localhost:${serverport}/ 
 
 serverport is defined in rabbit.config.json, e.g. 3010
+
+
+## Todo´s
+
+* actionbar - device buttons: add class "active" (on button-tag)
+* sidebarnav: toggle nav items, add toggle icon
