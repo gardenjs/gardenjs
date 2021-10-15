@@ -33,6 +33,9 @@
         &:hover {
           fill: $fill-color-hover-actionbar;
         }
+        &.landscape {
+          transform: rotate(90deg);
+        }
       }
       &.active {
         svg {
