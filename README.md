@@ -60,5 +60,8 @@ serverport is defined in rabbit.config.json, e.g. 3010
 
 ## Todo´s
 
-* actionbar - device buttons: add class "active" (on button-tag)
+* manage dark-mode of frameworks like carrots:
+  * set "class dark" inside iframe
+  * set bg-color of stage via config file for dark mode & light (default)?
 * sidebarnav: toggle nav items, add toggle icon
+* actionbar - device buttons: add class "active" (on button-tag)
