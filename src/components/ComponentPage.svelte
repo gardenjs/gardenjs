@@ -120,7 +120,7 @@ $: {
       </button>
     </div>
   </div>
-  <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={style} ></iframe>
+  <iframe class="stage whitebg" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={style} ></iframe>
 </div>
 <div slot="bottom" class="full flex-column">
   <TabsComponent tabs={tabs} on:out={tabselectionchange}>
@@ -148,3 +148,8 @@ $: {
   </TabsComponent>
 </div>
 </HorizontalSplitPane>
+<style>
+.whitebg {
+  background-color: white;
+}
+</style>
