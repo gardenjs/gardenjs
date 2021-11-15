@@ -20,12 +20,12 @@ export async function generateGardenBase() {
     }
   }, [])
 
-  await writeFileIfNotChanged(targetBaseFile, generateBaseCode(cds))
-  await writeFileIfNotChanged(targetComponentMapFile, generateComponentMapCode(cds))
+  await writeFileIfChanged(targetBaseFile, generateBaseCode(cds))
+  await writeFileIfChanged(targetComponentMapFile, generateComponentMapCode(cds))
 
 }
 
-async function writeFileIfNotChanged(file, content) {
+async function writeFileIfChanged(file, content) {
   let oldcontent = ''
   try {
     oldcontent = (await fs.promises.readFile(file)).toString()
@@ -54,7 +54,6 @@ export function getDasBaseFolders(structure, navbasenode) {
 }
 
 export function generateBaseCode(componentdescriptions) {
-
   return `
 export const routes = {
   ${componentdescriptions.map(createRouteEntry).join(',\n')}
