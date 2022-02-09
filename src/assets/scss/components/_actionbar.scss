@@ -19,40 +19,44 @@
     line-height: 2rem;
   }
   .framesize-nav {
-    align-self: center;
-    height: 18px;
-    button {
-      margin: 0 0.125rem;
-      padding: 0;
-      background: none;
-      border: none;
-      cursor: pointer;
-      svg {
-        height: 18px;
-        fill: $fill-color-actionbar;
-        &:hover {
-          fill: $fill-color-hover-actionbar;
-        }
-        &.landscape {
-          transform: rotate(90deg);
-        }
-      }
-      &.active {
+    display: none;
+    @include min(lg) {
+      display: block;
+      align-self: center;
+      height: 18px;
+      button {
+        margin: 0 0.125rem;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
         svg {
-          fill: $fill-color-hover-actionbar;
+          height: 18px;
+          fill: $fill-color-actionbar;
+          &:hover {
+            fill: $fill-color-hover-actionbar;
+          }
+          &.landscape {
+            transform: rotate(90deg);
+          }
+        }
+        &.active {
+          svg {
+            fill: $fill-color-hover-actionbar;
+          }
+        }
+        &.tooltip:hover::after {
+          position: absolute;
+          display: block;
+          margin-top: -2.75rem;
+          padding: 0.25rem;
+          content: attr(rel);
+          font-size: 0.75rem;
+          color: $color-tooltip-actionbar;
+          background-color: $bg-color-tooltip-actionbar;
+          border-radius: 0.125rem;
         }
       }
-      &.tooltip:hover::after {
-        position: absolute;
-        display: block;
-        margin-top: -2.75rem;
-        padding: 0.25rem;
-        content: attr(rel);
-        font-size: 0.75rem;
-        color: $color-tooltip-actionbar;
-        background-color: $bg-color-tooltip-actionbar;
-        border-radius: 0.125rem;
-       }
     }
   }
 }

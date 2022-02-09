@@ -4,3 +4,4 @@
 .git
 *.swp
 /public/build
+*.DS_Store
