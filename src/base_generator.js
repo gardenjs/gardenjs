@@ -22,7 +22,6 @@ export async function generateGardenBase() {
 
   await writeFileIfChanged(targetBaseFile, generateBaseCode(cds))
   await writeFileIfChanged(targetComponentMapFile, generateComponentMapCode(cds))
-
 }
 
 async function writeFileIfChanged(file, content) {

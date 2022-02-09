@@ -10,7 +10,8 @@
     "serveGarden": "bin/servegarden.js"
   },
   "scripts": {
-    "test": "mocha --require @babel/polyfill --require @babel/register --recursive"
+    "test": "mocha --require @babel/polyfill --require @babel/register --recursive",
+    "tdd": "nodemon --exec 'mocha --require @babel/polyfill --require @babel/register --recursive'"
   },
   "author": "",
   "license": "MIT",
