@@ -18,7 +18,7 @@ async function findDasFiles(basepath, relativepath = '') {
         if (err) {
           reject(err)
         } else {
-          const dasfiles = files.filter(file => file.name.match(/^.*\.das\.(js|json)$/i) ).map(file => {return {filename: file.name, relativepath, basepath}})
+          const dasfiles = files.filter(file => file.name.match(/^.*\.das\.js$/i) ).map(file => {return {filename: file.name, relativepath, basepath}})
           const promises = files.filter(file => file.isDirectory()).map(dir => {
             return findDasFiles(basepath, path.join(relativepath, dir.name))
           })
@@ -35,16 +35,9 @@ async function findDasFiles(basepath, relativepath = '') {
 
 async function readDasFile({filename, relativepath, basepath}) {
   let content = await fs.promises.readFile(path.resolve(basepath, relativepath, filename), {encoding: 'utf-8'})
-  if (isJsonFile(filename)) {
-    return JSON.parse(content)
-  }
   // js file
   const module = await import(path.resolve(basepath, relativepath, filename) + '?' + createMd5Hash(content))
   return module.default
-}
-
-function isJsonFile(filename) {
-  return filename.match(/.*\.json$/)
 }
 
 function createMd5Hash(str) {

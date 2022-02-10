@@ -1,4 +1,3 @@
-
 <script> 
 import {initRouter} from '../src/router.js'
 import ComponentPage from '../src/components/ComponentPage.svelte'
@@ -13,7 +12,7 @@ let componentname = ''
 
 export let routes
 export let navtree
-// export let componentmap 
+export let componentmap 
 
 let das = {}
 let historystate
@@ -23,8 +22,9 @@ initRouter(routes, baseurl, (routeobj, state) => {
     das = {}
     componentname = ''
   } else {
-    das = routeobj.das || {}
     componentname = routeobj.fullname
+    console.log(componentmap)
+    das = componentmap.dasmap[componentname] || {}
     historystate = state
   }
 })

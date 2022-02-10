@@ -6,7 +6,7 @@ const {structure, destination} = config
 
 export async function generateGardenBase() {
   const targetBaseFile = destination + 'base.js'
-  const targetComponentMapFile= destination + 'componentmap.js'
+  const targetImportMapFile= destination + 'importmap.js'
   
   const basefolders = getDasBaseFolders(structure)
 
@@ -21,7 +21,7 @@ export async function generateGardenBase() {
   }, [])
 
   await writeFileIfChanged(targetBaseFile, generateBaseCode(cds))
-  await writeFileIfChanged(targetComponentMapFile, generateComponentMapCode(cds))
+  await writeFileIfChanged(targetImportMapFile, generateImportMapCode(cds))
 }
 
 async function writeFileIfChanged(file, content) {
@@ -62,15 +62,19 @@ export const navtree = ${JSON.stringify(createNavItemTree(componentdescriptions)
 `
 }
 
-export function generateComponentMapCode(componentdescriptions) {
+export function generateImportMapCode(componentdescriptions) {
 
   return `
 ${componentdescriptions.map(createImportStmt).join('\n')}
 
 export const componentmap = {
-  ${componentdescriptions.map(createComponentKeyMapEntry).join(',\n')}
+  ${componentdescriptions.map(createComponentMapEntry).join(',\n')}
+}
+export const dasmap = {
+  ${componentdescriptions.map(createDasMapEntry).join(',\n')}
 }
 `
+
 }
 
 export function createNavItemTree(componentDescriptions) {
@@ -93,9 +97,8 @@ export function createNode(tree, nodes) {
   if (!parentNode._items) parentNode._items = []
   return parentNode._items
 }
-
 export function createNavigationEntry(description) {
-  return {href: description.route, text: description.das.name, key: description.fullname}
+  return {href: description.route, text: description.name, key: description.fullname}
 }
 
 
@@ -104,28 +107,36 @@ export function createRouteEntry(description) {
 }
 
 export function createImportStmt(description) {
-  return `import ${description.fullname} from '${description.file}'`
+  return `import ${description.fullname} from '${description.file}'
+import ${description.fullname}Das from '${description.dasfile}'`
 }
 
-export function createComponentKeyMapEntry(description) {
+export function createComponentMapEntry(description) {
   return `'${description.fullname}': ${description.fullname}`
 }
 
-export function createComponentDescription({das, navbasenode, basepath, relativepath}) {
-  const fullname = createFullname(navbasenode, relativepath, das.name)
-  const route = createRoute(navbasenode, relativepath, das.name)
+export function createDasMapEntry(description) {
+  return `'${description.fullname}': ${description.fullname}Das`
+}
+
+export function createComponentDescription({das, navbasenode, basepath, relativepath, filename}) {
+  const name = das.name
+  const fullname = createFullname(navbasenode, relativepath, name)
+  const route = createRoute(navbasenode, relativepath, name)
   const fullnavnode = path.join(navbasenode, relativepath)
   const modulepath = basepath.indexOf('node_modules') == 0 ? basepath.substring('node_modules/'.length) : '../' + basepath
   const file = das.file ? path.join(modulepath, relativepath, das.file) : undefined
+  const dasfile = path.join(modulepath, relativepath, filename)
   const fullpath = path.join(basepath, relativepath)
   return {
-    das,
+    name,
     basepath,
     navbasenode,
     fullnavnode,
     relativepath,
     fullpath,
     file,
+    dasfile,
     fullname,
     route
   }

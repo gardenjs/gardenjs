@@ -1,6 +1,6 @@
 import {default as chai} from 'chai'
 const expect = chai.expect
-import {generateBaseCode, generateComponentMapCode, createImportStmt, createRouteEntry, createNavigationEntry, createNavItemTree, createComponentDescription, getDasBaseFolders } from '../src/base_generator.js'
+import {generateBaseCode, generateImportMapCode, createImportStmt, createRouteEntry, createNavigationEntry, createNavItemTree, createComponentDescription, getDasBaseFolders } from '../src/base_generator.js'
 import {findAndReadDasFiles} from '../src/das_file_finder.js'
 
 describe('generate component', () => {
@@ -12,10 +12,10 @@ describe('generate component', () => {
       expect(code).equals(expectedCode)
     })
   })
-  describe('generateComponentMapCode', () => {
+  describe('generateImportMapCode', () => {
     it('creates component map code for given componentdescriptions', () => {
       const cds = [createSampleComponentDescription({name: 'C1'}), createSampleComponentDescription({name: 'C2'})]
-      const code = generateComponentMapCode(cds)
+      const code = generateImportMapCode(cds)
       const expectedCode = getExpectedComponentMapCode()
       expect(code).equals(expectedCode)
     })
@@ -41,17 +41,17 @@ describe('generate component', () => {
     })
   })
   describe('findAndReadDasFiles', () => {
-    it('returns all das-json and das-js files as json and file information relative to basefolder', async () => {
+    it('returns all das-js files as json and file information relative to basefolder', async () => {
       const basepath = './test/dasfiles_test_folder'
       const navbasenode = 'base'
       const dasfiles = await findAndReadDasFiles({basepath, navbasenode})
       const das = {some: 'value'}
-      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f1.das.json', relativepath: ''})
+      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f1.das.js', relativepath: ''})
       expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'fjs1.das.js', relativepath: 'folder_with_das_js'})
-      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f2.das.json', relativepath: 'subfolder'})
-      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f3.das.json', relativepath: 'anotherfolder'})
-      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f4.das.json', relativepath: 'anotherfolder'})
-      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f5.das.json', relativepath: 'anotherfolder/deepfolder'})
+      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f2.das.js', relativepath: 'subfolder'})
+      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f3.das.js', relativepath: 'anotherfolder'})
+      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f4.das.js', relativepath: 'anotherfolder'})
+      expect(dasfiles).to.deep.include({das, basepath, navbasenode, filename: 'f5.das.js', relativepath: 'anotherfolder/deepfolder'})
       expect(dasfiles.length).equals(6)
     })
   })
@@ -59,12 +59,14 @@ describe('generate component', () => {
   describe('generateImportStmt', () => {
     it('generates import stmt for component description relative to targetproject/dev folder. i.e. prepend ../ to file', () => {
       const description = createSampleComponentDescription()
-      const expectedImportStmt = 'import BaseNodeNestedFolderSample from \'../base/path/nested/folder/Sample.svelte\''
+      const expectedImportStmt = `import BaseNodeNestedFolderSample from '../base/path/nested/folder/Sample.svelte'
+import BaseNodeNestedFolderSampleDas from '../base/path/nested/folder/filename.das.js'`
       expect(createImportStmt(description)).equals(expectedImportStmt)
     })
     it('generates import stmt for component description relative to target node_module project/dev folder. i.e. removes node_modules/ from file', () => {
       const description = createSampleComponentDescription({basepath: 'node_modules/base/path'})
-      const expectedImportStmt = 'import BaseNodeNestedFolderSample from \'base/path/nested/folder/Sample.svelte\''
+      const expectedImportStmt = `import BaseNodeNestedFolderSample from 'base/path/nested/folder/Sample.svelte'
+import BaseNodeNestedFolderSampleDas from 'base/path/nested/folder/filename.das.js'`
       expect(createImportStmt(description)).equals(expectedImportStmt)
     })
   })
@@ -83,7 +85,7 @@ describe('generate component', () => {
   describe('generateNavigationEntry', () => {
     it('generates navigation entry', () => {
       const description = createSampleComponentDescription()
-      const expectedNavigationEntry = {href: description.route, text: description.das.name, key: description.fullname}
+      const expectedNavigationEntry = {href: description.route, text: description.name, key: description.fullname}
       expect(createNavigationEntry(description)).deep.equals(expectedNavigationEntry)
     })
     it('generates navitem tree', () => {
@@ -106,23 +108,25 @@ describe('generate component', () => {
       const relativepath = 'nested/folder'
       const basepath = 'base/path'
       const fullpath = 'base/path/nested/folder'
+      const filename = 'filename.das.js'
 
       const expectedFullname = 'BaseNodeNestedFolderSample'
       const expectedRoute = '/base/node/nested/folder/sample'
       const expectedFile = '../base/path/nested/folder/Sample.svelte'
+      const expectedDasFile = '../base/path/nested/folder/filename.das.js'
       const expectedFullNavNode = 'base/node/nested/folder'
-      const expectedDescription = {das, navbasenode, fullnavnode: expectedFullNavNode, basepath, fullpath, relativepath, file: expectedFile, fullname: expectedFullname, route: expectedRoute} 
+      const expectedDescription = {name: das.name, navbasenode, fullnavnode: expectedFullNavNode, basepath, fullpath, relativepath, file: expectedFile, dasfile: expectedDasFile, fullname: expectedFullname, route: expectedRoute} 
 
-      const componentDescription = createComponentDescription({das, navbasenode, basepath, relativepath})
+      const componentDescription = createComponentDescription({das, navbasenode, basepath, relativepath, filename})
 
       expect(componentDescription).deep.equals(expectedDescription)
     })
   })
 })
 
-function createSampleComponentDescription({name, navbasenode = 'base/node', basepath = 'base/path', relativepath = 'nested/folder'} = {}) {
+function createSampleComponentDescription({name, navbasenode = 'base/node', basepath = 'base/path', relativepath = 'nested/folder', filename = 'filename.das.js'} = {}) {
   const das = createSampleDas(name) 
-  return createComponentDescription({das, navbasenode, basepath, relativepath})
+  return createComponentDescription({das, navbasenode, basepath, relativepath, filename})
 }
 
 function createSampleDas(name = 'Sample') {
@@ -142,72 +146,26 @@ function getExpectedBaseCode() {
   return `
 export const routes = {
   '/base/node/nested/folder/c1': {
-  "das": {
-    "name": "C1",
-    "file": "Sample.svelte",
-    "description": "a description",
-    "in": [
-      {
-        "name": "inParam",
-        "type": "text"
-      }
-    ],
-    "out": [
-      {
-        "name": "outParam",
-        "type": "text"
-      }
-    ],
-    "examples": [
-      {
-        "story": "exampleOne",
-        "input": {
-          "inParam": "some text"
-        }
-      }
-    ]
-  },
+  "name": "C1",
   "basepath": "base/path",
   "navbasenode": "base/node",
   "fullnavnode": "base/node/nested/folder",
   "relativepath": "nested/folder",
   "fullpath": "base/path/nested/folder",
   "file": "../base/path/nested/folder/Sample.svelte",
+  "dasfile": "../base/path/nested/folder/filename.das.js",
   "fullname": "BaseNodeNestedFolderC1",
   "route": "/base/node/nested/folder/c1"
 },
 '/base/node/nested/folder/c2': {
-  "das": {
-    "name": "C2",
-    "file": "Sample.svelte",
-    "description": "a description",
-    "in": [
-      {
-        "name": "inParam",
-        "type": "text"
-      }
-    ],
-    "out": [
-      {
-        "name": "outParam",
-        "type": "text"
-      }
-    ],
-    "examples": [
-      {
-        "story": "exampleOne",
-        "input": {
-          "inParam": "some text"
-        }
-      }
-    ]
-  },
+  "name": "C2",
   "basepath": "base/path",
   "navbasenode": "base/node",
   "fullnavnode": "base/node/nested/folder",
   "relativepath": "nested/folder",
   "fullpath": "base/path/nested/folder",
   "file": "../base/path/nested/folder/Sample.svelte",
+  "dasfile": "../base/path/nested/folder/filename.das.js",
   "fullname": "BaseNodeNestedFolderC2",
   "route": "/base/node/nested/folder/c2"
 }
@@ -240,11 +198,17 @@ export const navtree = {
 function getExpectedComponentMapCode() {
   return `
 import BaseNodeNestedFolderC1 from '../base/path/nested/folder/Sample.svelte'
+import BaseNodeNestedFolderC1Das from '../base/path/nested/folder/filename.das.js'
 import BaseNodeNestedFolderC2 from '../base/path/nested/folder/Sample.svelte'
+import BaseNodeNestedFolderC2Das from '../base/path/nested/folder/filename.das.js'
 
 export const componentmap = {
   'BaseNodeNestedFolderC1': BaseNodeNestedFolderC1,
 'BaseNodeNestedFolderC2': BaseNodeNestedFolderC2
+}
+export const dasmap = {
+  'BaseNodeNestedFolderC1': BaseNodeNestedFolderC1Das,
+'BaseNodeNestedFolderC2': BaseNodeNestedFolderC2Das
 }
 `
 }
