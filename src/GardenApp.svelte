@@ -12,7 +12,7 @@ let componentname = ''
 
 export let routes
 export let navtree
-export let componentmap 
+export let dasmap 
 
 let das = {}
 let historystate
@@ -23,8 +23,7 @@ initRouter(routes, baseurl, (routeobj, state) => {
     componentname = ''
   } else {
     componentname = routeobj.fullname
-    console.log(componentmap)
-    das = componentmap.dasmap[componentname] || {}
+    das = dasmap[componentname] || {}
     historystate = state
   }
 })

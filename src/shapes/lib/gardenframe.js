@@ -1,6 +1,6 @@
 import {GardenFrame} from 'garden'
-import {routes} from '../base'
-import {componentmap} from '../componentmap'
+import {routes} from '../base.js'
+import {componentmap} from '../importmap.js'
 
 const app = new GardenFrame({
   target: document.body,
