@@ -64,6 +64,6 @@ serverport is defined in rabbit.config.json, e.g. 3010
   * set "class dark" inside iframe
   * set bg-color of stage via config file for dark mode & light (default)?
 * sidebarnav: toggle nav items, add toggle icon
-* sidebarnav: remove "carrots" as top level from nav
-* actionbar - device buttons: add class "active" (on button-tag) to show if btn is active (already styled)
+* sidebarnav: remove "carrots" as top level from nav -> done via config-file rabbit.config.json
+* actionbar - device buttons: add class "active" (on button-tag) to show if btn is active (already styled) -> done
 * actionbar: give btn a class if sidebar is toggled to set padding-right with same value as inside the topbar (set title with same distance to left then menu icon)
