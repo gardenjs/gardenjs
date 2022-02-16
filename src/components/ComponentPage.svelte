@@ -7,7 +7,7 @@ export let componentname
 export let das = {}
 export let historystate
 
-let selectedExample = {}
+let selectedStory = null 
 let examples = {}
 
 let myframeready 
@@ -34,22 +34,22 @@ $: {
 
 $: {
   if (myframeready) {
-    myframe.contentWindow.postMessage({selectedExample, das, componentname}, window.location)
+    myframe.contentWindow.postMessage({selectedStory, componentname}, window.location)
   }
 }
 
 
 $: {
   examples = das.examples || []
-  selectedExample = examples[0] || {}
+  selectedStory = examples[0]?.story 
   if (historystate && historystate.selectedstory) {
-    selectedExample = examples.find(ex => ex.story == historystate.selectedstory) || {}
+    selectedStory = examples.find(ex => ex.story == historystate.selectedstory)?.story
   }
 }
 
 $: tabs = [
   {name: 'Description', props: {text: das.name}},
-  {name: 'Examples', props: {selected: selectedExample.story, items: examples.map(ex => ex.story)}, page: InputSelectionComponent, out: handleSelectionChange},
+  {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: InputSelectionComponent, out: handleSelectionChange},
 ]
 
 $: selectedtab = tabs[0] || {}
