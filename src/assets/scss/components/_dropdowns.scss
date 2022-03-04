@@ -24,7 +24,7 @@
   .dropdown__items {
     visibility: hidden;
     position: absolute;
-    background-color: $background-topbar;
+    background-color: var(--topbar-bg-color);
     right: 0;
     z-index: 9;
     ul {

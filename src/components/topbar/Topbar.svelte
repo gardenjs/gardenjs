@@ -26,24 +26,65 @@
 
 <script>
   import { createEventDispatcher} from 'svelte'
-const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher()
 
-export let active = true
-export let dark = false
+  export let active = true
+  export let dark = false
 
-$: {
-  if (dark)
-    document.body.classList.add('dark')
-  else 
-    document.body.classList.remove('dark')
-}
+  $: {
+    if (dark)
+      document.body.classList.add('dark')
+    else 
+      document.body.classList.remove('dark')
+  }
 
-function toggle() {
-    dispatch('out', {active: !active})
-}
+  function toggle() {
+      dispatch('out', {active: !active})
+  }
 
-function toggleDarkmode() {
-  dark = !dark
-}
+  function toggleDarkmode() {
+    dark = !dark
+  }
 
 </script>
+
+<style>
+  .topbar {
+    width: 100%;
+    height: 50px;
+    background-color: var(--topbar-bg-color);
+    border-style: solid;
+    border-width: 2px;
+    border-image: linear-gradient(to right, rgb(0, 219, 0), rgb(0, 172, 0), 20%, hsl(17, 83%, 60%), 30%, hsl(17, 83%, 50%), #EA5B21) 0 0 100% 0 stretch;
+  }
+  .topbar svg {
+    fill: var(--topbarnav-icon-color);
+  }
+  .topbar__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 2rem;
+  }
+  .topbar__nav-btn {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  .topbar__nav {
+    display: flex;
+    align-items: center;
+  }
+  .switch-mode {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+</style>

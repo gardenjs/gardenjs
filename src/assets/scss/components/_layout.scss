@@ -69,5 +69,5 @@
   height: 100%;
   overflow-y: auto;
   box-sizing: border-box;
-  background-color: $background-topbar;
+  background-color: var(--topbar-bg-color);
 }
