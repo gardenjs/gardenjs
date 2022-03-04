@@ -29,8 +29,6 @@ function handlecomponentout(evt) {
 }
 </script>
 
-<div class="full">
 {#if component}
   <svelte:component this={component} {...selectedExample?.input} {...redirectdata} on:out={handlecomponentout} />
 {/if}
-</div>

@@ -6,6 +6,7 @@
   }
 
 </script>
+
 <a href={href} on:click|preventDefault={handleClick}>
 <slot />
 </a>

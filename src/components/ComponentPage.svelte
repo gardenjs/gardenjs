@@ -152,7 +152,27 @@ $: {
   </TabsComponent>
 </div>
 </HorizontalSplitPane>
+
 <style>
+.full {
+  height: 100%;
+  width: auto;
+  overflow-y: auto;
+}
+.flex-column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.stage {
+  align-self: center;
+  display: blocK;
+  height: 100%;
+  width: 100%;
+  background-color: var(--stage-bg-color);
+  border: 1px solid var(--stage-border-color);
+}
 .whitebg {
   background-color: white;
 }
