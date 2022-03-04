@@ -7,19 +7,41 @@
   }
 
 </script>
-<ul>
-  {#each Object.keys(node) as key}
-    {#if isLeaf(node[key])}
-      {#each node[key] as item}
-      <li>
-        <Link href={item.href}>{item.text}</Link>
-      </li>
-      {/each}
-    {:else}
-      <li>
-        {key}
-        <svelte:self node={node[key]} />
-      </li>
-    {/if}
-  {/each}
-</ul>
+<nav>
+  <ul>
+    {#each Object.keys(node) as key}
+      {#if isLeaf(node[key])}
+        {#each node[key] as item}
+        <li>
+          <Link href={item.href}>{item.text}</Link>
+        </li>
+        {/each}
+      {:else}
+        <li>
+          {key}
+          <svelte:self node={node[key]} />
+        </li>
+      {/if}
+    {/each}
+  </ul>
+</nav>
+
+<style>
+  nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  nav li {
+    list-style: none;
+    margin: 0.5rem 0;
+    padding: 0.5rem 0;
+    color: var(--sidebar-nav-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  nav ul li ul {
+    padding: 0 0 0 1rem;
+  }
+</style>

@@ -5,64 +5,64 @@
 //
 
 // specific layouts: (collapsed) toggle-sidebar & content
-.sidebar {
-  width: 0;
-  max-width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background: $background-sidebar;
-  padding: 0;
-  // transition: .1s;
+// .sidebar {
+//   width: 0;
+//   max-width: 100%;
+//   height: 100%;
+//   overflow-x: hidden;
+//   overflow-y: auto;
+//   background: $background-sidebar;
+//   padding: 0;
+//   // transition: .1s;
 
-  a.logo {
-    display: block;
-    margin: 1rem 0 2rem;
-    text-decoration: none;
-    svg {
-      display: block;
-      margin: auto;
-    }
-  }
-  nav {
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      li {
-        list-style: none;
-        margin: 0.5rem 0;
-        padding: 0.5rem 0;
-        color: $color-sidebarnav;
-        font-size: 0.9rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        a {
-          display: block;
-          margin: -0.25rem -1rem -1rem;
-          padding: 0.125rem 1rem;
-          text-transform: initial;
-          text-decoration: none;
-          font-weight: 400;
-          color: $color-sidebarnav;
-          &:focus,
-          &:hover {
-            color: $color-sidebarnav-hover;
-            background-color: $bg-color-sidebarnav-hover;
-          }
-          border-radius: 0.25rem;
-        }
-        ul {
-          padding: 0 0 0 1rem;
-        }
-      }
-    }
-  }
-  @include max(bp-l) {
-    width: 0px;
-  }
-}
-.show-sidebar {
-  width: 260px;
-  padding: 1rem 2rem;
-}
+//   a.logo {
+//     display: block;
+//     margin: 1rem 0 2rem;
+//     text-decoration: none;
+//     svg {
+//       display: block;
+//       margin: auto;
+//     }
+//   }
+//   nav {
+//     ul {
+//       margin: 0;
+//       padding: 0;
+//       list-style: none;
+//       li {
+//         list-style: none;
+//         margin: 0.5rem 0;
+//         padding: 0.5rem 0;
+//         color: $color-sidebarnav;
+//         font-size: 0.9rem;
+//         font-weight: 600;
+//         text-transform: uppercase;
+//         a {
+//           display: block;
+//           margin: -0.25rem -1rem -1rem;
+//           padding: 0.125rem 1rem;
+//           text-transform: initial;
+//           text-decoration: none;
+//           font-weight: 400;
+//           color: $color-sidebarnav;
+//           &:focus,
+//           &:hover {
+//             color: $color-sidebarnav-hover;
+//             background-color: $bg-color-sidebarnav-hover;
+//           }
+//           border-radius: 0.25rem;
+//         }
+//         ul {
+//           padding: 0 0 0 1rem;
+//         }
+//       }
+//     }
+//   }
+//   @include max(bp-l) {
+//     width: 0px;
+//   }
+// }
+// .show-sidebar {
+//   width: 260px;
+//   padding: 1rem 2rem;
+// }
