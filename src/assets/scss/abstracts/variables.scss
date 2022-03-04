@@ -133,23 +133,6 @@ $font-size-4xl:     $font-size-base * 2.0 !default;
 // components variables
 // -----------------------------------------------------------------------------------------------
 
-// dropdowns
-// -------------------------------------------------
-// $dropdown-list-border:                    2px solid $primary !default;
-$dropdown-list-right:                     0 !default;
-$dropdown-li-font-size-min:               $font-size-xs !default;
-$dropdown-li-font-size-max:               $font-size-sm !default;
-$dropdown-link-font-size-min:             $font-size-xs !default;
-$dropdown-link-font-size-max:             $font-size-sm !default;
-$dropdown-link-padding:                   0.5rem 0.5rem !default;
-// $dropdown-link-color:                     $primary !default;
-// $dropdown-link-color-hover:               $primary !default;
-$dropdown-link-svg-margin:                0 0.5rem 0 0 !default;
-// $dropdown-link-svg-fill:                  $primary !default;
-$dropdown-link-background:                #fff !default;
-// $dropdown-link-background-hover:          $blue-100 !default;
-
-
 // actionbar
 // -------------------------------------------------
 $bg-color-actionbar:                  var(--actionbar-bg-color) !default;
