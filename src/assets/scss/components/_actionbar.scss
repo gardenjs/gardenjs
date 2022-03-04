@@ -20,7 +20,7 @@
   }
   .framesize-nav {
     display: none;
-    @include min(lg) {
+    @media only screen and (min-width: 1280px) {
       display: block;
       align-self: center;
       height: 18px;
