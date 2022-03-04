@@ -31,8 +31,8 @@
   --actionbar-tooltip-bg-color:             #000;
 
   --dragbar-border-color:                   hsl(0, 0%, 13%);
-  --dragbar-bg-color:                       hsl(0, 0%, 85%);
-  --dragbar-bg-hover-color:                 hsl(0, 0%, 75%);
+  --dragbar-bg-color:                       hsl(0, 0%, 95%);
+  --dragbar-bg-hover-color:                 hsl(0, 0%, 100%);
   --dragbar-icon-color:                     #000;
 
   --stage-bg-color:                         #fff;
@@ -164,13 +164,6 @@ $fill-color-actionbar:                var(--actionbar-svg-color) !default;
 $fill-color-hover-actionbar:          var(--actionbar-svg-act-color) !default;
 $color-tooltip-actionbar:             var(--actionbar-tooltip-color) !default;
 $bg-color-tooltip-actionbar:          var(--actionbar-tooltip-bg-color) !default;
-
-// dragbar
-// -------------------------------------------------
-$border-dragbar:                  1px solid var(--dragbar-border-color) !default;
-$background-color-dragbar:        var(--dragbar-bg-color) !default;
-$background-color-dragbar-hover:  var(--dragbar-bg--hovercolor) !default;
-$fill-icon-dragbar:               var(--dragbar-icon-color) !default;
 
 // stage
 // -------------------------------------------------

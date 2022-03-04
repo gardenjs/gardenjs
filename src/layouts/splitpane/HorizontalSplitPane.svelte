@@ -22,9 +22,30 @@
 
 <div class="full flex-column" bind:this={element} >
   <div class="flexfix" style="height: {topheight}"><slot name="top" /></div>
-  <div class="dragbar-horizontal" on:mousedown={register}>
+  <div class="dragbar" on:mousedown={register}>
     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M3.984 15v-2.016h16.031V15H3.984zm16.032-6v2.016H3.985V9h16.031z"/></svg>
   </div>
   <div class="infopanel"><slot name="bottom" /></div>
 </div>
 
+<style>
+  .dragbar {
+    margin-top: -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+    background-color: var(--dragbar-bg-color);
+    border-top: 1px solid var(--dragbar-border-color);
+    border-bottom: 1px solid var(--dragbar-border-color);
+    cursor: row-resize;
+    z-index: 10;
+  }
+  .dragbar:hover {
+    background-color: var(--dragbar-bg-hover-color);
+  }
+  .dragbar svg {
+    width: 16px;
+    fill: var(--dragbar-icon-color);
+  }
+</style>
