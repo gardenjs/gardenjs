@@ -27,21 +27,21 @@
 </nav>
 
 <style>
-  nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  nav li {
-    list-style: none;
-    margin: 0.5rem 0;
-    padding: 0.5rem 0;
-    color: var(--gray-900);
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  nav ul li ul {
-    padding: 0 0 0 1rem;
-  }
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  list-style: none;
+  margin: 0.5rem 0;
+  padding: 0.5rem 0;
+  color: var(--gray-900);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+nav ul li ul {
+  padding: 0 0 0 1rem;
+}
 </style>

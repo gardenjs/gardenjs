@@ -12,26 +12,26 @@ export let show
 </div>
 
 <style>
-  .sidebar {
-    width: 0;
-    max-width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: var(--gray-50);
-    padding: 0;
-  }
-  a.logo {
-    display: block;
-    margin: 1rem 0 2rem;
-    text-decoration: none;
-  }
-  .logo svg {
-    display: block;
-    margin: auto;
-  }
-  .show-sidebar {
-    width: 260px;
-    padding: 1rem 2rem;
-  }
+.sidebar {
+  width: 0;
+  max-width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--gray-50);
+  padding: 0;
+}
+a.logo {
+  display: block;
+  margin: 1rem 0 2rem;
+  text-decoration: none;
+}
+.logo svg {
+  display: block;
+  margin: auto;
+}
+.show-sidebar {
+  width: 260px;
+  padding: 1rem 2rem;
+}
 </style>
