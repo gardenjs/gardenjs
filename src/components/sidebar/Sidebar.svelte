@@ -18,7 +18,7 @@ export let show
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: var(--sidebar-bg-color);
+    background-color: var(--gray-50);
     padding: 0;
   }
   a.logo {

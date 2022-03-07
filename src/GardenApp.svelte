@@ -70,6 +70,5 @@ function handleTopbarOut(evt) {
     height: 100%;
     overflow-y: auto;
     box-sizing: border-box;
-    background-color: var(--topbar-bg-color);
   }
 </style>

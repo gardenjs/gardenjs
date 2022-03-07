@@ -19,12 +19,11 @@
     text-transform: initial;
     text-decoration: none;
     font-weight: 400;
-    color: var(--sidebar-nav-color);
+    color: var(--gray-900);
     border-radius: 0.25rem;
   }
   a:hover,
   a:focus {
-    color: var(--sidebar-nav-hover-color);
-    background-color: var(--sidebar-nav-hover-bg-color);
+    background-color: var(--gray-200);
   }
 </style>

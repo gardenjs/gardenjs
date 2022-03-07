@@ -170,8 +170,8 @@ $: {
   display: blocK;
   height: 100%;
   width: 100%;
-  background-color: var(--stage-bg-color);
-  border: 1px solid var(--stage-border-color);
+  background-color: var(--white);
+  border: 1px solid var(--gray-900);
 }
 .whitebg {
   background-color: white;

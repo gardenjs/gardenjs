@@ -52,13 +52,13 @@
   .topbar {
     width: 100%;
     height: 50px;
-    background-color: var(--topbar-bg-color);
+    background-color: var(--gray-50);
     border-style: solid;
     border-width: 2px;
     border-image: linear-gradient(to right, rgb(0, 219, 0), rgb(0, 172, 0), 20%, hsl(17, 83%, 60%), 30%, hsl(17, 83%, 50%), #EA5B21) 0 0 100% 0 stretch;
   }
   .topbar svg {
-    fill: var(--topbarnav-icon-color);
+    fill: var(--gray-900);
   }
   .topbar__inner {
     display: flex;
@@ -98,16 +98,16 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--dropdown-color);
+    color: var(--gray-900);
   }
   .dropdown__btn svg {
-    fill: var(--dropdown-color);
+    fill: var(--gray-900);
     margin-left: 0.25rem;
   }
   .dropdown__items {
     visibility: hidden;
     position: absolute;
-    background-color: var(--topbar-bg-color);
+    background-color: var(--gray-50);
     right: 0;
     z-index: 9;
   }
@@ -129,7 +129,7 @@
     display: flex;
     align-items: center;
     padding: 0.5rem 0.5rem;
-    color: var(--dropdown-color);
+    color: var(--gray-900);
     text-decoration: none;
     white-space: nowrap;
   }

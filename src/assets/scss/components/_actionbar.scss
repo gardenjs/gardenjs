@@ -8,14 +8,14 @@
   display: flex;
   width: 100%;
   height: 2rem;
-  background-color: $bg-color-actionbar;
+  background-color: var(--gray-50);
   &::after{content: ''; flex: 1}
   .title__h1 {
     flex: 1;
     padding: 0;
     margin: 0;
     font-size: 1.3rem;
-    color: $color-h1-actionbar;
+    color: var(--c-text);
     line-height: 2rem;
   }
   .framesize-nav {
@@ -32,9 +32,9 @@
         cursor: pointer;
         svg {
           height: 18px;
-          fill: $fill-color-actionbar;
+          fill: var(--gray-400);
           &:hover {
-            fill: $fill-color-hover-actionbar;
+            fill: var(--gray-900);
           }
           &.landscape {
             transform: rotate(90deg);
@@ -42,7 +42,7 @@
         }
         &.active {
           svg {
-            fill: $fill-color-hover-actionbar;
+            fill: var(--gray-900);
           }
         }
         &.tooltip:hover::after {
@@ -52,8 +52,8 @@
           padding: 0.25rem;
           content: attr(rel);
           font-size: 0.75rem;
-          color: $color-tooltip-actionbar;
-          background-color: $bg-color-tooltip-actionbar;
+          color: var(--gray-50);
+          background-color: var(--gray-900);
           border-radius: 0.125rem;
         }
       }

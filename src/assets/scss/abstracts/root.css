@@ -1,0 +1,37 @@
+/*
+  @Project: Garden by Rabbit Development 
+  @Author: Martin Farkas
+  @Email:  info@websites-graphix.com
+*/
+
+:root {
+  --primary:          hsl(120, 100%, 40%);
+
+  --white:      #fff;
+
+  --gray-50:    #fafafa;
+  --gray-100:   hsl(0, 0%, 96%);
+  --gray-200:   hsl(0, 0%, 90%);
+  --gray-300:   #d4d4d4;
+  --gray-400:   #a3a3a3;
+  --gray-500:   #71717a;
+  --gray-600:   #525252;
+  --gray-700:   #404040;
+  --gray-800:   #262626;
+  --gray-900:   #171717;
+}
+
+.dark {
+  --white:      #000;
+
+  --gray-900:   #fafafa;
+  --gray-800:   #f5f5f5;
+  --gray-700:   #e5e5e5;
+  --gray-600:   #d4d4d4;
+  --gray-500:   #a3a3a3;
+  --gray-400:   #71717a;
+  --gray-300:   #525252;
+  --gray-200:   #404040;
+  --gray-100:   #262626;
+  --gray-50:    #171717;
+}
