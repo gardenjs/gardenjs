@@ -20,8 +20,8 @@
 
 </script>
 
-<div class="full flex-column" bind:this={element} >
-  <div class="flexfix" style="height: {topheight}"><slot name="top" /></div>
+<div class="is-full is-flex-column" bind:this={element} >
+  <div class="is-flexfix" style="height: {topheight}"><slot name="top" /></div>
   <div class="dragbar" on:mousedown={register}>
     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M3.984 15v-2.016h16.031V15H3.984zm16.032-6v2.016H3.985V9h16.031z"/></svg>
   </div>
@@ -29,38 +29,22 @@
 </div>
 
 <style>
-.full {
-  height: 100%;
-  width: auto;
-  overflow-y: auto;
-}
-.flex-column {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-}
-.flexfix {
-  flex-grow: 0;
-  flex-shrink: 0;
-}
 .dragbar {
   margin-top: -1px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 15px;
-  background-color: var(--gray-100);
-  border-top: 1px solid var(--gray-800);
-  border-bottom: 1px solid var(--gray-800);
+  height: 1.125rem;
+  background-color: var(--gray-50);
+  border: 1px solid var(--gray-300);
+  border-left: 0;
   cursor: row-resize;
   z-index: 10;
 }
 .dragbar:hover {
-  background-color: var(--gray-50);
+  background-color: var(--gray-200);
 }
 .dragbar svg {
-  width: 16px;
   fill: var(--gray-900);
 }
 </style>
