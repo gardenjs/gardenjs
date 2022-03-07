@@ -15,12 +15,12 @@
   a {
     display: block;
     margin: -0.25rem -1rem -1rem;
-    padding: 0.125rem 1rem;
+    padding: 0.25rem 1rem;
     text-transform: initial;
     text-decoration: none;
     font-weight: 400;
     color: var(--gray-900);
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
   }
   a:hover,
   a:focus {
