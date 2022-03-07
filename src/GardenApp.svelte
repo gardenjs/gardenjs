@@ -55,20 +55,20 @@ function handleTopbarOut(evt) {
 </FullScreenLayout>
 
 <style>
-  .full {
-    height: 100%;
-    width: auto;
-    overflow-y: auto;
-  }
-  .flexgrow {
-    flex-grow: 1;
-  }
-  .pane__container {
-    display: flex;
-    flex-grow: 1;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    box-sizing: border-box;
-  }
+.full {
+  height: 100%;
+  width: auto;
+  overflow-y: auto;
+}
+.flexgrow {
+  flex-grow: 1;
+}
+.pane__container {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
 </style>
