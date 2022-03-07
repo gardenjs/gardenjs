@@ -23,37 +23,4 @@ p {
 a, a:visited {
   text-decoration: underline;
   text-decoration-skip-ink: auto;
-  /* ie 10 */
-  background-color: transparent;
-}
-
-b, strong {
-  font-weight: 800;
-}
-
-.tabs__pane {
-  h2,h3,h4,h5,h6,li {
-    color: var(--infopanel-pane-text-color);
-  }
-  a {
-    color: var(--infopanel-pane-links-color);
-  }
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  li {
-    margin: 0.25rem 0;
-    padding: 0.125rem 0.75rem;
-    font-size: 0.9rem;
-    border-radius: 0.125rem;
-    cursor: pointer;
-  }
-  li:hover,
-  li:focus,
-  li.active {
-    color: var(--infopanel-pane-links-color);
-    background-color: var(--infopanel-pane-comp-hover-bg-color);
-  }
 }
