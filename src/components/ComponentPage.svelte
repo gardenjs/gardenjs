@@ -103,7 +103,7 @@ $: {
 
 
 <HorizontalSplitPane topheight='65vh'>
-<div slot="top" class="full flex-column">
+<div slot="top" class="is-full is-flex-column">
   <div class="actionbar">
     <h1 class="title__h1">{das.name}</h1>
     <div class="framesize-nav">
@@ -124,9 +124,9 @@ $: {
       </button>
     </div>
   </div>
-  <iframe class="stage whitebg" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={style} ></iframe>
+  <iframe class="stage stage--lightmode" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={style} ></iframe>
 </div>
-<div slot="bottom" class="full flex-column">
+<div slot="bottom" class="is-full is-flex-column">
   <TabsComponent tabs={tabs} on:out={tabselectionchange}>
     {#if selectedtab.name == 'Description'}
       <h2>{das.name}</h2>
@@ -154,16 +154,8 @@ $: {
 </HorizontalSplitPane>
 
 <style>
-.full {
-  height: 100%;
-  width: auto;
-  overflow-y: auto;
-}
-.flex-column {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
+.title__h1 {
+  color: var(--gray-900);
 }
 .stage {
   align-self: center;
@@ -171,9 +163,13 @@ $: {
   height: 100%;
   width: 100%;
   background-color: var(--white);
-  border: 1px solid var(--gray-900);
+  border: 1px solid var(--gray-300);
 }
-.whitebg {
+/* static, should be dynamical for dark theme switch */
+.stage--lightmode {
   background-color: white;
 }
+/* .stage--darkmode {
+  background-color: white;
+} */
 </style>
