@@ -7,7 +7,8 @@
 :root {
   --primary:          rgb(0, 204, 0);
   --primary-bg:       hsl(120, 100%, 97%);
-  --secondary:        #EA5B21;
+  --secondary:        hsl(17, 83%, 52%);
+  --secondary-bg:     hsl(17, 83%, 97%);
 
   --white:      #fff;
 
@@ -25,6 +26,7 @@
 
 .dark {
   --primary-bg:       hsl(120, 100%, 12%);
+  --secondary-bg:     hsl(17, 83%, 12%);
 
   --white:      #000;
 

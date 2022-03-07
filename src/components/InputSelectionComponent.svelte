@@ -30,6 +30,10 @@ const handleselect = item => () => {
   font-size: 0.9rem;
   cursor: pointer;
 }
+.component__stories li:nth-child(odd) {
+  background-color: var(--secondary-bg);
+  color: var(--gray);
+}
 .component__stories li:hover,
 .component__stories li:focus,
 .component__stories li.active {
