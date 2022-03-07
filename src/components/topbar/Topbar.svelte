@@ -102,12 +102,11 @@
   }
   .dropdown__btn svg {
     fill: var(--gray-900);
-    margin-left: 0.25rem;
+    margin-left: 0.5rem;
   }
   .dropdown__items {
     visibility: hidden;
     position: absolute;
-    right: 0;
     z-index: 9;
   }
   .dropdown__items ul {
@@ -131,10 +130,10 @@
     color: var(--gray-900);
     text-decoration: none;
     white-space: nowrap;
-    background-color: var(--gray-50);
+    background-color: var(--white);
   }
   .dropdown__items ul li a:hover {
-    background-color: var(--gray-200);
+    background-color: var(--primary-bg);
   }
   .dropdown__items ul li a svg {
     margin: 0 0.5rem 0 0;

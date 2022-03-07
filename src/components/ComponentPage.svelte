@@ -154,9 +154,6 @@ $: {
 </HorizontalSplitPane>
 
 <style>
-.title__h1 {
-  color: var(--gray-900);
-}
 .stage {
   align-self: center;
   display: blocK;

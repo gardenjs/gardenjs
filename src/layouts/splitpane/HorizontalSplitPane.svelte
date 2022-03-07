@@ -35,7 +35,7 @@
   align-items: center;
   justify-content: center;
   height: 1.125rem;
-  background-color: var(--gray-50);
+  background-color: var(--gray-100);
   border: 1px solid var(--gray-300);
   border-left: 0;
   cursor: row-resize;

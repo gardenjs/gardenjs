@@ -73,18 +73,19 @@ const dispatch = createEventDispatcher()
   text-align: center;
   cursor: pointer;
   border: none;
-  background-color: var(--gray-100);
+  background-color: var(--gray-200);
   border-bottom: 3px solid var(--gray-400);
-}
-.tabs__nav nav li button:hover {
-  color: var(--gray-900);
-  background-color: var(--white);
-  border-bottom: 3px solid var(--gray-900);
 }
 .tabs__nav nav li button.active {
   color: var(--gray-900);
   background-color: var(--primary-bg);
   border-bottom: 3px solid var(--primary);
+}
+.tabs__nav nav li button:hover {
+  border-color: var(--gray-900);
+}
+.tabs__nav nav li button.active:hover {
+  border-color: var(--primary-lighter);
 }
 .tabs__pane {
   padding: 1.25rem;
