@@ -60,10 +60,12 @@ serverport is defined in rabbit.config.json, e.g. 3010
 
 ## Todo´s
 
+* sidebarnav: toggle nav items, add toggle icon
+* actionbar: give btn a class if sidebar is toggled to set padding-right with same value as inside the topbar (set title with same distance to left then menu icon)
 * manage dark-mode of frameworks like carrots:
   * set "class dark" inside iframe
   * set bg-color of stage via config file for dark mode & light (default)?
-* sidebarnav: toggle nav items, add toggle icon
-* sidebarnav: remove "carrots" as top level from nav -> done via config-file rabbit.config.json
-* actionbar - device buttons: add class "active" (on button-tag) to show if btn is active (already styled) -> done
-* actionbar: give btn a class if sidebar is toggled to set padding-right with same value as inside the topbar (set title with same distance to left then menu icon)
+
+### Longterm ToDo´s
+
+* vertical dragbar to move stage horizontical to show rwd behaviour. Show px width/height of stage in actionbar
