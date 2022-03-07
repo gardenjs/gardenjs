@@ -91,16 +91,4 @@ const dispatch = createEventDispatcher()
   background-color: var(--white);
   color: var(--gray-900);
 }
-.tabs__pane ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.tabs__pane ul li {
-  margin: 0.25rem 0;
-  padding: 0.125rem 0.75rem;
-  font-size: 0.9rem;
-  border-radius: 0.125rem;
-  cursor: pointer;
-}
 </style>
