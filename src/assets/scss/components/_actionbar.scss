@@ -6,11 +6,16 @@
 
 .actionbar {
   display: flex;
+  padding: 0 2rem 0 0;
   width: 100%;
   height: 2rem;
   background-color: var(--gray-100);
-  &::after{content: ''; flex: 1}
-  .title__h1 {
+  overflow: hidden;
+  @media only screen and (min-width: 1920px) {
+    padding: 0;
+    &::after{content: ''; flex: 1}
+  }
+  .h1 {
     flex: 1;
     padding: 0;
     margin: 0;
@@ -22,7 +27,7 @@
     @media only screen and (min-width: 1280px) {
       display: block;
       align-self: center;
-      height: 18px;
+      height: 16px;
       button {
         margin: 0 0.125rem;
         padding: 0;
@@ -56,6 +61,10 @@
           border-radius: 0.125rem;
         }
       }
+    }
+    @media only screen and (min-width: 1920px) {
+      display: block;
+      align-self: center;
     }
   }
 }
