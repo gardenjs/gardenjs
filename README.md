@@ -60,6 +60,7 @@ serverport is defined in rabbit.config.json, e.g. 3010
 
 ## Todo´s
 
+* actionbar as it´s own component (so we can move scss as css into file)
 * sidebarnav: toggle nav items, add toggle icon
 * actionbar: give btn a class if sidebar is toggled to set padding-right with same value as inside the topbar (set title with same distance to left then menu icon)
 * manage dark-mode of frameworks like carrots:
