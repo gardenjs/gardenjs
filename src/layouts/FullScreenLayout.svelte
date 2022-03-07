@@ -1,9 +1,9 @@
-<div class="fullscreen">
+<div class="garden">
   <slot/>
 </div>
 
 <style>
-.fullscreen {
+.garden {
   display: flex;
   margin: 0;
   padding: 0;
