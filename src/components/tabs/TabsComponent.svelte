@@ -47,9 +47,8 @@ const dispatch = createEventDispatcher()
   width: 100%;
   overflow-y: auto;
   background-color: var(--white);
-}
-.tabs__nav nav {
-  background-color: var(--gray-50);
+  border-left: 1px solid var(--gray-300);
+  border-right: 1px solid var(--gray-300);
 }
 .tabs__nav nav ul {
   display: flex;
@@ -69,26 +68,39 @@ const dispatch = createEventDispatcher()
   width: 100%;
   min-width: 150px;
   height: 100%;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: var(--gray-900);
   text-align: center;
   cursor: pointer;
   border: none;
-  background: none;
+  background-color: var(--gray-100);
   border-bottom: 3px solid var(--gray-400);
 }
 .tabs__nav nav li button:hover {
   color: var(--gray-900);
+  background-color: var(--white);
   border-bottom: 3px solid var(--gray-900);
 }
 .tabs__nav nav li button.active {
   color: var(--gray-900);
+  background-color: var(--primary-bg);
   border-bottom: 3px solid var(--primary);
 }
-
 .tabs__pane {
-  padding: 20px;
+  padding: 1.25rem;
   background-color: var(--white);
   color: var(--gray-900);
+}
+.tabs__pane ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tabs__pane ul li {
+  margin: 0.25rem 0;
+  padding: 0.125rem 0.75rem;
+  font-size: 0.9rem;
+  border-radius: 0.125rem;
+  cursor: pointer;
 }
 </style>
