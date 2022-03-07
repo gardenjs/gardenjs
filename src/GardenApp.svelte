@@ -38,15 +38,15 @@ function handleTopbarOut(evt) {
 
 <FullScreenLayout>
   <TopBottomLayout>
-    <div slot="top" class="flexfix">
+    <div slot="top" class="is-flexfix">
       <Topbar active={showSidebar} on:out={handleTopbarOut} />
     </div>
-    <div slot="bottom" class="full flexgrow">
+    <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
-        <div slot="left" class="flexfix">
+        <div slot="left" class="is-flexfix">
           <Sidebar show={showSidebar} rootnode={navtree} />
         </div>
-        <div slot="right" class="pane__container">
+        <div slot="right" class="main">
           <ComponentPage componentname={componentname} das={das} historystate={historystate}/>
         </div>
       </LeftRightLayout>
@@ -55,15 +55,7 @@ function handleTopbarOut(evt) {
 </FullScreenLayout>
 
 <style>
-.full {
-  height: 100%;
-  width: auto;
-  overflow-y: auto;
-}
-.flexgrow {
-  flex-grow: 1;
-}
-.pane__container {
+.main {
   display: flex;
   flex-grow: 1;
   width: 100%;
