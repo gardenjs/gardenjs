@@ -63,6 +63,7 @@ serverport is defined in rabbit.config.json, e.g. 3010
 * actionbar as it´s own component (so we can move scss as css into file)
 * sidebarnav: toggle nav items, add toggle icon
 * actionbar: give btn a class if sidebar is toggled to set padding-right with same value as inside the topbar (set title with same distance to left then menu icon) maybe via a body class for sidebar is open/closed is needed
+* after page refresh bg-color for the "active page" disappears.
 * prevent horizontal drag bar from slipping out of view when moving
 * manage dark-mode of frameworks like carrots:
 * set "class dark" inside iframe
