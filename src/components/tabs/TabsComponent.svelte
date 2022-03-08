@@ -69,6 +69,7 @@ const dispatch = createEventDispatcher()
   min-width: 150px;
   height: 100%;
   font-size: 0.875rem;
+  font-weight: 500;
   color: var(--c-basic-900);
   text-align: center;
   cursor: pointer;
@@ -80,7 +81,7 @@ const dispatch = createEventDispatcher()
   border-bottom: 3px solid var(--primary);
 }
 .tabs__nav nav li button:hover {
-  background-color: var(--c-basic-100);
+  background-color: var(--c-basic-200);
   border-color: var(--c-basic-500);
 }
 .tabs__nav nav li button.active:hover {
