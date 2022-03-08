@@ -35,16 +35,16 @@
   align-items: center;
   justify-content: center;
   height: 1.125rem;
-  background-color: var(--gray-100);
-  border: 1px solid var(--gray-300);
+  background-color: var(--c-basic-100);
+  border: 1px solid var(--c-basic-300);
   border-left: 0;
   cursor: row-resize;
   z-index: 10;
 }
 .dragbar:hover {
-  background-color: var(--gray-200);
+  background-color: var(--c-basic-200);
 }
 .dragbar svg {
-  fill: var(--gray-900);
+  fill: var(--c-basic-900);
 }
 </style>

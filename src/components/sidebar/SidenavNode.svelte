@@ -36,7 +36,7 @@ nav li {
   list-style: none;
   margin: 0.5rem 0;
   padding: 0.5rem 0;
-  color: var(--gray-900);
+  color: var(--c-basic-900);
   font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;

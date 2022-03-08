@@ -19,10 +19,10 @@
     text-transform: initial;
     text-decoration: none;
     font-weight: 400;
-    color: var(--gray-900);
+    color: var(--c-basic-900);
   }
   a:hover,
   a:focus {
-    background-color: var(--gray-200);
+    background-color: var(--c-basic-200);
   }
 </style>

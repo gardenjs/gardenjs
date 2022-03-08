@@ -52,13 +52,13 @@
   .topbar {
     width: 100%;
     height: 50px;
-    background-color: var(--gray-100);
+    background-color: var(--c-basic-100);
     border-style: solid;
     border-width: 2px;
     border-image: linear-gradient(to right, rgb(0, 219, 0), rgb(0, 172, 0), 20%, hsl(17, 83%, 60%), 30%, hsl(17, 83%, 50%), #EA5B21) 0 0 100% 0 stretch;
   }
   .topbar svg {
-    fill: var(--gray-700);
+    fill: var(--c-basic-700);
   }
   svg.sun {
     fill: rgb(235, 211, 0);
@@ -104,10 +104,10 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--gray-700)
+    color: var(--c-basic-700)
   }
   .dropdown__btn svg {
-    fill: var(--gray-700);
+    fill: var(--c-basic-700);
     margin-left: 0.5rem;
   }
   .dropdown__items {
@@ -118,7 +118,7 @@
   .dropdown__items ul {
     margin: 0;
     padding: 0;
-    border: 1px solid var(--gray-700);
+    border: 1px solid var(--c-basic-700);
     border-radius: 0.5rem;
     overflow: hidden;
   }
@@ -133,21 +133,21 @@
     align-items: center;
     padding: 0.5rem 0.5rem;
     font-size: 0.875rem;
-    color: var(--gray-900);
+    color: var(--c-basic-900);
     text-decoration: none;
     white-space: nowrap;
     background-color: var(--white);
   }
   .dropdown__items ul li a:hover {
-    color: var(--gray-50);
-    background-color: var(--gray-900);
+    color: var(--c-basic-50);
+    background-color: var(--c-basic-900);
   }
   .dropdown__items ul li a svg {
     margin: 0 0.75rem 0 0;
-    fill: var(--gray-900);
+    fill: var(--c-basic-900);
   }
   .dropdown__items ul li a:hover svg {
-    fill: var(--gray-50);
+    fill: var(--c-basic-50);
   }
   .dropdown:hover > .dropdown__items,
   .dropdown:focus > .dropdown__items {
