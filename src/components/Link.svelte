@@ -20,7 +20,6 @@
     text-decoration: none;
     font-weight: 400;
     color: var(--gray-900);
-    border-radius: 0.5rem;
   }
   a:hover,
   a:focus {
