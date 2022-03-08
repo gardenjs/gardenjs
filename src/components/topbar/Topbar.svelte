@@ -58,7 +58,7 @@
     border-image: linear-gradient(to right, rgb(0, 219, 0), rgb(0, 172, 0), 20%, hsl(17, 83%, 60%), 30%, hsl(17, 83%, 50%), #EA5B21) 0 0 100% 0 stretch;
   }
   .topbar svg {
-    fill: var(--gray-900);
+    fill: var(--gray-700);
   }
   svg.sun {
     fill: rgb(235, 211, 0);
@@ -104,10 +104,10 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--gray-900);
+    color: var(--gray-700)
   }
   .dropdown__btn svg {
-    fill: var(--gray-900);
+    fill: var(--gray-700);
     margin-left: 0.5rem;
   }
   .dropdown__items {
