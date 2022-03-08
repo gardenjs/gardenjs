@@ -136,11 +136,11 @@
     color: var(--c-basic-900);
     text-decoration: none;
     white-space: nowrap;
-    background-color: var(--white);
+    background-color: var(--c-basic-200);
   }
   .dropdown__items ul li a:hover {
     color: var(--c-basic-50);
-    background-color: var(--c-basic-900);
+    background-color: var(--c-basic-800);
   }
   .dropdown__items ul li a svg {
     margin: 0 0.75rem 0 0;
