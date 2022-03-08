@@ -31,13 +31,13 @@ const handleselect = item => () => {
   cursor: pointer;
 }
 .component__stories li:nth-child(odd) {
-  background-color: var(--secondary-bg);
+  background-color: var(--gray-100);
   color: var(--gray);
 }
 .component__stories li:hover,
 .component__stories li:focus,
 .component__stories li.active {
-    color: #fff;
-    background-color: var(--secondary);
+    color: var(--gray-50);
+    background-color: var(--gray-600);
   }
 </style>
