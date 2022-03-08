@@ -52,7 +52,7 @@
   .topbar {
     width: 100%;
     height: 50px;
-    background-color: var(--gray-50);
+    background-color: var(--gray-100);
     border-style: solid;
     border-width: 2px;
     border-image: linear-gradient(to right, rgb(0, 219, 0), rgb(0, 172, 0), 20%, hsl(17, 83%, 60%), 30%, hsl(17, 83%, 50%), #EA5B21) 0 0 100% 0 stretch;
