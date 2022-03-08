@@ -37,7 +37,7 @@ const handleselect = item => () => {
 .component__stories li:hover,
 .component__stories li:focus,
 .component__stories li.active {
-    color: var(--white);
+    color: var(--c-basic-50);
     background-color: var(--c-basic-600);
   }
 </style>
