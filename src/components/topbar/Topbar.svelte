@@ -57,14 +57,17 @@
     border-width: 2px;
     border-image: linear-gradient(to right, rgb(0, 219, 0), rgb(0, 172, 0), 20%, hsl(17, 83%, 60%), 30%, hsl(17, 83%, 50%), #EA5B21) 0 0 100% 0 stretch;
   }
-  .topbar svg {
-    fill: var(--c-basic-700);
-  }
   svg.sun {
-    fill: rgb(235, 211, 0);
+    fill: hsl(54, 100%, 46%);
+  }
+  svg.sun:hover {
+    fill: hsl(54, 100%, 66%);
   }
   svg.moon {
-    fill: rgb(102, 33, 212);
+    fill: hsl(253, 100%, 54%);
+  }
+  svg.moon:hover {
+    fill: hsl(253, 100%, 69%);
   }
   .topbar__inner {
     display: flex;
@@ -79,6 +82,12 @@
     border: none;
     background: none;
     cursor: pointer;
+  }
+  .topbar__nav-btn svg {
+    fill: var(--c-basic-500);
+  }
+  .topbar__nav-btn:hover svg {
+    fill: var(--c-basic-900);
   }
   .topbar__nav {
     display: flex;
@@ -104,11 +113,17 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--c-basic-700)
+    color: var(--c-basic-500)
+  }
+  .dropdown__btn:hover {
+    color: var(--c-basic-900);
   }
   .dropdown__btn svg {
-    fill: var(--c-basic-700);
+    fill: var(--c-basic-500);
     margin-left: 0.5rem;
+  }
+  .dropdown__btn:hover svg {
+    fill: var(--c-basic-900);
   }
   .dropdown__items {
     visibility: hidden;
