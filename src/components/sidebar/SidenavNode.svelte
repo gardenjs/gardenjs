@@ -34,7 +34,7 @@ nav ul {
 }
 nav li {
   list-style: none;
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
   padding: 0.5rem 0;
   color: var(--c-basic-900);
   font-size: 0.9rem;
