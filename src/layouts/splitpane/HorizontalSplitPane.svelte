@@ -23,7 +23,7 @@
 <div class="is-full is-flex-column" bind:this={element} >
   <div class="is-flexfix" style="height: {topheight}"><slot name="top" /></div>
   <div class="dragbar" on:mousedown={register}>
-    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M3.984 15v-2.016h16.031V15H3.984zm16.032-6v2.016H3.985V9h16.031z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="#currentColor"><path d="M3.984 15v-2.016h16.031V15H3.984zm16.032-6v2.016H3.985V9h16.031z"/></svg>
   </div>
   <slot name="bottom" />
 </div>
@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 1rem;
+  height: 0.75rem;
   background-color: var(--c-basic-100);
   border: 1px solid var(--c-basic-300);
   border-left: 0;
