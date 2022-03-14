@@ -1,3 +1,27 @@
+<script>
+  import { createEventDispatcher} from 'svelte'
+  const dispatch = createEventDispatcher()
+
+  export let active = true
+  export let dark = false
+
+  $: {
+    if (dark)
+      document.body.classList.add('dark')
+    else 
+      document.body.classList.remove('dark')
+  }
+
+  function toggle() {
+      dispatch('out', {active: !active})
+  }
+
+  function toggleDarkmode() {
+    dark = !dark
+  }
+
+</script>
+
 <div class="topbar">
   <div class="topbar__inner">
     <button class="topbar__nav-btn" class:active={active} on:click={toggle}>
@@ -23,30 +47,6 @@
     </div>
   </div>
 </div>
-
-<script>
-  import { createEventDispatcher} from 'svelte'
-  const dispatch = createEventDispatcher()
-
-  export let active = true
-  export let dark = false
-
-  $: {
-    if (dark)
-      document.body.classList.add('dark')
-    else 
-      document.body.classList.remove('dark')
-  }
-
-  function toggle() {
-      dispatch('out', {active: !active})
-  }
-
-  function toggleDarkmode() {
-    dark = !dark
-  }
-
-</script>
 
 <style>
   .topbar {
