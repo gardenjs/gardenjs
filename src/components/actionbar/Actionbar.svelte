@@ -1,1 +1,0 @@
-<!-- here comes the componet stuff for the actionbar -->
