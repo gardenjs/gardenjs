@@ -61,14 +61,13 @@ serverport is defined in rabbit.config.json, e.g. 3010
 ## Todo´s
 
 * kill actionbar & title and move rwd-navi inside topbar
-* sidebarnav: toggle nav items, add toggle icon
-* actionbar: give btn a class if sidebar is toggled to set padding-right with same value as inside the topbar (set title with same distance to left then menu icon) maybe via a body class for sidebar is open/closed is needed
+* sidebarnav: toggle nav items & add toggle icon
 * after page refresh bg-color for the "active page" disappears.
 * prevent horizontal drag bar from slipping out of view when moving
-* manage dark-mode of frameworks like carrots:
+* manage themes if carrots has darkmode
 * set "class dark" inside iframe
 * set bg-color of stage via config file for dark mode & light (default)?
 
-### Longterm ToDo´s
+### Midterm ToDo´s
 
-* vertical dragbar to move stage horizontical to show rwd behaviour. Show px width/height of stage in actionbar
+* vertical dragbar to move stage horizontical to show rwd behaviour. Show px width/height of stage next to rwd-navi in topbar
