@@ -60,14 +60,10 @@ serverport is defined in rabbit.config.json, e.g. 3010
 
 ## Todo´s
 
-* kill actionbar & title and move rwd-navi inside topbar
-* sidebarnav: toggle nav items & add toggle icon
-* after page refresh bg-color for the "active page" disappears.
-* prevent horizontal drag bar from slipping out of view when moving
-* manage themes if carrots has darkmode
-* set "class dark" inside iframe
-* set bg-color of stage via config file for dark mode & light (default)?
-
-### Midterm ToDo´s
-
-* vertical dragbar to move stage horizontical to show rwd behaviour. Show px width/height of stage next to rwd-navi in topbar
+* [task] kill actionbar & title and move rwd-navi inside topbar. Then move styles from scss to topbar.svelte.
+* [task] Sidebarnav: toggle nav items & add toggle icon.
+* [task] Move sidebarnav into one file SidebarNav.svelte (Link.svelte + SidenavNode.svelte).
+* [bug] after page refresh bg-color of sidebar link for the "active page" disappears.
+* [bug] prevent horizontal drag bar from slipping out of view when moving.
+* [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. If done: Show 'px' width/height of stage next to rwd-navi.
+* [feature] Manage project themes via topbar dropdown. Set "class dark" inside iframe if project has dark mode. Needs a Configuration file? Which Concepts are possible to realize that?
