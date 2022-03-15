@@ -60,7 +60,7 @@ serverport is defined in rabbit.config.json, e.g. 3010
 
 ## Todo´s
 
-* [task] kill actionbar & title and move rwd-navi inside topbar. Then move styles from scss to topbar.svelte.
+* [task] kill actionbar & title and move rwd-navi inside topbar. Then move styles from scss to topbar.svelte. Right now: outcommented in ComponentPage.svelte and added staitical in Topbar.svelte.
 * [task] Sidebarnav: toggle nav items & add toggle icon.
 * [task] Combine both sidebarnav files to one file (SidebarNavLink.svelte + SidebarNav.svelte). 
 * [bug] after page refresh bg-color of sidebar link for the "active page" disappears.
