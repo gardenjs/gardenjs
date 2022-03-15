@@ -45,7 +45,7 @@
   z-index: 10;
 }
 .dragbar:hover {
-  background-color: var(--c-basic-50);
+  background-color: var(--c-basic-200);
 }
 .dragbar svg {
   fill: var(--c-basic-900);
