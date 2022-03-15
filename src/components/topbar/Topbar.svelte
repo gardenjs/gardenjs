@@ -72,7 +72,7 @@
     fill: var(--c-basic-700);
   }
   .topbar__nav-btn:hover {
-    background-color: var(--c-basic-200);
+    background-color: var(--c-basic-300);
   }
   .topbar__nav {
     display: flex;
@@ -89,7 +89,7 @@
     cursor: pointer;
   }
   .switch-mode:hover {
-    background-color: var(--c-basic-200);
+    background-color: var(--c-basic-300);
   }
   svg.sun,
   svg.moon {
