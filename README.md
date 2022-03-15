@@ -62,7 +62,7 @@ serverport is defined in rabbit.config.json, e.g. 3010
 
 * [task] kill actionbar & title and move rwd-navi inside topbar. Then move styles from scss to topbar.svelte.
 * [task] Sidebarnav: toggle nav items & add toggle icon.
-* [task] Move sidebarnav into one file SidebarNav.svelte (Link.svelte + SidenavNode.svelte).
+* [task] Combine both sidebarnav files to one file (SidebarNavLink.svelte + SidebarNav.svelte). 
 * [bug] after page refresh bg-color of sidebar link for the "active page" disappears.
 * [bug] prevent horizontal drag bar from slipping out of view when moving.
 * [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. If done: Show 'px' width/height of stage next to rwd-navi.
