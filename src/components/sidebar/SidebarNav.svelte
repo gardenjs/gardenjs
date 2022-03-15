@@ -1,5 +1,5 @@
 <script>
-  import Link from '../Link.svelte'
+  import Link from './SidebarNavLink.svelte'
   export let node = {} 
 
   function isLeaf(item) {
