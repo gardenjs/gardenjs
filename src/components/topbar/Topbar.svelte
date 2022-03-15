@@ -52,9 +52,7 @@
     width: 100%;
     height: 50px;
     background-color: var(--c-basic-100);
-    border-style: solid;
-    border-width: 2px;
-    border-image: linear-gradient(to right, rgb(0, 219, 0), rgb(0, 172, 0), 20%, hsl(17, 83%, 60%), 30%, hsl(17, 83%, 50%), #EA5B21) 0 0 100% 0 stretch;
+    border-bottom: 1px solid var(--c-basic-400);
   }
   svg.sun {
     fill: hsl(54, 100%, 46%);

@@ -31,7 +31,7 @@
 <style>
 .backstage {
   background-color: var(--c-basic-100);
-  border-left: 1px solid var(--c-basic-300);
+  border-left: 1px solid var(--c-basic-400);
 }
 .dragbar {
   display: flex;
@@ -39,7 +39,7 @@
   justify-content: center;
   height: 0.75rem;
   background-color: var(--c-basic-100);
-  border: 1px solid var(--c-basic-300);
+  border: 1px solid var(--c-basic-400);
   border-left: 0;
   cursor: row-resize;
   z-index: 10;

@@ -47,8 +47,8 @@ const dispatch = createEventDispatcher()
   width: 100%;
   overflow-y: auto;
   background-color: var(--c-basic-50);
-  border-left: 1px solid var(--c-basic-300);
-  border-right: 1px solid var(--c-basic-300);
+  border-left: 1px solid var(--c-basic-400);
+  border-right: 1px solid var(--c-basic-400);
 }
 .tabs__nav nav ul {
   display: flex;
