@@ -33,14 +33,12 @@
     height: 18px;
     fill: var(--c-basic-500);
   }
-  .framesize-nav button svg:hover {
+  .framesize-nav button:hover svg,
+  .framesize-nav button.active svg {
     fill: var(--c-basic-900);
   }
   .framesize-nav button svg.landscape {
     transform: rotate(90deg);
-  }
-  .framesize-nav button.active svg {
-    fill: var(--c-basic-900);
   }
   .framesize-nav button.tooltip:hover::after {
     position: absolute;
