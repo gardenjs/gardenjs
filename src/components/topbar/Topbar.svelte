@@ -77,10 +77,11 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    padding: 0 1.25rem;
+    padding: 0;
   }
   .topbar__nav-btn {
-    padding: 0.25rem;
+    padding: 0 1rem;
+    height: 2.688rem;
     border: none;
     background: none;
     cursor: pointer;
@@ -100,10 +101,10 @@
   }
   .switch-mode {
     display: flex;
-    justify-items: center;
     align-items: center;
     margin: 0;
-    padding: 0.25rem;
+    padding: 0 1rem;
+    height: 2.688rem;
     border: none;
     background: none;
     cursor: pointer;
@@ -120,12 +121,12 @@
   .dropdown {
     position: relative;
     display: inline-block;
-    margin-right: 1.25rem;
   }
   .dropdown__btn {
     display: flex;
     align-items: center;
-    padding: 0.25rem;
+    padding: 0 1rem;
+    line-height: 2.688rem;
     font-size: 0.875rem;
     color: var(--c-basic-700);
     background: none;
@@ -145,7 +146,7 @@
   .dropdown__items {
     visibility: hidden;
     position: absolute;
-    padding: 0.25rem 0 0;
+    padding: 0.375rem 0 0;
     z-index: 9;
   }
   .dropdown__items ul {
