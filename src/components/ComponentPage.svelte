@@ -1,6 +1,6 @@
 <script> 
 import HorizontalSplitPane from '../layouts/splitpane/HorizontalSplitPane.svelte'
-import TabsComponent from './tabs/TabsComponent.svelte'
+import TabsComponent from './panel/TabsComponent.svelte'
 import InputSelectionComponent from './InputSelectionComponent.svelte'
 
 export let componentname

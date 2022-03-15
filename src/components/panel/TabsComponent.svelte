@@ -21,8 +21,8 @@ const dispatch = createEventDispatcher()
  
 </script>
 
-<div class="tabs">
-  <div class="tabs__nav">
+<div class="panel">
+  <div class="panel__nav">
     <nav>
       <ul>
         {#each tabs as tab, index}
@@ -31,7 +31,7 @@ const dispatch = createEventDispatcher()
       </ul>
     </nav>
   </div>
-  <div class="tabs__pane">
+  <div class="panel__pane">
     {#if selected && selected.page }
     <TabContent item={selected} on:out={handleout} />
     {:else}
@@ -41,7 +41,7 @@ const dispatch = createEventDispatcher()
 </div>
 
 <style>
-.tabs {
+.panel {
   flex-grow: 1;
   height: 100%;
   width: 100%;
@@ -50,7 +50,7 @@ const dispatch = createEventDispatcher()
   border-left: 1px solid var(--c-basic-400);
   border-right: 1px solid var(--c-basic-400);
 }
-.tabs__nav nav ul {
+.panel__nav nav ul {
   display: flex;
   flex: 1 1 auto;
   flex-direction: row;
@@ -59,12 +59,12 @@ const dispatch = createEventDispatcher()
   margin: 0;
   padding: 0;
 }
-.tabs__nav nav li {
+.panel__nav nav li {
   display: flex;
   flex: auto;
   height: 100%;
 }
-.tabs__nav nav li button {
+.panel__nav nav li button {
   width: 100%;
   min-width: 150px;
   height: 100%;
@@ -77,17 +77,17 @@ const dispatch = createEventDispatcher()
   background-color: var(--c-basic-200);
   border-bottom: 3px solid var(--c-basic-400);
 }
-.tabs__nav nav li button.active {
+.panel__nav nav li button.active {
   border-bottom: 3px solid var(--primary);
 }
-.tabs__nav nav li button:hover {
+.panel__nav nav li button:hover {
   background-color: var(--c-basic-100);
   border-color: var(--c-basic-500);
 }
-.tabs__nav nav li button.active:hover {
+.panel__nav nav li button.active:hover {
   border-color: var(--primary-lighter);
 }
-.tabs__pane {
+.panel__pane {
   padding: 1.25rem;
   background-color: var(--c-basic-50);
   color: var(--c-basic-900);
