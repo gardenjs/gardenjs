@@ -160,7 +160,7 @@ $: {
   height: 100%;
   width: 100%;
   background-color: var(--white);
-  border: 1px solid var(--c-basic-300);
+  /* border: 1px solid var(--c-basic-300); */
 }
 /* static, should be dynamical for dark theme switch */
 .stage--lightmode {
