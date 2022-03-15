@@ -60,10 +60,10 @@ serverport is defined in rabbit.config.json, e.g. 3010
 
 ## Todo´s
 
-* [task] kill actionbar & title and move rwd-navi inside topbar. Then move styles from scss to topbar.svelte. Right now: outcommented in ComponentPage.svelte and added staitical in Topbar.svelte.
+* [task] Kill actionbar and move the rwd-navi inside the topbar. Then move styles from scss to topbar.svelte. Right now: Outcommented in ComponentPage.svelte and added statical inside Topbar.svelte.
 * [task] Sidebarnav: toggle nav items & add toggle icon.
-* [task] Combine both sidebarnav files to one file (SidebarNavLink.svelte + SidebarNav.svelte). 
-* [bug] after page refresh bg-color of sidebar link for the "active page" disappears.
-* [bug] prevent horizontal drag bar from slipping out of view when moving.
+* [bug] After page refresh bg-color of sidebar link for the "active page" disappears.
+* [bug] Prevent horizontal drag bar from slipping out of view when moving down.
 * [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. If done: Show 'px' width/height of stage next to rwd-navi.
 * [feature] Manage project themes via topbar dropdown. Set "class dark" inside iframe if project has dark mode. Needs a Configuration file? Which Concepts are possible to realize that?
+* [feature] Open Component in a new tab to show components blank. If possible: Add icon in topbar.
