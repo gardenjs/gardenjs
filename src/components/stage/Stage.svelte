@@ -1,5 +1,5 @@
 <script> 
-import HorizontalSplitPane from '../../layouts/splitpane/HorizontalSplitPane.svelte'
+import HorizontalSplitPane from '../splitpanes/HorizontalSplitPane.svelte'
 import PanelComponent from '../panel/PanelComponent.svelte'
 import InputSelectionComponent from '../panel/PanelStoriesNav.svelte'
 
@@ -117,7 +117,7 @@ $: {
 			<button on:click={setFramesizeFull} rel="Full" class="tooltip" class:active={framesize === 'full'} >
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/></svg>
 			</button>
-			<button on:click={toggleOrientation} rel="Toggle Portrait/Landscape" class="tooltip">
+			<button on:click={toggleOrientation} rel="Toggle Portrait/Landscape" class="toggle tooltip">
 				<svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M16.48 2.52c3.27 1.55 5.61 4.72 5.97 8.48h1.5C23.44 4.84 18.29 0 12 0l-.66.03 3.81 3.81 1.33-1.32zm-6.25-.77a1.49 1.49 0 00-2.12 0L1.75 8.11a1.49 1.49 0 000 2.12l12.02 12.02c.59.59 1.54.59 2.12 0l6.36-6.36c.59-.59.59-1.54 0-2.12L10.23 1.75zm4.6 19.44L2.81 9.17l6.36-6.36 12.02 12.02-6.36 6.36zm-7.31.29A10.487 10.487 0 011.55 13H.05C.56 19.16 5.71 24 12 24l.66-.03-3.81-3.81-1.33 1.32z"/></svg>
 			</button>
 		</div>
