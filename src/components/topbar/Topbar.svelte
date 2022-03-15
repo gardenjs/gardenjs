@@ -24,8 +24,8 @@
 
 <div class="topbar">
   <div class="topbar__inner">
-    <button class="topbar__nav-btn" class:active={active} on:click={toggle}>
-      <svg xmlns="http://www.w3.org/2000/svg" height="34" viewBox="0 0 24 24" width="34" fill="#fff"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+    <button class="topbar__nav-btn" class:active={active} on:click={toggle} title="toggle sidebar">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#fff"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
     </button>
     <div class="topbar__nav">
       <div class="dropdown">
@@ -36,7 +36,7 @@
           </ul>
         </div>
       </div>
-      <button class="switch-mode" on:click={toggleDarkmode} title="switch library mode">
+      <button class="switch-mode" on:click={toggleDarkmode} title="dark/light mode">
         {#if dark}
         <svg xmlns="http://www.w3.org/2000/svg" class="sun" height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3m0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
         {:else }
@@ -50,21 +50,9 @@
 <style>
   .topbar {
     width: 100%;
-    height: 50px;
+    height: 2.75rem;
     background-color: var(--c-basic-100);
     border-bottom: 1px solid var(--c-basic-400);
-  }
-  svg.sun {
-    fill: hsl(54, 100%, 46%);
-  }
-  svg.sun:hover {
-    fill: hsl(54, 100%, 66%);
-  }
-  svg.moon {
-    fill: hsl(253, 100%, 54%);
-  }
-  svg.moon:hover {
-    fill: hsl(253, 100%, 69%);
   }
   .topbar__inner {
     display: flex;
@@ -72,52 +60,61 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    padding: 0 2rem;
+    padding: 0 1.25rem;
   }
   .topbar__nav-btn {
-    padding: 0;
+    padding: 0.25rem;
     border: none;
     background: none;
     cursor: pointer;
   }
   .topbar__nav-btn svg {
-    fill: var(--c-basic-500);
+    fill: var(--c-basic-700);
   }
-  .topbar__nav-btn:hover svg {
-    fill: var(--c-basic-900);
+  .topbar__nav-btn:hover {
+    background-color: var(--c-basic-200);
   }
   .topbar__nav {
     display: flex;
     align-items: center;
   }
   .switch-mode {
-    width: 1.5rem;
-    height: 1.5rem;
+    display: flex;
+    justify-items: center;
+    align-items: center;
     margin: 0;
-    padding: 0;
+    padding: 0.25rem;
     border: none;
     background: none;
     cursor: pointer;
+  }
+  .switch-mode:hover {
+    background-color: var(--c-basic-200);
+  }
+  svg.sun,
+  svg.moon {
+    fill: var(--c-basic-700);
   }
   .dropdown {
     position: relative;
     display: inline-block;
-    margin-right: 2rem;
+    margin-right: 1.5rem;
   }
   .dropdown__btn {
     display: flex;
     align-items: center;
+    font-size: 0.875rem;
+    color: var(--c-basic-700);
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--c-basic-500)
   }
   .dropdown__btn:hover {
     color: var(--c-basic-900);
   }
   .dropdown__btn svg {
-    fill: var(--c-basic-500);
-    margin-left: 0.5rem;
+    fill: var(--c-basic-700);
+    margin-left: 0.25rem;
   }
   .dropdown__btn:hover svg {
     fill: var(--c-basic-900);
@@ -125,6 +122,7 @@
   .dropdown__items {
     visibility: hidden;
     position: absolute;
+    padding: 0.25rem 0 0;
     z-index: 9;
   }
   .dropdown__items ul {
@@ -144,7 +142,7 @@
     display: flex;
     align-items: center;
     padding: 0.5rem 0.5rem;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     color: var(--c-basic-900);
     text-decoration: none;
     white-space: nowrap;
@@ -153,13 +151,6 @@
   .dropdown__items ul li a:hover {
     color: var(--c-basic-50);
     background-color: var(--c-basic-800);
-  }
-  .dropdown__items ul li a svg {
-    margin: 0 0.75rem 0 0;
-    fill: var(--c-basic-900);
-  }
-  .dropdown__items ul li a:hover svg {
-    fill: var(--c-basic-50);
   }
   .dropdown:hover > .dropdown__items,
   .dropdown:focus > .dropdown__items {
