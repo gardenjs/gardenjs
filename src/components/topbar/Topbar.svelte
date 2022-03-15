@@ -24,7 +24,7 @@
 
 <div class="topbar">
   <div class="topbar__inner">
-    <button class="topbar__nav-btn" title="toggle sidebar">
+    <button class="topbar__toggle-btn" title="toggle sidebar">
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#fff"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
     </button>
     <div class="topbar__nav">
@@ -79,20 +79,20 @@
     height: 100%;
     padding: 0;
   }
-  .topbar__nav-btn {
+  .topbar__toggle-btn {
     padding: 0 1rem;
     height: 2.688rem;
     border: none;
     background: none;
     cursor: pointer;
   }
-  .topbar__nav-btn:hover {
+  .topbar__toggle-btn:hover {
     background-color: var(--c-basic-300);
   }
-  .topbar__nav-btn svg {
+  .topbar__toggle-btn svg {
     fill: var(--c-basic-700);
   }
-  .topbar__nav-btn:hover svg {
+  .topbar__toggle-btn:hover svg {
     fill: var(--c-basic-900);
   }
   .topbar__nav {
