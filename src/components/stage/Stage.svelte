@@ -1,7 +1,7 @@
 <script> 
-import HorizontalSplitPane from '../layouts/splitpane/HorizontalSplitPane.svelte'
-import TabsComponent from './panel/TabsComponent.svelte'
-import InputSelectionComponent from './InputSelectionComponent.svelte'
+import HorizontalSplitPane from '../../layouts/splitpane/HorizontalSplitPane.svelte'
+import PanelComponent from '../panel/PanelComponent.svelte'
+import InputSelectionComponent from '../panel/StoriesNav.svelte'
 
 export let componentname
 export let das = {}
@@ -125,7 +125,7 @@ $: {
 	<iframe class="stage stage--lightmode" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={style} ></iframe>
 </div>
 <div slot="bottom" class="is-full is-flex-column">
-  <TabsComponent tabs={tabs} on:out={tabselectionchange}>
+  <PanelComponent tabs={tabs} on:out={tabselectionchange}>
     {#if selectedtab.name == 'Description'}
       <h2>{das.name}</h2>
       <p><b>Info:</b> {@html das.description}</p>
@@ -147,7 +147,7 @@ $: {
       {/if}
       </ul>
     {/if}
-  </TabsComponent>
+  </PanelComponent>
 </div>
 </HorizontalSplitPane>
 

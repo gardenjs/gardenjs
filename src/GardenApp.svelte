@@ -1,6 +1,6 @@
 <script> 
 import {initRouter} from '../src/router.js'
-import ComponentPage from '../src/components/ComponentPage.svelte'
+import ComponentPage from './components/stage/Stage.svelte'
 import Sidebar from './components/sidebar/Sidebar.svelte'
 import Topbar from '../src/components/topbar/Topbar.svelte'
 import FullScreenLayout from '../src/layouts/FullScreenLayout.svelte'

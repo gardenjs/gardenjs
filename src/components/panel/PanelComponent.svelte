@@ -1,5 +1,5 @@
 <script> 
-  import TabContent from './TabContent.svelte'
+  import TabContent from './PanelContent.svelte'
   import { createEventDispatcher } from 'svelte'
   export let tabs = []
 const dispatch = createEventDispatcher()
