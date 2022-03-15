@@ -15,56 +15,49 @@
     padding: 0;
     &::after{content: ''; flex: 1}
   }
-  .h1 {
-    flex: 1;
-    padding: 0;
-    margin: 0;
-    font-size: 1.3rem;
-    line-height: 2rem;
-  }
-  .framesize-nav {
-    display: none;
-    @media only screen and (min-width: 1280px) {
-      display: block;
-      align-self: center;
-      height: 16px;
-      button {
-        margin: 0 0.125rem;
-        padding: 0;
-        background: none;
-        border: none;
-        cursor: pointer;
-        svg {
-          height: 18px;
-          fill: var(--c-basic-500);
-          &:hover {
-            fill: var(--c-basic-900);
-          }
-          &.landscape {
-            transform: rotate(90deg);
-          }
+}
+.framesize-nav {
+  display: none;
+  @media only screen and (min-width: 1280px) {
+    display: block;
+    align-self: center;
+    height: 16px;
+    button {
+      margin: 0 0.125rem;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      svg {
+        height: 18px;
+        fill: var(--c-basic-500);
+        &:hover {
+          fill: var(--c-basic-900);
         }
-        &.active {
-          svg {
-            fill: var(--c-basic-900);
-          }
-        }
-        &.tooltip:hover::after {
-          position: absolute;
-          display: block;
-          margin-top: -2.75rem;
-          padding: 0.25rem;
-          content: attr(rel);
-          font-size: 0.75rem;
-          color: var(--c-basic-50);
-          background-color: var(--c-basic-900);
-          border-radius: 0.125rem;
+        &.landscape {
+          transform: rotate(90deg);
         }
       }
+      &.active {
+        svg {
+          fill: var(--c-basic-900);
+        }
+      }
+      &.tooltip:hover::after {
+        position: absolute;
+        display: block;
+        margin-top: -2.75rem;
+        padding: 0.25rem;
+        content: attr(rel);
+        font-size: 0.75rem;
+        color: var(--c-basic-50);
+        background-color: var(--c-basic-900);
+        border-radius: 0.125rem;
+      }
     }
-    @media only screen and (min-width: 1920px) {
-      display: block;
-      align-self: center;
-    }
+  }
+  @media only screen and (min-width: 1920px) {
+    display: block;
+    align-self: center;
   }
 }
