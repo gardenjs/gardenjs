@@ -5,59 +5,52 @@
 //
 
 .actionbar {
-  display: flex;
-  padding: 0 2rem 0 0;
   width: 100%;
   height: 2rem;
   background-color: var(--c-basic-100);
-  overflow: hidden;
-  @media only screen and (min-width: 1920px) {
-    padding: 0;
-    &::after{content: ''; flex: 1}
-  }
 }
 .framesize-nav {
   display: none;
-  @media only screen and (min-width: 1280px) {
+}
+@media only screen and (min-width: 1280px) {
+  .framesize-nav {
     display: block;
     align-self: center;
-    height: 16px;
-    button {
-      margin: 0 0.125rem;
-      padding: 0;
-      background: none;
-      border: none;
-      cursor: pointer;
-      svg {
-        height: 18px;
-        fill: var(--c-basic-500);
-        &:hover {
-          fill: var(--c-basic-900);
-        }
-        &.landscape {
-          transform: rotate(90deg);
-        }
-      }
-      &.active {
-        svg {
-          fill: var(--c-basic-900);
-        }
-      }
-      &.tooltip:hover::after {
-        position: absolute;
-        display: block;
-        margin-top: -2.75rem;
-        padding: 0.25rem;
-        content: attr(rel);
-        font-size: 0.75rem;
-        color: var(--c-basic-50);
-        background-color: var(--c-basic-900);
-        border-radius: 0.125rem;
-      }
-    }
   }
-  @media only screen and (min-width: 1920px) {
+  .framesize-nav button {
+    float: left;
+    margin: 0;
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .framesize-nav button:hover,
+  .framesize-nav button.active {
+    background-color: var(--c-basic-300);
+  }
+  .framesize-nav button svg {
+    height: 16px;
+    fill: var(--c-basic-500);
+  }
+  .framesize-nav button svg:hover {
+    fill: var(--c-basic-900);
+  }
+  .framesize-nav button svg.landscape {
+    transform: rotate(90deg);
+  }
+  .framesize-nav button.active svg {
+    fill: var(--c-basic-900);
+  }
+  .framesize-nav button.tooltip:hover::after {
+    position: absolute;
     display: block;
-    align-self: center;
+    margin-top: -2.75rem;
+    padding: 0.25rem;
+    content: attr(rel);
+    font-size: 0.75rem;
+    color: var(--c-basic-50);
+    background-color: var(--c-basic-900);
+    border-radius: 0.125rem;
   }
 }
