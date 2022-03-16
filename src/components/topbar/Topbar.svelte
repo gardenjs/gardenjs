@@ -12,7 +12,7 @@
       document.body.classList.remove('dark')
   }
 
-  function toggle() {
+  function toggleSidebar() {
       dispatch('out', {active: !active})
   }
 
@@ -24,7 +24,7 @@
 
 <div class="topbar">
   <div class="topbar__inner">
-    <button class="topbar__toggle-btn" title="toggle sidebar">
+    <button class="topbar__toggle-btn" on:click={toggleSidebar} title="toggle sidebar">
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#fff"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
     </button>
     <div class="topbar__nav">
@@ -46,7 +46,7 @@
         </button>
       </div>
       <div class="dropdown">
-        <button class="dropdown__btn" title="switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"><path fill="none" d="M0 0h24v24H0z"/><path d="M22.288 9.29l-3.88 3.88-3.88-3.88a.998.998 0 00-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.998.998 0 000-1.41c-.39-.38-1.03-.39-1.42 0z" fill-rule="nonzero"/></svg></button>
+        <button class="dropdown__btn" title="switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24"><path d="M22.288 9.29l-3.88 3.88-3.88-3.88a.998.998 0 00-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.998.998 0 000-1.41c-.39-.38-1.03-.39-1.42 0z" fill-rule="nonzero"/></svg></button>
         <div class="dropdown__items">
           <ul>
             <li><a href="./">Default Project Theme</a></li>
