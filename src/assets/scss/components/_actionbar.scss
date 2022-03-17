@@ -24,14 +24,12 @@
     padding: 0.25rem;
     height: 2.75rem;
     background: none;
-    // border: none;
     border-bottom: 2px solid transparent;
     cursor: pointer;
   }
   .framesize-nav button:hover,
   .framesize-nav button.active {
     border-bottom: 2px solid var(--primary);
-    // background-color: var(--c-basic-300);
   }
   .framesize-nav button svg {
     height: 18px;
