@@ -22,14 +22,16 @@
     float: left;
     margin: 0;
     padding: 0.25rem;
-    height: 2.688rem;
+    height: 2.75rem;
     background: none;
-    border: none;
+    // border: none;
+    border-bottom: 2px solid transparent;
     cursor: pointer;
   }
   .framesize-nav button:hover,
   .framesize-nav button.active {
-    background-color: var(--c-basic-300);
+    border-bottom: 2px solid var(--primary);
+    // background-color: var(--c-basic-300);
   }
   .framesize-nav button svg {
     height: 18px;
@@ -37,7 +39,7 @@
   }
   .framesize-nav button:hover svg,
   .framesize-nav button.active svg {
-    fill: var(--c-basic-900);
+    fill: var(--primary);
   }
   .framesize-nav button svg.landscape {
     transform: rotate(90deg);
@@ -45,7 +47,7 @@
   .framesize-nav button.tooltip:hover::after {
     position: absolute;
     display: block;
-    margin-top: 0.5rem;
+    margin-top: 0.875rem;
     padding: 0.25rem;
     content: attr(rel);
     font-size: 0.75rem;

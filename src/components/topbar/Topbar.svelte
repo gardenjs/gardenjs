@@ -82,18 +82,19 @@
   .topbar__toggle-btn {
     padding: 0 1rem;
     height: 2.688rem;
-    border: none;
+    /* border: none; */
     background: none;
+    border-bottom: 1px solid transparent;
     cursor: pointer;
   }
   .topbar__toggle-btn:hover {
-    background-color: var(--c-basic-300);
+    border-bottom: 1px solid var(--primary);
   }
   .topbar__toggle-btn svg {
     fill: var(--c-basic-700);
   }
   .topbar__toggle-btn:hover svg {
-    fill: var(--c-basic-900);
+    fill: var(--primary);
   }
   .topbar__nav {
     display: flex;
@@ -104,19 +105,19 @@
     align-items: center;
     margin: 0;
     padding: 0 1rem;
-    height: 2.688rem;
-    border: none;
+    height: 2.75rem;
     background: none;
     cursor: pointer;
+    border-bottom: 2px solid transparent;
   }
   .switch-mode:hover {
-    background-color: var(--c-basic-300);
+    border-bottom: 2px solid var(--primary);
   }
   svg.mode-icon {
     fill: var(--c-basic-700);
   }
   .switch-mode:hover svg.mode-icon {
-    fill: var(--c-basic-900);
+    fill: var(--primary);
   }
   .dropdown {
     position: relative;
@@ -126,7 +127,7 @@
     display: flex;
     align-items: center;
     padding: 0 1rem;
-    line-height: 2.688rem;
+    line-height: 2.438rem;
     font-size: 0.875rem;
     color: var(--c-basic-700);
     background: none;
@@ -134,14 +135,13 @@
     cursor: pointer;
   }
   .dropdown__btn:hover {
-    color: var(--c-basic-900);
-    background-color: var(--c-basic-300);
+    color: var(--primary);
   }
   .dropdown__btn svg {
     fill: var(--c-basic-700);
   }
   .dropdown__btn:hover svg {
-    fill: var(--c-basic-900);
+    fill: var(--primary);
   }
   .dropdown__items {
     visibility: hidden;
@@ -153,6 +153,7 @@
     margin: 0;
     padding: 0;
     border: 1px solid var(--c-basic-400);
+    border-top: 2px solid var(--primary);
     border-radius: 0 0 0.25rem 0.25rem;
     overflow: hidden;
   }
@@ -173,7 +174,7 @@
     background-color: var(--c-basic-50);
   }
   .dropdown__items ul li a:hover {
-    background-color: var(--c-basic-300);
+    color: var(--primary);
   }
   .dropdown:hover > .dropdown__items,
   .dropdown:focus > .dropdown__items {
