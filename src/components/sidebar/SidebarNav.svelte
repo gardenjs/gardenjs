@@ -7,7 +7,6 @@
   }
 
 </script>
-<nav>
   <ul>
     {#each Object.keys(node) as key}
       {#if isLeaf(node[key])}
@@ -17,31 +16,43 @@
         </li>
         {/each}
       {:else}
-        <li>
-          {key}
-          <svelte:self node={node[key]} />
-        </li>
+        <span class="unit">
+          <li class="folder">
+            <span class="folder-label">{key}</span>
+            <svelte:self node={node[key]} />
+          </li>
+        </span>
       {/if}
     {/each}
   </ul>
-</nav>
 
 <style>
-nav ul {
+ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-nav li {
+ul li {
   list-style: none;
-  margin: 0.25rem 0;
-  padding: 0.5rem 0;
+  margin: 0;
+  /* padding: 0.5rem 0; */
   color: var(--c-basic-900);
   font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-nav ul li ul {
-  padding: 0 0 0 1rem;
+.unit {
+  display: block;
+  margin: 0.5rem 0 1.5rem 1rem;
+}
+.folder {
+  margin: 0.5rem 0 1rem;
+}
+.folder-label {
+  display: block;
+  padding: 0 0 0.5rem;
+}
+.unit .folder .ul {
+  margin: -1.5rem 0 0 0;
 }
 </style>
