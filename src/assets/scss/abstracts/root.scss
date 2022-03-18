@@ -5,8 +5,9 @@
 //
 
 :root {
-  --primary:          hsl(168, 31%, 55%);
-  --primary-lighter:  hsl(168, 31%, 65%);
+  --primary:         hsl(168, 31%, 60%);
+  --primary-lighter: hsl(168, 31%, 70%);
+  --primary-bg:      hsl(168, 31%, 92%);
 
   --white:      #fff;
 
@@ -23,6 +24,7 @@
 }
 
 .dark {
+  --primary-bg:      hsl(168, 31%, 15%);
 
   --white:      #000;
 
@@ -37,38 +39,3 @@
   --c-basic-800:   hsl(220, 40%, 96%);  
   --c-basic-900:   hsl(220, 40%, 98%);
 }
-
-
-// :root {
-//   --primary:          hsl(120, 100%, 40%);
-//   --primary-lighter:  hsl(120, 100%, 60%);
-
-//   --white:      #fff;
-
-//   --c-basic-50:    #fafafa;
-//   --c-basic-100:   #f5f5f5;
-//   --c-basic-200:   #e6e6e6;
-//   --c-basic-300:   #d4d4d4;
-//   --c-basic-400:   #a3a3a3;
-//   --c-basic-500:   #71717a;
-//   --c-basic-600:   #525252;
-//   --c-basic-700:   #404040;
-//   --c-basic-800:   #262626;
-//   --c-basic-900:   #171717;
-// }
-
-// .dark {
-
-//   --white:      #000;
-
-//   --c-basic-50:    #171717;
-//   --c-basic-100:   #262626;
-//   --c-basic-200:   #404040;
-//   --c-basic-300:   #525252;
-//   --c-basic-400:   #71717a;
-//   --c-basic-500:   #a3a3a3;
-//   --c-basic-600:   #d4d4d4;
-//   --c-basic-700:   #e5e5e5;
-//   --c-basic-800:   #f5f5f5;  
-//   --c-basic-900:   #fafafa;
-// }
