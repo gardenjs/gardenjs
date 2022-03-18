@@ -16,20 +16,20 @@
   .framesize-nav {
     display: block;
     align-self: center;
-    margin-right: 0.75rem;
+    padding: 0.188rem 0.75rem 0 0;
   }
   .framesize-nav button {
     float: left;
     margin: 0;
-    padding: 0.25rem;
-    height: 2.75rem;
+    padding: 0 0.25rem;
+    height: 2.625rem;
     background: none;
-    border-bottom: 2px solid transparent;
+    border-bottom: 0.188rem solid transparent;
     cursor: pointer;
   }
   .framesize-nav button:hover,
   .framesize-nav button.active {
-    border-bottom: 2px solid var(--primary);
+    border-bottom: 0.188rem solid var(--primary);
   }
   .framesize-nav button svg {
     height: 18px;

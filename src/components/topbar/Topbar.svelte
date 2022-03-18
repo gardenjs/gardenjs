@@ -80,15 +80,16 @@
     padding: 0;
   }
   .topbar__toggle-btn {
+    margin-top: 0.188rem;
     padding: 0 1rem;
-    height: 2.688rem;
+    height: 2.625rem;
     /* border: none; */
     background: none;
-    border-bottom: 1px solid transparent;
+    border-bottom: 0.188rem solid transparent;
     cursor: pointer;
   }
   .topbar__toggle-btn:hover {
-    border-bottom: 1px solid var(--primary);
+    border-color: var(--primary);
   }
   .topbar__toggle-btn svg {
     fill: var(--c-basic-700);
@@ -103,15 +104,15 @@
   .switch-mode {
     display: flex;
     align-items: center;
-    margin: 0;
+    margin-top: 0.188rem;
     padding: 0 1rem;
-    height: 2.75rem;
+    height: 2.625rem;
     background: none;
     cursor: pointer;
-    border-bottom: 2px solid transparent;
+    border-bottom: 0.188rem solid transparent;
   }
   .switch-mode:hover {
-    border-bottom: 2px solid var(--primary);
+    border-color: var(--primary);
   }
   svg.mode-icon {
     fill: var(--c-basic-700);
@@ -153,7 +154,7 @@
     margin: 0;
     padding: 0;
     border: 1px solid var(--c-basic-400);
-    border-top: 2px solid var(--primary);
+    border-top: 0.188rem solid var(--primary);
     border-radius: 0 0 0.25rem 0.25rem;
     overflow: hidden;
   }

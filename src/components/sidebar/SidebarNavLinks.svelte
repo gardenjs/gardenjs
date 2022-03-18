@@ -25,9 +25,9 @@
   a.active,
   a:hover,
   a:focus {
-    padding: 0.375rem 1rem 0.375rem 0.937rem;
+    padding: 0.375rem 1rem 0.375rem 0.875rem;
     color: var(--c-basic-900);
-    border-left: 2px solid var(--primary);
+    border-left: 3px solid var(--primary);
   }
   a.active {
     color: var(--c-basic-900);
