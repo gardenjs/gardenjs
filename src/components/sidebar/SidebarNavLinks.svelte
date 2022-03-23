@@ -18,8 +18,9 @@
     padding: 0.375rem 1rem;
     text-transform: initial;
     text-decoration: none;
-    font-weight: 400;
-    color: var(--c-basic-500);
+    font-weight: 500;
+    font-size: 0.813rem;
+    color: var(--c-basic-600);
     border-left: 1px solid var(--c-basic-300);
   }
   a.active,

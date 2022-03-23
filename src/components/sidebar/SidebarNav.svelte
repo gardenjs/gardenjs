@@ -36,7 +36,7 @@ ul li {
   list-style: none;
   margin: 0;
   color: var(--c-basic-900);
-  font-size: 0.9rem;
+  font-size: 0.813rem;
   font-weight: 600;
   text-transform: uppercase;
 }
