@@ -42,6 +42,7 @@ const dispatch = createEventDispatcher()
 
 <style>
 .panel {
+  position: relative;
   flex-grow: 1;
   height: 100%;
   width: 100%;
@@ -49,10 +50,16 @@ const dispatch = createEventDispatcher()
   background-color: var(--c-basic-50);
   border-left: 1px solid var(--c-basic-400);
   border-right: 1px solid var(--c-basic-400);
+  border-bottom: 1px solid var(--c-basic-400);
+}
+.panel__nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 2rem;
 }
 .panel__nav nav ul {
   display: flex;
-  flex: 1 1 auto;
   flex-direction: row;
   overflow-x: auto;
   height: 2rem;
@@ -66,7 +73,6 @@ const dispatch = createEventDispatcher()
 }
 .panel__nav nav li button {
   width: 100%;
-  min-width: 150px;
   height: 100%;
   font-size: 0.875rem;
   font-weight: 500;
@@ -76,6 +82,7 @@ const dispatch = createEventDispatcher()
   border: none;
   background-color: var(--c-basic-200);
   border-bottom: 3px solid var(--c-basic-400);
+  white-space: nowrap;
 }
 .panel__nav nav li button.active {
   border-bottom: 3px solid var(--primary);

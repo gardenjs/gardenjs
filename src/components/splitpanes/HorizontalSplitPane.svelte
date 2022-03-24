@@ -32,6 +32,7 @@
 .backstage {
   background-color: var(--c-basic-200);
   border-left: 1px solid var(--c-basic-400);
+  border-right: 1px solid var(--c-basic-400);
 }
 .dragbar {
   display: flex;
