@@ -39,8 +39,8 @@
   justify-content: center;
   height: 0.75rem;
   background-color: var(--c-basic-100);
-  border: 1px solid var(--c-basic-400);
-  border-left: 0;
+  border-top: 1px solid var(--c-basic-400);
+  border-bottom: 1px solid var(--c-basic-400);
   cursor: row-resize;
   z-index: 10;
 }
