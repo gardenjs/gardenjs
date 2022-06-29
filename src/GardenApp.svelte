@@ -1,6 +1,6 @@
 <script> 
 import {initRouter} from '../src/router.js'
-import ComponentPage from './components/stage/Stage.svelte'
+import Stage from './components/stage/Stage.svelte'
 import Sidebar from './components/sidebar/Sidebar.svelte'
 import Topbar from '../src/components/topbar/Topbar.svelte'
 import FullScreenLayout from '../src/layouts/FullScreenLayout.svelte'
@@ -29,9 +29,13 @@ initRouter(routes, baseurl, (routeobj, state) => {
 })
 
 let showSidebar = true
+let stageSize = 'full'
+let landscape = false
 
 function handleTopbarOut(evt) {
   showSidebar = evt.detail.active
+  stageSize = evt.detail.stageSize
+  landscape = evt.detail.landscape
 }
 
 </script>
@@ -39,7 +43,7 @@ function handleTopbarOut(evt) {
 <FullScreenLayout>
   <TopBottomLayout>
     <div slot="top" class="is-flexfix">
-      <Topbar active={showSidebar} on:out={handleTopbarOut} />
+      <Topbar active={showSidebar} stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
     </div>
     <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
@@ -47,7 +51,8 @@ function handleTopbarOut(evt) {
           <Sidebar show={showSidebar} rootnode={navtree} />
         </div>
         <div slot="right" class="main">
-          <ComponentPage componentname={componentname} das={das} historystate={historystate}/>
+          <Stage componentname={componentname} das={das} historystate={historystate} 
+          stageSize={stageSize} landscape={landscape}/>
         </div>
       </LeftRightLayout>
     </div>

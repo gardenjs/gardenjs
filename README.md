@@ -60,7 +60,8 @@ serverport is defined in rabbit.config.json, e.g. 3010
 
 ## Todo´s
 
-* [task] Kill actionbar and move the rwd-navi inside the topbar. Then move styles from scss to topbar.svelte. Right now: Outcommented in ComponentPage.svelte and added statical inside Topbar.svelte.
+* [task] Move styles from scss to topbar.svelte and added statical inside Topbar.svelte.
+* [refactor] Move logic from Topbar.svelte to darkmode.js
 * [task] Sidebarnav: toggle nav items & add toggle icon.
 * [bug] After page refresh bg-color of sidebar link for the "active page" disappears. It also disappears if another story will be selected.
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
