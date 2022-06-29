@@ -73,7 +73,7 @@ function tabselectionchange(evt) {
 
 
 <HorizontalSplitPane topheight='65vh'>
-<div slot="top" class="is-full is-flex-column">
+<div slot="top" class="is-full">
 	<iframe class="stage stage--lightmode" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle} ></iframe>
 </div>
 <div slot="bottom" class="is-full is-flex-column">
@@ -106,7 +106,8 @@ function tabselectionchange(evt) {
 <style>
 .stage {
   align-self: center;
-  display: blocK;
+  margin: auto;
+  display: block;
   height: 100%;
   width: 100%;
   background-color: var(--white);
