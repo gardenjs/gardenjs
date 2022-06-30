@@ -48,7 +48,7 @@
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#fff"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
     </button>
     <div class="topbar__nav">
-      <div class="framesize-nav">
+      <div class="stagesize-nav">
         <button rel="Small" class="tooltip" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M15.5 1h-8A2.5 2.5 0 005 3.5v17A2.5 2.5 0 007.5 23h8a2.5 2.5 0 002.5-2.5v-17A2.5 2.5 0 0015.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/></svg>
         </button>
@@ -201,5 +201,51 @@
   .dropdown:focus > .dropdown__items {
     display: block;
     visibility: visible;
+  }
+  /* stagesize */
+  .stagesize-nav {
+    display: none;
+  }
+  @media only screen and (min-width: 1280px) {
+    .stagesize-nav {
+      display: block;
+      align-self: center;
+      padding: 0.188rem 0.75rem 0 0;
+    }
+    .stagesize-nav button {
+      float: left;
+      margin: 0;
+      padding: 0 0.25rem;
+      height: 2.625rem;
+      background: none;
+      border-bottom: 0.188rem solid transparent;
+      cursor: pointer;
+    }
+    .stagesize-nav button:hover,
+    .stagesize-nav button.active {
+      border-bottom: 0.188rem solid var(--primary);
+    }
+    .stagesize-nav button svg {
+      height: 18px;
+      fill: var(--c-basic-700);
+    }
+    .stagesize-nav button:hover svg,
+    .stagesize-nav button.active svg {
+      fill: var(--primary);
+    }
+    .stagesize-nav button svg.landscape {
+      transform: rotate(90deg);
+    }
+    .stagesize-nav button.tooltip:hover::after {
+      position: absolute;
+      display: block;
+      margin-top: 0.875rem;
+      padding: 0.25rem;
+      content: attr(rel);
+      font-size: 0.75rem;
+      color: var(--c-basic-50);
+      background-color: var(--c-basic-900);
+      border-radius: 0.125rem;
+    }
   }
 </style>
