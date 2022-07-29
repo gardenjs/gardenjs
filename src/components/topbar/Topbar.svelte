@@ -65,6 +65,9 @@
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M16.48 2.52c3.27 1.55 5.61 4.72 5.97 8.48h1.5C23.44 4.84 18.29 0 12 0l-.66.03 3.81 3.81 1.33-1.32zm-6.25-.77a1.49 1.49 0 00-2.12 0L1.75 8.11a1.49 1.49 0 000 2.12l12.02 12.02c.59.59 1.54.59 2.12 0l6.36-6.36c.59-.59.59-1.54 0-2.12L10.23 1.75zm4.6 19.44L2.81 9.17l6.36-6.36 12.02 12.02-6.36 6.36zm-7.31.29A10.487 10.487 0 011.55 13H.05C.56 19.16 5.71 24 12 24l.66-.03-3.81-3.81-1.33 1.32z"/></svg>
         </button>
       </div>
+      <button class="open-new-tab">
+        <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24"><path d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h7v2H5v14h14v-7h2v7q0 .825-.587 1.413Q19.825 21 19 21Zm4.7-5.3-1.4-1.4L17.6 5H14V3h7v7h-2V6.4Z"/></svg>
+      </button>
       <div class="dropdown">
         <button class="dropdown__btn" title="switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24"><path d="M22.288 9.29l-3.88 3.88-3.88-3.88a.998.998 0 00-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.998.998 0 000-1.41c-.39-.38-1.03-.39-1.42 0z" fill-rule="nonzero"/></svg></button>
         <div class="dropdown__items">
@@ -125,7 +128,7 @@
     display: flex;
     align-items: center;
     margin-top: 0.188rem;
-    padding: 0 1rem;
+    padding: 0 1.25rem;
     height: 2.625rem;
     background: none;
     cursor: pointer;
@@ -247,5 +250,24 @@
       background-color: var(--c-basic-900);
       border-radius: 0.125rem;
     }
+  }
+  .open-new-tab {
+    display: flex;
+    align-items: center;
+    margin-top: 0.188rem;
+    padding: 0 1.25rem;
+    height: 2.625rem;
+    background: none;
+    cursor: pointer;
+    border-bottom: 0.188rem solid transparent;
+  }
+  .open-new-tab:hover {
+    border-color: var(--primary);
+  }
+  svg.open-new-tab-icon {
+    fill: var(--c-basic-700);
+  }
+  .open-new-tab:hover svg.open-new-tab-icon {
+    fill: var(--primary);
   }
 </style>
