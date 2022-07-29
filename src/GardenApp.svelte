@@ -48,7 +48,7 @@ function handleTopbarOut(evt) {
     <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
         <div slot="left" class="is-flexfix">
-          <Sidebar show={showSidebar} rootnode={navtree} />
+          <Sidebar show={showSidebar} rootnode={navtree} selectedNode={componentname} />
         </div>
         <div slot="right" class="main">
           <Stage componentname={componentname} das={das} historystate={historystate} 

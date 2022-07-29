@@ -1,6 +1,7 @@
 <script>
   import Link from './SidebarNavLinks.svelte'
   export let node = {} 
+  export let selectedNode
 
   function isLeaf(item) {
     return Array.isArray(item)
@@ -12,14 +13,14 @@
       {#if isLeaf(node[key])}
         {#each node[key] as item}
         <li>
-          <Link href={item.href}>{item.text}</Link>
+          <Link href={item.href} selected="{item.key === selectedNode}">{item.text}</Link>
         </li>
         {/each}
       {:else}
         <span class="unit">
           <li class="folder">
             <span class="folder-label">{key}</span>
-            <svelte:self node={node[key]} />
+            <svelte:self node={node[key]} selectedNode={selectedNode} />
           </li>
         </span>
       {/if}
