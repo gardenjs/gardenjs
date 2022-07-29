@@ -53,6 +53,7 @@ ul li {
 .folder-btn {
   display: flex;
   background: transparent;
+  padding: 0;
   cursor: pointer;
   height: 24px;
 }
