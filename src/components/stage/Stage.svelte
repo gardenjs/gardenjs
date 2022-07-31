@@ -9,9 +9,8 @@ export let das = {}
 export let historystate
 export let stageSize
 export let landscape
-
-let selectedStory = null 
-let examples = {}
+export let examples
+export let selectedStory
 
 let myframeready 
 let myframe
@@ -40,15 +39,6 @@ $: {
 $: {
   if (myframeready) {
     myframe.contentWindow.postMessage({selectedStory, componentname}, window.location)
-  }
-}
-
-
-$: {
-  examples = das.examples || []
-  selectedStory = examples[0]?.story 
-  if (historystate && historystate.selectedstory) {
-    selectedStory = examples.find(ex => ex.story == historystate.selectedstory)?.story
   }
 }
 

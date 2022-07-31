@@ -31,11 +31,30 @@ initRouter(routes, baseurl, (routeobj, state) => {
 let showSidebar = true
 let stageSize = 'full'
 let landscape = false
+let examples = {}
+let selectedStory
+
+$: {
+  examples = das.examples || []
+  selectedStory = examples[0]?.story 
+  if (historystate && historystate.selectedstory) {
+    selectedStory = examples.find(ex => ex.story == historystate.selectedstory)?.story
+  }
+}
+
 
 function handleTopbarOut(evt) {
-  showSidebar = evt.detail.active
-  stageSize = evt.detail.stageSize
-  landscape = evt.detail.landscape
+  if (evt.detail.openInTab) {
+    const targetWindow = window.open('/garden/gardenframe/', '_blank')
+    targetWindow.onload = () => {
+      targetWindow.postMessage({selectedStory, componentname}, window.location)
+    }
+  }
+  else {
+    showSidebar = evt.detail.active
+    stageSize = evt.detail.stageSize
+    landscape = evt.detail.landscape
+  }
 }
 
 </script>
@@ -51,7 +70,7 @@ function handleTopbarOut(evt) {
           <Sidebar show={showSidebar} rootnode={navtree} selectedNode={componentname} />
         </div>
         <div slot="right" class="main">
-          <Stage componentname={componentname} das={das} historystate={historystate} 
+          <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} 
           stageSize={stageSize} landscape={landscape}/>
         </div>
       </LeftRightLayout>
