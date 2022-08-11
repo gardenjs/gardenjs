@@ -36,6 +36,6 @@ a.logo {
   padding: 1rem 0;
 }
 nav {
-  margin: 0 0 0 0.5rem;
+  margin: 0 0.5rem;
 }
 </style>
