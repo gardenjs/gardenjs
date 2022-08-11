@@ -17,14 +17,16 @@
         </li>
         {/each}
       {:else}
-        <span class="unit">
-          <li class="folder">
-            <button class="folder-btn" title="fold/unfold">
-              <span class="folder-label">{key}</span><span class="folder-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M9.4 18L8 16.6l4.6-4.6L8 7.4 9.4 6l6 6z"/></svg></span>
-            </button>
-            <svelte:self node={node[key]} selectedNode={selectedNode} />
-          </li>
-        </span>
+        <li class="unit">
+          <span class="unit-container" title="fold/unfold">
+            <!-- idea: can be folder or link to overview page. therefore unit-label can contain link or "folders"
+            if not possible, i will rebuild the unit-container to the whole button to open sub items -->
+            <span class="unit-label">{key}</span>
+            <!-- end -->
+            <button class="unit-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M10 17V7l5 5z"/></svg></button>
+          </span>
+          <svelte:self node={node[key]} selectedNode={selectedNode} />
+        </li>
       {/if}
     {/each}
   </ul>
@@ -47,24 +49,33 @@ ul li {
   display: block;
   margin: 0.5rem 0 1.5rem 1rem;
 }
-.folder {
-  margin: 0.5rem 0 0;
-}
-.folder-btn {
+.unit-container {
   display: flex;
-  background: transparent;
-  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.unit-label {
+  display: block;
+  padding: 0.25rem 0;
+  width: 100%;
+}
+/* --start: idea: can be folder or link to overview page. therefore unit-label can contain link */
+.unit-label a {
+  color: var(--c-basic-900);
+  text-decoration: none;
   cursor: pointer;
-  height: 24px;
 }
-.folder-label {
-  display: flex;
-  align-self: center;
+/* --end */
+.unit-btn {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
 }
-.folder-icon {
-  margin: 0 0 0 0.5rem;
-}
-.folder-btn:hover > .folder-icon {
+/* just demo, should be class 'active' and not hover: */
+.unit-btn:hover {
   transform: rotate(90deg);
   transition: 0.2s ease-in-out;
 }
