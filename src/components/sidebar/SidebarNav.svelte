@@ -74,6 +74,9 @@ ul li {
   background: transparent;
   cursor: pointer;
 }
+.unit-btn svg {
+  fill: var(--c-basic-700);
+}
 /* just demo, should be class 'active' and not hover: */
 .unit-btn:hover {
   transform: rotate(90deg);
