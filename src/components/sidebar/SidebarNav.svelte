@@ -18,13 +18,13 @@
         {/each}
       {:else}
         <li class="unit">
-          <span class="unit-container" title="fold/unfold">
-            <!-- idea: can be folder or link to overview page. therefore unit-label can contain link or "folders"
-            if not possible, i will rebuild the unit-container to the whole button to open sub items -->
+          <button class="unit-container" title="fold/unfold">
             <span class="unit-label">{key}</span>
-            <!-- end -->
-            <button class="unit-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M10 17V7l5 5z"/></svg></button>
-          </span>
+            <span class="unit-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M10 17V7l5 5z"/></svg></span>
+          </button>
+          <!-- show folder content if class active -->
+          <!-- todo: configuration file for garden to define project specific settings? 
+          in this case: directories that should be open by default (maybe yaml file?) -->
           <svelte:self node={node[key]} selectedNode={selectedNode} />
         </li>
       {/if}
@@ -54,31 +54,25 @@ ul li {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
 }
 .unit-label {
   display: block;
   padding: 0.25rem 0;
   width: 100%;
 }
-/* --start: idea: can be folder or link to overview page. therefore unit-label can contain link */
-.unit-label a {
-  color: var(--c-basic-900);
-  text-decoration: none;
-  cursor: pointer;
-}
-/* --end */
-.unit-btn {
+.unit-icon {
   display: block;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
 }
-.unit-btn svg {
+.unit-icon svg {
   fill: var(--c-basic-700);
 }
 /* just demo, should be class 'active' and not hover: */
-.unit-btn:hover {
+.unit-container:hover .unit-icon {
   transform: rotate(90deg);
   transition: 0.2s ease-in-out;
 }
