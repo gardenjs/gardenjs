@@ -24,7 +24,8 @@
           </button>
           <!-- show folder content if class active -->
           <!-- todo: configuration file for garden to define project specific settings? 
-          in this case: directories that should be open by default (maybe yaml file?) -->
+          in this case: directories that should be open by default (maybe yaml file?)
+          other cases: project logo instead of garden logo ... -->
           <svelte:self node={node[key]} selectedNode={selectedNode} />
         </li>
       {/if}
@@ -35,15 +36,11 @@
 ul {
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 ul li {
   list-style: none;
   margin: 0;
-  color: var(--c-basic-900);
-  font-size: 0.938rem;
-  font-weight: 600;
-  text-transform: uppercase;
+  padding: 0;
 }
 .unit {
   display: block;
@@ -64,6 +61,10 @@ ul li {
   display: block;
   padding: 0.25rem 0;
   width: 100%;
+  color: var(--c-basic-900);
+  font-size: 0.938rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 .unit-icon {
   display: block;
@@ -71,7 +72,7 @@ ul li {
 .unit-icon svg {
   fill: var(--c-basic-700);
 }
-/* just demo, should be class 'active' and not hover: */
+/* just demo, should be class 'active' and not a hover effect */
 .unit-container:hover .unit-icon {
   transform: rotate(90deg);
   transition: 0.2s ease-in-out;
