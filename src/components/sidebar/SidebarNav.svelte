@@ -56,7 +56,6 @@ ul li {
   text-align: left;
   background: transparent;
   cursor: pointer;
-  background-color: #f60;
 }
 .unit-label {
   display: flex;
