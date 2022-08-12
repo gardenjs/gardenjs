@@ -56,10 +56,11 @@ ul li {
   text-align: left;
   background: transparent;
   cursor: pointer;
+  background-color: #f60;
 }
 .unit-label {
-  display: block;
-  padding: 0.25rem 0;
+  display: flex;
+  align-self: center;
   width: 100%;
   color: var(--c-basic-900);
   font-size: 0.938rem;
@@ -68,6 +69,7 @@ ul li {
 }
 .unit-icon {
   display: block;
+  height: 100%;
 }
 .unit-icon svg {
   fill: var(--c-basic-700);
