@@ -1,29 +1,27 @@
-//
-// @Project: Garden by Rabbit Development 
-// @Author: Martin Farkas
-// @Email:  info@websites-graphix.com
-//
-
 .is-full {
   height: 100%;
   width: auto;
   overflow-y: auto;
 }
+
 .is-flex-column {
   width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
 }
+
 .is-flex-row {
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
 .is-flexgrow {
   flex-grow: 1;
 }
+
 .is-flexfix {
   flex-grow: 0;
   flex-shrink: 0;
