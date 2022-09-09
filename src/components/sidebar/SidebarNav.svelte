@@ -7,9 +7,14 @@
     return Array.isArray(item)
   }
 
+  function toggleFolderStatus(key) {
+    console.log('TOGOGLE')
+    node[key].__unfolded = !node[key].__unfolded
+  }
+
 </script>
   <ul>
-    {#each Object.keys(node) as key}
+    {#each Object.keys(node).filter(key => key !== '__unfolded') as key}
       {#if isLeaf(node[key])}
         {#each node[key] as item}
         <li>
@@ -17,36 +22,25 @@
         </li>
         {/each}
       {:else}
-        <li class="unit">
-          <button class="unit-container" title="fold/unfold">
-            <span class="unit-label">{key}</span>
-            <span class="unit-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M10 17V7l5 5z"/></svg></span>
+        <li class="folder">
+          <button class="folder-button" title="fold/unfold" on:click={() => toggleFolderStatus(key)}>
+            <span class="folder-label">{key}</span>
+            <span class="folder-icon" class:unfolded={node[key].__unfolded}><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M10 17V7l5 5z"/></svg></span>
           </button>
-          <!-- show folder content if class active -->
-          <!-- todo: configuration file for garden to define project specific settings? 
-          in this case: directories that should be open by default (maybe yaml file?)
-          other cases: project logo instead of garden logo ... -->
-          <svelte:self node={node[key]} selectedNode={selectedNode} />
+          {#if node[key].__unfolded}
+            <svelte:self node={node[key]} selectedNode={selectedNode} />
+          {/if}
         </li>
       {/if}
     {/each}
   </ul>
 
 <style>
-ul {
-  margin: 0;
-  padding: 0;
-}
-ul li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.unit {
+.folder {
   display: block;
   margin: 0.5rem 0 1.5rem 1rem;
 }
-.unit-container {
+.folder-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,7 +51,7 @@ ul li {
   background: transparent;
   cursor: pointer;
 }
-.unit-label {
+.folder-label {
   display: flex;
   align-self: center;
   width: 100%;
@@ -66,15 +60,15 @@ ul li {
   font-weight: 600;
   text-transform: uppercase;
 }
-.unit-icon {
+.folder-icon {
   display: block;
   height: 100%;
 }
-.unit-icon svg {
+.folder-icon svg {
   fill: var(--c-basic-700);
 }
 /* just demo, should be class 'active' and not a hover effect */
-.unit-container:hover .unit-icon {
+.folder-icon.unfolded {
   transform: rotate(90deg);
   transition: 0.2s ease-in-out;
 }
