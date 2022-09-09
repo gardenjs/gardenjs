@@ -67,9 +67,7 @@
 .folder-icon svg {
   fill: var(--c-basic-700);
 }
-/* just demo, should be class 'active' and not a hover effect */
 .folder-icon.unfolded {
   transform: rotate(90deg);
-  transition: 0.2s ease-in-out;
 }
 </style>
