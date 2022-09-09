@@ -14,11 +14,8 @@
 
 <style>
   a {
-    display: block;
-    margin: 0;
     padding: 0.375rem 1rem;
     text-transform: initial;
-    text-decoration: none;
     font-weight: 500;
     font-size: 0.813rem;
     color: var(--c-basic-600);
