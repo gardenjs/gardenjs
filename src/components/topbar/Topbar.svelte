@@ -222,7 +222,9 @@
     .stagesize-nav {
       display: block;
       align-self: center;
-      padding: 0.188rem 0.75rem 0 0;
+      padding: 0.188rem 0.5rem 0;
+      background-color: var(--c-basic-200);
+      border-bottom: 2px solid var(--c-basic-400);
     }
     .stagesize-nav button {
       float: left;
