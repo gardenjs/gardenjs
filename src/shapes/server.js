@@ -1,4 +1,4 @@
-import { config } from 'garden'
+import { config, open } from 'garden'
 import { createServer as createViteServer } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
@@ -30,6 +30,8 @@ async function createServer() {
     )]
   })
   console.log(`Listening to port ${port}`)
+  console.log(`http://localhost:${port}/garden`)
   server.listen()
+  open(`http://localhost:${port}/garden`)
 }
 createServer()

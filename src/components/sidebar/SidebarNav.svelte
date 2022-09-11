@@ -1,34 +1,28 @@
 <script>
   import Link from './SidebarNavLinks.svelte'
-  export let node = {} 
-  export let selectedNode
+  import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
+  export let nodes = []
 
-  function isLeaf(item) {
-    return Array.isArray(item)
-  }
-
-  function toggleFolderStatus(key) {
-    console.log('TOGOGLE')
-    node[key].__unfolded = !node[key].__unfolded
+  function toggleFolderFoldStatus(node) {
+    dispatch('out', {toggleFolderFoldStatus: {...node}})
   }
 
 </script>
   <ul>
-    {#each Object.keys(node).filter(key => key !== '__unfolded') as key}
-      {#if isLeaf(node[key])}
-        {#each node[key] as item}
+    {#each nodes as node }
+      {#if node.isLeaf}
         <li>
-          <Link href={item.href} selected="{item.key === selectedNode}">{item.text}</Link>
+          <Link href={node.href} selected="{node.selected}">{node.name}</Link>
         </li>
-        {/each}
       {:else}
         <li class="folder">
-          <button class="folder-button" title="fold/unfold" on:click={() => toggleFolderStatus(key)}>
-            <span class="folder-label">{key}</span>
-            <span class="folder-icon" class:unfolded={node[key].__unfolded}><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M10 17V7l5 5z"/></svg></span>
+          <button class="folder-button" title="fold/unfold" on:click={() => toggleFolderFoldStatus(node)}>
+            <span class="folder-label">{node.name}</span>
+            <span class="folder-icon" class:unfolded={node.unfolded}><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M10 17V7l5 5z"/></svg></span>
           </button>
-          {#if node[key].__unfolded}
-            <svelte:self node={node[key]} selectedNode={selectedNode} />
+          {#if node.unfolded}
+            <svelte:self nodes={node.children} on:out />
           {/if}
         </li>
       {/if}

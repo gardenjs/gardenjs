@@ -78,27 +78,35 @@ export const dasmap = {
 }
 
 export function createNavItemTree(componentDescriptions) {
-  const tree = {}
+  const rootNode = []
   for (const componentDescription of componentDescriptions) {
-    const parentNode = createNode(tree, componentDescription.fullnavnode)
+    const parentNode = createNode(rootNode, componentDescription.fullnavnode)
     parentNode.push(createNavigationEntry(componentDescription))
   }
-  return tree
+  return rootNode
 }
 
-export function createNode(tree, nodes) { 
-  let parentNode = tree
+export function createNode(rootNode, nodes) { 
+  let parentNode = rootNode
+  let key = '/'
   nodes.split('/').forEach(node => {
-    if (!parentNode[node]) {
-      parentNode[node] = {}
+    key += node  + '/' 
+    let childNode = parentNode.find(node => node.key === key)
+    if (!childNode) {
+      childNode = {
+        isNode: true,
+        name: node,
+        key,
+        children: []
+      }
+      parentNode.push(childNode)
     }
-    parentNode = parentNode[node]
+    parentNode = childNode.children
   })
-  if (!parentNode._items) parentNode._items = []
-  return parentNode._items
+  return parentNode
 }
 export function createNavigationEntry(description) {
-  return {href: description.route, text: description.name, key: description.fullname}
+  return {isLeaf: true, href: description.route, name: description.name, key: description.fullname}
 }
 
 

@@ -9,6 +9,7 @@ import TopBottomLayout from '../src/layouts/TopBottomLayout.svelte'
 
 let baseurl = '/garden'
 let componentname = ''
+let currentRoute = ''
 
 export let routes
 export let navtree
@@ -23,6 +24,7 @@ initRouter(routes, baseurl, (routeobj, state) => {
     componentname = ''
   } else {
     componentname = routeobj.fullname
+    currentRoute = routeobj.route
     das = dasmap[componentname] || {}
     historystate = state
   }
@@ -57,6 +59,39 @@ function handleTopbarOut(evt) {
   }
 }
 
+function handleSidebarOut(evt) {
+  if (evt.detail.toggleFolderFoldStatus) {
+    const node = evt.detail.toggleFolderFoldStatus
+    if (unfoldedNodes[node.key]) {
+      unfoldedNodes[node.key] = false
+    } else {
+      unfoldedNodes[node.key] = true
+    }
+    unfoldedNodes = unfoldedNodes
+  }
+}
+
+let unfoldedNodes = {}
+
+let nodes = []
+$: {
+  nodes = transformNavTree(currentRoute, componentname,  unfoldedNodes, navtree)
+}
+
+function transformNavTree(route, selectedNode,  unfoldedNodes, nodes) {
+  return nodes.map(child => {
+    if (child.isLeaf) {
+      return {...child, selected: selectedNode === child.key, isLeaf: true}
+    } else {
+      return {...child, children: transformNavTree(currentRoute, selectedNode, unfoldedNodes, child.children), unfolded: isUnfolded(child, route) }
+    }
+  })
+}
+
+function isUnfolded(node, route) {
+  return unfoldedNodes[node.key] || route.indexOf(node.key) === 0
+}
+
 </script>
 
 <FullScreenLayout>
@@ -67,7 +102,7 @@ function handleTopbarOut(evt) {
     <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
         <div slot="left" class="is-flexfix">
-          <Sidebar show={showSidebar} rootnode={navtree} selectedNode={componentname} />
+          <Sidebar show={showSidebar} nodes={nodes} on:out={handleSidebarOut} />
         </div>
         <div slot="right" class="main">
           <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} 
