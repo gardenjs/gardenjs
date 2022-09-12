@@ -49,7 +49,7 @@
 </script>
 
 <div class="topbar">
-  <div class="topbar__inner">
+  <div class="topbar__container">
     <button class="topbar__toggle-btn" on:click={toggleSidebar} title="toggle sidebar">
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#fff"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
     </button>
@@ -89,9 +89,6 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon" height="20" viewBox="0 0 24 24" width="20" fill="#currentColor"><path d="M9.37 5.51A7.35 7.35 0 009.1 7.5c0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27A7.014 7.014 0 0112 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49zM12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
         {/if}
       </button>
-      <a href="https://github.com/rabbitdevelopment/garden" class="github" title="Open github" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" class="github-icon" height="24" viewBox="0 0 24 24" width="24" ><path d="M11.999.296C5.373.296 0 5.67 0 12.296c0 5.302 3.438 9.8 8.207 11.387.6.11.819-.26.819-.579 0-.284-.01-1.04-.017-2.04-3.337.725-4.042-1.61-4.042-1.61C4.422 18.07 3.635 17.7 3.635 17.7c-1.09-.745.082-.73.082-.73 1.205.085 1.838 1.237 1.838 1.237 1.07 1.833 2.81 1.304 3.493.997.109-.775.418-1.304.762-1.604-2.665-.303-5.467-1.333-5.467-5.931 0-1.31.468-2.381 1.236-3.22-.124-.304-.536-1.524.117-3.176 0 0 1.008-.323 3.3 1.23A11.473 11.473 0 0112 6.1a11.51 11.51 0 013.005.403c2.29-1.553 3.296-1.23 3.296-1.23.655 1.652.243 2.872.12 3.176.769.839 1.233 1.91 1.233 3.22 0 4.61-2.806 5.624-5.479 5.921.431.37.815 1.103.815 2.223 0 1.604-.015 2.898-.015 3.291 0 .321.216.695.825.578 4.765-1.59 8.2-6.085 8.2-11.385 0-6.628-5.373-12-12.001-12"/></svg>
-      </a>
     </div>
   </div>
 </div>
@@ -103,7 +100,7 @@
     background-color: var(--c-basic-100);
     border-bottom: 1px solid var(--c-basic-400);
   }
-  .topbar__inner {
+  .topbar__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -112,12 +109,11 @@
     padding: 0;
   }
   .topbar__toggle-btn {
-    margin-top: 0.188rem;
+    /* margin-top: 0.188rem; */
     padding: 0 1rem;
-    height: 2.625rem;
-    /* border: none; */
+    height: 2.75rem;
     background: none;
-    border-bottom: 0.188rem solid transparent;
+    /* border-top: 0.188rem solid transparent; */
     cursor: pointer;
   }
   .topbar__toggle-btn:hover {
@@ -133,15 +129,16 @@
     display: flex;
     align-items: center;
   }
+  /* switch to dark mode */
   .switch-mode {
     display: flex;
     align-items: center;
-    margin-top: 0.188rem;
-    padding: 0 1.25rem;
+    /* margin-top: 0.188rem; */
+    padding: 0 1rem;
     height: 2.625rem;
     background: none;
     cursor: pointer;
-    border-bottom: 0.188rem solid transparent;
+    /* border-bottom: 0.188rem solid transparent; */
   }
   .switch-mode:hover {
     border-color: var(--primary);
@@ -160,7 +157,7 @@
     display: flex;
     align-items: center;
     padding: 0 1rem;
-    line-height: 2.438rem;
+    line-height: 2.75rem;
     font-size: 0.875rem;
     color: var(--c-basic-700);
     background: none;
@@ -186,7 +183,7 @@
     margin: 0;
     padding: 0;
     border: 1px solid var(--c-basic-400);
-    border-top: 0.188rem solid var(--primary);
+    /* border-top: 0.188rem solid var(--primary); */
     border-radius: 0 0 0.25rem 0.25rem;
     overflow: hidden;
   }
@@ -222,7 +219,7 @@
     .stagesize-nav {
       display: block;
       align-self: center;
-      padding: 0.188rem 0.5rem 0;
+      padding: 0.188rem 0 0;
       background-color: var(--c-basic-200);
       border-bottom: 2px solid var(--c-basic-400);
     }
@@ -262,26 +259,22 @@
       border-radius: 0.125rem;
     }
   }
-  .github,
   .open-new-tab {
     display: flex;
     align-items: center;
-    margin-top: 0.188rem;
-    padding: 0 1.25rem;
-    height: 2.625rem;
+    /* margin-top: 0.188rem; */
+    padding: 0 1rem;
+    height: 2.75rem;
     background: none;
     cursor: pointer;
-    border-bottom: 0.188rem solid transparent;
+    /* border-bottom: 0.188rem solid transparent; */
   }
-  .github:hover,
   .open-new-tab:hover {
     border-color: var(--primary);
   }
-  svg.github-icon,
   svg.open-new-tab-icon {
     fill: var(--c-basic-700);
   }
-  .github:hover svg.github-icon,
   .open-new-tab:hover svg.open-new-tab-icon {
     fill: var(--primary);
   }
