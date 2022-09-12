@@ -74,6 +74,7 @@ const dispatch = createEventDispatcher()
 .panel__nav nav li button {
   width: 100%;
   height: 100%;
+  padding: 0 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--c-basic-900);
