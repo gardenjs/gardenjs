@@ -75,7 +75,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="20" viewBox="0 0 24 24" width="20"><path d="M5 21q-.825 0-1.413-.587Q3 19.825 3 19V5q0-.825.587-1.413Q4.175 3 5 3h7v2H5v14h14v-7h2v7q0 .825-.587 1.413Q19.825 21 19 21Zm4.7-5.3-1.4-1.4L17.6 5H14V3h7v7h-2V6.4Z"/></svg>
       </button>
       <div class="dropdown">
-        <button class="dropdown__btn" title="switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24" height="24"><path d="M22.288 9.29l-3.88 3.88-3.88-3.88a.998.998 0 00-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.998.998 0 000-1.41c-.39-.38-1.03-.39-1.42 0z" fill-rule="nonzero"/></svg></button>
+        <button class="dropdown__btn" title="switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
         <div class="dropdown__items">
           <ul>
             <li><a href="./">Default Project Theme</a></li>
@@ -109,15 +109,13 @@
     padding: 0;
   }
   .topbar__toggle-btn {
-    /* margin-top: 0.188rem; */
     padding: 0 1rem;
     height: 2.75rem;
     background: none;
-    /* border-top: 0.188rem solid transparent; */
     cursor: pointer;
   }
   .topbar__toggle-btn:hover {
-    border-color: var(--primary);
+    background-color: var(--c-basic-200);
   }
   .topbar__toggle-btn svg {
     fill: var(--c-basic-700);
@@ -133,15 +131,13 @@
   .switch-mode {
     display: flex;
     align-items: center;
-    /* margin-top: 0.188rem; */
-    padding: 0 1rem;
+    padding: 0 0.75rem;
     height: 2.625rem;
     background: none;
     cursor: pointer;
-    /* border-bottom: 0.188rem solid transparent; */
   }
   .switch-mode:hover {
-    border-color: var(--primary);
+    background-color: var(--c-basic-200);
   }
   svg.mode-icon {
     fill: var(--c-basic-700);
@@ -156,7 +152,7 @@
   .dropdown__btn {
     display: flex;
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 0.5rem 0 0.75rem;
     line-height: 2.75rem;
     font-size: 0.875rem;
     color: var(--c-basic-700);
@@ -166,6 +162,7 @@
   }
   .dropdown__btn:hover {
     color: var(--primary);
+    background-color: var(--c-basic-200);
   }
   .dropdown__btn svg {
     fill: var(--c-basic-700);
@@ -176,6 +173,7 @@
   .dropdown__items {
     visibility: hidden;
     position: absolute;
+    right: 0;
     padding: 0;
     z-index: 9;
   }
@@ -183,7 +181,6 @@
     margin: 0;
     padding: 0;
     border: 1px solid var(--c-basic-400);
-    /* border-top: 0.188rem solid var(--primary); */
     border-radius: 0 0 0.25rem 0.25rem;
     overflow: hidden;
   }
@@ -196,7 +193,7 @@
   .dropdown__items ul li a {
     display: flex;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     font-size: 0.75rem;
     color: var(--c-basic-900);
     text-decoration: none;
@@ -259,18 +256,17 @@
       border-radius: 0.125rem;
     }
   }
+  /* open in new tab */
   .open-new-tab {
     display: flex;
     align-items: center;
-    /* margin-top: 0.188rem; */
-    padding: 0 1rem;
+    padding: 0 0.75rem;
     height: 2.75rem;
     background: none;
     cursor: pointer;
-    /* border-bottom: 0.188rem solid transparent; */
   }
   .open-new-tab:hover {
-    border-color: var(--primary);
+    background-color: var(--c-basic-200);
   }
   svg.open-new-tab-icon {
     fill: var(--c-basic-700);
