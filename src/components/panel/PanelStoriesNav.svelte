@@ -41,6 +41,10 @@ const handleselect = item => () => {
   padding-left: 0.875rem;
   border-left: 3px solid var(--primary);
 }
+.stories li:hover,
+.stories li:focus {
+  background-color: var(--c-basic-200);
+}
 .stories li.active {
   color: var(--primary);
   background-color: var(--primary-bg);

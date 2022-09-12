@@ -27,6 +27,7 @@
     padding: 0.375rem 1rem 0.375rem 0.875rem;
     color: var(--c-basic-900);
     border-left: 3px solid var(--primary);
+    background-color: var(--c-basic-200);
   }
   a.selected {
     font-weight: 600;
