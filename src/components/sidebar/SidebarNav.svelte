@@ -32,7 +32,8 @@
 <style>
 .folder {
   display: block;
-  margin: 0.5rem 0 1.5rem 1rem;
+  margin: 0.5rem 0 1.5rem 0;
+  padding-left: 0.5rem;
 }
 .folder-button {
   display: flex;
@@ -40,10 +41,13 @@
   align-items: center;
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 0.5rem;
   text-align: left;
   background: transparent;
   cursor: pointer;
+}
+.folder-button:hover {
+  background-color: var(--c-basic-200);
 }
 .folder-label {
   display: flex;

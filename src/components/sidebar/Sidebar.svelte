@@ -40,10 +40,13 @@ a.logo {
 .unfold_nav {
   display: block;
   float: right;
-  margin: 0 0.5rem 1rem 0;
-  padding: 0;
+  margin: 0 0.25rem 1rem 0;
+  padding: 0.25rem;
   background-color: transparent;
   cursor: pointer;
+}
+.unfold_nav:hover {
+  background-color: var(--c-basic-200);
 }
 .unfold_nav svg {
   fill: var(--c-basic-700);
