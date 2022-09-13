@@ -63,7 +63,7 @@ or add it to your package.json and run via `npm run garden`
 
 ```json
   "scripts": {
-    "garden": "serveGarden".
+    "garden": "serveGarden",
   },
 ```
 
