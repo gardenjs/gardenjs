@@ -99,7 +99,4 @@ Released under [MIT](https://opensource.org/licenses/MIT) or [GPL v3.0](https://
 --
 * [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. If done: Show 'px' width/height of stage next to rwd-navi.
 
-<br><br><br>
-<p align="center">
-  <img src="src/assets/icons/logo.svg">
-</p>
+<br><br><br><p align="center"><img src="src/assets/icons/logo.svg"></p>
