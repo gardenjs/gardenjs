@@ -1,7 +1,20 @@
-# garden
+# GARDEN
 
-## install 
-(not yet) npm install --save-dev garden
+Garden is a lightweight component library for Svelte projects that helps you build, test and display UI components and pages.
+
+## What is Garden?
+
+### A Svelte component library
+
+Garden is the showroom for what you grow. The library represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for Svelte projects of any size and runs outside of your app for an absolute independence. Code changes are reflected at the speed of light by the build tool Vite. Garden is an Open Source project.
+
+## Getting Started
+
+not yet:
+
+```bash
+npm install --save-dev garden
+```
 
 instead:
 checkout garden
@@ -9,10 +22,13 @@ in garden base folder: 'npm link' or 'sudo npm link'
 
 Go to project base folder:
 
+```text
 create rabbit.config.json file
+```
 
 example:
-```
+
+```json
 {
   "garden": {
     "serverport": 3010,
@@ -35,15 +51,17 @@ example:
 }
 ```
 
+```bash
 run initGarden
-
+```
 
 ## Run Garden
 
 go to project base folder and run `serveGarden`
 
 or add it to your package.json and run via `npm run garden`
-```
+
+```json
   ...
   "scripts": {
     ...
@@ -53,14 +71,22 @@ or add it to your package.json and run via `npm run garden`
   ...
 ```
 
-open in browser: localhost:${serverport}/ 
+### open in browser:
 
-serverport is defined in rabbit.config.json, e.g. 3010
+```text
+localhost:${serverport}/ 
+````
 
+Serverport is defined in rabbit.config.json, e.g. 3010
+
+## License
+
+Released under [MIT](https://opensource.org/licenses/MIT) or [GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.html) or ...? Copyright © 2020-2022 by Robin Danzinger, Martin Farkas
 
 ## Todo´s
 
 * [task] update node 18.
+* [task] add license: [MIT](https://opensource.org/licenses/MIT) or [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html) or something else? I prefer [GPL-3.0](https://www.gnu.org/licenses/ rms-why-gplv3#top) because it puts us in a better position for future scenarios.
 * [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
 * [refactor] Move logic to own file. handle user interaction.
 * [task] rabbit.config -> javascript file and add config for css imports and theming 
@@ -76,3 +102,8 @@ serverport is defined in rabbit.config.json, e.g. 3010
 * [task] Set repository public & make garden npm modul.
 --
 * [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. If done: Show 'px' width/height of stage next to rwd-navi.
+
+<br><br><br>
+<p align="center">
+  <img src="src/assets/icons/logo.svg">
+</p>
