@@ -62,13 +62,9 @@ go to project base folder and run `serveGarden`
 or add it to your package.json and run via `npm run garden`
 
 ```json
-  ...
   "scripts": {
-    ...
     "garden": "serveGarden".
-    ...
   },
-  ...
 ```
 
 ### open in browser:
