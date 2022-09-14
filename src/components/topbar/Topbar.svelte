@@ -265,6 +265,7 @@
     .stagesize-nav button svg {
       height: 18px;
       fill: var(--c-basic-700);
+      transition: 0.2s;
     }
     .stagesize-nav button:hover svg,
     .stagesize-nav button.active svg {
@@ -272,6 +273,7 @@
     }
     .stagesize-nav button svg.landscape {
       transform: rotate(90deg);
+      transition: 0.2s;
     }
     .stagesize-nav button.tooltip:hover::after {
       position: absolute;
