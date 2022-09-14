@@ -1,0 +1,7 @@
+ul ul .folder .folder-label {
+  margin-left: 0.5rem;
+  font-size: 0.813rem !important;
+}
+ul .folder ul li a {
+  padding-left: 2.25rem
+}
