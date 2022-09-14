@@ -11,10 +11,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-  padding: 5px 0;
+  font-size: .875rem;
+  color: var(--c-basic-900);
+  margin: 0.5rem 0;
+}
+
+li {
+  font-size: .875rem;
 }
 
 a, a:visited {
+  font-size: .875rem;
   text-decoration: underline;
   text-decoration-skip-ink: auto;
 }
