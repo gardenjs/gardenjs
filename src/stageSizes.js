@@ -20,6 +20,6 @@ const sizes = {
 export function computeStageStyle(type = 'full', landscape = false) {
   const {frameheight, framewidth} = sizes[type]
   return landscape 
-    ? `width: ${frameheight}; height: ${framewidth}; transition: 0.4s;`
-    : `width: ${framewidth}; height: ${frameheight}; transition: 0.4s;`
+    ? `width: ${frameheight}; height: ${framewidth}; transition: 0.2s;`
+    : `width: ${framewidth}; height: ${frameheight}; transition: 0.2s;`
 }
