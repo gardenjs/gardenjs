@@ -1,10 +1,11 @@
 :root {
   --primary:              hsl(168, 31%, 50%);
   --primary-lighter:      hsl(168, 31%, 60%);
-  --primary-bg:           hsl(168, 31%, 92%);
+  --primary-bg:           hsl(168, 31%, 88%);
   --white:                #fff;
   --c-basic-50:           hsl(40, 10%, 98%);
   --c-basic-100:          hsl(40, 10%, 96%);
+  --c-basic-150:          hsl(40, 10%, 92%);
   --c-basic-200:          hsl(40, 10%, 90%);
   --c-basic-300:          hsl(40, 10%, 83%);
   --c-basic-400:          hsl(40, 10%, 64%);
@@ -17,10 +18,11 @@
 .dark {
   --primary:             hsl(168, 31%, 60%);
   --primary-lighter:     hsl(168, 31%, 70%);
-  --primary-bg:          hsl(168, 31%, 15%);
+  --primary-bg:          hsl(168, 31%, 20%);
   --white:               #000;
   --c-basic-50:          hsl(220, 40%, 10%);
   --c-basic-100:         hsl(220, 40%, 15%);
+  --c-basic-150:         hsl(220, 40%, 22%);
   --c-basic-200:         hsl(220, 40%, 25%);
   --c-basic-300:         hsl(220, 40%, 32%);
   --c-basic-400:         hsl(220, 40%, 46%);
