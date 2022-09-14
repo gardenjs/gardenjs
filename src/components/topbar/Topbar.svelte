@@ -78,7 +78,9 @@
         <button class="dropdown__btn" title="switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
         <div class="dropdown__items">
           <ul>
-            <li><a href="./">Default Project Theme</a></li>
+            <li><a href="./" class="active">Default Theme</a></li>
+            <li><a href="./">Light Mode</a></li>
+            <li><a href="./">Dark Mode</a></li>
           </ul>
         </div>
       </div>
@@ -115,7 +117,7 @@
     cursor: pointer;
   }
   .topbar__toggle-btn:hover {
-    background-color: var(--c-basic-200);
+    background-color: var(--c-basic-150);
   }
   .topbar__toggle-btn svg {
     fill: var(--c-basic-700);
@@ -127,47 +129,32 @@
     display: flex;
     align-items: center;
   }
-  /* switch to dark mode */
-  .switch-mode {
-    display: flex;
-    align-items: center;
-    padding: 0 0.75rem;
-    height: 2.625rem;
-    background: none;
-    cursor: pointer;
-  }
-  .switch-mode:hover {
-    background-color: var(--c-basic-200);
-  }
-  svg.mode-icon {
-    fill: var(--c-basic-700);
-  }
-  .switch-mode:hover svg.mode-icon {
-    fill: var(--primary);
-  }
+  /* theme dropdown nav */
   .dropdown {
     position: relative;
     display: inline-block;
+  }
+  .dropdown:hover {
+    background-color: var(--c-basic-150);
   }
   .dropdown__btn {
     display: flex;
     align-items: center;
     padding: 0 0.5rem 0 0.75rem;
-    line-height: 2.75rem;
+    height: 2.688rem;
     font-size: 0.875rem;
     color: var(--c-basic-700);
     background: none;
     border: none;
     cursor: pointer;
   }
-  .dropdown__btn:hover {
+  .dropdown:hover .dropdown__btn {
     color: var(--primary);
-    background-color: var(--c-basic-200);
   }
   .dropdown__btn svg {
     fill: var(--c-basic-700);
   }
-  .dropdown__btn:hover svg {
+  .dropdown:hover .dropdown__btn svg {
     fill: var(--primary);
   }
   .dropdown__items {
@@ -180,8 +167,8 @@
   .dropdown__items ul {
     margin: 0;
     padding: 0;
-    border: 1px solid var(--c-basic-400);
-    border-radius: 0 0 0.25rem 0.25rem;
+    background-color: var(--c-basic-150);
+    border: 1px solid var(--c-basic-300);
     overflow: hidden;
   }
   .dropdown__items ul li {
@@ -193,20 +180,46 @@
   .dropdown__items ul li a {
     display: flex;
     align-items: center;
-    padding: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--c-basic-900);
+    padding: 0.75rem 1rem;
+    font-size: 0.813rem;
+    color: var(--c-basic-600);
     text-decoration: none;
     white-space: nowrap;
-    background-color: var(--c-basic-50);
+    border-left: 3px solid transparent;
   }
   .dropdown__items ul li a:hover {
-    color: var(--primary);
+    color: #fff;
+    background-color: var(--c-basic-300);
+  }
+  .dropdown__items ul li a.active,
+  .dropdown__items ul li a.active:hover {
+    color: #fff;
+    font-weight: 500;
+    background-color: var(--primary-bg);
+    border-left: 3px solid var(--primary);
   }
   .dropdown:hover > .dropdown__items,
   .dropdown:focus > .dropdown__items {
     display: block;
     visibility: visible;
+  }
+  /* switch to dark mode */
+  .switch-mode {
+    display: flex;
+    align-items: center;
+    padding: 0 0.75rem;
+    height: 2.625rem;
+    background: none;
+    cursor: pointer;
+  }
+  .switch-mode:hover {
+    background-color: var(--c-basic-150);
+  }
+  svg.mode-icon {
+    fill: var(--c-basic-700);
+  }
+  .switch-mode:hover svg.mode-icon {
+    fill: var(--primary);
   }
   /* stagesize */
   .stagesize-nav {
@@ -214,24 +227,26 @@
   }
   @media only screen and (min-width: 1280px) {
     .stagesize-nav {
-      display: block;
+      display: flex;
+      flex-direction: row;
       align-self: center;
-      padding: 0.188rem 0 0;
-      background-color: var(--c-basic-200);
-      border-bottom: 2px solid var(--c-basic-400);
+      height: 2.688rem;
+      background-color: var(--c-basic-150);
     }
     .stagesize-nav button {
-      float: left;
+      height: 2.688rem;
       margin: 0;
       padding: 0 0.25rem;
-      height: 2.625rem;
       background: none;
-      border-bottom: 0.188rem solid transparent;
+      border-top: 3px solid transparent;
       cursor: pointer;
     }
     .stagesize-nav button:hover,
     .stagesize-nav button.active {
-      border-bottom: 0.188rem solid var(--primary);
+      border-top: 3px solid var(--primary);
+    }
+    .stagesize-nav button.active {
+      background-color: var(--primary-bg);
     }
     .stagesize-nav button svg {
       height: 18px;
@@ -261,12 +276,12 @@
     display: flex;
     align-items: center;
     padding: 0 0.75rem;
-    height: 2.75rem;
+    height: 2.688rem;
     background: none;
     cursor: pointer;
   }
   .open-new-tab:hover {
-    background-color: var(--c-basic-200);
+    background-color: var(--c-basic-150);
   }
   svg.open-new-tab-icon {
     fill: var(--c-basic-700);
