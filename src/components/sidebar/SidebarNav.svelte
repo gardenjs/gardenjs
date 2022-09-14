@@ -55,7 +55,7 @@
   cursor: pointer;
 }
 .folder-button:hover {
-  background-color: var(--c-basic-300);
+  background-color: var(--c-basic-250);
 }
 .folder-label {
   display: flex;
@@ -65,17 +65,20 @@
   padding: 0.75rem 0;
   color: var(--c-basic-900);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 .folder-icon {
   display: block;
   height: 100%;
+  transition: 0.2s;
 }
 .folder-icon svg {
   fill: var(--c-basic-700);
 }
 .folder-icon.unfolded_icon {
   transform: rotate(180deg);
+  transition: 0.2s;
 }
 </style>

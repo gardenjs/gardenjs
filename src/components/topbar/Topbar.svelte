@@ -123,7 +123,7 @@
     fill: var(--c-basic-700);
   }
   .topbar__toggle-btn:hover svg {
-    fill: var(--primary);
+    fill: var(--c-primary);
   }
   .topbar__nav {
     display: flex;
@@ -149,13 +149,13 @@
     cursor: pointer;
   }
   .dropdown:hover .dropdown__btn {
-    color: var(--primary);
+    color: var(--c-primary);
   }
   .dropdown__btn svg {
     fill: var(--c-basic-700);
   }
   .dropdown:hover .dropdown__btn svg {
-    fill: var(--primary);
+    fill: var(--c-primary);
   }
   .dropdown__items {
     visibility: hidden;
@@ -193,10 +193,10 @@
   }
   .dropdown__items ul li a.active,
   .dropdown__items ul li a.active:hover {
-    color: var(--primary);
+    color: var(--c-primary);
     font-weight: 500;
-    background-color: var(--primary-bg);
-    border-left: 3px solid var(--primary);
+    background-color: var(--c-primary-bg);
+    border-left: 3px solid var(--c-primary);
   }
   .dropdown:hover > .dropdown__items,
   .dropdown:focus > .dropdown__items {
@@ -219,7 +219,7 @@
     fill: var(--c-basic-700);
   }
   .switch-mode:hover svg.mode-icon {
-    fill: var(--primary);
+    fill: var(--c-primary);
   }
   /* stagesize */
   .stagesize-nav {
@@ -243,10 +243,10 @@
     }
     .stagesize-nav button:hover,
     .stagesize-nav button.active {
-      border-top: 3px solid var(--primary);
+      border-top: 3px solid var(--c-primary);
     }
     .stagesize-nav button.active {
-      background-color: var(--primary-bg);
+      background-color: var(--c-primary-bg);
     }
     .stagesize-nav button svg {
       height: 18px;
@@ -254,7 +254,7 @@
     }
     .stagesize-nav button:hover svg,
     .stagesize-nav button.active svg {
-      fill: var(--primary);
+      fill: var(--c-primary);
     }
     .stagesize-nav button svg.landscape {
       transform: rotate(90deg);
@@ -287,6 +287,6 @@
     fill: var(--c-basic-700);
   }
   .open-new-tab:hover svg.open-new-tab-icon {
-    fill: var(--primary);
+    fill: var(--c-primary);
   }
 </style>

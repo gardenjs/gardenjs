@@ -14,10 +14,10 @@
 
 <style>
   a {
-    padding: 0.75rem 1.75rem;
+    padding: 0.5rem 1.75rem;
     text-transform: initial;
-    font-weight: 500;
-    font-size: 0.813rem;
+    font-weight: 400;
+    font-size: 0.875rem;
     color: var(--c-basic-600);
     border-left: 3px solid transparent;
   }
@@ -25,12 +25,13 @@
   a:focus {
     color: var(--c-basic-900);
     background-color: var(--c-basic-300);
+    transition: 0.2s;
   }
   a.selected {
-    color: var(--primary);
+    color: var(--c-primary);
     font-weight: 600;
-    border-left: 3px solid var(--primary);
-    background-color: var(--primary-bg);
+    border-left: 3px solid var(--c-primary);
+    background-color: var(--c-primary-bg);
   }
 
 </style>

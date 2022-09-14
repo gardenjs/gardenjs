@@ -100,7 +100,7 @@ function tabselectionchange(evt) {
   display: block;
   height: 100%;
   width: 100%;
-  background-color: var(--white);
+  background-color: var(--c-white);
   /* border: 1px solid var(--c-basic-400); */
 }
 /* static, should be dynamical for dark theme switch */
