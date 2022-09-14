@@ -8,20 +8,24 @@ html {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   color: var(--c-basic-900);
+  line-height: 1.2;
 }
 
 p {
+  margin: 0.5rem 0;
   font-size: .875rem;
   color: var(--c-basic-900);
-  margin: 0.5rem 0;
+  line-height: 1.5;
 }
 
 li {
   font-size: .875rem;
+  line-height: 1.4;
 }
 
 a, a:visited {
   font-size: .875rem;
+  line-height: 1.4;
   text-decoration: underline;
   text-decoration-skip-ink: auto;
 }
