@@ -86,14 +86,14 @@ const dispatch = createEventDispatcher()
   white-space: nowrap;
 }
 .panel__nav nav li button.active {
-  border-bottom: 3px solid var(--primary);
+  border-bottom: 3px solid var(--c-primary);
 }
 .panel__nav nav li button:hover {
   background-color: var(--c-basic-200);
   border-color: var(--c-basic-500);
 }
 .panel__nav nav li button.active:hover {
-  border-color: var(--primary-lighter);
+  border-color: var(--c-primary-lighter);
 }
 .panel__pane {
   padding: 1.25rem;

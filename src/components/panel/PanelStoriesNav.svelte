@@ -38,7 +38,7 @@ const handleselect = item => () => {
 .stories li:hover,
 .stories li:focus,
 .stories li.active {
-  border-left: 3px solid var(--primary);
+  border-left: 3px solid var(--c-primary);
 }
 .stories li:hover,
 .stories li:focus {
@@ -46,7 +46,7 @@ const handleselect = item => () => {
   background-color: var(--c-basic-200);
 }
 .stories li.active {
-  color: var(--primary);
-  background-color: var(--primary-bg);
+  color: var(--c-primary);
+  background-color: var(--c-primary-bg);
 }
 </style>
