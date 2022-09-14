@@ -14,23 +14,23 @@
 
 <style>
   a {
-    padding: 0.375rem 1rem;
+    padding: 0.75rem 1.75rem;
     text-transform: initial;
     font-weight: 500;
     font-size: 0.813rem;
     color: var(--c-basic-600);
-    border-left: 1px solid var(--c-basic-300);
+    border-left: 3px solid transparent;
   }
-  a.selected,
   a:hover,
   a:focus {
-    padding: 0.375rem 1rem 0.375rem 0.875rem;
     color: var(--c-basic-900);
-    border-left: 3px solid var(--primary);
-    background-color: var(--c-basic-200);
+    background-color: var(--c-basic-300);
   }
   a.selected {
+    color: #fff;
     font-weight: 600;
+    border-left: 3px solid var(--primary);
+    background-color: var(--primary-bg);
   }
 
 </style>
