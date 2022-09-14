@@ -27,7 +27,7 @@
     background-color: var(--c-basic-300);
   }
   a.selected {
-    color: #fff;
+    color: var(--primary);
     font-weight: 600;
     border-left: 3px solid var(--primary);
     background-color: var(--primary-bg);

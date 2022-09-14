@@ -188,12 +188,12 @@
     border-left: 3px solid transparent;
   }
   .dropdown__items ul li a:hover {
-    color: #fff;
+    color: var(--c-basic-900);
     background-color: var(--c-basic-300);
   }
   .dropdown__items ul li a.active,
   .dropdown__items ul li a.active:hover {
-    color: #fff;
+    color: var(--primary);
     font-weight: 500;
     background-color: var(--primary-bg);
     border-left: 3px solid var(--primary);
