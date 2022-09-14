@@ -89,7 +89,7 @@ const dispatch = createEventDispatcher()
   border-bottom: 3px solid var(--c-primary);
 }
 .panel__nav nav li button:hover {
-  background-color: var(--c-basic-200);
+  background-color: var(--c-basic-150);
   border-color: var(--c-basic-500);
 }
 .panel__nav nav li button.active:hover {

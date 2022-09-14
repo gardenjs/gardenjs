@@ -23,12 +23,12 @@ export let show
   overflow-y: auto;
   background-color: var(--c-basic-100);
   padding: 0;
-  transition: 0.1s;
+  transition: 0.2s;
 }
 a.logo {
   display: block;
   width: 260px;
-  margin: 1rem 0 3.5rem;
+  margin: 0.5rem 0;
   text-decoration: none;
 }
 .logo svg {
@@ -37,7 +37,6 @@ a.logo {
 }
 .show-sidebar {
   width: 260px;
-  padding: 1rem 0;
 }
 .unfold_all {
   display: flex;

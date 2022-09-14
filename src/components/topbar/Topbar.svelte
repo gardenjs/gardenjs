@@ -170,7 +170,8 @@
     margin: 0;
     padding: 0;
     background-color: var(--c-basic-150);
-    border: 1px solid var(--c-basic-300);
+    border: 1px solid var(--c-basic-400);
+    border-top: none;
     overflow: hidden;
   }
   .dropdown__items ul li {
@@ -191,7 +192,7 @@
   }
   .dropdown__items ul li a:hover {
     color: var(--c-basic-900);
-    background-color: var(--c-basic-300);
+    background-color: var(--c-basic-200);
   }
   .dropdown__items ul li a.active,
   .dropdown__items ul li a.active:hover {
