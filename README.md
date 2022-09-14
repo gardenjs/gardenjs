@@ -97,6 +97,6 @@ Released under [MIT](https://opensource.org/licenses/MIT) or [GPL v3.0](https://
 * [task] github stars badget in garden topbar.
 * [task] Set repository public & make garden npm modul.
 --
-* [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. If done: Show 'px' width/height of stage next to rwd-navi.
+* [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi.
 
 <br><br><br><p align="center"><img src="src/assets/icons/logo.svg"></p>
