@@ -28,9 +28,9 @@ const handleselect = item => () => {
   margin: 0;
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
-  color: var(--c-basic-900);
+  color: var(--c-basic-600);
   cursor: pointer;
-  border-left: 1px solid var(--c-basic-300);
+  border-left: 3px solid transparent;
 }
 .stories li:nth-child(odd) {
   background-color: var(--c-basic-100);
@@ -38,11 +38,11 @@ const handleselect = item => () => {
 .stories li:hover,
 .stories li:focus,
 .stories li.active {
-  padding-left: 0.875rem;
   border-left: 3px solid var(--primary);
 }
 .stories li:hover,
 .stories li:focus {
+  color: var(--c-basic-900);
   background-color: var(--c-basic-200);
 }
 .stories li.active {
