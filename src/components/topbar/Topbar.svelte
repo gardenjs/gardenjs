@@ -54,6 +54,8 @@
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#fff"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
     </button>
     <div class="topbar__nav">
+      <!-- future feature: show pixels value of stage. (styles below) -->
+      <!-- <div class="stagesize__value">1920px <span class="multiplication_sign">&#10005;</span> 986px</div> -->
       <div class="stagesize-nav">
         <button rel="Small" class="tooltip" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M15.5 1h-8A2.5 2.5 0 005 3.5v17A2.5 2.5 0 007.5 23h8a2.5 2.5 0 002.5-2.5v-17A2.5 2.5 0 0015.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/></svg>
@@ -221,7 +223,18 @@
   .switch-mode:hover svg.mode-icon {
     fill: var(--c-primary);
   }
-  /* stagesize */
+ 
+  /* futur feature */
+  /* .stagesize__value {
+    font-size: 0.813rem;
+    padding: 0 1.25rem;
+    color: var(--c-basic-500);
+  }
+  .stagesize__value .multiplication_sign {
+    font-size: 0.563rem;
+  } */
+
+   /* stagesize */
   .stagesize-nav {
     display: none;
   }
