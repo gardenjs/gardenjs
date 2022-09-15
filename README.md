@@ -81,6 +81,7 @@ Released under [MIT](https://opensource.org/licenses/MIT) or [GPL v3.0](https://
 
 ## Todo´s
 
+### v1.0
 * [task] update node 18.
 * [task] add license: [MIT](https://opensource.org/licenses/MIT) or [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html) or something else? I prefer [GPL-3.0](https://www.gnu.org/licenses/ rms-why-gplv3#top) because it puts us in a better position for future scenarios.
 * [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
@@ -96,8 +97,9 @@ Released under [MIT](https://opensource.org/licenses/MIT) or [GPL v3.0](https://
 * [task] when opening garden info open page.
 * [task] github stars badget in garden topbar.
 * [task] Set repository public & make garden npm modul.
+* [feature] Show 'px' width/height of stage next to rwd-navi. (Already integrated staticly, just needs to be commented out in topbar.svelte) But also only possible for v1.1?
 
---
+### v1.1
 * [feature] Improve Garden for smaller displays:
   * Sidebarnav is closed by default on narrow display devices.
   * ...
