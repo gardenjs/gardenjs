@@ -33,7 +33,7 @@ export let show
   height: calc(100vh - 2.75rem);
   overflow-x: hidden;
   background-color: var(--c-basic-50);
-  border-right: 1px solid var(--c-basic-400);
+  border-right: 1px solid var(--c-basic-250);
   transition: width 0.2s;
 }
 a.logo {

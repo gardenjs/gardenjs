@@ -101,8 +101,8 @@
   .topbar {
     width: 100%;
     height: 2.75rem;
-    background-color: var(--c-basic-100);
-    border-bottom: 1px solid var(--c-basic-400);
+    background-color: var(--c-basic-50);
+    border-bottom: 1px solid var(--c-basic-250);
   }
   .topbar__container {
     display: flex;
