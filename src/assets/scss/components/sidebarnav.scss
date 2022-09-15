@@ -20,7 +20,7 @@ ul ul .folder {
     padding-left: 2.75rem 
   }
 }
-ul .folder ul ul li a.selected  {
+ul .folder ul ul li a  {
   background-color: var(--c-basic-150) !important;
   &:hover {
     background-color: var(--c-basic-200) !important;
