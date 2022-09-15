@@ -48,15 +48,13 @@ const dispatch = createEventDispatcher()
   width: 100%;
   overflow-y: auto;
   background-color: var(--c-basic-50);
-  border-left: 1px solid var(--c-basic-400);
-  border-right: 1px solid var(--c-basic-400);
-  border-bottom: 1px solid var(--c-basic-400);
 }
 .panel__nav {
   position: sticky;
   top: 0;
   width: 100%;
   height: 2rem;
+  border-bottom: 3px solid var(--c-basic-200);
 }
 .panel__nav nav ul {
   display: flex;
@@ -67,26 +65,29 @@ const dispatch = createEventDispatcher()
   padding: 0;
 }
 .panel__nav nav li {
-  display: flex;
-  flex: auto;
+  display: inline-flex;
+  /* flex: auto; */
   height: 100%;
 }
 .panel__nav nav li button {
   width: 100%;
   height: 100%;
-  padding: 0 0.5rem;
+  padding: 0 2rem;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--c-basic-900);
-  text-align: center;
+  white-space: nowrap;
+  text-transform: lowercase;
   cursor: pointer;
   border: none;
+  background-color: transparent;
   background-color: var(--c-basic-100);
   border-bottom: 3px solid var(--c-basic-400);
-  white-space: nowrap;
 }
 .panel__nav nav li button.active {
+  color: var(--c-primary);
   border-bottom: 3px solid var(--c-primary);
+  background-color: var(--c-primary-bg);
 }
 .panel__nav nav li button:hover {
   background-color: var(--c-basic-150);
