@@ -16,24 +16,6 @@
   --c-basic-800:           hsl(168, 10%, 15%);
   --c-basic-900:           hsl(168, 10%, 10%);
 }
-/* :root {
-  --c-primary:             hsl(168, 31%, 50%);
-  --c-primary-lighter:     hsl(168, 31%, 65%);
-  --c-primary-bg:          hsl(168, 31%, 91%);
-  --c-white:               #fff;
-  --c-basic-50:            hsl(40, 10%, 98%);
-  --c-basic-100:           hsl(40, 10%, 96%);
-  --c-basic-150:           hsl(40, 10%, 92%);
-  --c-basic-200:           hsl(40, 10%, 88%);
-  --c-basic-250:           hsl(40, 10%, 85%);
-  --c-basic-300:           hsl(40, 10%, 82%);
-  --c-basic-400:           hsl(40, 10%, 64%);
-  --c-basic-500:           hsl(40, 10%, 46%);
-  --c-basic-600:           hsl(40, 10%, 32%);
-  --c-basic-700:           hsl(40, 10%, 25%);
-  --c-basic-800:           hsl(40, 10%, 15%);
-  --c-basic-900:           hsl(40, 10%, 10%);
-} */
 .dark {
   --c-primary:             hsl(168, 31%, 60%);
   --c-primary-lighter:     hsl(168, 31%, 70%);
@@ -51,17 +33,4 @@
   --c-basic-700:           hsl(180, 40%, 90%);
   --c-basic-800:           hsl(180, 40%, 96%);  
   --c-basic-900:           hsl(180, 40%, 98%);
-
-  /* --c-basic-50:            hsl(220, 40%, 10%);
-  --c-basic-100:           hsl(220, 40%, 15%);
-  --c-basic-150:           hsl(220, 40%, 22%);
-  --c-basic-200:           hsl(220, 40%, 27%);
-  --c-basic-250:           hsl(220, 40%, 30%);
-  --c-basic-300:           hsl(220, 40%, 33%);
-  --c-basic-400:           hsl(220, 40%, 46%);
-  --c-basic-500:           hsl(220, 40%, 64%);
-  --c-basic-600:           hsl(220, 40%, 83%);
-  --c-basic-700:           hsl(220, 40%, 90%);
-  --c-basic-800:           hsl(220, 40%, 96%);  
-  --c-basic-900:           hsl(220, 40%, 98%); */
 }
