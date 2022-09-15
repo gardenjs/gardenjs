@@ -14,7 +14,7 @@
 
 <style>
   a {
-    padding: 0.5rem 1.75rem;
+    padding: 0.5rem 0 0.5rem 2.125rem;
     text-transform: initial;
     font-weight: 400;
     font-size: 0.875rem;
@@ -24,14 +24,14 @@
   a:hover,
   a:focus {
     color: var(--c-basic-900);
-    background-color: var(--c-basic-300);
+    background-color: var(--c-basic-200);
     transition: 0.2s;
   }
   a.selected {
     color: var(--c-primary);
     font-weight: 600;
     border-left: 3px solid var(--c-primary);
-    background-color: var(--c-primary-bg);
+    background-color: var(--c-primary-bg) !important;
   }
 
 </style>

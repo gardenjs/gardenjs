@@ -17,9 +17,9 @@
       </li>
     {:else}
       <li class="folder" class:unfolded={node.unfolded}>
-        <button class="folder-button" title="fold/unfold" on:click={() => toggleFolderFoldStatus(node)}>
-          <span class="folder-label">{node.name}</span>
-          <span class="folder-icon" class:unfolded_icon={node.unfolded}><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20"><path d="M7.4 15.375l-1.4-1.4 6-6 6 6-1.4 1.4-4.6-4.6z"/></svg>
+        <button class="folder_button" title="fold/unfold" on:click={() => toggleFolderFoldStatus(node)}>
+          <span class="folder_icon" class:unfolded_icon={node.unfolded}><svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 13.084L5 11.917l5-5 5 5-1.167 1.167L10 9.25l-3.833 3.834z"/></svg></span>
+          <span class="folder_label">{node.name}</span>
         </button>
         {#if node.unfolded}
           <svelte:self nodes={node.children} on:out />
@@ -43,41 +43,40 @@
 .folder.unfolded {
   background-color: var(--c-basic-150);
 }
-.folder-button {
+.folder_button {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   margin: 0;
-  padding: 0 0.5rem 0 1.25rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.75rem;
   text-align: left;
   background: transparent;
   cursor: pointer;
 }
-.folder-button:hover {
-  background-color: var(--c-basic-250);
+.folder_button:hover {
+  background-color: var(--c-basic-200);
 }
-.folder-label {
+.folder_label {
   display: flex;
   align-self: center;
   width: 100%;
-  margin-right: 0.75rem;
-  padding: 0.75rem 0;
+  padding-left: 0.25rem;
   color: var(--c-basic-900);
   font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-weight: 800;
+  text-transform: capitalize;
 }
-.folder-icon {
-  display: block;
-  height: 100%;
+.folder_icon {
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
   transition: 0.2s;
 }
-.folder-icon svg {
+.folder_icon svg {
   fill: var(--c-basic-700);
 }
-.folder-icon.unfolded_icon {
+.folder_icon.unfolded_icon {
   transform: rotate(180deg);
   transition: 0.2s;
 }

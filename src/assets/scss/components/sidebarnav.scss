@@ -1,0 +1,34 @@
+ul ul .folder .folder_icon {
+  margin-left: 1.25rem;
+  font-size: 0.813rem !important;
+}
+ul ul .folder {
+  .folder_button {
+    padding-left: 2.25rem !important;
+    background-color: var(--c-basic-150) !important;
+    .folder_label {
+      order: 1;
+      padding: 0;
+      font-weight: 600;
+    }
+    .folder_icon {
+      order: 2;
+      margin: 0 0 0 0.25rem
+    }
+  }
+  a {
+    padding-left: 2.75rem 
+  }
+}
+ul .folder ul ul li a {
+  background-color: var(--c-basic-200) !important;
+  &:hover {
+    background-color: var(--c-basic-250) !important;
+  }
+}
+.unfolded .unfolded .folder_button {
+  background-color: var(--c-basic-200) !important;
+}
+.unfolded .unfolded .folder_button:hover {
+  background-color: var(--c-basic-250) !important;
+}
