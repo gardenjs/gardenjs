@@ -191,6 +191,7 @@
   .dropdown__items ul li a:hover {
     color: var(--c-basic-900);
     background-color: var(--c-basic-200);
+    border-left: 3px solid var(--c-basic-500);
   }
   .dropdown__items ul li a.active,
   .dropdown__items ul li a.active:hover {
@@ -198,9 +199,6 @@
     font-weight: 500;
     background-color: var(--c-primary-bg);
     border-left: 3px solid var(--c-primary);
-  }
-  .dropdown__items ul li a.active:hover {
-    border-color: var(--c-primary-lighter);
   }
   .dropdown:hover > .dropdown__items,
   .dropdown:focus > .dropdown__items {
@@ -262,9 +260,6 @@
     }
     .stagesize-nav button.active {
       background-color: var(--c-primary-bg);
-    }
-    .stagesize-nav button.active:hover {
-      border-color: var(--c-primary-lighter);
     }
     .stagesize-nav button svg {
       height: 18px;

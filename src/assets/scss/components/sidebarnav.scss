@@ -9,7 +9,6 @@ ul ul .folder {
     .folder_label {
       order: 1;
       padding: 0;
-      font-weight: 600;
     }
     .folder_icon {
       order: 2;
@@ -30,7 +29,6 @@ ul .folder ul ul li a.selected {
   background-color: var(--c-primary-bg) !important;
   &:hover {
     background-color: var(--c-primary-bg) !important;
-    border-color: var(--c-primary-lighter) !important;
   }
 }
 .unfolded .unfolded .folder_button {

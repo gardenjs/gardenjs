@@ -59,9 +59,10 @@ a.logo {
   font-size: 0.875rem;
   color: var(--c-basic-900);
   font-weight: 500;
-  text-transform: uppercase;
+  letter-spacing: 1px;
   background-color: transparent;
   border: none;
+  border-left: 3px solid transparent;
   cursor: pointer;
 }
 .unfold_all button svg {
@@ -69,6 +70,7 @@ a.logo {
 }
 .unfold_all button:hover {
   background-color: var(--c-basic-150);
+  border-left: 3px solid var(--c-basic-500);
 }
 nav {
   width: 260px;

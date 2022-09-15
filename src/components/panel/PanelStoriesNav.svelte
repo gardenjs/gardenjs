@@ -45,9 +45,6 @@ const handleselect = item => () => {
   color: var(--c-basic-900);
   background-color: var(--c-basic-200);
 }
-.stories li.active:hover {
-  border-color: var(--c-primary-lighter);
-}
 .stories li.active {
   color: var(--c-primary);
   background-color: var(--c-primary-bg);

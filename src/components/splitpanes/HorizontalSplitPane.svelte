@@ -30,7 +30,7 @@
 
 <style>
 .backstage {
-  background-color: var(--c-basic-200);
+  background-color: var(--c-basic-250);
 }
 .dragbar {
   display: flex;
@@ -42,7 +42,7 @@
   z-index: 10;
 }
 .dragbar:hover {
-  background-color: var(--c-basic-200);
+  background-color: var(--c-basic-300);
 }
 .dragbar svg {
   fill: var(--c-basic-900);

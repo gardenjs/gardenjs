@@ -14,18 +14,18 @@
 
 <style>
   a {
-    padding: 0.5rem 0 0.5rem 2.125rem;
+    padding: 0.375rem 0 0.375rem 2.125rem;
     text-transform: initial;
     font-weight: 400;
-    font-size: 0.875rem;
+    font-size: 0.813rem;
     color: var(--c-basic-600);
     border-left: 3px solid transparent;
   }
   a:hover,
   a:focus {
     color: var(--c-basic-900);
+    border-left: 3px solid var(--c-basic-500);
     background-color: var(--c-basic-150);
-    transition: 0.2s;
   }
   a.selected {
     color: var(--c-primary);

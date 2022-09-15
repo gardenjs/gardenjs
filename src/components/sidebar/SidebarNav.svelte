@@ -52,9 +52,11 @@
   padding: 0.5rem 0.5rem 0.5rem 0.75rem;
   text-align: left;
   background: transparent;
+  border-left: 3px solid transparent;
   cursor: pointer;
 }
 .folder_button:hover {
+  border-left: 3px solid var(--c-basic-500);
   background-color: var(--c-basic-150);
 }
 .folder_label {
@@ -64,8 +66,9 @@
   padding-left: 0.25rem;
   color: var(--c-basic-900);
   font-size: 0.875rem;
-  font-weight: 800;
+  font-weight: 600;
   text-transform: capitalize;
+  letter-spacing: 1px;
 }
 .folder_icon {
   display: flex;
