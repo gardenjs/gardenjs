@@ -54,7 +54,7 @@ const dispatch = createEventDispatcher()
   top: 0;
   width: 100%;
   height: 2rem;
-  border-bottom: 3px solid var(--c-basic-200);
+  border-bottom: 1px solid var(--c-basic-400);
 }
 .panel__nav nav ul {
   display: flex;
@@ -77,7 +77,7 @@ const dispatch = createEventDispatcher()
   font-weight: 500;
   color: var(--c-basic-900);
   white-space: nowrap;
-  text-transform: lowercase;
+  text-transform: capitalize;
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -90,11 +90,12 @@ const dispatch = createEventDispatcher()
   background-color: var(--c-primary-bg);
 }
 .panel__nav nav li button:hover {
-  background-color: var(--c-basic-150);
+  background-color: var(--c-basic-100);
   border-color: var(--c-basic-500);
 }
 .panel__nav nav li button.active:hover {
   border-color: var(--c-primary-lighter);
+  background-color: var(--c-primary-bg);
 }
 .panel__pane {
   padding: 1.25rem;

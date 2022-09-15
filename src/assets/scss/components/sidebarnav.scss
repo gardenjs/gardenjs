@@ -5,7 +5,7 @@ ul ul .folder .folder_icon {
 ul ul .folder {
   .folder_button {
     padding-left: 2.25rem !important;
-    background-color: var(--c-basic-150) !important;
+    background-color: var(--c-basic-100) !important;
     .folder_label {
       order: 1;
       padding: 0;
@@ -20,15 +20,22 @@ ul ul .folder {
     padding-left: 2.75rem 
   }
 }
-ul .folder ul ul li a {
-  background-color: var(--c-basic-200) !important;
+ul .folder ul ul li a.selected  {
+  background-color: var(--c-basic-150) !important;
   &:hover {
-    background-color: var(--c-basic-250) !important;
+    background-color: var(--c-basic-200) !important;
+  }
+}
+ul .folder ul ul li a.selected {
+  background-color: var(--c-primary-bg) !important;
+  &:hover {
+    background-color: var(--c-primary-bg) !important;
+    border-color: var(--c-primary-lighter) !important;
   }
 }
 .unfolded .unfolded .folder_button {
-  background-color: var(--c-basic-200) !important;
+  background-color: var(--c-basic-150) !important;
 }
 .unfolded .unfolded .folder_button:hover {
-  background-color: var(--c-basic-250) !important;
+  background-color: var(--c-basic-200) !important;
 }

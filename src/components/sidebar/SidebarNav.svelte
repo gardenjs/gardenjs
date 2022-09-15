@@ -9,7 +9,7 @@
   }
 
 </script>
-<ul>
+<ul class="sidebarnav">
   {#each nodes as node }
     {#if node.isLeaf}
       <li>
@@ -30,7 +30,7 @@
 </ul>
 
 <style>
-/* some styles for second level in sidebar.css */
+/* some styles for deeper levels in sidebar.css... */
 .folder {
   display: block;
   margin: 0;
@@ -41,7 +41,7 @@
   border: none;
 }
 .folder.unfolded {
-  background-color: var(--c-basic-150);
+  background-color: var(--c-basic-100);
 }
 .folder_button {
   display: flex;
@@ -55,7 +55,7 @@
   cursor: pointer;
 }
 .folder_button:hover {
-  background-color: var(--c-basic-200);
+  background-color: var(--c-basic-150);
 }
 .folder_label {
   display: flex;

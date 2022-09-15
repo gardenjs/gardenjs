@@ -23,7 +23,7 @@
 <div class="is-full is-flex-column" bind:this={element} >
   <div class="is-flexfix backstage" style="height: {topheight};"><slot name="top" /></div>
   <div class="dragbar" on:mousedown={register}>
-    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="#currentColor"><path d="M3.984 15v-2.016h16.031V15H3.984zm16.032-6v2.016H3.985V9h16.031z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24" width="22"><path d="M3.984 15v-2.016h16.031V15H3.984zm16.032-6v2.016H3.985V9h16.031z"/></svg>
   </div>
   <slot name="bottom" />
 </div>
@@ -31,17 +31,13 @@
 <style>
 .backstage {
   background-color: var(--c-basic-200);
-  border-left: 1px solid var(--c-basic-400);
-  border-right: 1px solid var(--c-basic-400);
 }
 .dragbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 0.75rem;
-  background-color: var(--c-basic-100);
-  border-top: 1px solid var(--c-basic-400);
-  border-bottom: 1px solid var(--c-basic-400);
+  height: 1rem;
+  background-color: var(--c-basic-150);
   cursor: row-resize;
   z-index: 10;
 }
