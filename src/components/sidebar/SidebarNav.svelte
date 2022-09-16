@@ -41,7 +41,7 @@
   border: none;
 }
 .folder.unfolded {
-  background-color: var(--c-basic-100);
+  background-color: var(--c-basic-150);
 }
 .folder_button {
   display: flex;
