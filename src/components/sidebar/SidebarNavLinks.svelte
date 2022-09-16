@@ -33,5 +33,4 @@
     border-left: 3px solid var(--c-primary);
     background-color: var(--c-primary-bg) !important;
   }
-
 </style>
