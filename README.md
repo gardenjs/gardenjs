@@ -82,6 +82,7 @@ Released under [MIT](https://opensource.org/licenses/MIT) or [GPL v3.0](https://
 ## Todo´s
 
 ### v1.0
+* [discussion] Rename "Garden" in "GardenLib", "GardenView" or something else? ("garden" is an automation platform for Kubernetes development and testing: https://github.com/garden-io/garden)
 * [task] update node 18.
 * [task] add license: [MIT](https://opensource.org/licenses/MIT) or [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html) or something else? I prefer [GPL-3.0](https://www.gnu.org/licenses/ rms-why-gplv3#top) because it puts us in a better position for future scenarios.
 * [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
