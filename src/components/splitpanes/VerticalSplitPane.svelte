@@ -1,6 +1,6 @@
 <!-- maybe later to reduce stage width to show responsive behaviour of composnents -->
 
-<script>
+<!-- <script>
   function register() {
     document.addEventListener('mousemove', drag)
     document.addEventListener('mouseup', unregister)
@@ -39,4 +39,4 @@
    flex-direction: row;
    flex-wrap: nowrap;
  }
-</style>
+</style> -->
