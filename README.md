@@ -1,12 +1,12 @@
 # GARDEN
 
-Garden is a lightweight component library for Svelte projects that helps you build, test and display UI components and pages.
+Garden is a lightweight UI explorer for Svelte projects that helps you build, test and display UI components and pages.
 
 ## What is Garden?
 
 ### A Svelte component library
 
-Garden is the showroom for what you grow. The library represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for Svelte projects of any size and runs outside of your app for an absolute independence. Code changes are reflected at the speed of light by the build tool Vite. Garden is an Open Source project.
+Garden is the showroom for what you grow. The explorer represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for Svelte projects of any size and runs outside of your app for an absolute independence. Code changes are reflected at the speed of light by the build tool Vite. Garden is an Open Source project under the MIT License.
 
 ## Getting Started
 
