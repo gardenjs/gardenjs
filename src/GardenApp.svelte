@@ -96,15 +96,13 @@ function isUnfolded(node, route) {
 
 <FullScreenLayout>
   <TopBottomLayout>
-    <div slot="top" class="is-flexfix">
-      <Topbar active={showSidebar} stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
-    </div>
     <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
         <div slot="left" class="is-flexfix">
           <Sidebar show={showSidebar} nodes={nodes} on:out={handleSidebarOut} />
         </div>
         <div slot="right" class="main">
+          <Topbar active={showSidebar} stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
           <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} 
           stageSize={stageSize} landscape={landscape}/>
         </div>
@@ -116,7 +114,7 @@ function isUnfolded(node, route) {
 <style>
 .main {
   display: flex;
-  flex-grow: 1;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   overflow-y: auto;
