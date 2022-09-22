@@ -10,7 +10,7 @@ Garden is the showroom for what you grow. The explorer represents each component
 
 ## Getting Started
 
-not yet:
+To install Garden: [not yet]
 
 ```bash
 npm install --save-dev garden
@@ -20,7 +20,7 @@ instead:
 checkout garden
 in garden base folder: 'npm link' or 'sudo npm link'
 
-Go to project base folder:
+Go to your Svelte project folder:
 
 ```text
 create rabbit.config.json file
@@ -75,6 +75,10 @@ localhost:${serverport}/
 
 Serverport is defined in rabbit.config.json, e.g. 3010
 
+## Svelte project kickstarter
+
+Check out [Carrots](https://github.com/rabbitdevelopment/carrots) if you're interested in a fully customizable "hello world" Kickstarter for new Svelte project. Carrots is Garden ready out of the box.
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
@@ -82,6 +86,7 @@ Serverport is defined in rabbit.config.json, e.g. 3010
 ## Todo´s
 
 ### v1.0
+
 * [discussion] Rename "Garden" in "GardenLab", "GardenView" or something else? ("garden" is an automation platform for Kubernetes development and testing: https://github.com/garden-io/garden)
 * [task] update node 18.
 * [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
@@ -97,6 +102,7 @@ Serverport is defined in rabbit.config.json, e.g. 3010
 * [task] Set repository public & make garden npm modul.
 
 ### v1.1
+
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
 * [feature] Improve Garden for smaller displays:
   * Sidebarnav is closed by default on narrow display devices.
