@@ -25,7 +25,6 @@ create rabbit.config.json file
 Example configuration for your rabbit.config.json file:
 
 ```json
-// rabbit.config.json
 {
   "garden": {
     "serverport": 3010,
@@ -60,10 +59,9 @@ run initGarden
 
 ### Run Garden
 
-Run `serveGarden` from the root of the Svelte project. Or add it to your package.json there and run it via `npm run garden` :
+Run `serveGarden` from the root of the Svelte project. Or add it to your `package.json` there and run it via `npm run garden` :
 
 ```json
-  // package.json 
   "scripts": {
     "garden": "serveGarden",
   },
