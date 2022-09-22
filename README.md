@@ -4,31 +4,28 @@ Garden is a lightweight UI explorer for Svelte projects that helps you build, te
 
 ## What is Garden?
 
-### A Svelte component library
+### A Svelte component library explorer
 
 Garden is the showroom for what you grow. The explorer represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for Svelte projects of any size and runs outside of your app for an absolute independence. Code changes are reflected at the speed of light by the build tool Vite. Garden is an Open Source project under the MIT License.
 
 ## Getting Started
 
-To install Garden: [not yet]
+Install Garden with NPM: [not yet, now: instead: checkout garden in garden base folder: 'npm link' or 'sudo npm link']
 
 ```bash
 npm install --save-dev garden
 ```
 
-instead:
-checkout garden
-in garden base folder: 'npm link' or 'sudo npm link'
-
-Go to your Svelte project folder:
+Go to the root directory of your Svelte project:
 
 ```text
 create rabbit.config.json file
 ```
 
-example:
+Example configuration for your rabbit.config.json file:
 
 ```json
+// rabbit.config.json
 {
   "garden": {
     "serverport": 3010,
@@ -51,29 +48,30 @@ example:
 }
 ```
 
+Add those directories to "structure" > "custom" that are to be displayed on the first level of the Garden Navigation.
+
+### Initialize Garden
+
+Initialize Garden in the root of the project directory:
+
 ```bash
 run initGarden
 ```
 
-## Run Garden
+### Run Garden
 
-go to project base folder and run `serveGarden`
-
-or add it to your package.json and run via `npm run garden`
+Run `serveGarden` from the root of the Svelte project. Or add it to your package.json there and run it via `npm run garden` :
 
 ```json
+  // package.json 
   "scripts": {
     "garden": "serveGarden",
   },
 ```
 
-### open in browser
+### Open Garden
 
-```text
-localhost:${serverport}/ 
-````
-
-Serverport is defined in rabbit.config.json, e.g. 3010
+Open Garden in the browser via `http://localhost:<serverport>/garden`. The server port is defined in the `rabbit.config.json` file, e.g. 3010.
 
 ## Svelte project kickstarter
 
@@ -87,7 +85,7 @@ Check out [Carrots](https://github.com/rabbitdevelopment/carrots) if you're inte
 
 ### v1.0
 
-* [discussion] Rename "Garden" in "GardenLab", "GardenView" or something else? ("garden" is an automation platform for Kubernetes development and testing: https://github.com/garden-io/garden)
+* [discussion] Rename "Garden" in "GardenLab", "GardenView" or something else? ("garden" is an automation platform for Kubernetes development and testing: https://github.com/garden-io/garden). Anyway we need da domaine for the project website.
 * [task] update node 18.
 * [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
 * [refactor] Move logic to own file. handle user interaction.
