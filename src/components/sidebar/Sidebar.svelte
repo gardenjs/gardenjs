@@ -12,7 +12,7 @@ export let show
     <span>Garden</span>
   </a>
   <nav>
-    <ul class="unfold_all">
+    <ul class="unfold-all">
       <li>
         <button title="fold/unfold all">
           <span class="projectname">My project name</span>
@@ -76,19 +76,19 @@ a.logo {
 .logo span {
   padding-left: 0.5rem;
 }
-.unfold_all button {
+.unfold-all button {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 260px;
   margin: 0;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  padding: 0.5rem 0.75rem 0.5rem 1rem;
   background-color: transparent;
   border: none;
   border-left: 3px solid transparent;
   cursor: pointer;
 }
-.unfold_all .projectname {
+.unfold-all .projectname {
   margin-right: 0.75rem;
   font-size: 0.875rem;
   color: var(--c-basic-900);
@@ -96,10 +96,12 @@ a.logo {
   text-align: left;
   letter-spacing: 1px;
 }
-.unfold_all button svg {
+.unfold-all button svg {
+  display: flex;
+  align-self: center;
   fill: var(--c-basic-700);
 }
-.unfold_all button:hover {
+.unfold-all button:hover {
   background-color: var(--c-basic-150);
   border-left: 3px solid var(--c-basic-500);
 }
