@@ -49,7 +49,7 @@
   align-items: center;
   width: 100%;
   margin: 0;
-  padding: 0.5rem 0.25rem 0.5rem 0.5rem ;
+  padding: 0.5rem 0.75rem 0.5rem 0.5rem;
   text-align: left;
   border-left: 3px solid transparent;
   cursor: pointer;
@@ -74,8 +74,8 @@
   width: 1.25rem;
   height: 1.25rem;
   transition: 0.2s;
-  margin-left: 0;
-  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+  margin-right: 0;
 }
 .folder_icon svg {
   fill: var(--c-basic-700);
@@ -116,7 +116,10 @@
 /* level 3 */
 .level-3 {
   padding-left: 2.75rem;
-  background-color: var(--c-basic-100);
+  background-color: var(--c-basic-100); 
+}
+.level-3 .folder_label {
+  font-size: 0.813rem;
 }
 .unfolded .level-3 {
   background-color: var(--c-basic-200);
