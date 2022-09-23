@@ -1,10 +1,12 @@
 {
   "name": "garden",
-  "version": "0.0.1",
-  "description": "tool for visualizing a component library like carrots",
+  "version": "0.9.0",
+  "description": "Lightweight component library explorer for Svelte projects",
   "main": "index.js",
   "svelte": "src/index.js",
   "type": "module",
+  "author": "Robin Danzinger, Martin Farkas",
+  "license": "MIT",
   "bin": {
     "initGarden": "bin/initgarden.js",
     "serveGarden": "bin/servegarden.js"
@@ -13,8 +15,6 @@
     "test": "mocha --require @babel/polyfill --require @babel/register --recursive",
     "tdd": "nodemon --exec 'mocha --require @babel/polyfill --require @babel/register --recursive'"
   },
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/polyfill": "^7.11.5",
