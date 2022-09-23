@@ -71,13 +71,54 @@ Run `serveGarden` from the root of the Svelte project. Or add it to your `packag
 
 Open Garden in the browser via `http://localhost:<serverport>/garden`. The server port is defined in the `rabbit.config.json` file, e.g. 3010.
 
+## Output of variants or states
+
+In order to output variants or statuses of components, you must create two additional files in the componentset directory:
+
+1. With the `<component>.example.svelte` file you create all variants/states of the component. It then looks like this, for example:
+
+```js
+<script>
+  import Button from './<component>.svelte'
+
+  export let story
+</script>
+
+{#if story == 'story_1'}
+<!-- code example -->
+
+{:else if story == 'story_2'}
+<!-- code example -->
+
+{:else if story == 'story_3'}
+<!-- code example -->
+
+{/if}
+```
+
+2. So that the created variants/states can also be output in the panel and the navigation below the stage, they must be created in the `<component>.das.js`. In addition, a description or information about the component can be added here. It then looks like this, for example:
+
+```js
+export default {
+  name: "<component>",
+  file: "./<component>.example.svelte",
+  description: "<A description/info of the component can be added here...>",
+  examples: [
+    {story: "<navigation title for story_1>", input: {story: "story_1"}},
+    {story: "<navigation title for story_2>", input: {story: "story_2"}},
+    {story: "<navigation title for story_3>", input: {story: "story_3"}},
+  ]
+}
+```
+
+
 ## Svelte project kickstarter
 
 Check out [Carrots](https://github.com/rabbitdevelopment/carrots) if you're interested in a fully customizable "hello world" Kickstarter for new Svelte project. Carrots is Garden ready out of the box.
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT)
+MIT
 
 ## Todo´s
 
