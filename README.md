@@ -73,7 +73,7 @@ Open Garden in the browser via `http://localhost:<serverport>/garden`. The serve
 
 ## Output of variants or states
 
-In order to output variants or statuses of components, you must create two additional files in the componentset directory:
+In order to be able to output variants or states of components, you must create two additional files in the component directory:
 
 1. With the `<component>.example.svelte` file you create all variants/states of the component. It then looks like this, for example:
 
