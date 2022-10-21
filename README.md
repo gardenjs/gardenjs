@@ -124,19 +124,17 @@ MIT
 
 ### v1.0
 
-* [discussion] Rename "Garden" in "GardenLab", "GardenView" or something else? ("garden" is an automation platform for Kubernetes development and testing: https://github.com/garden-io/garden). Anyway we need da domaine for the project website.
-* [task] update node 18.
-* [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
 * [refactor] Move logic to own file. handle user interaction.
-* [task] rabbit.config -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown.
+* [task] Sidebarnav: open/close all.
+* [task] Show stage size in topbar.
+* [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. Add project title.
+* [task] Build kickstarter for new projects with own github repository (like carrots but just as "hello world).
+* [task] when opening garden show html page with infos.
+* [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
+* [task] update node 18.
+* [task] Set repository public & make garden npm modul. (yarn?)
 * [feature] Manage project themes via topbar dropdown. Set "class dark" inside iframe if project has dark mode. Needs a Configuration file? Which Concepts are possible to realize that? in case of configuration file set field for project name/app name and put above sidebar nav next to collapse icon.
 * open(`http://localhost:${port}/garden`)
-* [task] Write garden documentaion.
-* [task] Build kickstarter for new projects with own github repository (like carrots but just as "hello world).
-* [task] Sidebarnav: open/close all.
-* [task] content garden website.
-* [task] when opening garden info open page. -> kickstarter
-* [task] Set repository public & make garden npm modul.
 
 ### v1.1
 
