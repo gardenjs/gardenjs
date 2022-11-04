@@ -3,6 +3,11 @@ import SidebarNav from './SidebarNav.svelte'
 
 export let nodes = []
 export let show
+let showSidebarNav = true
+
+function toggleAllFolderStatus() {
+  showSidebarNav = !showSidebarNav
+}
 
 </script>
 
@@ -14,7 +19,7 @@ export let show
   <nav>
     <ul class="unfold-all">
       <li>
-        <button title="fold/unfold all">
+        <button title="fold/unfold all" on:click={toggleAllFolderStatus}>
           <span class="projectname">My project name</span>
           <span>
             <!-- expand icon (default): on click has to be siwched to collapse icon -->
@@ -26,7 +31,9 @@ export let show
         </button>
       </li>
     </ul>
+    {#if showSidebarNav}
     <SidebarNav nodes={nodes} on:out />
+    {/if}
     <ul>
       <li>
         <a class="github" href="https://github.com/rabbitdevelopment/garden" target="_blank">
