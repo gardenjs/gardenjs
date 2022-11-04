@@ -1,6 +1,7 @@
 <script>
   export let href
   export let selected
+  export let level
 
   function handleClick(evt) {
     globalThis.history.pushState({}, '', href)
@@ -8,7 +9,7 @@
 
 </script>
 
-<a href={href} class:selected on:click|preventDefault={handleClick}>
+<a href={href} class="level-{level}" class:selected on:click|preventDefault={handleClick}>
 <slot />
 </a>
 
