@@ -34,4 +34,30 @@
     border-left: 3px solid var(--c-primary);
     background-color: var(--c-primary-bg) !important;
   }
+
+    /* 1. level */
+  .level-2  {
+    background-color: var(--c-basic-100);
+  }
+  .level-2:hover {
+    background-color: var(--c-basic-150);
+  }
+
+  /* 2. level */
+  .level-3 {
+    padding-left: 2.75rem ;
+    background-color: var(--c-basic-150);
+  }
+  .level-3:hover {
+    background-color: var(--c-basic-200);
+  }
+
+  /* 3. level */
+  .level-4 {
+    padding-left: 3.5rem ;
+    background-color: var(--c-basic-200);
+  }
+  .level-4:hover {
+    background-color: var(--c-basic-250);
+  }
 </style>

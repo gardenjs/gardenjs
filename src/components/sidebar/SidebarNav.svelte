@@ -13,7 +13,7 @@
   {#each nodes as node }
     {#if node.isLeaf}
       <li>
-        <Link href={node.href} selected={node.selected} level={level + 1}>{node.name}</Link>
+        <Link href={node.href} selected={node.selected} level={level}>{node.name}</Link>
       </li>
     {:else}
       <li class="folder" class:unfolded={node.unfolded}>
