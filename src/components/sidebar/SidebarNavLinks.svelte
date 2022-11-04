@@ -24,7 +24,7 @@
   a:hover,
   a:focus {
     color: var(--c-basic-900);
-    border-left: 3px solid var(--c-basic-500);
+    border-left: 3px solid var(--c-primary);
     background-color: var(--c-basic-150);
   }
   a.selected {

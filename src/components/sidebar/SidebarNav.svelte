@@ -55,7 +55,7 @@
   cursor: pointer;
 }
 .folder_button:hover {
-  border-left: 3px solid var(--c-basic-500);
+  border-left: 3px solid var(--c-primary);
 }
 .folder_label {
   display: flex;
