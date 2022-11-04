@@ -125,7 +125,6 @@ MIT
 ### v1.0
 
 * [refactor] Move logic to own file. handle user interaction.
-* [task] Sidebarnav: open/close all.
 * [task] Show stage size in topbar.
 * [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. Add project title.
 * [task] Build kickstarter for new projects with own github repository (like carrots but just as "hello world).
