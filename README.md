@@ -1,16 +1,14 @@
-# GARDEN
+# Component library explorer
 
-Garden is a lightweight UI explorer for Svelte projects that helps you build, test and display UI components and pages.
+Garden is a lightweight UI explorer for Svelte projects that helps you build, test and display UI components and pages. Create design systems for Svelte projects.
 
-## What is Garden?
-
-### A Svelte component library explorer
+## This is Garden
 
 Garden is the showroom for what you grow. The explorer represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for Svelte projects of any size and runs outside of your app for an absolute independence. Code changes are reflected at the speed of light by the build tool Vite. Garden is an Open Source project under the MIT License.
 
 ## Getting Started
 
-Install Garden with NPM: [not yet, now: instead: checkout garden in garden base folder: 'npm link' or 'sudo npm link']
+Create a new directory outside of the Svelte project and install Garden with NPM: [not yet, now: instead: checkout garden in garden base folder: 'npm link' or 'sudo npm link']
 
 ```bash
 npm install --save-dev garden
@@ -75,7 +73,7 @@ Open Garden in the browser via `http://localhost:<serverport>/garden`. The serve
 
 In order to be able to output variants or states of components, you must create two additional files in the component directory:
 
-1. With the `<component>.example.svelte` file you create all variants/states of the component. It then looks like this, for example:
+With a `<component>.example.svelte` file you create all variants/states of the component. It then looks like this, for example:
 
 ```js
 <script>
@@ -96,7 +94,7 @@ In order to be able to output variants or states of components, you must create 
 {/if}
 ```
 
-2. So that the created variants/states can also be output in the panel and the navigation below the stage, they must be created in the `<component>.das.js`. In addition, a description or information about the component can be added here. It then looks like this, for example:
+Create a file `<component>.das.js` so that the variants/states are output in the panel and the navigation below the stage. In addition, a description or information about the component can be added here. It then looks like this, for example:
 
 ```js
 export default {
@@ -111,7 +109,6 @@ export default {
 }
 ```
 
-
 ## Svelte project kickstarter
 
 Check out [Carrots](https://github.com/rabbitdevelopment/carrots) if you're interested in a fully customizable "hello world" Kickstarter for new Svelte project. Carrots is Garden ready out of the box.
@@ -124,6 +121,7 @@ MIT
 
 ### v1.0
 
+* [question] Isn´t it better to name config file garden.config.json/js insead of rabbit.config.*?
 * [refactor] Move logic to own file. handle user interaction.
 * [task] Show stage size in topbar.
 * [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. Add project title.
