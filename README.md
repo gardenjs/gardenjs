@@ -121,10 +121,9 @@ MIT
 
 ### v1.0
 
-* [question] Isn´t it better to name config file garden.config.json/js insead of rabbit.config.*?
+* [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. add project title and style classes in config.
 * [refactor] Move logic to own file. handle user interaction.
 * [task] Show stage size in topbar.
-* [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. Add project title.
 * [task] Build kickstarter for new projects with own github repository (like carrots but just as "hello world).
 * [task] when opening garden show html page with infos.
 * [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
