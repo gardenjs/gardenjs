@@ -22,9 +22,8 @@ function toggleAllFolderStatus() {
         <button title="fold/unfold all" on:click={toggleAllFolderStatus}>
           <span class="projectname">My project name</span>
           <span>
-            <!-- expand icon (default): on click has to be siwched to collapse icon -->
             {#if showSidebarNav}
-            <svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 11.323L5 12.49l5 5 5-5-1.167-1.167L10 15.157l-3.833-3.834zm0-2.631L5 7.525l5-5 5 5-1.167 1.167L10 4.858 6.167 8.692z"/></svg>
+              <svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 11.323L5 12.49l5 5 5-5-1.167-1.167L10 15.157l-3.833-3.834zm0-2.631L5 7.525l5-5 5 5-1.167 1.167L10 4.858 6.167 8.692z"/></svg>
             {:else}
               <svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 17.49L5 16.323l5-5 5 5-1.167 1.167L10 13.656 6.167 17.49zm0-14.965L5 3.692l5 5 5-5-1.167-1.167L10 6.359 6.167 2.525z"/></svg>
             {/if}
