@@ -6,10 +6,11 @@ import config from './config.js'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const targetfolder = config.destination
 const sourcefolder = path.resolve(__dirname, 'shapes/') + '/'
 
 export async function copyBaseClasses() {
+  console.log('config is', await config())
+  const targetfolder = (await config()).destination
   fs.mkdir(targetfolder + '/build', {recursive: true}, onErrorAbortElse(() => copyFolder(sourcefolder, targetfolder)))
 }
 

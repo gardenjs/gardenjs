@@ -2,9 +2,9 @@ import path from 'path'
 import fs from 'fs'
 import {findAndReadDasFiles} from './das_file_finder.js'
 import config from './config.js'
-const {structure, destination} = config
 
 export async function generateGardenBase() {
+  const {structure, destination} = await config()
   const targetBaseFile = destination + 'base.js'
   const targetImportMapFile= destination + 'importmap.js'
   

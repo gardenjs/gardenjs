@@ -3,12 +3,17 @@ import config from './config.js'
 import {generateGardenBase} from './base_generator.js'
 
 generate()
-watch(config.watch.directories, {include: config.watch.include}, async (evt) => {
-  await generate()
-})
+readConfigThenWatch()
 
 async function generate() {
   console.log('generate component app')
   await generateGardenBase()
   console.log('generate component app finished')
+}
+
+async function readConfigThenWatch() {
+  const {directories, include} = (await config()).watch
+  watch(directories, { include }, async () => {
+    await generate()
+  })
 }
