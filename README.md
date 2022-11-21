@@ -124,6 +124,8 @@ MIT
 * [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. add project title and style classes in config.
 * [refactor] Move logic to own file. handle user interaction.
 * [task] Show stage size in topbar.
+* [task] Check branch sidebarstyles for conflicts with local changes for working on garden.config.js.
+* [task] Collapse sidebar nav should only close the first navigation level, but still display it.
 * [task] Build kickstarter for new projects with own github repository (like carrots but just as "hello world).
 * [task] when opening garden show html page with infos.
 * [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
@@ -133,6 +135,7 @@ MIT
 
 ### v1.1
 
+* [feature] Collapse panel button.
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
 * [feature] Improve Garden for smaller displays:
   * Sidebarnav is closed by default on narrow display devices.

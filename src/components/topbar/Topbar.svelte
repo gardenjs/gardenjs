@@ -191,7 +191,7 @@
   .dropdown__items ul li a:hover {
     color: var(--c-basic-900);
     background-color: var(--c-basic-200);
-    border-left: 3px solid var(--c-basic-500);
+    border-left: 3px solid var(--c-primary);
   }
   .dropdown__items ul li a.active,
   .dropdown__items ul li a.active:hover {
