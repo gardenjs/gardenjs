@@ -35,7 +35,7 @@
   display: block;
   margin: 0;
   background-color: transparent;
-  border-bottom: 1px solid var(--c-basic-300)
+  /* border-bottom: 1px solid var(--c-basic-300) */
 }
 .folder.unfolded:last-of-type {
   border: none;
