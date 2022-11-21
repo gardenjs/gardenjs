@@ -87,7 +87,7 @@ const dispatch = createEventDispatcher()
   border-bottom: 3px solid var(--c-primary);
 }
 .panel__nav nav li button:hover {
-  border-color: var(--c-basic-500);
+  border-color: var(--c-primary);
 }
 .panel__pane {
   padding: 1.25rem;
