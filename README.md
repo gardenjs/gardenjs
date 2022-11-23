@@ -122,7 +122,7 @@ MIT
 ### v1.0
 
 * [task] Rename branch master to main.
-* [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. add project title and style classes in config.
+* [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. add project title and style classes in config. If possible: Possibility to disable the panel if not needed.
 * [refactor] Move logic to own file. handle user interaction.
 * [task] Show stage size in topbar.
 * [task] Check branch sidebarstyles for conflicts with local changes for working on garden.config.js.
