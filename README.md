@@ -5,6 +5,7 @@ Garden is a lightweight UI explorer for Svelte projects that helps you build, te
 ## This is Garden
 
 Garden is the showroom for what you grow. The explorer represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for Svelte projects of any size and runs outside of your app for an absolute independence. Code changes are reflected at the speed of light by the build tool Vite. Garden is an Open Source project under the MIT License.
+<br><br>
 
 ## Getting Started
 
@@ -68,8 +69,9 @@ Run `serveGarden` from the root of the Svelte project. Or add it to your `packag
 ### Open Garden
 
 Open Garden in the browser via `http://localhost:<serverport>/garden`. The server port is defined in the `rabbit.config.json` file, e.g. 3010.
+<br><br>
 
-## Output of variants or states
+## Output of components (and pages) and add variants or states
 
 In order to be able to output variants or states of components, you must create two additional files in the component directory:
 
@@ -108,14 +110,17 @@ export default {
   ]
 }
 ```
+<br><br>
 
 ## Svelte project kickstarter
 
 Check out [Carrots](https://github.com/rabbitdevelopment/carrots) if you're interested in a fully customizable "hello world" Kickstarter for new Svelte project. Carrots is Garden ready out of the box.
+<br><br>
 
 ## License
 
 MIT
+<br><br>
 
 ## Todo´s
 
