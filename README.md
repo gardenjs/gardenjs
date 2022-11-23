@@ -1,6 +1,7 @@
 # Component library explorer
 
 Garden is a lightweight UI explorer for Svelte projects that helps you build, test and display UI components and pages. Create design systems for Svelte projects.
+<br><br>
 
 ## This is Garden
 
@@ -110,7 +111,7 @@ export default {
   ]
 }
 ```
-<br><br>
+<br>
 
 ## Svelte project kickstarter
 
@@ -127,7 +128,9 @@ MIT
 ### v1.0
 
 * [task] Rename branch master to main.
-* [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. add project title and style classes in config. If possible: Possibility to disable the panel if not needed.
+* [task] Add Markdownfile to panel for teams to document or comment.
+
+* [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. add project title and style classes in config. Customizable if possible -> If possible: Add more files to panel navigation like "comments.md"
 * [refactor] Move logic to own file. handle user interaction.
 * [task] Show stage size in topbar.
 * [task] Check branch sidebarstyles for conflicts with local changes for working on garden.config.js.
