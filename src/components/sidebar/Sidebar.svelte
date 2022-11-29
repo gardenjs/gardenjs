@@ -16,12 +16,10 @@
       <span>My project name</span>
     </a>
     <nav>
-      {#if showSidebarNav}
-      <SidebarNav nodes={nodes} on:out />
-      {/if}
       <ul>
         <li>
           <button class="unfold-all_button" title="fold/unfold all" on:click={toggleAllFolderStatus}>
+            <span class="unfold-all_label">Collapse Navigation</span>
             <span>
               {#if showSidebarNav}
                 <svg class="unfold-all_icon" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 11.323L5 12.49l5 5 5-5-1.167-1.167L10 15.157l-3.833-3.834zm0-2.631L5 7.525l5-5 5 5-1.167 1.167L10 4.858 6.167 8.692z"/></svg>
@@ -29,10 +27,12 @@
                 <svg class="unfold-all_icon" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 17.49L5 16.323l5-5 5 5-1.167 1.167L10 13.656 6.167 17.49zm0-14.965L5 3.692l5 5 5-5-1.167-1.167L10 6.359 6.167 2.525z"/></svg>
               {/if}
             </span>
-            <span class="unfold-all_label">Collapse Navigation</span>
           </button>
         </li>
       </ul>
+      {#if showSidebarNav}
+      <SidebarNav nodes={nodes} on:out />
+      {/if}
       <ul>
         <li>
           <a class="github" href="https://github.com/rabbitdevelopment/garden" target="_blank">
@@ -77,7 +77,6 @@
     text-decoration: none;
     font-weight: 900;
     line-height: 1;
-    background-color: var(--c-basic-800);
   }
   .project_title span {
     overflow: hidden;
