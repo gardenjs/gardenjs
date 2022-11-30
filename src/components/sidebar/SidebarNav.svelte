@@ -9,6 +9,7 @@
   }
 
 </script>
+
 <ul>
   {#each nodes as node }
     {#if node.isLeaf}
@@ -30,18 +31,16 @@
 </ul>
 
 <style>
-/* some styles for deeper levels in sidebar.css... */
+ul {
+  margin: 0 0 0.75rem;
+}
 .folder {
   display: block;
   margin: 0;
   background-color: transparent;
-  /* border-bottom: 1px solid var(--c-basic-300) */
 }
 .folder.unfolded:last-of-type {
   border: none;
-}
-.folder.unfolded {
-  background-color: var(--c-basic-100);
 }
 .folder_button {
   display: flex;
@@ -49,13 +48,11 @@
   align-items: center;
   width: 100%;
   margin: 0;
-  padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+  padding: 0.375rem 0.75rem 0.5rem 0.375rem;
   text-align: left;
-  border-left: 3px solid transparent;
+  color: var(--c-basic-900);
+  background-color: transparent;
   cursor: pointer;
-}
-.folder_button:hover {
-  border-left: 3px solid var(--c-primary);
 }
 .folder_label {
   display: flex;
@@ -67,6 +64,9 @@
   font-weight: 600;
   text-transform: capitalize;
   letter-spacing: 1px;
+}
+.folder_button:hover .folder_label {
+  color: var(--c-basic-500);
 }
 .folder_icon {
   display: flex;
@@ -84,14 +84,6 @@
   transform: rotate(180deg);
   transition: 0.2s;
 }
-
-
-.level-1 {
-  background: transparent;
-}
-.level-1:hover {
-  background-color: var(--c-basic-150);
-}
 .level-1 .folder_icon {
   margin-left: 0;
   margin-right: 0.25rem;
@@ -102,29 +94,13 @@
 .level-1 .folder_icon {
   order: 1;
 }
-/* level 2 */
 .level-2 {
-  padding-left: 2.125rem;
-  background-color: var(--c-basic-100);
+  padding-left: 2.25rem;
 }
-.unfolded .level-2 {
-  background-color: var(--c-basic-150);
-}
-.level-2:hover {
-  background-color: var(--c-basic-200);
-}
-/* level 3 */
 .level-3 {
-  padding-left: 2.75rem;
-  background-color: var(--c-basic-100); 
+  padding-left: 3.25rem;
 }
 .level-3 .folder_label {
   font-size: 0.813rem;
-}
-.unfolded .level-3 {
-  background-color: var(--c-basic-200);
-}
-.level-3:hover {
-  background-color: var(--c-basic-250);
 }
 </style>
