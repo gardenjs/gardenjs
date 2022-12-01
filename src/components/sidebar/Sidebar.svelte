@@ -52,7 +52,7 @@
     height: 100vh;
     overflow-x: hidden;
     background-color: var(--c-basic-50);
-    border-right: 1px solid var(--c-basic-250);
+    border-right: 1px solid var(--c-basic-300);
     transition: width 0.2s;
   }
   .show-sidebar {
@@ -77,6 +77,7 @@
     text-decoration: none;
     font-weight: 900;
     line-height: 1;
+    border-bottom: 1px solid var(--c-basic-300);
   }
   .project_title span {
     overflow: hidden;
@@ -95,7 +96,6 @@
     padding: 0.5rem 0.75rem 0.5rem 0.688rem;
     text-align: left;
     background-color: transparent;
-    border-top: 1px solid var(--c-basic-300);
     border-bottom: 1px solid var(--c-basic-300);
     cursor: pointer;
   }
@@ -108,9 +108,6 @@
     width: 100%;
     color: var(--c-basic-900);
     font-size: 0.75rem;
-    /* font-weight: 600; */
-    /* text-transform: capitalize;
-    letter-spacing: 1px; */
   }
   .unfold-all_icon {
     display: flex;
@@ -122,9 +119,6 @@
     margin-right: 0.25rem;
     fill: var(--c-basic-900);
   }
-  /* .unfold-all_button:hover {
-    background-color: var(--c-basic-150);
-  } */
   .github {
     display: inline-flex;
     justify-content: center;

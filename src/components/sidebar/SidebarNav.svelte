@@ -10,7 +10,7 @@
 
 </script>
 
-<ul>
+<ul class="list list_level-{level}">
   {#each nodes as node }
     {#if node.isLeaf}
       <li>
@@ -18,7 +18,7 @@
       </li>
     {:else}
       <li class="folder" class:unfolded={node.unfolded}>
-        <button class="folder_button level-{level}" title="fold/unfold" on:click={() => toggleFolderFoldStatus(node)}>
+        <button class="folder_button btn_level-{level}" title="fold/unfold" on:click={() => toggleFolderFoldStatus(node)}>
           <span class="folder_icon" class:unfolded_icon={node.unfolded}><svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 13.084L5 11.917l5-5 5 5-1.167 1.167L10 9.25l-3.833 3.834z"/></svg></span>
           <span class="folder_label">{node.name}</span>
         </button>
@@ -31,16 +31,15 @@
 </ul>
 
 <style>
-ul {
-  margin: 0 0 0.75rem;
+.list_level-1 {
+  padding-bottom: 0.75rem;
+  border: none;
+  border-bottom: 1px solid var(--c-basic-300);
 }
 .folder {
   display: block;
   margin: 0;
   background-color: transparent;
-}
-.folder.unfolded:last-of-type {
-  border: none;
 }
 .folder_button {
   display: flex;
@@ -48,7 +47,7 @@ ul {
   align-items: center;
   width: 100%;
   margin: 0;
-  padding: 0.375rem 0.75rem 0.5rem 0.375rem;
+  padding: 0.5rem 0.75rem 0.375rem 0.375rem;
   text-align: left;
   color: var(--c-basic-900);
   background-color: transparent;
@@ -62,8 +61,7 @@ ul {
   color: var(--c-basic-900);
   font-size: 0.875rem;
   font-weight: 600;
-  text-transform: capitalize;
-  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 .folder_button:hover .folder_label {
   color: var(--c-basic-500);
@@ -84,23 +82,23 @@ ul {
   transform: rotate(180deg);
   transition: 0.2s;
 }
-.level-1 .folder_icon {
+.btn_level-1 .folder_icon {
   margin-left: 0;
   margin-right: 0.25rem;
 }
-.level-1 .folder_label {
+.btn_level-1 .folder_label {
   order: 2;
 }
-.level-1 .folder_icon {
+.btn_level-1 .folder_icon {
   order: 1;
 }
-.level-2 {
-  padding-left: 2.25rem;
+.btn_level-2 {
+  padding-left: 2rem;
 }
-.level-3 {
-  padding-left: 3.25rem;
+.btn_level-3 {
+  padding-left: 3rem;
 }
-.level-3 .folder_label {
+.btn_level-3 .folder_label {
   font-size: 0.813rem;
 }
 </style>
