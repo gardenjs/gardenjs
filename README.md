@@ -134,7 +134,6 @@ MIT
 * [task] Build kickstarter for new projects with own github repository (like carrots but just as "hello world).
 * [task] when opening garden show html page with infos.
 * [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
-* [task] update node 18.
 * [task] Set repository public & make garden npm modul. (yarn?)
 * [feature] Manage project themes via topbar dropdown. Set "class dark" inside iframe if project has dark mode. Needs a Configuration file? Which Concepts are possible to realize that? in case of configuration file set field for project name/app name and put above sidebar nav next to collapse icon.
 
