@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World!</title>
   <style>
     *,
     ::before,
@@ -39,10 +32,7 @@
       border-color: hsl(168, 41%, 60%);
     } 
   </style>
-</head>
-<body>
+
   <h1>Welcome to Garden.</h1>
   <p>Woohoo, you've successfully installed the Component Library Explorer Garden. Have fun gardening.</p>
   <p>Feel free to post bugs and suggestions on <a href="https://github.com/rabbitdevelopment/garden">Github</a>.</p>
-</body>
-</html>

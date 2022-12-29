@@ -4,7 +4,7 @@ import {findAndReadDasFiles} from './das_file_finder.js'
 import config from './config.js'
 
 export async function generateGardenBase() {
-  const {structure, destination, additional_style_files} = await config()
+  const {structure, destination, additional_style_files, welcome_page} = await config()
   const targetBaseFile = destination + 'base.js'
   const targetImportMapFile= destination + 'importmap.js'
   const targetGardenFrameFile = destination + '/lib/gardenframe.js'
@@ -24,7 +24,7 @@ export async function generateGardenBase() {
 
 
   await writeFileIfChanged(targetBaseFile, generateBaseCode(cds))
-  await writeFileIfChanged(targetImportMapFile, generateImportMapCode(cds))
+  await writeFileIfChanged(targetImportMapFile, generateImportMapCode(cds, welcome_page))
   await writeFileIfChanged(targetGardenFrameFile, generateGardenFrameFile(additional_style_files))
 }
 
@@ -66,12 +66,14 @@ export const navtree = ${JSON.stringify(createNavItemTree(componentdescriptions)
 `
 }
 
-export function generateImportMapCode(componentdescriptions) {
-
+export function generateImportMapCode(componentdescriptions, welcome_page = '../garden/Welcome.svelte') {
   return `
 ${componentdescriptions.map(createImportStmt).join('\n')}
 
+import Welcome from '${welcome_page}' 
+
 export const componentmap = {
+  'Welcome': Welcome,
   ${componentdescriptions.map(createComponentMapEntry).join(',\n')}
 }
 export const dasmap = {

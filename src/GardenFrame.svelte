@@ -2,7 +2,7 @@
 export let componentmap = {}
 export let dasmap = {}
 
-let component
+let component = componentmap.Welcome
 let das = {}
 let selectedExample = {}
 let redirectdata = {}
@@ -11,7 +11,7 @@ window.addEventListener('message', (evt) => {
   das = dasmap[evt.data.componentname] 
   selectedExample = das.examples.find(ex => ex.story === evt.data.selectedStory)
   redirectdata = {}
-  component = evt.data.componentname ? componentmap[evt.data.componentname] : undefined
+  component = evt.data.componentname ? componentmap[evt.data.componentname] : componentmap.Welcome
 })
 
 function handlecomponentout(evt) {
@@ -31,4 +31,7 @@ function handlecomponentout(evt) {
 
 {#if component}
   <svelte:component this={component} {...selectedExample?.input} {...redirectdata} on:out={handlecomponentout} />
+{:else}
+  <Welcome />
 {/if}
+
