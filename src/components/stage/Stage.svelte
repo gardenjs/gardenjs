@@ -11,11 +11,12 @@ export let stageSize
 export let landscape
 export let examples
 export let selectedStory
+export let theme 
 
 let myframeready 
 let myframe
 
-$: stageStyle = computeStageStyle(stageSize, landscape)
+$: stageStyle = computeStageStyle({stageSize, landscape, stageBg: theme.stageBg})
 
 $: {
   if (myframe) {
@@ -38,7 +39,7 @@ $: {
 
 $: {
   if (myframeready) {
-    myframe.contentWindow.postMessage({selectedStory, componentname}, window.location)
+    myframe.contentWindow.postMessage({selectedStory, componentname, theme: theme.name}, window.location)
   }
 }
 
