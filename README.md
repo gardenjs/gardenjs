@@ -127,13 +127,10 @@ MIT
 
 ### v1.0
 
-* [task] Rename branch master to main.
 * [task] Add Markdownfile to panel for infos. v1 or v1.1?
-* [task] Add Markdownfile to panel for teams to document or comment.
 * [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. add project title and style classes in config. Customizable if possible -> If possible: Add more files to panel navigation like "comments.md"
 * [refactor] Move logic to own file. handle user interaction.
 * [task] Show stage size in topbar.
-* [task] Check branch sidebarstyles for conflicts with local changes for working on garden.config.js.
 * [task] Collapse sidebar nav should only close the first navigation level, but still display it.
 * [task] Build kickstarter for new projects with own github repository (like carrots but just as "hello world).
 * [task] when opening garden show html page with infos.
