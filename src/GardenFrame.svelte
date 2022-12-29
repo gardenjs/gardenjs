@@ -1,6 +1,7 @@
 <script> 
 export let componentmap = {}
 export let dasmap = {}
+export let config
 
 let component = componentmap.Welcome
 let das = {}
@@ -8,6 +9,7 @@ let selectedExample = {}
 let redirectdata = {}
 
 window.addEventListener('message', (evt) => {
+  config.themeHandler(evt.data.theme)
   das = dasmap[evt.data.componentname] 
   selectedExample = das.examples.find(ex => ex.story === evt.data.selectedStory)
   redirectdata = {}

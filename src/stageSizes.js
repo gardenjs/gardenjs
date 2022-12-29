@@ -17,9 +17,9 @@ const sizes = {
   }
 }
 
-export function computeStageStyle(type = 'full', landscape = false) {
-  const {frameheight, framewidth} = sizes[type]
+export function computeStageStyle({stageSize= 'full', landscape = false, stageBg = 'white'}) {
+  const {frameheight, framewidth} = sizes[stageSize]
   return landscape 
-    ? `width: ${frameheight}; height: ${framewidth}; transition: 0.2s;`
-    : `width: ${framewidth}; height: ${frameheight}; transition: 0.2s;`
+    ? `width: ${frameheight}; height: ${framewidth}; transition: 0.2s; background: ${stageBg};`
+    : `width: ${framewidth}; height: ${frameheight}; transition: 0.2s; background: ${stageBg};`
 }
