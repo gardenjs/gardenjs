@@ -38,7 +38,7 @@ let examples = {}
 let selectedStory
 let rootNodesExpanded = true
 
-$: themes = config.themes.map(theme => ({name: theme, active: false}))
+$: themes = config.themes.map((theme, index) => ({name: theme, active: index === 0}))
 
 $: projectTitle = config.project_title || ''
 
