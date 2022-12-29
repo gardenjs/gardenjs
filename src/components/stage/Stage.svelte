@@ -65,7 +65,7 @@ function tabselectionchange(evt) {
 
 <HorizontalSplitPane topheight='65vh'>
 <div slot="top" class="is-full">
-	<iframe class="stage stage--lightmode" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle} ></iframe>
+	<iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle} ></iframe>
 </div>
 <div slot="bottom" class="is-full is-flex-column">
   <PanelComponent tabs={tabs} on:out={tabselectionchange}>
@@ -104,11 +104,4 @@ function tabselectionchange(evt) {
   background-color: var(--c-white);
   /* border: 1px solid var(--c-basic-400); */
 }
-/* static, should be dynamical for dark theme switch */
-.stage--lightmode {
-  background-color: white;
-}
-/* .stage--darkmode {
-  background-color: white;
-} */
 </style>
