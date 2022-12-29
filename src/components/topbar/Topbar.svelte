@@ -192,7 +192,7 @@
     padding: 0.5rem 1.25rem;
     font-size: 0.813rem;
     color: var(--c-basic-600);
-    text-decoration: none;
+    text-transform: capitalize;
     white-space: nowrap;
     background-color: transparent;
     border: none;
