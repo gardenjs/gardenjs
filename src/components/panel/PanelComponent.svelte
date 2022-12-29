@@ -56,7 +56,7 @@ const dispatch = createEventDispatcher()
   margin: 0 1.25rem;
   padding-top: 0.5rem;
   background-color: var(--c-basic-50);
-  border-bottom: 1px solid var(--c-basic-250);
+  border-bottom: 1px solid var(--c-basic-300);
 }
 .panel__nav nav ul {
   display: flex;

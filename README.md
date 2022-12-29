@@ -128,8 +128,8 @@ MIT
 ### v1.0
 
 * [task] Rename branch master to main.
+* [task] Add Markdownfile to panel for infos. v1 or v1.1?
 * [task] Add Markdownfile to panel for teams to document or comment.
-
 * [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. add project title and style classes in config. Customizable if possible -> If possible: Add more files to panel navigation like "comments.md"
 * [refactor] Move logic to own file. handle user interaction.
 * [task] Show stage size in topbar.
@@ -144,6 +144,7 @@ MIT
 
 ### v1.1
 
+* [feature] Make Garden compatible with Vue.
 * [feature] Collapse panel button.
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
 * [feature] Improve Garden for smaller displays:

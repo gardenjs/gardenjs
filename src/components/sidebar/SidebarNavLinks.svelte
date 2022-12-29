@@ -9,55 +9,45 @@
 
 </script>
 
-<a href={href} class="level-{level}" class:selected on:click|preventDefault={handleClick}>
+<a href={href} class="link_level-{level}" class:selected on:click|preventDefault={handleClick}>
 <slot />
 </a>
 
 <style>
   a {
-    padding: 0.375rem 0 0.375rem 2.125rem;
+    padding: 0.188rem 0 0.188rem 0.75rem;
     text-transform: initial;
     font-weight: 400;
     font-size: 0.813rem;
     color: var(--c-basic-600);
-    border-left: 3px solid transparent;
+    border-left: 1px solid var(--c-basic-300);
   }
   a:hover,
   a:focus {
     color: var(--c-basic-900);
     border-left: 3px solid var(--c-primary);
-    background-color: var(--c-basic-150);
   }
   a.selected {
     color: var(--c-primary);
-    font-weight: 600;
     border-left: 3px solid var(--c-primary);
-    background-color: var(--c-primary-bg) !important;
+    padding-left: calc(0.75rem - 2px) !important;
+    background-color: var(--c-primary-bg);
   }
-
-    /* 1. level */
-  .level-2  {
-    background-color: var(--c-basic-100);
+  a.selected:hover {
+    padding-left: 0.75rem;
   }
-  .level-2:hover {
-    background-color: var(--c-basic-150);
+  .link_level-2 {
+    margin-left: 1.938rem ;
   }
-
-  /* 2. level */
-  .level-3 {
-    padding-left: 2.75rem ;
-    background-color: var(--c-basic-150);
+  .link_level-3 {
+    margin-left: 2.063rem ;
   }
-  .level-3:hover {
-    background-color: var(--c-basic-200);
+  .link_level-4 {
+    margin-left: 3.063rem ;
   }
-
-  /* 3. level */
-  .level-4 {
-    padding-left: 3.5rem ;
-    background-color: var(--c-basic-200);
-  }
-  .level-4:hover {
-    background-color: var(--c-basic-250);
+  .link_level-2:hover,
+  .link_level-3:hover,
+  .link_level-4:hover {
+    padding-left: calc(0.75rem - 2px);
   }
 </style>
