@@ -32,7 +32,6 @@
       border-color: hsl(168, 41%, 60%);
     } 
   </style>
-
-  <h1>Welcome to Garden.</h1>
+  <h1>Welcome to Garden :)</h1>
   <p>Woohoo, you've successfully installed the Component Library Explorer Garden. Have fun gardening.</p>
   <p>Feel free to post bugs and suggestions on <a href="https://github.com/rabbitdevelopment/garden">Github</a>.</p>
