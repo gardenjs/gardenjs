@@ -189,6 +189,7 @@
     border: none;
     border-left: 3px solid transparent;
     background-color: transparent;
+    cursor: pointer;
   }
   .dropdown__items ul li button:hover {
     color: var(--c-basic-900);
