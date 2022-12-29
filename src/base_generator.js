@@ -96,7 +96,7 @@ import config from '../../garden.config.js'
 const app = new GardenFrame({
   target: document.body,
   hydrate: true,
-  props: {routes, componentmap, dasmap}
+  props: {routes, componentmap, dasmap, config}
 })
 
 export default app
