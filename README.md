@@ -138,6 +138,7 @@ MIT
 
 ### v1.1
 
+* [feature] screenshot-tests
 * [feature] Make Garden compatible with Vue.
 * [feature] Collapse panel button.
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
