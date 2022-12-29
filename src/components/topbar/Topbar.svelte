@@ -189,6 +189,7 @@
   .dropdown__items ul li button {
     display: flex;
     align-items: center;
+    width: 100%;
     padding: 0.5rem 1.25rem;
     font-size: 0.813rem;
     color: var(--c-basic-600);
