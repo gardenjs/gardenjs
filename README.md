@@ -128,7 +128,6 @@ MIT
 ### v1.0
 
 * [task] Add Markdownfile to panel for infos. v1 or v1.1?
-* [task] generate rabbit.config file -> javascript file and add config for css imports and theming. topbar: add class "active" to link in theme dropdown. add project title and style classes in config. Customizable if possible -> If possible: Add more files to panel navigation like "comments.md"
 * [refactor] Move logic to own file. handle user interaction.
 * [task] Show stage size in topbar.
 * [task] Build kickstarter for new projects with own github repository (like carrots but just as "hello world).
