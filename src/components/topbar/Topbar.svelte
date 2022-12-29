@@ -6,6 +6,7 @@
   export let dark = false
   export let landscape = false
   export let stageSize = 'full'
+  export let themes = []
 
   $: {
     if (dark)
@@ -46,6 +47,13 @@
       landscape
     })
   }
+
+  function handleThemeChange(theme) {
+    dispatch('out', {
+      selectTheme: theme
+    })
+  }
+
 </script>
 
 <div class="topbar">
@@ -80,9 +88,9 @@
         <button class="dropdown__btn" title="switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
         <div class="dropdown__items">
           <ul>
-            <li><a href="./" class="active">Default Theme</a></li>
-            <li><a href="./">Light Mode</a></li>
-            <li><a href="./">Dark Mode</a></li>
+            {#each themes as theme}
+            <li><button class:active="{theme.active}" on:click="{() => handleThemeChange(theme.name)}">{theme.name}</button></li>
+            {/each}            
           </ul>
         </div>
       </div>

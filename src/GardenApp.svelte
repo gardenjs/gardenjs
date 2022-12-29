@@ -37,7 +37,10 @@ let landscape = false
 let examples = {}
 let selectedStory
 let rootNodesExpanded = true
-$: project_title = config.project_title || ''
+
+$: themes = config.themes.map(theme => ({name: theme, active: false}))
+
+$: projectTitle = config.project_title || ''
 
 $: {
   examples = das.examples || []
@@ -61,6 +64,10 @@ function handleTopbarOut(evt) {
     targetWindow.onload = () => {
       targetWindow.postMessage({selectedStory, componentname}, window.location)
     }
+  }
+  else if (evt.detail.selectTheme) {
+    themes = themes.map(theme => ({ ...theme, active: theme.name === evt.detail.selectTheme }))
+    config.themehandler(evt.detail.selectTheme)
   }
   else {
     showSidebar = evt.detail.active
@@ -124,10 +131,10 @@ function isUnfolded(node, route) {
     <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
         <div slot="left" class="is-flexfix">
-          <Sidebar project_title={project_title} show={showSidebar} rootNodesExpanded={rootNodesExpanded} nodes={nodes} on:out={handleSidebarOut} />
+          <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={rootNodesExpanded} nodes={nodes} on:out={handleSidebarOut} />
         </div>
         <div slot="right" class="main">
-          <Topbar active={showSidebar} stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
+          <Topbar active={showSidebar} themes="{themes}" tageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
           <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} 
           stageSize={stageSize} landscape={landscape}/>
         </div>

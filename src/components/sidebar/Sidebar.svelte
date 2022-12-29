@@ -6,7 +6,7 @@
   export let nodes = []
   export let show
   export let rootNodesExpanded = true
-  export let project_title
+  export let projectTitle
   
   function toggleRootFolders() {
     dispatch('out', {toggleRootFolders: true})
@@ -16,7 +16,7 @@
   
   <div class="sidebar" class:show-sidebar={show}>
     <a class="project_title" href="/garden/">
-      <span>{project_title}</span>
+      <span>{projectTitle}</span>
     </a>
     <nav>
       <ul>
