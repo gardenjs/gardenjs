@@ -140,6 +140,7 @@ MIT
 * [feature] screenshot-tests
 * [feature] Make Garden compatible with Vue.
 * [feature] Collapse panel button.
+* [feature] Integrate Svelte A11y features.
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
 * [feature] Improve Garden for smaller displays:
   * Sidebarnav is closed by default on narrow display devices.
