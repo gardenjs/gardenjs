@@ -14,6 +14,7 @@ let currentRoute = ''
 export let routes
 export let navtree
 export let dasmap 
+export let config
 
 let das = {}
 let historystate
@@ -36,6 +37,7 @@ let landscape = false
 let examples = {}
 let selectedStory
 let rootNodesExpanded = true
+$: project_title = config.project_title || ''
 
 $: {
   examples = das.examples || []
@@ -79,7 +81,6 @@ function handleSidebarOut(evt) {
     } else {
       unfoldedNodes[node.key] = true
     }
-    console.log(unfoldedNodes[node.key])
     unfoldedNodes = unfoldedNodes
   }
   if (evt.detail.toggleRootFolders) {
@@ -123,7 +124,7 @@ function isUnfolded(node, route) {
     <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
         <div slot="left" class="is-flexfix">
-          <Sidebar show={showSidebar} rootNodesExpanded={rootNodesExpanded} nodes={nodes} on:out={handleSidebarOut} />
+          <Sidebar project_title={project_title} show={showSidebar} rootNodesExpanded={rootNodesExpanded} nodes={nodes} on:out={handleSidebarOut} />
         </div>
         <div slot="right" class="main">
           <Topbar active={showSidebar} stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />

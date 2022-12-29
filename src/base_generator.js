@@ -4,9 +4,10 @@ import {findAndReadDasFiles} from './das_file_finder.js'
 import config from './config.js'
 
 export async function generateGardenBase() {
-  const {structure, destination} = await config()
+  const {structure, destination, additional_style_files} = await config()
   const targetBaseFile = destination + 'base.js'
   const targetImportMapFile= destination + 'importmap.js'
+  const targetGardenFrameFile = destination + '/lib/gardenframe.js'
   
   const basefolders = getDasBaseFolders(structure)
 
@@ -20,8 +21,11 @@ export async function generateGardenBase() {
     }
   }, [])
 
+
+
   await writeFileIfChanged(targetBaseFile, generateBaseCode(cds))
   await writeFileIfChanged(targetImportMapFile, generateImportMapCode(cds))
+  await writeFileIfChanged(targetGardenFrameFile, generateGardenFrameFile(additional_style_files))
 }
 
 async function writeFileIfChanged(file, content) {
@@ -75,6 +79,26 @@ export const dasmap = {
 }
 `
 
+}
+
+function generateGardenFrameFile(stylefiles = []) {
+  return stylefiles.map(file => {
+    return `import '../../${file}'`
+  }).join('\n') + `
+
+import {GardenFrame} from 'garden'
+import {routes} from '../base.js'
+import {componentmap, dasmap} from '../importmap.js'
+import config from '../../garden.config.js'
+ 
+const app = new GardenFrame({
+  target: document.body,
+  hydrate: true,
+  props: {routes, componentmap, dasmap}
+})
+
+export default app
+  `
 }
 
 export function createNavItemTree(componentDescriptions) {
