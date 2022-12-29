@@ -35,6 +35,7 @@ let stageSize = 'full'
 let landscape = false
 let examples = {}
 let selectedStory
+let rootNodesExpanded = true
 
 $: {
   examples = das.examples || []
@@ -42,6 +43,13 @@ $: {
   if (historystate && historystate.selectedstory) {
     selectedStory = examples.find(ex => ex.story == historystate.selectedstory)?.story
   }
+}
+
+let unfoldedNodes = {}
+
+let nodes = []
+$: {
+  nodes = transformNavTree(currentRoute, componentname, unfoldedNodes, navtree)
 }
 
 
@@ -61,27 +69,40 @@ function handleTopbarOut(evt) {
 
 function handleSidebarOut(evt) {
   if (evt.detail.toggleFolderFoldStatus) {
+    if (!rootNodesExpanded) {
+      expandRootNode(evt.detail.toggleFolderFoldStatus)
+      return
+    }
     const node = evt.detail.toggleFolderFoldStatus
-    if (unfoldedNodes[node.key]) {
+    if (unfoldedNodes[node.key] && !(currentRoute.indexOf(node.key) === 0)) {
       unfoldedNodes[node.key] = false
     } else {
       unfoldedNodes[node.key] = true
     }
+    console.log(unfoldedNodes[node.key])
     unfoldedNodes = unfoldedNodes
   }
   if (evt.detail.toggleRootFolders) {
-    nodes = nodes.map(n => ({...n, unfolded: evt.detail.toggleRootFolders.expand}))
+    rootNodesExpanded = !rootNodesExpanded
+    nodes = nodes.map(n => ({...n, unfolded: rootNodesExpanded && unfoldedNodes[n.key]}))
   }
 }
 
-let unfoldedNodes = {}
-
-let nodes = []
-$: {
-  nodes = transformNavTree(currentRoute, componentname,  unfoldedNodes, navtree)
+function expandRootNode(node) {
+  rootNodesExpanded = true
+  nodes.map(n => {
+    if (n.key === node.key || currentRoute.indexOf(n.key) === 0) {
+      unfoldedNodes[n.key] = true
+      return {...n, unfolded: true}
+    }
+    else {
+      unfoldedNodes[n.key] = false
+      return {...n, unfolded: false}
+    }
+  })
 }
 
-function transformNavTree(route, selectedNode,  unfoldedNodes, nodes) {
+function transformNavTree(route, selectedNode, unfoldedNodes, nodes) {
   return nodes.map(child => {
     if (child.isLeaf) {
       return {...child, selected: selectedNode === child.key, isLeaf: true}
@@ -102,7 +123,7 @@ function isUnfolded(node, route) {
     <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
         <div slot="left" class="is-flexfix">
-          <Sidebar show={showSidebar} nodes={nodes} on:out={handleSidebarOut} />
+          <Sidebar show={showSidebar} rootNodesExpanded={rootNodesExpanded} nodes={nodes} on:out={handleSidebarOut} />
         </div>
         <div slot="right" class="main">
           <Topbar active={showSidebar} stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
