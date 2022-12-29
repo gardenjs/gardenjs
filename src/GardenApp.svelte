@@ -69,6 +69,9 @@ function handleSidebarOut(evt) {
     }
     unfoldedNodes = unfoldedNodes
   }
+  if (evt.detail.toggleRootFolders) {
+    nodes = nodes.map(n => ({...n, unfolded: evt.detail.toggleRootFolders.expand}))
+  }
 }
 
 let unfoldedNodes = {}

@@ -1,12 +1,15 @@
 <script>
   import SidebarNav from './SidebarNav.svelte'
+  import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
   
   export let nodes = []
   export let show
   let showSidebarNav = true
   
-  function toggleAllFolderStatus() {
+  function toggleRootFolders() {
     showSidebarNav = !showSidebarNav
+    dispatch('out', {toggleRootFolders: {expand: showSidebarNav}})
   }
   
   </script>
@@ -18,7 +21,7 @@
     <nav>
       <ul>
         <li>
-          <button class="unfold-all_button" title="fold/unfold all" on:click={toggleAllFolderStatus}>
+          <button class="unfold-all_button" title="fold/unfold all" on:click={toggleRootFolders}>
             <span class="unfold-all_label">Collapse Navigation</span>
             <span>
               {#if showSidebarNav}
@@ -30,9 +33,7 @@
           </button>
         </li>
       </ul>
-      {#if showSidebarNav}
       <SidebarNav nodes={nodes} on:out />
-      {/if}
       <ul>
         <li>
           <a class="github" href="https://github.com/rabbitdevelopment/garden" target="_blank">
