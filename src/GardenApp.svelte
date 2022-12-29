@@ -37,7 +37,6 @@ let landscape = false
 let examples = {}
 let selectedStory
 let rootNodesExpanded = true
-let stageBg = 'white'
 let themes = []
 let activeTheme
 
@@ -47,7 +46,6 @@ $: {
 
 $: {
   activeTheme = themes.find(t => t.active)
-  stageBg = activeTheme.stageBg
 }
 
 $: projectTitle = config.project_title || ''
@@ -72,7 +70,7 @@ function handleTopbarOut(evt) {
   if (evt.detail.openInTab) {
     const targetWindow = window.open('/garden/gardenframe/', '_blank')
     targetWindow.onload = () => {
-      targetWindow.postMessage({selectedStory, componentname}, window.location)
+      targetWindow.postMessage({selectedStory, componentname}, window.location.origin)
     }
   }
   else if (evt.detail.selectTheme) {
@@ -143,7 +141,7 @@ function isUnfolded(node, route) {
           <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={rootNodesExpanded} nodes={nodes} on:out={handleSidebarOut} />
         </div>
         <div slot="right" class="main">
-          <Topbar active={showSidebar} themes="{themes}" tageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
+          <Topbar active={showSidebar} themes="{themes}" stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
           <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} 
                  stageSize={stageSize} landscape={landscape} theme={activeTheme} />
         </div>
