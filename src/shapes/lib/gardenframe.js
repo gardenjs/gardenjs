@@ -1,7 +1,7 @@
 import {GardenFrame} from 'garden'
 import {routes} from '../base.js'
 import {componentmap, dasmap} from '../importmap.js'
-import config from 'rabbit.config.js'
+import config from './rabbit.config.js'
 
 if (config.additional_style_files) {
   config.additional_style_files.forEach(style_file) {
