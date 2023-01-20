@@ -1,8 +1,11 @@
 <script> 
+import { createEventDispatcher} from 'svelte'
 import HorizontalSplitPane from '../splitpanes/HorizontalSplitPane.svelte'
 import PanelComponent from '../panel/PanelComponent.svelte'
 import InputSelectionComponent from '../panel/PanelStoriesNav.svelte'
 import {computeStageStyle} from '../../stageSizes.js'
+
+const dispatch = createEventDispatcher()
 
 export let componentname
 export let das = {}
@@ -13,13 +16,27 @@ export let examples
 export let selectedStory
 export let theme 
 
+function updateStageRect(stageRect) {
+  dispatch('out', {
+    stageRect,
+  })
+}
+
 let myframeready 
 let myframe
 
 $: stageStyle = computeStageStyle({stageSize, landscape, stageBg: theme.stageBg})
 
+const resizeObserver = new ResizeObserver((entries) => {
+  entries.forEach(entry => {
+    updateStageRect(entry.contentRect)
+  })
+})
+
+
 $: {
   if (myframe) {
+    resizeObserver.observe(myframe)
     myframe.contentWindow.onload = () => {
       myframeready = true
     }
@@ -58,6 +75,7 @@ function handleSelectionChange(evt) {
 function tabselectionchange(evt) {
   selectedtab = evt.detail.selecteditem
 }
+
 
 
 </script>

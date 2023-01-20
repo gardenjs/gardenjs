@@ -7,6 +7,15 @@
   export let landscape = false
   export let stageSize = 'full'
   export let themes = []
+  export let stageRect
+
+  let stageWidth, stageHeight
+
+  $: {
+    ({width: stageWidth, height: stageHeight} = stageRect)
+    stageWidth = Math.round(stageWidth)
+    stageHeight = Math.round(stageHeight)
+  }
 
   $: {
     if (dark)
@@ -63,7 +72,7 @@
     </button>
     <div class="topbar__nav">
       <!-- future feature: show pixels value of stage. (styles below) -->
-      <div class="stagesize__value">1920px <span class="multiplication_sign">&#10005;</span> 986px</div>
+      <div class="stagesize__value">{stageWidth}px <span class="multiplication_sign">&#10005;</span> {stageHeight}px</div>
       <div class="stagesize-nav">
         <button rel="Small" class="tooltip" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="#currentColor"><path d="M15.5 1h-8A2.5 2.5 0 005 3.5v17A2.5 2.5 0 007.5 23h8a2.5 2.5 0 002.5-2.5v-17A2.5 2.5 0 0015.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/></svg>
