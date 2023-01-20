@@ -127,21 +127,21 @@ MIT
 
 ### v1.0
 
-* [task] Add Markdownfile to panel for infos. v1 or v1.1?
-* [refactor] Move logic to own file. handle user interaction.
-* [task] Show stage size in topbar.
-* [task] Build kickstarter for new projects with own github repository (like carrots but just as "hello world).
-* [task] check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
+* [feature] Add .md or .mdx to description in panel for text info. v1 or v1.1?
+* [feature] Add search to sidebar nav.
+* [refactor] Move logic to own file. handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
+* [task] Build mini demo for new projects with own github repository (like carrots but just as "hello world).
+* [task] install script / commandline skeleton project (example component.)
 * [task] Set repository public & make garden npm modul. (yarn?)
 
 ### v1.1
 
-* [feature] screenshot-tests
-* [feature] Make Garden compatible with Vue.
+* [task] Make Garden compatible with Vue.
 * [feature] Collapse panel button.
-* [feature] Integrate Svelte A11y features.
+* [feature] Screenshot-tests
+* [task] Integrate Svelte A11y features.
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
-* [feature] Improve Garden for smaller displays:
+* [task] Improve Garden for smaller displays:
   * Sidebarnav is closed by default on narrow display devices.
   * ...
 * [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi.
