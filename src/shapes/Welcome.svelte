@@ -1,37 +1,38 @@
-  <style>
-    *,
-    ::before,
-    ::after {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      padding: 2rem 1rem;
-      min-height: 100vh;
-      text-rendering: optimizeSpeed;
-      line-height: 1.5;
-      font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", Courier New, "monospace";
-    }
-    h1 {
-      margin: 1rem 0 1.5rem;
-      font-size: 2.2rem;
-      text-align: center;
-    }
-    p {
-      font-size: 1.4rem;
-      text-align: center;
-      font-weight: 500;
-    }
-    a {
-      color: hsl(168, 41%, 50%);
-      text-decoration: none;
-      border-bottom: 1px solid hsl(168, 41%, 50%);
-    }
-    a:hover{
-      color: hsl(168, 41%, 60%);
-      border-color: hsl(168, 41%, 60%);
-    } 
-  </style>
-  <h1>Welcome to Garden :)</h1>
-  <p>Woohoo, you've successfully installed the Component Library Explorer Garden. Have fun gardening.</p>
-  <p>Feel free to post bugs and suggestions on <a href="https://github.com/rabbitdevelopment/garden">Github</a>.</p>
+<style>
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", Courier New, "monospace";
+  }
+  h1 {
+    margin: 1rem 0 1.5rem;
+    font-size: 2.2rem;
+    text-align: center;
+  }
+  p {
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: 500;
+  }
+  a {
+    color: hsl(168, 41%, 50%);
+    text-decoration: none;
+    border-bottom: 1px solid hsl(168, 41%, 50%);
+  }
+  a:hover{
+    color: hsl(168, 41%, 60%);
+    border-color: hsl(168, 41%, 60%);
+  } 
+</style>
+
+<h1>Welcome to Garden :)</h1>
+<p>Woohoo, you've successfully installed the Component Library Explorer Garden. Have fun gardening.</p>
+<p>Feel free to post bugs and suggestions on <a href="https://github.com/rabbitdevelopment/garden">Github</a>.</p>
