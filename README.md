@@ -127,6 +127,7 @@ MIT
 
 ### v1.0
 
+* [task] Show favicon.svg (src/assets/icons/favicon.svg). Maybe with an alternate path through garden.config.js.
 * [feature] Add .md or .mdx to description in panel for text info. v1 or v1.1?
 * [feature] Add search to sidebar nav.
 * [refactor] Move logic to own file. handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
