@@ -68,11 +68,10 @@
 <div class="topbar">
   <div class="topbar__container">
     <button class="topbar__toggle-btn" on:click={toggleSidebar} title="toggle sidebar">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18"/></svg>
     </button>
     <div class="topbar__nav">
-      <!-- future feature: show pixels value of stage. (styles below) -->
-      <div class="stagesize__value">{stageWidth}px <span class="multiplication_sign">&#10005;</span> {stageHeight}px</div>
+      <div class="stagesize_value">{stageWidth}px <span class="multiplication_sign">&#10005;</span> {stageHeight}px</div>
       <div class="stagesize-nav">
         <button rel="Small" class="tooltip" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
@@ -247,20 +246,26 @@
   }
  
   /* futur feature */
-  .stagesize__value {
-    font-size: 0.813rem;
-    padding: 0 1.25rem;
-    color: var(--c-basic-500);
+  .stagesize_value {
+    display: none;
   }
-  .stagesize__value .multiplication_sign {
-    font-size: 0.563rem;
+  @media (min-width: 640px) {
+    .stagesize_value {
+      display: block;
+      font-size: 0.813rem;
+      padding: 0 1.25rem;
+      color: var(--c-basic-500);
+    }
+    .stagesize_value .multiplication_sign {
+      font-size: 0.563rem;
+    }
   }
 
    /* stagesize */
   .stagesize-nav {
     display: none;
   }
-  @media only screen and (min-width: 1280px) {
+  @media (min-width: 1280px) {
     .stagesize-nav {
       display: flex;
       flex-direction: row;
