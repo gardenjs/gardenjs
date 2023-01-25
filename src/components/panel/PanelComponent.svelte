@@ -63,7 +63,7 @@ const dispatch = createEventDispatcher()
   flex-direction: row;
   overflow-x: auto;
   height: 2rem;
-  margin: 0;
+  margin: 0 0 -1px;
   padding: 0;
 }
 .panel__nav nav li {
