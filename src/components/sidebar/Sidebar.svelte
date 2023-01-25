@@ -27,13 +27,13 @@
           </form>
         </li>
         <li>
-          <button class="unfold-all_button" title="fold/unfold all" on:click={toggleRootFolders}>
-            <span class="unfold-all_label">Collapse Navigation</span>
+          <button class="collapse_button" title="fold/unfold all" on:click={toggleRootFolders}>
+            <span class="collapse_label">Collapse Navigation</span>
             <span>
               {#if rootNodesExpanded}
-                <svg class="unfold-all_icon" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 11.323L5 12.49l5 5 5-5-1.167-1.167L10 15.157l-3.833-3.834zm0-2.631L5 7.525l5-5 5 5-1.167 1.167L10 4.858 6.167 8.692z"/></svg>
+                <svg class="collapse_icon" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 11.323L5 12.49l5 5 5-5-1.167-1.167L10 15.157l-3.833-3.834zm0-2.631L5 7.525l5-5 5 5-1.167 1.167L10 4.858 6.167 8.692z"/></svg>
               {:else}
-                <svg class="unfold-all_icon" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 17.49L5 16.323l5-5 5 5-1.167 1.167L10 13.656 6.167 17.49zm0-14.965L5 3.692l5 5 5-5-1.167-1.167L10 6.359 6.167 2.525z"/></svg>
+                <svg class="collapse_icon" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M6.167 17.49L5 16.323l5-5 5 5-1.167 1.167L10 13.656 6.167 17.49zm0-14.965L5 3.692l5 5 5-5-1.167-1.167L10 6.359 6.167 2.525z"/></svg>
               {/if}
             </span>
           </button>
@@ -110,7 +110,6 @@
     width: calc(100% - 2.5rem);
     height: 2rem;
     border: none;
-    color: blue;
   }
   .searchform_input::placeholder {
     font-size: 0.813rem;
@@ -132,37 +131,36 @@
   .searchform_submit svg {
     color: var(--c-primary);
   }
-  .unfold-all_button {
+  .collapse_button {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: 2rem;
     margin: 0;
-    padding: 0.5rem 0.75rem 0.5rem 0.688rem;
+    padding: 0 0.688rem;
     text-align: left;
     background-color: transparent;
     border-bottom: 1px solid var(--c-basic-300);
     cursor: pointer;
   }
-  .unfold-all_button:hover {
+  .collapse_button:hover {
     background-color: var(--c-basic-150);
   }
-  .unfold-all_label {
+  .collapse_label {
     display: flex;
     align-self: center;
     width: 100%;
     color: var(--c-basic-900);
     font-size: 0.75rem;
   }
-  .unfold-all_icon {
+  .collapse_icon {
     display: flex;
     order: 2;
     width: 1rem;
     height: 1rem;
     transition: 0.2s;
     margin-left: 0;
-    margin-right: 0.25rem;
     fill: var(--c-basic-900);
   }
   .github {
