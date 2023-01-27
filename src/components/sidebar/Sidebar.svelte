@@ -22,7 +22,7 @@
       <ul>
         <li class="search">
           <form id="search" class="searchform" method="post" action="">
-            <input class="searchform_input" type="text" name="" value="" placeholder="search term">
+            <input class="searchform_input" type="text" name="" value="" placeholder="filter">
             <button id="searchform_submit" class="searchform_submit" name="search[submitButton]" title="send search request"><svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
           </form>
         </li>
