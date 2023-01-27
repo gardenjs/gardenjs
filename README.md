@@ -128,16 +128,16 @@ MIT
 ### v1.0
 
 * [task] Show favicon.svg (src/assets/icons/favicon.svg). Maybe with an alternate path through garden.config.js.
-* [feature] Add .md or .mdx to description in panel for text info. v1 or v1.1?
 * [feature] Add search to sidebar nav.
+* [feature] Add .md or .mdx to description in panel for text info. v1 or v1.1?
 * [refactor] Move logic to own file. handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
+* [task] Make Garden compatible with Vue.
 * [task] Build mini demo for new projects with own github repository (like carrots but just as "hello world).
 * [task] install script / commandline skeleton project (example component.)
 * [task] Set repository public & make garden npm modul. (yarn?)
 
 ### v1.1
 
-* [task] Make Garden compatible with Vue.
 * [feature] Collapse panel button.
 * [feature] Screenshot-tests
 * [task] Integrate Svelte A11y features.
