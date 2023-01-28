@@ -1,28 +1,28 @@
 # Component library explorer
 
-Garden is a lightweight UI explorer for Svelte projects that helps you build, test and display UI components and pages. Create design systems for Svelte projects.
+Garden is a lightweight UI explorer for JavaScript frontend libraries that helps you build, test and display UI components and pages. Svelte[, Vue and React] are currently supported out of the box. But other libraries can also be easily connected to Garden.
 <br><br>
 
 ## This is Garden
 
-Garden is the showroom for what you grow. The explorer represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for Svelte projects of any size and runs outside of your app for an absolute independence. Code changes are reflected at the speed of light by the build tool Vite. Garden is an Open Source project under the MIT License.
+Garden is the showroom for what you grow. The explorer represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for JavaScript frontend projects of any size. Code changes are reflected at the speed of light by the build tool Vite. Garden is an Open Source project under the MIT License.
 <br><br>
 
-## Getting Started
+## Getting Started (Examples for Svelte)
 
-Create a new directory outside of the Svelte project and install Garden with NPM: [not yet, now: instead: checkout garden in garden base folder: 'npm link' or 'sudo npm link']
+Install Garden inside your project with NPM: [not yet, now: instead: checkout garden in garden base folder: 'npm link' or 'sudo npm link']
 
 ```bash
 npm install --save-dev garden
 ```
 
-Go to the root directory of your Svelte project:
+Go to the root directory of your project:
 
 ```text
-create rabbit.config.json file
+create garden.config.json file
 ```
 
-Example configuration for your rabbit.config.json file:
+Svelte example configuration for your garden.config.json file:
 
 ```json
 {
@@ -59,13 +59,16 @@ run initGarden
 
 ### Run Garden
 
-Run `serveGarden` from the root of the Svelte project. Or add it to your `package.json` there and run it via `npm run garden` :
+Run `serveGarden` from the root of the project. Or add it to your `package.json` there and run it via `npm run garden` :
 
 ```json
   "scripts": {
     "garden": "serveGarden",
   },
 ```
+
+### Configure Garden with project-specific settings
+With the garden.config.js you have various options to customize Garden to suit your project. Take a look at the file for a quick overview of the options already implemented. Here you can also make your own individual adjustments with JavaScript, e.g. to output your components in Garden with your created themes.
 
 ### Open Garden
 
@@ -131,7 +134,7 @@ MIT
 * [feature] Add search to sidebar nav.
 * [feature] Add .md or .mdx to description in panel for text info. v1 or v1.1?
 * [refactor] Move logic to own file. handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
-* [task] Make Garden compatible with Vue.
+* [task] Make Garden compatible with Vue & React.
 * [task] Build mini demo for new projects with own github repository (like carrots but just as "hello world).
 * [task] install script / commandline skeleton project (example component.)
 * [task] Set repository public & make garden npm modul. (yarn?)
