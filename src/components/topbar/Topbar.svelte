@@ -68,7 +68,8 @@
 <div class="topbar">
   <div class="topbar__container">
     <button class="topbar__toggle-btn" on:click={toggleSidebar} title="toggle sidebar">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18m7-6l-3-3 3-3"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18m5-12l3 3-3 3"/></svg>
     </button>
     <div class="topbar__nav">
       <div class="stagesize_value">{stageWidth}px <span class="multiplication_sign">&#10005;</span> {stageHeight}px</div>
