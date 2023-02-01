@@ -131,6 +131,8 @@ MIT
 ### v1.0
 
 * [task] Show favicon.svg (src/assets/icons/favicon.svg). Maybe with an alternate path through garden.config.js.
+* [task] Change title tag depending on the active state of sidebar toggle Btn & dark/light mode btn in topbar. Also in sidebar the btn-title of the collapse nav btn.
+* [task] Rename welcome.html in hellogarden.html.
 * [feature] Add search to sidebar nav.
 * [feature] Add .md or .mdx to description in panel for text info. v1 or v1.1?
 * [refactor] Move logic to own file. handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
@@ -141,7 +143,7 @@ MIT
 
 ### v1.1
 
-* [feature] Collapse panel button.
+* [feature] Collapse/expand panel button in sidebar and close btn in panel nav.
 * [feature] Screenshot-tests
 * [task] Integrate Svelte A11y features.
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
