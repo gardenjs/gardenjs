@@ -1,26 +1,25 @@
 # Component library explorer
 
-Garden is a lightweight UI explorer for JavaScript frontend libraries that helps you build, test and display UI components and pages. Svelte[, Vue and React] are currently supported out of the box. But other libraries can also be easily connected to Garden.
+Garden is a lightweight UI explorer for JavaScript frontend libraries that helps you build, test and display UI components and pages. Svelte[, Vue and React] are currently supported out of the box. Other libraries can also be easily connected to Garden.
 <br><br>
 
 ## This is Garden
 
-Garden is the showroom for what you grow. The explorer represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for JavaScript frontend projects of any size. Code changes are reflected at the speed of light by the build tool Vite. Garden is an Open Source project under the MIT License.
+Garden is the showroom for what you grow. The explorer represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for JavaScript frontend projects of any size. Code changes are reflected at the speed of light by the build tool Vite. Garden is an MIT-licensed open source project.
 <br><br>
 
 ## Getting Started (Examples for Svelte)
 
-Install Garden inside your project with NPM: [not yet, now: instead: checkout garden in garden base folder: 'npm link' or 'sudo npm link']
+Install Garden inside your project root with NPM: [not yet, now: instead: checkout garden in garden base folder: 'npm link' or 'sudo npm link']
 
 ```bash
 npm install --save-dev garden
 ```
+[not yet ...]
+Follow the installation routine.
 
-Go to the root directory of your project:
-
-```text
-create garden.config.json file
-```
+In the root directory you will now find your Garden configuration file 'garden.config.js' to adapt Garden to your project.
+[... not yet!]
 
 Svelte example configuration for your garden.config.json file:
 
@@ -68,11 +67,11 @@ Run `serveGarden` from the root of the project. Or add it to your `package.json`
 ```
 
 ### Configure Garden with project-specific settings
-With the garden.config.js you have various options to customize Garden to suit your project. Take a look at the file for a quick overview of the options already implemented. Here you can also make your own individual adjustments with JavaScript, e.g. to output your components in Garden with your created themes.
+With the garden.config.js you have various options to customize Garden to suit your project. Take a look at the file for a quick overview of the options already implemented. Here you can also make your own individual adjustments with JavaScript, e.g. to switch between your different themes.
 
 ### Open Garden
 
-Open Garden in the browser via `http://localhost:<serverport>/garden`. The server port is defined in the `rabbit.config.json` file, e.g. 3010.
+Open Garden in the browser via `http://localhost:<serverport>/garden`. The server port is defined in `garden.config.js`, the default setting is 3010.
 <br><br>
 
 ## Output of components (and pages) and add variants or states
