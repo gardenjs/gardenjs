@@ -97,6 +97,7 @@
   .search {
     height: 2rem;
     padding: 0 0 0 0.688rem;
+    background-color: #fff;
     border-bottom: 1px solid var(--c-basic-300);
     overflow: hidden;
   }
