@@ -67,7 +67,7 @@
 
 <div class="topbar">
   <div class="topbar__container">
-    <button class="topbar__toggle-btn" on:click={toggleSidebar} title="toggle sidebar">
+    <button class="topbar__toggle-btn" on:click={toggleSidebar} title="Collapse/Toggle sidebar">
       <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18m7-6l-3-3 3-3"/></svg>
       <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18m5-12l3 3-3 3"/></svg>
     </button>
@@ -94,7 +94,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3"/></svg>
       </button>
       <div class="dropdown">
-        <button class="dropdown__btn" title="switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <button class="dropdown__btn" title="Switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="dropdown__items">
           <ul>
             {#each themes as theme}
@@ -103,7 +103,7 @@
           </ul>
         </div>
       </div>
-      <button class="switch-mode" on:click={toggleDarkmode} title="dark/light mode">
+      <button class="switch-mode" on:click={toggleDarkmode} title="Dark/Light mode">
         {#if dark}
         <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon" width="20" viewBox="0 0 24 24" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
         {:else }
