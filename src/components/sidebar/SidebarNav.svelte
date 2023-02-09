@@ -59,8 +59,8 @@
   order: 1;
   width: 100%;
   color: var(--c-basic-900);
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.813rem;
+  font-weight: 500;
   text-transform: uppercase;
 }
 .folder_button:hover .folder_label {
