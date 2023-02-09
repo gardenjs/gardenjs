@@ -170,7 +170,7 @@
     justify-content: center;
     align-items: center; 
     margin: 1rem 0;
-    padding: 0.5rem 0.5rem 0.5rem 0.688rem;
+    padding: 0 0.5rem 0 0.688rem;
   }
   a.github svg {
     display: block;
