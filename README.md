@@ -143,6 +143,7 @@ MIT
 ### v1.1
 
 * [feature] Collapse/expand panel button in sidebar and close btn in panel nav.
+* [feature] Set default mode in garden.config.json.
 * [feature] Screenshot-tests
 * [task] Integrate Svelte A11y features.
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
