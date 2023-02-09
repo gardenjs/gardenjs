@@ -97,7 +97,7 @@
   .search {
     height: 2rem;
     padding: 0 0 0 0.688rem;
-    background-color: #fff;
+    background-color: var(--c-white);
     border-bottom: 1px solid var(--c-basic-300);
     overflow: hidden;
   }
@@ -110,11 +110,12 @@
     padding: 0.125rem;
     width: calc(100% - 2.5rem);
     height: 2rem;
+    background-color: var(--c-white);
     border: none;
   }
   .searchform_input::placeholder {
     font-size: 0.813rem;
-    color: var(--c-basic-500);
+    color: var(--c-basic-700);
   }
   .searchform_input:focus {
     outline: none;
