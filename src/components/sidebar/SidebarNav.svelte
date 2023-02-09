@@ -58,13 +58,13 @@
   align-self: center;
   order: 1;
   width: 100%;
-  color: var(--c-basic-900);
+  color: var(--c-basic-600);
   font-size: 0.813rem;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: uppercase;
 }
 .folder_button:hover .folder_label {
-  color: var(--c-basic-500);
+  color: var(--c-basic-900);
 }
 .folder_icon {
   display: flex;
