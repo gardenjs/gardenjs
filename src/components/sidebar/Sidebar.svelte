@@ -27,7 +27,7 @@
           </form>
         </li>
         <li>
-          <button class="collapse_button" title="fold/unfold all" on:click={toggleRootFolders}>
+          <button class="collapse_button" title="{rootNodesExpanded ? 'fold all' : 'unfold'}" on:click={toggleRootFolders}>
             <span class="collapse_label">Collapse Navigation</span>
             <span>
               {#if rootNodesExpanded}
