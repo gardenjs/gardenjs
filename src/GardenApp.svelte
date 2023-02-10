@@ -135,15 +135,25 @@ function expandRootNode(node) {
 function transformNavTree(route, selectedNode, unfoldedNodes, nodes, filterNavtree, parentVisible) {
   return nodes.map(child => {
     const filterMatches = filterNavtree ? child.name?.toLowerCase().includes(filterNavtree) : true
+    const name = filterNavtree && filterMatches ? highlightFilterMatch(child.name, filterNavtree) : child.name
     if (child.isLeaf) {
       const visible = parentVisible || filterMatches
-      return visible ? {...child, selected: selectedNode === child.key, isLeaf: true } : undefined
+      return visible ? {...child, name, selected: selectedNode === child.key, isLeaf: true } : undefined
     } else {
       const children = transformNavTree(currentRoute, selectedNode, unfoldedNodes, child.children, filterNavtree, parentVisible || filterMatches).filter(n => n)
       const visible = filterMatches || children.length > 0
-      return visible ? {...child, children, unfolded: isUnfolded(child, route, filterNavtree, visible), filterMatches} : undefined
+      return visible ? {...child, name, children, unfolded: isUnfolded(child, route, filterNavtree, visible), filterMatches} : undefined
     }
   }).filter(n => n)
+}
+
+function highlightFilterMatch(text, filter) {
+  const matchStart = text.toLowerCase().indexOf(filter)
+  const matchEnd = matchStart + filter.length
+  const start = text.substring(0, matchStart)
+  const middle = text.substring(matchStart, matchEnd)
+  const end = text.substring(matchEnd)
+  return `${start}<span class="highlight">${middle}</span>${end}`
 }
 
 function isUnfolded(node, route, filter, visible) {
