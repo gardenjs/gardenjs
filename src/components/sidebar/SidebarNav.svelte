@@ -106,7 +106,9 @@
 .btn_level-3 .folder_label {
   font-size: 0.813rem;
 }
-.highlight {
-  background-color: yellow;
+.list :global(.highlight) {
+  background-color: var(--c-primary);
+  color: #fff;
+  font-weight: 600;
 }
 </style>
