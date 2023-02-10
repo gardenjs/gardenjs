@@ -127,8 +127,6 @@ MIT
 ### v1.0
 
 * [task] Show favicon.svg (src/assets/icons/favicon.svg). Maybe with an alternate path through garden.config.js.
-* [task] Change title tag depending on the active state of sidebar toggle Btn & dark/light mode btn in topbar. Also in sidebar the btn-title of the collapse nav btn.
-* [task] Rename welcome.html in hellogarden.html.
 * [feature] Add search to sidebar nav.
 * [garden] add garden build with compiled js & scss files.
 * [feature] Add .md or .mdx to description in panel for text info. v1 or v1.1?
