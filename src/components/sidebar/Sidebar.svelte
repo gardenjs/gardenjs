@@ -11,6 +11,10 @@
   function toggleRootFolders() {
     dispatch('out', {toggleRootFolders: true})
   }
+
+  function updateFilter(event) {
+    dispatch('out', {filter: {value : event.target.value}})
+  }
   
   </script>
   
@@ -21,10 +25,10 @@
     <nav>
       <ul>
         <li class="search">
-          <form id="search" class="searchform" method="post" action="">
-            <input class="searchform_input" type="text" name="" value="" placeholder="filter">
-            <button id="searchform_submit" class="searchform_submit" name="search[submitButton]" title="send search request"><svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
-          </form>
+          <div class="searchfield">
+            <input class="searchfield_input" type="text" name="" value="" placeholder="filter" on:input={updateFilter}>
+            <button class="searchfield_submit" title="send search request"><svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+          </div>
         </li>
         <li>
           <button class="collapse_button" title="{rootNodesExpanded ? 'fold all' : 'unfold'}" on:click={toggleRootFolders}>
@@ -101,26 +105,26 @@
     border-bottom: 1px solid var(--c-basic-300);
     overflow: hidden;
   }
-  .searchform {
+  .searchfield {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .searchform_input {
+  .searchfield_input {
     padding: 0.125rem;
     width: calc(100% - 2.5rem);
     height: 2rem;
     background-color: var(--c-white);
     border: none;
   }
-  .searchform_input::placeholder {
+  .searchfield_input::placeholder {
     font-size: 0.813rem;
     color: var(--c-basic-700);
   }
-  .searchform_input:focus {
+  .searchfield_input:focus {
     outline: none;
   }
-  .searchform_submit {
+  .searchfield_submit {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,7 +134,7 @@
     border: none;
     cursor: pointer;
   }
-  .searchform_submit svg {
+  .searchfield_submit svg {
     color: var(--c-primary);
   }
   .collapse_button {

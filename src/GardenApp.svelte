@@ -39,6 +39,7 @@ let selectedStory
 let rootNodesExpanded = true
 let themes = []
 let activeTheme
+let filterNavtree
 
 let stageRect = {
   stageWidth: 900,
@@ -67,7 +68,7 @@ let unfoldedNodes = {}
 
 let nodes = []
 $: {
-  nodes = transformNavTree(currentRoute, componentname, unfoldedNodes, navtree)
+  nodes = transformNavTree(currentRoute, componentname, unfoldedNodes, navtree, filterNavtree)
 }
 
 
@@ -112,6 +113,9 @@ function handleSidebarOut(evt) {
     rootNodesExpanded = !rootNodesExpanded
     nodes = nodes.map(n => ({...n, unfolded: rootNodesExpanded && unfoldedNodes[n.key]}))
   }
+  if (evt.detail.filter) {
+    filterNavtree = evt.detail.filter.value?.toLowerCase() || undefined
+  }
 }
 
 function expandRootNode(node) {
@@ -128,18 +132,22 @@ function expandRootNode(node) {
   })
 }
 
-function transformNavTree(route, selectedNode, unfoldedNodes, nodes) {
+function transformNavTree(route, selectedNode, unfoldedNodes, nodes, filterNavtree, parentVisible) {
   return nodes.map(child => {
+    const filterMatches = filterNavtree ? child.name?.toLowerCase().includes(filterNavtree) : true
     if (child.isLeaf) {
-      return {...child, selected: selectedNode === child.key, isLeaf: true}
+      const visible = parentVisible || filterMatches
+      return visible ? {...child, selected: selectedNode === child.key, isLeaf: true } : undefined
     } else {
-      return {...child, children: transformNavTree(currentRoute, selectedNode, unfoldedNodes, child.children), unfolded: isUnfolded(child, route) }
+      const children = transformNavTree(currentRoute, selectedNode, unfoldedNodes, child.children, filterNavtree, parentVisible || filterMatches).filter(n => n)
+      const visible = filterMatches || children.length > 0
+      return visible ? {...child, children, unfolded: isUnfolded(child, route, filterNavtree, visible), filterMatches} : undefined
     }
-  })
+  }).filter(n => n)
 }
 
-function isUnfolded(node, route) {
-  return unfoldedNodes[node.key] || route.indexOf(node.key) === 0
+function isUnfolded(node, route, filter, visible) {
+  return (filter && visible) || unfoldedNodes[node.key] || route.indexOf(node.key) === 0
 }
 
 </script>

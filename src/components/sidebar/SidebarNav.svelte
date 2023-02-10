@@ -4,6 +4,8 @@
   const dispatch = createEventDispatcher()
   export let nodes = []
   export let level = 1
+
+  $: filteredNodes = nodes.filter(n => n)
   function toggleFolderFoldStatus(node) {
     dispatch('out', {toggleFolderFoldStatus: {...node}})
   }
@@ -11,7 +13,7 @@
 </script>
 
 <ul class="list list_level-{level}">
-  {#each nodes as node }
+  {#each filteredNodes as node }
     {#if node.isLeaf}
       <li>
         <Link href={node.href} selected={node.selected} level={level}>{node.name}</Link>
