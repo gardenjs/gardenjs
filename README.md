@@ -12,9 +12,10 @@ Garden is the showroom for what you grow. The explorer represents each component
 
 Install Garden inside your project root with NPM: [not yet, now: instead: checkout garden in garden base folder: 'npm link' or 'sudo npm link']
 
-```bash
+```console
 npm install --save-dev garden
 ```
+
 [not yet ...]
 Follow the installation routine.
 
@@ -114,11 +115,6 @@ export default {
 }
 ```
 <br>
-
-## Svelte project kickstarter
-
-Check out [Carrots](https://github.com/rabbitdevelopment/carrots) if you're interested in a fully customizable "hello world" Kickstarter for new Svelte project. Carrots is Garden ready out of the box.
-<br><br>
 
 ## License
 
