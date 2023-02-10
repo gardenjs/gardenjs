@@ -107,6 +107,7 @@
   font-size: 0.813rem;
 }
 .list :global(.highlight) {
+  padding: 0 0.125rem;
   background-color: var(--c-primary);
   color: #fff;
   font-weight: 600;

@@ -26,7 +26,7 @@
       <ul>
         <li class="search">
           <div class="searchfield">
-            <input class="searchfield_input" type="text" name="" value="" placeholder="filter" on:input={updateFilter}>
+            <input class="searchfield_input" type="text" name="" value="" placeholder="Filter" on:input={updateFilter}>
             <button class="searchfield_submit" title="send search request"><svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
           </div>
         </li>
