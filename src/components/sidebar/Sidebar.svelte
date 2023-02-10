@@ -7,6 +7,7 @@
   export let show
   export let rootNodesExpanded = true
   export let projectTitle
+  export let filter
   
   function toggleRootFolders() {
     dispatch('out', {toggleRootFolders: true})
@@ -26,10 +27,15 @@
       <ul>
         <li class="search">
           <div class="searchfield">
-            <input class="searchfield_input" type="text" name="" value="" placeholder="Filter" on:input={updateFilter}>
+            <input class="searchfield_input" type="text" value={filter || ''} placeholder="Filter" on:input={updateFilter}>
             <button class="searchfield_submit" title="send search request"><svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
           </div>
         </li>
+        {#if nodes.length == 0 && filter}
+        <li>
+          <div class="nosearchresult">No results found for '{filter}'</div>
+        </li>
+        {:else}
         <li>
           <button class="collapse_button" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
             <span class="collapse_label">{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span>
@@ -42,8 +48,9 @@
             </span>
           </button>
         </li>
+        {/if}
       </ul>
-      <SidebarNav nodes={nodes} on:out />
+      <SidebarNav nodes={nodes} filter={filter} on:out />
       <ul>
         <li>
           <a class="github" href="https://github.com/rabbitdevelopment/garden" target="_blank" rel="noreferrer">
@@ -191,6 +198,15 @@
   }
   a.github:hover span {
     border-color: transparent;
+  }
+  .nosearchresult {
+    padding: 0.188rem 0 0.188rem 0.75rem;
+    text-transform: initial;
+    font-weight: 400;
+    font-size: 0.813rem;
+    color: var(--c-basic-600);
+    border-left: 1px solid var(--c-basic-300);
+
   }
   </style>
   
