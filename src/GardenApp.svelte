@@ -64,7 +64,27 @@ $: {
   }
 }
 
-let unfoldedNodes = {}
+let unfoldedNodes
+let initialized = false
+$: {
+  if (!initialized && navtree) {
+    const all = navtree.flatMap(getAllNodes)
+    unfoldedNodes = all.reduce((acc, cur) => {
+      acc[cur.key] = true
+      return acc
+    }, {})
+    initialized = true
+  }
+}
+
+function getAllNodes(node) {
+  return [node, ...getAllChildNodes(node)]
+}
+
+function getAllChildNodes(node) {
+  return node.children ? node.children.flatMap(getAllNodes) : []
+}
+
 
 let nodes = []
 $: {
@@ -120,7 +140,8 @@ function handleSidebarOut(evt) {
 
 function expandRootNode(node) {
   rootNodesExpanded = true
-  nodes.map(n => {
+  Object.keys(unfoldedNodes).forEach(key => unfoldedNodes[key] = false)
+  nodes = nodes.map(n => {
     if (n.key === node.key || currentRoute.indexOf(n.key) === 0) {
       unfoldedNodes[n.key] = true
       return {...n, unfolded: true}
