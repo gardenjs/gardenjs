@@ -114,6 +114,7 @@ export default {
   ]
 }
 ```
+
 <br>
 
 ## License
@@ -129,6 +130,7 @@ MIT
 * [task] Change title tag depending on the active state of sidebar toggle Btn & dark/light mode btn in topbar. Also in sidebar the btn-title of the collapse nav btn.
 * [task] Rename welcome.html in hellogarden.html.
 * [feature] Add search to sidebar nav.
+* [garden] add garden build with compiled js & scss files.
 * [feature] Add .md or .mdx to description in panel for text info. v1 or v1.1?
 * [refactor] Move logic to own file. handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
 * [task] Make Garden compatible with Vue & React.
