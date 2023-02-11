@@ -67,7 +67,7 @@
 
 <div class="topbar">
   <div class="topbar__container">
-    <button class="topbar__toggle-btn" on:click={toggleSidebar} title={ active ? 'Collapse sidebar' : 'Expand sidebar'}>
+    <button class="sidebar_toggle" on:click={toggleSidebar} title={ active ? 'Collapse sidebar' : 'Expand sidebar'}>
       {#if active}
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18m7-6l-3-3 3-3"/></svg>
       {:else}
@@ -132,20 +132,20 @@
     height: 100%;
     padding: 0;
   }
-  .topbar__toggle-btn {
-    padding: 0 1rem;
+  .sidebar_toggle {
+    padding: 0 0.75rem;
     height: 2.75rem;
     background: none;
     cursor: pointer;
   }
-  .topbar__toggle-btn:hover {
+  .sidebar_toggle:hover {
     background-color: var(--c-basic-150);
   }
-  .topbar__toggle-btn svg {
+  .sidebar_toggle svg {
     height: 1.125rem;
     color: var(--c-basic-700);
   }
-  .topbar__toggle-btn:hover svg {
+  .sidebar_toggle:hover svg {
     color: var(--c-primary);
   }
   .topbar__nav {
