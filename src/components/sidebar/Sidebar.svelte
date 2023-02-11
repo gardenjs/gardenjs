@@ -33,7 +33,7 @@
         </li>
         {#if nodes.length == 0 && filter}
         <li>
-          <div class="nosearchresult">No results found for '{filter}'</div>
+          <div class="nosearchresult">No results for '{filter}'</div>
         </li>
         {:else}
         <li>
@@ -121,6 +121,7 @@
     padding: 0.125rem;
     width: calc(100% - 2.5rem);
     height: 2rem;
+    color: var(--c-basic-900);
     background-color: var(--c-white);
     border: none;
   }
@@ -200,13 +201,15 @@
     border-color: transparent;
   }
   .nosearchresult {
-    padding: 0.188rem 0 0.188rem 0.75rem;
+    width: 260px;
+    padding: 1.25rem 0.688rem 0.375rem 0.688rem;
     text-transform: initial;
-    font-weight: 400;
     font-size: 0.813rem;
     color: var(--c-basic-600);
-    border-left: 1px solid var(--c-basic-300);
-
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   </style>
   
