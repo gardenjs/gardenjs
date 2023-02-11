@@ -69,8 +69,7 @@
     max-width: 260px;
     height: 100vh;
     overflow-x: hidden;
-    background-color: var(--c-basic-50);
-    border-right: 1px solid var(--c-basic-300);
+    background-color: var(--c-basic-100);
     transition: width 0.2s;
   }
   .show-sidebar {
@@ -95,6 +94,7 @@
     text-decoration: none;
     font-weight: 900;
     line-height: 1;
+    background-color: var(--c-basic-50);
     border-bottom: 1px solid var(--c-basic-300);
   }
   .project_title span {
@@ -107,9 +107,8 @@
   }
   .search {
     height: 2rem;
-    padding: 0 0 0 0.688rem;
     background-color: var(--c-white);
-    border-bottom: 1px solid var(--c-basic-300);
+    /* border-bottom: 1px solid var(--c-basic-300); */
     overflow: hidden;
   }
   .searchfield {
@@ -118,7 +117,7 @@
     align-items: center;
   }
   .searchfield_input {
-    padding: 0.125rem;
+    padding: 0.125rem 0.125rem 0.125rem 0.688rem;;
     width: calc(100% - 2.5rem);
     height: 2rem;
     color: var(--c-basic-900);
@@ -138,7 +137,7 @@
     align-items: center;
     width: 2.5rem;
     height: 2rem;
-    background-color: var(--c-basic-150);
+    background-color: var(--c-basic-100);
     border: none;
     cursor: pointer;
   }
@@ -155,11 +154,12 @@
     padding: 0 0.688rem;
     text-align: left;
     background-color: transparent;
-    border-bottom: 1px solid var(--c-basic-300);
+    background-color: var(--c-basic-150);
+    /* border-bottom: 1px solid var(--c-basic-300); */
     cursor: pointer;
   }
   .collapse_button:hover {
-    background-color: var(--c-basic-150);
+    background-color: var(--c-basic-100);
   }
   .collapse_label {
     display: flex;
@@ -202,7 +202,7 @@
   }
   .nosearchresult {
     width: 260px;
-    padding: 1.25rem 0.688rem 0.375rem 0.688rem;
+    padding: 0.5rem 0.688rem 0.375rem 0.688rem;
     text-transform: initial;
     font-size: 0.813rem;
     color: var(--c-basic-600);

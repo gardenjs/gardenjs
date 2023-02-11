@@ -34,9 +34,8 @@
 
 <style>
 .list_level-1 {
-  padding-bottom: 0.75rem;
-  border: none;
-  border-bottom: 1px solid var(--c-basic-300);
+  padding: 0.5rem 0 1.25rem;
+  /* border-bottom: 1px solid var(--c-basic-300); */
 }
 .folder {
   display: block;
