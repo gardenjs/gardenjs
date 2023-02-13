@@ -37,7 +37,7 @@
         </li>
         {:else}
         <li>
-          <button class="collapse_button" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
+          <button class="collapse_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
             <span class="collapse_label">{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span>
             <span>
               {#if rootNodesExpanded}
@@ -94,8 +94,8 @@
     text-decoration: none;
     font-weight: 900;
     line-height: 1;
-    background-color: var(--c-basic-50);
-    border-bottom: 1px solid var(--c-basic-300);
+    /* background-color: var(--c-basic-50);
+    border-bottom: 1px solid var(--c-basic-300); */
   }
   .project_title span {
     overflow: hidden;
@@ -144,7 +144,7 @@
   .searchfield_submit svg {
     color: var(--c-primary);
   }
-  .collapse_button {
+  .collapse_btn {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -158,7 +158,7 @@
     /* border-bottom: 1px solid var(--c-basic-300); */
     cursor: pointer;
   }
-  .collapse_button:hover {
+  .collapse_btn:hover {
     background-color: var(--c-basic-100);
   }
   .collapse_label {
