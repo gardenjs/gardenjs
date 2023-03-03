@@ -5,3 +5,4 @@
 *.sw?
 /public/build
 *.DS_Store
+tmuxdev.sh
