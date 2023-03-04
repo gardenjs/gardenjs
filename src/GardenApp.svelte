@@ -47,7 +47,7 @@ let stageRect = {
 }
 
 $: {
-  themes = config.themes.map((theme, index) => ({...theme, active: index === 0}))
+  themes = config.themes?.map((theme, index) => ({...theme, active: index === 0})) || []
 }
 
 $: {

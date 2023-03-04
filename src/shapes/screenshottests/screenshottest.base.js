@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer'
-import {routes} from '../garden/base'
+import { routes } from '../garden/base'
+import { dasmap } from '../garden/importmap'
 import { toMatchImageSnapshot } from 'jest-image-snapshot'
 
 expect.extend({ toMatchImageSnapshot })
@@ -14,25 +15,29 @@ describe('Component Screenshot Test', () => {
     page = await browser.newPage()
     await page.goto(url, {waitUntil: 'networkidle0', timeout: 60000})
     await page.setViewport({width: 600, height: 800})
+    await page.addStyleTag({path: 'garden/screenshottests/disable_animations.css'})
   })
   afterAll(async () => {
     await page.close()
     await browser.close()
   })
 
-  for (const [route, {fullname: componentname, das}] of Object.entries(routes)) {
-    describe(`Component at route: ${route}`, () => {
+  for (const [route, {name, fullname: componentname}] of Object.entries(routes)) {
+    const das = dasmap[componentname]
+    describe(`Component ${name} at route: ${route}`, () => {
+
       for (const selectedExample of das.examples) {
         const story = selectedExample.story
         it(`Story: '${story}'`, async () => {
+          expect(true).toBe(true)
           await page.evaluate((data) => {
             window.postMessage(data, '*')
           }, {selectedExample, das, componentname})
           const body = await page.$('body')
           const screenshot = await body.screenshot()
           expect(screenshot).toMatchImageSnapshot()
-        })
-      }
+         })
+       }
     })
   }
 })

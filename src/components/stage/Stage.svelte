@@ -14,7 +14,7 @@ export let stageSize
 export let landscape
 export let examples
 export let selectedStory
-export let theme 
+export let theme = {name: 'default', stageBg: 'white'}
 
 function updateStageRect(stageRect) {
   dispatch('out', {
