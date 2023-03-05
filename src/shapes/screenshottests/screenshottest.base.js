@@ -26,12 +26,12 @@ describe('Component Screenshot Test', () => {
     const das = dasmap[componentname]
     describe(`Component ${name} at route: ${route}`, () => {
 
-      for (const selectedExample of das.examples) {
-        const story = selectedExample.story
-        it(`Story: '${story}'`, async () => {
+      for (const example of das.examples) {
+        const story = example.story
+        it(story, async () => {
           await page.evaluate((data) => {
             window.postMessage(data, '*')
-          }, {selectedExample, componentname})
+          }, {selectedStory: story, componentname})
           const body = await page.$('body')
           const screenshot = await body.screenshot()
           expect(screenshot).toMatchImageSnapshot()
