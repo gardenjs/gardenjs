@@ -14,7 +14,7 @@ export let stageSize
 export let landscape
 export let examples
 export let selectedStory
-export let theme = {name: 'default', stageBg: 'white'}
+export let theme 
 
 function updateStageRect(stageRect) {
   dispatch('out', {
@@ -25,7 +25,7 @@ function updateStageRect(stageRect) {
 let myframeready 
 let myframe
 
-$: stageStyle = computeStageStyle({stageSize, landscape, stageBg: theme.stageBg})
+$: stageStyle = computeStageStyle({stageSize, landscape, stageBg: theme?.stageBg})
 
 const resizeObserver = new ResizeObserver((entries) => {
   entries.forEach(entry => {
@@ -56,7 +56,7 @@ $: {
 
 $: {
   if (myframeready) {
-    myframe.contentWindow.postMessage({selectedStory, componentname, theme: theme.name}, window.location)
+    myframe.contentWindow.postMessage({selectedStory, componentname}, window.location)
   }
 }
 

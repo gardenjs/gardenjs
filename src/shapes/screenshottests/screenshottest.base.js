@@ -31,7 +31,7 @@ describe('Component Screenshot Test', () => {
         it(`Story: '${story}'`, async () => {
           await page.evaluate((data) => {
             window.postMessage(data, '*')
-          }, {selectedExample, das, componentname})
+          }, {selectedExample, componentname})
           const body = await page.$('body')
           const screenshot = await body.screenshot()
           expect(screenshot).toMatchImageSnapshot()

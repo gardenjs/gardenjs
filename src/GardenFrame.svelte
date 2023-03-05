@@ -9,7 +9,9 @@ let selectedExample = {}
 let redirectdata = {}
 
 window.addEventListener('message', (evt) => {
-  config.themeHandler(evt.data.theme)
+  if (config.themeHandler) {
+    config.themeHandler(evt.data.theme)
+  }
   das = dasmap[evt.data.componentname] 
   selectedExample = das?.examples.find(ex => ex.story === evt.data.selectedStory)
   redirectdata = {}

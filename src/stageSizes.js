@@ -21,8 +21,8 @@ export function computeStageStyle({stageSize= 'full', landscape = false, stageBg
   const {frameheight, framewidth} = sizes[stageSize]
   const size = landscape ? `width: ${frameheight}; height: ${framewidth}` : `width: ${framewidth}; height: ${frameheight}`
   const padding = stageSize === 'full' ? 'padding: 1rem' : 'padding: 0'
-  const background = `background: ${stageBg}`
+  const background = `background-color: ${stageBg}`
   const transition = 'transition: 0.2s'
  
-  return `${size};${padding};${background}${transition};`
+  return `${size}; ${padding}; ${background}; ${transition};`
 }
