@@ -7,6 +7,7 @@ async function createServer() {
 
   console.log('PROJECT ROOT', process.cwd())
   const server = await createViteServer({
+    configFile: false,
     server: {
       port: serverport,
       proxy: {

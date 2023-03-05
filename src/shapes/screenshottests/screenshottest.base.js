@@ -29,7 +29,6 @@ describe('Component Screenshot Test', () => {
       for (const selectedExample of das.examples) {
         const story = selectedExample.story
         it(`Story: '${story}'`, async () => {
-          expect(true).toBe(true)
           await page.evaluate((data) => {
             window.postMessage(data, '*')
           }, {selectedExample, das, componentname})
