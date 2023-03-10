@@ -127,8 +127,8 @@ MIT
 ### v1.0
 
 * [task] Show favicon.svg (src/assets/icons/favicon.svg). Maybe with an alternate path through garden.config.js.
-* [task] Add screenshot test.
-* [garden] add garden build with compiled js & scss files.
+* [feature] Docker image for screenshot test.
+* [garden] add garden build with compiled js & scss files (vite?).
 * [feature] Add .md or .mdx to description in panel for text info. v1 or v1.1?
 * [refactor] Move logic to own file. handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
 * [task] Make Garden compatible with Vue & React.
@@ -142,7 +142,8 @@ MIT
 
 * [feature] Collapse/expand panel button in sidebar and close btn in panel nav.
 * [feature] Set default mode in garden.config.json.
-* [feature] Screenshot-tests
+* [feature] Screenshot test: automatic create test file & and folder (like init garden).
+* [feature] Screenshot test: settings.
 * [task] Integrate Svelte A11y features.
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
 * [task] Improve Garden for smaller displays:
