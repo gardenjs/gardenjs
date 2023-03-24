@@ -96,6 +96,7 @@
       <button class="open-new-tab" title="Open component in new tab" on:click="{openInTab}">
         <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3"/></svg>
       </button>
+      {#if themes.length > 1}
       <div class="dropdown">
         <button class="dropdown__btn" title="Switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="dropdown__items">
@@ -106,6 +107,7 @@
           </ul>
         </div>
       </div>
+      {/if}
       <button class="switch-mode" on:click={toggleDarkmode} title={dark ? 'Light mode' : 'Dark mode'} >
         {#if dark}
         <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
