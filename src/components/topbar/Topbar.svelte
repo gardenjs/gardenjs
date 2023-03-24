@@ -77,19 +77,19 @@
     <div class="topbar__nav">
       <div class="stagesize_value">{stageWidth}px <span class="multiplication_sign">&#10005;</span> {stageHeight}px</div>
       <div class="stagesize-nav">
-        <button rel="Small" class="tooltip" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
+        <button data-title="Small" class="tooltip" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
         </button>
-        <button rel="Medium" class="tooltip" class:active={stageSize === 'medium'} on:click={() => setFramesize('medium')}>
+        <button data-title="Medium" class="tooltip" class:active={stageSize === 'medium'} on:click={() => setFramesize('medium')}>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
         </button>
-        <button rel="Large" class="tooltip" class:active={stageSize === 'large'} on:click={() => setFramesize('large')}>
+        <button data-title="Large" class="tooltip" class:active={stageSize === 'large'} on:click={() => setFramesize('large')}>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" ry="2"/><path d="M2 20h20"/></svg>
         </button>
-        <button rel="Full" class="tooltip" class:active={stageSize === 'full'} on:click={() => setFramesize('full')}>
+        <button data-title="Full" class="tooltip" class:active={stageSize === 'full'} on:click={() => setFramesize('full')}>
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8m-4-4v4"/></svg>
         </button>
-        <button rel={ landscape ? 'Portrait mode' : 'Landscape mode'} class="tooltip" on:click={toggleOrientation}>
+        <button data-title={ landscape ? 'Portrait mode' : 'Landscape mode'} class="tooltip" on:click={toggleOrientation}>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="currentColor"><path d="M16.48 2.52c3.27 1.55 5.61 4.72 5.97 8.48h1.5C23.44 4.84 18.29 0 12 0l-.66.03 3.81 3.81 1.33-1.32zm-6.25-.77a1.49 1.49 0 00-2.12 0L1.75 8.11a1.49 1.49 0 000 2.12l12.02 12.02c.59.59 1.54.59 2.12 0l6.36-6.36c.59-.59.59-1.54 0-2.12L10.23 1.75zm4.6 19.44L2.81 9.17l6.36-6.36 12.02 12.02-6.36 6.36zm-7.31.29A10.487 10.487 0 011.55 13H.05C.56 19.16 5.71 24 12 24l.66-.03-3.81-3.81-1.33 1.32z"/></svg>
         </button>
       </div>
@@ -314,7 +314,7 @@
       display: block;
       margin-top: 0.875rem;
       padding: 0.25rem;
-      content: attr(rel);
+      content: attr(data-title);
       font-size: 0.75rem;
       color: var(--c-basic-50);
       background-color: var(--c-basic-900);
