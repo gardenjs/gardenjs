@@ -68,6 +68,7 @@ Run `serveGarden` from the root of the project. Or add it to your `package.json`
 ```
 
 ### Configure Garden with project-specific settings
+
 With the garden.config.js you have various options to customize Garden to suit your project. Take a look at the file for a quick overview of the options already implemented. Here you can also make your own individual adjustments with JavaScript, e.g. to switch between your different themes.
 
 ### Open Garden
