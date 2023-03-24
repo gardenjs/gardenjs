@@ -126,15 +126,15 @@ MIT
 
 ### v1.0
 
+* [feature] Use .md or .mdx for description in panel for text info.
+* [feature] Show component code in own tab.
+* [refactor] Move logic to own file. Handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
 * [feature] Docker image for screenshot test.
-* [garden] add garden build with compiled js & scss files (vite?).
-* [feature] Add .md or .mdx to description in panel for text info. v1 or v1.1?
-* [refactor] Move logic to own file. handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
 * [task] Show favicon.svg (src/assets/icons/favicon.svg). Maybe with an alternate path through garden.config.js.
+* [task] Add garden as dist with compiled js & scss files (vite?).
 * [task] Make Garden compatible with Vue & React.
-* [task] Build mini demo for new projects with own github repository (like carrots but just as "hello world).
-* [task] install script / commandline skeleton project (example component.)
-* [task] Project website.
+* [task] Install script / commandline skeleton project (example component.)
+* [task] Project website (garden website) as svelte project.
 * [task] Rabbit dev website.
 * [task] Set repository public & make garden npm modul. (yarn?)
 
