@@ -141,6 +141,9 @@
     border: none;
     cursor: pointer;
   }
+  .searchfield_submit:hover {
+    background-color: var(--c-basic-50);
+  }
   .searchfield_submit svg {
     color: var(--c-primary);
   }
