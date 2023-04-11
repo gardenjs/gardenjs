@@ -7,7 +7,7 @@
     if (das) {
       setTimeout(() => {
         hljs.highlightAll();
-      }, 800)
+      }, 400)
     }
   }
 </script>
@@ -24,118 +24,118 @@
   Current colors taken from GitHub's CSS
 */
 
-.hljs {
+:global(.hljs) {
   color: #24292e;
   background: #ffffff;
 }
 
-.hljs-doctag,
-.hljs-keyword,
-.hljs-meta .hljs-keyword,
-.hljs-template-tag,
-.hljs-template-variable,
-.hljs-type,
-.hljs-variable.language_ {
+:global(.hljs-doctag),
+:global(.hljs-keyword),
+:global(.hljs-meta .hljs-keyword),
+:global(.hljs-template-tag),
+:global(.hljs-template-variable),
+:global(.hljs-type),
+:global(.hljs-variable.language_) {
   /* prettylights-syntax-keyword */
   color: #d73a49;
 }
 
-.hljs-title,
-.hljs-title.class_,
-.hljs-title.class_.inherited__,
-.hljs-title.function_ {
+:global(.hljs-title),
+:global(.hljs-title.class_),
+:global(.hljs-title.class_.inherited__),
+:global(.hljs-title.function_) {
   /* prettylights-syntax-entity */
   color: #6f42c1;
 }
 
-.hljs-attr,
-.hljs-attribute,
-.hljs-literal,
-.hljs-meta,
-.hljs-number,
-.hljs-operator,
-.hljs-variable,
-.hljs-selector-attr,
-.hljs-selector-class,
-.hljs-selector-id {
+:global(.hljs-attr),
+:global(.hljs-attribute),
+:global(.hljs-literal),
+:global(.hljs-meta),
+:global(.hljs-number),
+:global(.hljs-operator),
+:global(.hljs-variable),
+:global(.hljs-selector-attr),
+:global(.hljs-selector-class),
+:global(.hljs-selector-id) {
   /* prettylights-syntax-constant */
   color: #005cc5;
 }
 
-.hljs-regexp,
-.hljs-string,
-.hljs-meta .hljs-string {
+:global(.hljs-regexp),
+:global(.hljs-string),
+:global(.hljs-meta .hljs-string) {
   /* prettylights-syntax-string */
   color: #032f62;
 }
 
-.hljs-built_in,
-.hljs-symbol {
+:global(.hljs-built_in),
+:global(.hljs-symbol) {
   /* prettylights-syntax-variable */
   color: #e36209;
 }
 
-.hljs-comment,
-.hljs-code,
-.hljs-formula {
+:global(.hljs-comment),
+:global(.hljs-code),
+:global(.hljs-formula) {
   /* prettylights-syntax-comment */
   color: #6a737d;
 }
 
-.hljs-name,
-.hljs-quote,
-.hljs-selector-tag,
-.hljs-selector-pseudo {
+:global(.hljs-name),
+:global(.hljs-quote),
+:global(.hljs-selector-tag),
+:global(.hljs-selector-pseudo) {
   /* prettylights-syntax-entity-tag */
   color: #22863a;
 }
 
-.hljs-subst {
+:global(.hljs-subst) {
   /* prettylights-syntax-storage-modifier-import */
   color: #24292e;
 }
 
-.hljs-section {
+:global(.hljs-section) {
   /* prettylights-syntax-markup-heading */
   color: #005cc5;
   font-weight: bold;
 }
 
-.hljs-bullet {
+:global(.hljs-bullet) {
   /* prettylights-syntax-markup-list */
   color: #735c0f;
 }
 
-.hljs-emphasis {
+:global(.hljs-emphasis) {
   /* prettylights-syntax-markup-italic */
   color: #24292e;
   font-style: italic;
 }
 
-.hljs-strong {
+:global(.hljs-strong) {
   /* prettylights-syntax-markup-bold */
   color: #24292e;
   font-weight: bold;
 }
 
-.hljs-addition {
+:global(.hljs-addition) {
   /* prettylights-syntax-markup-inserted */
   color: #22863a;
   background-color: #f0fff4;
 }
 
-.hljs-deletion {
+:global(.hljs-deletion) {
   /* prettylights-syntax-markup-deleted */
   color: #b31d28;
   background-color: #ffeef0;
 }
 
-.hljs-char.escape_,
-.hljs-link,
-.hljs-params,
-.hljs-property,
-.hljs-punctuation,
-.hljs-tag {
+:global(.hljs-char.escape_),
+:global(.hljs-link),
+:global(.hljs-params),
+:global(.hljs-property),
+:global(.hljs-punctuation),
+:global(.hljs-tag) {
   /* purposely ignored */
 }
 
@@ -150,118 +150,118 @@
   Current colors taken from GitHub's CSS
 */
 
-.dark .hljs {
+:global(.dark .hljs) {
   color: #c9d1d9;
   background: #0d1117;
 }
 
-.dark .hljs-doctag,
-.dark .hljs-keyword,
-.dark .hljs-meta .hljs-keyword,
-.dark .hljs-template-tag,
-.dark .hljs-template-variable,
-.dark .hljs-type,
-.dark .hljs-variable.language_ {
+:global(.dark .hljs-doctag),
+:global(.dark .hljs-keyword),
+:global(.dark .hljs-meta .hljs-keyword),
+:global(.dark .hljs-template-tag),
+:global(.dark .hljs-template-variable),
+:global(.dark .hljs-type),
+:global(.dark .hljs-variable.language_) {
   /* prettylights-syntax-keyword */
   color: #ff7b72;
 }
 
-.dark .hljs-title,
-.dark .hljs-title.class_,
-.dark .hljs-title.class_.inherited__,
-.dark .hljs-title.function_ {
+:global(.dark .hljs-title),
+:global(.dark .hljs-title.class_),
+:global(.dark .hljs-title.class_.inherited__),
+:global(.dark .hljs-title.function_) {
   /* prettylights-syntax-entity */
   color: #d2a8ff;
 }
 
-.dark .hljs-attr,
-.dark .hljs-attribute,
-.dark .hljs-literal,
-.dark .hljs-meta,
-.dark .hljs-number,
-.dark .hljs-operator,
-.dark .hljs-variable,
-.dark .hljs-selector-attr,
-.dark .hljs-selector-class,
-.dark .hljs-selector-id {
+:global(.dark .hljs-attr),
+:global(.dark .hljs-attribute),
+:global(.dark .hljs-literal),
+:global(.dark .hljs-meta),
+:global(.dark .hljs-number),
+:global(.dark .hljs-operator),
+:global(.dark .hljs-variable),
+:global(.dark .hljs-selector-attr),
+:global(.dark .hljs-selector-class),
+:global(.dark .hljs-selector-id) {
   /* prettylights-syntax-constant */
   color: #79c0ff;
 }
 
-.dark .hljs-regexp,
-.dark .hljs-string,
-.dark .hljs-meta .hljs-string {
+:global(.dark .hljs-regexp),
+:global(.dark .hljs-string),
+:global(.dark .hljs-meta .hljs-string) {
   /* prettylights-syntax-string */
   color: #a5d6ff;
 }
 
-.dark .hljs-built_in,
-.dark .hljs-symbol {
+:global(.dark .hljs-built_in),
+:global(.dark .hljs-symbol) {
   /* prettylights-syntax-variable */
   color: #ffa657;
 }
 
-.dark .hljs-comment,
-.dark .hljs-code,
-.dark .hljs-formula {
+:global(.dark .hljs-comment),
+:global(.dark .hljs-code),
+:global(.dark .hljs-formula) {
   /* prettylights-syntax-comment */
   color: #8b949e;
 }
 
-.dark .hljs-name,
-.dark .hljs-quote,
-.dark .hljs-selector-tag,
-.dark .hljs-selector-pseudo {
+:global(.dark .hljs-name),
+:global(.dark .hljs-quote),
+:global(.dark .hljs-selector-tag),
+:global(.dark .hljs-selector-pseudo) {
   /* prettylights-syntax-entity-tag */
   color: #7ee787;
 }
 
-.dark .hljs-subst {
+:global(.dark .hljs-subst){
   /* prettylights-syntax-storage-modifier-import */
   color: #c9d1d9;
 }
 
-.dark .hljs-section {
+:global(.dark .hljs-section) {
   /* prettylights-syntax-markup-heading */
   color: #1f6feb;
   font-weight: bold;
 }
 
-.dark .hljs-bullet {
+:global(.dark .hljs-bullet) {
   /* prettylights-syntax-markup-list */
   color: #f2cc60;
 }
 
-.dark .hljs-emphasis {
+:global(.dark .hljs-emphasis) {
   /* prettylights-syntax-markup-italic */
   color: #c9d1d9;
   font-style: italic;
 }
 
-.dark .hljs-strong {
+:global(.dark .hljs-strong) {
   /* prettylights-syntax-markup-bold */
   color: #c9d1d9;
   font-weight: bold;
 }
 
-.dark .hljs-addition {
+:global(.dark .hljs-addition) {
   /* prettylights-syntax-markup-inserted */
   color: #aff5b4;
   background-color: #033a16;
 }
 
-.dark .hljs-deletion {
+:global(.dark .hljs-deletion) {
   /* prettylights-syntax-markup-deleted */
   color: #ffdcd7;
   background-color: #67060c;
 }
 
-.dark .hljs-char.escape_,
-.dark .hljs-link,
-.dark .hljs-params,
-.dark .hljs-property,
-.dark .hljs-punctuation,
-.dark .hljs-tag {
+:global(.dark .hljs-char.escape_),
+:global(.dark .hljs-link),
+:global(.dark .hljs-params),
+:global(.dark .hljs-property),
+:global(.dark .hljs-punctuation),
+:global(.dark .hljs-tag) {
   /* purposely ignored */
 }
 </style>

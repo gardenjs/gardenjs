@@ -1,23 +1,13 @@
 <script>
   import {marked} from 'marked'
-  import hljs from 'highlight.js'
-
   export let das
-  $: {
-    if (das) {
-      console.log('DEBUG', 'highlight js' )
-      setTimeout(() => {
-      hljs.highlightAll();
-      }, 800)
-    }
-  }
 </script>
 <div class="markdown-body">
   {@html marked(das.descriptionfile || das.description)}
 </div>
 
 <style>
-.markdown-body {
+:global(.markdown-body) {
   --color-prettylights-syntax-comment: #6e7781;
   --color-prettylights-syntax-constant: #0550ae;
   --color-prettylights-syntax-entity: #8250df;
@@ -62,7 +52,7 @@
   --color-danger-fg: #cf222e;
 }
 
-.dark .markdown-body {
+:global(.dark .markdown-body) {
   --color-prettylights-syntax-comment: #8b949e;
   --color-prettylights-syntax-constant: #79c0ff;
   --color-prettylights-syntax-entity: #d2a8ff;
@@ -114,6 +104,7 @@
   width: 100%;
   max-width: 830px;
   color: var(--color-fg-default);
+  background-color: var(--color-canvas-subtle);
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
   font-size: 16px;
   line-height: 1.5;
