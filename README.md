@@ -148,6 +148,7 @@ MIT
 * [feature] Set default mode in garden.config.json.
 * [feature] Screenshot test: automatic create test file & and folder (like init garden).
 * [feature] Screenshot test: settings.
+* [feature] switch from md to mdx.
 * [task] Integrate Svelte A11y features.
 * [bug] Prevent horizontal drag bar from slipping out of view when moving down.
 * [task] Improve Garden for smaller displays:
