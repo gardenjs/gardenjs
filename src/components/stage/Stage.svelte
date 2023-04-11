@@ -83,17 +83,6 @@ function tabselectionchange(evt) {
   selectedtab = evt.detail.selecteditem
 }
 
-let markedHtml = ''
-$: {
-  if (das) {
-    setMarkedHtml(das)
-  }
-}
-
-async function setMarkedHtml(das) {
-  markedHtml = das.descriptionfile || das.description
-}
-
 </script>
 
 
@@ -104,7 +93,7 @@ async function setMarkedHtml(das) {
   <div slot="bottom" class="is-full is-flex-column">
     <PanelComponent tabs={tabs} on:out={tabselectionchange}>
       {#if selectedtab.name == 'Description' }
-      {@html marked(markedHtml)}
+      {@html marked(das.descriptionfile || das.description)}
       {/if}
     </PanelComponent>
   </div>
