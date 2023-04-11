@@ -76,7 +76,7 @@ With the garden.config.js you have various options to customize Garden to suit y
 Open Garden in the browser via `http://localhost:<serverport>/garden`. The server port is defined in `garden.config.js`, the default setting is 3010.
 <br><br>
 
-## Output of components (and pages) and add variants or states
+## Output of components (and pages), add variants or states and add a documentation/description
 
 In order to be able to output variants or states of components, you must create two additional files in the component directory:
 
@@ -101,13 +101,16 @@ With a `<component>.example.svelte` file you create all variants/states of the c
 {/if}
 ```
 
-Create a file `<component>.das.js` so that the variants/states are output in the panel and the navigation below the stage. In addition, a description or information about the component can be added here. It then looks like this, for example:
+Create a file `<component>.das.js` so that the variants/states are output in the panel and the navigation below the stage.
+A description or documentation for the component can also be added here. This is shown in a separate tab in the panel. This text can also be created as markdown. Alternatively, a path can point to a markdown file, which is then rendered in the tab. The suffix <.md> triggers the linking.
+
+It then looks like this, for example:
 
 ```js
 export default {
   name: "<component>",
   file: "./<component>.example.svelte",
-  description: "<A description/info of the component can be added here...>",
+  description: "<A description/info can be added here as plain text or markdown... The .md extension is used to search for a Markdown file.>",
   examples: [
     {story: "<navigation title for story_1>", input: {story: "story_1"}},
     {story: "<navigation title for story_2>", input: {story: "story_2"}},
@@ -127,7 +130,6 @@ MIT
 
 ### v1.0
 
-* [feature] Use .md or .mdx for description in panel for text info.
 * [feature] Show component code in own tab.
 * [refactor] Move logic to own file. Handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
 * [feature] Docker image for screenshot test.
