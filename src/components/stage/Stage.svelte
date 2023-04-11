@@ -5,6 +5,7 @@ import PanelComponent from '../panel/PanelComponent.svelte'
 import PanelStoriesNav from '../panel/PanelStoriesNav.svelte'
 import PanelDescription from '../panel/PanelDescription.svelte'
 import {computeStageStyle} from '../../stageSizes.js'
+import Highlight from '../highlight/Highlight.svelte'
 
 const dispatch = createEventDispatcher()
 
@@ -85,7 +86,7 @@ function tabselectionchange(evt) {
 
 </script>
 
-
+<Highlight das="{das}" />
 <HorizontalSplitPane topheight='65vh'>
   <div slot="top" class="is-full">
     <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle}></iframe>

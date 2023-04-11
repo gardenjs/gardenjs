@@ -1,6 +1,16 @@
 <script>
-  import { marked } from 'marked'
+  import {marked} from 'marked'
+  import hljs from 'highlight.js'
+
   export let das
+  $: {
+    if (das) {
+      console.log('DEBUG', 'highlight js' )
+      setTimeout(() => {
+      hljs.highlightAll();
+      }, 800)
+    }
+  }
 </script>
 <div class="markdown-body">
   {@html marked(das.descriptionfile || das.description)}

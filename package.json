@@ -45,6 +45,7 @@
     "ext": "svelte,json,js"
   },
   "dependencies": {
+    "highlight.js": "^11.7.0",
     "marked": "^4.3.0",
     "open": "^8.4.0"
   }
