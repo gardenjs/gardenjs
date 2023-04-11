@@ -1,7 +1,6 @@
 import { config, open } from 'garden'
 import { createServer as createViteServer } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
-import { mdsvex } from 'mdsvex'
 
 async function createServer() {
   const {serverport, destination} = await config()
@@ -9,6 +8,7 @@ async function createServer() {
   console.log('PROJECT ROOT', process.cwd())
   const server = await createViteServer({
     configFile: false,
+    assetsInclude: ['**/*.md'],
     server: {
       port: serverport,
       proxy: {
@@ -27,9 +27,7 @@ async function createServer() {
       }
     },
     plugins: [svelte( {
-      extensions: ['.svelte', '.svx', 'mdx'],
       compilerOptions: {hydratable: true},
-      preprocess: mdsvex({extensions: ['.svx', '.mdx']})
     }
     )]
   })

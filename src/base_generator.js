@@ -21,8 +21,6 @@ export async function generateGardenBase() {
     }
   }, [])
 
-
-
   await writeFileIfChanged(targetBaseFile, generateBaseCode(cds))
   await writeFileIfChanged(targetImportMapFile, generateImportMapCode(cds, welcome_page))
   await writeFileIfChanged(targetGardenFrameFile, generateGardenFrameFile(additional_style_files))
@@ -78,6 +76,9 @@ export const componentmap = {
 }
 export const dasmap = {
   ${componentdescriptions.map(createDasMapEntry).join(',\n')}
+}
+export const dasdescriptionmap = {
+  ${componentdescriptions.filter(das => das.descriptionfile).map(createDasDescriptionMapEntry).join(',\n')}
 }
 `
 
@@ -142,7 +143,13 @@ export function createRouteEntry(description) {
 
 export function createImportStmt(description) {
   return `import ${description.fullname} from '${description.file}'
-import ${description.fullname}Das from '${description.dasfile}'`
+import ${description.fullname}Das from '${description.dasfile}'
+${createDescriptionImportStmt(description)}
+`
+}
+
+function createDescriptionImportStmt(description) {
+  return description.descriptionfile ? `import ${description.fullname}DasDescription from '${description.descriptionfile}?raw'` : ''
 }
 
 export function createComponentMapEntry(description) {
@@ -153,6 +160,10 @@ export function createDasMapEntry(description) {
   return `'${description.fullname}': ${description.fullname}Das`
 }
 
+export function createDasDescriptionMapEntry(description) {
+  return `'${description.fullname}': ${description.fullname}DasDescription`
+}
+
 export function createComponentDescription({das, navbasenode, basepath, relativepath, filename}) {
   const name = das.name
   const fullname = createFullname(navbasenode, relativepath, name)
@@ -161,6 +172,7 @@ export function createComponentDescription({das, navbasenode, basepath, relative
   const modulepath = basepath.indexOf('node_modules') == 0 ? basepath.substring('node_modules/'.length) : '../' + basepath
   const file = das.file ? path.join(modulepath, relativepath, das.file) : undefined
   const dasfile = path.join(modulepath, relativepath, filename)
+  const descriptionfile = das.description?.endsWith('.md') ? '/' + path.join(modulepath, relativepath, das.description).substring(3) : undefined
   const fullpath = path.join(basepath, relativepath)
   return {
     name,
@@ -171,6 +183,7 @@ export function createComponentDescription({das, navbasenode, basepath, relative
     fullpath,
     file,
     dasfile,
+    descriptionfile,
     fullname,
     route
   }
