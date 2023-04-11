@@ -14,7 +14,7 @@ globals:
   SharedArrayBuffer: readonly
   globalThis: readonly
 parserOptions:
-  ecmaVersion: 2018
+  ecmaVersion: latest
   sourceType: module
 rules:
   no-console: 0

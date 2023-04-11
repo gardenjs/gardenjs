@@ -45,7 +45,7 @@
     "ext": "svelte,json,js"
   },
   "dependencies": {
-    "mdsvex": "^0.10.6",
+    "marked": "^4.3.0",
     "open": "^8.4.0"
   }
 }

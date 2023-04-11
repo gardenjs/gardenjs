@@ -2,7 +2,8 @@
 import { createEventDispatcher} from 'svelte'
 import HorizontalSplitPane from '../splitpanes/HorizontalSplitPane.svelte'
 import PanelComponent from '../panel/PanelComponent.svelte'
-import InputSelectionComponent from '../panel/PanelStoriesNav.svelte'
+import PanelStoriesNav from '../panel/PanelStoriesNav.svelte'
+import PanelDescription from '../panel/PanelDescription.svelte'
 import {computeStageStyle} from '../../stageSizes.js'
 
 const dispatch = createEventDispatcher()
@@ -60,10 +61,16 @@ $: {
   }
 }
 
-$: tabs = [
-  {name: 'Description', props: {text: das.name}},
-  {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: InputSelectionComponent, out: handleSelectionChange},
-]
+$: tabs = createTabs(das)
+
+function createTabs(das) {
+  const tabs = []
+  if (das.description) {
+    tabs.push({name: 'Description', props: {das}, page: PanelDescription })
+  }
+  tabs.push( {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
+  return tabs
+}
 
 $: selectedtab = tabs[0] || {}
 
@@ -76,40 +83,16 @@ function tabselectionchange(evt) {
   selectedtab = evt.detail.selecteditem
 }
 
-
-
 </script>
 
 
 <HorizontalSplitPane topheight='65vh'>
-<div slot="top" class="is-full">
-	<iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle} ></iframe>
-</div>
-<div slot="bottom" class="is-full is-flex-column">
-  <PanelComponent tabs={tabs} on:out={tabselectionchange}>
-    {#if selectedtab.name == 'Description'}
-      <h2>{das.name}</h2>
-      <p><b>Info:</b> {@html das.description}</p>
-      <div>Input</div>
-      <ul>
-      {#if das.in}
-      {#each das.in as inp}
-        <li>{inp.name}: {inp.type}</li>
-      {/each}
-      {/if}
-      </ul>
-      
-      <div>Output</div>
-      <ul>
-      {#if das.out}
-      {#each das.out as outp}
-        <li>{outp.name}: {outp.type}</li>
-      {/each}
-      {/if}
-      </ul>
-    {/if}
-  </PanelComponent>
-</div>
+  <div slot="top" class="is-full">
+    <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle}></iframe>
+  </div>
+  <div slot="bottom" class="is-full is-flex-column">
+    <PanelComponent tabs={tabs} on:out={tabselectionchange} />
+  </div>
 </HorizontalSplitPane>
 
 <style>
