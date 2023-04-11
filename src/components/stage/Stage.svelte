@@ -2,9 +2,9 @@
 import { createEventDispatcher} from 'svelte'
 import HorizontalSplitPane from '../splitpanes/HorizontalSplitPane.svelte'
 import PanelComponent from '../panel/PanelComponent.svelte'
-import InputSelectionComponent from '../panel/PanelStoriesNav.svelte'
+import PanelStoriesNav from '../panel/PanelStoriesNav.svelte'
+import PanelDescription from '../panel/PanelDescription.svelte'
 import {computeStageStyle} from '../../stageSizes.js'
-import { marked } from 'marked'
 
 const dispatch = createEventDispatcher()
 
@@ -66,9 +66,9 @@ $: tabs = createTabs(das)
 function createTabs(das) {
   const tabs = []
   if (das.description) {
-    tabs.push({name: 'Description', props: {text: das.name}})
+    tabs.push({name: 'Description', props: {das}, page: PanelDescription })
   }
-  tabs.push( {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: InputSelectionComponent, out: handleSelectionChange} )
+  tabs.push( {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
   return tabs
 }
 
@@ -91,11 +91,7 @@ function tabselectionchange(evt) {
     <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle}></iframe>
   </div>
   <div slot="bottom" class="is-full is-flex-column">
-    <PanelComponent tabs={tabs} on:out={tabselectionchange}>
-      {#if selectedtab.name == 'Description' }
-      {@html marked(das.descriptionfile || das.description)}
-      {/if}
-    </PanelComponent>
+    <PanelComponent tabs={tabs} on:out={tabselectionchange} />
   </div>
 </HorizontalSplitPane>
 
