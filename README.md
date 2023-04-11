@@ -102,6 +102,7 @@ With a `<component>.example.svelte` file you create all variants/states of the c
 ```
 
 Create a file `<component>.das.js` so that the variants/states are output in the panel and the navigation below the stage.
+
 A description or documentation for the component can also be added here. This is shown in a separate tab in the panel. This text can also be created as markdown. Alternatively, a path can point to a markdown file, which is then rendered in the tab. The suffix <.md> triggers the linking.
 
 It then looks like this, for example:
@@ -110,7 +111,7 @@ It then looks like this, for example:
 export default {
   name: "<component>",
   file: "./<component>.example.svelte",
-  description: "<A description/info can be added here as plain text or markdown... The .md extension is used to search for a Markdown file.>",
+  description: "./<component>.md",
   examples: [
     {story: "<navigation title for story_1>", input: {story: "story_1"}},
     {story: "<navigation title for story_2>", input: {story: "story_2"}},
