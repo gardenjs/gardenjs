@@ -1,6 +1,7 @@
 import { config, open } from 'garden'
 import { createServer as createViteServer } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
+import { mdsvex } from 'mdsvex'
 
 async function createServer() {
   const {serverport, destination} = await config()
@@ -25,8 +26,11 @@ async function createServer() {
         },
       }
     },
-    plugins: [svelte(
-      {compilerOptions: {hydratable: true}}
+    plugins: [svelte( {
+      extensions: ['.svelte', '.svx', 'mdx'],
+      compilerOptions: {hydratable: true},
+      preprocess: mdsvex({extensions: ['.svx', '.mdx']})
+    }
     )]
   })
   console.log(`Listening to port ${serverport}`)
