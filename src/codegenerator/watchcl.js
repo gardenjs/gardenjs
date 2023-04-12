@@ -1,5 +1,5 @@
+import config from '../config.js'
 import {watch} from './watch.js'
-import config from './config.js'
 import {generateGardenBase} from './base_generator.js'
 
 generate()

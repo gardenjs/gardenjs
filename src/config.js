@@ -9,5 +9,4 @@ export default async function () {
   }
 
   return {garden: {}}
-
 }

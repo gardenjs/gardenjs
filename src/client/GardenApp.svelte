@@ -1,11 +1,11 @@
 <script> 
-import {initRouter} from '../src/router.js'
+import {initRouter} from './router.js'
 import Stage from './components/stage/Stage.svelte'
 import Sidebar from './components/sidebar/Sidebar.svelte'
-import Topbar from '../src/components/topbar/Topbar.svelte'
-import FullScreenLayout from '../src/layouts/FullScreenLayout.svelte'
-import LeftRightLayout from '../src/layouts/LeftRightLayout.svelte'
-import TopBottomLayout from '../src/layouts/TopBottomLayout.svelte'
+import Topbar from './components/topbar/Topbar.svelte'
+import FullScreenLayout from './layouts/FullScreenLayout.svelte'
+import LeftRightLayout from './layouts/LeftRightLayout.svelte'
+import TopBottomLayout from './layouts/TopBottomLayout.svelte'
 
 let baseurl = '/garden'
 let componentname = ''

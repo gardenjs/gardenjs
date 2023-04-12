@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import {findAndReadDasFiles} from './das_file_finder.js'
-import config from './config.js'
+import config from '../config.js'
 
 export async function generateGardenBase() {
   const {structure, destination, additional_style_files, welcome_page} = await config()
