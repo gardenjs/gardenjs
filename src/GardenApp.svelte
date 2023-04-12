@@ -14,7 +14,6 @@ let currentRoute = ''
 export let routes
 export let navtree
 export let dasmap 
-export let dasdescriptionmap
 export let config
 
 let das = {}
@@ -27,7 +26,7 @@ initRouter(routes, baseurl, (routeobj, state) => {
   } else {
     componentname = routeobj.fullname
     currentRoute = routeobj.route
-    das = {...dasmap[componentname], descriptionfile: dasdescriptionmap[componentname]} || {}
+    das = dasmap[componentname]
     historystate = state
   }
 })

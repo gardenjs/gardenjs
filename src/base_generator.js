@@ -77,9 +77,6 @@ export const componentmap = {
 export const dasmap = {
   ${componentdescriptions.map(createDasMapEntry).join(',\n')}
 }
-export const dasdescriptionmap = {
-  ${componentdescriptions.filter(das => das.descriptionfile).map(createDasDescriptionMapEntry).join(',\n')}
-}
 `
 
 }
@@ -143,9 +140,9 @@ export function createRouteEntry(description) {
 
 export function createImportStmt(description) {
   return `import ${description.fullname} from '${description.file}'
+  import ${description.fullname}Code from '${description.file}?raw'
 import ${description.fullname}Das from '${description.dasfile}'
-${createDescriptionImportStmt(description)}
-`
+${createDescriptionImportStmt(description)}`
 }
 
 function createDescriptionImportStmt(description) {
@@ -157,7 +154,16 @@ export function createComponentMapEntry(description) {
 }
 
 export function createDasMapEntry(description) {
-  return `'${description.fullname}': ${description.fullname}Das`
+  return `'${description.fullname}': {
+    ...${description.fullname}Das,
+    code: ${description.fullname}Code,
+    description: ${getDescriptionFromFileOrProperty(description)} 
+  }`
+}
+
+function getDescriptionFromFileOrProperty(description) {
+  return description.descriptionfile ? `${description.fullname}DasDescription` : `${description.fullname}Das.description`
+
 }
 
 export function createDasDescriptionMapEntry(description) {

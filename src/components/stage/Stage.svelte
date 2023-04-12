@@ -6,7 +6,6 @@ import PanelStoriesNav from '../panel/PanelStoriesNav.svelte'
 import PanelDescription from '../panel/PanelDescription.svelte'
 import PanelCode from '../panel/PanelCode.svelte'
 import {computeStageStyle} from '../../stageSizes.js'
-import {triggerHighlightAll} from '../highlight/Highlight.js'
 
 const dispatch = createEventDispatcher()
 
@@ -72,18 +71,14 @@ function createTabs(das) {
   if (examples.length) {
     tabs.push( {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
   }
-  if (das.name) { // TODO use code
-    tabs.push( {name: 'Code', props: {das}, page: PanelCode} )
+  if (das.code) { 
+    tabs.push( {name: 'Code', props: {code: das.code}, page: PanelCode} )
   }
   return tabs
 }
 
 function handleSelectionChange(evt) {
   globalThis.history.pushState({selectedstory: evt.detail.selecteditem}, '', window.location.pathname.substring('/garden'.length))
-}
-
-function tabselectionchange() {
-  triggerHighlightAll()
 }
 
 </script>
@@ -93,7 +88,7 @@ function tabselectionchange() {
     <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle}></iframe>
   </div>
   <div slot="bottom" class="is-full is-flex-column">
-    <PanelComponent tabs={tabs} on:out={tabselectionchange} />
+    <PanelComponent tabs={tabs} />
   </div>
 </HorizontalSplitPane>
 
