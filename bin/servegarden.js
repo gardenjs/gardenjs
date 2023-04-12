@@ -5,6 +5,7 @@ import {createServer} from '../src/server.js'
 
 async function initAndCreateServer() {
   await init()
+  console.log('DEBUG', 'createServer')
   await createServer()
 }
 

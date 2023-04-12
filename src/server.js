@@ -1,10 +1,10 @@
-import config from './config.js'
+import { getConfig } from './config.js'
 import open from 'open'
 import { createServer as createViteServer } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 export async function createServer() {
-  const {serverport, destination} = await config()
+  const {serverport, destination} = await getConfig()
 
   console.log('PROJECT ROOT', process.cwd())
   const server = await createViteServer({

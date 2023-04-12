@@ -1,10 +1,10 @@
 import path from 'path'
 import fs from 'fs'
 import {findAndReadDasFiles} from './das_file_finder.js'
-import config from '../config.js'
+import {getConfig} from '../config.js'
 
 export async function generateGardenBase() {
-  const {structure, destination, additional_style_files, welcome_page} = await config()
+  const {structure, destination, additional_style_files, welcome_page} = await getConfig()
   const targetBaseFile = destination + 'base.js'
   const targetImportMapFile= destination + 'importmap.js'
   const targetGardenFrameFile = destination + '/lib/gardenframe.js'
@@ -29,7 +29,9 @@ export async function generateGardenBase() {
 async function writeFileIfChanged(file, content) {
   let oldcontent = ''
   try {
-    oldcontent = (await fs.promises.readFile(file)).toString()
+    if (fs.existsSync(file)) {
+      oldcontent = (await fs.promises.readFile(file)).toString()
+    }
   } catch (e) {
     console.log(e)
   }

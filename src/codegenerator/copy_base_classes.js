@@ -2,21 +2,19 @@ import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
-import config from '../config.js'
+import { getConfig} from '../config.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const sourcefolder = path.resolve(__dirname, 'shapes') + '/'
 
 export async function clearBaseFolder() {
-  console.log('config is', await config())
-  const targetfolder = (await config()).destination
+  const targetfolder = (await getConfig()).destination
   fs.rmSync(targetfolder, { recursive: true, force: true })
 }
 
 export async function copyBaseClasses() {
-  console.log('config is', await config())
-  const targetfolder = (await config()).destination
+  const targetfolder = (await getConfig()).destination
   fs.mkdir(targetfolder, {recursive: true}, onErrorAbortElse(() => copyFolder(sourcefolder, targetfolder)))
 }
 
