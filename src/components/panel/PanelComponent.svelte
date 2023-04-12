@@ -6,6 +6,11 @@ const dispatch = createEventDispatcher()
 
   let selectedIndex = 0
   let selected = {}
+  $: {
+    if (tabs.length <= selectedIndex) {
+      selectedIndex = 0
+    }
+  }
   $: selected = tabs ? tabs[selectedIndex] : {}
 
   const handleSelect = index => () => {
