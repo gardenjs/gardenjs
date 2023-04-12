@@ -17,11 +17,7 @@
 </script>
 
 {#if tmpcode}
-  <div>
-  <pre>
-  <code class="language-xml" bind:this={codeblock}>
-  {code}
-  </code>
-  </pre>
+<div>
+  <pre><code class="language-xml" bind:this={codeblock}>{code}</code></pre>
 </div>
 {/if}
