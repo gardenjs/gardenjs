@@ -17,9 +17,10 @@
   a {
     padding: 0.188rem 0 0.188rem 0.75rem;
     text-transform: initial;
-    font-weight: 400;
     font-size: 0.813rem;
     color: var(--c-basic-600);
+    line-height: 1.3;
+    font-weight: 400;
     border-left: 1px solid var(--c-basic-400);
   }
   a:hover,
