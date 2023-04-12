@@ -94,8 +94,6 @@
     text-decoration: none;
     font-weight: 900;
     line-height: 1;
-    /* background-color: var(--c-basic-50);
-    border-bottom: 1px solid var(--c-basic-300); */
   }
   .project_title span {
     overflow: hidden;
@@ -108,7 +106,6 @@
   .search {
     height: 2rem;
     background-color: var(--c-white);
-    /* border-bottom: 1px solid var(--c-basic-300); */
     overflow: hidden;
   }
   .searchfield {
@@ -158,11 +155,10 @@
     text-align: left;
     background-color: transparent;
     background-color: var(--c-basic-150);
-    /* border-bottom: 1px solid var(--c-basic-300); */
     cursor: pointer;
   }
   .collapse_btn:hover {
-    background-color: var(--c-basic-100);
+    background-color: var(--c-primary-bg);
   }
   .collapse_label {
     display: flex;
@@ -170,15 +166,18 @@
     width: 100%;
     color: var(--c-basic-900);
     font-size: 0.75rem;
-  }
+  } 
   .collapse_icon {
     display: flex;
     order: 2;
     width: 1rem;
     height: 1rem;
-    transition: 0.2s;
     margin-left: 0;
     color: var(--c-basic-900);
+  }
+  .collapse_btn:hover .collapse_label,
+  .collapse_btn:hover .collapse_icon {
+    color: var(--c-primary);
   }
   .github {
     display: inline-flex;
