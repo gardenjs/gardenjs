@@ -6,6 +6,7 @@ import Topbar from './components/topbar/Topbar.svelte'
 import FullScreenLayout from './layouts/FullScreenLayout.svelte'
 import LeftRightLayout from './layouts/LeftRightLayout.svelte'
 import TopBottomLayout from './layouts/TopBottomLayout.svelte'
+import {computeStageStyle} from './logic/stageSizes.js'
 
 let baseurl = '/garden'
 let componentname = ''
@@ -45,6 +46,8 @@ let stageRect = {
   stageWidth: 900,
   stageHeight: 1000
 }
+
+$: stageStyle = computeStageStyle({stageSize, landscape, stageBg: activeTheme?.stageBg})
 
 $: {
   themes = config.themes?.map((theme, index) => ({...theme, active: index === 0})) || []
@@ -192,8 +195,7 @@ function isUnfolded(node, route, filter, visible) {
         </div>
         <div slot="right" class="main">
           <Topbar active={showSidebar} themes="{themes}" stageRect={stageRect} stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
-          <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} 
-                 stageSize={stageSize} landscape={landscape} theme={activeTheme} on:out={handleStageOut} />
+          <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} stageStyle={stageStyle} on:out={handleStageOut} />
         </div>
       </LeftRightLayout>
     </div>
