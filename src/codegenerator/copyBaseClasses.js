@@ -1,12 +1,12 @@
 import path from 'path'
 import fs from 'fs'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
 import config from '../config.js'
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-const sourcefolder = path.resolve(__dirname, '../shapes/') + '/'
+const sourcefolder = path.resolve(__dirname, 'shapes') + '/'
 
 export async function copyBaseClasses() {
   console.log('config is', await config())
