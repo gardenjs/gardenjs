@@ -22,22 +22,24 @@ const dispatch = createEventDispatcher()
 </script>
 
 <div class="panel">
-  <div class="panel__nav">
-    <nav>
-      <ul>
-        {#each tabs as tab, index}
-        <li><button class:active="{tab == selected}" on:click={handleSelect(index)}>{tab.name}</button></li>
-        {/each}
-      </ul>
-    </nav>
-  </div>
-  <div class="panel__pane">
-    {#if selected && selected.page }
-    <TabContent item={selected} on:out={handleout} />
-    {:else}
-    <slot>No tab content provided</slot>
-    {/if}
-  </div>
+  {#if tabs.length}
+    <div class="panel__nav">
+      <nav>
+        <ul>
+          {#each tabs as tab, index}
+          <li><button class:active="{tab == selected}" on:click={handleSelect(index)}>{tab.name}</button></li>
+          {/each}
+        </ul>
+      </nav>
+    </div>
+    <div class="panel__pane">
+      {#if selected && selected.page }
+      <TabContent item={selected} on:out={handleout} />
+      {:else}
+      <slot>No tab content provided</slot>
+      {/if}
+    </div>
+  {/if}
 </div>
 
 <style>

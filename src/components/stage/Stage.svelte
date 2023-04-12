@@ -4,14 +4,14 @@ import HorizontalSplitPane from '../splitpanes/HorizontalSplitPane.svelte'
 import PanelComponent from '../panel/PanelComponent.svelte'
 import PanelStoriesNav from '../panel/PanelStoriesNav.svelte'
 import PanelDescription from '../panel/PanelDescription.svelte'
+import PanelCode from '../panel/PanelCode.svelte'
 import {computeStageStyle} from '../../stageSizes.js'
-import Highlight from '../highlight/Highlight.svelte'
+import {triggerHighlightAll} from '../highlight/Highlight.js'
 
 const dispatch = createEventDispatcher()
 
 export let componentname
 export let das = {}
-export let historystate
 export let stageSize
 export let landscape
 export let examples
@@ -69,24 +69,25 @@ function createTabs(das) {
   if (das.description) {
     tabs.push({name: 'Description', props: {das}, page: PanelDescription })
   }
-  tabs.push( {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
+  if (examples.length) {
+    tabs.push( {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
+  }
+  if (das.name) { // TODO use code
+    tabs.push( {name: 'Code', props: {das}, page: PanelCode} )
+  }
   return tabs
 }
 
-$: selectedtab = tabs[0] || {}
-
-    
 function handleSelectionChange(evt) {
   globalThis.history.pushState({selectedstory: evt.detail.selecteditem}, '', window.location.pathname.substring('/garden'.length))
 }
 
-function tabselectionchange(evt) {
-  selectedtab = evt.detail.selecteditem
+function tabselectionchange() {
+  triggerHighlightAll()
 }
 
 </script>
 
-<Highlight das="{das}" />
 <HorizontalSplitPane topheight='65vh'>
   <div slot="top" class="is-full">
     <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle}></iframe>
