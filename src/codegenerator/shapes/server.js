@@ -2,7 +2,7 @@ import { config, open } from 'garden'
 import { createServer as createViteServer } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
-async function createServer() {
+export async function createServer() {
   const {serverport, destination} = await config()
 
   console.log('PROJECT ROOT', process.cwd())
@@ -36,4 +36,3 @@ async function createServer() {
   server.listen()
   open(`http://localhost:${serverport}/garden`)
 }
-createServer()

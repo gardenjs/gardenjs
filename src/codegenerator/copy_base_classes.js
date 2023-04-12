@@ -8,10 +8,16 @@ const __dirname = dirname(__filename)
 
 const sourcefolder = path.resolve(__dirname, 'shapes') + '/'
 
+export async function clearBaseFolder() {
+  console.log('config is', await config())
+  const targetfolder = (await config()).destination
+  fs.rmSync(targetfolder, { recursive: true, force: true })
+}
+
 export async function copyBaseClasses() {
   console.log('config is', await config())
   const targetfolder = (await config()).destination
-  fs.mkdir(targetfolder + '/build', {recursive: true}, onErrorAbortElse(() => copyFolder(sourcefolder, targetfolder)))
+  fs.mkdir(targetfolder, {recursive: true}, onErrorAbortElse(() => copyFolder(sourcefolder, targetfolder)))
 }
 
 function onErrorAbortElse(func) {

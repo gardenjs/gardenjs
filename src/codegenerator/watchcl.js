@@ -1,9 +1,14 @@
 import config from '../config.js'
 import {watch} from './watch.js'
 import {generateGardenBase} from './base_generator.js'
+import {clearBaseFolder, copyBaseClasses} from './copy_base_classes.js'
 
-generate()
-readConfigThenWatch()
+export async function init() {
+  await clearBaseFolder()
+  await copyBaseClasses()
+  await generate()
+  readConfigThenWatch()
+}
 
 async function generate() {
   console.log('generate component app')

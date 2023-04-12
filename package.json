@@ -8,8 +8,7 @@
   "author": "Robin Danzinger, Martin Farkas",
   "license": "MIT",
   "bin": {
-    "initGarden": "bin/initgarden.js",
-    "serveGarden": "bin/servegarden.js"
+    "initgarden": "bin/initgarden.js"
   },
   "scripts": {
     "test": "mocha --require @babel/polyfill --require @babel/register --recursive",
