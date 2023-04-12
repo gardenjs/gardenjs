@@ -618,9 +618,9 @@
   font-size: 85%;
 }
 
-.markdown-body pre code {
+/* .markdown-body pre code {
   font-size: 100%;
-}
+} */
 
 .markdown-body pre>code {
   padding: 0;
