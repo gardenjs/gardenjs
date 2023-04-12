@@ -1,4 +1,5 @@
-import { config, open } from 'garden'
+import config from './config.js'
+import open from 'open'
 import { createServer as createViteServer } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 
