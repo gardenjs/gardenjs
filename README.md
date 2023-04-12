@@ -131,7 +131,6 @@ MIT
 
 ### v1.0
 
-* [feature] Show component code in own tab.
 * [refactor] Move logic to own file. Handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
 * [feature] Docker image for screenshot test.
 * [task] Show favicon.svg (src/assets/icons/favicon.svg). Maybe with an alternate path through garden.config.js.
