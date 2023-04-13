@@ -15,15 +15,27 @@ export async function createServer() {
       proxy: {
         '^/garden$': {
           target: `http://localhost:${serverport}/${destination}/`,
-          rewrite: (_path) => ''
+          rewrite: (_path) => {
+           return ''
+          }
+        },
+        '^/garden/gardenframe/.*': {
+          target: `http://localhost:${serverport}/${destination}/`,
+          rewrite: (path) => {
+            return path.substring('/garden/'.length)
+          }
         },
         '^/garden/(?!(lib/|gardenframe/)).*/': {
           target: `http://localhost:${serverport}/${destination}/`,
-          rewrite: (_path) => ''
+          rewrite: (path) => {
+            return ''
+          }
         },
         '^/gardenlib/.*': {
           target: `http://localhost:${serverport}/${destination}/lib/`,
-          rewrite: (path) => path.substring('/gardenlib/'.length)
+          rewrite: (path) => {
+            return path.substring('/gardenlib/'.length)
+          }
         },
       }
     },
