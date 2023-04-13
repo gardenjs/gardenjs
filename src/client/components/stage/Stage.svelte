@@ -56,7 +56,7 @@ $: {
   }
 }
 
-let tabs = createTabs(das)
+$: tabs = createTabs(das)
 
 function createTabs(das) {
   const tabs = []
