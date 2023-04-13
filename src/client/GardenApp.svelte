@@ -28,6 +28,7 @@ initRouter(routes, baseurl, (routeobj, state) => {
     componentname = routeobj.fullname
     currentRoute = routeobj.route
     das = dasmap[componentname]
+    das.componentfile = routeobj.file
     historystate = state
   }
 })

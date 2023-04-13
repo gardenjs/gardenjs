@@ -186,10 +186,10 @@ export function createComponentDescription({das, navbasenode, basepath, relative
   const fullname = createFullname(navbasenode, relativepath, name)
   const route = createRoute(navbasenode, relativepath, name)
   const fullnavnode = path.join(navbasenode, relativepath)
-  const modulepath = basepath.indexOf('node_modules') == 0 ? basepath.substring('node_modules/'.length) : '../' + basepath
+  const modulepath = basepath.indexOf('node_modules') == 0 ? basepath.substring('node_modules/'.length) : '/' + basepath
   const file = das.file ? path.join(modulepath, relativepath, das.file) : undefined
   const dasfile = path.join(modulepath, relativepath, filename)
-  const descriptionfile = das.description?.endsWith('.md') ? '/' + path.join(modulepath, relativepath, das.description).substring(3) : undefined
+  const descriptionfile = das.description?.endsWith('.md') ? path.join(modulepath, relativepath, das.description) : undefined
   const fullpath = path.join(basepath, relativepath)
   return {
     name,

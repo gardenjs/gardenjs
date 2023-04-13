@@ -9,27 +9,30 @@
   }
 
   async function loadCode(das) {
-    const response = await fetch('/src/components/buttons/Buttons.example.svelte?raw')
-    code = 'foobar'
-
- //   code = await response.text()
-    console.log('DEBUG', code )
+    try {
+      const response = await fetch(`${das.componentfile}?raw`)
+      code = (await response.text())
+    } catch (e) {
+      code = ''
+    }
   }
   $: {
     if (code != tmpcode) {
       tmpcode = null
+      setTimeout(() => {
+        tmpcode = code
+        console.log('DEBUG', tmpcode )
+        if (tmpcode && codeblock) {
+          codeblock.innerText=tmpcode
+          highlightElement(codeblock)
+        }
+      }, 10)
     }
-    setTimeout(() => {
-      tmpcode = code
-      if (tmpcode && codeblock) {
-        highlightElement(codeblock)
-      }
-    }, 10)
   }
 </script>
 
 {#if tmpcode}
 <div>
-  <pre><code class="language-xml" bind:this={codeblock}>{code}</code></pre>
+  <pre><code class="language-xml" bind:this={codeblock}></code></pre>
 </div>
 {/if}
