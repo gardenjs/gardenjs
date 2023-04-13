@@ -6,7 +6,8 @@ import {getConfig} from '../config.js'
 export async function generateGardenBase() {
   const {structure, destination, additional_style_files, welcome_page} = await getConfig()
   const targetBaseFile = destination + 'base.js'
-  const targetImportMapFile= destination + 'importmap.js'
+  const targetComponentMapFile= destination + 'component_import_map.js'
+  const targetDasMapFile= destination + 'das_import_map.js'
   const targetGardenFrameFile = destination + '/lib/gardenframe.js'
   
   const basefolders = getDasBaseFolders(structure)
@@ -22,7 +23,8 @@ export async function generateGardenBase() {
   }, [])
 
   await writeFileIfChanged(targetBaseFile, generateBaseCode(cds))
-  await writeFileIfChanged(targetImportMapFile, generateImportMapCode(cds, welcome_page))
+  await writeFileIfChanged(targetComponentMapFile, generateComponentMapCode(cds, welcome_page))
+  await writeFileIfChanged(targetDasMapFile, generateDasMapCode(cds))
   await writeFileIfChanged(targetGardenFrameFile, generateGardenFrameFile(additional_style_files))
 }
 
@@ -36,6 +38,7 @@ async function writeFileIfChanged(file, content) {
     console.log(e)
   }
   if (oldcontent !== content) {
+    console.log('Write file', file)
     await fs.promises.writeFile(file, content)
   }
 }
@@ -66,9 +69,9 @@ export const navtree = ${JSON.stringify(createNavItemTree(componentdescriptions)
 `
 }
 
-export function generateImportMapCode(componentdescriptions, welcome_page = '../garden/Hellogarden.svelte') {
+export function generateComponentMapCode(componentdescriptions, welcome_page = '../garden/Hellogarden.svelte') {
   return `
-${componentdescriptions.map(createImportStmt).join('\n')}
+${componentdescriptions.map(createComponentImportStmt).join('\n')}
 
 import Welcome from '${welcome_page}' 
 
@@ -76,11 +79,16 @@ export const componentmap = {
   'Welcome': Welcome,
   ${componentdescriptions.map(createComponentMapEntry).join(',\n')}
 }
+`
+}
+
+export function generateDasMapCode(componentdescriptions) {
+  return `
+${componentdescriptions.map(createDasImportStmt).join('\n')}
 export const dasmap = {
   ${componentdescriptions.map(createDasMapEntry).join(',\n')}
 }
 `
-
 }
 
 function generateGardenFrameFile(stylefiles = []) {
@@ -90,7 +98,8 @@ function generateGardenFrameFile(stylefiles = []) {
 
 import {GardenFrame} from 'garden'
 import {routes} from '../base.js'
-import {componentmap, dasmap} from '../importmap.js'
+import {dasmap} from '../das_import_map.js'
+import {componentmap} from '../component_import_map.js'
 import config from '../../garden.config.js'
  
 const app = new GardenFrame({
@@ -135,15 +144,16 @@ export function createNavigationEntry(description) {
   return {isLeaf: true, href: description.route, name: description.name, key: description.fullname}
 }
 
-
 export function createRouteEntry(description) {
   return `'${description.route}': ${JSON.stringify(description, null, 2)}`
 }
 
-export function createImportStmt(description) {
-  return `import ${description.fullname} from '${description.file}'
-  import ${description.fullname}Code from '${description.file}?raw'
-import ${description.fullname}Das from '${description.dasfile}'
+export function createComponentImportStmt(description) {
+  return `import ${description.fullname} from '${description.file}'`
+}
+
+export function createDasImportStmt(description) {
+  return `import ${description.fullname}Das from '${description.dasfile}'
 ${createDescriptionImportStmt(description)}`
 }
 
@@ -158,7 +168,6 @@ export function createComponentMapEntry(description) {
 export function createDasMapEntry(description) {
   return `'${description.fullname}': {
     ...${description.fullname}Das,
-    code: ${description.fullname}Code,
     description: ${getDescriptionFromFileOrProperty(description)} 
   }`
 }

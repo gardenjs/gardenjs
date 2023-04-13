@@ -1,8 +1,20 @@
 <script>
   import {highlightElement} from '../highlight/Highlight.js'
-  export let code
+  export let das
+  let code = ''
   let tmpcode
   let codeblock 
+  $: {
+    loadCode(das)
+  }
+
+  async function loadCode(das) {
+    const response = await fetch('/src/components/buttons/Buttons.example.svelte?raw')
+    code = 'foobar'
+
+ //   code = await response.text()
+    console.log('DEBUG', code )
+  }
   $: {
     if (code != tmpcode) {
       tmpcode = null

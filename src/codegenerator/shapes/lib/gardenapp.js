@@ -1,6 +1,6 @@
 import {GardenApp} from 'garden'
 import {navtree, routes} from '../base.js'
-import {dasmap} from '../importmap.js'
+import {dasmap} from '../das_import_map.js'
 import config from '../../garden.config.js'
 import 'garden/src/client/assets/scss/main.scss'
 

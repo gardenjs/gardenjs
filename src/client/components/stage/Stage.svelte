@@ -56,7 +56,7 @@ $: {
   }
 }
 
-$: tabs = createTabs(das)
+let tabs = createTabs(das)
 
 function createTabs(das) {
   const tabs = []
@@ -66,8 +66,8 @@ function createTabs(das) {
   if (examples.length) {
     tabs.push( {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
   }
-  if (das.code) { 
-    tabs.push( {name: 'Code', props: {code: das.code}, page: PanelCode} )
+  if (das) { 
+    tabs.push( {name: 'Code', props: {das}, page: PanelCode} )
   }
   return tabs
 }
