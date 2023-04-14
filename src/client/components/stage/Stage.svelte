@@ -8,7 +8,7 @@ import PanelCode from './panel/PanelCode.svelte'
 
 const dispatch = createEventDispatcher()
 
-export let componentname
+export let componentName
 export let das = {}
 export let stageStyle
 export let selectedExample
@@ -51,7 +51,7 @@ $: {
 
 $: {
   if (myframeready) {
-    myframe.contentWindow.postMessage({selectedStory: selectedExample, componentname}, window.location)
+    myframe.contentWindow.postMessage({selectedStory: selectedExample, componentName}, window.location)
   }
 }
 

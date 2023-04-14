@@ -7,7 +7,7 @@ import LeftRightLayout from './layouts/LeftRightLayout.svelte'
 import TopBottomLayout from './layouts/TopBottomLayout.svelte'
 import {updateStage, stageStyle, stageSize, landscape, setThemes, selectTheme, themes} from './logic/stage.js'
 import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavTree as filterNavTree, updateFilter, updateNavTree as updateNavTree} from './logic/navTree.js'
-import {initRouting, das, componentname, selectedExample, updateDasMap} from './logic/routing.js'
+import {initRouting, das, componentName, selectedExample, updateDasMap} from './logic/routing.js'
 updateNavTree
 
 let baseurl = '/garden'
@@ -29,7 +29,7 @@ function handleTopbarOut(evt) {
   if (evt.detail.openInTab) {
     const targetWindow = window.open('/garden/gardenframe/', '_blank')
     targetWindow.onload = () => {
-      targetWindow.postMessage({$selectedExample, $componentname}, window.location.origin)
+      targetWindow.postMessage({$selectedExample, $componentName}, window.location.origin)
     }
   }
   else if (evt.detail.selectTheme) {
@@ -74,7 +74,7 @@ function handleSidebarOut(evt) {
         </div>
         <div slot="right" class="main">
           <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
-          <Stage componentname={$componentname} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
+          <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
         </div>
       </LeftRightLayout>
     </div>

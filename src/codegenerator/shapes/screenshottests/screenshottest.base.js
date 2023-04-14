@@ -22,8 +22,8 @@ describe('Component Screenshot Test', () => {
     await browser.close()
   })
 
-  for (const [route, {name, fullname: componentname}] of Object.entries(routes)) {
-    const das = dasmap[componentname]
+  for (const [route, {name, fullname: componentName}] of Object.entries(routes)) {
+    const das = dasmap[componentName]
     describe(`Component ${name} at route: ${route}`, () => {
 
       for (const example of das.examples) {
@@ -31,7 +31,7 @@ describe('Component Screenshot Test', () => {
         it(story, async () => {
           await page.evaluate((data) => {
             window.postMessage(data, '*')
-          }, {selectedStory: story, componentname})
+          }, {selectedStory: story, componentName})
           const body = await page.$('body')
           const screenshot = await body.screenshot()
           expect(screenshot).toMatchImageSnapshot()

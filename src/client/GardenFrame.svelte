@@ -12,10 +12,10 @@ window.addEventListener('message', (evt) => {
   if (config.themeHandler) {
     config.themeHandler(evt.data.theme)
   }
-  das = dasMap[evt.data.componentname] 
+  das = dasMap[evt.data.componentName] 
   selectedExample = das?.examples.find(ex => ex.story === evt.data.selectedStory)
   redirectdata = {}
-  component = evt.data.componentname ? componentMap[evt.data.componentname] : componentMap.Welcome
+  component = evt.data.componentName ? componentMap[evt.data.componentName] : componentMap.Welcome
 })
 
 function handlecomponentout(evt) {
