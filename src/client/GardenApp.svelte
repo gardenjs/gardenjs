@@ -7,6 +7,7 @@ import FullScreenLayout from './layouts/FullScreenLayout.svelte'
 import LeftRightLayout from './layouts/LeftRightLayout.svelte'
 import TopBottomLayout from './layouts/TopBottomLayout.svelte'
 import {computeStageStyle} from './logic/stageSizes.js'
+import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavtree, updateFilter, updateNavtree, updateRoute} from './logic/navtree.js'
 
 let baseurl = '/garden'
 let componentname = ''
@@ -18,6 +19,9 @@ export let dasmap
 export let config
 $: expressport = config.serverport + 1
 $: expressbaseurl = `${window.location.protocol}//${window.location.hostname}:${expressport}/`
+
+$: updateNavtree(navtree)
+$: updateRoute(currentRoute, componentname)
 
 let das = {}
 let historystate
@@ -38,12 +42,8 @@ initRouter(routes, baseurl, (routeobj, state) => {
 let showSidebar = true
 let stageSize = 'full'
 let landscape = false
-let examples = {}
-let selectedStory
-let rootNodesExpanded = true
 let themes = []
 let activeTheme
-let filterNavtree
 
 let stageRect = {
   stageWidth: 900,
@@ -62,6 +62,8 @@ $: {
 
 $: projectTitle = config.project_title || ''
 
+let examples = {}
+let selectedStory
 $: {
   examples = das.examples || []
   selectedStory = examples[0]?.story 
@@ -69,34 +71,6 @@ $: {
     selectedStory = examples.find(ex => ex.story == historystate.selectedstory)?.story
   }
 }
-
-let unfoldedNodes
-let initialized = false
-$: {
-  if (!initialized && navtree) {
-    const all = navtree.flatMap(getAllNodes)
-    unfoldedNodes = all.reduce((acc, cur) => {
-      acc[cur.key] = true
-      return acc
-    }, {})
-    initialized = true
-  }
-}
-
-function getAllNodes(node) {
-  return [node, ...getAllChildNodes(node)]
-}
-
-function getAllChildNodes(node) {
-  return node.children ? node.children.flatMap(getAllNodes) : []
-}
-
-
-let nodes = []
-$: {
-  nodes = transformNavTree(currentRoute, componentname, unfoldedNodes, navtree, filterNavtree)
-}
-
 
 function handleTopbarOut(evt) {
   if (evt.detail.openInTab) {
@@ -122,69 +96,15 @@ function handleStageOut(evt) {
 }
 
 function handleSidebarOut(evt) {
-  if (evt.detail.toggleFolderFoldStatus) {
-    if (!rootNodesExpanded) {
-      expandRootNode(evt.detail.toggleFolderFoldStatus)
-      return
-    }
-    const node = evt.detail.toggleFolderFoldStatus
-    if (unfoldedNodes[node.key] && !(currentRoute.indexOf(node.key) === 0)) {
-      unfoldedNodes[node.key] = false
-    } else {
-      unfoldedNodes[node.key] = true
-    }
-    unfoldedNodes = unfoldedNodes
+  if (evt.detail.toggleFoldStatusOfNode) {
+    toggleFolder(evt.detail.toggleFoldStatusOfNode)
   }
   if (evt.detail.toggleRootFolders) {
-    rootNodesExpanded = !rootNodesExpanded
-    nodes = nodes.map(n => ({...n, unfolded: rootNodesExpanded && unfoldedNodes[n.key]}))
+    toggleRootFolders()
   }
   if (evt.detail.filter) {
-    filterNavtree = evt.detail.filter.value?.toLowerCase() || undefined
+    updateFilter(evt.detail.filter.value?.toLowerCase())
   }
-}
-
-function expandRootNode(node) {
-  rootNodesExpanded = true
-  Object.keys(unfoldedNodes).forEach(key => unfoldedNodes[key] = false)
-  nodes = nodes.map(n => {
-    if (n.key === node.key || currentRoute.indexOf(n.key) === 0) {
-      unfoldedNodes[n.key] = true
-      return {...n, unfolded: true}
-    }
-    else {
-      unfoldedNodes[n.key] = false
-      return {...n, unfolded: false}
-    }
-  })
-}
-
-function transformNavTree(route, selectedNode, unfoldedNodes, nodes, filterNavtree, parentVisible) {
-  return nodes.map(child => {
-    const filterMatches = filterNavtree ? child.name?.toLowerCase().includes(filterNavtree) : true
-    const name = filterNavtree && filterMatches ? highlightFilterMatch(child.name, filterNavtree) : child.name
-    if (child.isLeaf) {
-      const visible = parentVisible || filterMatches
-      return visible ? {...child, name, selected: selectedNode === child.key, isLeaf: true } : undefined
-    } else {
-      const children = transformNavTree(currentRoute, selectedNode, unfoldedNodes, child.children, filterNavtree, parentVisible || filterMatches).filter(n => n)
-      const visible = filterMatches || children.length > 0
-      return visible ? {...child, name, children, unfolded: isUnfolded(child, route, filterNavtree, visible), filterMatches} : undefined
-    }
-  }).filter(n => n)
-}
-
-function highlightFilterMatch(text, filter) {
-  const matchStart = text.toLowerCase().indexOf(filter)
-  const matchEnd = matchStart + filter.length
-  const start = text.substring(0, matchStart)
-  const middle = text.substring(matchStart, matchEnd)
-  const end = text.substring(matchEnd)
-  return `${start}<span class="highlight">${middle}</span>${end}`
-}
-
-function isUnfolded(node, route, filter, visible) {
-  return (filter && visible) || unfoldedNodes[node.key] || route.indexOf(node.key) === 0
 }
 
 </script>
@@ -194,7 +114,7 @@ function isUnfolded(node, route, filter, visible) {
     <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
         <div slot="left" class="is-flexfix">
-          <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={rootNodesExpanded} nodes={nodes} filter={filterNavtree} on:out={handleSidebarOut} />
+          <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavtree} on:out={handleSidebarOut} />
         </div>
         <div slot="right" class="main">
           <Topbar active={showSidebar} themes="{themes}" stageRect={stageRect} stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />

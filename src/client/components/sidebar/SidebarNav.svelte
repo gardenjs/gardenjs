@@ -5,8 +5,8 @@
   export let nodes = []
   export let level = 1
 
-  function toggleFolderFoldStatus(node) {
-    dispatch('out', {toggleFolderFoldStatus: {...node}})
+  function toggleFoldStatusOfNode(node) {
+    dispatch('out', {toggleFoldStatusOfNode: {...node}})
   }
 
 </script>
@@ -20,7 +20,7 @@
     {:else}
       <li class="folder" class:unfolded={node.unfolded}>
         <button class="folder_button btn_level-{level}" title={node.unfolded ? 'fold' : 'unfold'} 
-          on:click={() => toggleFolderFoldStatus(node)}>
+          on:click={() => toggleFoldStatusOfNode(node)}>
           <span class="folder_icon" class:unfolded_icon={node.unfolded}><svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24"  height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg></span>
           <span class="folder_label">{@html node.name}</span>
         </button>
