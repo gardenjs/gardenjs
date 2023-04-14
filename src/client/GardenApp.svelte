@@ -6,7 +6,7 @@ import Topbar from './components/topbar/Topbar.svelte'
 import FullScreenLayout from './layouts/FullScreenLayout.svelte'
 import LeftRightLayout from './layouts/LeftRightLayout.svelte'
 import TopBottomLayout from './layouts/TopBottomLayout.svelte'
-import {computeStageStyle} from './logic/stageSizes.js'
+import {updateStage, stageStyle, stageSize, landscape, setThemes, themes} from './logic/stage.js'
 import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavtree, updateFilter, updateNavtree, updateRoute} from './logic/navtree.js'
 
 let baseurl = '/garden'
@@ -17,11 +17,11 @@ export let routes
 export let navtree
 export let dasmap 
 export let config
-$: expressport = config.serverport + 1
-$: expressbaseurl = `${window.location.protocol}//${window.location.hostname}:${expressport}/`
+$: expressbaseurl = `${window.location.protocol}//${window.location.hostname}:${config.serverport + 1}/`
 
 $: updateNavtree(navtree)
 $: updateRoute(currentRoute, componentname)
+$: setThemes(config.themes)
 
 let das = {}
 let historystate
@@ -39,26 +39,6 @@ initRouter(routes, baseurl, (routeobj, state) => {
   }
 })
 
-let showSidebar = true
-let stageSize = 'full'
-let landscape = false
-let themes = []
-let activeTheme
-
-let stageRect = {
-  stageWidth: 900,
-  stageHeight: 1000
-}
-
-$: stageStyle = computeStageStyle({stageSize, landscape, stageBg: activeTheme?.stageBg})
-
-$: {
-  themes = config.themes?.map((theme, index) => ({...theme, active: index === 0})) || []
-}
-
-$: {
-  activeTheme = themes.find(t => t.active)
-}
 
 $: projectTitle = config.project_title || ''
 
@@ -72,6 +52,7 @@ $: {
   }
 }
 
+let showSidebar = true
 function handleTopbarOut(evt) {
   if (evt.detail.openInTab) {
     const targetWindow = window.open('/garden/gardenframe/', '_blank')
@@ -80,15 +61,18 @@ function handleTopbarOut(evt) {
     }
   }
   else if (evt.detail.selectTheme) {
-    themes = themes.map(theme => ({ ...theme, active: theme.name === evt.detail.selectTheme }))
+    selectTheme(evt.detail.selectTheme)
   }
   else {
     showSidebar = evt.detail.active
-    stageSize = evt.detail.stageSize
-    landscape = evt.detail.landscape
+    updateStage({stageSize: evt.detail.stageSize, landscape: evt.detail.landscape})
   }
 }
 
+let stageRect = {
+  stageWidth: 900,
+  stageHeight: 1000
+}
 function handleStageOut(evt) {
   if (evt.detail.stageRect) {
     stageRect = evt.detail.stageRect
@@ -117,8 +101,8 @@ function handleSidebarOut(evt) {
           <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavtree} on:out={handleSidebarOut} />
         </div>
         <div slot="right" class="main">
-          <Topbar active={showSidebar} themes="{themes}" stageRect={stageRect} stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
-          <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} stageStyle={stageStyle} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
+          <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
+          <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} stageStyle={$stageStyle} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
         </div>
       </LeftRightLayout>
     </div>
