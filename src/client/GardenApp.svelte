@@ -16,6 +16,8 @@ export let routes
 export let navtree
 export let dasmap 
 export let config
+$: expressport = config.serverport + 1
+$: expressbaseurl = `${window.location.protocol}//${window.location.hostname}:${expressport}/`
 
 let das = {}
 let historystate
@@ -196,7 +198,7 @@ function isUnfolded(node, route, filter, visible) {
         </div>
         <div slot="right" class="main">
           <Topbar active={showSidebar} themes="{themes}" stageRect={stageRect} stageSize={stageSize} landscape={landscape} on:out={handleTopbarOut} />
-          <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} stageStyle={stageStyle} on:out={handleStageOut} />
+          <Stage componentname={componentname} das={das} examples={examples} selectedStory={selectedStory} historystate={historystate} stageStyle={stageStyle} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
         </div>
       </LeftRightLayout>
     </div>
