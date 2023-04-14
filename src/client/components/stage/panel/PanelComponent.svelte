@@ -1,26 +1,28 @@
 <script> 
   import TabContent from './PanelContent.svelte'
   import { createEventDispatcher } from 'svelte'
-  export let tabs = []
-const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher()
 
-  let selectedIndex = 0
-  let selected = {}
+  export let tabs = []
+
+  let selectedTabName = {}
+  let selectedTab
   $: {
-    if (tabs.length <= selectedIndex) {
-      selectedIndex = 0
+    if (tabs) {
+      selectedTab = tabs.find(t => t.name === selectedTabName) || tabs[0]
+    } else {
+      selectedTab = {}
     }
   }
-  $: selected = tabs ? tabs[selectedIndex] : {}
 
-  const handleSelect = index => () => {
-    selectedIndex = index
-    dispatch('out', {selecteditem : tabs[selectedIndex]})
+  const handleSelect = tab => () => {
+    selectedTabName = tab.name
+    dispatch('out', {selecteditem : tab})
   }
 
   function handleout(evt) {
-    if (selected.out) {
-      selected.out(evt)
+    if (selectedTab.out) {
+      selectedTab.out(evt)
     }
   }
  
@@ -31,15 +33,15 @@ const dispatch = createEventDispatcher()
     <div class="panel__nav">
       <nav>
         <ul>
-          {#each tabs as tab, index}
-          <li><button class:active="{tab == selected}" on:click={handleSelect(index)}>{tab.name}</button></li>
+          {#each tabs as tab}
+          <li><button class:active="{tab == selectedTab}" on:click={handleSelect(tab)}>{tab.name}</button></li>
           {/each}
         </ul>
       </nav>
     </div>
     <div class="panel__pane">
-      {#if selected && selected.page }
-      <TabContent item={selected} on:out={handleout} />
+      {#if selectedTab && selectedTab.page }
+      <TabContent item={selectedTab} on:out={handleout} />
       {:else}
       <slot>No tab content provided</slot>
       {/if}

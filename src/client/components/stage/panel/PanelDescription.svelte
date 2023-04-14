@@ -1,7 +1,7 @@
 <script>
   import './markdown.css'
   import {marked} from 'marked'
-  import {highlightElement} from '../highlight/Highlight.js'
+  import {highlightElement} from '../../highlight/Highlight.js'
   export let das
   let element
 

@@ -1,10 +1,10 @@
 <script> 
 import { createEventDispatcher} from 'svelte'
 import HorizontalSplitPane from '../splitpanes/HorizontalSplitPane.svelte'
-import PanelComponent from '../panel/PanelComponent.svelte'
-import PanelStoriesNav from '../panel/PanelStoriesNav.svelte'
-import PanelDescription from '../panel/PanelDescription.svelte'
-import PanelCode from '../panel/PanelCode.svelte'
+import PanelComponent from './panel/PanelComponent.svelte'
+import PanelStoriesNav from './panel/PanelStoriesNav.svelte'
+import PanelDescription from './panel/PanelDescription.svelte'
+import PanelCode from './panel/PanelCode.svelte'
 
 const dispatch = createEventDispatcher()
 
@@ -13,6 +13,7 @@ export let das = {}
 export let stageStyle
 export let examples
 export let selectedStory
+export let expressbaseurl
 
 function updateStageRect(stageRect) {
   dispatch('out', {
@@ -66,8 +67,8 @@ function createTabs(das) {
   if (examples.length) {
     tabs.push( {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
   }
-  if (das) { 
-    tabs.push( {name: 'Code', props: {das}, page: PanelCode} )
+  if (das.componentfile) { 
+    tabs.push( {name: 'Code', props: {das, expressbaseurl}, page: PanelCode} )
   }
   return tabs
 }
