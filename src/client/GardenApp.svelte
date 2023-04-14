@@ -44,10 +44,7 @@ function handleTopbarOut(evt) {
   }
 }
 
-let stageRect = {
-  stageWidth: 900,
-  stageHeight: 1000
-}
+let stageRect = {}
 function handleStageOut(evt) {
   if (evt.detail.stageRect) {
     stageRect = evt.detail.stageRect
