@@ -51,7 +51,7 @@ $: {
 
 $: {
   if (myframeready) {
-    myframe.contentWindow.postMessage({selectedStory: selectedExample, componentName}, window.location)
+    myframe.contentWindow.postMessage({selectedExample, componentName}, window.location)
   }
 }
 

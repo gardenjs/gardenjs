@@ -13,7 +13,7 @@ window.addEventListener('message', (evt) => {
     config.themeHandler(evt.data.theme)
   }
   das = dasMap[evt.data.componentName] 
-  selectedExample = das?.examples.find(ex => ex.story === evt.data.selectedStory)
+  selectedExample = das?.examples.find(ex => ex.story === evt.data.selectedExample)
   redirectdata = {}
   component = evt.data.componentName ? componentMap[evt.data.componentName] : componentMap.Welcome
 })

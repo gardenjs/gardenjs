@@ -29,7 +29,7 @@ function handleTopbarOut(evt) {
   if (evt.detail.openInTab) {
     const targetWindow = window.open('/garden/gardenframe/', '_blank')
     targetWindow.onload = () => {
-      targetWindow.postMessage({$selectedExample, $componentName}, window.location.origin)
+      targetWindow.postMessage({selectedExample: $selectedExample, componentName: $componentName}, window.location.origin)
     }
   }
   else if (evt.detail.selectTheme) {
