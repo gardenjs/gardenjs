@@ -17,9 +17,12 @@ export let config
 $: expressbaseurl = `${window.location.protocol}//${window.location.hostname}:${config.serverport + 1}/`
 
 $: updateNavTree(navTree)
-$: setThemes(config.themes)
-$: initRouting(routes, baseurl)
 $: updateDasMap(dasMap)
+$: {
+  if (routes && dasMap)
+    initRouting(dasMap, routes, baseurl)
+}
+$: setThemes(config.themes)
 $: updateSelectedComponent($currentRoute, $componentName)
 
 $: projectTitle = config.project_title || ''
