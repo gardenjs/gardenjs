@@ -26,6 +26,10 @@ export async function createServer() {
             return path.substring('/garden/'.length)
           }
         },
+        '^/gardenfavicon$': {
+          target: `http://localhost:${serverport}/${destination}/assets/favicon.svg`,
+          rewrite: () => ''
+        },
         '^/garden/(?!(lib/|gardenframe/)).*/': {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: () => ''
