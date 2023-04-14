@@ -97,7 +97,6 @@ function generateGardenFrameFile(stylefiles = []) {
   }).join('\n') + `
 
 import {GardenFrame} from 'garden'
-import {routes} from '../base.js'
 import {dasmap} from '../das_import_map.js'
 import {componentmap} from '../component_import_map.js'
 import config from '../../garden.config.js'
@@ -105,7 +104,7 @@ import config from '../../garden.config.js'
 const app = new GardenFrame({
   target: document.body,
   hydrate: true,
-  props: {routes, componentmap, dasmap, config}
+  props: {componentmap, dasmap, config}
 })
 
 export default app

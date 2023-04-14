@@ -1,27 +1,10 @@
 import {writable, get} from 'svelte/store'
 
 export const themes = writable([])
-export const stageStyle = writable({})
+export const stageStyle = writable('')
 export const stageSize = writable('full')
 export const landscape = writable(false) 
 let activeTheme
-
-
-export function setThemes(newThemes) {
-  themes.set(newThemes)
-}
-
-export function selectTheme(themeName) {
-  themes.set(get(themes).map(theme => ({ ...theme, active: theme.name === themeName })))
-  activeTheme = get(themes).find((theme) => theme.active)
-  stageStyle.set(computeStageStyle())
-}
-
-export function updateStage(newStage) {
-  stageSize.set(newStage.stageSize)
-  landscape.set(newStage.landscape)
-  stageStyle.set(computeStageStyle())
-}
 
 const sizes = {
   small: {
@@ -42,6 +25,22 @@ const sizes = {
   }
 }
 
+export function setThemes(newThemes) {
+  themes.set(newThemes)
+}
+
+export function selectTheme(themeName) {
+  themes.set(get(themes).map(theme => ({ ...theme, active: theme.name === themeName })))
+  activeTheme = get(themes).find((theme) => theme.active)
+  computeStageStyle()
+}
+
+export function updateStage(newStage) {
+  stageSize.set(newStage.stageSize)
+  landscape.set(newStage.landscape)
+  computeStageStyle()
+}
+
 function computeStageStyle() {
   const stageBg = activeTheme?.stageBg || 'white'
   const {frameheight, framewidth} = sizes[get(stageSize)]
@@ -50,5 +49,8 @@ function computeStageStyle() {
   const background = `background-color: ${stageBg}`
   const transition = 'transition: 0.2s'
  
-  return `${size}; ${padding}; ${background}; ${transition};`
+  stageStyle.set(`${size}; ${padding}; ${background}; ${transition};`)
 }
+
+computeStageStyle()
+

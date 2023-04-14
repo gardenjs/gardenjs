@@ -38,7 +38,6 @@ export function updateFilter(newFilter) {
 }
 
 export function updateNavtree(newNavtree) {
-  console.log('DEBUG', 'updaten', navtree )
   navtree = newNavtree
   if (!initialized) {
     initializeTree(navtree)
@@ -49,7 +48,6 @@ export function updateNavtree(newNavtree) {
 
 function updateTree() {
   nodes.set(transformNavTree(navtree))
-  console.log('DEBUG', get(nodes) )
 }
 
 function transformNavTree(nodes, parentVisible) {

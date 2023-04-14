@@ -11,8 +11,7 @@ const dispatch = createEventDispatcher()
 export let componentname
 export let das = {}
 export let stageStyle
-export let examples
-export let selectedStory
+export let selectedExample
 export let expressbaseurl
 
 function updateStageRect(stageRect) {
@@ -29,7 +28,6 @@ const resizeObserver = new ResizeObserver((entries) => {
     updateStageRect(entry.contentRect)
   })
 })
-
 
 $: {
   if (myframe) {
@@ -53,7 +51,7 @@ $: {
 
 $: {
   if (myframeready) {
-    myframe.contentWindow.postMessage({selectedStory, componentname}, window.location)
+    myframe.contentWindow.postMessage({selectedStory: selectedExample, componentname}, window.location)
   }
 }
 
@@ -64,8 +62,8 @@ function createTabs(das) {
   if (das.description) {
     tabs.push({name: 'Description', props: {das}, page: PanelDescription })
   }
-  if (examples.length) {
-    tabs.push( {name: 'Examples', props: {selected: selectedStory, items: examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
+  if (das.examples?.length) {
+    tabs.push( {name: 'Examples', props: {selected: selectedExample, items: das.examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
   }
   if (das.componentfile) { 
     tabs.push( {name: 'Code', props: {das, expressbaseurl}, page: PanelCode} )

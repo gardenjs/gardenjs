@@ -16,7 +16,7 @@ export async function createServer() {
     server: {
       port: serverport,
       proxy: {
-        '^/garden$': {
+        '^/garden/?$': {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: () => ''
         },

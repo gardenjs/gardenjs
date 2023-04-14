@@ -50,7 +50,7 @@
         </li>
         {/if}
       </ul>
-      <SidebarNav nodes={nodes} filter={filter} on:out />
+      <SidebarNav nodes={nodes} on:out />
       <ul>
         <li>
           <a class="github" href="https://github.com/rabbitdevelopment/garden" target="_blank" rel="noreferrer">
