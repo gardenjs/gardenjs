@@ -5,7 +5,7 @@ import Topbar from './components/topbar/Topbar.svelte'
 import FullScreenLayout from './layouts/FullScreenLayout.svelte'
 import LeftRightLayout from './layouts/LeftRightLayout.svelte'
 import TopBottomLayout from './layouts/TopBottomLayout.svelte'
-import {updateStage, stageStyle, stageSize, landscape, setThemes, themes} from './logic/stage.js'
+import {updateStage, stageStyle, stageSize, landscape, setThemes, selectTheme, themes} from './logic/stage.js'
 import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavtree, updateFilter, updateNavtree, updateRoute} from './logic/navtree.js'
 import {initRouting, das, componentname, currentRoute, selectedExample, updateDasMap} from './logic/routing.js'
 
