@@ -2,7 +2,7 @@ import {writable, get} from 'svelte/store'
 
 export const nodes = writable([])
 export const rootNodesExpanded = writable(true)
-export const filterNavtree = writable()
+export const filterNavTree = writable()
 
 let initialized = false
 let currentRoute = ''
@@ -26,19 +26,13 @@ function getAllChildNodes(node) {
   return node.children ? node.children.flatMap(getAllNodes) : []
 }
 
-export function updateRoute(route, selectedComponent) {
-  currentRoute = route
-  selectedNode = selectedComponent
-  updateTree()
-}
-
 export function updateFilter(newFilter) {
-  filterNavtree.set(newFilter)
+  filterNavTree.set(newFilter)
   updateTree()
 }
 
-export function updateNavtree(newNavtree) {
-  navtree = newNavtree
+export function updateNavTree(newNavTree) {
+  navtree = newNavTree
   if (!initialized) {
     initializeTree(navtree)
     initialized = true
@@ -51,7 +45,7 @@ function updateTree() {
 }
 
 function transformNavTree(nodes, parentVisible) {
-  const filter = get(filterNavtree)
+  const filter = get(filterNavTree)
   return nodes.map(child => {
     const filterMatches = filter ? child.name?.toLowerCase().includes(filter) : true
     const name = filter && filterMatches ? highlightFilterMatch(child.name) : child.name
@@ -67,7 +61,7 @@ function transformNavTree(nodes, parentVisible) {
 }
 
 function highlightFilterMatch(text) {
-  const filter = get(filterNavtree)
+  const filter = get(filterNavTree)
   const matchStart = text.toLowerCase().indexOf(filter)
   const matchEnd = matchStart + filter.length
   const start = text.substring(0, matchStart)

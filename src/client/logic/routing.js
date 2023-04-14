@@ -2,11 +2,10 @@ import { writable, get } from 'svelte/store'
 import {initRouter} from '../router.js'
 export const componentname = writable('')
 export const das  = writable()
-export const historystate = writable({})
-export const currentRoute = writable('')
 export const selectedExample = writable({})
 
 let dasMap
+let historystate
 
 export function updateDasMap(newDasMap) {
   dasMap = newDasMap
@@ -20,11 +19,10 @@ export function initRouting(routes, baseurl) {
       componentname.set('')
     } else {
       componentname.set(routeobj.fullname)
-      currentRoute.set(routeobj.route)
       const newDas = dasMap[routeobj.fullname]
       newDas.componentfile = routeobj.file
       das.set(newDas)
-      historystate.set(state)
+      historystate = state
       updateSelectedExample()
     }
   })
@@ -32,8 +30,8 @@ export function initRouting(routes, baseurl) {
 
 export function updateSelectedExample() {
   const examples = get(das).examples || []
-  if (get(historystate).selectedstory) {
-    selectedExample.set(examples.find(ex => ex.story == get(historystate).selectedstory)?.story)
+  if (historystate.selectedstory) {
+    selectedExample.set(examples.find(ex => ex.story == historystate.selectedstory)?.story)
   } else {
     selectedExample.set(examples[0]?.story)
   }

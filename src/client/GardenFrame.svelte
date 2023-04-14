@@ -1,9 +1,9 @@
 <script> 
-export let componentmap = {}
-export let dasmap = {}
+export let componentMap = {}
+export let dasMap = {}
 export let config
 
-let component = componentmap.Welcome
+let component = componentMap.Welcome
 let das = {}
 let selectedExample = {}
 let redirectdata = {}
@@ -12,10 +12,10 @@ window.addEventListener('message', (evt) => {
   if (config.themeHandler) {
     config.themeHandler(evt.data.theme)
   }
-  das = dasmap[evt.data.componentname] 
+  das = dasMap[evt.data.componentname] 
   selectedExample = das?.examples.find(ex => ex.story === evt.data.selectedStory)
   redirectdata = {}
-  component = evt.data.componentname ? componentmap[evt.data.componentname] : componentmap.Welcome
+  component = evt.data.componentname ? componentMap[evt.data.componentname] : componentMap.Welcome
 })
 
 function handlecomponentout(evt) {

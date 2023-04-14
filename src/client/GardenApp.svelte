@@ -6,22 +6,21 @@ import FullScreenLayout from './layouts/FullScreenLayout.svelte'
 import LeftRightLayout from './layouts/LeftRightLayout.svelte'
 import TopBottomLayout from './layouts/TopBottomLayout.svelte'
 import {updateStage, stageStyle, stageSize, landscape, setThemes, selectTheme, themes} from './logic/stage.js'
-import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavtree, updateFilter, updateNavtree, updateRoute} from './logic/navtree.js'
-import {initRouting, das, componentname, currentRoute, selectedExample, updateDasMap} from './logic/routing.js'
-
+import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavTree as filterNavTree, updateFilter, updateNavTree as updateNavTree} from './logic/navTree.js'
+import {initRouting, das, componentname, selectedExample, updateDasMap} from './logic/routing.js'
+updateNavTree
 
 let baseurl = '/garden'
 export let routes
-export let navtree
-export let dasmap 
+export let navTree
+export let dasMap 
 export let config
 $: expressbaseurl = `${window.location.protocol}//${window.location.hostname}:${config.serverport + 1}/`
 
-$: updateNavtree(navtree)
-$: updateRoute(currentRoute, $componentname)
+$: updateNavTree(navTree)
 $: setThemes(config.themes)
 $: initRouting(routes, baseurl)
-$: updateDasMap(dasmap)
+$: updateDasMap(dasMap)
 
 $: projectTitle = config.project_title || ''
 
@@ -71,7 +70,7 @@ function handleSidebarOut(evt) {
     <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
         <div slot="left" class="is-flexfix">
-          <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavtree} on:out={handleSidebarOut} />
+          <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} on:out={handleSidebarOut} />
         </div>
         <div slot="right" class="main">
           <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />

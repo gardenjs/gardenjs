@@ -65,7 +65,7 @@ export const routes = {
   ${componentdescriptions.map(createRouteEntry).join(',\n')}
 }
 
-export const navtree = ${JSON.stringify(createNavItemTree(componentdescriptions), null, 2)}
+export const navTree = ${JSON.stringify(createNavItemTree(componentdescriptions), null, 2)}
 `
 }
 
@@ -75,7 +75,7 @@ ${componentdescriptions.map(createComponentImportStmt).join('\n')}
 
 import Welcome from '${welcome_page}' 
 
-export const componentmap = {
+export const componentMap = {
   'Welcome': Welcome,
   ${componentdescriptions.map(createComponentMapEntry).join(',\n')}
 }
@@ -85,7 +85,7 @@ export const componentmap = {
 export function generateDasMapCode(componentdescriptions) {
   return `
 ${componentdescriptions.map(createDasImportStmt).join('\n')}
-export const dasmap = {
+export const dasMap = {
   ${componentdescriptions.map(createDasMapEntry).join(',\n')}
 }
 `
@@ -97,14 +97,14 @@ function generateGardenFrameFile(stylefiles = []) {
   }).join('\n') + `
 
 import {GardenFrame} from 'garden'
-import {dasmap} from '../das_import_map.js'
-import {componentmap} from '../component_import_map.js'
+import {dasMap} from '../das_import_map.js'
+import {componentMap} from '../component_import_map.js'
 import config from '../../garden.config.js'
  
 const app = new GardenFrame({
   target: document.body,
   hydrate: true,
-  props: {componentmap, dasmap, config}
+  props: {componentMap, dasMap, config}
 })
 
 export default app
