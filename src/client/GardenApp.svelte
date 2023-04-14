@@ -17,11 +17,11 @@ export let config
 $: expressbaseurl = `${window.location.protocol}//${window.location.hostname}:${config.serverport + 1}/`
 
 $: updateNavTree(navTree)
-$: updateDasMap(dasMap)
 $: {
   if (routes && dasMap)
     initRouting(dasMap, routes, baseurl)
 }
+$: updateDasMap(dasMap)
 $: setThemes(config.themes)
 $: updateSelectedComponent($currentRoute, $componentName)
 
