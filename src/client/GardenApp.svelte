@@ -6,9 +6,8 @@ import FullScreenLayout from './layouts/FullScreenLayout.svelte'
 import LeftRightLayout from './layouts/LeftRightLayout.svelte'
 import TopBottomLayout from './layouts/TopBottomLayout.svelte'
 import {updateStage, stageStyle, stageSize, landscape, setThemes, selectTheme, themes} from './logic/stage.js'
-import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavTree as filterNavTree, updateFilter, updateNavTree as updateNavTree} from './logic/navTree.js'
-import {initRouting, das, componentName, selectedExample, updateDasMap} from './logic/routing.js'
-updateNavTree
+import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavTree, updateFilter, updateNavTree, updateSelectedComponent} from './logic/navTree.js'
+import {initRouting, das, componentName, selectedExample, updateDasMap, currentRoute} from './logic/routing.js'
 
 let baseurl = '/garden'
 export let routes
@@ -21,6 +20,7 @@ $: updateNavTree(navTree)
 $: setThemes(config.themes)
 $: initRouting(routes, baseurl)
 $: updateDasMap(dasMap)
+$: updateSelectedComponent($currentRoute, $componentName)
 
 $: projectTitle = config.project_title || ''
 

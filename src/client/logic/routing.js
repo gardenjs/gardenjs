@@ -3,6 +3,7 @@ import {initRouter} from '../router.js'
 export const componentName = writable('')
 export const das  = writable()
 export const selectedExample = writable({})
+export const currentRoute = writable('')
 
 let dasMap
 let historystate
@@ -19,6 +20,7 @@ export function initRouting(routes, baseurl) {
       componentName.set('')
     } else {
       componentName.set(routeobj.fullname)
+      currentRoute.set(routeobj.route)
       const newDas = dasMap[routeobj.fullname]
       newDas.componentfile = routeobj.file
       das.set(newDas)

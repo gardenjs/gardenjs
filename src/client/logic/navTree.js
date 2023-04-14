@@ -26,6 +26,12 @@ function getAllChildNodes(node) {
   return node.children ? node.children.flatMap(getAllNodes) : []
 }
 
+export function updateSelectedComponent(route, componentName) {
+  currentRoute = route 
+  selectedNode = componentName
+  updateTree()
+}
+
 export function updateFilter(newFilter) {
   filterNavTree.set(newFilter)
   updateTree()
@@ -37,7 +43,7 @@ export function updateNavTree(newNavTree) {
     initializeTree(navtree)
     initialized = true
   }
-  updateTree()
+  nodes.set(transformNavTree(navtree))
 }
 
 function updateTree() {
