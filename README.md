@@ -138,6 +138,7 @@ MIT
 * [task] Make Garden compatible with Vue & React.
 * [task] Install script / commandline skeleton project (example component.)
 * [task] Project website (garden website) as svelte project.
+* [task] Public garden demo of project website.
 * [task] Rabbit dev website.
 * [task] Set repository public & make garden npm modul. (yarn?)
 
