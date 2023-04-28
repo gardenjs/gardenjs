@@ -3,7 +3,7 @@ import './highlight.css'
 
 export const triggerHighlightAll = () => {
   setTimeout(() => {
-   hljs.highlightAll()
+    hljs.highlightAll()
   }, 600)
 }
 
