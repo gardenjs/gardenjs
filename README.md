@@ -131,9 +131,8 @@ MIT
 
 ### v1.0
 
-* [refactor] Move logic to own file. Handle user interaction. check the error messages on the svelte files in the vs code (e.g. stage.svelte, gardenapp.svelte ...).
+* [refactor] Move logic to own file. Handle user interaction.
 * [feature] Docker image for screenshot test.
-* [task] Show favicon.svg (src/assets/icons/favicon.svg). Maybe with an alternate path through garden.config.js.
 * [task] Add garden as dist with compiled js & scss files (vite?).
 * [task] Make Garden compatible with Vue & React.
 * [task] Install script / commandline skeleton project (example component.)
@@ -144,6 +143,7 @@ MIT
 
 ### v1.1
 
+* [feature] Show custom favicon.svg configured in garden.config.js.
 * [feature] Collapse/expand panel button in sidebar and close btn in panel nav.
 * [feature] Set default mode in garden.config.json.
 * [feature] Screenshot test: automatic create test file & and folder (like init garden).
