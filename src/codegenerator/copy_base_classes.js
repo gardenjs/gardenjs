@@ -38,10 +38,6 @@ function copyFolder(sourcefolder, targetfolder) {
   })
 }
 
-function copyFile(file, target) {
-  fs.copyFile(file, target, callback)
-}
-
 function copyFileOrDirectory(fileOrDirectory, sourcefolder, targetfolder) {
   const filename = fileOrDirectory.name
   if (fileOrDirectory.isFile()) {
