@@ -26,7 +26,7 @@ export async function createServer() {
             return path.substring('/garden/'.length)
           }
         },
-        '^/gardenfavicon$': {
+        '^/garden/favicon$': {
           target: `http://localhost:${serverport}/${destination}/assets/favicon.svg`,
           rewrite: () => ''
         },
@@ -34,10 +34,10 @@ export async function createServer() {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: () => ''
         },
-        '^/gardenlib/.*': {
+        '^/garden/lib/.*$': {
           target: `http://localhost:${serverport}/${destination}/lib/`,
           rewrite: (path) => {
-            return path.substring('/gardenlib/'.length)
+            return path.substring('/garden/lib/'.length)
           }
         },
       }
