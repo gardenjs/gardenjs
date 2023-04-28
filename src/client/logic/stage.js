@@ -45,11 +45,10 @@ function computeStageStyle() {
   const stageBg = activeTheme?.stageBg || 'white'
   const {frameheight, framewidth} = sizes[get(stageSize)]
   const size = get(landscape) ? `width: ${frameheight}; height: ${framewidth}` : `width: ${framewidth}; height: ${frameheight}`
-  const padding = get(stageSize) === 'full' ? 'padding: 1rem' : 'padding: 0'
   const background = `background-color: ${stageBg}`
   const transition = 'transition: 0.2s'
  
-  stageStyle.set(`${size}; ${padding}; ${background}; ${transition};`)
+  stageStyle.set(`${size}; ${background}; ${transition};`)
 }
 
 computeStageStyle()

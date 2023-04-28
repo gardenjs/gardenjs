@@ -74,7 +74,7 @@ function handleSidebarOut(evt) {
         </div>
         <div slot="right" class="main">
           <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
-          <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
+          <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
         </div>
       </LeftRightLayout>
     </div>
