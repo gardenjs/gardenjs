@@ -7,11 +7,13 @@ let component = componentMap.Welcome
 let das = {}
 let selectedExample = {}
 let redirectdata = {}
+let full = false
 
 window.addEventListener('message', (evt) => {
   if (config.themeHandler) {
     config.themeHandler(evt.data.theme)
   }
+  full = evt.data.stageSize === 'full'
   das = dasMap[evt.data.componentName] 
   selectedExample = das?.examples.find(ex => ex.story === evt.data.selectedExample)
   redirectdata = {}
@@ -34,8 +36,13 @@ function handlecomponentout(evt) {
 </script>
 
 {#if component}
+<div class:full>
   <svelte:component this={component} {...selectedExample?.input} {...redirectdata} on:out={handlecomponentout} />
-{:else}
-  <Welcome />
+</div>
 {/if}
 
+<style>
+  .full {
+    padding: 1rem 1rem 0;
+  }
+</style>

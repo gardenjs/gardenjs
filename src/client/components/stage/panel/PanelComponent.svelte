@@ -30,7 +30,7 @@
 
 <div class="panel">
   {#if tabs.length}
-    <div class="panel__nav">
+    <div class="panel_nav">
       <nav>
         <ul>
           {#each tabs as tab}
@@ -39,7 +39,7 @@
         </ul>
       </nav>
     </div>
-    <div class="panel__pane">
+    <div class="panel_pane">
       {#if selectedTab && selectedTab.page }
       <TabContent item={selectedTab} on:out={handleout} />
       {:else}
@@ -58,7 +58,7 @@
   overflow-y: auto;
   background-color: var(--c-basic-50);
 }
-.panel__nav {
+.panel_nav {
   position: sticky;
   top: 0;
   width: calc(100% - 2.5rem);
@@ -67,7 +67,7 @@
   background-color: var(--c-basic-50);
   border-bottom: 1px solid var(--c-basic-300);
 }
-.panel__nav nav ul {
+.panel_nav nav ul {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
@@ -75,10 +75,10 @@
   margin: 0 0 -1px;
   padding: 0;
 }
-.panel__nav nav li {
+.panel_nav nav li {
   height: 100%;
 }
-.panel__nav nav li button {
+.panel_nav nav li button {
   height: 100%;
   padding: 0 1.25rem;
   font-size: 0.875rem;
@@ -91,14 +91,14 @@
   background-color: transparent;
   border-bottom: 3px solid var(--c-basic-250);
 }
-.panel__nav nav li button.active {
+.panel_nav nav li button.active {
   color: var(--c-primary);
   border-bottom: 3px solid var(--c-primary);
 }
-.panel__nav nav li button:hover {
+.panel_nav nav li button:hover {
   border-color: var(--c-primary);
 }
-.panel__pane {
+.panel_pane {
   padding: 1.25rem;
   background-color: var(--c-basic-50);
   color: var(--c-basic-900);

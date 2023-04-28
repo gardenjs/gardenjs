@@ -14,7 +14,7 @@ function doWatch(dir, options, onChange) {
     if (watchFileType(filename, options)) {
       waitForUpdate = true
       onChange()
-      setTimeout(() => waitForUpdate = false, 400);
+      setTimeout(() => waitForUpdate = false, 400)
     }
   })
 }
@@ -22,7 +22,7 @@ function doWatch(dir, options, onChange) {
 function watchFileType(filename, options) {
   let watchFile = true
   if (options.include) {
-    watchFile &= options.include.some(pattern => filename.match(pattern + "$")) 
+    watchFile &= options.include.some(pattern => filename.match(pattern + '$'))
   }
   if (options.exclude) {
     watchFile &= !options.exclude.some(pattern => filename.match(pattern)) 

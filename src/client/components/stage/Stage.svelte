@@ -11,6 +11,7 @@ const dispatch = createEventDispatcher()
 export let componentName
 export let das = {}
 export let stageStyle
+export let stageSize
 export let selectedExample
 export let expressbaseurl
 
@@ -38,7 +39,9 @@ $: {
     myframe.contentWindow.addEventListener('mousemove', function( event ) {
         var boundingClientRect = myframe.getBoundingClientRect();
         var evt = new CustomEvent( 'mousemove', {bubbles: true, cancelable: false})
+        // @ts-ignore
         evt.pageX = event.clientX + boundingClientRect.left;
+        // @ts-ignore
         evt.pageY = event.clientY + boundingClientRect.top;
         myframe.dispatchEvent( evt );
     });
@@ -51,7 +54,7 @@ $: {
 
 $: {
   if (myframeready) {
-    myframe.contentWindow.postMessage({selectedExample, componentName}, window.location)
+    myframe.contentWindow.postMessage({selectedExample, componentName, stageSize}, window.location)
   }
 }
 
@@ -94,6 +97,5 @@ function handleSelectionChange(evt) {
   height: 100%;
   width: 100%;
   background-color: var(--c-white);
-  /* border: 1px solid var(--c-basic-400); */
 }
 </style>
