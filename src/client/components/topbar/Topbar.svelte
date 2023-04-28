@@ -66,7 +66,7 @@
 </script>
 
 <div class="topbar">
-  <div class="topbar__container">
+  <div class="topbarcontainer">
     <button class="sidebar_toggle" on:click={toggleSidebar} title={ active ? 'Collapse sidebar' : 'Expand sidebar'}>
       {#if active}
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18m7-6l-3-3 3-3"/></svg>
@@ -74,7 +74,7 @@
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18m5-12l3 3-3 3"/></svg>
       {/if}
     </button>
-    <div class="topbar__nav">
+    <div class="topbar_nav">
       <div class="stagesize_value">{stageWidth}px <span class="multiplication_sign">&#10005;</span> {stageHeight}px</div>
       <div class="stagesize-nav">
         <button data-title="Small" class="tooltip" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
@@ -98,8 +98,8 @@
       </button>
       {#if themes.length > 1}
       <div class="dropdown">
-        <button class="dropdown__btn" title="Switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="dropdown__items">
+        <button class="dropdown_btn" title="Switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dropdown_items">
           <ul>
             {#each themes as theme}
             <li><button class:active="{theme.active}" on:click="{() => handleThemeChange(theme.name)}">{theme.name}</button></li>
@@ -126,7 +126,7 @@
     background-color: var(--c-basic-100);
     /* border-bottom: 1px solid var(--c-basic-300); */
   }
-  .topbar__container {
+  .topbar_container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -150,7 +150,7 @@
   .sidebar_toggle:hover svg {
     color: var(--c-primary);
   }
-  .topbar__nav {
+  .topbar_nav {
     display: flex;
     align-items: center;
   }
@@ -162,7 +162,7 @@
   .dropdown:hover {
     background-color: var(--c-basic-150);
   }
-  .dropdown__btn {
+  .dropdown_btn {
     display: flex;
     align-items: center;
     padding: 0 0.5rem 0 0.75rem;
@@ -173,36 +173,36 @@
     border: none;
     cursor: pointer;
   }
-  .dropdown:hover .dropdown__btn {
+  .dropdown:hover .dropdown_btn {
     color: var(--c-primary);
   }
-  .dropdown__btn svg {
+  .dropdown_btn svg {
     margin-left: 0.125rem;
     color: var(--c-basic-700);
   }
-  .dropdown:hover .dropdown__btn svg {
+  .dropdown:hover .dropdown_btn svg {
     color: var(--c-primary);
   }
-  .dropdown__items {
+  .dropdown_items {
     visibility: hidden;
     position: absolute;
     right: 0;
     padding: 0;
     z-index: 9;
   }
-  .dropdown__items ul {
+  .dropdown_items ul {
     margin: 0;
     padding: 0;
     background-color: var(--c-basic-150);
     overflow: hidden;
   }
-  .dropdown__items ul li {
+  .dropdown_items ul li {
     display: block;
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .dropdown__items ul li button {
+  .dropdown_items ul li button {
     display: flex;
     align-items: center;
     width: 100%;
@@ -216,20 +216,20 @@
     border-left: 3px solid transparent;
     cursor: pointer;
   }
-  .dropdown__items ul li button:hover {
+  .dropdown_items ul li button:hover {
     color: var(--c-basic-900);
     background-color: var(--c-basic-200);
     border-left: 3px solid var(--c-primary);
   }
-  .dropdown__items ul li button.active,
-  .dropdown__items ul li button.active:hover {
+  .dropdown_items ul li button.active,
+  .dropdown_items ul li button.active:hover {
     color: var(--c-primary);
     font-weight: 500;
     background-color: var(--c-primary-bg);
     border-left: 3px solid var(--c-primary);
   }
-  .dropdown:hover > .dropdown__items,
-  .dropdown:focus > .dropdown__items {
+  .dropdown:hover > .dropdown_items,
+  .dropdown:focus > .dropdown_items {
     display: block;
     visibility: visible;
   }
