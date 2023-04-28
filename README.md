@@ -132,10 +132,10 @@ MIT
 ### v1.0
 
 * [refactor] Move logic to own file. Handle user interaction.
-* [feature] Docker image for screenshot test.
 * [task] Add garden as dist with compiled js & scss files (vite?).
-* [task] Make Garden compatible with Vue & React.
 * [task] Install script / commandline skeleton project (example component.)
+* [task] Make Garden compatible with Vue & React.
+* [feature] Docker image for screenshot test.
 * [task] Project website (garden website) as svelte project.
 * [task] Public garden demo of project website.
 * [task] Rabbit dev website.
