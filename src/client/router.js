@@ -50,12 +50,15 @@ export function findRoute(url) {
   if (!history) return
   var pushState = history.pushState
   history.pushState = function(state, title, url) {
+    // @ts-ignore
     if (typeof history.onpushstate == 'function') {
+      // @ts-ignore
       history.onpushstate(state, title, url)
     }
     return pushState.apply(history, arguments)
   }
 
+  // @ts-ignore
   history.onpushstate = function (state, title, target) {
     if (target.startsWith(baseurl) && baseurl.length > 0) return  // TODO check this line
     currentUrl = baseurl + target
