@@ -24,7 +24,7 @@ export async function createServer() {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: () => ''
         },
-        '^/garden/.*': {
+        '^/garden/.*$': {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: (path) => path.substring('/garden/'.length)
         },
