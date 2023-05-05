@@ -89,7 +89,7 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
-  border-bottom: 3px solid var(--c-basic-250);
+  border-bottom: 3px solid transparent;
 }
 .panel_nav nav li button.active {
   color: var(--c-primary);
