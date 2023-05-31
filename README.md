@@ -22,9 +22,9 @@ Follow the installation routine.
 In the root directory you will now find your Garden configuration file 'garden.config.js' to adapt Garden to your project.
 [... not yet!]
 
-Svelte example configuration for your garden.config.json file:
+Svelte example configuration for your garden.config.js file:
 
-```json
+```js
 {
   "garden": {
     "serverport": 3010,
