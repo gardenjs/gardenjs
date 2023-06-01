@@ -1,13 +1,13 @@
 :root {
   --c-primary:             hsl(185, 100%, 40%);
   --c-primary-bg:          hsl(185, 100%, 93%);
-  --c-white:               #fff;
+  --c-base-0:              hsl(168, 8%, 100%);
   --c-basic-50:            hsl(168, 8%, 98%);
-  --c-basic-100:           hsl(168, 8%, 96%);
-  --c-basic-150:           hsl(168, 8%, 92%);
-  --c-basic-200:           hsl(168, 8%, 88%);
-  --c-basic-250:           hsl(168, 8%, 85%);
-  --c-basic-300:           hsl(168, 8%, 82%);
+  --c-basic-100:           hsl(168, 8%, 94%);
+  --c-basic-150:           hsl(168, 8%, 90%);
+  --c-basic-200:           hsl(168, 8%, 87%);
+  --c-basic-250:           hsl(168, 8%, 84%);
+  --c-basic-300:           hsl(168, 8%, 81%);
   --c-basic-400:           hsl(168, 8%, 64%);
   --c-basic-500:           hsl(168, 8%, 46%);
   --c-basic-600:           hsl(168, 8%, 32%);
@@ -18,9 +18,9 @@
 .dark {
   --c-primary:             hsl(185, 100%, 45%);
   --c-primary-bg:          hsl(195, 100%, 20%);
-  --c-white:               #000;
+  --c-base-0:              hsl(216, 41%, 0%);
   --c-basic-50:            hsl(216, 41%, 10%);
-  --c-basic-100:           hsl(216, 41%, 15%);
+  --c-basic-100:           hsl(216, 41%, 18%);
   --c-basic-150:           hsl(216, 41%, 22%);
   --c-basic-200:           hsl(216, 41%, 27%);
   --c-basic-250:           hsl(216, 41%, 30%);

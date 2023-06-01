@@ -75,7 +75,11 @@
       {/if}
     </button>
     <div class="topbar_nav">
-      <div class="stagesize_value">{stageWidth}px <span class="multiplication_sign">&#10005;</span> {stageHeight}px</div>
+      <div class="stagesize_value">
+        <div>{stageWidth}px</div>
+        <div class="stagesize_value-multi_sign">&#10005;</div>
+        <div class="stagesize_value-height">{stageHeight}px</div>
+      </div>
       <div class="stagesize-nav">
         <button data-title="Small" class="tooltip" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
@@ -93,9 +97,6 @@
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape={landscape} height="24" viewBox="0 0 24 24" width="24" fill="currentColor"><path d="M16.48 2.52c3.27 1.55 5.61 4.72 5.97 8.48h1.5C23.44 4.84 18.29 0 12 0l-.66.03 3.81 3.81 1.33-1.32zm-6.25-.77a1.49 1.49 0 00-2.12 0L1.75 8.11a1.49 1.49 0 000 2.12l12.02 12.02c.59.59 1.54.59 2.12 0l6.36-6.36c.59-.59.59-1.54 0-2.12L10.23 1.75zm4.6 19.44L2.81 9.17l6.36-6.36 12.02 12.02-6.36 6.36zm-7.31.29A10.487 10.487 0 011.55 13H.05C.56 19.16 5.71 24 12 24l.66-.03-3.81-3.81-1.33 1.32z"/></svg>
         </button>
       </div>
-      <button class="open-new-tab" title="Open component in new tab" on:click="{openInTab}">
-        <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3"/></svg>
-      </button>
       {#if themes.length > 1}
       <div class="dropdown">
         <button class="dropdown_btn" title="Switch component theme">Themes<svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
@@ -108,6 +109,9 @@
         </div>
       </div>
       {/if}
+      <button class="open-new-tab" title="Open component in new tab" on:click="{openInTab}">
+        <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3"/></svg>
+      </button>
       <button class="switch-mode" on:click={toggleDarkmode} title={dark ? 'Light mode' : 'Dark mode'} >
         {#if dark}
         <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -122,9 +126,11 @@
 <style>
   .topbar {
     width: 100%;
-    height: 2.75rem;
+    --h-topbar: 2.75rem;
+    height: var(--h-topbar);
+    margin: 0 0 0.375rem;
     background-color: var(--c-basic-100);
-    /* border-bottom: 1px solid var(--c-basic-300); */
+    border-radius: 0.5rem;
   }
   .topbar_container {
     display: flex;
@@ -136,9 +142,10 @@
   }
   .sidebar_toggle {
     padding: 0 0.75rem;
-    height: 2.75rem;
+    height: var(--h-topbar);
     background: none;
     cursor: pointer;
+    border-radius: 0.5rem 0 0 0.5rem;
   }
   .sidebar_toggle:hover {
     background-color: var(--c-basic-150);
@@ -165,8 +172,10 @@
   .dropdown_btn {
     display: flex;
     align-items: center;
-    padding: 0 0.5rem 0 0.75rem;
-    height: 2.688rem;
+    margin: 0 0 0 0.5rem;
+    padding: 0 0.75rem;
+    height: var(--h-topbar);
+    min-width: 105px;
     font-size: 0.875rem;
     color: var(--c-basic-700);
     background: none;
@@ -186,7 +195,7 @@
   .dropdown_items {
     visibility: hidden;
     position: absolute;
-    right: 0;
+    left: 0;
     padding: 0;
     z-index: 9;
   }
@@ -206,10 +215,12 @@
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 0.5rem 1.25rem;
+    min-width: 113px;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
     font-size: 0.813rem;
     color: var(--c-basic-600);
     text-transform: capitalize;
+    letter-spacing: 0.063rem;
     white-space: nowrap;
     background-color: transparent;
     border: none;
@@ -237,9 +248,10 @@
     display: flex;
     align-items: center;
     padding: 0 0.75rem;
-    height: 2.625rem;
+    height: var(--h-topbar);
     background: none;
     cursor: pointer;
+    border-radius: 0 0.5rem 0.5rem 0;
   }
   .switch-mode:hover {
     background-color: var(--c-basic-150);
@@ -258,13 +270,19 @@
   }
   @media (min-width: 640px) {
     .stagesize_value {
-      display: block;
+      display: inline-flex;
+      align-items: center;
       font-size: 0.813rem;
       padding: 0 1.25rem;
       color: var(--c-basic-500);
     }
-    .stagesize_value .multiplication_sign {
+    .stagesize_value-multi_sign {
+      margin: 0 0.25rem;
       font-size: 0.563rem;
+    }
+    .stagesize_value-height {
+      min-width: 40px;
+      text-align: right;
     }
   }
 
@@ -277,11 +295,10 @@
       display: flex;
       flex-direction: row;
       align-self: center;
-      height: 2.688rem;
       background-color: var(--c-basic-150);
     }
     .stagesize-nav button {
-      height: 2.688rem;
+      height: var(--h-topbar);
       margin: 0;
       padding: 0 0.25rem;
       background: none;
@@ -325,7 +342,7 @@
     display: flex;
     align-items: center;
     padding: 0 0.75rem;
-    height: 2.688rem;
+    height: var(--h-topbar);
     background: none;
     cursor: pointer;
   }

@@ -1,6 +1,6 @@
 # Component library explorer
 
-Garden is a lightweight UI explorer for JavaScript frontend libraries that helps you build, test and display UI components and pages. Svelte[, Vue and React] are currently supported out of the box. Other libraries can also be easily connected to Garden.
+Garden is a lightweight UI explorer for JavaScript frontend libraries that helps you build, test and display UI components and pages. Svelte, Vue and React are currently supported out of the box. Other libraries can also be easily connected to Garden.
 <br><br>
 
 ## This is Garden
@@ -131,6 +131,8 @@ MIT
 
 ### v1.0
 
+* [bug] Stage scrolls up when panel is slid to the bottom.
+* [bug] Favicon is gone. (If component is opened in external window favicon is there).
 * [refactor] Move logic to own file. Handle user interaction.
 * [task] Remove express server, use iframe instead.
 * [task] Add garden as dist with compiled js & scss files (vite?).
@@ -144,6 +146,7 @@ MIT
 
 ### v1.1
 
+* [task] Make garden docs link optional via garden.config.js.
 * [feature] Show custom favicon.svg configured in garden.config.js.
 * [feature] Collapse/expand panel button in sidebar and close btn in panel nav.
 * [feature] Set default mode in garden.config.json.

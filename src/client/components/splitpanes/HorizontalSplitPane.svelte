@@ -31,10 +31,14 @@
 
 <style>
 .backstage {
+  margin-bottom: 0.375rem;
   background-color: var(--c-basic-250);
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 .dragbar {
-  height: 3px;
+  height: 0.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
   background-color: var(--c-basic-300);
   cursor: row-resize;
   z-index: 10;
@@ -42,6 +46,6 @@
 .dragging,
 .dragbar:hover {
   background-color: var(--c-primary);
-  transform: scaleY(1.7);
+  transform: scaleY(1.2);
 }
 </style>

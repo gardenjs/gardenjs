@@ -52,44 +52,44 @@
 <style>
 .panel {
   position: relative;
-  flex-grow: 1;
+  /* flex-grow: 1; */
   height: 100%;
   width: 100%;
-  overflow-y: auto;
   background-color: var(--c-basic-50);
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  overflow-y: auto;
 }
 .panel_nav {
   position: sticky;
   top: 0;
-  width: calc(100% - 2.5rem);
-  margin: 0 1.25rem;
-  padding-top: 0.5rem;
-  background-color: var(--c-basic-50);
+  background-color: var(--c-basic-100);
   border-bottom: 1px solid var(--c-basic-300);
+}
+.panel_nav nav {
+  margin: 0 1.25rem;
 }
 .panel_nav nav ul {
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
-  height: 2rem;
-  margin: 0 0 -1px;
   padding: 0;
+  overflow-x: auto;
 }
 .panel_nav nav li {
   height: 100%;
 }
 .panel_nav nav li button {
+  padding: 0.625rem 1.25rem;
   height: 100%;
-  padding: 0 1.25rem;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--c-basic-900);
   white-space: nowrap;
   text-transform: capitalize;
-  cursor: pointer;
-  border: none;
   background-color: transparent;
+  border: none;
   border-bottom: 3px solid transparent;
+  cursor: pointer;
 }
 .panel_nav nav li button.active {
   color: var(--c-primary);
@@ -100,7 +100,7 @@
 }
 .panel_pane {
   padding: 1.25rem;
-  background-color: var(--c-basic-50);
   color: var(--c-basic-900);
+  background-color: var(--c-basic-50);
 }
 </style>

@@ -36,26 +36,26 @@
           <div class="nosearchresult">No results for '{filter}'</div>
         </li>
         {:else}
-        <li>
-          <button class="collapse_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
-            <span class="collapse_label">{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span>
-            <span>
-              {#if rootNodesExpanded}
-                <svg class="collapse_icon" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l5-5 5 5M7 4l5 5 5-5"/></svg>
-              {:else}
-                <svg class="collapse_icon" xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 24 24" width="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg>
-              {/if}
-            </span>
-          </button>
-        </li>
+          <SidebarNav nodes={nodes} on:out />
         {/if}
       </ul>
-      <SidebarNav nodes={nodes} on:out />
-      <ul>
+      <ul class="fixed_links">
         <li>
-          <a class="github" href="https://github.com/rabbitdevelopment/garden" target="_blank" rel="noreferrer">
-            <svg height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M11.999.296C5.373.296 0 5.67 0 12.296c0 5.302 3.438 9.8 8.207 11.387.6.11.819-.26.819-.579 0-.284-.01-1.04-.017-2.04-3.337.725-4.042-1.61-4.042-1.61C4.422 18.07 3.635 17.7 3.635 17.7c-1.09-.745.082-.73.082-.73 1.205.085 1.838 1.237 1.838 1.237 1.07 1.833 2.81 1.304 3.493.997.109-.775.418-1.304.762-1.604-2.665-.303-5.467-1.333-5.467-5.931 0-1.31.468-2.381 1.236-3.22-.124-.304-.536-1.524.117-3.176 0 0 1.008-.323 3.3 1.23A11.473 11.473 0 0112 6.1a11.51 11.51 0 013.005.403c2.29-1.553 3.296-1.23 3.296-1.23.655 1.652.243 2.872.12 3.176.769.839 1.233 1.91 1.233 3.22 0 4.61-2.806 5.624-5.479 5.921.431.37.815 1.103.815 2.223 0 1.604-.015 2.898-.015 3.291 0 .321.216.695.825.578 4.765-1.59 8.2-6.085 8.2-11.385 0-6.628-5.373-12-12.001-12"/></svg>
-            <span>Documentation</span>
+          <button class="collapse_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
+            <span>
+              {#if rootNodesExpanded}
+                <svg class="collapse_icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l5-5 5 5M7 4l5 5 5-5"/></svg>
+              {:else}
+                <svg class="collapse_icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg>
+              {/if}
+            </span>
+            <span class="collapse_label">{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span>
+          </button>
+        </li>
+        <li>
+          <a class="docs" href="https://github.com/rabbitdevelopment/garden" target="_blank" rel="noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
+            <span>Garden Docs</span>
           </a>
         </li>
       </ul>
@@ -67,14 +67,16 @@
     position: relative;
     width: 0;
     max-width: 260px;
-    height: 100vh;
-    overflow-x: hidden;
+    height: calc(100vh - 0.75rem);
     background-color: var(--c-basic-100);
+    border-radius: 0.75rem;
     transition: width 0.2s;
+    overflow-x: hidden;
   }
   .show-sidebar {
+    margin-right: 0.375rem;
     width: 260px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
   }
   .project_title {
     position: sticky;
@@ -85,7 +87,8 @@
     align-items: center;
     padding: 0.25rem 0.688rem;
     width: 260px;
-    height: 2.75rem;
+    --h-project-title: 2.75rem;
+    height: var(--h-project-title);
     inline-size: 260px; 
     overflow: hidden;
     white-space: nowrap;
@@ -98,28 +101,25 @@
   .project_title span {
     overflow: hidden;
   }
-  nav {
-    width: 260px;
-    height: calc(100vh - 44px);
-    overflow-y: auto;
-  }
   .search {
     height: 2rem;
-    background-color: var(--c-white);
     overflow: hidden;
   }
   .searchfield {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-left: 0.5rem;
+    height: 2rem;
   }
   .searchfield_input {
     padding: 0.125rem 0.125rem 0.125rem 0.688rem;;
     width: calc(100% - 2.5rem);
-    height: 2rem;
+    height: 100%;
     color: var(--c-basic-900);
-    background-color: var(--c-white);
-    border: none;
+    background-color: var(--c-base-0);
+    border: 1px solid var(--c-basic-250);
+    border-right: none;
   }
   .searchfield_input::placeholder {
     font-size: 0.813rem;
@@ -133,74 +133,19 @@
     justify-content: center;
     align-items: center;
     width: 2.5rem;
-    height: 2rem;
-    background-color: var(--c-basic-100);
+    height: 100%;
+    background-color: var(--c-basic-150);
     border: none;
     cursor: pointer;
   }
   .searchfield_submit:hover {
-    background-color: var(--c-basic-50);
-  }
-  .searchfield_submit svg {
-    color: var(--c-primary);
-  }
-  .collapse_btn {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    height: 2rem;
-    margin: 0;
-    padding: 0 0.688rem;
-    text-align: left;
-    background-color: transparent;
-    background-color: var(--c-basic-150);
-    cursor: pointer;
-  }
-  .collapse_btn:hover {
     background-color: var(--c-primary-bg);
   }
-  .collapse_label {
-    display: flex;
-    align-self: center;
-    width: 100%;
-    color: var(--c-basic-900);
-    font-size: 0.75rem;
-  } 
-  .collapse_icon {
-    display: flex;
-    order: 2;
-    width: 1rem;
-    height: 1rem;
-    margin-left: 0;
+  .searchfield_submit svg {
     color: var(--c-basic-900);
   }
-  .collapse_btn:hover .collapse_label,
-  .collapse_btn:hover .collapse_icon {
+  .searchfield_submit:hover svg {
     color: var(--c-primary);
-  }
-  .github {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center; 
-    margin: 1rem 0;
-    padding: 0 0.5rem 0 0.688rem;
-  }
-  a.github svg {
-    display: block;
-    fill: var(--c-basic-900);
-  }
-  a.github span {
-    display: block;
-    margin-left: 0.5rem;
-    color: var(--c-basic-900);
-    font-size: 0.75rem;
-    text-transform: capitalize;
-    letter-spacing: 1px;
-    border-bottom: 1px solid var(--c-basic-900);
-  }
-  a.github:hover span {
-    border-color: transparent;
   }
   .nosearchresult {
     width: 260px;
@@ -212,6 +157,84 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  nav {
+    width: 260px;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+  }
+  .fixed_links {
+    position: fixed;
+    width: 260px;
+    bottom: 0.375rem;
+    padding: 0;
+    background-color: var(--c-basic-100);
+    border-top: 1px solid var(--c-basic-300);
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    overflow: hidden;
+  }
+  .collapse_btn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0.5rem 0.688rem;
+    text-align: left;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .collapse_btn:hover {
+    background-color: var(--c-primary-bg);
+  }
+  .collapse_icon {
+    display: flex;
+    margin: 0;
+    color: var(--c-basic-900);
+  }
+  .collapse_label {
+    display: flex;
+    align-self: center;
+    margin-left: 0.5rem;
+    width: 100%;
+    color: var(--c-basic-900);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .collapse_btn:hover .collapse_label,
+  .collapse_btn:hover .collapse_icon {
+    color: var(--c-primary);
+  }
+  .docs {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0.5rem 0.688rem;
+    text-align: left;
+  }
+  .docs:hover {
+    background-color: var(--c-primary-bg);
+  }
+  a.docs svg {
+    display: flex;
+    margin: 0;
+    color: var(--c-basic-900);
+  }
+  a.docs span {
+    display: flex;
+    align-self: center;
+    margin-left: 0.5rem;
+    width: 100%;
+    color: var(--c-basic-900);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .docs:hover svg,
+  .docs:hover span {
+    color: var(--c-primary);
   }
   </style>
   
