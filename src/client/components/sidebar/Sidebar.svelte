@@ -28,7 +28,7 @@
         <li class="search">
           <div class="searchfield">
             <input class="searchfield_input" type="text" value={filter || ''} placeholder="Filter" on:input={updateFilter}>
-            <button class="searchfield_submit" title="send search request"><svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+            <!-- <button class="searchfield_submit" title="send search request"><svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button> -->
           </div>
         </li>
         {#if nodes.length == 0 && filter}
@@ -109,17 +109,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 0.5rem;
+    margin: 0 0.5rem;
     height: 2rem;
   }
   .searchfield_input {
     padding: 0.125rem 0.125rem 0.125rem 0.688rem;;
-    width: calc(100% - 2.5rem);
+    width: 100%;
     height: 100%;
     color: var(--c-basic-900);
     background-color: var(--c-base-0);
     border: 1px solid var(--c-basic-250);
-    border-right: none;
   }
   .searchfield_input::placeholder {
     font-size: 0.813rem;
@@ -128,7 +127,7 @@
   .searchfield_input:focus {
     outline: none;
   }
-  .searchfield_submit {
+  /* .searchfield_submit {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,7 +145,7 @@
   }
   .searchfield_submit:hover svg {
     color: var(--c-primary);
-  }
+  } */
   .nosearchresult {
     width: 260px;
     padding: 0.5rem 0.688rem 0.375rem 0.688rem;
