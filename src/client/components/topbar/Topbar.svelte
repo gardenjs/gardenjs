@@ -220,7 +220,6 @@
     font-size: 0.813rem;
     color: var(--c-basic-600);
     text-transform: capitalize;
-    letter-spacing: 0.063rem;
     white-space: nowrap;
     background-color: transparent;
     border: none;
