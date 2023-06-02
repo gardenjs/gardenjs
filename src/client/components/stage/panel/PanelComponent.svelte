@@ -62,7 +62,6 @@
 .panel_nav {
   position: sticky;
   top: 0;
-  background-color: var(--c-basic-100);
   border-bottom: 1px solid var(--c-basic-300);
 }
 .panel_nav nav {
