@@ -85,8 +85,9 @@
     justify-content: flex-start;
     align-items: center;
     padding: 0.25rem 0.688rem;
+    margin: 0 0 0.375rem;
     width: 260px;
-    --h-project-title: 2.75rem;
+    --h-project-title: 2.25rem;
     height: var(--h-project-title);
     inline-size: 260px; 
     overflow: hidden;

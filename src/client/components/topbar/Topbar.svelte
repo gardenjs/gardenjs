@@ -127,7 +127,7 @@
   .topbar {
     margin: 0.375rem 0;
     width: 100%;
-    --h-topbar: 2.75rem;
+    --h-topbar: 2.25rem;
     height: var(--h-topbar);
     background-color: var(--c-basic-100);
     border-radius: 0.5rem;
