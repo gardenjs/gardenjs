@@ -52,7 +52,6 @@
 <style>
 .panel {
   position: relative;
-  /* flex-grow: 1; */
   height: 100%;
   width: 100%;
   background-color: var(--c-basic-50);
@@ -72,23 +71,21 @@
 .panel_nav nav ul {
   display: flex;
   flex-direction: row;
-  padding: 0;
   overflow-x: auto;
 }
 .panel_nav nav li {
   height: 100%;
 }
 .panel_nav nav li button {
-  padding: 0.625rem 1.25rem;
+  padding: 0.375rem 1.25rem;
   height: 100%;
   font-size: 0.875rem;
-  font-weight: 500;
   color: var(--c-basic-900);
   white-space: nowrap;
   text-transform: capitalize;
   background-color: transparent;
   border: none;
-  border-bottom: 3px solid transparent;
+  border-bottom: 0.188rem solid transparent;
   cursor: pointer;
 }
 .panel_nav nav li button.active {
