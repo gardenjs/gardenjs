@@ -73,7 +73,7 @@
     overflow-x: hidden;
   }
   .show-sidebar {
-    margin-right: 0.375rem;
+    margin: 0.375rem;
     width: 260px;
     box-sizing: border-box;
   }

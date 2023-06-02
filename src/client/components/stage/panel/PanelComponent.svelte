@@ -52,6 +52,7 @@
 <style>
 .panel {
   position: relative;
+  margin-bottom: 0.375rem;
   height: 100%;
   width: 100%;
   background-color: var(--c-basic-50);

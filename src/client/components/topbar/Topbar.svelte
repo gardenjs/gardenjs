@@ -125,10 +125,10 @@
 
 <style>
   .topbar {
+    margin: 0.375rem 0;
     width: 100%;
     --h-topbar: 2.75rem;
     height: var(--h-topbar);
-    margin: 0 0 0.375rem;
     background-color: var(--c-basic-100);
     border-radius: 0.5rem;
   }
