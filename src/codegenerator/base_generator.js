@@ -69,7 +69,7 @@ export const navTree = ${JSON.stringify(createNavItemTree(componentdescriptions)
 `
 }
 
-export function generateComponentMapCode(componentdescriptions, welcome_page = '../garden/Hellogarden.svelte') {
+export function generateComponentMapCode(componentdescriptions, welcome_page = '../.garden/Hellogarden.svelte') {
   return `
 ${componentdescriptions.map(createComponentImportStmt).join('\n')}
 
