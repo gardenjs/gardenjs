@@ -28,7 +28,6 @@ Svelte example configuration for your garden.config.js file:
 {
   "garden": {
     "serverport": 3010,
-    "wssocketport": 3011,
     "destination": "garden/",
     "structure": {
       "custom": {
