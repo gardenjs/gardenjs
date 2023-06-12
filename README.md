@@ -153,6 +153,7 @@ MIT
 * [feature] Screenshot test: automatic create test file & and folder (like init garden).
 * [feature] Screenshot test: settings.
 * [feature] switch from md to mdx.
+* [task] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js.
 * [task] Topbar: Add class to "stagesize_value-height" depending on the number of digits to prevent the "Width" digits from fidgeting when moving the browser window.
 * [task] Integrate Svelte A11y features.
 * [task] Improve Garden for smaller displays:
