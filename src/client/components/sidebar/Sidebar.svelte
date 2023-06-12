@@ -64,6 +64,7 @@
   <style>
   .sidebar {
     position: relative;
+    margin: 0.375rem 0;
     width: 0;
     max-width: 260px;
     height: calc(100vh - 0.75rem);
