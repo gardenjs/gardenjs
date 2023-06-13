@@ -15,12 +15,12 @@
 
 <style>
 a {
-  margin: 0 0 0 -0.125rem;
+  margin: 0;
   padding: 0.188rem 0 0.188rem 0.813rem;
   text-transform: initial;
   font-size: 0.813rem;
   color: var(--c-basic-600);
-  line-height: 1.3;
+  line-height: 1.2;
   font-weight: 400;
   border-left: 0.188rem solid transparent;
 }
@@ -34,7 +34,7 @@ a.selected {
   border-color: var(--c-primary);
   background-color: var(--c-primary-bg);
 }
-a.selected:hover {
+/* a.selected:hover {
   padding-left: 0.75rem;
-}
+} */
 </style>

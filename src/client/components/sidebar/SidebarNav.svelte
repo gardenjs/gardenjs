@@ -58,6 +58,8 @@
   color: var(--c-basic-900);
   font-weight: 600;
   text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .folder_btn:hover .folder_label {
   color: var(--c-basic-900);
@@ -89,6 +91,26 @@
   border-left: 1px solid var(--c-basic-300);
 }
 .level-4 {
+  margin-left: 1.063rem;
+  border-left: 1px solid var(--c-basic-300);
+}
+.level-5 {
+  margin-left: 1.063rem;
+  border-left: 1px solid var(--c-basic-300);
+}
+.level-6 {
+  margin-left: 1.063rem;
+  border-left: 1px solid var(--c-basic-300);
+}
+.level-7 {
+  margin-left: 1.063rem;
+  border-left: 1px solid var(--c-basic-300);
+}
+.level-8 {
+  margin-left: 1.063rem;
+  border-left: 1px solid var(--c-basic-300);
+}
+.level-9 {
   margin-left: 1.063rem;
   border-left: 1px solid var(--c-basic-300);
 }
