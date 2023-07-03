@@ -130,7 +130,7 @@ MIT
 
 ### v1.0
 
-* [bug] Stage scrolls up when panel is slid to the bottom.
+* [task] Update Svelte 4.
 * [bug] Favicon is gone. (If component is opened in external window favicon is there).
 * [refactor] Move logic to own file. Handle user interaction.
 * [task] Remove express server, use iframe instead.
