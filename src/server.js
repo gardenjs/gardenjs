@@ -24,6 +24,7 @@ export async function createServer() {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: () => ''
         },
+        // we need to handle lib and gardenframe special for reload page
         '^/garden/(lib|gardenframe)/.*$': {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: (path) => path.substring('/garden/'.length)
