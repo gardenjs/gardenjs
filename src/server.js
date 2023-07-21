@@ -1,7 +1,7 @@
-import { getConfig } from './config.js'
+import {getConfig} from './config.js'
 import open from 'open'
-import { createServer as createViteServer } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
+import {createServer as createViteServer} from 'vite'
+import {svelte} from '@sveltejs/vite-plugin-svelte'
 import express from 'express'
 import path from 'path'
 import fs from 'fs'
@@ -24,13 +24,17 @@ export async function createServer() {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: () => ''
         },
-        '^/garden/.*$': {
+        '^/garden/(lib|gardenframe)/.*$': {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: (path) => path.substring('/garden/'.length)
         },
+        '^/garden/(?!lib|gardenframe).*$': {
+          target: `http://localhost:${serverport}/${destination}/`,
+          rewrite: () => ''
+        },
       }
     },
-    plugins: [svelte( {
+    plugins: [svelte({
       compilerOptions: {hydratable: true},
     }
     )]
@@ -41,8 +45,8 @@ export async function createServer() {
   open(`http://localhost:${serverport}/garden`)
 
   const app = express()
-  const port = serverport + 1 
-  app.get('/garden/raw/', async(req, res) => {
+  const port = serverport + 1
+  app.get('/garden/raw/', async (req, res) => {
     const file = path.resolve(process.env.PWD, '.' + req.query.file)
     const content = await fs.promises.readFile(file)
     res.append('Access-Control-Allow-Origin', '*')
