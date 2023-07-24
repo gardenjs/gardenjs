@@ -130,21 +130,19 @@ MIT
 
 ### v1.0
 
-* [task] Update Svelte 4.
-* [bug] Favicon is gone. (If component is opened in external window favicon is there).
 * [refactor] Move logic to own file. Handle user interaction.
 * [task] Remove express server, use iframe instead.
 * [task] Add garden as dist with compiled js & scss files (vite?).
 * [task] Install script / commandline skeleton project (example component).
 * [task] Make Garden compatible with Vue & React.
-* [feature] Docker image for screenshot test.
-* [task] Project website (garden website) as svelte project.
-* [task] Public garden demo of project website.
+* [task] Public garden demo of project/marketing website.
+* [task] Set repository of project/marketing website public
 * [task] Rabbit dev website.
-* [task] Set repository public & make garden npm modul. (yarn?)
+* [task] Set garden repository public & make garden npm modul. (yarn?)
 
 ### v1.1
 
+* [feature] Docker image for screenshot test.
 * [task] Make garden docs link optional via garden.config.js.
 * [feature] Show custom favicon.svg configured in garden.config.js.
 * [feature] Collapse/expand panel button in sidebar and close btn in panel nav.
