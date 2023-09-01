@@ -78,7 +78,7 @@
       <div class="stagesize_value">
         <div>{stageWidth}px</div>
         <div class="stagesize_value-multi_sign">&#10005;</div>
-        <div class="stagesize_value-height">{stageHeight}px</div>
+        <div>{stageHeight}px</div>
       </div>
       <div class="stagesize-nav">
         <button data-title="Small" class="tooltip" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
@@ -271,17 +271,14 @@
     .stagesize_value {
       display: inline-flex;
       align-items: center;
-      font-size: 0.813rem;
+      font-size: 0.75rem;
       padding: 0 1.25rem;
+      font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", Courier New, "monospace";
       color: var(--c-basic-500);
     }
     .stagesize_value-multi_sign {
       margin: 0 0.25rem;
-      font-size: 0.563rem;
-    }
-    .stagesize_value-height {
-      min-width: 40px;
-      text-align: right;
+      font-size: 0.813rem;
     }
   }
 
