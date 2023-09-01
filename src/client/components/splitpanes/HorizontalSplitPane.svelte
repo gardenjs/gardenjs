@@ -1,5 +1,9 @@
 <script>
+    import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
+
   let dragging = false
+  let pageY
   function register() {
     document.addEventListener('mousemove', drag)
     document.addEventListener('mouseup', unregister)
@@ -8,23 +12,31 @@
 
   const drag = (e) => {
     window.getSelection().removeAllRanges()
-    topheight = (e.pageY - element.offsetTop - 7) + 'px'
+    topHeight = (e.pageY - element.offsetTop - 7) + 'px'
+    pageY = e.pageY
+    console.log('top', pageY, element.offsetTop, element.offsetHeight,topHeight)
+
+
   }
 
   function unregister() {
     document.removeEventListener('mousemove', drag)
     document.removeEventListener('mouseup', unregister)
+
+    let bottomHeight = element.offsetHeight - pageY + element.offsetTop
+    console.log('bottom', pageY, element.offsetTop, element.offsetHeight, bottomHeight)
+    dispatch('out', {panelHeight: bottomHeight})
     dragging = false
   }
 
   let element
 
-  export let topheight
+export let topHeight
 
 </script>
 
 <div class="is-full is-flex-column" bind:this={element} >
-  <div class="is-flexfix backstage" style="height: {topheight};"><slot name="top" /></div>
+  <div class="is-flexfix backstage" style="height: {topHeight};"><slot name="top" /></div>
   <div class="is-flexfix dragbar" class:dragging on:mousedown={register}></div>
   <slot name="bottom" />
 </div>

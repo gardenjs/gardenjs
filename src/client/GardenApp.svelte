@@ -44,10 +44,22 @@ function handleTopbarOut(evt) {
   }
 }
 
+let panelHeightNumber = 35
+let panelHeight = '35vh'
 let stageRect = {}
+let topHeight = '65vh'
+$: panelExpanded = panelHeightNumber > 0
+
+$: {
+  topHeight = `calc(100vh - ${panelHeight} - 3.4rem)`
+}
 function handleStageOut(evt) {
   if (evt.detail.stageRect) {
     stageRect = evt.detail.stageRect
+  }
+  if (evt.detail.panelHeight) {
+    panelHeightNumber = evt.detail.panelHeight
+    panelHeight = panelHeightNumber + 'px'
   }
 }
 
@@ -61,6 +73,12 @@ function handleSidebarOut(evt) {
   if (evt.detail.filter) {
     updateFilter(evt.detail.filter.value?.toLowerCase())
   }
+  if (evt.detail.togglePanel) {
+    console.log('toggle panel', panelHeight)
+    panelHeightNumber = panelExpanded ? 0 : 35
+    panelHeight = panelHeightNumber === 0 ? '0px' : '35vh'
+    
+  }
 }
 
 </script>
@@ -70,11 +88,11 @@ function handleSidebarOut(evt) {
     <div slot="bottom" class="is-full is-flexgrow">
       <LeftRightLayout>
         <div slot="left" class="is-flexfix">
-          <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} on:out={handleSidebarOut} />
+          <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} panelExpanded={panelExpanded} on:out={handleSidebarOut} />
         </div>
         <div slot="right" class="main">
           <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
-          <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
+          <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} expressbaseurl={expressbaseurl} topHeight={topHeight} on:out={handleStageOut} />
         </div>
       </LeftRightLayout>
     </div>

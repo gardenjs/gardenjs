@@ -8,6 +8,7 @@
   export let rootNodesExpanded = true
   export let projectTitle
   export let filter
+  export let panelExpanded = true
   
   function toggleRootFolders() {
     dispatch('out', {toggleRootFolders: true})
@@ -15,6 +16,10 @@
 
   function updateFilter(event) {
     dispatch('out', {filter: {value : event.target.value}})
+  }
+
+  function togglePanel() {
+    dispatch('out', {togglePanel: true})
   }
   
   </script>
@@ -49,6 +54,18 @@
               {/if}
             </span>
             <span class="fixednav_btn-label">{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span>
+          </button>
+        </li>
+        <li>
+          <button class="fixednav_btn" title={panelExpanded ? 'Collapse' : 'Restore'} on:click={togglePanel}>
+            <span>
+              {#if panelExpanded}
+                <svg class="fixednav_btn-icon" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l5-5 5 5M7 4l5 5 5-5"/></svg>
+              {:else}
+                <svg class="fixednav_btn-icon" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg>
+              {/if}
+            </span>
+            <span class="fixednav_btn-label">{panelExpanded ? 'Collapse' : 'Expand'} Panel</span>
           </button>
         </li>
         <li>

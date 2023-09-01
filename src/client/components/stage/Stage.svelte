@@ -14,6 +14,7 @@ export let stageStyle
 export let stageSize
 export let selectedExample
 export let expressbaseurl
+export let topHeight
 
 function updateStageRect(stageRect) {
   dispatch('out', {
@@ -80,7 +81,7 @@ function handleSelectionChange(evt) {
 
 </script>
 
-<HorizontalSplitPane topheight='65vh'>
+<HorizontalSplitPane topHeight={topHeight} on:out>
   <div slot="top" class="is-full">
     <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle}></iframe>
   </div>
