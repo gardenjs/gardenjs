@@ -130,12 +130,14 @@ MIT
 
 ### v1.0
 
+* [feature] Collapse/expand panel button in sidebar and close btn in panel nav.
 * [refactor] Move logic to own file. Handle user interaction.
+* [task] Restructure and divide garden server and component server.
 * [task] Remove express server, use iframe instead.
 * [task] Add garden as dist with compiled js & scss files (vite?).
-* [task] Install script / commandline skeleton project (example component).
 * [task] Make Garden compatible with Vue & React.
 * [task] Public garden demo of project/marketing website.
+* [task] Install script / commandline skeleton project (example component).
 * [task] Set repository of project/marketing website public
 * [task] Rabbit dev website.
 * [task] Set garden repository public & make garden npm modul. (yarn?)
@@ -145,13 +147,10 @@ MIT
 * [feature] Docker image for screenshot test.
 * [task] Make garden docs link optional via garden.config.js.
 * [feature] Show custom favicon.svg configured in garden.config.js.
-* [feature] Collapse/expand panel button in sidebar and close btn in panel nav.
-* [feature] Set default mode in garden.config.json.
 * [feature] Screenshot test: automatic create test file & and folder (like init garden).
 * [feature] Screenshot test: settings.
 * [feature] switch from md to mdx.
 * [task] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js.
-* [task] Topbar: Add class to "stagesize_value-height" depending on the number of digits to prevent the "Width" digits from fidgeting when moving the browser window.
 * [task] Integrate Svelte A11y features.
 * [task] Improve Garden for smaller displays:
   * Sidebarnav is closed by default on narrow display devices.
