@@ -57,9 +57,9 @@
         <li>
           <button class="fixednav_btn" title={panelExpanded ? 'Collapse' : 'Restore'} on:click={togglePanel}>
             {#if panelExpanded}
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-bottom-close"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="15" y2="15"/><path d="m15 8-3 3-3-3"/></svg>
+            <svg class="fixednav_btn-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="15" y2="15"/><path d="m15 8-3 3-3-3"/></svg>
             {:else}
-            <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 24 24" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5zM3 15h18" fill="none" stroke="#000" stroke-width="1.5"/><path d="M15 11l-3-3-3 3" fill="none" stroke="#000" stroke-width="1.5"/></svg>
+            <svg class="fixednav_btn-icon" xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5zM3 15h18" fill="none"/><path d="M15 11l-3-3-3 3"/></svg>
             {/if}
             <span class="fixednav_btn-label">{panelExpanded ? 'Collapse' : 'Expand'} Panel</span>
           </button>
@@ -132,7 +132,6 @@
     height: 100%;
     color: var(--c-basic-900);
     background-color: var(--c-base-0);
-    border: 1px solid var(--c-basic-250);
   }
   .searchfield_input::placeholder {
     font-size: 0.813rem;
