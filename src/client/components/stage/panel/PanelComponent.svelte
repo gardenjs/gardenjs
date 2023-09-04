@@ -38,6 +38,10 @@
           {/each}
         </ul>
       </nav>
+      <!-- only collapse btn, do not show any button if collapsed: -->
+      <button class="panel_toggle" title="Collapse panel">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-bottom-close"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="15" y2="15"/><path d="m15 8-3 3-3-3"/></svg>
+      </button>
     </div>
     <div class="panel_pane">
       {#if selectedTab && selectedTab.page }
@@ -63,6 +67,8 @@
 .panel_nav {
   position: sticky;
   top: 0;
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid var(--c-basic-300);
 }
 .panel_nav nav {
@@ -94,6 +100,22 @@
 }
 .panel_nav nav li button:hover {
   border-color: var(--c-primary);
+}
+.panel_toggle {
+  padding: 0 0.75rem;
+  background: none;
+  cursor: pointer;
+}
+.panel_toggle:hover {
+  background-color: var(--c-basic-150);
+}
+.panel_toggle svg {
+  margin-top: 0.188rem;
+  height: 1.375rem;
+  color: var(--c-basic-700);
+}
+.panel_toggle:hover svg {
+  color: var(--c-primary);
 }
 .panel_pane {
   padding: 1.25rem;
