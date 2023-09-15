@@ -11,7 +11,7 @@
     margin: 5rem auto;
     padding: 2rem;
   }
-  h1,p,a {
+  h1,p {
     font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", Courier New, "monospace";
   }
   h1 {
@@ -19,12 +19,6 @@
     font-size: 1.8rem;
     color: hsl(185, 100%, 40%);
     text-align: center;
-  }
-  p {
-    font-size: 1.5rem;
-    color: hsl(185, 100%, 40%);
-    text-align: center;
-    font-weight: 500;
   }
   p {
     font-size: 1.5rem;
