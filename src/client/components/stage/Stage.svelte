@@ -96,6 +96,6 @@ function handleSelectionChange(evt) {
   display: block;
   height: 100%;
   width: 100%;
-  background-color: var(--c-base-0);
+  background-color: var(--c-basic-0);
 }
 </style>
