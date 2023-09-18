@@ -1,13 +1,13 @@
-import {getConfig} from './config.js'
+import { getConfig } from './config.js'
 import open from 'open'
-import {createServer as createViteServer} from 'vite'
-import {svelte} from '@sveltejs/vite-plugin-svelte'
+import { createServer as createViteServer } from 'vite'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
 import express from 'express'
 import path from 'path'
 import fs from 'fs'
 
 export async function createServer() {
-  const {serverport, destination} = await getConfig()
+  const { serverport, destination } = await getConfig()
 
   console.log('PROJECT ROOT', process.cwd())
   const server = await createViteServer({
@@ -16,29 +16,37 @@ export async function createServer() {
     server: {
       port: serverport,
       proxy: {
+        '^/assets/.*$': {
+          target: `http://localhost:${serverport}/${destination}/`,
+          rewrite: (path) => {
+            console.log('DEBUG', 'rewrite', path)
+            return path
+          },
+        },
         '^/garden/favicon$': {
           target: `http://localhost:${serverport}/${destination}/assets/favicon.svg`,
-          rewrite: () => ''
+          rewrite: () => '',
         },
         '^/garden$': {
           target: `http://localhost:${serverport}/${destination}/`,
-          rewrite: () => ''
+          rewrite: () => '',
         },
         // we need to handle lib and gardenframe special for reload page
         '^/garden/(lib|gardenframe)/.*$': {
           target: `http://localhost:${serverport}/${destination}/`,
-          rewrite: (path) => path.substring('/garden/'.length)
+          rewrite: (path) => path.substring('/garden/'.length),
         },
         '^/garden/(?!lib|gardenframe).*$': {
           target: `http://localhost:${serverport}/${destination}/`,
-          rewrite: () => ''
+          rewrite: () => '',
         },
-      }
+      },
     },
-    plugins: [svelte({
-      compilerOptions: {hydratable: true},
-    }
-    )]
+    plugins: [
+      svelte({
+        compilerOptions: { hydratable: true },
+      }),
+    ],
   })
   console.log(`Listening to port ${serverport}`)
   console.log(`http://localhost:${serverport}/garden`)

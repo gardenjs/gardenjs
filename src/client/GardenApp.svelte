@@ -2,9 +2,6 @@
 import Stage from './components/stage/Stage.svelte'
 import Sidebar from './components/sidebar/Sidebar.svelte'
 import Topbar from './components/topbar/Topbar.svelte'
-import FullScreenLayout from './layouts/FullScreenLayout.svelte'
-import LeftRightLayout from './layouts/LeftRightLayout.svelte'
-import TopBottomLayout from './layouts/TopBottomLayout.svelte'
 import {updateStage, stageStyle, stageSize, landscape, setThemes, selectTheme, themes} from './logic/stage.js'
 import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavTree, updateFilter, updateNavTree, updateSelectedComponent} from './logic/navTree.js'
 import {initRouting, das, componentName, selectedExample, updateDasMap, currentRoute} from './logic/routing.js'
@@ -65,21 +62,15 @@ function handleSidebarOut(evt) {
 
 </script>
 
-<FullScreenLayout>
-  <TopBottomLayout>
-    <div slot="bottom" class="is-full is-flexgrow">
-      <LeftRightLayout>
-        <div slot="left" class="is-flexfix">
-          <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} on:out={handleSidebarOut} />
-        </div>
-        <div slot="right" class="main">
-          <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
-          <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
-        </div>
-      </LeftRightLayout>
-    </div>
-  </TopBottomLayout>
-</FullScreenLayout>
+<div class="is-full is-flexgrow is-flex-row">
+  <div class="is-flexfix">
+    <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} on:out={handleSidebarOut} />
+  </div>
+  <div class="main">
+    <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
+    <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
+  </div>
+</div>
 
 <style>
 .main {
