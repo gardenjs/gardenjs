@@ -20,7 +20,7 @@
   </script>
   
   <div class="sidebar" class:show-sidebar={show}>
-    <a class="project_title" href="/garden/">
+    <a class="project_title" href="/">
       <span>{projectTitle}</span>
     </a>
     <nav>

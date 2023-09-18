@@ -16,27 +16,11 @@ export async function createServer() {
     server: {
       port: serverport,
       proxy: {
-        '^/assets/.*$': {
-          target: `http://localhost:${serverport}/${destination}/`,
-          rewrite: (path) => {
-            console.log('DEBUG', 'rewrite', path)
-            return path
-          },
-        },
-        '^/garden/favicon$': {
-          target: `http://localhost:${serverport}/${destination}/assets/favicon.svg`,
-          rewrite: () => '',
-        },
-        '^/garden$': {
+        '^/$': {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: () => '',
         },
-        // we need to handle lib and gardenframe special for reload page
-        '^/garden/(lib|gardenframe)/.*$': {
-          target: `http://localhost:${serverport}/${destination}/`,
-          rewrite: (path) => path.substring('/garden/'.length),
-        },
-        '^/garden/(?!lib|gardenframe).*$': {
+        '^/garden/.*$': {
           target: `http://localhost:${serverport}/${destination}/`,
           rewrite: () => '',
         },
@@ -49,13 +33,13 @@ export async function createServer() {
     ],
   })
   console.log(`Listening to port ${serverport}`)
-  console.log(`http://localhost:${serverport}/garden`)
+  console.log(`http://localhost:${serverport}`)
   server.listen()
-  open(`http://localhost:${serverport}/garden`)
+  open(`http://localhost:${serverport}`)
 
   const app = express()
   const port = serverport + 1
-  app.get('/garden/raw/', async (req, res) => {
+  app.get('/.garden/raw/', async (req, res) => {
     const file = path.resolve(process.env.PWD, '.' + req.query.file)
     const content = await fs.promises.readFile(file)
     res.append('Access-Control-Allow-Origin', '*')

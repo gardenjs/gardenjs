@@ -3,7 +3,7 @@ export let componentMap = {}
 export let dasMap = {}
 export let config
 
-let component = componentMap.Welcome
+let component
 let das = {}
 let selectedExample = {}
 let redirectdata = {}

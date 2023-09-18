@@ -12,7 +12,7 @@
   async function loadCode(componentfile) {
     code = ''
     try {
-      const response = await fetch(`${expressbaseurl}garden/raw/?file=${encodeURI(componentfile)}`)
+      const response = await fetch(`${expressbaseurl}.garden/raw/?file=${encodeURI(componentfile)}`)
       code = (await response.text())
     } catch (e) {
     }

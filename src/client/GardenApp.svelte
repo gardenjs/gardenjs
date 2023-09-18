@@ -15,8 +15,7 @@ $: expressbaseurl = `${window.location.protocol}//${window.location.hostname}:${
 
 $: updateNavTree(navTree)
 $: {
-  if (routes && dasMap)
-    initRouting(dasMap, routes, baseurl)
+  if (routes && dasMap) initRouting(dasMap, routes, baseurl)
 }
 $: updateDasMap(dasMap)
 $: setThemes(config.themes)
@@ -27,7 +26,7 @@ $: projectTitle = config.project_title || ''
 let showSidebar = true
 function handleTopbarOut(evt) {
   if (evt.detail.openInTab) {
-    const targetWindow = window.open('/garden/gardenframe/', '_blank')
+    const targetWindow = window.open('/.garden/gardenframe/', '_blank')
     targetWindow.onload = () => {
       targetWindow.postMessage({selectedExample: $selectedExample, componentName: $componentName}, window.location.origin)
     }
