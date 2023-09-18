@@ -9,7 +9,7 @@ export async function generateGardenBase() {
   const targetBaseFile = destination + 'base.js'
   const targetComponentMapFile = destination + 'component_import_map.js'
   const targetDasMapFile = destination + 'das_import_map.js'
-  const targetGardenFrameFile = destination + 'lib/gardenframe.js'
+  const targetGardenFrameFile = destination + 'gardenframe/gardenframe.js'
 
   const basefolders = getDasBaseFolders(structure)
 
