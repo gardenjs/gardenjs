@@ -175,17 +175,19 @@ export function createRouteEntry(description) {
 }
 
 export function createComponentImportStmt(description) {
-  return `import ${description.fullname} from '${description.file}'`
+  return `import ${description.fullname} from '${description.pathRelativeToGarden}${description.file}'`
 }
 
 export function createDasImportStmt(description) {
-  return `import ${description.fullname}Das from '${description.dasfile}'
+  return `import ${description.fullname}Das from '${
+    description.pathRelativeToGarden
+  }${description.dasfile}'
 ${createDescriptionImportStmt(description)}`
 }
 
 function createDescriptionImportStmt(description) {
   return description.descriptionfile
-    ? `import ${description.fullname}DasDescription from '${description.descriptionfile}?raw'`
+    ? `import ${description.fullname}DasDescription from '${description.pathRelativeToGarden}${description.descriptionfile}?raw'`
     : ''
 }
 
@@ -221,10 +223,10 @@ export function createComponentDescription({
   const fullname = createFullname(navbasenode, relativepath, name)
   const route = createRoute(navbasenode, relativepath, name)
   const fullnavnode = path.join(navbasenode, relativepath)
-  const modulepath =
-    basepath.indexOf('node_modules') == 0
-      ? basepath.substring('node_modules/'.length)
-      : '/' + basepath
+  const isModule = basepath.indexOf('node_modules') == 0
+  const modulepath = isModule
+    ? basepath.substring('node_modules/'.length)
+    : '/' + basepath
   const file = das.file
     ? path.join(modulepath, relativepath, das.file)
     : undefined
@@ -233,6 +235,7 @@ export function createComponentDescription({
     ? path.join(modulepath, relativepath, das.description)
     : undefined
   const fullpath = path.join(basepath, relativepath)
+  const pathRelativeToGarden = isModule ? '' : '/..'
   return {
     name,
     basepath,
@@ -245,6 +248,7 @@ export function createComponentDescription({
     descriptionfile,
     fullname,
     route,
+    pathRelativeToGarden,
   }
 }
 
