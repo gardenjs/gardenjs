@@ -11,20 +11,11 @@ export async function createServer() {
 
   console.log('PROJECT ROOT', process.cwd())
   const server = await createViteServer({
+    root: '.garden/',
     configFile: false,
     assetsInclude: ['**/*.md'],
     server: {
       port: serverport,
-      proxy: {
-        '^/$': {
-          target: `http://localhost:${serverport}/${destination}/`,
-          rewrite: () => '',
-        },
-        '^/garden/.*$': {
-          target: `http://localhost:${serverport}/${destination}/`,
-          rewrite: () => '',
-        },
-      },
     },
     plugins: [
       svelte({
