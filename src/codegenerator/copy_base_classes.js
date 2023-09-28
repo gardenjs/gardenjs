@@ -10,17 +10,20 @@ const sourcefolder = path.resolve(__dirname, 'shapes') + '/'
 const distfolder = path.resolve(__dirname, '../../dist') + '/'
 
 export async function clearBaseFolder() {
-  const targetfolder = (await getConfig()).destination
+  const config = await getConfig()
+  const targetfolder = config.destination
   fs.rmSync(targetfolder, { recursive: true, force: true })
 }
 
 export async function copyBaseClasses() {
-  const targetfolder = (await getConfig()).destination
+  const config = await getConfig()
+  const targetfolder = config.destination
   fs.mkdir(
     targetfolder,
     { recursive: true },
     onErrorAbortElse(() => {
       copyFolder(sourcefolder, targetfolder)
+      if (config.devmodus) return
       copyFolder(distfolder, targetfolder)
     })
   )
