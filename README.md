@@ -130,6 +130,7 @@ MIT
 
 ### v1.0
 
+* [bug] Scrolling bug if nav list of stories is longer than panel.
 * [feature] Collapse/expand panel button in sidebar and close btn in panel nav. (check branch)
 * [refactor] Move logic to own file. Handle user interaction.
 * [task] Restructure and divide garden server and component server.
