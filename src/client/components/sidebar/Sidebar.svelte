@@ -23,22 +23,22 @@
     <a class="project_title" href="/">
       <span>{projectTitle}</span>
     </a>
-    <nav>
-      <ul>
-        <li class="search">
-          <div class="searchfield">
-            <input class="searchfield_input" type="text" value={filter || ''} placeholder="Filter" on:input={updateFilter}>
-          </div>
-        </li>
-        {#if nodes.length == 0 && filter}
-        <li>
-          <div class="nosearchresult">No results for '{filter}'</div>
-        </li>
-        {:else}
+    <div class="filter">
+      <input class="filter_input" type="text" value={filter || ''} placeholder="Filter" on:input={updateFilter}>
+    </div>
+    {#if nodes.length == 0 && filter}
+      <div>
+        <div class="nofilterresult">No results for '{filter}'</div>
+      </div>
+    {:else}
+      <nav class="components">
+        <ul>
           <SidebarNav nodes={nodes} on:out />
-        {/if}
-      </ul>
-      <ul class="fixednav">
+        </ul>
+      </nav>
+    {/if}
+    <nav class="controls">
+      <ul>
         <li>
           <button class="fixednav_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
             <span>
@@ -65,6 +65,7 @@
   .sidebar {
     position: relative;
     margin: 0.375rem 0;
+    padding: 0 0 4.688rem; /* Depending on the height of the fixednav to ensure that mainnav is fully visible when scrolling */
     width: 0;
     max-width: 260px;
     height: calc(100vh - 0.75rem);
@@ -72,6 +73,7 @@
     border-radius: 0.75rem;
     transition: width 0.2s;
     overflow-x: hidden;
+    overflow-y: auto;
   }
   .show-sidebar {
     margin: 0.375rem 0.375rem 0.375rem 0;
@@ -88,6 +90,8 @@
     padding: 0.25rem 0.688rem;
     margin: 0 0 0.375rem;
     width: 260px;
+    background-color: var(--c-basic-100);
+    z-index: 9;
     --h-project-title: 2.25rem;
     height: var(--h-project-title);
     inline-size: 260px; 
@@ -102,33 +106,33 @@
   .project_title span {
     overflow: hidden;
   }
-  .search {
-    height: 2rem;
-    overflow: hidden;
-  }
-  .searchfield {
+  .filter {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 0.5rem;
     height: 2rem;
   }
-  .searchfield_input {
+  .filter_input {
     padding: 0.125rem 0.125rem 0.125rem 0.688rem;;
     width: 100%;
     height: 100%;
     color: var(--c-basic-900);
-    background-color: var(--c-base-0);
-    border: 1px solid var(--c-basic-250);
+    background-color: var(--c-basic-0);
+    /* border: 1px solid var(--c-basic-250); */
+    border-radius: 1.75rem;
   }
-  .searchfield_input::placeholder {
+  input.filter_input[type="text"] {
+    font-size: 0.813rem
+  }
+  .filter_input::placeholder {
     font-size: 0.813rem;
-    color: var(--c-basic-700);
+    color: var(--c-basic-900);
   }
-  .searchfield_input:focus {
+  .filter_input:focus {
     outline: none;
   }
-  .nosearchresult {
+  .nofilterresult {
     width: 260px;
     padding: 0.5rem 0.688rem 0.375rem 0.688rem;
     text-transform: initial;
@@ -139,12 +143,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  nav {
+  .components {
     width: 260px;
-    height: calc(100vh - 56px);
-    overflow-y: auto;
+    /* height: calc(100vh - 56px); */
+    z-index: 1;
   }
-  .fixednav {
+  .controls {
     position: fixed;
     width: 260px;
     bottom: 0.375rem;

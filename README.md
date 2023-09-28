@@ -108,14 +108,14 @@ It then looks like this, for example:
 
 ```js
 export default {
-  name: "<component>",
-  file: "./<component>.example.svelte",
-  description: "./<component>.md",
+  name: '<component>',
+  file: './<component>.example.svelte',
+  description: './<component>.md',
   examples: [
-    {story: "<navigation title for story_1>", input: {story: "story_1"}},
-    {story: "<navigation title for story_2>", input: {story: "story_2"}},
-    {story: "<navigation title for story_3>", input: {story: "story_3"}},
-  ]
+    { story: '<navigation title for story_1>', input: { story: 'story_1' } },
+    { story: '<navigation title for story_2>', input: { story: 'story_2' } },
+    { story: '<navigation title for story_3>', input: { story: 'story_3' } },
+  ],
 }
 ```
 
@@ -130,32 +130,40 @@ MIT
 
 ### v1.0
 
-* [feature] Collapse/expand panel button in sidebar and close btn in panel nav.
-* [refactor] Move logic to own file. Handle user interaction.
-* [task] Restructure and divide garden server and component server.
-* [task] Remove express server, use iframe instead.
-* [task] Add garden as dist with compiled js & scss files (vite?).
-* [task] Make Garden compatible with Vue & React.
-* [task] Public garden demo of project/marketing website.
-* [task] Install script / commandline skeleton project (example component).
-* [task] Set repository of project/marketing website public
-* [task] Rabbit dev website.
-* [task] Set garden repository public & make garden npm modul. (yarn?)
+- [bug] Scrolling bug if nav list of stories is longer than panel.
+- [feature] Collapse/expand panel button in sidebar and close btn in panel nav. (check branch)
+- [refactor] Move logic to own file. Handle user interaction.
+- [task] Restructure and divide garden server and component server.
+- [task] Remove express server, use iframe instead.
+- [task] Add garden as dist with compiled js & scss files (vite?).
+- [task] Make Garden compatible with Vue & React.
+- [task] Public garden demo of project/marketing website.
+- [task] Install script / commandline skeleton project (example component).
+- [task] Set repository of project/marketing website public
+- [task] Rabbit dev website.
+- [task] Set garden repository public & make garden npm modul. (yarn?)
 
 ### v1.1
 
-* [feature] Docker image for screenshot test.
-* [task] Make garden docs link optional via garden.config.js.
-* [feature] Show custom favicon.svg configured in garden.config.js.
-* [feature] Screenshot test: automatic create test file & and folder (like init garden).
-* [feature] Screenshot test: settings.
-* [feature] switch from md to mdx.
-* [task] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js.
-* [task] Integrate Svelte A11y features.
-* [task] Improve Garden for smaller displays:
-  * Sidebarnav is closed by default on narrow display devices.
-  * ...
-* [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi.
-* [task] Build kickstarter "carrots". Define components for carrots.
+- [feature] Docker image for screenshot test.
+- [feature] Set width and height of stage by size input.
+- [feature] Add zoom button 100% and if zoomed show size in % with switch possibility.
+- [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi.
+- [task] Make garden docs link optional via garden.config.js.
+- [feature] Show custom favicon.svg configured in garden.config.js.
+- [feature] Screenshot test: automatic create test file & and folder (like init garden).
+- [feature] Screenshot test: settings.
+- [feature] switch from md to mdx.
+- [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js. Option: Set list of custom values like iPhone 15, iPad, Samsung etc. in garden.config and show dropdown in garden instead of icons.
+- [task] Integrate Svelte A11y features.
+- [task] Improve Garden for smaller displays:
+  - Sidebarnav is closed by default on narrow display devices.
+  - ...
+- [task] Build kickstarter "carrots". Define components for carrots.
+
+### v1.2
+
+- [feature] Bookmarks.
+- [feature] Measure.
 
 <br><br><br><p align="center"><img src="src/assets/icons/logo.svg"></p>
