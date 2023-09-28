@@ -69,7 +69,7 @@ function createTabs(das) {
     tabs.push( {name: 'Examples', props: {selected: selectedExample, items: das.examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
   }
   if (das.componentfile) { 
-    tabs.push( {name: 'Code', props: {das, expressbaseurl}, page: PanelCode} )
+    tabs.push( {name: 'Code', props: {componentName, expressbaseurl}, page: PanelCode} )
   }
   return tabs
 }
@@ -82,7 +82,7 @@ function handleSelectionChange(evt) {
 
 <HorizontalSplitPane topheight='65vh'>
   <div slot="top" class="is-full">
-    <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle}></iframe>
+    <iframe class="stage" title="preview" bind:this={myframe} src="/gardenframe/" style={stageStyle}></iframe>
   </div>
   <div slot="bottom" class="is-full is-flex-column">
     <PanelComponent tabs={tabs} />

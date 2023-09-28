@@ -2,9 +2,6 @@
 import Stage from './components/stage/Stage.svelte'
 import Sidebar from './components/sidebar/Sidebar.svelte'
 import Topbar from './components/topbar/Topbar.svelte'
-import FullScreenLayout from './layouts/FullScreenLayout.svelte'
-import LeftRightLayout from './layouts/LeftRightLayout.svelte'
-import TopBottomLayout from './layouts/TopBottomLayout.svelte'
 import {updateStage, stageStyle, stageSize, landscape, setThemes, selectTheme, themes} from './logic/stage.js'
 import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavTree, updateFilter, updateNavTree, updateSelectedComponent} from './logic/navTree.js'
 import {initRouting, das, componentName, selectedExample, updateDasMap, currentRoute} from './logic/routing.js'
@@ -18,8 +15,7 @@ $: expressbaseurl = `${window.location.protocol}//${window.location.hostname}:${
 
 $: updateNavTree(navTree)
 $: {
-  if (routes && dasMap)
-    initRouting(dasMap, routes, baseurl)
+  if (routes && dasMap) initRouting(dasMap, routes, baseurl)
 }
 $: updateDasMap(dasMap)
 $: setThemes(config.themes)
@@ -30,7 +26,7 @@ $: projectTitle = config.project_title || ''
 let showSidebar = true
 function handleTopbarOut(evt) {
   if (evt.detail.openInTab) {
-    const targetWindow = window.open('/garden/gardenframe/', '_blank')
+    const targetWindow = window.open('/gardenframe/', '_blank')
     targetWindow.onload = () => {
       targetWindow.postMessage({selectedExample: $selectedExample, componentName: $componentName}, window.location.origin)
     }
@@ -65,23 +61,26 @@ function handleSidebarOut(evt) {
 
 </script>
 
-<FullScreenLayout>
-  <TopBottomLayout>
-    <div slot="bottom" class="is-full is-flexgrow">
-      <LeftRightLayout>
-        <div slot="left" class="is-flexfix">
-          <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} on:out={handleSidebarOut} />
-        </div>
-        <div slot="right" class="main">
-          <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
-          <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
-        </div>
-      </LeftRightLayout>
-    </div>
-  </TopBottomLayout>
-</FullScreenLayout>
+<div class="garden is-full is-flexgrow is-flex-row">
+  <div class="is-flexfix">
+    <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} on:out={handleSidebarOut} />
+  </div>
+  <div class="main">
+    <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
+    <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
+  </div>
+</div>
 
 <style>
+  .garden {
+    display: flex;
+    margin: 0;
+    padding: 0 0.375rem;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--c-basic-0);
+  }
 .main {
   display: flex;
   flex-direction: column;
