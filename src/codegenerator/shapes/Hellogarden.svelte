@@ -1,6 +1,6 @@
 <div class="box">
   <h1>Hello, Garden!</h1>
-  <p>Woohoo, you've successfully installed the component library explorer Garden.<br>Welcome and have fun gardening.<span class="cursor_blink">_</span></p>
+  <p>Woohoo, you've successfully installed the component library explorer Garden.<br>Welcome and have fun gardening<span class="cursor_blink">_</span></p>
 </div>
 
 <style>

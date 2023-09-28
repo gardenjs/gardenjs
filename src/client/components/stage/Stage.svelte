@@ -81,21 +81,34 @@ function handleSelectionChange(evt) {
 </script>
 
 <HorizontalSplitPane topheight='65vh'>
-  <div slot="top" class="is-full">
-    <iframe class="stage" title="preview" bind:this={myframe} src="/gardenframe/" style={stageStyle}></iframe>
+  <div slot="top" class="stage">
+    <iframe class="stage_iframe" title="preview" bind:this={myframe} src="/gardenframe/" style={stageStyle}></iframe>
   </div>
-  <div slot="bottom" class="is-full is-flex-column">
+  <div slot="bottom" class="panel_container">
     <PanelComponent tabs={tabs} />
   </div>
 </HorizontalSplitPane>
 
 <style>
-.stage {
-  align-self: center;
-  margin: auto;
-  display: block;
-  height: 100%;
-  width: 100%;
-  background-color: var(--c-basic-0);
-}
+  .stage {
+    height: 100%;
+    width: auto;
+    overflow-y: auto;
+  }
+  .stage_iframe {
+    display: block;
+    align-self: center;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    background-color: var(--c-basic-0);
+  }
+  .panel_container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+  }
 </style>
