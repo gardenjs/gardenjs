@@ -130,15 +130,12 @@ MIT
 
 ### v1.0
 
-- [bug] Scrolling bug if nav list of stories is longer than panel.
 - [feature] Collapse/expand panel button in sidebar and close btn in panel nav. (check branch)
 - [refactor] Move logic to own file. Handle user interaction.
-- [task] Restructure and divide garden server and component server.
-- [task] Remove express server, use iframe instead.
-- [task] Add garden as dist with compiled js & scss files (vite?).
+- [task] Add tests.
 - [task] Make Garden compatible with Vue & React.
-- [task] Public garden demo of project/marketing website.
 - [task] Install script / commandline skeleton project (example component).
+- [task] Public garden demo of project/marketing website.
 - [task] Set repository of project/marketing website public
 - [task] Rabbit dev website.
 - [task] Set garden repository public & make garden npm modul. (yarn?)
