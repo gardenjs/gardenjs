@@ -65,8 +65,8 @@
 
 </script>
 
-<div class="topbar">
-  <div class="topbar_container">
+<div class="garden_topbar">
+  <div class="topbar">
     <button class="sidebar_toggle" on:click={toggleSidebar} title={ active ? 'Collapse sidebar' : 'Expand sidebar'}>
       {#if active}
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18m7-6l-3-3 3-3"/></svg>
@@ -124,7 +124,7 @@
 </div>
 
 <style>
-  .topbar {
+  .garden_topbar {
     margin: 0.375rem 0;
     width: 100%;
     --h-topbar: 2.25rem;
@@ -132,7 +132,7 @@
     background-color: var(--c-basic-100);
     border-radius: 0.5rem;
   }
-  .topbar_container {
+  .topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
