@@ -69,7 +69,7 @@ function createTabs(das) {
     tabs.push( {name: 'Examples', props: {selected: selectedExample, items: das.examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
   }
   if (das.componentfile) { 
-    tabs.push( {name: 'Code', props: {das, expressbaseurl}, page: PanelCode} )
+    tabs.push( {name: 'Code', props: {componentName, expressbaseurl}, page: PanelCode} )
   }
   return tabs
 }

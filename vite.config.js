@@ -11,6 +11,7 @@ export default defineConfig({
         '../base.js',
         '../das_import_map.js',
         '../../garden.config.js',
+        '/raw_component_import_map.js',
       ],
     },
   },

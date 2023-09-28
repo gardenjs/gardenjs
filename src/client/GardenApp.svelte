@@ -26,7 +26,7 @@ $: projectTitle = config.project_title || ''
 let showSidebar = true
 function handleTopbarOut(evt) {
   if (evt.detail.openInTab) {
-    const targetWindow = window.open('/.garden/gardenframe/', '_blank')
+    const targetWindow = window.open('/gardenframe/', '_blank')
     targetWindow.onload = () => {
       targetWindow.postMessage({selectedExample: $selectedExample, componentName: $componentName}, window.location.origin)
     }
@@ -61,7 +61,7 @@ function handleSidebarOut(evt) {
 
 </script>
 
-<div class="is-full is-flexgrow is-flex-row">
+<div class="garden is-full is-flexgrow is-flex-row">
   <div class="is-flexfix">
     <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} on:out={handleSidebarOut} />
   </div>
@@ -72,6 +72,15 @@ function handleSidebarOut(evt) {
 </div>
 
 <style>
+  .garden {
+    display: flex;
+    margin: 0;
+    padding: 0 0.375rem;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--c-basic-0);
+  }
 .main {
   display: flex;
   flex-direction: column;

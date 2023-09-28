@@ -8,6 +8,7 @@ export async function generateGardenBase() {
     await getConfig()
   const targetBaseFile = destination + 'base.js'
   const targetComponentMapFile = destination + 'component_import_map.js'
+  const targetRawComponentMapFile = destination + 'raw_component_import_map.js'
   const targetDasMapFile = destination + 'das_import_map.js'
   const targetGardenFrameFile = destination + 'gardenframe/gardenframe.js'
 
@@ -29,6 +30,10 @@ export async function generateGardenBase() {
   await writeFileIfChanged(
     targetComponentMapFile,
     generateComponentMapCode(cds, welcome_page)
+  )
+  await writeFileIfChanged(
+    targetRawComponentMapFile,
+    generateRawComponentMapCode(cds, welcome_page)
   )
   await writeFileIfChanged(targetDasMapFile, generateDasMapCode(cds))
   await writeFileIfChanged(
@@ -94,6 +99,16 @@ import Welcome from '${welcome_page}'
 
 export const componentMap = {
   'Welcome': Welcome,
+  ${componentdescriptions.map(createComponentMapEntry).join(',\n')}
+}
+`
+}
+
+export function generateRawComponentMapCode(componentdescriptions) {
+  return `
+${componentdescriptions.map(createRawComponentImportStmt).join('\n')}
+
+export const rawComponentMap = {
   ${componentdescriptions.map(createComponentMapEntry).join(',\n')}
 }
 `
@@ -179,6 +194,10 @@ function createComponentImportStmt(description) {
   return `import ${description.fullname} from '${description.pathRelativeToGarden}${description.file}'`
 }
 
+function createRawComponentImportStmt(description) {
+  return `import ${description.fullname} from '${description.pathRelativeToGarden}${description.file}?raw'`
+}
+
 function createDasImportStmt(description) {
   return `import ${description.fullname}Das from '${
     description.pathRelativeToGarden
@@ -207,10 +226,6 @@ function getDescriptionFromFileOrProperty(description) {
   return description.descriptionfile
     ? `${description.fullname}DasDescription`
     : `${description.fullname}Das.description`
-}
-
-function createDasDescriptionMapEntry(description) {
-  return `'${description.fullname}': ${description.fullname}DasDescription`
 }
 
 function createComponentDescription({

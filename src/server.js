@@ -26,7 +26,7 @@ export async function createServer() {
   console.log(`Listening to port ${serverport}`)
   console.log(`http://localhost:${serverport}`)
   server.listen()
-  open(`http://localhost:${serverport}`)
+  //  open(`http://localhost:${serverport}`)
 
   const app = express()
   const port = serverport + 1
