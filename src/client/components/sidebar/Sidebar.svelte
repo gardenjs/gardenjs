@@ -17,51 +17,51 @@
     dispatch('out', {filter: {value : event.target.value}})
   }
   
-  </script>
+</script>
   
-  <div class="sidebar" class:show-sidebar={show}>
-    <a class="project_title" href="/">
-      <span>{projectTitle}</span>
-    </a>
-    <div class="filter">
-      <input class="filter_input" type="text" value={filter || ''} placeholder="Filter" on:input={updateFilter}>
+<div class="sidebar" class:show-sidebar={show}>
+  <a class="project_title" href="/">
+    <span>{projectTitle}</span>
+  </a>
+  <div class="filter">
+    <input class="filter_input" type="text" value={filter || ''} placeholder="Filter" on:input={updateFilter}>
+  </div>
+  {#if nodes.length == 0 && filter}
+    <div>
+      <div class="nofilterresult">No results for '{filter}'</div>
     </div>
-    {#if nodes.length == 0 && filter}
-      <div>
-        <div class="nofilterresult">No results for '{filter}'</div>
-      </div>
-    {:else}
-      <nav class="components">
-        <ul>
-          <SidebarNav nodes={nodes} on:out />
-        </ul>
-      </nav>
-    {/if}
-    <nav class="controls">
+  {:else}
+    <nav class="components">
       <ul>
-        <li>
-          <button class="fixednav_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
-            <span>
-              {#if rootNodesExpanded}
-                <svg class="fixednav_btn-icon" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l5-5 5 5M7 4l5 5 5-5"/></svg>
-              {:else}
-                <svg class="fixednav_btn-icon" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg>
-              {/if}
-            </span>
-            <span class="fixednav_btn-label">{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span>
-          </button>
-        </li>
-        <li>
-          <a class="fixednav_link" href="https://github.com/rabbitdevelopment/garden" target="_blank" rel="noreferrer">
-            <svg class="fixednav_link-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
-            <span class="fixednav_link-label">Garden Docs</span>
-          </a>
-        </li>
+        <SidebarNav nodes={nodes} on:out />
       </ul>
     </nav>
-  </div>
+  {/if}
+  <nav class="controls">
+    <ul>
+      <li>
+        <button class="fixednav_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
+          <span>
+            {#if rootNodesExpanded}
+              <svg class="fixednav_btn-icon" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l5-5 5 5M7 4l5 5 5-5"/></svg>
+            {:else}
+              <svg class="fixednav_btn-icon" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg>
+            {/if}
+          </span>
+          <span class="fixednav_btn-label">{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span>
+        </button>
+      </li>
+      <li>
+        <a class="fixednav_link" href="https://github.com/rabbitdevelopment/garden" target="_blank" rel="noreferrer">
+          <svg class="fixednav_link-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
+          <span class="fixednav_link-label">Garden Docs</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
   
-  <style>
+<style>
   .sidebar {
     position: relative;
     margin: 0.375rem 0;
@@ -221,4 +221,4 @@
   .fixednav_link:hover .fixednav_link-label {
     color: var(--c-primary);
   }
-  </style>
+</style>

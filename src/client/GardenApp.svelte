@@ -61,8 +61,8 @@ function handleSidebarOut(evt) {
 
 </script>
 
-<div class="garden is-full is-flexgrow is-flex-row">
-  <div class="is-flexfix">
+<div class="garden">
+  <div class="sidebar_container">
     <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} on:out={handleSidebarOut} />
   </div>
   <div class="main">
@@ -72,8 +72,15 @@ function handleSidebarOut(evt) {
 </div>
 
 <style>
+  .sidebar_container {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
   .garden {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-grow: 1;
     margin: 0;
     padding: 0 0.375rem;
     width: 100vw;
@@ -81,12 +88,12 @@ function handleSidebarOut(evt) {
     overflow: hidden;
     background-color: var(--c-basic-0);
   }
-.main {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  box-sizing: border-box;
-}
+  .main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
 </style>
