@@ -161,7 +161,8 @@ export function createNode(rootNode, nodes) {
   })
   return parentNode
 }
-export function createNavigationEntry(description) {
+
+function createNavigationEntry(description) {
   return {
     isLeaf: true,
     href: description.route,
@@ -170,15 +171,15 @@ export function createNavigationEntry(description) {
   }
 }
 
-export function createRouteEntry(description) {
+function createRouteEntry(description) {
   return `'${description.route}': ${JSON.stringify(description, null, 2)}`
 }
 
-export function createComponentImportStmt(description) {
+function createComponentImportStmt(description) {
   return `import ${description.fullname} from '${description.pathRelativeToGarden}${description.file}'`
 }
 
-export function createDasImportStmt(description) {
+function createDasImportStmt(description) {
   return `import ${description.fullname}Das from '${
     description.pathRelativeToGarden
   }${description.dasfile}'
@@ -191,11 +192,11 @@ function createDescriptionImportStmt(description) {
     : ''
 }
 
-export function createComponentMapEntry(description) {
+function createComponentMapEntry(description) {
   return `'${description.fullname}': ${description.fullname}`
 }
 
-export function createDasMapEntry(description) {
+function createDasMapEntry(description) {
   return `'${description.fullname}': {
     ...${description.fullname}Das,
     description: ${getDescriptionFromFileOrProperty(description)} 
@@ -208,11 +209,11 @@ function getDescriptionFromFileOrProperty(description) {
     : `${description.fullname}Das.description`
 }
 
-export function createDasDescriptionMapEntry(description) {
+function createDasDescriptionMapEntry(description) {
   return `'${description.fullname}': ${description.fullname}DasDescription`
 }
 
-export function createComponentDescription({
+function createComponentDescription({
   das,
   navbasenode,
   basepath,
