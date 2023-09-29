@@ -28,7 +28,7 @@
  
 </script>
 
-<div class="panel">
+<div class="panel_container">
   {#if tabs.length}
     <div class="panel_nav">
       <nav>
@@ -50,7 +50,7 @@
 </div>
 
 <style>
-  .panel {
+  .panel_container {
     position: relative;
     margin-bottom: 0.375rem;
     height: 100%;

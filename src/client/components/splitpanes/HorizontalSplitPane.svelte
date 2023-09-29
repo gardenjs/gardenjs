@@ -23,14 +23,14 @@
 
 </script>
 
-<div class="garden_main" bind:this={element} >
-  <div class="stage_wrapper" style="height: {topheight};"><slot name="top" /></div>
+<div class="stagepanel_container" bind:this={element} >
+  <div class="stage" style="height: {topheight};"><slot name="top" /></div>
   <div class="dragbar" class:dragging on:mousedown={register}></div>
   <slot name="bottom" />
 </div>
 
 <style>
-  .garden_main {
+  .stagepanel_container {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -38,7 +38,7 @@
     height: 100%;
     overflow-y: auto;
   }
-  .stage_wrapper {
+  .stage {
     flex-grow: 0;
     flex-shrink: 0;
     background-color: var(--c-basic-250);

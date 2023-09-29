@@ -81,16 +81,16 @@ function handleSelectionChange(evt) {
 </script>
 
 <HorizontalSplitPane topheight='65vh'>
-  <div slot="top" class="stage">
+  <div slot="top" class="stage_container">
     <iframe class="stage_iframe" title="preview" bind:this={myframe} src="/gardenframe/" style={stageStyle}></iframe>
   </div>
-  <div slot="bottom" class="panel_container">
+  <div slot="bottom" class="panel">
     <PanelComponent tabs={tabs} />
   </div>
 </HorizontalSplitPane>
 
 <style>
-  .stage {
+  .stage_container {
     height: 100%;
     width: auto;
     overflow-y: auto;
@@ -103,7 +103,7 @@ function handleSelectionChange(evt) {
     width: 100%;
     background-color: var(--c-basic-0);
   }
-  .panel_container {
+  .panel {
     display: flex;
     height: 100%;
     width: 100%;

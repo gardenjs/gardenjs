@@ -62,17 +62,17 @@
 </script>
 
 <div class="garden">
-  <div class="garden_sidebar">
+  <div class="sidebar">
     <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} on:out={handleSidebarOut} />
   </div>
-  <div class="garden_maincolumn">
+  <div class="main">
     <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
     <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
   </div>
 </div>
 
 <style>
-  .garden_sidebar {
+  .sidebar {
     flex-grow: 0;
     flex-shrink: 0;
   }
@@ -88,7 +88,7 @@
     overflow: hidden;
     background-color: var(--c-basic-0);
   }
-  .garden_maincolumn {
+  .main {
     display: flex;
     flex-direction: column;
     width: 100%;

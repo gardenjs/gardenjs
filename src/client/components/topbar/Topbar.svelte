@@ -65,9 +65,9 @@
 
 </script>
 
-<div class="garden_topbar">
-  <div class="topbar">
-    <button class="sidebar_toggle" on:click={toggleSidebar} title={ active ? 'Collapse sidebar' : 'Expand sidebar'}>
+<div class="topbar">
+  <div class="topbar_container">
+    <button class="sidebar-toggle" on:click={toggleSidebar} title={ active ? 'Collapse sidebar' : 'Expand sidebar'}>
       {#if active}
       <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 3v18m7-6l-3-3 3-3"/></svg>
       {:else}
@@ -75,9 +75,9 @@
       {/if}
     </button>
     <div class="topbar_nav">
-      <div class="stagesize_value">
+      <div class="stagesize-value">
         <div>{stageWidth}px</div>
-        <div class="stagesize_value-multi_sign">&#10005;</div>
+        <div class="stagesize-value-multi_sign">&#10005;</div>
         <div>{stageHeight}px</div>
       </div>
       <div class="stagesize-nav">
@@ -124,7 +124,7 @@
 </div>
 
 <style>
-  .garden_topbar {
+  .topbar {
     margin: 0.375rem 0;
     width: 100%;
     --h-topbar: 2.25rem;
@@ -132,7 +132,7 @@
     background-color: var(--c-basic-100);
     border-radius: 0.5rem;
   }
-  .topbar {
+  .topbar_container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -140,21 +140,21 @@
     height: 100%;
     padding: 0;
   }
-  .sidebar_toggle {
+  .sidebar-toggle {
     padding: 0 0.75rem;
     height: var(--h-topbar);
     background: none;
     cursor: pointer;
     border-radius: 0.5rem 0 0 0.5rem;
   }
-  .sidebar_toggle:hover {
+  .sidebar-toggle:hover {
     background-color: var(--c-basic-150);
   }
-  .sidebar_toggle svg {
+  .sidebar-toggle svg {
     height: 1.125rem;
     color: var(--c-basic-700);
   }
-  .sidebar_toggle:hover svg {
+  .sidebar-toggle:hover svg {
     color: var(--c-primary);
   }
   .topbar_nav {
@@ -264,11 +264,11 @@
   }
  
   /* futur feature */
-  .stagesize_value {
+  .stagesize-value {
     display: none;
   }
   @media (min-width: 640px) {
-    .stagesize_value {
+    .stagesize-value {
       display: inline-flex;
       align-items: center;
       font-size: 0.75rem;
@@ -276,7 +276,7 @@
       font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", Courier New, "monospace";
       color: var(--c-basic-500);
     }
-    .stagesize_value-multi_sign {
+    .stagesize-value-multi_sign {
       margin: 0 0.25rem;
       font-size: 0.813rem;
     }

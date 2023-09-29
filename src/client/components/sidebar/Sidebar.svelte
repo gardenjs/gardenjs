@@ -19,7 +19,7 @@
   
 </script>
   
-<div class="sidebar" class:show-sidebar={show}>
+<div class="sidebar_container" class:show-sidebar={show}>
   <a class="project_title" href="/">
     <span>{projectTitle}</span>
   </a>
@@ -62,7 +62,7 @@
 </div>
   
 <style>
-  .sidebar {
+  .sidebar_container {
     position: relative;
     margin: 0.375rem 0;
     padding: 0 0 4.688rem; /* Depending on the height of the fixednav to ensure that mainnav is fully visible when scrolling */
