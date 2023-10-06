@@ -6,23 +6,55 @@
   export let level = 1
 
   function toggleFoldStatusOfNode(node) {
-    dispatch('out', {toggleFoldStatusOfNode: {...node}})
+    dispatch('out', { toggleFoldStatusOfNode: { ...node } })
   }
-
 </script>
 
 <ul class="list level-{level}">
-  {#each nodes as node }
+  {#each nodes as node}
     {#if node.isLeaf}
       <li>
-        <Link href={node.href} selected={node.selected} level={level}>{@html node.name}</Link>
+        <Link href={node.href} selected={node.selected} {level}
+          >{@html node.name}</Link
+        >
       </li>
     {:else}
       <li class="folder" class:unfolded={node.unfolded}>
-        <button class="folder_btn btn_level-{level}" title={node.unfolded ? 'fold' : 'unfold'} 
-          on:click={() => toggleFoldStatusOfNode(node)}>
-          <span class="folder_arrow" class:unfolded_icon={node.unfolded}><svg xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg></span>
-          <span class="folder_icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder"><path d="M4 20h16a2 2 0 002-2V8a2 2 0 00-2-2h-7.93a2 2 0 01-1.66-.9l-.82-1.2A2 2 0 007.93 3H4a2 2 0 00-2 2v13c0 1.1.9 2 2 2z"/></svg></span>
+        <button
+          class="folder_btn btn_level-{level}"
+          title={node.unfolded ? 'fold' : 'unfold'}
+          on:click={() => toggleFoldStatusOfNode(node)}
+        >
+          <span class="folder_arrow" class:unfolded_icon={node.unfolded}
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              viewBox="0 0 24 24"
+              height="12"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"><path d="M18 15l-6-6-6 6" /></svg
+            ></span
+          >
+          <span class="folder_icon"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              viewBox="0 0 24 24"
+              height="15"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-folder"
+              ><path
+                d="M4 20h16a2 2 0 002-2V8a2 2 0 00-2-2h-7.93a2 2 0 01-1.66-.9l-.82-1.2A2 2 0 007.93 3H4a2 2 0 00-2 2v13c0 1.1.9 2 2 2z"
+              /></svg
+            ></span
+          >
           <span class="folder_label">{@html node.name}</span>
         </button>
         {#if node.unfolded}
@@ -124,5 +156,5 @@
     background-color: var(--c-primary);
     color: #fff;
     font-weight: 600;
-}
+  }
 </style>

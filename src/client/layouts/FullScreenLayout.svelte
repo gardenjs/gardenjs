@@ -1,5 +1,5 @@
 <div class="garden">
-  <slot/>
+  <slot />
 </div>
 
 <style>

@@ -1,7 +1,7 @@
-import {getConfig} from '../config.js'
-import {watch} from './watch.js'
-import {generateGardenBase} from './base_generator.js'
-import {clearBaseFolder, copyBaseClasses} from './copy_base_classes.js'
+import { getConfig } from '../config.js'
+import { watch } from './watch.js'
+import { generateGardenBase } from './base_generator.js'
+import { clearBaseFolder, copyBaseClasses } from './copy_base_classes.js'
 
 export async function init() {
   await clearBaseFolder()
@@ -17,7 +17,7 @@ async function generate() {
 }
 
 async function readConfigThenWatch() {
-  const {directories, include} = (await getConfig()).watch
+  const { directories, include } = (await getConfig()).watch
   watch(directories, { include }, async () => {
     await generate()
   })

@@ -1,4 +1,4 @@
-import {writable, get} from 'svelte/store'
+import { writable, get } from 'svelte/store'
 
 export const nodes = writable([])
 export const rootNodesExpanded = writable(true)
@@ -27,7 +27,7 @@ function getAllChildNodes(node) {
 }
 
 export function updateSelectedComponent(route, componentName) {
-  currentRoute = route 
+  currentRoute = route
   selectedNode = componentName
   updateTree()
 }
@@ -52,18 +52,41 @@ function updateTree() {
 
 function transformNavTree(nodes, parentVisible) {
   const filter = get(filterNavTree)
-  return nodes.map(child => {
-    const filterMatches = filter ? child.name?.toLowerCase().includes(filter) : true
-    const name = filter && filterMatches ? highlightFilterMatch(child.name) : child.name
-    if (child.isLeaf) {
-      const visible = parentVisible || filterMatches
-      return visible ? {...child, name, selected: selectedNode === child.key, isLeaf: true } : undefined
-    } else {
-      const children = transformNavTree(child.children, parentVisible || filterMatches).filter(n => n)
-      const visible = filterMatches || children.length > 0
-      return visible ? {...child, name, children, unfolded: isUnfolded(child, currentRoute, filter, visible), filterMatches} : undefined
-    }
-  }).filter(n => n)
+  return nodes
+    .map((child) => {
+      const filterMatches = filter
+        ? child.name?.toLowerCase().includes(filter)
+        : true
+      const name =
+        filter && filterMatches ? highlightFilterMatch(child.name) : child.name
+      if (child.isLeaf) {
+        const visible = parentVisible || filterMatches
+        return visible
+          ? {
+              ...child,
+              name,
+              selected: selectedNode === child.key,
+              isLeaf: true,
+            }
+          : undefined
+      } else {
+        const children = transformNavTree(
+          child.children,
+          parentVisible || filterMatches
+        ).filter((n) => n)
+        const visible = filterMatches || children.length > 0
+        return visible
+          ? {
+              ...child,
+              name,
+              children,
+              unfolded: isUnfolded(child, currentRoute, filter, visible),
+              filterMatches,
+            }
+          : undefined
+      }
+    })
+    .filter((n) => n)
 }
 
 function highlightFilterMatch(text) {
@@ -77,12 +100,19 @@ function highlightFilterMatch(text) {
 }
 
 function isUnfolded(node, route, filter, visible) {
-  return (filter && visible) || unfoldedNodes[node.key] || route?.indexOf(node.key) === 0
+  return (
+    (filter && visible) ||
+    unfoldedNodes[node.key] ||
+    route?.indexOf(node.key) === 0
+  )
 }
 
 export function toggleRootFolders() {
   rootNodesExpanded.set(!get(rootNodesExpanded))
-  const newNodes = get(nodes).map(n => ({...n, unfolded: get(rootNodesExpanded) && unfoldedNodes[n.key]}))
+  const newNodes = get(nodes).map((n) => ({
+    ...n,
+    unfolded: get(rootNodesExpanded) && unfoldedNodes[n.key],
+  }))
   nodes.set(newNodes)
 }
 
@@ -101,15 +131,14 @@ export function toggleFolder(node) {
 
 function expandRootNode(node) {
   rootNodesExpanded.set(true)
-  Object.keys(unfoldedNodes).forEach(key => unfoldedNodes[key] = false)
-  const newNodes = get(nodes).map(n => {
+  Object.keys(unfoldedNodes).forEach((key) => (unfoldedNodes[key] = false))
+  const newNodes = get(nodes).map((n) => {
     if (n.key === node.key || currentRoute.indexOf(n.key) === 0) {
       unfoldedNodes[n.key] = true
-      return {...n, unfolded: true}
-    }
-    else {
+      return { ...n, unfolded: true }
+    } else {
       unfoldedNodes[n.key] = false
-      return {...n, unfolded: false}
+      return { ...n, unfolded: false }
     }
   })
   nodes.set(newNodes)

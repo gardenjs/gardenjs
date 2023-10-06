@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import {init} from '../src/codegenerator/watchcl.js'
-import {createServer} from '../src/server.js'
+import { init } from '../src/codegenerator/watchcl.js'
+import { createServer } from '../src/server.js'
 
 async function initAndCreateServer() {
   await init()
@@ -10,4 +10,3 @@ async function initAndCreateServer() {
 }
 
 initAndCreateServer()
-

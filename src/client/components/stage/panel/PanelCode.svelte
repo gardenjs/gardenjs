@@ -1,10 +1,10 @@
 <script>
-  import {highlightElement} from '../../highlight/Highlight.js'
-  import {rawComponentMap} from '/raw_component_import_map.js'
+  import { highlightElement } from '../../highlight/Highlight.js'
+  import { rawComponentMap } from '/raw_component_import_map.js'
 
-  export let componentName 
-  let code 
-  let codeblock 
+  export let componentName
+  let code
+  let codeblock
 
   $: {
     updateCode(componentName)

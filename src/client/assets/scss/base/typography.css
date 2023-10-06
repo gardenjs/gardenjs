@@ -1,11 +1,25 @@
 html {
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   color: var(--c-basic-600);
   line-height: 1.2;
@@ -13,18 +27,19 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   margin: 0.5rem 0;
-  font-size: .875rem;
+  font-size: 0.875rem;
   color: var(--c-basic-600);
   line-height: 1.5;
 }
 
 li {
-  font-size: .875rem;
+  font-size: 0.875rem;
   line-height: 1.5;
 }
 
-a, a:visited {
-  font-size: .875rem;
+a,
+a:visited {
+  font-size: 0.875rem;
   line-height: 1.5;
   text-decoration: underline;
   text-decoration-skip-ink: auto;

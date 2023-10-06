@@ -1,18 +1,50 @@
 <script>
-	import { onMount } from 'svelte';
+  import { onMount } from 'svelte'
   import Stage from './components/stage/Stage.svelte'
   import Sidebar from './components/sidebar/Sidebar.svelte'
   import Topbar from './components/topbar/Topbar.svelte'
-  import {updateStage, stageStyle, stageSize, stageHeight, stageMaxHeight, panelExpanded, landscape, setThemes, selectTheme, themes, toggleExpandPanel, updateStageHeight, updateStageMaxHeight} from './logic/stage.js'
-  import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavTree, updateFilter, updateNavTree, updateSelectedComponent} from './logic/navTree.js'
-  import {initRouting, das, componentName, selectedExample, updateDasMap, currentRoute} from './logic/routing.js'
+  import {
+    updateStage,
+    stageStyle,
+    stageSize,
+    stageHeight,
+    stageMaxHeight,
+    panelExpanded,
+    landscape,
+    setThemes,
+    selectTheme,
+    themes,
+    toggleExpandPanel,
+    updateStageHeight,
+    updateStageMaxHeight,
+  } from './logic/stage.js'
+  import {
+    nodes,
+    rootNodesExpanded,
+    toggleFolder,
+    toggleRootFolders,
+    filterNavTree,
+    updateFilter,
+    updateNavTree,
+    updateSelectedComponent,
+  } from './logic/navTree.js'
+  import {
+    initRouting,
+    das,
+    componentName,
+    selectedExample,
+    updateDasMap,
+    currentRoute,
+  } from './logic/routing.js'
 
   let baseurl = '/garden'
   export let routes
   export let navTree
-  export let dasMap 
+  export let dasMap
   export let config
-  $: expressbaseurl = `${window.location.protocol}//${window.location.hostname}:${config.serverport + 1}/`
+  $: expressbaseurl = `${window.location.protocol}//${
+    window.location.hostname
+  }:${config.serverport + 1}/`
 
   $: updateNavTree(navTree)
   $: {
@@ -30,15 +62,19 @@
     if (evt.detail.openInTab) {
       const targetWindow = window.open('/gardenframe/', '_blank')
       targetWindow.onload = () => {
-        targetWindow.postMessage({selectedExample: $selectedExample, componentName: $componentName}, window.location.origin)
+        targetWindow.postMessage(
+          { selectedExample: $selectedExample, componentName: $componentName },
+          window.location.origin
+        )
       }
-    }
-    else if (evt.detail.selectTheme) {
+    } else if (evt.detail.selectTheme) {
       selectTheme(evt.detail.selectTheme)
-    }
-    else {
+    } else {
       showSidebar = evt.detail.active
-      updateStage({stageSize: evt.detail.stageSize, landscape: evt.detail.landscape})
+      updateStage({
+        stageSize: evt.detail.stageSize,
+        landscape: evt.detail.landscape,
+      })
     }
   }
 
@@ -53,7 +89,7 @@
       toggleExpandPanel()
     }
     if (evt.detail.stageMaxHeight) {
-      console.log('DEBUG', 'update' )
+      console.log('DEBUG', 'update')
       updateStageMaxHeight(evt.detail.stageMaxHeight)
     }
   }
@@ -72,16 +108,41 @@
       toggleExpandPanel()
     }
   }
-
 </script>
 
 <div class="garden">
   <div class="sidebar">
-    <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} panelExpanded={$panelExpanded} on:out={handleSidebarOut} />
+    <Sidebar
+      {projectTitle}
+      show={showSidebar}
+      rootNodesExpanded={$rootNodesExpanded}
+      nodes={$nodes}
+      filter={$filterNavTree}
+      panelExpanded={$panelExpanded}
+      on:out={handleSidebarOut}
+    />
   </div>
   <div class="main">
-    <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
-    <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} stageHeight={$stageHeight} stageMaxHeight={$stageMaxHeight} expressbaseurl={expressbaseurl} panelExpanded={$panelExpanded} on:out={handleStageOut} />
+    <Topbar
+      active={showSidebar}
+      themes={$themes}
+      {stageRect}
+      stageSize={$stageSize}
+      landscape={$landscape}
+      on:out={handleTopbarOut}
+    />
+    <Stage
+      componentName={$componentName}
+      das={$das}
+      selectedExample={$selectedExample}
+      stageStyle={$stageStyle}
+      stageSize={$stageSize}
+      stageHeight={$stageHeight}
+      stageMaxHeight={$stageMaxHeight}
+      {expressbaseurl}
+      panelExpanded={$panelExpanded}
+      on:out={handleStageOut}
+    />
   </div>
 </div>
 

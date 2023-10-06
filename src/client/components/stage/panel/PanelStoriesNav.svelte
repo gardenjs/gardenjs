@@ -1,20 +1,21 @@
 <script>
-import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
 
-export let items = [] 
-export let selected
+  export let items = []
+  export let selected
 
-const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher()
 
-const handleselect = item => () => {
-  dispatch('out', {selecteditem : item})
-}
-
+  const handleselect = (item) => () => {
+    dispatch('out', { selecteditem: item })
+  }
 </script>
 
 <ul class="stories">
   {#each items as item}
-  <li class:active="{selected == item}"><button on:click={handleselect(item)}>{item}</button></li>
+    <li class:active={selected == item}>
+      <button on:click={handleselect(item)}>{item}</button>
+    </li>
   {/each}
 </ul>
 
@@ -43,7 +44,7 @@ const handleselect = item => () => {
   .stories li:focus button,
   .stories li.active button {
     border-left: 3px solid var(--c-primary);
-    padding-left: calc(1rem - 2px)
+    padding-left: calc(1rem - 2px);
   }
   .stories li:hover button,
   .stories li:focus button {

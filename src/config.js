@@ -15,5 +15,5 @@ async function readConfig() {
     const config = await import(path.resolve('garden.config.js'))
     return config.default
   }
-  return {garden: {}}
+  return { garden: {} }
 }

@@ -1,8 +1,8 @@
 import { writable, get } from 'svelte/store'
-import {initRouter} from '../router.js'
+import { initRouter } from '../router.js'
 
 export const componentName = writable('')
-export const das  = writable()
+export const das = writable()
 export const selectedExample = writable({})
 export const currentRoute = writable('')
 
@@ -12,8 +12,7 @@ let initialized
 
 export function updateDasMap(newDasMap) {
   dasMap = newDasMap
-  if (initialized)
-    updateSelectedExample()
+  if (initialized) updateSelectedExample()
 }
 
 export function initRouting(initialDasMap, routes, baseurl) {
@@ -42,7 +41,9 @@ function updateRoute(routeobj, state) {
 export function updateSelectedExample() {
   const examples = get(das).examples || []
   if (historystate?.selectedstory) {
-    selectedExample.set(examples.find(ex => ex.story == historystate.selectedstory)?.story)
+    selectedExample.set(
+      examples.find((ex) => ex.story == historystate.selectedstory)?.story
+    )
   } else {
     selectedExample.set(examples[0]?.story)
   }

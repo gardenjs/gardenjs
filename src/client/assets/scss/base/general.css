@@ -37,10 +37,14 @@ a {
   text-decoration-skip-ink: auto;
 }
 
-img, picture, embed, object, video {
-	max-width: 100%;
-	width: auto;
-	height: auto;
+img,
+picture,
+embed,
+object,
+video {
+  max-width: 100%;
+  width: auto;
+  height: auto;
 }
 
 img,
