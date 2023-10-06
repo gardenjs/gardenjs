@@ -16,6 +16,7 @@ export let selectedExample
 export let expressbaseurl
 export let stageHeight
 export let stageMaxHeight
+export let panelExpanded
 
 let myframeready 
 let myframe
@@ -88,7 +89,6 @@ function handleHorizontalSplitPaneOut(evt) {
     dispatch('out', {stageHeight: evt.detail.topHeight})
   }
   if (evt.detail.maxHeight) {
-    console.log('DEBUG', 'set maxhei', evt.detail.maxHeight )
     dispatch('out', {stageMaxHeight: evt.detail.maxHeight})
   }
 }
@@ -100,7 +100,9 @@ function handleHorizontalSplitPaneOut(evt) {
     <iframe class="stage_iframe" title="preview" bind:this={myframe} src="/gardenframe/" style={stageStyle}></iframe>
   </div>
   <div slot="bottom" class="panel">
+  {#if panelExpanded}
     <PanelComponent tabs={tabs} on:out />
+  {/if}
   </div>
 </HorizontalSplitPane>
 

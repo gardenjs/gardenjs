@@ -81,7 +81,7 @@
   </div>
   <div class="main">
     <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
-    <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} stageHeight={$stageHeight} stageMaxHeight={$stageMaxHeight} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
+    <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} stageHeight={$stageHeight} stageMaxHeight={$stageMaxHeight} expressbaseurl={expressbaseurl} panelExpanded={$panelExpanded} on:out={handleStageOut} />
   </div>
 </div>
 

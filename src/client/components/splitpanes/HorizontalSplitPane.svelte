@@ -4,12 +4,12 @@
 
   export let topHeight
   export let maxHeight
+  $: topHeightWithUnit = Number.isInteger(topHeight) ? topHeight + 'px' : topHeight
   let element 
   let dragging = false
 
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach(entry => {
-      console.log('DEBUG resizeobserver', element.offsetHeight)
       dispatch('out', {maxHeight: element.offsetHeight})
     })
   })
@@ -31,21 +31,20 @@
   const drag = (e) => {
     window.getSelection().removeAllRanges()
     const newHeight = Math.min(maxHeight, (e.pageY - element.offsetTop - 7))
-    console.log('DEBUG', newHeight )
-    topHeight = newHeight + 'px'
+    topHeight = newHeight
   }
 
   function unregister() {
     document.removeEventListener('mousemove', drag)
     document.removeEventListener('mouseup', unregister)
 
-    dispatch('out', {topHeight})
+    dispatch('out', {topHeight: topHeight})
     dragging = false
   }
 </script>
 
 <div class="container" bind:this={element} >
-  <div class="top" style="height: {topHeight};"><slot name="top" /></div>
+  <div class="top" style="height: {topHeightWithUnit};"><slot name="top" /></div>
   <div class="dragbar" class:dragging on:mousedown={register}></div>
   <slot name="bottom" />
 </div>

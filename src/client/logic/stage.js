@@ -5,7 +5,7 @@ export const stageStyle = writable('')
 export const stageSize = writable('full')
 export const landscape = writable(false)
 export const stageHeight = writable('65vh')
-export const stageMaxHeight = writable('9999px')
+export const stageMaxHeight = writable(9999)
 export const panelExpanded = writable(true)
 
 let previousPanelHeight = '65vh'
@@ -61,6 +61,9 @@ function computeStageStyle() {
 }
 
 export function updateStageHeight(newHeight) {
+  if (Number.isInteger(newHeight)) {
+    panelExpanded.set(newHeight < get(stageMaxHeight))
+  }
   stageHeight.set(newHeight)
 }
 
