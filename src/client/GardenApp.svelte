@@ -89,7 +89,6 @@
       toggleExpandPanel()
     }
     if (evt.detail.stageMaxHeight) {
-      console.log('DEBUG', 'update')
       updateStageMaxHeight(evt.detail.stageMaxHeight)
     }
   }
