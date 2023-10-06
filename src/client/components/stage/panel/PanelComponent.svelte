@@ -20,6 +20,10 @@
     dispatch('out', {selecteditem : tab})
   }
 
+  function handleCollapsePanel() {
+    dispatch('out', {toggleExpandPanel: true})
+  }
+
   function handleout(evt) {
     if (selectedTab.out) {
       selectedTab.out(evt)
@@ -39,7 +43,7 @@
         </ul>
       </nav>
       <!-- only collapse btn, do not show any button if collapsed: -->
-      <button class="panel_toggle" title="Collapse panel">
+      <button class="panel_toggle" title="Collapse panel" on:click={handleCollapsePanel}>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-bottom-close"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="15" y2="15"/><path d="m15 8-3 3-3-3"/></svg>
       </button>
     </div>

@@ -1,9 +1,27 @@
 <script>
-    import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   const dispatch = createEventDispatcher()
 
+  export let topHeight
+  export let maxHeight
+  let element 
   let dragging = false
-  let pageY
+
+  const resizeObserver = new ResizeObserver((entries) => {
+    entries.forEach(entry => {
+      console.log('DEBUG resizeobserver', element.offsetHeight)
+      dispatch('out', {maxHeight: element.offsetHeight})
+    })
+  })
+
+  onMount(() => {
+    resizeObserver.observe(element)
+  })
+
+  onDestroy(() => {
+    resizeObserver.disconnect()
+  })
+
   function register() {
     document.addEventListener('mousemove', drag)
     document.addEventListener('mouseup', unregister)
@@ -12,37 +30,28 @@
 
   const drag = (e) => {
     window.getSelection().removeAllRanges()
-    topHeight = (e.pageY - element.offsetTop - 7) + 'px'
-    pageY = e.pageY
-    console.log('top', pageY, element.offsetTop, element.offsetHeight,topHeight)
-
-
+    const newHeight = Math.min(maxHeight, (e.pageY - element.offsetTop - 7))
+    console.log('DEBUG', newHeight )
+    topHeight = newHeight + 'px'
   }
 
   function unregister() {
     document.removeEventListener('mousemove', drag)
     document.removeEventListener('mouseup', unregister)
 
-    let bottomHeight = element.offsetHeight - pageY + element.offsetTop
-    console.log('bottom', pageY, element.offsetTop, element.offsetHeight, bottomHeight)
-    dispatch('out', {panelHeight: bottomHeight})
+    dispatch('out', {topHeight})
     dragging = false
   }
-
-  let element
-
-export let topHeight
-
 </script>
 
-<div class="stagepanel_container" bind:this={element} >
-  <div class="stage" style="height: {topHeight};"><slot name="top" /></div>
+<div class="container" bind:this={element} >
+  <div class="top" style="height: {topHeight};"><slot name="top" /></div>
   <div class="dragbar" class:dragging on:mousedown={register}></div>
   <slot name="bottom" />
 </div>
 
 <style>
-  .stagepanel_container {
+  .container {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -50,7 +59,7 @@ export let topHeight
     height: 100%;
     overflow-y: auto;
   }
-  .stage {
+  .top {
     flex-grow: 0;
     flex-shrink: 0;
     background-color: var(--c-basic-250);

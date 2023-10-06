@@ -1,5 +1,5 @@
 <script> 
-import { createEventDispatcher} from 'svelte'
+import { createEventDispatcher, onMount, onDestroy } from 'svelte'
 import HorizontalSplitPane from '../splitpanes/HorizontalSplitPane.svelte'
 import PanelComponent from './panel/PanelComponent.svelte'
 import PanelStoriesNav from './panel/PanelStoriesNav.svelte'
@@ -14,13 +14,8 @@ export let stageStyle
 export let stageSize
 export let selectedExample
 export let expressbaseurl
-export let topHeight
-
-function updateStageRect(stageRect) {
-  dispatch('out', {
-    stageRect,
-  })
-}
+export let stageHeight
+export let stageMaxHeight
 
 let myframeready 
 let myframe
@@ -31,7 +26,7 @@ const resizeObserver = new ResizeObserver((entries) => {
   })
 })
 
-$: {
+onMount(() => {
   if (myframe) {
     resizeObserver.observe(myframe)
     myframe.contentWindow.onload = () => {
@@ -51,7 +46,10 @@ $: {
         myframe.dispatchEvent( evt );
     });
   }
-}
+})
+onDestroy(() => {
+  resizeObserver.disconnect()
+})
 
 $: {
   if (myframeready) {
@@ -79,14 +77,30 @@ function handleSelectionChange(evt) {
   globalThis.history.pushState({selectedstory: evt.detail.selecteditem}, '', window.location.pathname.substring('/garden'.length))
 }
 
+function updateStageRect(stageRect) {
+  dispatch('out', {
+    stageRect,
+  })
+}
+
+function handleHorizontalSplitPaneOut(evt) {
+  if (evt.detail.topHeight) {
+    dispatch('out', {stageHeight: evt.detail.topHeight})
+  }
+  if (evt.detail.maxHeight) {
+    console.log('DEBUG', 'set maxhei', evt.detail.maxHeight )
+    dispatch('out', {stageMaxHeight: evt.detail.maxHeight})
+  }
+}
+
 </script>
 
-<HorizontalSplitPane topHeight={topHeight} on:out>
+<HorizontalSplitPane topHeight={stageHeight} maxHeight={stageMaxHeight} on:out={handleHorizontalSplitPaneOut}>
   <div slot="top" class="stage_container">
     <iframe class="stage_iframe" title="preview" bind:this={myframe} src="/gardenframe/" style={stageStyle}></iframe>
   </div>
   <div slot="bottom" class="panel">
-    <PanelComponent tabs={tabs} />
+    <PanelComponent tabs={tabs} on:out />
   </div>
 </HorizontalSplitPane>
 
