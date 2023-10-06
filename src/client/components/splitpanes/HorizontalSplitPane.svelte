@@ -1,5 +1,27 @@
 <script>
+  import { createEventDispatcher, onMount, onDestroy } from 'svelte'
+  const dispatch = createEventDispatcher()
+
+  export let topHeight
+  export let maxHeight
+  $: topHeightWithUnit = Number.isInteger(topHeight) ? topHeight + 'px' : topHeight
+  let element 
   let dragging = false
+
+  const resizeObserver = new ResizeObserver((entries) => {
+    entries.forEach(entry => {
+      dispatch('out', {maxHeight: element.offsetHeight})
+    })
+  })
+
+  onMount(() => {
+    resizeObserver.observe(element)
+  })
+
+  onDestroy(() => {
+    resizeObserver.disconnect()
+  })
+
   function register() {
     document.addEventListener('mousemove', drag)
     document.addEventListener('mouseup', unregister)
@@ -8,29 +30,27 @@
 
   const drag = (e) => {
     window.getSelection().removeAllRanges()
-    topheight = (e.pageY - element.offsetTop - 7) + 'px'
+    const newHeight = Math.min(maxHeight, (e.pageY - element.offsetTop - 7))
+    topHeight = newHeight
   }
 
   function unregister() {
     document.removeEventListener('mousemove', drag)
     document.removeEventListener('mouseup', unregister)
+
+    dispatch('out', {topHeight: topHeight})
     dragging = false
   }
-
-  let element
-
-  export let topheight
-
 </script>
 
-<div class="stagepanel_container" bind:this={element} >
-  <div class="stage" style="height: {topheight};"><slot name="top" /></div>
+<div class="container" bind:this={element} >
+  <div class="top" style="height: {topHeightWithUnit};"><slot name="top" /></div>
   <div class="dragbar" class:dragging on:mousedown={register}></div>
   <slot name="bottom" />
 </div>
 
 <style>
-  .stagepanel_container {
+  .container {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -38,7 +58,7 @@
     height: 100%;
     overflow-y: auto;
   }
-  .stage {
+  .top {
     flex-grow: 0;
     flex-shrink: 0;
     background-color: var(--c-basic-250);

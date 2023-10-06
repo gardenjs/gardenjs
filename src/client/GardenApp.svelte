@@ -1,8 +1,9 @@
 <script>
+	import { onMount } from 'svelte';
   import Stage from './components/stage/Stage.svelte'
   import Sidebar from './components/sidebar/Sidebar.svelte'
   import Topbar from './components/topbar/Topbar.svelte'
-  import {updateStage, stageStyle, stageSize, landscape, setThemes, selectTheme, themes} from './logic/stage.js'
+  import {updateStage, stageStyle, stageSize, stageHeight, stageMaxHeight, panelExpanded, landscape, setThemes, selectTheme, themes, toggleExpandPanel, updateStageHeight, updateStageMaxHeight} from './logic/stage.js'
   import {nodes, rootNodesExpanded, toggleFolder, toggleRootFolders, filterNavTree, updateFilter, updateNavTree, updateSelectedComponent} from './logic/navTree.js'
   import {initRouting, das, componentName, selectedExample, updateDasMap, currentRoute} from './logic/routing.js'
 
@@ -22,6 +23,7 @@
   $: updateSelectedComponent($currentRoute, $componentName)
 
   $: projectTitle = config.project_title || ''
+  let stageRect = {}
 
   let showSidebar = true
   function handleTopbarOut(evt) {
@@ -40,10 +42,19 @@
     }
   }
 
-  let stageRect = {}
   function handleStageOut(evt) {
     if (evt.detail.stageRect) {
       stageRect = evt.detail.stageRect
+    }
+    if (evt.detail.stageHeight) {
+      updateStageHeight(evt.detail.stageHeight)
+    }
+    if (evt.detail.toggleExpandPanel) {
+      toggleExpandPanel()
+    }
+    if (evt.detail.stageMaxHeight) {
+      console.log('DEBUG', 'update' )
+      updateStageMaxHeight(evt.detail.stageMaxHeight)
     }
   }
 
@@ -57,17 +68,20 @@
     if (evt.detail.filter) {
       updateFilter(evt.detail.filter.value?.toLowerCase())
     }
+    if (evt.detail.toggleExpandPanel) {
+      toggleExpandPanel()
+    }
   }
 
 </script>
 
 <div class="garden">
   <div class="sidebar">
-    <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} on:out={handleSidebarOut} />
+    <Sidebar projectTitle={projectTitle} show={showSidebar} rootNodesExpanded={$rootNodesExpanded} nodes={$nodes} filter={$filterNavTree} panelExpanded={$panelExpanded} on:out={handleSidebarOut} />
   </div>
   <div class="main">
     <Topbar active={showSidebar} themes="{$themes}" stageRect={stageRect} stageSize={$stageSize} landscape={$landscape} on:out={handleTopbarOut} />
-    <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} expressbaseurl={expressbaseurl} on:out={handleStageOut} />
+    <Stage componentName={$componentName} das={$das} selectedExample={$selectedExample} stageStyle={$stageStyle} stageSize={$stageSize} stageHeight={$stageHeight} stageMaxHeight={$stageMaxHeight} expressbaseurl={expressbaseurl} panelExpanded={$panelExpanded} on:out={handleStageOut} />
   </div>
 </div>
 
@@ -92,7 +106,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     overflow-y: auto;
     box-sizing: border-box;
   }
