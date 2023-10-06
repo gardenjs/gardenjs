@@ -131,11 +131,12 @@ MIT
 ### v1.0
 
 - [feature] Collapse/expand panel button in sidebar and close btn in panel nav. (check branch)
+- [task] Make Garden compatible with Vue & React.
 - [refactor] Move logic to own file. Handle user interaction.
 - [task] Add tests.
-- [task] Make Garden compatible with Vue & React.
-- [task] Install script / commandline skeleton project (example component).
-- [task] Public garden demo of project/marketing website.
+- [task] Install script / commandline skeleton project (example component). Test script with Svelte, Vue & React.
+- [task] Make Storybook stories compatible with Garden.
+- [task] Public Garden demo of project/marketing website.
 - [task] Set repository of project/marketing website public
 - [task] Rabbit dev website.
 - [task] Set garden repository public & make garden npm modul. (yarn?)

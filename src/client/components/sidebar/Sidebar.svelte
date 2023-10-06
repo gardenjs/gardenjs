@@ -36,11 +36,14 @@
     <div class="nofilterresult">No results for '{filter}'</div>
   </div>
   {:else}
-  <nav class="components">
+    <nav class="nav_components">
+      <ul>
+        <SidebarNav nodes={nodes} on:out />
+      </ul>
+    </nav>
+  {/if}
+  <nav class="nav_controls">
     <ul>
-      <SidebarNav nodes={nodes} on:out />
-    </ul>
-    <ul class="fixednav">
       <li>
         <button class="fixednav_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
           {#if rootNodesExpanded}
@@ -69,7 +72,6 @@
       </li>
     </ul>
   </nav>
-  {/if}
 </div>
   
 <style>
@@ -154,12 +156,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .components {
+  .nav_components {
     width: 260px;
     /* height: calc(100vh - 56px); */
     z-index: 1;
   }
-  .controls {
+  .nav_controls {
     position: fixed;
     width: 260px;
     bottom: 0.375rem;
