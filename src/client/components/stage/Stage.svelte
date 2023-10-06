@@ -70,7 +70,7 @@ function createTabs(das) {
     tabs.push( {name: 'Examples', props: {selected: selectedExample, items: das.examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
   }
   if (das.componentfile) { 
-    tabs.push( {name: 'Code', props: {das, expressbaseurl}, page: PanelCode} )
+    tabs.push( {name: 'Code', props: {componentName, expressbaseurl}, page: PanelCode} )
   }
   return tabs
 }
@@ -82,21 +82,34 @@ function handleSelectionChange(evt) {
 </script>
 
 <HorizontalSplitPane topHeight={topHeight} on:out>
-  <div slot="top" class="is-full">
-    <iframe class="stage" title="preview" bind:this={myframe} src="/garden/gardenframe/" style={stageStyle}></iframe>
+  <div slot="top" class="stage_container">
+    <iframe class="stage_iframe" title="preview" bind:this={myframe} src="/gardenframe/" style={stageStyle}></iframe>
   </div>
-  <div slot="bottom" class="is-full is-flex-column">
+  <div slot="bottom" class="panel">
     <PanelComponent tabs={tabs} />
   </div>
 </HorizontalSplitPane>
 
 <style>
-.stage {
-  align-self: center;
-  margin: auto;
-  display: block;
-  height: 100%;
-  width: 100%;
-  background-color: var(--c-base-0);
-}
+  .stage_container {
+    height: 100%;
+    width: auto;
+    overflow-y: auto;
+  }
+  .stage_iframe {
+    display: block;
+    align-self: center;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    background-color: var(--c-basic-0);
+  }
+  .panel {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+  }
 </style>

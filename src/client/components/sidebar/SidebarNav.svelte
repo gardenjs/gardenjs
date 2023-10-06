@@ -33,91 +33,91 @@
 </ul>
 
 <style>
-.level-1 {
-  padding: 0.5rem 0 1.25rem;
-}
-.folder {
-  display: block;
-  margin: 0;
-  background-color: transparent;
-}
-.folder_btn {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  margin: 0;
-  padding: 0.5rem 0.688rem 0.375rem 0.688rem;
-  background-color: transparent;
-  cursor: pointer;
-}
-.folder_label {
-  display: flex;
-  width: 100%;
-  font-size: 0.813rem;
-  color: var(--c-basic-900);
-  font-weight: 600;
-  text-transform: uppercase;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.folder_btn:hover .folder_label {
-  color: var(--c-basic-900);
-}
-.folder_icon {
-  display: flex;
-  align-items: center;
-  width: 0.938rem;
-  height: 1.25rem;
-  transition: 0.2s;
-  margin-right: 0.375rem;
-}
-.folder_icon svg {
-  color: var(--c-basic-900);
-}
-.folder_icon.unfolded_icon {
-  transform: rotate(180deg);
-  transition: 0.2s;
-}
-.btn_level-3 .folder_label {
-  font-size: 0.813rem;
-}
-.level-2 {
-  margin-left: 1.063rem;
-  border-left: 1px solid var(--c-basic-300);
-}
-.level-3 {
-  margin-left: 1.063rem;
-  border-left: 1px solid var(--c-basic-300);
-}
-.level-4 {
-  margin-left: 1.063rem;
-  border-left: 1px solid var(--c-basic-300);
-}
-.level-5 {
-  margin-left: 1.063rem;
-  border-left: 1px solid var(--c-basic-300);
-}
-.level-6 {
-  margin-left: 1.063rem;
-  border-left: 1px solid var(--c-basic-300);
-}
-.level-7 {
-  margin-left: 1.063rem;
-  border-left: 1px solid var(--c-basic-300);
-}
-.level-8 {
-  margin-left: 1.063rem;
-  border-left: 1px solid var(--c-basic-300);
-}
-.level-9 {
-  margin-left: 1.063rem;
-  border-left: 1px solid var(--c-basic-300);
-}
-.list :global(.highlight) {
-  padding: 0 0.125rem;
-  background-color: var(--c-primary);
-  color: #fff;
-  font-weight: 600;
+  .level-1 {
+    padding: 0.5rem 0 1.25rem;
+  }
+  .folder {
+    display: block;
+    margin: 0;
+    background-color: transparent;
+  }
+  .folder_btn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0.5rem 0.688rem 0.375rem 0.688rem;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .folder_label {
+    display: flex;
+    width: 100%;
+    font-size: 0.813rem;
+    color: var(--c-basic-900);
+    font-weight: 600;
+    text-transform: uppercase;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .folder_btn:hover .folder_label {
+    color: var(--c-basic-900);
+  }
+  .folder_icon {
+    display: flex;
+    align-items: center;
+    width: 0.938rem;
+    height: 1.25rem;
+    transition: 0.2s;
+    margin-right: 0.375rem;
+  }
+  .folder_icon svg {
+    color: var(--c-basic-900);
+  }
+  .folder_icon.unfolded_icon {
+    transform: rotate(180deg);
+    transition: 0.2s;
+  }
+  .btn_level-3 .folder_label {
+    font-size: 0.813rem;
+  }
+  .level-2 {
+    margin-left: 1.063rem;
+    border-left: 1px solid var(--c-basic-300);
+  }
+  .level-3 {
+    margin-left: 1.063rem;
+    border-left: 1px solid var(--c-basic-300);
+  }
+  .level-4 {
+    margin-left: 1.063rem;
+    border-left: 1px solid var(--c-basic-300);
+  }
+  .level-5 {
+    margin-left: 1.063rem;
+    border-left: 1px solid var(--c-basic-300);
+  }
+  .level-6 {
+    margin-left: 1.063rem;
+    border-left: 1px solid var(--c-basic-300);
+  }
+  .level-7 {
+    margin-left: 1.063rem;
+    border-left: 1px solid var(--c-basic-300);
+  }
+  .level-8 {
+    margin-left: 1.063rem;
+    border-left: 1px solid var(--c-basic-300);
+  }
+  .level-9 {
+    margin-left: 1.063rem;
+    border-left: 1px solid var(--c-basic-300);
+  }
+  .list :global(.highlight) {
+    padding: 0 0.125rem;
+    background-color: var(--c-primary);
+    color: #fff;
+    font-weight: 600;
 }
 </style>

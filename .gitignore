@@ -4,5 +4,6 @@
 .git
 *.sw?
 /public/build
+/dist
 *.DS_Store
 tmuxdev.sh

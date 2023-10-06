@@ -28,7 +28,7 @@
  
 </script>
 
-<div class="panel">
+<div class="panel_container">
   {#if tabs.length}
     <div class="panel_nav">
       <nav>
@@ -81,7 +81,7 @@
 }
 .panel_nav nav li {
   height: 100%;
-}
+ }
 .panel_nav nav li button {
   padding: 0.375rem 1.25rem;
   height: 100%;
@@ -101,25 +101,25 @@
 .panel_nav nav li button:hover {
   border-color: var(--c-primary);
 }
-.panel_toggle {
-  padding: 0 0.75rem;
-  background: none;
-  cursor: pointer;
-}
-.panel_toggle:hover {
-  background-color: var(--c-basic-150);
-}
-.panel_toggle svg {
-  margin-top: 0.188rem;
-  height: 1.375rem;
-  color: var(--c-basic-700);
-}
-.panel_toggle:hover svg {
-  color: var(--c-primary);
-}
-.panel_pane {
-  padding: 1.25rem;
-  color: var(--c-basic-900);
-  background-color: var(--c-basic-50);
-}
+  .panel_toggle {
+    padding: 0 0.75rem;
+    background: none;
+    cursor: pointer;
+  }
+  .panel_toggle:hover {
+    background-color: var(--c-basic-150);
+  }
+  .panel_toggle svg {
+    margin-top: 0.188rem;
+    height: 1.375rem;
+    color: var(--c-basic-700);
+  }
+  .panel_toggle:hover svg {
+    color: var(--c-primary);
+  }
+  .panel_pane {
+    padding: 1.25rem;
+    color: var(--c-basic-900);
+    background-color: var(--c-basic-50);
+  }
 </style>

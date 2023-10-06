@@ -1,22 +1,22 @@
 <script>
   import {highlightElement} from '../../highlight/Highlight.js'
-  export let das
-  export let expressbaseurl = 'http://localhost:3020/'
-  let code = ''
+  import {rawComponentMap} from '/raw_component_import_map.js'
+
+  export let componentName 
+  let code 
   let codeblock 
 
   $: {
-    if (das.componentfile) loadCode(das.componentfile)
+    updateCode(componentName)
   }
 
-  async function loadCode(componentfile) {
-    code = ''
-    try {
-      const response = await fetch(`${expressbaseurl}garden/raw/?file=${encodeURI(componentfile)}`)
-      code = (await response.text())
-    } catch (e) {
-    }
+  function updateCode(componentName) {
+    code = null
+    setTimeout(() => {
+      code = rawComponentMap[componentName]
+    })
   }
+
   $: {
     if (code && codeblock) {
       highlightElement(codeblock)

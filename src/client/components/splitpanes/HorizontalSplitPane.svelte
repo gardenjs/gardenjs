@@ -35,27 +35,39 @@ export let topHeight
 
 </script>
 
-<div class="is-full is-flex-column" bind:this={element} >
-  <div class="is-flexfix backstage" style="height: {topHeight};"><slot name="top" /></div>
-  <div class="is-flexfix dragbar" class:dragging on:mousedown={register}></div>
+<div class="stagepanel_container" bind:this={element} >
+  <div class="stage" style="height: {topHeight};"><slot name="top" /></div>
+  <div class="dragbar" class:dragging on:mousedown={register}></div>
   <slot name="bottom" />
 </div>
 
 <style>
-.backstage {
-  background-color: var(--c-basic-250);
-  border-radius: 0.5rem 0.5rem 0 0;
-  overflow: hidden;
-}
-.dragbar {
-  height: 0.188rem;
-  background-color: var(--c-basic-300);
-  cursor: row-resize;
-  z-index: 10;
-}
-.dragging,
-.dragbar:hover {
-  background-color: var(--c-primary);
-  transform: scaleY(1.7);
-}
+  .stagepanel_container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+  .stage {
+    flex-grow: 0;
+    flex-shrink: 0;
+    background-color: var(--c-basic-250);
+    border-radius: 0.5rem 0.5rem 0 0;
+    overflow: hidden;
+  }
+  .dragbar {
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 0.188rem;
+    background-color: var(--c-basic-300);
+    cursor: row-resize;
+    z-index: 10;
+  }
+  .dragging,
+  .dragbar:hover {
+    background-color: var(--c-primary);
+    transform: scaleY(1.7);
+  }
 </style>
