@@ -63,7 +63,7 @@ $: tabs = createTabs(das)
 function createTabs(das) {
   const tabs = []
   if (das.description) {
-    tabs.push({name: 'Description', props: {das}, page: PanelDescription })
+    tabs.push({name: 'Notes', props: {das}, page: PanelDescription })
   }
   if (das.examples?.length) {
     tabs.push( {name: 'Examples', props: {selected: selectedExample, items: das.examples.map(ex => ex.story)}, page: PanelStoriesNav, out: handleSelectionChange} )
