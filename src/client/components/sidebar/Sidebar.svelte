@@ -176,7 +176,7 @@
     width: 0;
     max-width: 260px;
     height: calc(100vh - 0.75rem);
-    background-color: var(--c-basic-100);
+    background-color: var(--c-basic-50);
     border-radius: 0.75rem;
     transition: width 0.1s;
     overflow-x: hidden;
@@ -197,7 +197,7 @@
     padding: 0.25rem 0.688rem;
     margin: 0 0 0.375rem;
     width: 260px;
-    background-color: var(--c-basic-100);
+    background-color: var(--c-basic-50);
     z-index: 9;
     --h-project-title: 2.25rem;
     height: var(--h-project-title);
@@ -260,7 +260,7 @@
     width: 260px;
     bottom: 0.375rem;
     padding: 0;
-    background-color: var(--c-basic-100);
+    background-color: var(--c-basic-50);
     border-top: 1px solid var(--c-basic-300);
     border-bottom-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;

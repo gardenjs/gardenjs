@@ -311,7 +311,7 @@
     width: 100%;
     --h-topbar: 2.25rem;
     height: var(--h-topbar);
-    background-color: var(--c-basic-100);
+    background-color: var(--c-basic-50);
     border-radius: 0.5rem;
   }
   .topbar_container {
@@ -486,7 +486,7 @@
       display: flex;
       flex-direction: row;
       align-self: center;
-      background-color: var(--c-basic-150);
+      background-color: var(--c-basic-100);
     }
     .stagesize-nav button {
       height: var(--h-topbar);
