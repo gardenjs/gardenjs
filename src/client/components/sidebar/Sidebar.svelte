@@ -38,7 +38,7 @@
   </div>
   {#if nodes.length == 0 && filter}
     <div>
-      <div class="nofilterresult">No results for '{filter}'</div>
+      <div class="filter_zero-results">No results for '{filter}'</div>
     </div>
   {:else}
     <nav class="components">
@@ -141,13 +141,13 @@
       </li>
       <li>
         <a
-          class="controls_link"
+          class="controls_btn"
           href="https://github.com/rabbitdevelopment/garden"
           target="_blank"
           rel="noreferrer"
         >
           <svg
-            class="controls_link-icon"
+            class="controls_btn-icon"
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="18"
@@ -161,7 +161,7 @@
               d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01"
             /></svg
           >
-          <span class="controls_link-label">Garden Docs</span>
+          <span class="controls_btn-label">Garden Docs</span>
         </a>
       </li>
     </ul>
@@ -174,7 +174,6 @@
     --w-sidebar: 260px;
     position: relative;
     margin: 0.375rem 0.375rem 0.375rem 0;
-    padding: 0 0 7rem; /* Depending on the height of the fixednav to ensure that mainnav is fully visible when scrolling */
     width: 0;
     max-width: var(--w-sidebar);
     height: calc(100vh - 0.75rem);
@@ -218,6 +217,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    margin: 0 0 0.375rem;
     padding: 0.25rem 0.688rem;
     top: 0;
     display: flex;
@@ -234,7 +234,6 @@
     height: 100%;
     color: var(--c-basic-900);
     background-color: var(--c-basic-0);
-    /* border: 1px solid var(--c-basic-250); */
     border-radius: 1.75rem;
   }
   input.filter_input[type='text'] {
@@ -247,7 +246,7 @@
   .filter_input:focus {
     outline: none;
   }
-  .nofilterresult {
+  .filter_zero-results {
     width: var(--w-sidebar);
     padding: 0.5rem 0.688rem 0.375rem 0.688rem;
     text-transform: initial;
@@ -260,7 +259,8 @@
   }
   .components {
     width: var(--w-sidebar);
-    /* height: calc(100vh - 56px); */
+    height: calc(100% - 12.438rem);
+    overflow-y: scroll;
     z-index: 1;
   }
   .controls {
@@ -279,8 +279,9 @@
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+    height: 2.125rem;
     margin: 0;
-    padding: 0.5rem 0.688rem;
+    padding: 0 0.688rem;
     text-align: left;
     background-color: transparent;
     cursor: pointer;
@@ -304,36 +305,6 @@
   }
   .controls_btn:hover .controls_btn-label,
   .controls_btn:hover .controls_btn-icon {
-    color: var(--c-primary);
-  }
-  .controls_link {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    margin: 0;
-    padding: 0.5rem 0.688rem;
-    text-align: left;
-  }
-  .controls_link:hover {
-    background-color: var(--c-primary-bg);
-  }
-  .controls_link .controls_link-icon {
-    display: flex;
-    margin: 0;
-    color: var(--c-basic-900);
-  }
-  .controls_link .controls_link-label {
-    display: flex;
-    align-self: center;
-    margin-left: 0.5rem;
-    width: 100%;
-    color: var(--c-basic-900);
-    font-size: 0.875rem;
-    font-weight: 500;
-  }
-  .controls_link:hover .controls_link-icon,
-  .controls_link:hover .controls_link-label {
     color: var(--c-primary);
   }
 </style>
