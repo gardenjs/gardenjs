@@ -170,6 +170,9 @@
   .sidebar_container {
     --c-sidebar: var(--c-basic-100);
     --w-sidebar: 260px;
+    display: flex;
+    flex-direction: column;
+
     position: relative;
     margin: 0.375rem 0.375rem 0.375rem 0;
     width: 0;
@@ -178,8 +181,7 @@
     background-color: var(--c-sidebar);
     border-radius: 0.75rem;
     transition: width 0.1s;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
   }
   .show-sidebar {
     width: var(--w-sidebar);
@@ -188,6 +190,7 @@
   .project_title {
     position: relative;
     display: flex;
+    flex-shrink: 0;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -210,7 +213,9 @@
     overflow: hidden;
   }
   .filter {
-    margin: 0 0 0.375rem;
+    display: flex;
+    flex-shrink: 0;
+    margin: 0 0 0.25rem;
     padding: 0.25rem 0.688rem;
     height: 2.25rem;
   }
@@ -244,21 +249,32 @@
     text-overflow: ellipsis;
   }
   .components {
+    display: flex;
+    flex-shrink: 1;
+    overflow: hidden;
+    visibility: visible;
     width: var(--w-sidebar);
-    height: calc(100% - 12.438rem);
     overflow-y: scroll;
     z-index: 1;
+    margin: 0 0 1rem;
   }
   .controls {
-    position: fixed;
-    width: var(--w-sidebar);
-    bottom: 0.375rem;
-    padding: 0;
-    background-color: var(--c-sidebar);
-    border-top: 1px solid var(--c-basic-300);
-    border-bottom-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    overflow: hidden;
+    display: none;
+  }
+  @media (min-height: 35rem) {
+    .controls {
+      display: block;
+      flex-shrink: 0;
+      width: var(--w-sidebar);
+      height: 103px;
+      bottom: 0.375rem;
+      padding: 0;
+      background-color: var(--c-sidebar);
+      border-top: 1px solid var(--c-basic-300);
+      border-bottom-right-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+      overflow: hidden;
+    }
   }
   .controls_btn {
     display: flex;
@@ -276,12 +292,11 @@
     background-color: var(--c-primary-bg);
   }
   .controls_btn-icon {
-    display: flex;
     margin: 0;
     color: var(--c-basic-900);
   }
   .controls_btn-label {
-    display: flex;
+    position: relative;
     align-self: center;
     margin-left: 0.5rem;
     width: 100%;

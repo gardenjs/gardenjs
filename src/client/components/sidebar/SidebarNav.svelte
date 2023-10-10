@@ -67,7 +67,7 @@
 
 <style>
   .level-1 {
-    padding: 0.5rem 0 1.25rem;
+    padding: 0;
   }
   .folder {
     display: block;
