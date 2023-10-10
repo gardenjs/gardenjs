@@ -42,9 +42,7 @@
     </div>
   {:else}
     <nav class="components">
-      <ul>
-        <SidebarNav {nodes} on:out />
-      </ul>
+      <SidebarNav {nodes} on:out />
     </nav>
   {/if}
   <nav class="controls">
@@ -212,21 +210,9 @@
     overflow: hidden;
   }
   .filter {
-    position: sticky;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
     margin: 0 0 0.375rem;
     padding: 0.25rem 0.688rem;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: var(--w-sidebar);
     height: 2.25rem;
-    background-color: var(--c-sidebar);
-    z-index: 9;
   }
   .filter_input {
     padding: 0.125rem 0.125rem 0.125rem 0.688rem;
