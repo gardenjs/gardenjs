@@ -114,6 +114,7 @@
     height: 100%;
   }
   .panel_nav nav li button {
+    margin-bottom: -1px;
     padding: 0.375rem 1.25rem;
     height: 100%;
     font-size: 0.875rem;
@@ -127,7 +128,7 @@
   }
   .panel_nav nav li button.active {
     color: var(--c-primary);
-    border-bottom: 3px solid var(--c-primary);
+    border-bottom: 0.188rem solid var(--c-primary);
   }
   .panel_nav nav li button:hover {
     border-color: var(--c-primary);
