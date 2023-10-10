@@ -46,7 +46,6 @@
           {/each}
         </ul>
       </nav>
-      <!-- only collapse btn, do not show any button if collapsed: -->
       <button
         class="panel_toggle"
         title="Collapse panel"
@@ -88,7 +87,7 @@
     top: 0;
     display: flex;
     justify-content: space-between;
-    background-color: var(--c-basic-100);
+    background-color: var(--c-basic-50);
     border-bottom: 1px solid var(--c-basic-300);
   }
   .panel_nav nav {

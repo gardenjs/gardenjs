@@ -160,7 +160,7 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background-color: var(--c-basic-0);
+    background-color: var(--c-bg-body);
   }
   .main {
     display: flex;

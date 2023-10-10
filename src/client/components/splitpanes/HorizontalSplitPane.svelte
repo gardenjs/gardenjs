@@ -66,14 +66,16 @@
     flex-grow: 0;
     flex-shrink: 0;
     background-color: var(--c-basic-250);
+    border: 1px solid var(--c-basic-300);
     border-radius: 0.5rem 0.5rem 0 0;
+    border-bottom: 0;
     overflow: hidden;
   }
   .dragbar {
     flex-grow: 0;
     flex-shrink: 0;
     height: 0.188rem;
-    background-color: var(--c-basic-300);
+    background-color: var(--c-primary);
     cursor: row-resize;
     z-index: 10;
   }

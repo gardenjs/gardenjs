@@ -168,7 +168,7 @@
 
 <style>
   .sidebar_container {
-    --c-sidebar: var(--c-basic-100);
+    --c-sidebar: var(--c-bg-panels);
     --w-sidebar: 260px;
     display: flex;
     flex-direction: column;

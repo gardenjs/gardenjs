@@ -322,7 +322,7 @@
 <style>
   .topbar {
     --h-topbar: 2.25rem;
-    --c-topbar: var(--c-basic-100);
+    --c-topbar: var(--c-bg-panels);
     margin: 0.375rem 0;
     width: 100%;
     height: var(--h-topbar);
