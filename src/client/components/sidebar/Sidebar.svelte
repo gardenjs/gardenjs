@@ -23,7 +23,7 @@
   }
 </script>
 
-<div class="sidebar_container" class:show-sidebar={show}>
+<header class="sidebar_container" class:show-sidebar={show}>
   <a class="project_title" href="/">
     <span>{projectTitle}</span>
   </a>
@@ -41,23 +41,23 @@
       <div class="nofilterresult">No results for '{filter}'</div>
     </div>
   {:else}
-    <nav class="nav_components">
+    <nav class="components">
       <ul>
         <SidebarNav {nodes} on:out />
       </ul>
     </nav>
   {/if}
-  <nav class="nav_controls">
+  <nav class="controls">
     <ul>
       <li>
         <button
-          class="fixednav_btn"
+          class="controls_btn"
           title={rootNodesExpanded ? 'Collapse' : 'Restore'}
           on:click={toggleRootFolders}
         >
           {#if rootNodesExpanded}
             <svg
-              class="fixednav_btn-icon"
+              class="controls_btn-icon"
               xmlns="http://www.w3.org/2000/svg"
               height="18"
               viewBox="0 0 24 24"
@@ -71,7 +71,7 @@
             >
           {:else}
             <svg
-              class="fixednav_btn-icon"
+              class="controls_btn-icon"
               xmlns="http://www.w3.org/2000/svg"
               height="18"
               viewBox="0 0 24 24"
@@ -84,20 +84,20 @@
               ><path d="M7 15l5 5 5-5M7 9l5-5 5 5" /></svg
             >
           {/if}
-          <span class="fixednav_btn-label"
+          <span class="controls_btn-label"
             >{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span
           >
         </button>
       </li>
       <li>
         <button
-          class="fixednav_btn"
+          class="controls_btn"
           title={panelExpanded ? 'Collapse' : 'Restore'}
           on:click={toggleExpandPanel}
         >
           {#if panelExpanded}
             <svg
-              class="fixednav_btn-icon"
+              class="controls_btn-icon"
               xmlns="http://www.w3.org/2000/svg"
               width="18"
               height="18"
@@ -116,7 +116,7 @@
             >
           {:else}
             <svg
-              class="fixednav_btn-icon"
+              class="controls_btn-icon"
               xmlns="http://www.w3.org/2000/svg"
               width="18"
               height="18"
@@ -134,20 +134,20 @@
               /><path d="m9 10 3-3 3 3" /></svg
             >
           {/if}
-          <span class="fixednav_btn-label"
+          <span class="controls_btn-label"
             >{panelExpanded ? 'Collapse' : 'Expand'} Panel</span
           >
         </button>
       </li>
       <li>
         <a
-          class="fixednav_link"
+          class="controls_link"
           href="https://github.com/rabbitdevelopment/garden"
           target="_blank"
           rel="noreferrer"
         >
           <svg
-            class="fixednav_link-icon"
+            class="controls_link-icon"
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="18"
@@ -161,47 +161,46 @@
               d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01"
             /></svg
           >
-          <span class="fixednav_link-label">Garden Docs</span>
+          <span class="controls_link-label">Garden Docs</span>
         </a>
       </li>
     </ul>
   </nav>
-</div>
+</header>
 
 <style>
   .sidebar_container {
+    --c-sidebar: var(--c-basic-100);
+    --w-sidebar: 260px;
     position: relative;
-    margin: 0.375rem 0;
-    padding: 0 0 4.688rem; /* Depending on the height of the fixednav to ensure that mainnav is fully visible when scrolling */
+    margin: 0.375rem 0.375rem 0.375rem 0;
+    padding: 0 0 7rem; /* Depending on the height of the fixednav to ensure that mainnav is fully visible when scrolling */
     width: 0;
-    max-width: 260px;
+    max-width: var(--w-sidebar);
     height: calc(100vh - 0.75rem);
-    background-color: var(--c-basic-50);
+    background-color: var(--c-sidebar);
     border-radius: 0.75rem;
     transition: width 0.1s;
     overflow-x: hidden;
     overflow-y: auto;
   }
   .show-sidebar {
-    margin: 0.375rem 0.375rem 0.375rem 0;
-    width: 260px;
+    width: var(--w-sidebar);
     box-sizing: border-box;
   }
   .project_title {
-    position: sticky;
-    top: 0;
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     padding: 0.25rem 0.688rem;
     margin: 0 0 0.375rem;
-    width: 260px;
-    background-color: var(--c-basic-50);
+    width: var(--w-sidebar);
+    background-color: var(--c-sidebar);
     z-index: 9;
-    --h-project-title: 2.25rem;
-    height: var(--h-project-title);
-    inline-size: 260px;
+    height: 2.25rem;
+    inline-size: var(--w-sidebar);
     overflow: hidden;
     white-space: nowrap;
     font-size: 1.25rem;
@@ -214,11 +213,20 @@
     overflow: hidden;
   }
   .filter {
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.25rem 0.688rem;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0.5rem;
-    height: 2rem;
+    width: var(--w-sidebar);
+    height: 2.25rem;
+    background-color: var(--c-sidebar);
+    z-index: 9;
   }
   .filter_input {
     padding: 0.125rem 0.125rem 0.125rem 0.688rem;
@@ -240,7 +248,7 @@
     outline: none;
   }
   .nofilterresult {
-    width: 260px;
+    width: var(--w-sidebar);
     padding: 0.5rem 0.688rem 0.375rem 0.688rem;
     text-transform: initial;
     font-size: 0.813rem;
@@ -250,23 +258,23 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .nav_components {
-    width: 260px;
+  .components {
+    width: var(--w-sidebar);
     /* height: calc(100vh - 56px); */
     z-index: 1;
   }
-  .nav_controls {
+  .controls {
     position: fixed;
-    width: 260px;
+    width: var(--w-sidebar);
     bottom: 0.375rem;
     padding: 0;
-    background-color: var(--c-basic-50);
+    background-color: var(--c-sidebar);
     border-top: 1px solid var(--c-basic-300);
     border-bottom-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
     overflow: hidden;
   }
-  .fixednav_btn {
+  .controls_btn {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -277,15 +285,15 @@
     background-color: transparent;
     cursor: pointer;
   }
-  .fixednav_btn:hover {
+  .controls_btn:hover {
     background-color: var(--c-primary-bg);
   }
-  .fixednav_btn-icon {
+  .controls_btn-icon {
     display: flex;
     margin: 0;
     color: var(--c-basic-900);
   }
-  .fixednav_btn-label {
+  .controls_btn-label {
     display: flex;
     align-self: center;
     margin-left: 0.5rem;
@@ -294,11 +302,11 @@
     font-size: 0.875rem;
     font-weight: 500;
   }
-  .fixednav_btn:hover .fixednav_btn-label,
-  .fixednav_btn:hover .fixednav_btn-icon {
+  .controls_btn:hover .controls_btn-label,
+  .controls_btn:hover .controls_btn-icon {
     color: var(--c-primary);
   }
-  .fixednav_link {
+  .controls_link {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -307,15 +315,15 @@
     padding: 0.5rem 0.688rem;
     text-align: left;
   }
-  .fixednav_link:hover {
+  .controls_link:hover {
     background-color: var(--c-primary-bg);
   }
-  .fixednav_link .fixednav_link-icon {
+  .controls_link .controls_link-icon {
     display: flex;
     margin: 0;
     color: var(--c-basic-900);
   }
-  .fixednav_link .fixednav_link-label {
+  .controls_link .controls_link-label {
     display: flex;
     align-self: center;
     margin-left: 0.5rem;
@@ -324,8 +332,8 @@
     font-size: 0.875rem;
     font-weight: 500;
   }
-  .fixednav_link:hover .fixednav_link-icon,
-  .fixednav_link:hover .fixednav_link-label {
+  .controls_link:hover .controls_link-icon,
+  .controls_link:hover .controls_link-label {
     color: var(--c-primary);
   }
 </style>
