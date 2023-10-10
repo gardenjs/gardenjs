@@ -307,11 +307,12 @@
 
 <style>
   .topbar {
+    --h-topbar: 2.25rem;
+    --c-topbar: var(--c-basic-100);
     margin: 0.375rem 0;
     width: 100%;
-    --h-topbar: 2.25rem;
     height: var(--h-topbar);
-    background-color: var(--c-basic-50);
+    background-color: var(--c-topbar);
     border-radius: 0.5rem;
   }
   .topbar_container {
@@ -523,7 +524,7 @@
       padding: 0.25rem;
       content: attr(data-title);
       font-size: 0.75rem;
-      color: var(--c-basic-50);
+      color: var(--c-topbar);
       background-color: var(--c-basic-900);
       border-radius: 0.125rem;
     }
