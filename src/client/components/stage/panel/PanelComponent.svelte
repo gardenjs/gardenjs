@@ -83,23 +83,12 @@
 </div>
 
 <style>
-  /* for class panel_container or not necessary anymore?  */
-  /* .panel {
-    position: relative;
-    margin-bottom: 0.375rem;
-    height: 100%;
-    width: 100%;
-    background-color: var(--c-basic-50);
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-    overflow-y: auto;
-  } */
   .panel_nav {
     position: sticky;
     top: 0;
     display: flex;
     justify-content: space-between;
-    background-color: var(--c-basic-50);
+    background-color: var(--c-basic-100);
     border-bottom: 1px solid var(--c-basic-300);
   }
   .panel_nav nav {
@@ -152,6 +141,5 @@
   .panel_pane {
     padding: 1.25rem;
     color: var(--c-basic-900);
-    background-color: var(--c-basic-50);
   }
 </style>

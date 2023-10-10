@@ -172,13 +172,13 @@
     --w-sidebar: 260px;
     display: flex;
     flex-direction: column;
-
     position: relative;
     margin: 0.375rem 0.375rem 0.375rem 0;
     width: 0;
     max-width: var(--w-sidebar);
     height: calc(100vh - 0.75rem);
     background-color: var(--c-sidebar);
+    border: 1px solid var(--c-basic-300);
     border-radius: 0.75rem;
     transition: width 0.1s;
     overflow: hidden;

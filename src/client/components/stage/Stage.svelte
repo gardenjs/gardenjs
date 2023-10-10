@@ -160,6 +160,15 @@
     width: 100%;
     flex-direction: column;
     flex-wrap: nowrap;
+    position: relative;
+    margin-bottom: 0.375rem;
+    height: 100%;
+    width: 100%;
+    background-color: var(--c-basic-100);
+    border: 1px solid var(--c-basic-300);
+    border-top: 0;
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
     overflow-y: auto;
   }
 </style>
