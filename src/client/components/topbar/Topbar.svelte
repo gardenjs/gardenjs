@@ -65,7 +65,7 @@
 <div class="topbar">
   <div class="topbar_container">
     <button
-      class="sidebar-toggle"
+      class="topbar_btn is-first-btn"
       on:click={toggleSidebar}
       title={active ? 'Collapse sidebar' : 'Expand sidebar'}
     >
@@ -215,19 +215,33 @@
       </div>
       {#if themes.length > 1}
         <div class="dropdown">
-          <button class="dropdown_btn" title="Switch component theme"
-            >Themes<svg
+          <button
+            class="dropdown_btn topbar_btn"
+            title="Switch component theme"
+          >
+            <svg
               xmlns="http://www.w3.org/2000/svg"
-              height="18"
+              width="24"
               viewBox="0 0 24 24"
-              width="18"
+              height="24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
-              stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg
-            ></button
-          >
+              stroke-linejoin="round"
+              ><circle cx="13.5" cy="6.5" r=".5" /><circle
+                cx="17.5"
+                cy="10.5"
+                r=".5"
+              /><circle cx="8.5" cy="7.5" r=".5" /><circle
+                cx="6.5"
+                cy="12.5"
+                r=".5"
+              /><path
+                d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
+              /></svg
+            >
+          </button>
           <div class="dropdown_items">
             <ul>
               {#each themes as theme}
@@ -244,7 +258,7 @@
         </div>
       {/if}
       <button
-        class="open-new-tab"
+        class="topbar_btn"
         title="Open component in new tab"
         on:click={openInTab}
       >
@@ -265,7 +279,7 @@
         >
       </button>
       <button
-        class="switch-mode"
+        class="topbar_btn is-last-btn"
         on:click={toggleDarkmode}
         title={dark ? 'Light mode' : 'Dark mode'}
       >
@@ -313,6 +327,7 @@
     width: 100%;
     height: var(--h-topbar);
     background-color: var(--c-topbar);
+    border: 1px solid var(--c-basic-300);
     border-radius: 0.5rem;
   }
   .topbar_container {
@@ -323,57 +338,126 @@
     height: 100%;
     padding: 0;
   }
-  .sidebar-toggle {
-    padding: 0 0.75rem;
-    height: var(--h-topbar);
-    background: none;
-    cursor: pointer;
-    border-radius: 0.5rem 0 0 0.5rem;
-  }
-  .sidebar-toggle:hover {
-    background-color: var(--c-basic-150);
-  }
-  .sidebar-toggle svg {
-    height: 1.125rem;
-    color: var(--c-basic-700);
-  }
-  .sidebar-toggle:hover svg {
-    color: var(--c-primary);
-  }
   .topbar_nav {
     display: flex;
     align-items: center;
   }
+
+  /* buttons */
+  .topbar_btn {
+    padding: 0 0.5rem;
+    height: var(--h-topbar);
+    background: none;
+    cursor: pointer;
+  }
+  .topbar_btn:hover {
+    background-color: var(--c-basic-200);
+  }
+  .topbar_btn svg {
+    height: 1.125rem;
+    color: var(--c-basic-700);
+  }
+  .topbar_btn:hover svg {
+    color: var(--c-primary);
+  }
+  .is-first-btn {
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+  .is-last-btn {
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+
+  /* stage size */
+  .stagesize-value {
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .stagesize-value {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.75rem;
+      padding: 0 1.25rem;
+      font-family:
+        ui-monospace,
+        Menlo,
+        Monaco,
+        'Cascadia Mono',
+        'Segoe UI Mono',
+        'Roboto Mono',
+        'Oxygen Mono',
+        'Ubuntu Monospace',
+        'Source Code Pro',
+        'Fira Mono',
+        'Droid Sans Mono',
+        Courier New,
+        'monospace';
+      color: var(--c-basic-500);
+    }
+    .stagesize-value-multi_sign {
+      margin: 0 0.25rem;
+      font-size: 0.813rem;
+    }
+  }
+
+  /* stagesize nav */
+  .stagesize-nav {
+    display: none;
+  }
+  @media (min-width: 1280px) {
+    .stagesize-nav {
+      position: relative;
+      display: inline-flex;
+      margin: 0 0.75rem;
+      background-color: var(--c-basic-150);
+      border-right: 1px solid var(--c-basic-300);
+      border-left: 1px solid var(--c-basic-300);
+    }
+    .stagesize-nav button {
+      height: calc(var(--h-topbar) - 2px);
+      margin: 0;
+      padding: 0 0.25rem;
+      background: none;
+      border-top: 2px solid transparent;
+      cursor: pointer;
+    }
+    .stagesize-nav button:hover,
+    .stagesize-nav button.active {
+      border-top: 2px solid var(--c-primary);
+      z-index: 9;
+    }
+    .stagesize-nav button.active {
+      background-color: var(--c-primary-bg);
+    }
+    .stagesize-nav button svg {
+      height: 1.125rem;
+      color: var(--c-basic-700);
+      transition: 0.2s;
+    }
+    .stagesize-nav button:hover svg,
+    .stagesize-nav button.active svg {
+      color: var(--c-primary);
+    }
+    .stagesize-nav button svg.landscape {
+      transform: rotate(90deg);
+      transition: 0.2s;
+    }
+    .stagesize-nav button.tooltip:hover::after {
+      position: absolute;
+      display: block;
+      margin-top: 0.875rem;
+      padding: 0.25rem;
+      content: attr(data-title);
+      font-size: 0.75rem;
+      color: var(--c-topbar);
+      background-color: var(--c-basic-900);
+      border-radius: 0.125rem;
+    }
+  }
+
   /* theme dropdown nav */
   .dropdown {
     position: relative;
     display: inline-block;
-  }
-  .dropdown:hover {
-    background-color: var(--c-basic-150);
-  }
-  .dropdown_btn {
-    display: flex;
-    align-items: center;
-    margin: 0 0 0 0.5rem;
-    padding: 0 0.75rem;
-    height: var(--h-topbar);
-    min-width: 105px;
-    font-size: 0.875rem;
-    color: var(--c-basic-700);
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  .dropdown:hover .dropdown_btn {
-    color: var(--c-primary);
-  }
-  .dropdown_btn svg {
-    margin-left: 0.125rem;
-    color: var(--c-basic-700);
-  }
-  .dropdown:hover .dropdown_btn svg {
-    color: var(--c-primary);
   }
   .dropdown_items {
     visibility: hidden;
@@ -424,128 +508,5 @@
   .dropdown:focus > .dropdown_items {
     display: block;
     visibility: visible;
-  }
-  /* switch to dark mode */
-  .switch-mode {
-    display: flex;
-    align-items: center;
-    padding: 0 0.75rem;
-    height: var(--h-topbar);
-    background: none;
-    cursor: pointer;
-    border-radius: 0 0.5rem 0.5rem 0;
-  }
-  .switch-mode:hover {
-    background-color: var(--c-basic-150);
-  }
-  svg.mode-icon {
-    height: 1.125rem;
-    color: var(--c-basic-700);
-  }
-  .switch-mode:hover svg.mode-icon {
-    color: var(--c-primary);
-  }
-
-  /* futur feature */
-  .stagesize-value {
-    display: none;
-  }
-  @media (min-width: 640px) {
-    .stagesize-value {
-      display: inline-flex;
-      align-items: center;
-      font-size: 0.75rem;
-      padding: 0 1.25rem;
-      font-family:
-        ui-monospace,
-        Menlo,
-        Monaco,
-        'Cascadia Mono',
-        'Segoe UI Mono',
-        'Roboto Mono',
-        'Oxygen Mono',
-        'Ubuntu Monospace',
-        'Source Code Pro',
-        'Fira Mono',
-        'Droid Sans Mono',
-        Courier New,
-        'monospace';
-      color: var(--c-basic-500);
-    }
-    .stagesize-value-multi_sign {
-      margin: 0 0.25rem;
-      font-size: 0.813rem;
-    }
-  }
-
-  /* stagesize */
-  .stagesize-nav {
-    display: none;
-  }
-  @media (min-width: 1280px) {
-    .stagesize-nav {
-      display: flex;
-      flex-direction: row;
-      align-self: center;
-      background-color: var(--c-basic-100);
-    }
-    .stagesize-nav button {
-      height: var(--h-topbar);
-      margin: 0;
-      padding: 0 0.25rem;
-      background: none;
-      border-top: 3px solid transparent;
-      cursor: pointer;
-    }
-    .stagesize-nav button:hover,
-    .stagesize-nav button.active {
-      border-top: 3px solid var(--c-primary);
-    }
-    .stagesize-nav button.active {
-      background-color: var(--c-primary-bg);
-    }
-    .stagesize-nav button svg {
-      height: 1.125rem;
-      color: var(--c-basic-700);
-      transition: 0.2s;
-    }
-    .stagesize-nav button:hover svg,
-    .stagesize-nav button.active svg {
-      color: var(--c-primary);
-    }
-    .stagesize-nav button svg.landscape {
-      transform: rotate(90deg);
-      transition: 0.2s;
-    }
-    .stagesize-nav button.tooltip:hover::after {
-      position: absolute;
-      display: block;
-      margin-top: 0.875rem;
-      padding: 0.25rem;
-      content: attr(data-title);
-      font-size: 0.75rem;
-      color: var(--c-topbar);
-      background-color: var(--c-basic-900);
-      border-radius: 0.125rem;
-    }
-  }
-  /* open in new tab */
-  .open-new-tab {
-    display: flex;
-    align-items: center;
-    padding: 0 0.75rem;
-    height: var(--h-topbar);
-    background: none;
-    cursor: pointer;
-  }
-  .open-new-tab:hover {
-    background-color: var(--c-basic-150);
-  }
-  svg.open-new-tab-icon {
-    height: 1.125rem;
-    color: var(--c-basic-700);
-  }
-  .open-new-tab:hover svg.open-new-tab-icon {
-    color: var(--c-primary);
   }
 </style>
