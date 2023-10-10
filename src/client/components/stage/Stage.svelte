@@ -164,7 +164,7 @@
     margin-bottom: 0.375rem;
     height: 100%;
     width: 100%;
-    background-color: var(--c-basic-100);
+    background-color: var(--c-basic-0);
     border: 1px solid var(--c-basic-300);
     border-top: 0;
     border-bottom-left-radius: 0.75rem;
