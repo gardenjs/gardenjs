@@ -165,10 +165,9 @@
     height: 100%;
     width: 100%;
     background-color: var(--c-basic-0);
-    border: 1px solid var(--c-basic-300);
+    border: 1px solid var(--c-basic-400);
     border-top: 0;
-    border-bottom-left-radius: 0.75rem;
-    border-bottom-right-radius: 0.75rem;
+    border-radius: 0 0 0.5rem 0.5rem;
     overflow-y: auto;
   }
 </style>

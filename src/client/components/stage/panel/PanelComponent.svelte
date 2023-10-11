@@ -88,7 +88,7 @@
     display: flex;
     justify-content: space-between;
     background-color: var(--c-basic-50);
-    border-bottom: 1px solid var(--c-basic-300);
+    border-bottom: 1px solid var(--c-basic-400);
   }
   .panel_nav nav {
     margin: 0 1.25rem;
@@ -125,9 +125,6 @@
     padding: 0 0.75rem;
     background: none;
     cursor: pointer;
-  }
-  .panel_toggle:hover {
-    background-color: var(--c-basic-150);
   }
   .panel_toggle svg {
     margin-top: 0.188rem;

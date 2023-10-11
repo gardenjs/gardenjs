@@ -48,8 +48,7 @@
   }
   .stories li:hover button,
   .stories li:focus button {
-    color: var(--c-basic-900);
-    background-color: var(--c-basic-150);
+    color: var(--c-primary);
   }
   .stories li.active button {
     color: var(--c-primary);
