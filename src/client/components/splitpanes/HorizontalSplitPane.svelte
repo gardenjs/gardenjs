@@ -65,7 +65,6 @@
   .top {
     flex-grow: 0;
     flex-shrink: 0;
-    border: 1px solid var(--c-basic-400);
     border-bottom: 0;
     border-radius: 0.5rem 0.5rem 0 0;
     overflow: hidden;

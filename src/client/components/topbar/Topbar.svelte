@@ -334,7 +334,6 @@
     width: 100%;
     height: var(--h-topbar);
     background-color: var(--c-bg-panels);
-    border: 1px solid var(--c-basic-400);
     border-radius: 0.5rem;
   }
   .topbar_container {
@@ -414,8 +413,6 @@
       display: inline-flex;
       margin: 0 0.75rem;
       background-color: var(--c-basic-150);
-      border-right: 1px solid var(--c-basic-400);
-      border-left: 1px solid var(--c-basic-400);
     }
     .stagesize-nav button {
       height: calc(var(--h-topbar) - 2px);
