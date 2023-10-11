@@ -144,7 +144,6 @@
   .stage_container {
     height: 100%;
     width: auto;
-    overflow-y: auto;
   }
   .stage_iframe {
     display: block;

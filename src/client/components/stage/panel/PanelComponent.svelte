@@ -52,16 +52,16 @@
         on:click={handleCollapsePanel}
       >
         <svg
+          class="controls_btn-icon"
           xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="lucide lucide-panel-bottom-close"
           ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line
             x1="3"
             x2="21"
@@ -87,36 +87,33 @@
     top: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 36px;
     background-color: var(--c-basic-50);
-    border-bottom: 1px solid var(--c-basic-400);
+    border-bottom: 1px solid var(--c-basic-300);
   }
   .panel_nav nav {
     margin: 0 1.25rem;
   }
   .panel_nav nav ul {
     display: flex;
-    flex-direction: row;
     overflow-x: auto;
   }
-  .panel_nav nav li {
-    height: 100%;
-  }
   .panel_nav nav li button {
-    margin-bottom: -1px;
-    padding: 0.375rem 1.25rem;
-    height: 100%;
+    padding: 0 1.25rem;
+    height: calc(36px - 1px);
     font-size: 0.875rem;
     color: var(--c-basic-900);
     white-space: nowrap;
     text-transform: capitalize;
     background-color: transparent;
     border: none;
-    border-bottom: 0.188rem solid transparent;
+    border-bottom: 0.125rem solid transparent;
     cursor: pointer;
   }
   .panel_nav nav li button.active {
     color: var(--c-primary);
-    border-bottom: 0.188rem solid var(--c-primary);
+    border-bottom: 0.125rem solid var(--c-primary);
   }
   .panel_nav nav li button:hover {
     border-color: var(--c-primary);
@@ -129,7 +126,7 @@
   .panel_toggle svg {
     margin-top: 0.188rem;
     height: 1.375rem;
-    color: var(--c-basic-800);
+    color: var(--c-basic-900);
   }
   .panel_toggle:hover svg {
     color: var(--c-primary);
@@ -137,5 +134,6 @@
   .panel_pane {
     padding: 1.25rem;
     color: var(--c-basic-900);
+    overflow-y: auto;
   }
 </style>
