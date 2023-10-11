@@ -40,17 +40,17 @@
     justify-content: flex-start;
     align-items: center;
     margin: 0;
-    padding: 0.188rem 0 0.188rem 0.5rem;
+    padding: 0.188rem 0 0.188rem 0.563rem;
     text-transform: initial;
     font-size: 0.813rem;
     color: var(--c-basic-600);
     line-height: 1.2;
     font-weight: 400;
-    border-left: 0.188rem solid transparent;
+    border-left: 0.125rem solid transparent;
   }
   a:hover,
   a:focus {
-    color: var(--c-basic-900);
+    color: var(--c-primary);
     border-color: var(--c-primary);
   }
   a.selected {
