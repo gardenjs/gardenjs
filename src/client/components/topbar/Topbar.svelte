@@ -202,13 +202,21 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class:landscape
-            height="24"
-            viewBox="0 0 24 24"
             width="24"
-            fill="currentColor"
-            ><path
-              d="M16.48 2.52c3.27 1.55 5.61 4.72 5.97 8.48h1.5C23.44 4.84 18.29 0 12 0l-.66.03 3.81 3.81 1.33-1.32zm-6.25-.77a1.49 1.49 0 00-2.12 0L1.75 8.11a1.49 1.49 0 000 2.12l12.02 12.02c.59.59 1.54.59 2.12 0l6.36-6.36c.59-.59.59-1.54 0-2.12L10.23 1.75zm4.6 19.44L2.81 9.17l6.36-6.36 12.02 12.02-6.36 6.36zm-7.31.29A10.487 10.487 0 011.55 13H.05C.56 19.16 5.71 24 12 24l.66-.03-3.81-3.81-1.33 1.32z"
+            viewBox="0 0 24 24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-ratio"
+            ><rect width="12" height="20" x="6" y="2" rx="2" /><rect
+              width="20"
+              height="12"
+              x="2"
+              y="6"
+              rx="2"
             /></svg
           >
         </button>
@@ -322,18 +330,18 @@
 <style>
   .topbar {
     --h-topbar: 2.25rem;
-    --c-topbar: var(--c-bg-panels);
     margin: 0.375rem 0;
     width: 100%;
     height: var(--h-topbar);
-    background-color: var(--c-topbar);
-    border: 1px solid var(--c-basic-300);
+    background-color: var(--c-bg-panels);
+    border: 1px solid var(--c-basic-400);
     border-radius: 0.5rem;
   }
   .topbar_container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1px;
     width: 100%;
     height: 100%;
     padding: 0;
@@ -345,13 +353,10 @@
 
   /* buttons */
   .topbar_btn {
-    padding: 0 0.5rem;
-    height: var(--h-topbar);
+    padding: 0 0.375rem;
+    height: calc(var(--h-topbar) - 2px);
     background: none;
     cursor: pointer;
-  }
-  .topbar_btn:hover {
-    background-color: var(--c-basic-200);
   }
   .topbar_btn svg {
     height: 1.125rem;
@@ -376,7 +381,7 @@
       display: inline-flex;
       align-items: center;
       font-size: 0.75rem;
-      padding: 0 1.25rem;
+      padding: 0 1rem;
       font-family:
         ui-monospace,
         Menlo,
@@ -409,8 +414,8 @@
       display: inline-flex;
       margin: 0 0.75rem;
       background-color: var(--c-basic-150);
-      border-right: 1px solid var(--c-basic-300);
-      border-left: 1px solid var(--c-basic-300);
+      border-right: 1px solid var(--c-basic-400);
+      border-left: 1px solid var(--c-basic-400);
     }
     .stagesize-nav button {
       height: calc(var(--h-topbar) - 2px);
@@ -420,7 +425,6 @@
       border-top: 2px solid transparent;
       cursor: pointer;
     }
-    .stagesize-nav button:hover,
     .stagesize-nav button.active {
       border-top: 2px solid var(--c-primary);
       z-index: 9;
@@ -448,7 +452,7 @@
       padding: 0.25rem;
       content: attr(data-title);
       font-size: 0.75rem;
-      color: var(--c-topbar);
+      color: var(--c-basic-50);
       background-color: var(--c-basic-900);
       border-radius: 0.125rem;
     }
