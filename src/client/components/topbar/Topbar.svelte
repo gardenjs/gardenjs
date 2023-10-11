@@ -353,13 +353,13 @@
   /* buttons */
   .topbar_btn {
     padding: 0 0.375rem;
-    height: calc(var(--h-topbar) - 2px);
+    height: var(--h-topbar);
     background: none;
     cursor: pointer;
   }
   .topbar_btn svg {
     height: 1.125rem;
-    color: var(--c-basic-700);
+    color: var(--c-basic-800);
   }
   .topbar_btn:hover svg {
     color: var(--c-primary);
@@ -412,10 +412,10 @@
       position: relative;
       display: inline-flex;
       margin: 0 0.75rem;
-      background-color: var(--c-basic-150);
+      background-color: var(--c-basic-100);
     }
     .stagesize-nav button {
-      height: calc(var(--h-topbar) - 2px);
+      height: var(--h-topbar);
       margin: 0;
       padding: 0 0.25rem;
       background: none;
@@ -463,14 +463,14 @@
   .dropdown_items {
     visibility: hidden;
     position: absolute;
-    left: 0;
+    left: -0.75rem;
     padding: 0;
     z-index: 9;
   }
   .dropdown_items ul {
     margin: 0;
     padding: 0;
-    background-color: var(--c-basic-150);
+    background-color: var(--c-basic-50);
     overflow: hidden;
   }
   .dropdown_items ul li {

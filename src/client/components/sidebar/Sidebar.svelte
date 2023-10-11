@@ -57,9 +57,9 @@
             <svg
               class="controls_btn-icon"
               xmlns="http://www.w3.org/2000/svg"
-              height="18"
+              height="20"
               viewBox="0 0 24 24"
-              width="18"
+              width="20"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -71,9 +71,9 @@
             <svg
               class="controls_btn-icon"
               xmlns="http://www.w3.org/2000/svg"
-              height="18"
+              height="20"
               viewBox="0 0 24 24"
-              width="18"
+              width="20"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -97,12 +97,12 @@
             <svg
               class="controls_btn-icon"
               xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="1.5"
+              stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
               ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line
@@ -116,12 +116,12 @@
             <svg
               class="controls_btn-icon"
               xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="1.5"
+              stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
               ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line
@@ -147,8 +147,8 @@
           <svg
             class="controls_btn-icon"
             xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -298,11 +298,11 @@
   .controls_btn-label {
     position: relative;
     align-self: center;
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
     width: 100%;
     color: var(--c-basic-900);
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 400;
   }
   .controls_btn:hover .controls_btn-label,
   .controls_btn:hover .controls_btn-icon {

@@ -15,8 +15,8 @@
   --c-basic-800: hsl(48, 10%, 15%);
   --c-basic-900: hsl(48, 10%, 10%);
 
-  --c-bg-body: var(--c-basic-100);
-  --c-bg-panels: var(--c-basic-50);
+  --c-bg-body: var(--c-basic-150);
+  --c-bg-panels: var(--c-basic-0);
 }
 .dark {
   --c-primary: hsl(185, 100%, 45%);
@@ -35,6 +35,6 @@
   --c-basic-800: hsl(216, 30%, 96%);
   --c-basic-900: hsl(216, 30%, 98%);
 
-  --c-bg-body: var(--c-basic-100);
+  --c-bg-body: var(--c-basic-250);
   --c-bg-panels: var(--c-basic-50);
 }
