@@ -173,7 +173,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    margin: 0.375rem 0.375rem 0.375rem 0;
+    margin: 0.375rem 0;
     width: 0;
     max-width: var(--w-sidebar);
     height: calc(100vh - 0.75rem);
@@ -183,6 +183,7 @@
     overflow: hidden;
   }
   .show-sidebar {
+    margin: 0.375rem 0.375rem 0.375rem 0;
     width: var(--w-sidebar);
     box-sizing: border-box;
   }
