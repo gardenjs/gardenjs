@@ -65,10 +65,9 @@
   .top {
     flex-grow: 0;
     flex-shrink: 0;
-    background-color: var(--c-basic-250);
-    border: 1px solid var(--c-basic-300);
-    border-radius: 0.5rem 0.5rem 0 0;
+    border: 1px solid var(--c-basic-400);
     border-bottom: 0;
+    border-radius: 0.5rem 0.5rem 0 0;
     overflow: hidden;
   }
   .dragbar {
@@ -82,6 +81,6 @@
   .dragging,
   .dragbar:hover {
     background-color: var(--c-primary);
-    transform: scaleY(1.7);
+    transform: scaleY(2);
   }
 </style>
