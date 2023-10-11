@@ -224,6 +224,7 @@
     height: 100%;
     color: var(--c-basic-900);
     background-color: var(--c-basic-0);
+    border: 1px solid var(--c-primary);
     border-radius: 1.75rem;
   }
   input.filter_input[type='text'] {
