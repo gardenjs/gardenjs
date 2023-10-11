@@ -178,8 +178,8 @@
     max-width: var(--w-sidebar);
     height: calc(100vh - 0.75rem);
     background-color: var(--c-sidebar);
-    border: 1px solid var(--c-basic-300);
-    border-radius: 0.75rem;
+    border: 1px solid var(--c-basic-400);
+    border-radius: 0.5rem;
     transition: width 0.1s;
     overflow: hidden;
   }
@@ -225,6 +225,7 @@
     height: 100%;
     color: var(--c-basic-900);
     background-color: var(--c-basic-0);
+    border: 1px solid var(--c-primary);
     border-radius: 1.75rem;
   }
   input.filter_input[type='text'] {
