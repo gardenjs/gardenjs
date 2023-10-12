@@ -286,22 +286,20 @@
     margin: 0;
     padding: 0 0.688rem;
     text-align: left;
-    background-color: transparent;
-    cursor: pointer;
   }
   .controls_btn:hover {
-    background-color: var(--c-primary-bg);
+    background-color: var(--c-basic-100);
   }
   .controls_btn-icon {
     margin: 0;
-    color: var(--c-basic-900);
+    color: var(--c-basic-700);
   }
   .controls_btn-label {
     position: relative;
     align-self: center;
     margin-left: 0.75rem;
     width: 100%;
-    color: var(--c-basic-900);
+    color: var(--c-basic-700);
     font-size: 0.875rem;
     font-weight: 400;
   }

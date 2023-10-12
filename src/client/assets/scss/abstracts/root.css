@@ -1,19 +1,20 @@
 :root {
   --c-primary: hsl(185, 100%, 40%);
   --c-primary-bg: hsl(185, 100%, 93%);
-  --c-basic-0: hsl(48, 10%, 100%);
-  --c-basic-50: hsl(48, 10%, 98%);
-  --c-basic-100: hsl(48, 10%, 94%);
-  --c-basic-150: hsl(48, 10%, 90%);
-  --c-basic-200: hsl(48, 10%, 87%);
-  --c-basic-250: hsl(48, 10%, 84%);
-  --c-basic-300: hsl(48, 10%, 81%);
-  --c-basic-400: hsl(48, 10%, 64%);
-  --c-basic-500: hsl(48, 10%, 46%);
-  --c-basic-600: hsl(48, 10%, 32%);
-  --c-basic-700: hsl(48, 10%, 25%);
-  --c-basic-800: hsl(48, 10%, 15%);
-  --c-basic-900: hsl(48, 10%, 10%);
+  --c-basic-0: hsl(185, 10%, 100%);
+  --c-basic-50: hsl(185, 10%, 98%);
+  --c-basic-75: hsl(185, 10%, 96%);
+  --c-basic-100: hsl(185, 10%, 94%);
+  --c-basic-150: hsl(185, 10%, 90%);
+  --c-basic-200: hsl(185, 10%, 87%);
+  --c-basic-250: hsl(185, 10%, 84%);
+  --c-basic-300: hsl(185, 10%, 81%);
+  --c-basic-400: hsl(185, 10%, 64%);
+  --c-basic-500: hsl(185, 10%, 46%);
+  --c-basic-600: hsl(185, 10%, 32%);
+  --c-basic-700: hsl(185, 10%, 25%);
+  --c-basic-800: hsl(185, 10%, 15%);
+  --c-basic-900: hsl(185, 10%, 10%);
 
   --c-bg-body: var(--c-basic-150);
   --c-bg-panels: var(--c-basic-0);
@@ -23,6 +24,7 @@
   --c-primary-bg: hsl(195, 100%, 20%);
   --c-basic-0: hsl(216, 30%, 5%);
   --c-basic-50: hsl(216, 30%, 10%);
+  --c-basic-75: hsl(216, 30%, 14%);
   --c-basic-100: hsl(216, 30%, 18%);
   --c-basic-150: hsl(216, 30%, 22%);
   --c-basic-200: hsl(216, 30%, 10%);

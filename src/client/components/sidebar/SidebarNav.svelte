@@ -73,7 +73,6 @@
   .folder {
     display: block;
     margin: 0;
-    background-color: transparent;
   }
   .folder_btn {
     display: flex;
@@ -82,8 +81,6 @@
     width: 100%;
     margin: 0;
     padding: 0.5rem 0.688rem 0.375rem 0.688rem;
-    background-color: transparent;
-    cursor: pointer;
   }
   .folder_label {
     display: flex;

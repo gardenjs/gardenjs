@@ -51,6 +51,7 @@
   a:hover,
   a:focus {
     color: var(--c-primary);
+    background-color: var(--c-basic-100);
     border-color: var(--c-primary);
   }
   a.selected {

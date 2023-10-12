@@ -143,6 +143,9 @@ MIT
 
 ### v1.1
 
+- [task] Make setting of default mode possible via garden.config.js.
+- [task] Store selection in panel nav for refresh or if another component is selected.
+- [task] Store selection of stage for refresh or if another component is selected.
 - [feature] Docker image for screenshot test.
 - [feature] Set width and height of stage by size input.
 - [feature] Add zoom button 100% and if zoomed show size in % with switch possibility.

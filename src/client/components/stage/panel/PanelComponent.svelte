@@ -40,8 +40,11 @@
             <li>
               <button
                 class:active={tab == selectedTab}
-                on:click={handleSelect(tab)}>{tab.name}</button
+                on:click={handleSelect(tab)}
               >
+                {tab.name}
+                <span class="dot"></span>
+              </button>
             </li>
           {/each}
         </ul>
@@ -82,6 +85,9 @@
 </div>
 
 <style>
+  :root {
+    --h-panelnav: 2.375rem;
+  }
   .panel_nav {
     position: sticky;
     top: 0;
@@ -89,9 +95,8 @@
     flex-shrink: 0;
     justify-content: space-between;
     align-items: center;
-    height: 36px;
-    background-color: var(--c-basic-50);
-    border-bottom: 1px solid var(--c-basic-300);
+    height: var(--h-panelnav);
+    background-color: var(--c-basic-75);
   }
   .panel_nav nav {
     margin: 0 1.25rem;
@@ -101,33 +106,45 @@
     overflow-x: auto;
   }
   .panel_nav nav li button {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    padding: 0.563rem 1.25rem 0.188rem;
     padding: 0 1.25rem;
-    height: calc(36px - 1px);
+    height: var(--h-panelnav);
     font-size: 0.875rem;
-    color: var(--c-basic-900);
+    color: var(--c-basic-700);
     white-space: nowrap;
     text-transform: capitalize;
+    overflow: hidden;
+  }
+  .panel_nav nav li button .dot {
+    display: block;
+    height: 0.313rem;
+    width: 0.313rem;
     background-color: transparent;
-    border: none;
-    border-bottom: 0.125rem solid transparent;
-    cursor: pointer;
+    border-radius: 50%;
+  }
+  .panel_nav nav li button.active .dot {
+    background-color: var(--c-primary);
+  }
+  .panel_nav nav li button:hover {
+    color: var(--c-primary);
   }
   .panel_nav nav li button.active {
     color: var(--c-primary);
-    border-bottom: 0.125rem solid var(--c-primary);
-  }
-  .panel_nav nav li button:hover {
-    border-color: var(--c-primary);
   }
   .panel_toggle {
     padding: 0 0.75rem;
     background: none;
-    cursor: pointer;
   }
   .panel_toggle svg {
     margin-top: 0.188rem;
     height: 1.375rem;
-    color: var(--c-basic-900);
+    color: var(--c-basic-700);
   }
   .panel_toggle:hover svg {
     color: var(--c-primary);
@@ -137,7 +154,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    top: calc(36px);
+    top: var(--h-panelnav);
     padding: 1.25rem;
     overflow-y: auto;
   }

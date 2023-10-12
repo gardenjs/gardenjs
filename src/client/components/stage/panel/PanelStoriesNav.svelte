@@ -32,13 +32,11 @@
     width: 100%;
     font-size: 0.9rem;
     color: var(--c-basic-600);
-    cursor: pointer;
-    background-color: transparent;
     border-left: 1px solid var(--c-basic-300);
     text-align: left;
   }
   .stories li:nth-child(odd) button {
-    background-color: var(--c-basic-100);
+    background-color: var(--c-basic-50);
   }
   .stories li:hover button,
   .stories li:focus button,
@@ -49,6 +47,7 @@
   .stories li:hover button,
   .stories li:focus button {
     color: var(--c-primary);
+    background-color: var(--c-basic-100);
   }
   .stories li.active button {
     color: var(--c-primary);

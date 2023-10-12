@@ -128,6 +128,7 @@
               d="M12 18h.01"
             /></svg
           >
+          <span class="dot"></span>
         </button>
         <button
           title="Medium"
@@ -149,6 +150,7 @@
               d="M12 18h.01"
             /></svg
           >
+          <span class="dot"></span>
         </button>
         <button
           title="Large"
@@ -170,6 +172,7 @@
               d="M2 20h20"
             /></svg
           >
+          <span class="dot"></span>
         </button>
         <button
           title="Full"
@@ -190,6 +193,7 @@
               d="M8 21h8m-4-4v4"
             /></svg
           >
+          <span class="dot"></span>
         </button>
         <button
           title={landscape ? 'Portrait mode' : 'Landscape mode'}
@@ -334,7 +338,6 @@
   .topbar_container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 1px;
     width: 100%;
     height: 100%;
@@ -347,14 +350,15 @@
 
   /* buttons */
   .topbar_btn {
+    display: flex;
+    align-items: center;
     padding: 0 0.375rem;
     height: var(--h-topbar);
     background: none;
-    cursor: pointer;
   }
   .topbar_btn svg {
     height: 1.125rem;
-    color: var(--c-basic-800);
+    color: var(--c-basic-700);
   }
   .topbar_btn:hover svg {
     color: var(--c-primary);
@@ -410,19 +414,16 @@
       background-color: var(--c-basic-100);
     }
     .stagesize-nav button {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-self: center;
       height: var(--h-topbar);
       margin: 0;
       padding: 0 0.25rem;
       background: none;
-      border-top: 2px solid transparent;
-      cursor: pointer;
-    }
-    .stagesize-nav button.active {
-      border-top: 2px solid var(--c-primary);
-      z-index: 9;
-    }
-    .stagesize-nav button.active {
-      background-color: var(--c-primary-bg);
+      overflow: hidden;
     }
     .stagesize-nav button svg {
       height: 1.125rem;
@@ -436,6 +437,20 @@
     .stagesize-nav button svg.landscape {
       transform: rotate(90deg);
       transition: 0.2s;
+    }
+    .stagesize-nav button .dot {
+      display: block;
+      position: absolute;
+      left: 50%;
+      bottom: 0.125rem;
+      transform: translateX(-50%);
+      height: 0.25rem;
+      width: 0.25rem;
+      background-color: transparent;
+      border-radius: 50%;
+    }
+    .stagesize-nav button.active .dot {
+      background-color: var(--c-primary);
     }
   }
 
@@ -454,7 +469,9 @@
   .dropdown_items ul {
     margin: 0;
     padding: 0;
-    background-color: var(--c-basic-150);
+    background-color: var(--c-basic-50);
+    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
+      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
     border-radius: 0.5rem;
     overflow: hidden;
   }
@@ -474,14 +491,11 @@
     color: var(--c-basic-900);
     text-transform: capitalize;
     white-space: nowrap;
-    background-color: transparent;
-    border: none;
     border-left: 3px solid transparent;
-    cursor: pointer;
   }
   .dropdown_items ul li button:hover {
     color: var(--c-primary);
-    border-color: var(--c-primary);
+    background-color: var(--c-basic-100);
   }
   .dropdown_items ul li button.active,
   .dropdown_items ul li button.active:hover {
