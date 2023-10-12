@@ -86,6 +86,7 @@
     position: sticky;
     top: 0;
     display: flex;
+    flex-shrink: 0;
     justify-content: space-between;
     align-items: center;
     height: 36px;
@@ -132,8 +133,12 @@
     color: var(--c-primary);
   }
   .panel_pane {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: calc(36px);
     padding: 1.25rem;
-    color: var(--c-basic-900);
     overflow-y: auto;
   }
 </style>
