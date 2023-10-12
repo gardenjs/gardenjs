@@ -68,6 +68,7 @@
     border-bottom: 0;
     border-radius: 0.5rem 0.5rem 0 0;
     overflow: hidden;
+    transition: 0.1s;
   }
   .dragbar {
     flex-grow: 0;
