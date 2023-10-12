@@ -192,14 +192,14 @@
     display: flex;
     flex-shrink: 0;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     padding: 0.25rem 0.688rem;
-    margin: 0 0 0.375rem;
+    margin: 0 0 0.125rem;
     width: var(--w-sidebar);
+    height: 2.25rem;
     background-color: var(--c-sidebar);
     z-index: 9;
-    height: 2.25rem;
     inline-size: var(--w-sidebar);
     overflow: hidden;
     white-space: nowrap;
