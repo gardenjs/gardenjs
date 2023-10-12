@@ -10,7 +10,7 @@
   }
 </script>
 
-<ul class="list level-{level}">
+<ul class="filter_list level-{level}">
   {#each nodes as node}
     {#if node.isLeaf}
       <li>
@@ -68,6 +68,7 @@
 <style>
   .level-1 {
     padding: 0;
+    width: 100%;
   }
   .folder {
     display: block;
@@ -151,7 +152,7 @@
     margin-left: 1.063rem;
     border-left: 1px solid var(--c-basic-300);
   }
-  .list :global(.highlight) {
+  .filter_list :global(.highlight) {
     padding: 0 0.125rem;
     background-color: var(--c-primary);
     color: #fff;

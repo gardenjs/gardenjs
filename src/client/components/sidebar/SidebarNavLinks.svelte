@@ -64,4 +64,9 @@
     margin-right: 0.438rem;
     color: var(--c-basic-400);
   }
+  .component_label {
+    margin-right: 0.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 </style>
