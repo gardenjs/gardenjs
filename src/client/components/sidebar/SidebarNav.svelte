@@ -154,8 +154,7 @@
   }
   .filter_list :global(.highlight) {
     padding: 0 0.125rem;
-    background-color: var(--c-primary);
-    color: #fff;
-    font-weight: 600;
+    color: var(--c-primary);
+    font-weight: 700;
   }
 </style>
