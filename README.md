@@ -130,6 +130,7 @@ MIT
 
 ### v1.0
 
+- [task] Topbar: Add class "active" to default theme in dropdown - depending on what theme was choosen as "default" in config.garden.js.
 - [task] Make Garden compatible with Vue & React.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [task] Install script / commandline skeleton project (example component). Test script with Svelte, Vue & React.
@@ -163,4 +164,4 @@ MIT
 - [feature] Bookmarks.
 - [feature] Measure.
 
-<br><br><br><p align="center"><img src="src/assets/icons/logo.svg"></p>
+<br><br><br><p align="center"><img src="src/client/assets/icons/logo.svg"></p>
