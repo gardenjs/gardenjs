@@ -109,8 +109,7 @@
       </div>
       <div class="stagesize-nav">
         <button
-          data-title="Small"
-          class="tooltip"
+          title="Small"
           class:active={stageSize === 'small'}
           on:click={() => setFramesize('small')}
         >
@@ -131,8 +130,7 @@
           >
         </button>
         <button
-          data-title="Medium"
-          class="tooltip"
+          title="Medium"
           class:active={stageSize === 'medium'}
           on:click={() => setFramesize('medium')}
         >
@@ -153,8 +151,7 @@
           >
         </button>
         <button
-          data-title="Large"
-          class="tooltip"
+          title="Large"
           class:active={stageSize === 'large'}
           on:click={() => setFramesize('large')}
         >
@@ -175,8 +172,7 @@
           >
         </button>
         <button
-          data-title="Full"
-          class="tooltip"
+          title="Full"
           class:active={stageSize === 'full'}
           on:click={() => setFramesize('full')}
         >
@@ -196,8 +192,7 @@
           >
         </button>
         <button
-          data-title={landscape ? 'Portrait mode' : 'Landscape mode'}
-          class="tooltip"
+          title={landscape ? 'Portrait mode' : 'Landscape mode'}
           on:click={toggleOrientation}
         >
           <svg
@@ -442,17 +437,6 @@
       transform: rotate(90deg);
       transition: 0.2s;
     }
-    .stagesize-nav button.tooltip:hover::after {
-      position: absolute;
-      display: block;
-      margin-top: 0.875rem;
-      padding: 0.25rem;
-      content: attr(data-title);
-      font-size: 0.75rem;
-      color: var(--c-basic-50);
-      background-color: var(--c-basic-900);
-      border-radius: 0.125rem;
-    }
   }
 
   /* theme dropdown nav */
@@ -464,13 +448,14 @@
     visibility: hidden;
     position: absolute;
     left: -0.75rem;
-    padding: 0;
+    padding: 0.375rem 0 0;
     z-index: 9;
   }
   .dropdown_items ul {
     margin: 0;
     padding: 0;
-    background-color: var(--c-basic-50);
+    background-color: var(--c-basic-150);
+    border-radius: 0.5rem;
     overflow: hidden;
   }
   .dropdown_items ul li {
@@ -485,8 +470,8 @@
     width: 100%;
     min-width: 113px;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
-    font-size: 0.813rem;
-    color: var(--c-basic-600);
+    font-size: 0.75rem;
+    color: var(--c-basic-900);
     text-transform: capitalize;
     white-space: nowrap;
     background-color: transparent;
@@ -495,8 +480,7 @@
     cursor: pointer;
   }
   .dropdown_items ul li button:hover {
-    color: var(--c-basic-900);
-    background-color: var(--c-basic-200);
+    color: var(--c-primary);
     border-color: var(--c-primary);
   }
   .dropdown_items ul li button.active,
