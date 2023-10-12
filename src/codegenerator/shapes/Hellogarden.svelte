@@ -1,18 +1,28 @@
-<div class="box">
-  <h1>Hello, Garden!</h1>
-  <p>
-    Woohoo, you've successfully installed the component library explorer Garden.<br
-    />Welcome and have fun gardening<span class="cursor_blink">_</span>
-  </p>
+<div class="container">
+  <div class="container_content">
+    <h1>Hello, Garden!</h1>
+    <p>
+      Woohoo, you've successfully installed the component library explorer
+      Garden.<br />Welcome and have fun gardening<span class="cursor_blink"
+        >_</span
+      >
+    </p>
+  </div>
 </div>
 
 <style>
-  .box {
+  .container_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 2rem;
+  }
+  .container {
     width: 90%;
     max-width: 1240px;
     background: #fff;
-    margin: 5rem auto;
-    padding: 2rem;
+    margin: auto;
   }
   h1,
   p {
