@@ -52,6 +52,6 @@
 
 <style>
   .full {
-    padding: 1rem 1rem 0;
+    padding: 0.5rem 0.5rem 0;
   }
 </style>
