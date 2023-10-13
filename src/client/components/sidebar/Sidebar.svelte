@@ -255,7 +255,7 @@
     overflow: hidden;
     visibility: visible;
     width: var(--w-sidebar);
-    overflow-y: scroll;
+    overflow-y: auto;
     z-index: 1;
     margin: 0 0 1rem;
   }
