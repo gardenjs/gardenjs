@@ -68,13 +68,13 @@ export function updateStageHeight(newHeight) {
 }
 
 export function updateStageMaxHeight(newHeight) {
-  stageMaxHeight.set(newHeight - 8)
+  stageMaxHeight.set(newHeight - 10)
 }
 
 export function toggleExpandPanel() {
   if (get(panelExpanded)) {
     previousPanelHeight = get(stageHeight)
-    stageHeight.set('calc(100vh - 3.4rem)')
+    stageHeight.set(get(stageMaxHeight))
   } else {
     stageHeight.set(previousPanelHeight)
   }
