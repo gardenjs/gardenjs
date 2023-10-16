@@ -1,10 +1,12 @@
 <script setup>
 import { componentMap } from '../component_import_map.js'
-import { computed } from 'vue'
+import { ref, watch } from 'vue'
 import { state } from './state.js'
 
-const component = computed(() => {
-  return componentMap[state.componentName]
+const component = ref()
+
+watch(state, (newState) => {
+  component.value = componentMap[newState.componentName]
 })
 </script>
 

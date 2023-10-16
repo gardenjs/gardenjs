@@ -25,13 +25,19 @@
     updateComponent(evt.data.componentName, selectedExample, das)
   })
 
-  function updateComponent(componentName, selectedExample, das) {
+  async function updateComponent(componentName, selectedExample, das) {
     const newFwk = das?.file.indexOf('vue') > 0 ? 'vue' : 'svelte'
     if (fwk != newFwk) {
-      updateRenderer(newFwk)
+      console.log('DEBUG', 'update renderer')
+      await updateRenderer(newFwk)
       fwk = newFwk
     }
-    currentRenderer?.updateComponent({ componentName, selectedExample, das })
+    currentRenderer?.updateComponent({
+      componentName,
+      selectedExample,
+      das,
+      componentMap,
+    })
   }
 
   async function updateRenderer(newFwk) {
@@ -54,6 +60,7 @@
   }
 
   async function createVueRenderer() {
+    updateVueState({})
     const app = createApp(VueApp)
     app.mount('#app')
     return {

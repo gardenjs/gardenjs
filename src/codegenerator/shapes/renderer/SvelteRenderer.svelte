@@ -1,10 +1,10 @@
 <script>
-  import { componentMap } from '../component_import_map.js'
+  export let componentMap
   export let componentName
   export let selectedExample
   export let das
 
-  $: component = componentMap[componentName] || componentMap.Welcome
+  $: component = componentMap?.[componentName] || componentMap?.Welcome
 
   let redirectData = {}
   $: {
@@ -13,10 +13,6 @@
     }
   }
 
-  $: console.log('DEBUG', 'compname', componentName, 'das', das)
-
-  $: console.log('DEBUG', 'comp', component)
-  $: console.log('DEBUG', 'compmap', componentMap)
   function handleComponentOut(evt) {
     if (das.out) {
       das.out.forEach((out) => {
