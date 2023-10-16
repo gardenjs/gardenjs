@@ -2,10 +2,10 @@
   export let componentMap = {}
   export let dasMap = {}
   export let config
-  import SvelteApp from '../renderer/SvelteRenderer.svelte'
+  import SvelteApp from '/renderer/SvelteRenderer.svelte'
   import { createApp } from 'vue'
-  import VueApp from '../renderer/VueRenderer.vue'
-  import { updateVueState } from '../renderer/state.js'
+  import VueApp from '/renderer/VueRenderer.vue'
+  import { updateVueState } from '/renderer/state.js'
 
   let das = {}
   let selectedExample = {}
