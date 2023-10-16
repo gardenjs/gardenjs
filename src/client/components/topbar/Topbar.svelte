@@ -256,8 +256,10 @@
                   <button
                     class:active={theme.active}
                     on:click={() => handleThemeChange(theme.name)}
-                    >{theme.name}</button
                   >
+                    <span class="dropdown_item-dot"></span>
+                    {theme.name}
+                  </button>
                 </li>
               {/each}
             </ul>
@@ -482,16 +484,30 @@
     padding: 0;
   }
   .dropdown_items ul li button {
+    position: relative;
     display: flex;
     align-items: center;
+    justify-items: flex-start;
     width: 100%;
     min-width: 113px;
-    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    padding: 0.5rem;
     font-size: 0.75rem;
     color: var(--c-basic-900);
     text-transform: capitalize;
     white-space: nowrap;
-    border-left: 3px solid transparent;
+    overflow: hidden;
+  }
+  .dropdown_items ul li button .dropdown_item-dot {
+    display: block;
+    margin: 0 0.25rem 0 0;
+    height: 0.25rem;
+    width: 0.25rem;
+    background-color: transparent;
+    border-radius: 50%;
+  }
+  .dropdown_items ul li button.active .dropdown_item-dot,
+  .dropdown_items ul li button.active:hover .dropdown_item-dot {
+    background-color: var(--c-primary);
   }
   .dropdown_items ul li button:hover {
     color: var(--c-primary);
