@@ -484,7 +484,6 @@
     padding: 0;
   }
   .dropdown_items ul li button {
-    position: relative;
     display: flex;
     align-items: center;
     justify-items: flex-start;
@@ -495,7 +494,6 @@
     color: var(--c-basic-900);
     text-transform: capitalize;
     white-space: nowrap;
-    overflow: hidden;
   }
   .dropdown_items ul li button .dropdown_item-dot {
     display: block;
