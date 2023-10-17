@@ -10,10 +10,11 @@
 
 <a
   {href}
-  class="link_level-{level}"
+  class="component_link link_level-{level}"
   class:selected
   on:click|preventDefault={handleClick}
 >
+  <span class="dot"></span>
   <span class="component_icon"
     ><svg
       xmlns="http://www.w3.org/2000/svg"
@@ -35,28 +36,38 @@
 </a>
 
 <style>
-  a {
+  .component_link {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     margin: 0;
-    padding: 0.188rem 0 0.188rem 0.563rem;
+    padding: 0.188rem 0 0.188rem 0;
     text-transform: initial;
     font-size: 0.813rem;
     color: var(--c-basic-600);
     line-height: 1.2;
     font-weight: 400;
-    border-left: 0.125rem solid transparent;
   }
-  a:hover,
-  a:focus {
+  .component_link:hover,
+  .component_link:focus {
     color: var(--c-primary);
+    font-weight: 500;
     background-color: var(--c-basic-100);
-    border-color: var(--c-primary);
   }
-  a.selected {
+  .component_link .dot {
+    display: block;
+    margin: 0 0.5rem 0 -0.188rem;
+    height: 0.375rem;
+    width: 0.375rem;
+    background-color: transparent;
+    border-radius: 50%;
+  }
+  .component_link.selected .dot {
+    background-color: var(--c-primary);
+  }
+  .component_link.selected {
     color: var(--c-primary);
-    border-color: var(--c-primary);
+    font-weight: 500;
     background-color: var(--c-primary-bg);
   }
   .component_icon {
