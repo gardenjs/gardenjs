@@ -119,35 +119,35 @@
   }
   .level-2 {
     margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-300);
+    border-left: 1px solid var(--c-basic-250);
   }
   .level-3 {
     margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-300);
+    border-left: 1px solid var(--c-basic-250);
   }
   .level-4 {
     margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-300);
+    border-left: 1px solid var(--c-basic-250);
   }
   .level-5 {
     margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-300);
+    border-left: 1px solid var(--c-basic-250);
   }
   .level-6 {
     margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-300);
+    border-left: 1px solid var(--c-basic-250);
   }
   .level-7 {
     margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-300);
+    border-left: 1px solid var(--c-basic-250);
   }
   .level-8 {
     margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-300);
+    border-left: 1px solid var(--c-basic-250);
   }
   .level-9 {
     margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-300);
+    border-left: 1px solid var(--c-basic-250);
   }
   .filter_list :global(.highlight) {
     padding: 0 0.125rem;
