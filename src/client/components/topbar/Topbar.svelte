@@ -509,11 +509,12 @@
   }
   .dropdown_items ul li button:hover {
     color: var(--c-primary);
+    font-weight: 500;
     background-color: var(--c-basic-100);
   }
-  .dropdown_items ul li button.active,
-  .dropdown_items ul li button.active:hover {
+  .dropdown_items ul li button.active {
     color: var(--c-primary);
+    font-weight: 500;
     background-color: var(--c-primary-bg);
     border-color: var(--c-primary);
   }
