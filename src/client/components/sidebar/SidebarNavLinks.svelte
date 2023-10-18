@@ -14,7 +14,7 @@
   class:selected
   on:click|preventDefault={handleClick}
 >
-  <span class="dot"></span>
+  <span class="component_dot"></span>
   <span class="component_icon"
     ><svg
       xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@
     font-weight: 500;
     background-color: var(--c-basic-100);
   }
-  .component_link .dot {
+  .component_link .component_dot {
     display: block;
     margin: 0 0.5rem 0 -0.188rem;
     height: 0.375rem;
@@ -62,13 +62,15 @@
     background-color: transparent;
     border-radius: 50%;
   }
-  .component_link.selected .dot {
+  .component_link.selected .component_dot {
     background-color: var(--c-primary);
   }
   .component_link.selected {
+    margin-left: -1px;
     color: var(--c-primary);
     font-weight: 500;
     background-color: var(--c-primary-bg);
+    border-left: 1px solid var(--c-primary);
   }
   .component_icon {
     display: flex;
