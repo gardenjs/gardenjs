@@ -10,10 +10,10 @@
   }
 </script>
 
-<ul class="filter_list level-{level}">
+<ul class="filter_list items level-{level}">
   {#each nodes as node}
     {#if node.isLeaf}
-      <li>
+      <li class="item">
         <Link href={node.href} selected={node.selected} {level}
           >{@html node.name}</Link
         >
@@ -66,9 +66,15 @@
 </ul>
 
 <style>
+  .items {
+    margin-left: 1.063rem;
+    border-left: 1px solid var(--c-basic-250);
+  }
   .level-1 {
-    padding: 0;
     width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
   }
   .folder {
     display: block;
@@ -116,38 +122,6 @@
   }
   .btn_level-3 .folder_label {
     font-size: 0.813rem;
-  }
-  .level-2 {
-    margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-250);
-  }
-  .level-3 {
-    margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-250);
-  }
-  .level-4 {
-    margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-250);
-  }
-  .level-5 {
-    margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-250);
-  }
-  .level-6 {
-    margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-250);
-  }
-  .level-7 {
-    margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-250);
-  }
-  .level-8 {
-    margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-250);
-  }
-  .level-9 {
-    margin-left: 1.063rem;
-    border-left: 1px solid var(--c-basic-250);
   }
   .filter_list :global(.highlight) {
     padding: 0 0.125rem;
