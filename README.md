@@ -130,19 +130,22 @@ MIT
 
 ### v1.0
 
-- [bug] Fix favicon.
-- [task] Topbar: Add class "active" to default theme in dropdown - depending on what theme was choosen as "default" in config.garden.js.
 - [task] Make Garden compatible with Vue & React.
+- [task] Topbar: Add class "active" to default theme in dropdown - depending on what theme was choosen as "default" in config.garden.js.
+- [bug] Fix favicon. Update: it´s only a Firefox problem.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
+- [task] Add tests (or v1.1 ?).
 - [task] Install script / commandline skeleton project (example component). Test script with Svelte, Vue & React.
-- [task] Make Storybook stories compatible with Garden.
 - [task] Public Garden demo of project/marketing website.
 - [task] Set repository of project/marketing website public
 - [task] Rabbit dev website.
 - [task] Set garden repository public & make garden npm modul. (yarn?)
-- [task] Add tests.
 
 ### v1.1
+
+- [task] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
+
+### v1.x
 
 - [task] Make setting of default mode possible via garden.config.js.
 - [task] Store selection in panel nav for refresh or if another component is selected.
