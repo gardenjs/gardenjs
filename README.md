@@ -143,31 +143,26 @@ MIT
 
 ### v1.1
 
-- [task] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
+- [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
 
-### v1.x
+### v1.x.x
 
+- [task] Sidebarnav is closed by default on narrow display devices.
 - [task] Make setting of default mode possible via garden.config.js.
 - [task] Store selection in panel nav for refresh or if another component is selected.
 - [task] Store selection of stage for refresh or if another component is selected.
-- [feature] Docker image for screenshot test.
+- [task] Make garden docs link optional via garden.config.js.
+- [task] Show custom favicon.svg configured in garden.config.js.
+- [feature] Screenshot tests:
+  - Docker image oder alternativ for screenshot test.
+  - Automatic create test file & and folder (like init garden).
+  - Settings.
 - [feature] Set width and height of stage by size input.
 - [feature] Add zoom button 100% and if zoomed show size in % with switch possibility.
-- [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi.
-- [task] Make garden docs link optional via garden.config.js.
-- [feature] Show custom favicon.svg configured in garden.config.js.
-- [feature] Screenshot test: automatic create test file & and folder (like init garden).
-- [feature] Screenshot test: settings.
-- [feature] switch from md to mdx.
+- [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi. -[task] Switch from md to mdx.
 - [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js. Option: Set list of custom values like iPhone 15, iPad, Samsung etc. in garden.config and show dropdown in garden instead of icons.
 - [task] Integrate Svelte A11y features.
-- [task] Improve Garden for smaller displays:
-  - Sidebarnav is closed by default on narrow display devices.
-  - ...
-- [task] Build kickstarter "carrots". Define components for carrots.
-
-### v1.2
-
+- [feature] Build kickstarter "carrots". Define components for carrots.
 - [feature] Bookmarks.
 - [feature] Measure.
 
