@@ -145,7 +145,7 @@ MIT
 
 - [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
 
-### v1.x.x
+### v1.x
 
 - [task] Sidebarnav is closed by default on narrow display devices.
 - [task] Make setting of default mode possible via garden.config.js.
@@ -159,7 +159,8 @@ MIT
   - Settings.
 - [feature] Set width and height of stage by size input.
 - [feature] Add zoom button 100% and if zoomed show size in % with switch possibility.
-- [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi. -[task] Switch from md to mdx.
+- [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi.
+- [task] Switch from md to mdx.
 - [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js. Option: Set list of custom values like iPhone 15, iPad, Samsung etc. in garden.config and show dropdown in garden instead of icons.
 - [task] Integrate Svelte A11y features.
 - [feature] Build kickstarter "carrots". Define components for carrots.
