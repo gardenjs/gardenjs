@@ -1,13 +1,17 @@
-import SvelteApp from './SvelteRenderer.svelte'
+// import SvelteApp from './SvelteRenderer.svelte'
 
 async function create() {
-  console.log('DEBUG', 'CREATE APP')
-  const app = new SvelteApp({
-    target: document.getElementById('app'),
-  })
-  return {
-    destroy: () => app.$destroy(),
-    updateComponent: (props) => app.$set(props),
+  try {
+    const { default: SvelteApp } = await import('./SvelteRenderer.svelte')
+    const app = new SvelteApp({
+      target: document.getElementById('app'),
+    })
+    return {
+      destroy: () => app.$destroy(),
+      updateComponent: (props) => app.$set(props),
+    }
+  } catch (e) {
+    console.log('DEBUG', 'error', e)
   }
 }
 
