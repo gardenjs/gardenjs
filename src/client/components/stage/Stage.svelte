@@ -129,7 +129,7 @@
       class="stage_iframe"
       title="preview"
       bind:this={myframe}
-      src="/gardenframe/"
+      src="/frame.html"
       style={stageStyle}
     ></iframe>
   </div>
