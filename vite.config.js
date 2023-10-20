@@ -9,6 +9,7 @@ export default defineConfig({
       input: ['index.html', 'frame.html'],
       makeAbsoluteExternalsRelative: false,
       external: [
+        'garden',
         '/raw_component_import_map.js',
         '../base.js',
         '../das_import_map.js',

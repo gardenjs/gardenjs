@@ -1,17 +1,18 @@
 <script>
+  import SvelteRenderer from '../renderer/SvelteRenderer.svelte'
+  import DefaultRendererBuilder from '../renderer/SvelteRenderer.js'
   export let componentMap = {}
   export let dasMap = {}
   export let config
-  import SvelteApp from '/renderer/SvelteRenderer.svelte'
-  import { createApp } from 'vue'
-  import VueApp from '/renderer/VueRenderer.vue'
-  import { updateVueState } from '/renderer/state.js'
 
   let das = {}
   let selectedExample = {}
   let full = false
   let fwk
   let currentRenderer
+  let componentName
+  let component
+  let redirectData = {}
 
   window.addEventListener('message', (evt) => {
     if (config.themeHandler) {
@@ -22,15 +23,24 @@
     selectedExample = das?.examples.find(
       (ex) => ex.story === evt.data.selectedExample
     )
-    updateComponent(evt.data.componentName, selectedExample, das)
+    componentName = evt.data.componentName
+    if (config.devmodus) {
+      component = componentMap?.[componentName] || componentMap?.Welcome
+      redirectData = {}
+    } else {
+      updateComponent(componentName, selectedExample, das)
+    }
   })
 
   async function updateComponent(componentName, selectedExample, das) {
-    const newFwk = das?.file.indexOf('vue') > 0 ? 'vue' : 'svelte'
-    if (fwk != newFwk) {
-      console.log('DEBUG', 'update renderer')
-      await updateRenderer(newFwk)
-      fwk = newFwk
+    if (config.renderer) {
+      let newFwk =
+        das?.file.substring(das?.file.lastIndexOf('.') + 1) || 'svelte'
+      if (fwk != newFwk) {
+        const rendererBuilder = config.renderer[newFwk]
+        await updateRenderer(rendererBuilder)
+        fwk = newFwk
+      }
     }
     currentRenderer?.updateComponent({
       componentName,
@@ -40,38 +50,43 @@
     })
   }
 
-  async function updateRenderer(newFwk) {
+  async function updateRenderer(rendererBuilder) {
     await currentRenderer?.destroy()
-    if (newFwk === 'svelte') {
-      currentRenderer = await createSvelteRenderer()
-    } else if (newFwk === 'vue') {
-      currentRenderer = await createVueRenderer()
+    currentRenderer = await rendererBuilder.create()
+  }
+
+  $: {
+    if (!config.devmodus) {
+      updateRenderer(DefaultRendererBuilder)
     }
   }
 
-  async function createSvelteRenderer() {
-    const app = new SvelteApp({
-      target: document.getElementById('app'),
-    })
-    return {
-      destroy: () => app.$destroy(),
-      updateComponent: (props) => app.$set(props),
-    }
-  }
-
-  async function createVueRenderer() {
-    updateVueState({})
-    const app = createApp(VueApp)
-    app.mount('#app')
-    return {
-      destroy: () => app.unmount(),
-      updateComponent: updateVueState,
+  function handleComponentOut(evt) {
+    if (das.out) {
+      das.out.forEach((out) => {
+        if (evt.detail[out.name]) {
+          console.log(evt.detail[out.name])
+          if (selectedExample.redirect && selectedExample.redirect[out.name]) {
+            const input = selectedExample.redirect[out.name]
+            redirectData[input] = evt.detail[out.name]
+          }
+        }
+      })
     }
   }
 </script>
 
 <div class:full>
-  <div id="app"></div>
+  {#if config.devmodus}
+    <svelte:component
+      this={component}
+      {...selectedExample?.input}
+      {...redirectData}
+      on:out={handleComponentOut}
+    />
+  {:else}
+    <div id="app"></div>
+  {/if}
 </div>
 
 <style>

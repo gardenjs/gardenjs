@@ -10,7 +10,6 @@ const sourcefolder = path.resolve(__dirname, 'shapes') + '/'
 const distfolder = path.resolve(__dirname, '../../dist') + '/'
 
 export async function clearBaseFolder() {
-  const config = await getConfig()
   const targetfolder = '.garden'
   fs.rmSync(targetfolder, { recursive: true, force: true })
 }

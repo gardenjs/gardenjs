@@ -10,6 +10,13 @@
   "bin": {
     "garden": "bin/servegarden.js"
   },
+  "exports": {
+    ".": "./src/client/index.js",
+    "./GardenFrame": "./src/client/GardenFrame.svelte",
+    "./svelte": "./src/renderer/SvelteRenderer.js",
+    "./vue": "./src/renderer/VueRenderer.js",
+    "./main.scss": "./src/client/assets/scss/main.scss"
+  },
   "scripts": {
     "prepare": "husky install",
     "build": "vite build",
