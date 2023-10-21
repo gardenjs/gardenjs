@@ -12,6 +12,7 @@
   },
   "exports": {
     ".": "./src/client/index.js",
+    "./init": "./src/codegenerator/watchcl.js",
     "./GardenFrame": "./src/client/GardenFrame.svelte",
     "./svelte": "./src/renderer/SvelteRenderer.js",
     "./vue": "./src/renderer/VueRenderer.js",

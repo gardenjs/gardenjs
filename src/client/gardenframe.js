@@ -4,7 +4,7 @@ import { componentMap } from '../component_import_map.js'
 import config from '../../garden.config.js'
 
 const app = new GardenFrame({
-  target: document.getElementById('gardenframe'),
+  target: document.body,
   props: { componentMap, dasMap, config },
 })
 
