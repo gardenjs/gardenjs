@@ -132,7 +132,6 @@ MIT
 
 - [task] Make Garden compatible with Vue & React.
 - [task] Topbar: Add class "active" to default theme in dropdown - depending on what theme was choosen as "default" in config.garden.js.
-- [bug] Fix favicon. Update: it´s only a Firefox problem.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [task] Add tests (or v1.1 ?).
 - [task] Install script / commandline skeleton project (example component). Test script with Svelte, Vue & React.
