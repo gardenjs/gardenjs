@@ -8,15 +8,14 @@ const __dirname = dirname(__filename)
 
 const sourcefolder = path.resolve(__dirname, 'shapes') + '/'
 const distfolder = path.resolve(__dirname, '../../dist') + '/'
+const targetfolder = '.garden/'
 
 export async function clearBaseFolder() {
-  const targetfolder = '.garden'
   fs.rmSync(targetfolder, { recursive: true, force: true })
 }
 
 export async function copyBaseClasses() {
   const config = await getConfig()
-  const targetfolder = config.destination
   fs.mkdir(
     targetfolder,
     { recursive: true },
