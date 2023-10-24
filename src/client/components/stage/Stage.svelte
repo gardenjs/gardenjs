@@ -17,6 +17,7 @@
   export let stageHeight
   export let stageMaxHeight
   export let panelExpanded
+  export let theme
 
   let myframeready
   let myframe
@@ -61,7 +62,7 @@
   $: {
     if (myframeready) {
       myframe.contentWindow.postMessage(
-        { selectedExample, componentName, stageSize },
+        { selectedExample, componentName, stageSize, theme },
         window.location
       )
     }

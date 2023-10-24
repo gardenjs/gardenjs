@@ -13,6 +13,7 @@
     setThemes,
     selectTheme,
     themes,
+    activeTheme,
     toggleExpandPanel,
     updateStageHeight,
     updateStageMaxHeight,
@@ -137,6 +138,7 @@
       stageSize={$stageSize}
       stageHeight={$stageHeight}
       stageMaxHeight={$stageMaxHeight}
+      theme={$activeTheme?.name}
       {expressbaseurl}
       panelExpanded={$panelExpanded}
       on:out={handleStageOut}

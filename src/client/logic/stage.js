@@ -1,15 +1,17 @@
-import { writable, get } from 'svelte/store'
+import { writable, derived, get } from 'svelte/store'
 
 export const themes = writable([])
 export const stageStyle = writable('')
 export const stageSize = writable('full')
 export const landscape = writable(false)
+export const activeTheme = derived(themes, ($themes) => {
+  return $themes.find((theme) => theme.active)
+})
 export const stageHeight = writable('65vh')
 export const stageMaxHeight = writable(9999)
 export const panelExpanded = writable(true)
 
 let previousPanelHeight = '65vh'
-let activeTheme
 
 const sizes = {
   small: {
@@ -41,7 +43,6 @@ export function selectTheme(themeName) {
   themes.set(
     get(themes).map((theme) => ({ ...theme, active: theme.name === themeName }))
   )
-  activeTheme = get(themes).find((theme) => theme.active)
   computeStageStyle()
 }
 
@@ -52,7 +53,7 @@ export function updateStage(newStage) {
 }
 
 function computeStageStyle() {
-  const stageBg = activeTheme?.stageBg || 'white'
+  const stageBg = get(activeTheme)?.stageBg || 'white'
   const { frameheight, framewidth } = sizes[get(stageSize)]
   const size = get(landscape)
     ? `width: ${frameheight}; height: ${framewidth}`
