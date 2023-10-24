@@ -1,24 +1,17 @@
 import { getConfig } from './config.js'
 import open from 'open'
 import { createServer as createViteServer } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 export async function createServer() {
-  const { serverport } = await getConfig()
+  const { serverport, vite_config } = await getConfig()
+
+  const configFile = vite_config || './vite.config.js'
 
   console.log('PROJECT ROOT', process.cwd())
   const server = await createViteServer({
+    configFile,
     root: '.garden/',
-    configFile: false,
     assetsInclude: ['**/*.md'],
-    server: {
-      port: serverport,
-    },
-    plugins: [
-      svelte({
-        compilerOptions: { hydratable: true },
-      }),
-    ],
   })
   console.log(`Listening to port ${serverport}`)
   console.log(`http://localhost:${serverport}`)
