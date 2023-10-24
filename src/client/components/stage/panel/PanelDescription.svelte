@@ -21,5 +21,6 @@
 </script>
 
 <div class="markdown-body" bind:this={element}>
+  <!-- eslint-disable-next-line -->
   {@html marked(das.descriptionfile || das.description)}
 </div>

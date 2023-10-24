@@ -14,9 +14,10 @@
   {#each nodes as node}
     {#if node.isLeaf}
       <li class="item">
-        <Link href={node.href} selected={node.selected} {level}
-          >{@html node.name}</Link
-        >
+        <Link href={node.href} selected={node.selected} {level}>
+          <!-- eslint-disable-next-line -->
+          {@html node.name}
+        </Link>
       </li>
     {:else}
       <li class="folder" class:unfolded={node.unfolded}>
@@ -55,7 +56,10 @@
               /></svg
             ></span
           >
-          <span class="folder_label">{@html node.name}</span>
+          <span class="folder_label">
+            <!-- eslint-disable-next-line -->
+            {@html node.name}
+          </span>
         </button>
         {#if node.unfolded}
           <svelte:self nodes={node.children} level={level + 1} on:out />
