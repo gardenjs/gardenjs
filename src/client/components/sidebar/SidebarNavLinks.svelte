@@ -3,7 +3,7 @@
   export let selected
   export let level
 
-  function handleClick(evt) {
+  function handleClick() {
     globalThis.history.pushState({}, '', href)
   }
 </script>

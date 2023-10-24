@@ -45,7 +45,7 @@
         evt.pageY = event.clientY + boundingClientRect.top
         myframe.dispatchEvent(evt)
       })
-      myframe.contentWindow.addEventListener('mouseup', function (event) {
+      myframe.contentWindow.addEventListener('mouseup', function () {
         var evt = new CustomEvent('mouseup', {
           bubbles: true,
           cancelable: false,

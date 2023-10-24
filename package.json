@@ -23,7 +23,8 @@
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview",
-    "format": "prettier --write --plugin prettier-plugin-svelte ."
+    "format": "prettier --write --plugin prettier-plugin-svelte .",
+    "lint": "eslint src/."
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "2.4.5",

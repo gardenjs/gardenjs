@@ -11,7 +11,7 @@
   let dragging = false
 
   const resizeObserver = new ResizeObserver((entries) => {
-    entries.forEach((entry) => {
+    entries.forEach(() => {
       dispatch('out', { maxHeight: element.offsetHeight })
     })
   })
