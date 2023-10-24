@@ -32,6 +32,7 @@ const sizes = {
 
 export function setThemes(newThemes) {
   themes.set(newThemes)
+  selectTheme(newThemes[0].name)
 }
 
 export function selectTheme(themeName) {

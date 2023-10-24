@@ -1,5 +1,4 @@
 <script>
-  import SvelteRenderer from '../renderer/SvelteRenderer.svelte'
   import DefaultRendererBuilder from '../renderer/SvelteRenderer.js'
   export let componentMap = {}
   export let dasMap = {}

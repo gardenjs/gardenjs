@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte'
   import Stage from './components/stage/Stage.svelte'
   import Sidebar from './components/sidebar/Sidebar.svelte'
   import Topbar from './components/topbar/Topbar.svelte'
