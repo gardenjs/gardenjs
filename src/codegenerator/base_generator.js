@@ -4,8 +4,8 @@ import { findAndReadDasFiles } from './das_file_finder.js'
 import { getConfig } from '../config.js'
 
 export async function generateGardenBase() {
-  const { structure, destination, additional_style_files, welcome_page } =
-    await getConfig()
+  const destination = '.garden/'
+  const { structure, additional_style_files, welcome_page } = await getConfig()
   const targetBaseFile = destination + 'base.js'
   const targetComponentMapFile = destination + 'component_import_map.js'
   const targetRawComponentMapFile = destination + 'raw_component_import_map.js'
