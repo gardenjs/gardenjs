@@ -37,6 +37,7 @@ export function setThemes(newThemes) {
     newThemes[0].active = true
   }
   themes.set(newThemes)
+  computeStageStyle()
 }
 
 export function selectTheme(themeName) {
