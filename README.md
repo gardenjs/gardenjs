@@ -130,11 +130,12 @@ MIT
 
 ### v1.0
 
-- [task] Make Garden compatible with Vue & React.
-- [task] Topbar: Add class "active" to default theme in dropdown - depending on what theme was choosen as "default" in config.garden.js.
+- [task] Install script / commandline skeleton project (example component). Test script with Svelte, Vue & React.
+- [task] Make Garden compatible with React.
+- [task] Add renderer plugins for svelte, vue and react.
+- [task] Add hooks before, after.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [task] Add tests (or v1.1 ?).
-- [task] Install script / commandline skeleton project (example component). Test script with Svelte, Vue & React.
 - [task] Public Garden demo of project/marketing website.
 - [task] Set repository of project/marketing website public
 - [task] Rabbit dev website.
