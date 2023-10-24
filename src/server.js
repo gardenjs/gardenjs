@@ -12,6 +12,9 @@ export async function createServer() {
     configFile,
     root: '.garden/',
     assetsInclude: ['**/*.md'],
+    server: {
+      port: serverport,
+    },
   })
   console.log(`Listening to port ${serverport}`)
   console.log(`http://localhost:${serverport}`)
