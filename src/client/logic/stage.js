@@ -5,7 +5,7 @@ export const stageStyle = writable('')
 export const stageSize = writable('full')
 export const landscape = writable(false)
 export const activeTheme = derived(themes, ($themes) => {
-  return $themes.find((theme) => theme.active)
+  return $themes?.find((theme) => theme.active)
 })
 export const stageHeight = writable('65vh')
 export const stageMaxHeight = writable(9999)
