@@ -31,8 +31,10 @@ const sizes = {
 }
 
 export function setThemes(newThemes) {
+  if (newThemes && !newThemes.some((theme) => theme.active)) {
+    newThemes[0].active = true
+  }
   themes.set(newThemes)
-  selectTheme(newThemes[0].name)
 }
 
 export function selectTheme(themeName) {
