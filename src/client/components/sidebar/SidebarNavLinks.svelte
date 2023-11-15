@@ -56,7 +56,7 @@
   }
   .component_link .component_dot {
     display: block;
-    margin: 0 0.5rem 0 -0.188rem;
+    margin: 0 0.5rem 0 -0.219rem;
     height: 0.375rem;
     width: 0.375rem;
     background-color: transparent;
