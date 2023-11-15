@@ -62,7 +62,7 @@
               width="20"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="1.5"
               stroke-linecap="round"
               stroke-linejoin="round"
               ><path d="M7 20l5-5 5 5M7 4l5 5 5-5" /></svg
@@ -76,7 +76,7 @@
               width="20"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="1.5"
               stroke-linecap="round"
               stroke-linejoin="round"
               ><path d="M7 15l5 5 5-5M7 9l5-5 5 5" /></svg
@@ -102,7 +102,7 @@
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="1.5"
               stroke-linecap="round"
               stroke-linejoin="round"
               ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line
@@ -121,7 +121,7 @@
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="1.5"
               stroke-linecap="round"
               stroke-linejoin="round"
               ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line
@@ -152,7 +152,7 @@
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
+            stroke-width="1.5"
             stroke-linecap="round"
             stroke-linejoin="round"
             ><circle cx="12" cy="12" r="10" /><path
