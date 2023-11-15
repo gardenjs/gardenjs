@@ -96,7 +96,7 @@
     justify-content: space-between;
     align-items: center;
     height: var(--h-panelnav);
-    background-color: var(--c-basic-75);
+    border-bottom: 1px solid var(--c-bg-body);
   }
   .panel_nav nav {
     margin: 0 1.25rem;

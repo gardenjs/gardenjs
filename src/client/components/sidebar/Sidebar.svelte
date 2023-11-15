@@ -271,7 +271,7 @@
       bottom: 0.375rem;
       padding: 0;
       background-color: var(--c-sidebar);
-      border-top: 1px solid var(--c-basic-200);
+      border-top: 1px solid var(--c-bg-body);
       border-bottom-right-radius: 0.5rem;
       border-bottom-left-radius: 0.5rem;
       overflow: hidden;
