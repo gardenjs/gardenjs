@@ -1,143 +1,31 @@
 # Component library explorer
 
-Garden is a lightweight UI explorer for JavaScript frontend libraries that helps you build, test and display UI components and pages. Svelte, Vue and React are currently supported out of the box. Other libraries can also be easily connected to Garden.
-<br><br>
+Garden is a lightweight UI component explorer for JavaScript frontend libraries that helps you build, test and display UI components and pages. Svelte, Vue and React are currently supported out of the box. Other libraries can also be easily connected to Garden.
 
-## This is Garden
+## Why Garden?
 
-Garden is the showroom for what you grow. The explorer represents each component of your design system in isolation. The different states of the components are also shown. Garden is developed for JavaScript frontend projects of any size. Code changes are reflected at the speed of light by the build tool Vite. Garden is an MIT-licensed open source project.
-<br><br>
+- Garden is significantly faster than comparable tools such as Storybook.
+- Garden is multi-framework compatible.
+- Garden has many useful features without being complex and bloated.
+- Garden simply looks good :)
 
-## Getting Started (Examples for Svelte)
+## Getting Started
 
-Install Garden inside your project root with NPM: [not yet, now: instead: checkout garden in garden base folder: 'npm link' or 'sudo npm link']
-
-```console
-npm install --save-dev garden
-```
-
-[not yet ...]
-Follow the installation routine.
-
-In the root directory you will now find your Garden configuration file 'garden.config.js' to adapt Garden to your project.
-[... not yet!]
-
-Svelte example configuration for your garden.config.js file:
-
-```js
-{
-  "garden": {
-    "serverport": 3010,
-    "destination": "garden/",
-    "structure": {
-      "custom": {
-        "components": "/src/components/"
-      }
-    },
-    "watch": {
-      "directories": [
-        "./src"
-      ],
-      "include": [
-        ".svelte", ".das.json", ".scss", ".css", ".js"
-      ]
-    }
-  }
-}
-```
-
-Add those directories to "structure" > "custom" that are to be displayed on the first level of the Garden Navigation.
-
-### Initialize Garden
-
-Initialize Garden in the root of the project directory:
-
-```bash
-run initGarden
-```
-
-### Run Garden
-
-Run `serveGarden` from the root of the project. Or add it to your `package.json` there and run it via `npm run garden` :
-
-```json
-  "scripts": {
-    "garden": "serveGarden",
-  },
-```
-
-### Configure Garden with project-specific settings
-
-With the garden.config.js you have various options to customize Garden to suit your project. Take a look at the file for a quick overview of the options already implemented. Here you can also make your own individual adjustments with JavaScript, e.g. to switch between your different themes.
-
-### Open Garden
-
-Open Garden in the browser via `http://localhost:<serverport>/garden`. The server port is defined in `garden.config.js`, the default setting is 3010.
-<br><br>
-
-## Output of components (and pages), add variants or states and add a documentation/description
-
-In order to be able to output variants or states of components, you must create two additional files in the component directory:
-
-With a `<component>.example.svelte` file you create all variants/states of the component. It then looks like this, for example:
-
-```js
-<script>
-  import Button from './<component>.svelte'
-
-  export let story
-</script>
-
-{#if story == 'story_1'}
-<!-- code example -->
-
-{:else if story == 'story_2'}
-<!-- code example -->
-
-{:else if story == 'story_3'}
-<!-- code example -->
-
-{/if}
-```
-
-Create a file `<component>.das.js` so that the variants/states are output in the panel and the navigation below the stage.
-
-A description or documentation for the component can also be added here. This is shown in a separate tab in the panel. This text can also be created as markdown. Alternatively, a path can point to a markdown file, which is then rendered in the tab. The suffix <.md> triggers the linking.
-
-It then looks like this, for example:
-
-```js
-export default {
-  name: '<component>',
-  file: './<component>.example.svelte',
-  description: './<component>.md',
-  examples: [
-    { story: '<navigation title for story_1>', input: { story: 'story_1' } },
-    { story: '<navigation title for story_2>', input: { story: 'story_2' } },
-    { story: '<navigation title for story_3>', input: { story: 'story_3' } },
-  ],
-}
-```
-
-<br>
+Please follow the documentation at [gardenjs.org](https://www.gardenjs.org)
 
 ## Sponsors
 
-Become a sponsor to publish your logo and website URL in our README on Github and on our website/documentation.
-
-<br>
+Garden is an open source project and is licensed under the MIT license. Become a sponsor to give us more scope for further development. We are grateful for this and will publish your logo and website URL in our README on Github and on our website/documentation.
 
 ## Contributing
 
-GardenJS was developed and is contributed by [Rabbit Development](https://www.rabbitdevelopment.de). We look forward to your feedback, please report any bugs. We also welcome financial support and contributions.
-
-<br>
+GardenJS was developed and is contributed by [Rabbit Development](https://www.rabbitdevelopment.de). We look forward to your feedback, please report any bugs. We also welcome contributions and are happy about sponsoring.
 
 ## License
 
-MIT
+[MIT](https://opensource.org/license/mit/)
 
-<br>
+Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Development](https://www.rabbitdevelopment.de).
 
 ## Todo´s
 
