@@ -147,6 +147,7 @@ MIT
 
 ### v1.x
 
+- [task] Add [line numbers plugin](https://github.com/wcoder/highlightjs-line-numbers.js) to highlightjs.
 - [task] Sidebarnav is closed by default on narrow display devices.
 - [task] Make setting of default mode possible via garden.config.js.
 - [task] Store selection in panel nav for refresh or if another component is selected.
