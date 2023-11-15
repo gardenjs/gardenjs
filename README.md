@@ -150,6 +150,7 @@ MIT
 - [task] Add [line numbers plugin](https://github.com/wcoder/highlightjs-line-numbers.js) to highlightjs.
 - [task] Sidebarnav is closed by default on narrow display devices.
 - [task] Make setting of default mode possible via garden.config.js.
+- [task] If full mode is active, switching to portrait mode is deactivated.
 - [task] Store selection in panel nav for refresh or if another component is selected.
 - [task] Store selection of stage for refresh or if another component is selected.
 - [task] Make garden docs link optional via garden.config.js.
