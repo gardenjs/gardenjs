@@ -121,10 +121,23 @@ export default {
 
 <br>
 
+## Sponsors
+
+Become a sponsor to publish your logo and website URL in our README on Github and on our website/documentation.
+
+<br>
+
+## Contributing
+
+GardenJS was developed and is contributed by [Rabbit Development](https://www.rabbitdevelopment.de). We look forward to your feedback, please report any bugs. We also welcome financial support and contributions.
+
+<br>
+
 ## License
 
 MIT
-<br><br>
+
+<br>
 
 ## Todo´s
 
