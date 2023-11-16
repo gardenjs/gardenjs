@@ -1,6 +1,6 @@
 # Component library explorer
 
-Garden is a lightweight UI component explorer for JavaScript frontend libraries that helps you build, test and display UI components and pages. Svelte, Vue and React are currently supported out of the box. Other libraries can also be easily connected to Garden.
+Garden is a lightweight UI component explorer for JavaScript front-end libraries that makes it easier to develop, test and document UI components and pages. Svelte, Vue and React are currently supported out of the box. Other libraries can also be easily connected to Garden.
 
 ## Why Garden?
 
@@ -12,6 +12,8 @@ Garden is a lightweight UI component explorer for JavaScript frontend libraries 
 ## Getting Started
 
 Please follow the documentation at [gardenjs.org](https://www.gardenjs.org)
+
+Happy Gardening :)
 
 ## Sponsors
 
