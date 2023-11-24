@@ -446,8 +446,8 @@
       left: 50%;
       bottom: 0.125rem;
       transform: translateX(-50%);
-      height: 0.25rem;
-      width: 0.25rem;
+      height: 0.313rem;
+      width: 0.313rem;
       background-color: transparent;
       border-radius: 50%;
     }
@@ -497,9 +497,9 @@
   }
   .dropdown_items ul li button .dropdown_item-dot {
     display: block;
-    margin: 0 0.25rem 0 0;
-    height: 0.25rem;
-    width: 0.25rem;
+    margin: 0 0.5rem 0 0;
+    height: 0.313rem;
+    width: 0.313rem;
     background-color: transparent;
     border-radius: 50%;
   }

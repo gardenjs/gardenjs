@@ -42,8 +42,8 @@
   .stories li button .dot {
     display: block;
     margin: 0 0.5rem 0 0;
-    height: 0.313rem;
-    width: 0.313rem;
+    height: 0.375rem;
+    width: 0.375rem;
     background-color: transparent;
     border-radius: 50%;
   }
