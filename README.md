@@ -35,14 +35,15 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 
 - [task] Install script / commandline skeleton project (example component). Test script with Svelte, Vue & React.
 - [task] Make Garden compatible with React.
-- [task] Add renderer plugins for svelte, vue and react.
+- [task] Add renderer plugins for svelte, vue and react. npm modules (@gardenjs/plugin-xyz).
+- [task] Gardenjs npm modul. (yarn?)
 - [task] Add hooks before, after.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [task] Add tests (or v1.1 ?).
-- [task] Public Garden demo of project/marketing website.
-- [task] Set repository of project/marketing website public
-- [task] Rabbit dev website.
-- [task] Set garden repository public & make garden npm modul. (yarn?)
+- [task] Set Gardenjs repository public.
+- [task] Public Garden docs.
+- [task] Public Garden demo of Garden docs. Set repository of Garden docs public.
+- [task] Public Rabbit dev website.
 
 ### v1.1
 
