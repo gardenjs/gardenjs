@@ -1,11 +1,11 @@
 {
   "name": "garden",
   "version": "0.9.0",
-  "description": "Lightweight component library explorer for Svelte projects",
+  "description": "Lightweight component library explorer for js projects",
   "main": "index.js",
   "svelte": "src/client/index.js",
   "type": "module",
-  "author": "Robin Danzinger, Martin Farkas",
+  "author": "Robin Danzinger, Martin Farkas @ Rabbit Development",
   "license": "MIT",
   "bin": {
     "garden": "bin/servegarden.js"
