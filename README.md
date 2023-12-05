@@ -1,13 +1,13 @@
 # Component library explorer
 
-Garden is a lightweight UI component explorer for JavaScript front-end libraries that makes it easier to develop, test and document UI components and pages. Svelte, Vue and React are currently supported out of the box. Other libraries can also be easily connected to Garden.
+Gardenjs is a lightweight UI component explorer for JavaScript front-end libraries that makes it easier to develop, test and document UI components and pages. Svelte, Vue and React are currently supported out of the box. Other libraries can also be easily connected to Garden.
 
 ## Why Garden?
 
-- Garden is significantly faster than comparable tools such as Storybook.
-- Garden is multi-framework compatible.
-- Garden has many useful features without being complex and bloated.
-- Garden simply looks good :)
+- Gardenjs is significantly faster than comparable tools such as Storybook.
+- Gardenjs is multi-framework compatible.
+- Gardenjs has many useful features without being complex and bloated.
+- Gardenjs simply looks good :)
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ Happy Gardening :)
 
 ## Sponsors
 
-Garden is an open source project and is licensed under the MIT license. Become a sponsor to give us more scope for further development. We are grateful for this and will publish your logo and website URL in our README on Github and on our website/documentation.
+Gardenjs is an open source project and is licensed under the MIT license. Become a sponsor to give us more scope for further development. We are grateful for this and will publish your logo and website URL in our README on Github and on our website/documentation.
 
 ## Contributing
 
@@ -34,15 +34,16 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 ### v1.0
 
 - [task] Install script / commandline skeleton project (example component). Test script with Svelte, Vue & React.
-- [task] Make Garden compatible with React.
+- [task] Make Gardenjs compatible with React.
 - [task] Add renderer plugins for svelte, vue and react. npm modules (@gardenjs/plugin-xyz).
 - [task] Gardenjs npm modul. (yarn?)
+- [task] Public Gardenjs docs.
+- [task] Public Gardenjs demo of Gardenjs docs.
 - [task] Add hooks before, after.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [task] Add tests (or v1.1 ?).
 - [task] Set Gardenjs repository public.
-- [task] Public Garden docs.
-- [task] Public Garden demo of Garden docs. Set repository of Garden docs public.
+- [task] Set repository of Gardenjs docs public.
 - [task] Public Rabbit dev website.
 
 ### v1.1
@@ -57,7 +58,7 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 - [task] If full mode is active, switching to portrait mode is deactivated.
 - [task] Store selection in panel nav for refresh or if another component is selected.
 - [task] Store selection of stage for refresh or if another component is selected.
-- [task] Make garden docs link optional via garden.config.js.
+- [task] Make Gardenjs docs link optional via garden.config.js.
 - [task] Show custom favicon.svg configured in garden.config.js.
 - [feature] Screenshot tests:
   - Docker image oder alternativ for screenshot test.
@@ -67,7 +68,7 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 - [feature] Add zoom button 100% and if zoomed show size in % with switch possibility.
 - [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi.
 - [task] Switch from md to mdx.
-- [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js. Option: Set list of custom values like iPhone 15, iPad, Samsung etc. in garden.config and show dropdown in garden instead of icons.
+- [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js. Option: Set list of custom values like iPhone 15, iPad, Samsung etc. in garden.config and show dropdown in Gardenjs instead of icons.
 - [task] Integrate Svelte A11y features.
 - [feature] Build kickstarter "carrots". Define components for carrots.
 - [feature] Bookmarks.
