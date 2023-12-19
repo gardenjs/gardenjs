@@ -1,7 +1,7 @@
 {
   "name": "garden",
-  "version": "0.9.0",
-  "description": "Lightweight UI component explorer for JavaScript front-end libraries",
+  "version": "1.0.0",
+  "description": "A Lightweight UI component explorer for JavaScript front-end libraries",
   "main": "index.js",
   "svelte": "src/client/index.js",
   "type": "module",
