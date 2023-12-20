@@ -1,5 +1,3 @@
-// import SvelteApp from './SvelteRenderer.svelte'
-
 async function create() {
   try {
     const { default: SvelteApp } = await import('./SvelteRenderer.svelte')

@@ -8,7 +8,6 @@ export async function createServer() {
 
   const configFile = vite_config || './vite.config.js'
 
-  console.log('PROJECT ROOT', process.cwd())
   const server = await createViteServer({
     configFile,
     root: '.garden/',
@@ -17,13 +16,11 @@ export async function createServer() {
       port: serverport,
     },
   })
-  console.log(`Listening to port ${serverport}`)
   server.listen()
+
   if (devmodus) {
     console.log('!!!!RUNNING IN DEVELOPMENT-MODUS!!!!')
   }
-  console.log('')
-  console.log(`Goto -> http://localhost:${serverport}`)
-  console.log('')
+
   if (!no_open_browser) open(`http://localhost:${serverport}`)
 }

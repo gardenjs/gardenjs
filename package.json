@@ -41,6 +41,8 @@
     "vite": "4.4.9"
   },
   "dependencies": {
+    "@inquirer/checkbox": "^1.5.0",
+    "@inquirer/prompts": "^3.3.0",
     "highlight.js": "11.7.0",
     "marked": "4.3.0",
     "open": "8.4.0"

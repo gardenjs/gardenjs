@@ -1,8 +1,11 @@
 <script>
+  import { onDestroy, onMount, beforeUpdate, afterUpdate } from 'svelte'
   export let componentMap
   export let componentName
   export let selectedExample
   export let das
+
+  let unmountFn
 
   $: component = componentMap?.[componentName] || componentMap?.Welcome
 
@@ -12,6 +15,46 @@
       redirectData = {}
     }
   }
+
+  $: {
+    updateState(das, selectedExample)
+  }
+
+  async function updateState(das, selectedExample) {
+    console.log('DEBUG', 'update state')
+    if (unmountFn) {
+      console.log('DEBUG', 'call unmount update state')
+      unmountFn()
+      unmountFn = undefined
+    }
+    if (das?.beforeEach) {
+      unmountFn = await das.beforeEach()
+    }
+  }
+
+  onDestroy(() => {
+    console.log('DEBUG', 'on destroy')
+    if (unmountFn) {
+      console.log('DEBUG', 'call unmount on destroy')
+      unmountFn()
+      unmountFn = undefined
+    }
+  })
+  onMount(() => {
+    console.log('DEBUG', 'on mount')
+  })
+  beforeUpdate(() => {
+    console.log('DEBUG', 'before update')
+    if (unmountFn) {
+      console.log('DEBUG', 'call unmount before update')
+      unmountFn()
+    }
+    unmountFn = undefined
+  })
+
+  afterUpdate(() => {
+    console.log('DEBUG', 'after update')
+  })
 
   function handleComponentOut(evt) {
     if (das.out) {

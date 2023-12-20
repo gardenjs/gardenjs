@@ -34,14 +34,13 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 ### v1.0
 
 - [task] Install script / commandline skeleton project (example component). Test script with Svelte, Vue & React.
-- [task] Make Gardenjs compatible with React.
-- [task] Add renderer plugins for svelte, vue and react. npm modules (@gardenjs/plugin-xyz).
 - [task] Gardenjs npm modul. (yarn?)
+- [task] Add renderer plugins for svelte, vue and react. npm modules (@gardenjs/plugin-xyz).
+- [task] Add hooks before, after.
+- [task] Make Gardenjs compatible with React.
 - [task] Public Gardenjs docs.
 - [task] Public Gardenjs demo of Gardenjs docs.
-- [task] Add hooks before, after.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
-- [task] Add tests (or v1.1 ?).
 - [task] Set Gardenjs repository public.
 - [task] Set repository of Gardenjs docs public.
 - [task] Public Rabbit dev website.
@@ -49,6 +48,7 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 ### v1.1
 
 - [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
+- [task] Add tests (or v1.1 ?).
 
 ### v1.x
 
@@ -71,7 +71,7 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 - [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js. Option: Set list of custom values like iPhone 15, iPad, Samsung etc. in garden.config and show dropdown in Gardenjs instead of icons.
 - [task] Integrate Svelte A11y features.
 - [feature] Build kickstarter "carrots". Define components for carrots.
-- [feature] Bookmarks.
+- [feature] Bookmarks. (siehe ReactCosmos)
 - [feature] Measure.
 
 <br><br><br><p align="center"><img src="src/client/assets/icons/logo.svg"></p>
