@@ -35,7 +35,6 @@
     "eslint-plugin-svelte": "2.32.2",
     "husky": "8.0.3",
     "lint-staged": "14.0.1",
-    "node-watch": "0.7.3",
     "prettier": "3.0.3",
     "prettier-plugin-svelte": "3.0.3",
     "sass": "1.69.0",
@@ -45,6 +44,7 @@
   "dependencies": {
     "@inquirer/checkbox": "1.5.0",
     "@inquirer/prompts": "3.3.0",
+    "node-watch": "0.7.3",
     "highlight.js": "11.7.0",
     "marked": "4.3.0",
     "open": "8.4.0"

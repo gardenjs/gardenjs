@@ -1,8 +1,8 @@
-import { GardenApp } from 'garden'
+import { GardenApp } from 'gardenjs'
 import { navTree, routes } from '../base.js'
 import { dasMap } from '../das_import_map.js'
 import config from '../../garden.config.js'
-import 'garden/main.scss'
+import 'gardenjs/main.scss'
 
 const app = new GardenApp({
   target: document.getElementById('app'),

@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer'
-import { routes } from '../garden/base'
-import { dasmap } from '../garden/importmap'
+import { routes } from '../.garden/base'
+import { dasmap } from '../.garden/importmap'
 import { toMatchImageSnapshot } from 'jest-image-snapshot'
 
 expect.extend({ toMatchImageSnapshot })
