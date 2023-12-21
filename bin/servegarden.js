@@ -72,7 +72,7 @@ function separator() {
 function createConfigFile({ title, componentFolder, libraries }) {
   const importStmts = libraries
     .map((lib) => {
-      return `import ${lib}RendererBuilder from "garden/${lib.toLowerCase()}"`
+      return `import ${lib}RendererBuilder from "gardenjs/${lib.toLowerCase()}"`
     })
     .join('\n')
   const renderer = libraries
