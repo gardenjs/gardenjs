@@ -1,7 +1,9 @@
 {
-  "name": "garden",
+  "name": "gardenjs",
   "version": "0.9.0",
   "description": "A lightweight UI component explorer for JavaScript front-end libraries",
+  "repository": "https://github.com/gardenjs/gardenjs",
+  "homepage": "https://github.com/gardenjs/gardenjs/blob/main/README.md",
   "main": "index.js",
   "svelte": "src/client/index.js",
   "type": "module",
@@ -35,14 +37,14 @@
     "lint-staged": "14.0.1",
     "node-watch": "0.7.3",
     "prettier": "3.0.3",
-    "prettier-plugin-svelte": "^3.0.3",
-    "sass": "^1.67.0",
+    "prettier-plugin-svelte": "3.0.3",
+    "sass": "1.67.0",
     "svelte": "4.2.0",
     "vite": "4.4.9"
   },
   "dependencies": {
-    "@inquirer/checkbox": "^1.5.0",
-    "@inquirer/prompts": "^3.3.0",
+    "@inquirer/checkbox": "1.5.0",
+    "@inquirer/prompts": "3.3.0",
     "highlight.js": "11.7.0",
     "marked": "4.3.0",
     "open": "8.4.0"
