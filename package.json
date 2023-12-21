@@ -7,7 +7,7 @@
   "main": "index.js",
   "svelte": "src/client/index.js",
   "type": "module",
-  "author": "Robin Danzinger, Martin Farkas @ Rabbit Development",
+  "author": "Robin Danzinger, Martin Farkas",
   "license": "MIT",
   "bin": {
     "garden": "bin/servegarden.js"
