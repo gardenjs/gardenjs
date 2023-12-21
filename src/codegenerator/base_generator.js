@@ -132,7 +132,7 @@ function generateGardenFrameFile(stylefiles = []) {
       .join('\n') +
     `
 
-import GardenFrame from 'garden/GardenFrame'
+import GardenFrame from '.garden/GardenFrame'
 import {dasMap} from '../das_import_map.js'
 import {componentMap} from '../component_import_map.js'
 import config from '../../garden.config.js'
