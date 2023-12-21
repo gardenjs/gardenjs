@@ -33,7 +33,6 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 
 ### v1.0
 
-- [task] Install script / commandline skeleton project (example component). Test script with Svelte, Vue & React.
 - [task] Gardenjs npm modul. (yarn?)
 - [task] Add renderer plugins for svelte, vue and react. npm modules (@gardenjs/plugin-xyz).
 - [task] Add hooks before, after.
