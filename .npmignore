@@ -1,0 +1,9 @@
+.vimsession
+.vscode
+/node_modules
+.git
+*.sw?
+/public/build
+*.DS_Store
+tmuxdev.sh
+ba.sh
