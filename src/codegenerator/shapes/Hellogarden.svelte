@@ -1,9 +1,9 @@
 <div class="container">
   <div class="container_content">
-    <h1>Hello, Garden!</h1>
+    <h1>Hello gardener!</h1>
     <p>
       Woohoo, you've successfully installed the component library explorer
-      Garden.<br />Welcome and have fun gardening<span class="cursor_blink"
+      Gardenjs.<br />Welcome and have fun gardening<span class="cursor_blink"
         >_</span
       >
     </p>
