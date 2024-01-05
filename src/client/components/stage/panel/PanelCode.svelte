@@ -1,8 +1,8 @@
 <script>
   import { highlightElement } from '../../highlight/Highlight.js'
-  import { rawComponentMap } from '/raw_component_import_map.js'
 
   export let componentName
+  export let rawComponentMap
   let code
   let codeblock
 

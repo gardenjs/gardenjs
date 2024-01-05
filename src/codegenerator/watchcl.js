@@ -10,7 +10,7 @@ export async function init() {
   await copyBaseClasses()
   await generate(serverport)
   watch(directories, { include: include }, async () => {
-    await generate()
+    await generate(serverport)
   })
 }
 

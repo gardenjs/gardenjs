@@ -42,6 +42,7 @@
   export let navTree
   export let dasMap
   export let config
+  export let rawComponentMap
   $: expressbaseurl = `${window.location.protocol}//${
     window.location.hostname
   }:${config.serverport + 1}/`
@@ -139,7 +140,7 @@
       stageHeight={$stageHeight}
       stageMaxHeight={$stageMaxHeight}
       theme={$activeTheme?.name}
-      {expressbaseurl}
+      {rawComponentMap}
       panelExpanded={$panelExpanded}
       on:out={handleStageOut}
     />
