@@ -38,13 +38,11 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 - [task] Add hooks before, after.
 - [task] Make Gardenjs compatible with React.
 - [task] Add renderer plugin for react. npm modules (@gardenjs/gardenjs-plugin-react).
-- [task] Public Gardenjs docs.
-- [task] Public Gardenjs demo of Gardenjs docs.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
-- [task] Set Gardenjs repository public.
-- [task] Set repository of Gardenjs docs public.
+- [task] Public Gardenjs docs & set Gardenjs repository public.
+- [task] Public Gardenjs demo of Gardenjs docs & set repository of Gardenjs docs public.
 - [task] Public Rabbit Dev website.
-- [task] Create Linkedin Profil for Rabbit Dev & Gardenjs.
+- [task] Create Linkedin profil for Rabbit Dev & Gardenjs.
 
 ### v1.1
 
