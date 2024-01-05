@@ -5,12 +5,14 @@ import { getConfig } from '../config.js'
 
 export async function generateGardenBase() {
   const destination = '.garden/'
-  const { structure, additional_style_files, welcome_page } = await getConfig()
+  const { structure, additional_style_files, welcome_page, devmodus } =
+    await getConfig()
   const targetBaseFile = destination + 'base.js'
   const targetComponentMapFile = destination + 'component_import_map.js'
   const targetRawComponentMapFile = destination + 'raw_component_import_map.js'
   const targetDasMapFile = destination + 'das_import_map.js'
   const targetGardenFrameFile = destination + 'gardenframe/gardenframe.js'
+  const targetGardenFrameCssFile = destination + 'gardenframe/cssimport.js'
 
   const basefolders = getDasBaseFolders(structure)
 
@@ -36,10 +38,17 @@ export async function generateGardenBase() {
     generateRawComponentMapCode(cds, welcome_page)
   )
   await writeFileIfChanged(targetDasMapFile, generateDasMapCode(cds))
+
   await writeFileIfChanged(
-    targetGardenFrameFile,
-    generateGardenFrameFile(additional_style_files)
+    targetGardenFrameCssFile,
+    generateCssImportFile(additional_style_files)
   )
+  if (devmodus) {
+    await writeFileIfChanged(
+      targetGardenFrameFile,
+      generateGardenFrameFile(additional_style_files)
+    )
+  }
 }
 
 async function writeFileIfChanged(file, content) {
@@ -121,6 +130,14 @@ export const dasMap = {
   ${componentdescriptions.map(createDasMapEntry).join(',\n')}
 }
 `
+}
+
+function generateCssImportFile(stylefiles = []) {
+  return stylefiles
+    .map((file) => {
+      return `import '../../${file}'`
+    })
+    .join('\n')
 }
 
 function generateGardenFrameFile(stylefiles = []) {
