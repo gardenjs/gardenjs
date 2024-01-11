@@ -14,7 +14,7 @@ export default defineConfig({
         '../das_import_map.js',
         '../component_import_map.js',
         '../../garden.config.js',
-        './gardenframe/cssimport.js',
+        '../gardenframe/cssimport.js',
         '../renderer/SvelteRenderer.svelte',
       ],
     },
