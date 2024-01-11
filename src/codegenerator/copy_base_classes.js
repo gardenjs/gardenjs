@@ -16,35 +16,18 @@ export async function clearBaseFolder() {
 
 export async function copyBaseClasses() {
   const config = await getConfig()
-  fs.mkdir(
-    targetfolder,
-    { recursive: true },
-    onErrorAbortElse(() => {
-      copyFolder(sourcefolder, targetfolder)
-      if (config.devmodus) return
-      copyFolder(distfolder, targetfolder)
-    })
-  )
-}
-
-function onErrorAbortElse(func) {
-  return (err) => {
-    if (err) {
-      console.log(err)
-      throw err
-    }
-    func()
-  }
+  fs.mkdirSync(targetfolder, { recursive: true })
+  copyFolder(sourcefolder, targetfolder)
+  if (config.devmodus) return
+  copyFolder(distfolder, targetfolder)
 }
 
 function copyFolder(sourcefolder, targetfolder) {
   if (!fs.existsSync(targetfolder)) {
     fs.mkdirSync(targetfolder)
   }
-  fs.readdir(sourcefolder, { withFileTypes: true }, (err, files) => {
-    if (err) throw err
-    files.forEach((f) => copyFileOrDirectory(f, sourcefolder, targetfolder))
-  })
+  const files = fs.readdirSync(sourcefolder, { withFileTypes: true })
+  files.forEach((f) => copyFileOrDirectory(f, sourcefolder, targetfolder))
 }
 
 function copyFileOrDirectory(fileOrDirectory, sourcefolder, targetfolder) {
@@ -56,12 +39,8 @@ function copyFileOrDirectory(fileOrDirectory, sourcefolder, targetfolder) {
       'TO',
       targetfolder + filename
     )
-    fs.copyFile(sourcefolder + filename, targetfolder + filename, callback)
+    fs.copyFileSync(sourcefolder + filename, targetfolder + filename)
   } else if (fileOrDirectory.isDirectory()) {
     copyFolder(sourcefolder + filename + '/', targetfolder + filename + '/')
   }
-}
-
-function callback(err) {
-  if (err) throw err
 }

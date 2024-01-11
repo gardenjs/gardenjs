@@ -1,16 +1,27 @@
 <script>
   import { highlightElement } from '../../highlight/Highlight.js'
-  import { rawComponentMap } from '../raw_component_import_map.js'
 
   export let componentName
+  export let devmodus
+
   let code
   let codeblock
+  let rawComponentMap = []
 
   $: {
-    updateCode(componentName)
+    updateCode(componentName, rawComponentMap)
   }
 
-  function updateCode(componentName) {
+  if (!devmodus) {
+    importComponentMap()
+  }
+
+  async function importComponentMap() {
+    const componentModule = await import('../raw_component_import_map.js')
+    rawComponentMap = componentModule.rawComponentMap
+  }
+
+  function updateCode(componentName, rawComponentMap) {
     code = null
     setTimeout(() => {
       code = rawComponentMap[componentName]
@@ -25,6 +36,9 @@
 </script>
 
 <div>
+  {#if devmodus}
+    Running in devmodus. No Code view supported.
+  {/if}
   {#if code}
     <pre><code class="language-xml" bind:this={codeblock}>{code}</code></pre>
   {/if}
