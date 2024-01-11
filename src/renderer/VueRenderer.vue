@@ -1,5 +1,5 @@
 <script setup>
-import { componentMap } from '/component_import_map.js'
+import { componentMap } from '../component_import_map.js'
 import { ref, watch } from 'vue'
 import { state } from './state.js'
 

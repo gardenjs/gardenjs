@@ -17,7 +17,6 @@
   export let stageMaxHeight
   export let panelExpanded
   export let theme
-  export let rawComponentMap
 
   let myframeready
   let myframe
@@ -89,7 +88,7 @@
     if (das.componentfile) {
       tabs.push({
         name: 'Code',
-        props: { componentName, rawComponentMap },
+        props: { componentName },
         page: PanelCode,
       })
     }
