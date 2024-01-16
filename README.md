@@ -2,12 +2,12 @@
 
 Gardenjs is a lightweight UI component explorer for JavaScript front-end libraries that makes it easier to develop, test and document UI components and pages. Svelte, Vue and React are currently supported out of the box. Other libraries can also be easily connected to Garden.
 
-## Why Garden?
+## Why Gardenjs?
 
-- Gardenjs is significantly faster than comparable tools such as Storybook.
-- Gardenjs is multi-framework compatible.
-- Gardenjs has many useful features without being complex and bloated.
-- Gardenjs simply looks good :)
+- Significantly faster than comparable tools such as Storybook.
+- Multi-framework compatible.
+- Many useful features without being complex and bloated.
+- Simply looks good :)
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ Gardenjs is an open source project and is licensed under the MIT license. Become
 
 ## Contributing
 
-GardenJS was developed and is contributed by [Rabbit Development](https://www.rabbitdevelopment.de). We look forward to your feedback, please report any bugs. We also welcome contributions and are happy about sponsoring.
+Gardenjs was developed and is contributed by [Rabbit Development](https://www.rabbitdevelopment.de). We look forward to your feedback, please report any bugs. We also welcome contributions and are happy about sponsoring.
 
 ## License
 
@@ -33,11 +33,9 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 
 ### v1.0
 
-- [task] Gardenjs npm modul. (yarn?)
-- [task] Add renderer plugins for svelte, vue. npm modules (@gardenjs/gardenjs-plugin-svelte/vue).
 - [task] Add hooks before, after.
 - [task] Make Gardenjs compatible with React.
-- [task] Add renderer plugin for react. npm modules (@gardenjs/gardenjs-plugin-react).
+- [task] Add renderer plugins for svelte, vue, react. npm modules (@gardenjs/gardenjs-plugin-svelte/vue/react).
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [task] Public Gardenjs docs & set Gardenjs repository public.
 - [task] Public Gardenjs demo of Gardenjs docs & set repository of Gardenjs docs public.
