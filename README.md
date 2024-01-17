@@ -11,7 +11,7 @@ Gardenjs is a lightweight UI component explorer for JavaScript front-end librari
 
 ## Getting Started
 
-Please follow the documentation at [gardenjs.org](https://www.gardenjs.org)
+Please follow the documentation at [gardenjs.org](https://www.gardenjs.org).
 
 Happy Gardening :)
 
@@ -34,6 +34,7 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 ### v1.0
 
 - [task] Add hooks before, after.
+- [bug] Open comp. in new window.
 - [task] Make Gardenjs compatible with React.
 - [task] Add renderer plugins for svelte, vue, react. npm modules (@gardenjs/gardenjs-plugin-svelte/vue/react).
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
