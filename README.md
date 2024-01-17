@@ -50,12 +50,15 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 
 ### v1.x
 
+- [task] Keep user state after refresh.
+  - [task] Store selection in panel nav for refresh or if another component is selected.
+  - [task] Store selection of stage for refresh or if another component is selected.
+- [feature] Add testing library. E.g. [Testing Library](https://testing-library.com/).
+- [feature] Collect events and show in panel.
 - [task] Add [line numbers plugin](https://github.com/wcoder/highlightjs-line-numbers.js) to highlightjs.
 - [task] Sidebarnav is closed by default on narrow display devices.
 - [task] Make setting of default mode possible via garden.config.js.
 - [task] If full mode is active, switching to portrait mode is deactivated.
-- [task] Store selection in panel nav for refresh or if another component is selected.
-- [task] Store selection of stage for refresh or if another component is selected.
 - [task] Make Gardenjs docs link optional via garden.config.js.
 - [task] Show custom favicon.svg configured in garden.config.js.
 - [feature] Screenshot tests:
@@ -71,5 +74,6 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 - [feature] Build kickstarter "carrots". Define components for carrots.
 - [feature] Bookmarks. (siehe ReactCosmos)
 - [feature] Measure.
+- [feature] Manually change properties via control panel.
 
 <br><br><br><p align="center"><img src="src/client/assets/icons/logo.svg"></p>
