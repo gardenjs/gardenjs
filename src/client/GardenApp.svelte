@@ -57,7 +57,7 @@
   let showSidebar = true
   function handleTopbarOut(evt) {
     if (evt.detail.openInTab) {
-      const targetWindow = window.open('/gardenframe/', '_blank')
+      const targetWindow = window.open('/frame.html', '_blank')
       targetWindow.onload = () => {
         targetWindow.postMessage(
           { selectedExample: $selectedExample, componentName: $componentName },
