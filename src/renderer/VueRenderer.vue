@@ -1,12 +1,20 @@
 <script setup>
-import { componentMap } from '../component_import_map.js'
-import { ref, watch } from 'vue'
-import { state } from './state.js'
+import { computed, onMounted } from 'vue'
 
-const component = ref()
+const props = defineProps([
+  'selectedExample',
+  'das',
+  'componentName',
+  'componentMap',
+  'afterRenderHook',
+])
 
-watch(state, (newState) => {
-  component.value = componentMap[newState.componentName]
+const component = computed(() => {
+  return props.componentMap?.[props.componentName]
+})
+
+onMounted(async () => {
+  await props.afterRenderHook()
 })
 </script>
 
@@ -14,7 +22,7 @@ watch(state, (newState) => {
   <component
     v-if="component"
     :is="component"
-    v-bind="{ ...state.selectedExample.input }"
+    v-bind="{ ...props.selectedExample.input }"
   />
   <h1 v-else>Ups</h1>
 </template>

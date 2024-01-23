@@ -133,11 +133,13 @@ export const dasMap = {
 }
 
 function generateCssImportFile(stylefiles = []) {
-  return stylefiles
-    .map((file) => {
-      return `import '../../${file}'`
-    })
-    .join('\n')
+  return (
+    stylefiles
+      .map((file) => {
+        return `import '../../${file}'`
+      })
+      .join('\n') || '// no custom css scripts'
+  )
 }
 
 function generateGardenFrameFile(stylefiles = []) {

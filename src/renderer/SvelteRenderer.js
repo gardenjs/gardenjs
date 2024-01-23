@@ -1,12 +1,19 @@
-async function create() {
+async function create(afterRenderHook) {
   try {
     const { default: SvelteApp } = await import('./SvelteRenderer.svelte')
-    const app = new SvelteApp({
+    let app = new SvelteApp({
       target: document.getElementById('app'),
+      props: { afterRenderHook },
     })
     return {
       destroy: () => app.$destroy(),
-      updateComponent: (props) => app.$set(props),
+      updateComponent: (props) => {
+        app.$destroy()
+        app = new SvelteApp({
+          target: document.getElementById('app'),
+          props: { ...props, afterRenderHook },
+        })
+      },
     }
   } catch (e) {
     console.log('DEBUG', 'error', e)

@@ -1,20 +1,20 @@
-//import { updateVueState } from './state.js'
-//import { createApp } from 'vue'
-// import VueApp from './VueRenderer.js'
-
-async function create() {
+async function create(afterRenderHook) {
   try {
     const { createApp } = await import('vue')
-    const { updateVueState } = await import('./state.js')
     const { default: VueApp } = await import('./VueRenderer.vue')
-    updateVueState({})
-    const app = createApp(VueApp)
+    let app = createApp(VueApp, { afterRenderHook })
     app.mount('#app')
     return {
       destroy: () => app.unmount(),
-      updateComponent: updateVueState,
+      updateComponent: (props) => {
+        app.unmount()
+        app = createApp(VueApp, { ...props, afterRenderHook })
+        app.mount('#app')
+      },
     }
-  } catch (e) {}
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 export default { create }

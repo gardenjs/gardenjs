@@ -4,25 +4,42 @@
   export let dasMap = {}
   export let config
 
+  let hookTimeout = config.hookTimeout | 5000
   let das = {}
   let selectedExample = {}
+  let selectedExampleTitle
   let full = false
   let fwk
   let currentRenderer
   let componentName
   let component
   let redirectData = {}
+  let componentChanged
+  let selectedExampleChanged
+
+  let afterFns = []
+  let afterAllFns = []
+  let beforeFns = []
+  let beforeAllFns = []
+  let afterRenderedFns = []
 
   window.addEventListener('message', (evt) => {
     if (config.themeHandler) {
       config.themeHandler(evt.data.theme)
+    }
+    if (componentName != evt.data.componentName) {
+      componentChanged = true
     }
     full = evt.data.stageSize === 'full'
     das = dasMap[evt.data.componentName]
     selectedExample = das?.examples.find(
       (ex) => ex.story === evt.data.selectedExample
     )
+    componentChanged = componentName !== evt.data.componentName
     componentName = evt.data.componentName
+    selectedExampleChanged = selectedExampleTitle !== evt.data.selectedExample
+    selectedExampleTitle = evt.data.selectedExample
+
     if (config.devmodus) {
       component = componentMap?.[componentName] || componentMap?.Welcome
       redirectData = {}
@@ -41,6 +58,9 @@
         fwk = newFwk
       }
     }
+
+    await runHooks()
+
     currentRenderer?.updateComponent({
       componentName,
       selectedExample,
@@ -49,9 +69,35 @@
     })
   }
 
+  async function afterRenderHook() {
+    await runHooksIfSet(afterRenderedFns)
+  }
+
+  async function runHooks() {
+    if (componentChanged) {
+      afterRenderedFns = [selectedExample?.play]
+      beforeAllFns = [das?.beforeAll]
+      beforeFns = [das?.before, selectedExample?.before]
+      await runHooksIfSet([
+        ...afterFns,
+        ...afterAllFns,
+        ...beforeAllFns,
+        ...beforeFns,
+      ])
+      afterAllFns = [das?.afterAll]
+      afterFns = [selectedExample?.after, das?.after]
+      beforeAllFns = []
+    } else if (selectedExampleChanged) {
+      afterRenderedFns = [selectedExample?.play]
+      beforeFns = [das?.before, selectedExample?.before]
+      await runHooksIfSet([...afterFns, ...beforeFns])
+      afterFns = [selectedExample?.after, das?.after]
+    }
+  }
+
   async function updateRenderer(rendererBuilder) {
     await currentRenderer?.destroy()
-    currentRenderer = await rendererBuilder.create()
+    currentRenderer = await rendererBuilder.create(afterRenderHook)
   }
 
   $: {
@@ -73,6 +119,24 @@
       })
     }
   }
+
+  async function runHooksIfSet(funcs) {
+    for (const func of funcs) {
+      if (func) {
+        try {
+          await Promise.race([wait(hookTimeout), func()])
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    }
+  }
+
+  function wait(ms) {
+    return new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Timeout on')), ms)
+    })
+  }
 </script>
 
 <div class:full>
@@ -81,6 +145,7 @@
       this={component}
       {...selectedExample?.input}
       {...redirectData}
+      {afterRenderHook}
       on:out={handleComponentOut}
     />
   {:else}
