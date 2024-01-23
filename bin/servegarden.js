@@ -32,7 +32,7 @@ async function runSetupScript() {
   const title = await input({ message: 'Enter your project title:' })
 
   const libraries = await checkbox({
-    message: 'UI Library',
+    message: 'UI Library:',
     choices: [
       { name: 'Svelte', value: 'Svelte' },
       { name: 'Vue', value: 'Vue' },
