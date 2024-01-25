@@ -157,16 +157,13 @@ function createExample({ libraries, componentFolder }) {
 
 function copyExampleFiles(library, componentFolder) {
   fs.mkdirSync(`${componentFolder}/garden_example/`, { recursive: true })
-  fs.copyFileSync(
-    `${exampleSourceFolder}garden_button.${library}.das.js`,
-    `${componentFolder}/garden_example/garden_button.${library}.das.js`
-  )
-  fs.copyFileSync(
-    `${exampleSourceFolder}garden_button.${library}`,
-    `${componentFolder}/garden_example/garden_button.${library}`
-  )
-  fs.copyFileSync(
-    `${exampleSourceFolder}garden_button.${library}.md`,
-    `${componentFolder}/garden_example/garden_button.${library}.md`
-  )
+  const files = fs
+    .readdirSync(`${exampleSourceFolder}`)
+    .filter((filename) => filename.includes(`.${library}`))
+  for (const filename of files) {
+    fs.copyFileSync(
+      `${exampleSourceFolder}/${filename}`,
+      `${componentFolder}/garden_example/${filename}`
+    )
+  }
 }
