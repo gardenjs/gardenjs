@@ -14,12 +14,10 @@ export const updateApp = (props) => {
 }
 
 function DynamicComponent({
-  componentMap,
-  componentName,
+  component: Component,
   selectedExample,
   afterRenderHook,
 }) {
-  const Component = componentMap?.[componentName]
   if (afterRenderHook) {
     useEffect(() => {
       console.log('DEBUG', 'useeffect', afterRenderHook)

@@ -1,5 +1,5 @@
 <script>
-  import DefaultRendererBuilder from '../renderer/SvelteRenderer.js'
+  import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
   export let componentMap = {}
   export let dasMap = {}
   export let config
@@ -16,6 +16,7 @@
   let redirectData = {}
   let componentChanged
   let selectedExampleChanged
+  let error
 
   let afterFns = []
   let afterAllFns = []
@@ -36,24 +37,27 @@
       (ex) => ex.story === evt.data.selectedExample
     )
     componentChanged = componentName !== evt.data.componentName
-    componentName = evt.data.componentName
+    componentName = evt.data.componentName || 'Welcome'
     selectedExampleChanged = selectedExampleTitle !== evt.data.selectedExample
     selectedExampleTitle = evt.data.selectedExample
 
+    component = componentMap?.[componentName]
+
     if (config.devmodus) {
-      component = componentMap?.[componentName] || componentMap?.Welcome
       redirectData = {}
+      return
     } else {
-      updateComponent(componentName, selectedExample, das)
+      updateComponent(component, selectedExample, das)
     }
   })
 
-  async function updateComponent(componentName, selectedExample, das) {
+  async function updateComponent(component, selectedExample, das) {
     if (config.renderer) {
       let newFwk =
-        das?.file.substring(das?.file.lastIndexOf('.') + 1) || 'svelte'
+        das?.file.substring(das?.file.lastIndexOf('.') + 1) || 'default'
       if (fwk != newFwk) {
-        const rendererBuilder = config.renderer[newFwk]
+        const rendererBuilder =
+          config.renderer[newFwk] || DefaultRendererBuilder
         await updateRenderer(rendererBuilder)
         fwk = newFwk
       }
@@ -61,16 +65,23 @@
 
     await runHooks()
 
-    currentRenderer?.updateComponent({
-      componentName,
-      selectedExample,
-      das,
-      componentMap,
-    })
+    try {
+      currentRenderer?.updateComponent({
+        component,
+        selectedExample,
+        das,
+      })
+    } catch (err) {
+      error = err
+    }
   }
 
   async function afterRenderHook() {
     await runHooksIfSet(afterRenderedFns)
+  }
+
+  function hideError() {
+    error = null
   }
 
   async function runHooks() {
@@ -96,7 +107,11 @@
   }
 
   async function updateRenderer(rendererBuilder) {
-    await currentRenderer?.destroy()
+    try {
+      await currentRenderer?.destroy()
+    } catch (e) {
+      console.error('Could not destroy current renderer', e)
+    }
     currentRenderer = await rendererBuilder.create(afterRenderHook)
   }
 
@@ -152,9 +167,37 @@
     <div id="app"></div>
   {/if}
 </div>
+{#if error}
+  <div class="modal_back" on:click={hideError}>
+    <div class="modal">
+      <h1>Error during rendering:</h1>
+      <div><pre>{error}</pre></div>
+    </div>
+  </div>
+{/if}
 
 <style>
   .full {
     padding: 0.5rem 0.5rem 0;
+  }
+  .modal_back {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0.3;
+  }
+  .modal {
+    z-index: 1001;
+    background-color: white;
+    border: 1px solid red;
+    flex-direction: column;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
