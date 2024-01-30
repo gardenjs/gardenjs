@@ -19,5 +19,5 @@ onMounted(async () => {
     :is="props.component"
     v-bind="{ ...props.selectedExample.input }"
   />
-  <h1>No Component selected!</h1>
+  <h1 v-else>No Component selected!</h1>
 </template>
