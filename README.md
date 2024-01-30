@@ -35,10 +35,10 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 
 ### v1.0
 
-- [task] Add hooks before, after.
-- [bug] Open comp. in new window.
-- [task] Make Gardenjs compatible with React.
+- [task] Rename stories to title/examples.
 - [task] Add renderer plugins for svelte, vue, react. npm modules (@gardenjs/gardenjs-plugin-svelte/vue/react).
+- [task] Error handling. Do not render crash.
+- [task] Type infos of das in editor.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [task] Public Gardenjs docs & set Gardenjs repository public.
 - [task] Public Gardenjs demo of Gardenjs docs & set repository of Gardenjs docs public.
