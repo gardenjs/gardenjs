@@ -99,12 +99,12 @@ export const navTree = ${JSON.stringify(
 
 export function generateComponentMapCode(
   componentdescriptions,
-  welcome_page = './Hellogarden.svelte'
+  welcome_page = './Hellogarden.html'
 ) {
   return `
 ${componentdescriptions.map(createComponentImportStmt).join('\n')}
 
-import Welcome from '${welcome_page}' 
+import Welcome from '${welcome_page}?raw' 
 
 export const componentMap = {
   'Welcome': Welcome,

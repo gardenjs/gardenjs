@@ -1,17 +1,12 @@
 <script setup>
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 
 const props = defineProps([
   'selectedExample',
   'das',
-  'componentName',
-  'componentMap',
+  'component',
   'afterRenderHook',
 ])
-
-const component = computed(() => {
-  return props.componentMap?.[props.componentName]
-})
 
 onMounted(async () => {
   await props.afterRenderHook()
@@ -20,9 +15,9 @@ onMounted(async () => {
 
 <template>
   <component
-    v-if="component"
-    :is="component"
+    v-if="props.component"
+    :is="props.component"
     v-bind="{ ...props.selectedExample.input }"
   />
-  <h1 v-else>Ups</h1>
+  <h1>No Component selected!</h1>
 </template>

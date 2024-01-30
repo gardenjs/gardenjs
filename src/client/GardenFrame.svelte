@@ -1,5 +1,5 @@
 <script>
-  import DefaultRendererBuilder from '../renderer/SvelteRenderer.js'
+  import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
   export let componentMap = {}
   export let dasMap = {}
   export let config
@@ -36,24 +36,27 @@
       (ex) => ex.story === evt.data.selectedExample
     )
     componentChanged = componentName !== evt.data.componentName
-    componentName = evt.data.componentName
+    componentName = evt.data.componentName || 'Welcome'
     selectedExampleChanged = selectedExampleTitle !== evt.data.selectedExample
     selectedExampleTitle = evt.data.selectedExample
 
+    component = componentMap?.[componentName]
+
     if (config.devmodus) {
-      component = componentMap?.[componentName] || componentMap?.Welcome
       redirectData = {}
+      return
     } else {
-      updateComponent(componentName, selectedExample, das)
+      updateComponent(component, selectedExample, das)
     }
   })
 
-  async function updateComponent(componentName, selectedExample, das) {
+  async function updateComponent(component, selectedExample, das) {
     if (config.renderer) {
       let newFwk =
-        das?.file.substring(das?.file.lastIndexOf('.') + 1) || 'svelte'
+        das?.file.substring(das?.file.lastIndexOf('.') + 1) || 'default'
       if (fwk != newFwk) {
-        const rendererBuilder = config.renderer[newFwk]
+        const rendererBuilder =
+          config.renderer[newFwk] || DefaultRendererBuilder
         await updateRenderer(rendererBuilder)
         fwk = newFwk
       }
@@ -62,10 +65,9 @@
     await runHooks()
 
     currentRenderer?.updateComponent({
-      componentName,
+      component,
       selectedExample,
       das,
-      componentMap,
     })
   }
 

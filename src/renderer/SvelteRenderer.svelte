@@ -1,26 +1,15 @@
 <script>
   import { onMount } from 'svelte'
-  export let componentMap
-  export let componentName
+  export let component
   export let selectedExample
   export let das
   export let afterRenderHook = () => {}
-
-  let component
 
   let redirectData = {}
   $: {
     if (selectedExample) {
       redirectData = {}
     }
-  }
-
-  $: {
-    updateState(das, selectedExample, componentMap)
-  }
-
-  async function updateState(das, selectedExample, componentMap) {
-    component = componentMap?.[componentName] || componentMap?.Welcome
   }
 
   onMount(async () => {
