@@ -100,8 +100,9 @@ export default {
   // This title is displayed above the navigation:
   project_title: "${title}",
 
-  // Here you can set a path to your own start page:
-  // "welcome_page": "/src/custom_welcome_page.${libraries[0]}", 
+  // Here you can set a path to your own start page.
+  // The HTML file may only contain the body part, i.e. without the doctype, head and body tag:
+  // "welcome_page": "/src/custom_welcome_page.html",
 
   // vite config file:
   // vite_config: "./garden.vite.config.js",
