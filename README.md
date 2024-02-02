@@ -35,9 +35,10 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Dev
 
 ### v1.0
 
+- [bug] On reload css defect.
+- [task] Error handling. Do not render crash.
 - [task] Rename stories to title/examples.
 - [task] Add renderer plugins for svelte, vue, react. npm modules (@gardenjs/gardenjs-plugin-svelte/vue/react).
-- [task] Error handling. Do not render crash.
 - [task] Type infos of das in editor.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [task] Public Gardenjs docs & set Gardenjs repository public.
