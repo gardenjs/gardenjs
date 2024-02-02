@@ -12,6 +12,10 @@
     }
   }
 
+  $: {
+    if (component) console.log('DEBUG', 'component changed')
+  }
+
   onMount(async () => {
     await afterRenderHook()
   })

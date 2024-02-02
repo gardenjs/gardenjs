@@ -16,7 +16,6 @@
   let redirectData = {}
   let componentChanged
   let selectedExampleChanged
-  let error
 
   let afterFns = []
   let afterAllFns = []
@@ -71,17 +70,13 @@
         selectedExample,
         das,
       })
-    } catch (err) {
-      error = err
+    } catch (e) {
+      console.log('DEBUG', e)
     }
   }
 
   async function afterRenderHook() {
     await runHooksIfSet(afterRenderedFns)
-  }
-
-  function hideError() {
-    error = null
   }
 
   async function runHooks() {
@@ -167,37 +162,9 @@
     <div id="app"></div>
   {/if}
 </div>
-{#if error}
-  <div class="modal_back" on:click={hideError}>
-    <div class="modal">
-      <h1>Error during rendering:</h1>
-      <div><pre>{error}</pre></div>
-    </div>
-  </div>
-{/if}
 
 <style>
   .full {
     padding: 0.5rem 0.5rem 0;
-  }
-  .modal_back {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: #000;
-    opacity: 0.3;
-  }
-  .modal {
-    z-index: 1001;
-    background-color: white;
-    border: 1px solid red;
-    flex-direction: column;
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 </style>

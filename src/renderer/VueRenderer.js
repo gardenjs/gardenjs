@@ -5,9 +5,9 @@ async function create(afterRenderHook) {
     let app = createApp(VueApp, { afterRenderHook })
     app.mount('#app')
     return {
-      destroy: () => app.unmount(),
+      destroy: () => app?.unmount?.(),
       updateComponent: (props) => {
-        app.unmount()
+        app?.unmount()
         app = createApp(VueApp, { ...props, afterRenderHook })
         app.mount('#app')
       },

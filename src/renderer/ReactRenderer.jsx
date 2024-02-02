@@ -8,7 +8,7 @@ export const createApp = () => {
 }
 
 export const updateApp = (props) => {
-  app.unmount()
+  app?.unmount?.()
   createApp()
   app.render(<DynamicComponent {...props} />)
 }
