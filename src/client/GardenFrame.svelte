@@ -33,7 +33,7 @@
     full = evt.data.stageSize === 'full'
     das = dasMap[evt.data.componentName]
     selectedExample = das?.examples.find(
-      (ex) => ex.story === evt.data.selectedExample
+      (ex) => ex.title === evt.data.selectedExample
     )
     componentChanged = componentName !== evt.data.componentName
     componentName = evt.data.componentName || 'Welcome'

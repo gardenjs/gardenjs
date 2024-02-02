@@ -40,11 +40,11 @@ function updateRoute(routeobj, state) {
 
 export function updateSelectedExample() {
   const examples = get(das).examples || []
-  if (historystate?.selectedstory) {
+  if (historystate?.selectedExample) {
     selectedExample.set(
-      examples.find((ex) => ex.story == historystate.selectedstory)?.story
+      examples.find((ex) => ex.title == historystate.selectedExample)?.title
     )
   } else {
-    selectedExample.set(examples[0]?.story)
+    selectedExample.set(examples[0]?.title)
   }
 }

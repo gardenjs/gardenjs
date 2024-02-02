@@ -30,13 +30,13 @@ describe('Component Screenshot Test', () => {
     const das = dasmap[componentName]
     describe(`Component ${name} at route: ${route}`, () => {
       for (const example of das.examples) {
-        const story = example.story
-        it(story, async () => {
+        const title = example.title
+        it(title, async () => {
           await page.evaluate(
             (data) => {
               window.postMessage(data, '*')
             },
-            { selectedStory: story, componentName }
+            { selectedExample: title, componentName }
           )
           const body = await page.$('body')
           const screenshot = await body.screenshot()

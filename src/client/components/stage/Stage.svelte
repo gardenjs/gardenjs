@@ -80,7 +80,7 @@
         name: 'Examples',
         props: {
           selected: selectedExample,
-          items: das.examples.map((ex) => ex.story),
+          items: das.examples.map((ex) => ex.title),
         },
         page: PanelStoriesNav,
         out: handleSelectionChange,
@@ -98,7 +98,7 @@
 
   function handleSelectionChange(evt) {
     globalThis.history.pushState(
-      { selectedstory: evt.detail.selecteditem },
+      { selectedExample: evt.detail.selecteditem },
       '',
       window.location.pathname.substring('/garden'.length)
     )
