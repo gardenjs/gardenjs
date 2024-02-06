@@ -15,11 +15,17 @@ Gardenjs is a lightweight and lightning-fast UI component explorer for JavaScrip
 
 Please follow the documentation at [gardenjs.org](https://www.gardenjs.org).
 
-### Supported Frameworks
-
-The support of JS frameworks is realized by renderer plugins. There are currently renderers for [Svelte](https://github.com/gardenjs/render-plugin-svelte), [Vue](https://github.com/gardenjs/render-plugin-vue) and [React](https://github.com/gardenjs/render-plugin-react). These can be selected during the installation of Gardenjs or later. You can easily create plugins for other frameworks. Contact us, we will be happy to link your plugins here.
-
 Happy Gardening :)
+
+## Supported Frameworks
+
+The support of JS frameworks is realized by renderer plugins. There are currently renderers for...
+
+- [Svelte](https://github.com/gardenjs/render-plugin-svelte)
+- [Vue](https://github.com/gardenjs/render-plugin-vue)
+- [React](https://github.com/gardenjs/render-plugin-react)
+
+These can be selected during the installation of Gardenjs or later. You can easily create plugins for other frameworks. Contact us, we will be happy to link your plugins here.
 
 ## Sponsors
 
