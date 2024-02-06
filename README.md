@@ -1,8 +1,8 @@
-Test Release, coming soon ...
+# Gardenjs
 
-# Component library explorer
++++ TEST RELEASE, COMING SOON +++
 
-Gardenjs is a lightweight UI component explorer for JavaScript front-end libraries that makes it easier to develop, test and document UI components and pages. Svelte, Vue and React are currently supported out of the box. Other libraries can also be easily connected to Garden.
+Gardenjs is a lightweight and lightning-fast UI component explorer for JavaScript front-end libraries that makes it easier to develop, test and document UI components and pages. Other libraries can also be easily connected to Garden.
 
 ## Why Gardenjs?
 
@@ -14,6 +14,10 @@ Gardenjs is a lightweight UI component explorer for JavaScript front-end librari
 ## Getting Started
 
 Please follow the documentation at [gardenjs.org](https://www.gardenjs.org).
+
+### Supported Frameworks
+
+The support of JS frameworks is realized by renderer plugins. There are currently renderers for [Svelte](https://github.com/gardenjs/render-plugin-svelte), [Vue](https://github.com/gardenjs/render-plugin-vue) and [React](https://github.com/gardenjs/render-plugin-react). These can be selected during the installation of Gardenjs or later. You can easily create plugins for other frameworks. Contact us, we will be happy to link your plugins here.
 
 Happy Gardening :)
 
@@ -29,7 +33,7 @@ Gardenjs was developed and is contributed by [Rabbit Development](https://www.ra
 
 [MIT](https://opensource.org/license/mit/)
 
-Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas from [Rabbit Development](https://www.rabbitdevelopment.de).
+Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas.
 
 ## Todo´s
 
