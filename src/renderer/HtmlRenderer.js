@@ -2,7 +2,7 @@ import HtmlApp from './HtmlRenderer.svelte'
 async function create(afterRenderHook) {
   try {
     let app = new HtmlApp({
-      target: document.getElementById('app'),
+      target: document.getElementById('garden_app'),
       props: { afterRenderHook },
     })
     return {
@@ -10,7 +10,7 @@ async function create(afterRenderHook) {
       updateComponent: (props) => {
         app.$destroy()
         app = new HtmlApp({
-          target: document.getElementById('app'),
+          target: document.getElementById('garden_app'),
           props: { ...props, afterRenderHook },
         })
       },

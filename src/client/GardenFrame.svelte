@@ -65,6 +65,7 @@
     await runHooks()
 
     try {
+      console.log('DEBUG', 'update component', component)
       currentRenderer?.updateComponent({
         component,
         selectedExample,
@@ -149,7 +150,7 @@
   }
 </script>
 
-<div class:full>
+<div class:full id="garden_app">
   {#if config.devmodus}
     <svelte:component
       this={component}
@@ -158,8 +159,6 @@
       {afterRenderHook}
       on:out={handleComponentOut}
     />
-  {:else}
-    <div id="app"></div>
   {/if}
 </div>
 
