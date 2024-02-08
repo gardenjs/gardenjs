@@ -10,6 +10,7 @@
   let selectedExampleTitle
   let full = false
   let currentRendererBuilder
+  //  let currentRenderer
   let componentName
   let component
   let redirectData = {}
