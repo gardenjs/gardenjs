@@ -152,19 +152,21 @@ async function runCommand(cmd) {
   }
 }
 
+const lib2FileExtension = {
+  React: '"[tj]sx"',
+  Svelte: '"svelte"',
+  Vue: '"vue"',
+}
+
 function createConfigFile({ title, componentFolder, libraries }) {
   const importStmts = libraries
     .map((lib) => {
-      return `import ${lib}RendererBuilder from "gardenjs/${lib.toLowerCase()}"`
+      return `import ${lib}RendererBuilder from "@gardenjs/render-plugin-${lib.toLowerCase()}"`
     })
     .join('\n')
   const renderer = libraries
     .map((lib) => {
-      if (lib === 'React') {
-        return `jsx: ReactRendererBuilder,
-tsx: ReactRendererBuilder,`
-      }
-      return `${lib.toLowerCase()}: ${lib}RendererBuilder,`
+      return `${lib2FileExtension[lib]}: ${lib}RendererBuilder,`
     })
     .join('\n    ')
 

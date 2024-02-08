@@ -9,8 +9,7 @@
   let selectedExample = {}
   let selectedExampleTitle
   let full = false
-  let fwk
-  let currentRenderer
+  let currentRendererBuilder
   let componentName
   let component
   let redirectData = {}
@@ -50,15 +49,23 @@
     }
   })
 
+  async function getRendererBuilderFor(filename) {
+    if (!filename) return DefaultRendererBuilder
+
+    for (const extensionPattern in config.renderer) {
+      const regex = new RegExp(extensionPattern + '$')
+      if (regex.test(filename)) {
+        return config.renderer[extensionPattern]
+      }
+    }
+    return DefaultRendererBuilder
+  }
+
   async function updateComponent(component, selectedExample, das) {
     if (config.renderer) {
-      let newFwk =
-        das?.file.substring(das?.file.lastIndexOf('.') + 1) || 'default'
-      if (fwk != newFwk) {
-        const rendererBuilder =
-          config.renderer[newFwk] || DefaultRendererBuilder
-        await updateRenderer(rendererBuilder)
-        fwk = newFwk
+      const newRendererBuilder = await getRendererBuilderFor(das?.file)
+      if (newRendererBuilder !== currentRendererBuilder) {
+        await updateRenderer(newRendererBuilder)
       }
     }
 

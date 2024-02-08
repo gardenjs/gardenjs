@@ -6,11 +6,11 @@ export default {
   out: [{ name: 'click', type: 'String' }],
   examples: [
     {
-      story: 'with text',
+      title: 'with text',
       input: {
         name: 'GardenButton',
       },
     },
-    { story: 'no text', input: {} },
+    { title: 'no text', input: {} },
   ],
 }
