@@ -27,10 +27,6 @@ The support of JS frameworks is realized by renderer plugins. There are currentl
 
 These can be selected during the installation of Gardenjs or later. You can easily create plugins for other frameworks. Contact us, we will be happy to link your plugins here.
 
-## Sponsors
-
-Gardenjs is an open source project and is licensed under the MIT license. Become a sponsor to give us more scope for further development. We are grateful for this and will publish your logo and website URL in our README on Github and on our website/documentation.
-
 ## Contributing
 
 Gardenjs was developed and is contributed by [Rabbit Development](https://www.rabbitdevelopment.de). We look forward to your feedback, please report any bugs. We also welcome contributions and are happy about sponsoring.
