@@ -52,10 +52,9 @@
     "open": "8.4.0"
   },
   "lint-staged": {
-    "src/**/*.{js,ts}": [
-      "eslint --fix",
-      "prettier --write -u"
-    ],
-    "!**/*": "prettier --write --ignore-unknown"
+    "**/*.{js,ts,svelte}": "eslint --fix",
+    "**/*": [
+      "prettier --write --ignore-unknown"
+    ]
   }
 }
