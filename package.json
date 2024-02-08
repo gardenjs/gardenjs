@@ -45,9 +45,10 @@
   "dependencies": {
     "@inquirer/checkbox": "1.5.0",
     "@inquirer/prompts": "3.3.0",
-    "node-watch": "0.7.3",
+    "@inquirer/select": "^2.0.0",
     "highlight.js": "11.7.0",
     "marked": "4.3.0",
+    "node-watch": "0.7.3",
     "open": "8.4.0"
   },
   "lint-staged": {

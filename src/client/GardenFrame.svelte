@@ -65,14 +65,13 @@
     await runHooks()
 
     try {
-      console.log('DEBUG', 'update component', component)
       currentRenderer?.updateComponent({
         component,
         selectedExample,
         das,
       })
     } catch (e) {
-      console.log('DEBUG', e)
+      console.error(e)
     }
   }
 
@@ -137,7 +136,7 @@
         try {
           await Promise.race([wait(hookTimeout), func()])
         } catch (err) {
-          console.log(err)
+          console.error(err)
         }
       }
     }
