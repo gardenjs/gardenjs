@@ -6,9 +6,9 @@ async function create(afterRenderHook) {
       props: { afterRenderHook },
     })
     return {
-      destroy: () => app.$destroy(),
+      destroy: () => app?.$destroy?.(),
       updateComponent: (props) => {
-        app.$destroy()
+        app?.$destroy?.()
         app = new HtmlApp({
           target: document.getElementById('garden_app'),
           props: { ...props, afterRenderHook },

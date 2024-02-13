@@ -9,7 +9,7 @@
   let selectedExample = {}
   let selectedExampleTitle
   let full = false
-  let fwk
+  let currentRendererBuilder
   let currentRenderer
   let componentName
   let component
@@ -50,29 +50,36 @@
     }
   })
 
+  async function getRendererBuilderFor(filename) {
+    if (!filename) return DefaultRendererBuilder
+
+    for (const extensionPattern in config.renderer) {
+      const regex = new RegExp(extensionPattern + '$')
+      if (regex.test(filename)) {
+        return config.renderer[extensionPattern]
+      }
+    }
+    return DefaultRendererBuilder
+  }
+
   async function updateComponent(component, selectedExample, das) {
     if (config.renderer) {
-      let newFwk =
-        das?.file.substring(das?.file.lastIndexOf('.') + 1) || 'default'
-      if (fwk != newFwk) {
-        const rendererBuilder =
-          config.renderer[newFwk] || DefaultRendererBuilder
-        await updateRenderer(rendererBuilder)
-        fwk = newFwk
+      const newRendererBuilder = await getRendererBuilderFor(das?.file)
+      if (newRendererBuilder !== currentRendererBuilder) {
+        await updateRenderer(newRendererBuilder)
       }
     }
 
     await runHooks()
 
     try {
-      console.log('DEBUG', 'update component', component)
       currentRenderer?.updateComponent({
         component,
         selectedExample,
         das,
       })
     } catch (e) {
-      console.log('DEBUG', e)
+      console.error(e)
     }
   }
 
@@ -137,7 +144,7 @@
         try {
           await Promise.race([wait(hookTimeout), func()])
         } catch (err) {
-          console.log(err)
+          console.error(err)
         }
       }
     }
