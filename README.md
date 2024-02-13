@@ -68,6 +68,7 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas.
 - [task] If full mode is active, switching to portrait mode is deactivated.
 - [task] Make Gardenjs docs link optional via garden.config.js.
 - [task] Show custom favicon.svg configured in garden.config.js.
+- [task] Move demo components from core to the renderer plugins.
 - [feature] Screenshot tests:
   - Docker image oder alternativ for screenshot test.
   - Automatic create test file & and folder (like init garden).
