@@ -37,25 +37,31 @@ Gardenjs was developed and is contributed by [Rabbit Development](https://www.ra
 
 Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas.
 
+---
+
 ## Todo´s
 
 ### v1.0
 
-- [bug] On reload css defect. only problem in ubuntu
-- [task] Add renderer plugins for svelte, vue, react. npm modules (@gardenjs/gardenjs-plugin-svelte/vue/react).
+- [bug] On reload css defect (only problem in ubuntu).
+- [task] Decorator for vue & react plugin.
 - [task] Type infos of das in editor.
-- [refactor] Move logic to own file / use stores?. Handle user interaction.
+- [task] Add renderer to docs.
+- [task] Add decorator to docs.
 - [task] Public Gardenjs docs & set Gardenjs repository public.
 - [task] Public Gardenjs demo of Gardenjs docs & set repository of Gardenjs docs public.
 - [task] Public Rabbit Dev website.
 - [task] Create Linkedin profil for Rabbit Dev & Gardenjs.
 
-### v1.1
+## Roadmap
 
+### Follow-up version
+
+- [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
 - [task] Add tests (or v1.1 ?).
 
-### v1.x
+### later
 
 - [task] Keep user state after refresh.
   - [task] Store selection in panel nav for refresh or if another component is selected.
