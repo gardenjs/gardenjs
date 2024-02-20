@@ -10,11 +10,11 @@
   --c-basic-250: hsl(46, 5%, 84%);
   --c-basic-300: hsl(46, 5%, 81%);
   --c-basic-400: hsl(46, 5%, 64%);
-  --c-basic-500: hsl(46, 5%, 46%);
-  --c-basic-600: hsl(46, 5%, 32%);
-  --c-basic-700: hsl(46, 5%, 25%);
-  --c-basic-800: hsl(46, 5%, 15%);
-  --c-basic-900: hsl(46, 5%, 10%);
+  --c-basic-500: hsl(210, 5%, 46%);
+  --c-basic-600: hsl(210, 5%, 32%);
+  --c-basic-700: hsl(210, 5%, 25%);
+  --c-basic-800: hsl(210, 5%, 15%);
+  --c-basic-900: hsl(210, 5%, 10%);
 
   --c-bg-body: var(--c-basic-150);
   --c-bg-panels: var(--c-basic-0);
