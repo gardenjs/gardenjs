@@ -37,8 +37,6 @@ Gardenjs was developed and is contributed by [Rabbit Development](https://www.ra
 
 Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas.
 
----
-
 ## Todo´s
 
 ### v1.0
@@ -55,13 +53,15 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas.
 
 ## Roadmap
 
-### Follow-up version
+Gardenjs will continue to be maintained. Further features will also be integrated depending on how well Gardenjs is accepted.
+
+### Version 1.1
 
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
 - [task] Add tests (or v1.1 ?).
 
-### later
+### Version 1.2 and later (without specific order)
 
 - [task] Keep user state after refresh.
   - [task] Store selection in panel nav for refresh or if another component is selected.
@@ -75,6 +75,7 @@ Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas.
 - [task] Make Gardenjs docs link optional via garden.config.js.
 - [task] Show custom favicon.svg configured in garden.config.js.
 - [task] Move demo components from core to the renderer plugins.
+- [task] Color variables are made configurable for your own Gardenjs themes.
 - [feature] Screenshot tests:
   - Docker image oder alternativ for screenshot test.
   - Automatic create test file & and folder (like init garden).
