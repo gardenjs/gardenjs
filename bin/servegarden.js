@@ -123,7 +123,7 @@ function separator() {
 async function installPlugins(packman, libraries) {
   const cmdStart = {
     npm: 'npm install --save-dev ',
-    pnpm: 'pnpm install --save-dev ',
+    pnpm: 'pnpm add -D ',
     yarn: 'yarn add -D ',
   }[packman]
   const cmd =
