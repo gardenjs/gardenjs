@@ -2,6 +2,10 @@
 
 +++ TEST RELEASE, COMING SOON +++
 
+Gardenjs is an open source JS/Svelte-based UI component library explorer released under the [MIT](https://opensource.org/license/mit/) license. Gardenjs is copyright (C) 2020 - present by Robin Danzinger & Martin Farkas.
+
+## What is Gardenjs?
+
 Gardenjs provides a centralized platform for developers to create, test and present UI components in isolation. Gardenjs promotes modular and reusable code, streamlines collaboration between team members and increases overall productivity. Gardenjs is designed for projects of any size.
 
 ## Why Gardenjs?
@@ -11,13 +15,9 @@ Gardenjs provides a centralized platform for developers to create, test and pres
 - Many useful features without being complex and bloated.
 - Simply looks good :)
 
-## Getting Started
-
-Please follow the documentation at [gardenjs.org](https://www.gardenjs.org). Happy Gardening :)
-
 ## Supported Frameworks
 
-The support of JS frameworks is realized by renderer plugins. There are currently renderers for...
+HTML is rendered by default. The support of JS frameworks is realized by renderer plugins. There are currently renderers for...
 
 - [Svelte](https://github.com/gardenjs/render-plugin-svelte)
 - [Vue](https://github.com/gardenjs/render-plugin-vue)
@@ -25,15 +25,13 @@ The support of JS frameworks is realized by renderer plugins. There are currentl
 
 These can be selected during the installation of Gardenjs or later. You can easily create plugins for other frameworks. Contact us, we will be happy to link your plugins here.
 
+## Getting Started
+
+Please follow the documentation at [gardenjs.org](https://www.gardenjs.org). Happy Gardening :)
+
 ## Contributing
 
 Gardenjs was developed and is contributed by [Rabbit Development](https://www.rabbitdevelopment.de). We look forward to your feedback, please report any bugs. We also welcome contributions and are happy about sponsoring.
-
-## License
-
-[MIT](https://opensource.org/license/mit/)
-
-Gardenjs is copyright (C) 2020 - present by Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
@@ -55,7 +53,7 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
-- [task] Add tests (or v1.1 ?).
+- [task] Add tests.
 
 ### Version 1.2 and later (without specific order)
 
@@ -64,13 +62,14 @@ Gardenjs will continue to be maintained. Further features will also be integrate
   - [task] Store selection of stage for refresh or if another component is selected.
 - [feature] Add testing library. E.g. [Testing Library](https://testing-library.com/).
 - [feature] Collect events and show in panel.
+- [feature] Bookmarks. (siehe ReactCosmos)
 - [task] Add [line numbers plugin](https://github.com/wcoder/highlightjs-line-numbers.js) to highlightjs.
 - [task] Sidebarnav is closed by default on narrow display devices.
 - [task] Make setting of default mode possible via garden.config.js.
 - [task] If full mode is active, switching to portrait mode is deactivated.
 - [task] Make Gardenjs docs link optional via garden.config.js.
-- [task] Show custom favicon.svg configured in garden.config.js.
 - [task] Move demo components from core to the renderer plugins.
+- [task] Show custom favicon.svg configured in garden.config.js.
 - [task] Color variables are made configurable for your own Gardenjs themes.
 - [feature] Screenshot tests:
   - Docker image oder alternativ for screenshot test.
@@ -80,10 +79,9 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 - [feature] Add zoom button 100% and if zoomed show size in % with switch possibility.
 - [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi.
 - [task] Switch from md to mdx.
-- [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js. Option: Set list of custom values like iPhone 15, iPad, Samsung etc. in garden.config and show dropdown in Gardenjs instead of icons.
+- [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js. Option: Set list of custom values like iPhone 13,14,15, iPad, Samsung Galaxy A/Sx or as pixel values in garden.config and show dropdown in Gardenjs instead of icons.
 - [task] Integrate Svelte A11y features.
 - [feature] Build kickstarter "carrots". Define components for carrots.
-- [feature] Bookmarks. (siehe ReactCosmos)
 - [feature] Measure.
 - [feature] Manually change properties via control panel.
 
