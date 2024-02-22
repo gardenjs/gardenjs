@@ -2,7 +2,7 @@
 
 +++ TEST RELEASE, COMING SOON +++
 
-Gardenjs is a lightweight and lightning-fast UI component explorer for JavaScript front-end libraries that makes it easier to develop, test and document UI components and pages. Other libraries can also be easily connected to Garden.
+Gardenjs provides a centralized platform for developers to create, test and present UI components in isolation. Gardenjs promotes modular and reusable code, streamlines collaboration between team members and increases overall productivity. Gardenjs is designed for projects of any size.
 
 ## Why Gardenjs?
 
@@ -13,9 +13,7 @@ Gardenjs is a lightweight and lightning-fast UI component explorer for JavaScrip
 
 ## Getting Started
 
-Please follow the documentation at [gardenjs.org](https://www.gardenjs.org).
-
-Happy Gardening :)
+Please follow the documentation at [gardenjs.org](https://www.gardenjs.org). Happy Gardening :)
 
 ## Supported Frameworks
 
@@ -35,11 +33,9 @@ Gardenjs was developed and is contributed by [Rabbit Development](https://www.ra
 
 [MIT](https://opensource.org/license/mit/)
 
-Copyright (C) 2020 - present by Robin Danzinger & Martin Farkas.
+Gardenjs is copyright (C) 2020 - present by Robin Danzinger & Martin Farkas.
 
-## Todo´s
-
-### v1.0
+## Todo's up to v1.0
 
 - [bug] On reload css defect (only problem in ubuntu).
 - [task] Decorator for vue & react plugin.
