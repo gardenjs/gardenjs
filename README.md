@@ -23,7 +23,7 @@ Gardenjs provides a centralized platform for developers to create, test and pres
 
 ## Supported Frameworks
 
-HTML is rendered by default. The support of JS frameworks is realized by renderer plugins. There are currently plugins for [Svelte](https://github.com/gardenjs/render-plugin-svelte), [Vue](https://github.com/gardenjs/render-plugin-vue) and [React](https://github.com/gardenjs/render-plugin-react). You can also easily create plugins for other frameworks. Contact us, we will be happy to link your renderer plugins here.
+HTML snippets are rendered by default. The support of JS frameworks is realized by renderer plugins. There are currently plugins for [Svelte](https://github.com/gardenjs/render-plugin-svelte), [Vue](https://github.com/gardenjs/render-plugin-vue) and [React](https://github.com/gardenjs/render-plugin-react). You can also easily create plugins for other frameworks. Contact us, we will be happy to link your renderer plugins here.
 
 ## Contributing
 
@@ -39,6 +39,8 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [task] Decorator for vue & react plugin.
+- [feature] Place decorator files in folders (like test-files with before/after).
+- [feature] Support das file as JS, JSX, TS, TSX.
 - [task] Type infos of das in editor.
 - [task] Add renderer to docs.
 - [task] Add decorator to docs.
@@ -59,8 +61,7 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 
 ### Later (no specific order)
 
-- [feature] use das-files from other modules (e.g. show carrots in custom project)
-- [feature] Place decorator files in folders (like test-files with before/after)
+- [feature] use das-files from other modules (e.g. show carrots in custom project).
 - [task] Keep user state after refresh.
   - [task] Store selection in panel nav for refresh or if another component is selected.
   - [task] Store selection of stage for refresh or if another component is selected.
