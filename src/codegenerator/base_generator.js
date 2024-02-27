@@ -35,7 +35,7 @@ export async function generateGardenBase() {
   )
   await writeFileIfChanged(
     targetRawComponentMapFile,
-    generateRawComponentMapCode(cds, welcome_page)
+    generateRawComponentMapCode(cds)
   )
   await writeFileIfChanged(targetDasMapFile, generateDasMapCode(cds))
 
@@ -71,10 +71,7 @@ export function getDasBaseFolders(structure, navbasenode) {
   for (const node in structure) {
     const basenode = navbasenode ? navbasenode + '/' + node : node
     if (typeof structure[node] == 'string') {
-      const basepath =
-        structure[node].indexOf('/') == 0
-          ? structure[node].substring(1)
-          : 'node_modules/' + structure[node]
+      const basepath = structure[node]
       folders.push({ navbasenode: basenode, basepath })
     } else {
       folders = folders.concat(getDasBaseFolders(structure[node], basenode))
@@ -258,19 +255,15 @@ function createComponentDescription({
   const fullname = createFullname(navbasenode, relativepath, name)
   const route = createRoute(navbasenode, relativepath, name)
   const fullnavnode = path.join(navbasenode, relativepath)
-  const isModule = basepath.indexOf('node_modules') == 0
-  const modulepath = isModule
-    ? basepath.substring('node_modules/'.length)
-    : '/' + basepath
   const file = das.file
-    ? path.join(modulepath, relativepath, das.file)
+    ? path.join(basepath, relativepath, das.file)
     : undefined
-  const dasfile = path.join(modulepath, relativepath, filename)
+  const dasfile = path.join(basepath, relativepath, filename)
   const descriptionfile = das.description?.endsWith('.md')
-    ? path.join(modulepath, relativepath, das.description)
+    ? path.join(basepath, relativepath, das.description)
     : undefined
   const fullpath = path.join(basepath, relativepath)
-  const pathRelativeToGarden = isModule ? '' : '/..'
+  const pathRelativeToGarden = '/../'
   return {
     name,
     basepath,
