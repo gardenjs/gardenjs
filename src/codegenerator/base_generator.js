@@ -234,14 +234,12 @@ function createComponentMapEntry(description) {
 function createDasMapEntry(description) {
   return `'${description.fullname}': {
     ...${description.fullname}Das,
-    description: ${getDescriptionFromFileOrProperty(description)} 
+    ${
+      description.descriptionFile
+        ? 'description : ' + description.fullname + 'DasDescription'
+        : ''
+    }
   }`
-}
-
-function getDescriptionFromFileOrProperty(description) {
-  return description.descriptionfile
-    ? `${description.fullname}DasDescription`
-    : `${description.fullname}Das.description`
 }
 
 function createComponentDescription({
