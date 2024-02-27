@@ -37,7 +37,6 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
-- [task] Checkout if it is possible to include a library from outside the project folder via garden.config.js.
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [task] Decorator for vue & react plugin.
 - [task] Type infos of das in editor.
@@ -60,6 +59,8 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 
 ### Later (no specific order)
 
+- [feature] use das-files from other modules (e.g. show carrots in custom project)
+- [feature] Place decorator files in folders (like test-files with before/after)
 - [task] Keep user state after refresh.
   - [task] Store selection in panel nav for refresh or if another component is selected.
   - [task] Store selection of stage for refresh or if another component is selected.
