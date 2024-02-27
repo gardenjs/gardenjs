@@ -37,7 +37,8 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
-- [bug] On reload css defect (only problem in ubuntu).
+- [task] Checkout if it is possible to include a library from outside the project folder via garden.config.js.
+- [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [task] Decorator for vue & react plugin.
 - [task] Type infos of das in editor.
 - [task] Add renderer to docs.
@@ -51,13 +52,13 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 Gardenjs will continue to be maintained. Further features will also be integrated depending on how well Gardenjs is accepted.
 
-### Version 1.1
+### Next
 
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
 - [task] Add tests.
 
-### Version 1.2 and later (without specific order)
+### Later (no specific order)
 
 - [task] Keep user state after refresh.
   - [task] Store selection in panel nav for refresh or if another component is selected.
