@@ -46,7 +46,7 @@ async function runSetupScript() {
 
   const componentFolder = await input({
     message: 'Enter your component source folder:',
-    default: 'src/',
+    default: './src/',
   })
 
   const shallCreateExample = await confirm({
@@ -191,19 +191,19 @@ export default {
 
   // Here you can set a path to your own start page.
   // The HTML file may only contain the body part, i.e. without the doctype, head and body tag:
-  // "welcome_page": "/src/custom_welcome_page.html",
+  // "welcome_page": "./src/custom_welcome_page.html",
 
   // vite config file:
   // vite_config: "./garden.vite.config.js",
   
   // Each entry is output with its subpages in the page tree:
   structure: {
-    components: "/${componentFolder}",
+    components: "${componentFolder}",
   },
 
   watch: {
-    directories: ["./${componentFolder}"],
-    include: [${watchLibFiles}, ".das.json", ".scss", ".css", ".less", ".js", ".ts"],
+    directories: ["${componentFolder}"],
+    include: [${watchLibFiles}, ".scss", ".css", ".less", ".js", ".ts"],
   },
 
   renderer: {
