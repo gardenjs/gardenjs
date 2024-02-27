@@ -20,8 +20,8 @@
   --c-bg-panels: var(--c-basic-0);
 }
 .dark {
-  --c-primary: hsl(185, 100%, 45%);
-  --c-primary-bg: hsl(195, 100%, 20%);
+  --c-primary: hsl(185, 80%, 75%); /* hsl(185, 100%, 45%); */
+  --c-primary-bg: hsl(185, 80%, 20%); /* hsl(195, 100%, 20%); */
   --c-basic-0: hsl(216, 30%, 5%);
   --c-basic-50: hsl(216, 30%, 10%);
   --c-basic-75: hsl(216, 30%, 14%);
