@@ -37,6 +37,7 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
+- [task] Add "no renderer" to install script and at least least one must be selected.
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [task] Decorator for vue & react plugin.
 - [feature] Place decorator files in folders (like test-files with before/after).
