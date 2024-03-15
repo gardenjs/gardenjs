@@ -27,9 +27,6 @@
     if (config.themeHandler) {
       config.themeHandler(evt.data.theme)
     }
-    if (componentName != evt.data.componentName) {
-      componentChanged = true
-    }
     full = evt.data.stageSize === 'full'
     das = dasMap[evt.data.componentName]
     selectedExample = das?.examples.find(
@@ -66,7 +63,7 @@
     if (config.renderer) {
       const newRendererBuilder = await getRendererBuilderFor(das?.file)
       if (newRendererBuilder !== currentRendererBuilder) {
-        await updateRenderer(newRendererBuilder)
+        await updateRenderer(newRendererBuilder, das?.decorators)
       }
     }
 
@@ -87,19 +84,59 @@
     await runHooksIfSet(afterRenderedFns)
   }
 
+  let currentHooks = []
+
   async function runHooks() {
     if (componentChanged) {
       afterRenderedFns = [selectedExample?.play]
-      beforeAllFns = [das?.beforeAll]
-      beforeFns = [das?.before, selectedExample?.before]
+      beforeAllFns = das?.beforeAll ? [das?.beforeAll] : []
+
+      const oldHooks = das?.hooks
+        ? currentHooks.filter((currentHook) => {
+            return !das?.hooks.find((newHook) => newHook === currentHook)
+          })
+        : currentHooks
+
+      const newHooks =
+        currentHooks.length > 0
+          ? das?.hooks.filter((newHook) => {
+              return !currentHooks.find(
+                (currentHook) => newHook === currentHook
+              )
+            })
+          : das?.hooks ?? []
+
+      currentHooks = das?.hooks ?? []
+
+      const hookBefore =
+        currentHooks.filter((h) => h.before).map((hook) => hook.before) ?? []
+
+      afterAllFns = [
+        ...afterAllFns,
+        ...oldHooks.filter((h) => h.afterAll).map((h) => h.afterAll),
+      ]
+      beforeAllFns = [
+        ...newHooks.filter((h) => h.beforeAll).map((h) => h.beforeAll),
+        ...beforeAllFns,
+      ]
+      beforeFns = [...hookBefore, das?.before, selectedExample?.before].filter(
+        (b) => !!b
+      )
+
       await runHooksIfSet([
         ...afterFns,
         ...afterAllFns,
         ...beforeAllFns,
         ...beforeFns,
       ])
-      afterAllFns = [das?.afterAll]
-      afterFns = [selectedExample?.after, das?.after]
+
+      const hookAfter =
+        currentHooks.filter((h) => h.after).map((h) => h.after) ?? []
+
+      afterAllFns = das?.afterAll ? [das?.afterAll] : []
+      afterFns = [selectedExample?.after, das?.after, ...hookAfter].filter(
+        (af) => !!af
+      )
       beforeAllFns = []
     } else if (selectedExampleChanged) {
       afterRenderedFns = [selectedExample?.play]
@@ -109,13 +146,13 @@
     }
   }
 
-  async function updateRenderer(rendererBuilder) {
+  async function updateRenderer(rendererBuilder, decorators) {
     try {
       await currentRenderer?.destroy()
     } catch (e) {
       console.error('Could not destroy current renderer', e)
     }
-    currentRenderer = await rendererBuilder.create(afterRenderHook)
+    currentRenderer = await rendererBuilder.create(afterRenderHook, decorators)
   }
 
   $: {

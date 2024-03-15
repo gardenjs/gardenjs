@@ -11,25 +11,75 @@ export async function findAndReadDasFiles({ basepath, navbasenode }) {
   return await Promise.all(promises)
 }
 
-async function findDasFiles(basepath, relativepath = '') {
+async function findDasFiles(
+  basepath,
+  relativepath = '',
+  hooks = [],
+  decorators = []
+) {
   return new Promise((resolve, reject) => {
     try {
       fs.readdir(
         path.resolve(basepath, relativepath),
         { withFileTypes: true },
-        (err, files) => {
+        async (err, files) => {
           if (err) {
             reject(err)
           } else {
-            const dasfiles = files
-              .filter((file) => file.name.match(/^.*\.das\.js$/i))
+            const hookfiles = files
+              .filter((file) => file.name.match(/^.*\.das\.hook\.[jt]s*$/i))
               .map((file) => {
-                return { filename: file.name, relativepath, basepath }
+                return {
+                  filename: file.name,
+                  relativepath,
+                  basepath,
+                }
+              })
+
+            const hookContentPromises = hookfiles.map(async (file) => {
+              return {
+                ...(await readDasFile(file)),
+                ...file,
+              }
+            })
+            const hookContent = await Promise.all(hookContentPromises)
+
+            hooks = [...hooks, ...hookContent]
+
+            const decoratorfiles = files
+              .filter((file) => file.name.match(/^.*\.das\.decorator\.[^.]*$/i))
+              .map((file) => {
+                const extension = file.name.substring(
+                  file.name.lastIndexOf('.')
+                )
+                return {
+                  filename: file.name,
+                  relativepath,
+                  basepath,
+                  extension,
+                }
+              })
+            decorators = [...decorators, ...decoratorfiles]
+            const dasfiles = files
+              .filter((file) => file.name.match(/^.*\.das\.[tj]sx?$/i))
+              .map((file) => {
+                return {
+                  filename: file.name,
+                  relativepath,
+                  basepath,
+                  hooks,
+                  decorators,
+                }
               })
             const promises = files
               .filter((file) => file.isDirectory())
               .map((dir) => {
-                return findDasFiles(basepath, path.join(relativepath, dir.name))
+                return findDasFiles(
+                  basepath,
+                  path.join(relativepath, dir.name),
+                  hooks,
+                  decorators
+                )
               })
             Promise.all(promises).then((subDasFiles) => {
               resolve(

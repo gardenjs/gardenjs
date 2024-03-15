@@ -3,6 +3,8 @@ import fs from 'fs'
 import { findAndReadDasFiles } from './das_file_finder.js'
 import { getConfig } from '../config.js'
 
+const pathRelativeToGarden = '../'
+
 export async function generateGardenBase() {
   const destination = '.garden/'
   const { structure, additional_style_files, welcome_page, devmodus } =
@@ -121,8 +123,23 @@ export const rawComponentMap = {
 }
 
 export function generateDasMapCode(componentdescriptions) {
+  const decorators = componentdescriptions.flatMap((cd) => cd.decorators)
+  const added = {}
+  const hooks = componentdescriptions
+    .flatMap((cd) => cd.hooks)
+    .filter((hook) => {
+      if (added[hook.fullname]) {
+        return false
+      }
+      added[hook.fullname] = true
+      return true
+    })
   return `
 ${componentdescriptions.map(createDasImportStmt).join('\n')}
+${Array.from(new Set(decorators.map(createDecoratorImportStmt))).join('\n')}
+${hooks.map(createHookImportStmt).join('\n')}
+${hooks.map(createHookEntry).join('\n')}
+
 export const dasMap = {
   ${componentdescriptions.map(createDasMapEntry).join(',\n')}
 }
@@ -207,23 +224,38 @@ function createRouteEntry(description) {
 }
 
 function createComponentImportStmt(description) {
-  return `import ${description.fullname} from '${description.pathRelativeToGarden}${description.file}'`
+  return `import ${description.fullname} from '${pathRelativeToGarden}${description.file}'`
 }
 
 function createRawComponentImportStmt(description) {
-  return `import ${description.fullname} from '${description.pathRelativeToGarden}${description.file}?raw'`
+  return `import ${description.fullname} from '${pathRelativeToGarden}${description.file}?raw'`
 }
 
 function createDasImportStmt(description) {
-  return `import ${description.fullname}Das from '${
-    description.pathRelativeToGarden
-  }${description.dasfile}'
-${createDescriptionImportStmt(description)}`
+  const dasImportStmt = `import ${description.fullname}Das from '${pathRelativeToGarden}${description.dasfile}'`
+  const descriptionImportStmt = description.descriptionfile
+    ? '\n' + createDescriptionImportStmt(description)
+    : ''
+  return dasImportStmt + descriptionImportStmt
+}
+
+function createDecoratorImportStmt(decorator) {
+  return `import ${decorator.fullname} from '${decorator.fullpath}'`
+}
+
+function createHookImportStmt(hook) {
+  return `import ${hook.fullname}Import from '${hook.fullpath}'`
+}
+
+function createHookEntry(hook) {
+  return `const ${hook.fullname} = {...${JSON.stringify(hook)}, ...${
+    hook.fullname
+  }Import}`
 }
 
 function createDescriptionImportStmt(description) {
   return description.descriptionfile
-    ? `import ${description.fullname}DasDescription from '${description.pathRelativeToGarden}${description.descriptionfile}?raw'`
+    ? `import ${description.fullname}DasDescription from '${pathRelativeToGarden}${description.descriptionfile}?raw'`
     : ''
 }
 
@@ -235,7 +267,26 @@ function createDasMapEntry(description) {
   return `'${description.fullname}': {
     ...${description.fullname}Das,
     ${
-      description.descriptionFile
+      description.decorators
+        ? 'decorators: [' +
+          description.decorators
+            .filter((decorator) => {
+              return decorator.extension === description.extension
+            })
+            .map((decorator) => decorator.fullname)
+            .join(', ') +
+          ']'
+        : '[]'
+    },
+    ${
+      description.hooks
+        ? 'hooks: [' +
+          description.hooks.map((hook) => hook.fullname).join(', ') +
+          ']'
+        : '[]'
+    },
+    ${
+      description.descriptionfile
         ? 'description : ' + description.fullname + 'DasDescription'
         : ''
     }
@@ -248,8 +299,11 @@ function createComponentDescription({
   basepath,
   relativepath,
   filename,
+  hooks,
+  decorators,
 }) {
   const name = das.name
+  const extension = das.file.substring(das.file.lastIndexOf('.'))
   const fullname = createFullname(navbasenode, relativepath, name)
   const route = createRoute(navbasenode, relativepath, name)
   const fullnavnode = path.join(navbasenode, relativepath)
@@ -261,7 +315,45 @@ function createComponentDescription({
     ? path.join(basepath, relativepath, das.description)
     : undefined
   const fullpath = path.join(basepath, relativepath)
-  const pathRelativeToGarden = '/../'
+
+  hooks = hooks.map((hook) => {
+    return {
+      ...hook,
+      fullname: createFullname(navbasenode, hook.relativepath, hook.filename),
+      fullpath: path.join(
+        pathRelativeToGarden,
+        basepath,
+        hook.relativepath,
+        hook.filename
+      ),
+    }
+  })
+
+  const dasDecorator = das.decorator
+    ? [
+        {
+          basepath,
+          relativepath,
+          filename: das.decorator,
+          extension,
+        },
+      ]
+    : []
+
+  decorators = [...decorators, ...dasDecorator].map(
+    ({ basepath, relativepath, filename, extension }) => {
+      return {
+        fullname: createFullname(navbasenode, relativepath, filename),
+        fullpath: path.join(
+          pathRelativeToGarden,
+          basepath,
+          relativepath,
+          filename
+        ),
+        extension,
+      }
+    }
+  )
   return {
     name,
     basepath,
@@ -272,9 +364,11 @@ function createComponentDescription({
     file,
     dasfile,
     descriptionfile,
+    extension,
     fullname,
     route,
-    pathRelativeToGarden,
+    decorators,
+    hooks,
   }
 }
 
@@ -294,7 +388,7 @@ function createFullname(navfolder, relativepath, name) {
   return navfolder
     .split('/')
     .concat(relativepath.split('/'))
-    .concat([name])
+    .concat([name.replaceAll('.', '')])
     .map(firstLetterToUpperCase)
     .join('')
 }
