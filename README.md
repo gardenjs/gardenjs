@@ -37,20 +37,20 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
+- [task] Run Gardenjs with Sveltekit projects.
 - [task] Generate garden.vite.config.js.
 - [task] Add preprocessors scss, postcss, less, tailwind and stylus to garden.vite.config.js.
 - [docs] Explain garden.vite.config.js.
-- [task] Add "no renderer" to install script and at least least one must be selected.
+- [task] Add "no renderer" to install script and at least one must be selected.
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [task] Decorator for vue & react plugin.
-- [feature] Place decorator files in folders (like test-files with before/after).
-- [feature] same as decorator files, das-hooks-file (before, after)
-- [task] handle component out in vue/react
+- [task] Handle component out in vue/react
 - [feature] Support das file as JS, JSX, TS, TSX.
 - [task] sprechende fehlermeldung wenn das-datei fehlerhaft (und datei ignorieren)
 - [task] Type infos of das in editor.
-- [task] Add renderer to docs.
-- [task] Add decorator to docs.
+- [docs] Add renderer to docs.
+- [docs] Add decorator to docs.
+- [docs] Add hooks to docs.
 - [task] Public Gardenjs docs & set Gardenjs repository public.
 - [task] Public Gardenjs demo of Gardenjs docs & set repository of Gardenjs docs public.
 - [task] Public Rabbit Dev website.
