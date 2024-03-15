@@ -44,7 +44,10 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [task] Decorator for vue & react plugin.
 - [feature] Place decorator files in folders (like test-files with before/after).
+- [feature] same as decorator files, das-hooks-file (before, after)
+- [task] handle component out in vue/react
 - [feature] Support das file as JS, JSX, TS, TSX.
+- [task] sprechende fehlermeldung wenn das-datei fehlerhaft (und datei ignorieren)
 - [task] Type infos of das in editor.
 - [task] Add renderer to docs.
 - [task] Add decorator to docs.

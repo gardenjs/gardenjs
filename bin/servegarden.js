@@ -82,7 +82,7 @@ async function runSetupScript() {
       }
     } else {
       const packman = await select({
-        message: 'UI Library:',
+        message: 'Package manager:',
         choices: [
           { name: 'npm', value: 'npm', checked: true },
           { name: 'pnpm', value: 'pnpm' },
