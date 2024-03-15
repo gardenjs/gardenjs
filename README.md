@@ -37,7 +37,7 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
-- [task] Geneate garden.vite.config.js.
+- [task] Generate garden.vite.config.js.
 - [task] Add preprocessors scss, postcss, less, tailwind and stylus to garden.vite.config.js.
 - [docs] Explain garden.vite.config.js.
 - [task] Add "no renderer" to install script and at least least one must be selected.
