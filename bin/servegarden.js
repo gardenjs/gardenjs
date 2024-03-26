@@ -35,14 +35,26 @@ async function runSetupScript() {
 
   const title = await input({ message: 'Enter your project title:' })
 
-  const libraries = await checkbox({
+  let libraries = await checkbox({
     message: 'UI Library:',
+    required: true,
+    validate: (items) => {
+      if (items.length > 1 && items.some((item) => item.value === 'None')) {
+        return "'No Library' cannot be used in combination with another value"
+      }
+      return true
+    },
     choices: [
+      { name: 'No Library', value: 'None' },
       { name: 'Svelte', value: 'Svelte' },
       { name: 'Vue', value: 'Vue' },
       { name: 'React', value: 'React' },
     ],
   })
+
+  if (libraries.includes('None')) {
+    libraries = []
+  }
 
   const componentFolder = await input({
     message: 'Enter your component source folder:',
@@ -53,12 +65,6 @@ async function runSetupScript() {
     message: 'Should garden create an example component?',
   })
 
-  separator()
-  console.log('')
-  console.log('Creating garden config file...:')
-  console.log('')
-
-  createConfigFile({ title, libraries, componentFolder })
   if (shallCreateExample) {
     createExample({ libraries, componentFolder })
   }
@@ -91,6 +97,20 @@ async function runSetupScript() {
       })
       packman && (await installPlugins(packman, libraries))
     }
+  }
+  separator()
+
+  const shallCreateViteConfig = await confirm({
+    message:
+      'You need a vite configuration file for gardenjs. Shall we create the file?',
+  })
+  if (shallCreateViteConfig) {
+    separator()
+    console.log('')
+    console.log('Creating garden.vite.config.js ...:')
+    console.log('')
+    createViteConfig(libraries)
+  } else {
     if (libraries.some((library) => library === 'React')) {
       console.log('')
       console.log(
@@ -106,7 +126,13 @@ async function runSetupScript() {
       console.log('')
     }
   }
+
   separator()
+  console.log('')
+  console.log('Creating garden.config.js ...:')
+  console.log('')
+
+  createConfigFile({ title, libraries, componentFolder })
 
   console.log('')
   console.log('Done. Edit garden.config.js file according to your needs.')
@@ -194,7 +220,7 @@ export default {
   // "welcome_page": "./src/custom_welcome_page.html",
 
   // vite config file:
-  // vite_config: "./garden.vite.config.js",
+  vite_config: "./garden.vite.config.js",
   
   // Each entry is output with its subpages in the page tree:
   structure: {
@@ -236,6 +262,64 @@ export default {
 //}
   `
   fs.writeFileSync('garden.config.js', content)
+}
+
+function createViteConfig(libraries) {
+  const viteLibs = getViteImports(libraries)
+
+  const optimizeDeps = libraries.includes('React')
+    ? `optimizeDeps: {
+      include: ["react-dom/client"],
+    },
+`
+    : ''
+
+  const content = `
+import { defineConfig } from "vite"
+${viteLibs.importStmts.join('\n')}
+
+// https://vitejs.dev/config/
+export default defineConfig(({ command, mode }) => {
+  return {
+    plugins: [${viteLibs.pluginStmts.join(', ')}],
+    root: ".garden",
+    ${optimizeDeps}
+    build: {
+      rollupOptions: {
+        input: {
+          app: ".garden/index.html",
+          frame: ".garden/frame.html",
+        },
+      },
+    },
+  };
+});
+  `
+  fs.writeFileSync('garden.vite.config.js', content)
+}
+
+const lib2ViteImport = {
+  Svelte:
+    'import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte"',
+  React: 'import react from "@vitejs/plugin-react"',
+  Vue: 'import vue from "@vitejs/plugin-vue"',
+}
+
+const lib2VitePluginStmt = {
+  Svelte: 'svelte({preprocess: vitePreprocess()})',
+  React: 'react()',
+  Vue: 'vue()',
+}
+
+function getViteImports(libraries) {
+  return libraries.reduce(
+    (acc, cur) => {
+      acc.importStmts.push(lib2ViteImport[cur])
+      acc.pluginStmts.push(lib2VitePluginStmt[cur])
+      return acc
+    },
+    { importStmts: [], pluginStmts: [] }
+  )
 }
 
 function createExample({ libraries, componentFolder }) {
