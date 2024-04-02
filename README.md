@@ -18,6 +18,7 @@ Gardenjs provides a centralized platform for developers to create, test and pres
 - Significantly faster than comparable tools such as Storybook.
 - Multiple frameworks running in a single instance.
 - Integration of external libraries within a project.
+- More flexible and extensive work with decorators.
 - Many useful features without being complex and bloated.
 - Simply looks good :)
 
