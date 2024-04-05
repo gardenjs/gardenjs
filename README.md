@@ -2,11 +2,11 @@
 
 +++ TEST RELEASE, COMING SOON +++
 
-Gardenjs is an open source JS/Svelte-based UI component library explorer.
+Gardenjs is an open source JS/Svelte-based UI component library explorer for JS frameworks.
 
 ## Getting Started
 
-Please follow the documentation at [gardenjs.org](https://www.gardenjs.org). Happy Gardening :)
+Please follow the documentation at <a href="https://www.gardenjs.org" target="_blank">gardenjs.org</a>. Happy Gardening :)
 
 ## What is Gardenjs?
 
@@ -24,11 +24,11 @@ Gardenjs provides a centralized platform for developers to create, test and pres
 
 ## Supported Frameworks
 
-HTML snippets are rendered by default. The support of JS frameworks is realized by renderer plugins. There are currently plugins for [Svelte](https://github.com/gardenjs/render-plugin-svelte), [Vue](https://github.com/gardenjs/render-plugin-vue) and [React](https://github.com/gardenjs/render-plugin-react). You can also easily create plugins for other frameworks. Contact us, we will be happy to link your renderer plugins here.
+HTML snippets are rendered by default. The support of JS frameworks is realized by renderer plugins. There are currently plugins for <a href="https://github.com/gardenjs/render-plugin-svelte" target="_blank">Svelte</a>, <a href="https://github.com/gardenjs/render-plugin-vue" target="_blank">Vue</a> and <a href="https://github.com/gardenjs/render-plugin-react" target="_blank">React</a>. You can also easily create plugins for other frameworks. Contact us, for example we will be happy to create a repository for your renderer plugin.
 
 ## Contributing
 
-Gardenjs was developed and is contributed by [Rabbit Development](https://www.rabbitdevelopment.de). We look forward to your feedback, please report any bugs. We also welcome contributions and are happy about sponsoring.
+Gardenjs was developed and is contributed by <a href="https://www.rabbitdevelopment.com" target="_blank">Rabbit Development</a>. We look forward to your feedback, please report any bugs. We also welcome contributions and are happy about sponsoring.
 
 ## License
 
