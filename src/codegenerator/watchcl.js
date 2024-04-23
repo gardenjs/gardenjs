@@ -32,3 +32,4 @@ async function generate(serverport) {
   console.log('======================')
   console.log('')
 }
+await init()

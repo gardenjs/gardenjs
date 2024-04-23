@@ -1,28 +1,26 @@
 #!/usr/bin/env node
 
-import { init } from '../src/codegenerator/watchcl.js'
-import { input, confirm } from '@inquirer/prompts'
 import checkbox from '@inquirer/checkbox'
+import { confirm, input } from '@inquirer/prompts'
 import select from '@inquirer/select'
-import { createServer } from '../src/server.js'
+import { exec } from 'node:child_process'
 import fs from 'node:fs'
+import { promisify } from 'node:util'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { exec } from 'node:child_process'
-import { promisify } from 'node:util'
+import { createServer } from '../src/server.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const exampleSourceFolder = path.resolve(__dirname, '../examples') + '/'
 const execAsync = promisify(exec)
 
 if (fs.existsSync('./garden.config.js')) {
-  initAndCreateServer()
+  createNodeViteServer()
 } else {
   runSetupScript()
 }
 
-async function initAndCreateServer() {
-  await init()
+async function createNodeViteServer() {
   await createServer()
 }
 
@@ -283,6 +281,8 @@ export default defineConfig(({ command, mode }) => {
   return {
     plugins: [${viteLibs.pluginStmts.join(', ')}],
     root: ".garden",
+    assetsInclude: ['**/*.md'],
+    publicDir: "../public",
     ${optimizeDeps}
     build: {
       rollupOptions: {

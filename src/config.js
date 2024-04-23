@@ -12,7 +12,9 @@ export async function getConfig() {
 async function readConfig() {
   if (fs.existsSync(path.resolve('garden.config.js'))) {
     console.log('the path is', path.resolve('garden.config.js'))
-    const config = await import(path.resolve('garden.config.js'))
+    const config = await import(
+      /* @vite-ignore */ path.resolve('garden.config.js')
+    )
     return config.default
   }
   return { garden: {} }
