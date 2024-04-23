@@ -38,13 +38,12 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
-- [feature] Support das file as JS, JSX, TS, TSX.
+- [task] Speaking error messages in das file (and ignore file).
 - [task] Type infos of das in editor.
+- [task] Handle component out in svelte/vue/react.
 - [task] Run Gardenjs with Sveltekit projects.
 - [task] Check for svelte, react and vue. Preprocessors scss, postcss, less, tailwind and stylus to garden.vite.config.js.
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
-- [task] Speaking error messages in das file (and ignore file).
-- [task] Handle component out in svelte/vue/react.
 - [docs] Explain garden.vite.config.js.
 - [docs] Add renderer to docs.
 - [docs] Add decorator to docs.
