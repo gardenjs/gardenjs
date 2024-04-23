@@ -62,43 +62,14 @@
   }
 </script>
 
+<!-- prettier-ignore -->
 <div class="topbar">
   <div class="topbar_container">
-    <button
-      class="topbar_btn is-first-btn"
-      on:click={toggleSidebar}
-      title={active ? 'Collapse sidebar' : 'Expand sidebar'}
-    >
+    <button class="topbar_btn is-first-btn" on:click={toggleSidebar} title={active ? 'Collapse sidebar' : 'Expand sidebar'}>
       {#if active}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path
-            d="M9 3v18m7-6l-3-3 3-3"
-          /></svg
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M9 3v18m7-6l-3-3 3-3" /></svg>
       {:else}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path
-            d="M9 3v18m5-12l3 3-3 3"
-          /></svg
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M9 3v18m5-12l3 3-3 3" /></svg>
       {/if}
     </button>
     <div class="topbar_nav">
@@ -108,154 +79,36 @@
         <div>{stageHeight}px</div>
       </div>
       <div class="stagesize-nav">
-        <button
-          title="Small"
-          class:active={stageSize === 'small'}
-          on:click={() => setFramesize('small')}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class:landscape
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><path
-              d="M12 18h.01"
-            /></svg
-          >
+        <button title="Small" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
+          <svg xmlns="http://www.w3.org/2000/svg" class:landscape height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><path d="M12 18h.01" /></svg>
           <span class="dot"></span>
         </button>
-        <button
-          title="Medium"
-          class:active={stageSize === 'medium'}
-          on:click={() => setFramesize('medium')}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class:landscape
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path
-              d="M12 18h.01"
-            /></svg
-          >
+        <button title="Medium" class:active={stageSize === 'medium'} on:click={() => setFramesize('medium')}>
+          <svg xmlns="http://www.w3.org/2000/svg" class:landscape height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M12 18h.01" /></svg>
           <span class="dot"></span>
         </button>
-        <button
-          title="Large"
-          class:active={stageSize === 'large'}
-          on:click={() => setFramesize('large')}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class:landscape
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><rect x="3" y="4" width="18" height="12" rx="2" ry="2" /><path
-              d="M2 20h20"
-            /></svg
-          >
+        <button title="Large" class:active={stageSize === 'large'} on:click={() => setFramesize('large')}>
+          <svg xmlns="http://www.w3.org/2000/svg" class:landscape height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" ry="2" /><path d="M2 20h20" /></svg>
           <span class="dot"></span>
         </button>
-        <button
-          title="Full"
-          class:active={stageSize === 'full'}
-          on:click={() => setFramesize('full')}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><path
-              d="M8 21h8m-4-4v4"
-            /></svg
-          >
+        <button title="Full" class:active={stageSize === 'full'} on:click={() => setFramesize('full')}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><path d="M8 21h8m-4-4v4" /></svg>
           <span class="dot"></span>
         </button>
-        <button
-          title={landscape ? 'Portrait mode' : 'Landscape mode'}
-          on:click={toggleOrientation}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            viewBox="0 0 24 24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><rect width="12" height="20" x="6" y="2" rx="2" /><rect
-              width="20"
-              height="12"
-              x="2"
-              y="6"
-              rx="2"
-            /></svg
-          >
+        <button title={landscape ? 'Portrait mode' : 'Landscape mode'} on:click={toggleOrientation}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="12" height="20" x="6" y="2" rx="2" /><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
         </button>
       </div>
       {#if themes.length > 1}
         <div class="dropdown">
-          <button
-            class="dropdown_btn topbar_btn"
-            title="Switch component theme"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              viewBox="0 0 24 24"
-              height="24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><circle cx="13.5" cy="6.5" r=".5" /><circle
-                cx="17.5"
-                cy="10.5"
-                r=".5"
-              /><circle cx="8.5" cy="7.5" r=".5" /><circle
-                cx="6.5"
-                cy="12.5"
-                r=".5"
-              /><path
-                d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
-              /></svg
-            >
+          <button class="dropdown_btn topbar_btn" title="Switch component theme">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" /><circle cx="17.5" cy="10.5" r=".5" /><circle cx="8.5" cy="7.5" r=".5" /><circle cx="6.5" cy="12.5" r=".5" /><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" /></svg>
           </button>
           <div class="dropdown_items">
             <ul>
               {#each themes as theme}
                 <li>
-                  <button
-                    class:active={theme.active}
-                    on:click={() => handleThemeChange(theme.name)}
-                  >
+                  <button class:active={theme.active} on:click={() => handleThemeChange(theme.name)}>
                     <span class="dropdown_item-dot"></span>
                     {theme.name}
                   </button>
@@ -265,62 +118,14 @@
           </div>
         </div>
       {/if}
-      <button
-        class="topbar_btn"
-        title="Open component in new tab"
-        on:click={openInTab}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="open-new-tab-icon"
-          height="24"
-          viewBox="0 0 24 24"
-          width="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><path
-            d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3"
-          /></svg
-        >
+      <button class="topbar_btn" title="Open component in new tab" on:click={openInTab}>
+        <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3" /></svg>
       </button>
-      <button
-        class="topbar_btn is-last-btn"
-        on:click={toggleDarkmode}
-        title={dark ? 'Light mode' : 'Dark mode'}
-      >
+      <button class="topbar_btn is-last-btn" on:click={toggleDarkmode} title={dark ? 'Light mode' : 'Dark mode'}>
         {#if dark}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="mode-icon"
-            width="24"
-            viewBox="0 0 24 24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><circle cx="12" cy="12" r="4" /><path
-              d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
-            /></svg
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></svg>
         {:else}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="mode-icon"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><path d="M12 3a6.364 6.364 0 009 9 9 9 0 11-9-9z" /></svg
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6.364 6.364 0 009 9 9 9 0 11-9-9z" /></svg>
         {/if}
       </button>
     </div>
