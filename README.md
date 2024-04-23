@@ -38,7 +38,6 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
-- [task] Speaking error messages in das file (and ignore file).
 - [task] Type infos of das in editor.
 - [task] Handle component out in svelte/vue/react.
 - [task] Run Gardenjs with Sveltekit projects.
