@@ -8,28 +8,11 @@
   }
 </script>
 
-<a
-  {href}
-  class="component_link link_level-{level}"
-  class:selected
-  on:click|preventDefault={handleClick}
->
+<!-- prettier-ignore -->
+<a {href} class="component_link link_level-{level}" class:selected on:click|preventDefault={handleClick}>
   <span class="component_dot"></span>
   <span class="component_icon">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="15"
-      viewBox="0 0 24 24"
-      height="15"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      ><path
-        d="M21 8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"
-      /><path d="M3.3 7l8.7 5 8.7-5M12 22V12" /></svg
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /><path d="M3.3 7l8.7 5 8.7-5M12 22V12" /></svg>
   </span>
   <span class="component_label"><slot /></span>
 </a>
