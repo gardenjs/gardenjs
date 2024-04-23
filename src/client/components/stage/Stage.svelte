@@ -166,7 +166,7 @@
     width: 100%;
     background-color: var(--c-basic-0);
     border-top: 0;
-    border-radius: 0 0 0.5rem 0.5rem;
+    border-radius: 0 0 0.625rem 0.625rem;
     overflow-y: auto;
   }
 </style>

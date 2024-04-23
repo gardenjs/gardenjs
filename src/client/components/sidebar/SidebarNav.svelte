@@ -26,8 +26,8 @@
           title={node.unfolded ? 'fold' : 'unfold'}
           on:click={() => toggleFoldStatusOfNode(node)}
         >
-          <span class="folder_arrow" class:unfolded_icon={node.unfolded}
-            ><svg
+          <span class="folder_arrow" class:unfolded_icon={node.unfolded}>
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               width="12"
               viewBox="0 0 24 24"
@@ -37,10 +37,10 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"><path d="M18 15l-6-6-6 6" /></svg
-            ></span
-          >
-          <span class="folder_icon"
-            ><svg
+            >
+          </span>
+          <span class="folder_icon">
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               width="15"
               viewBox="0 0 24 24"
@@ -50,12 +50,11 @@
               stroke-width="2.5"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-folder"
               ><path
                 d="M4 20h16a2 2 0 002-2V8a2 2 0 00-2-2h-7.93a2 2 0 01-1.66-.9l-.82-1.2A2 2 0 007.93 3H4a2 2 0 00-2 2v13c0 1.1.9 2 2 2z"
               /></svg
-            ></span
-          >
+            >
+          </span>
           <span class="folder_label">
             <!-- eslint-disable-next-line -->
             {@html node.name}
