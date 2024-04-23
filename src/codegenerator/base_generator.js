@@ -214,7 +214,7 @@ function createNavigationEntry(description) {
   return {
     isLeaf: true,
     href: description.route,
-    name: description.name,
+    name: description.displayname,
     key: description.fullname,
   }
 }
@@ -302,7 +302,10 @@ function createComponentDescription({
   hooks,
   decorators,
 }) {
-  const name = das.name
+  const displayname =
+    das.name ??
+    das.file.substring(das.file.lastIndexOf('/') + 1, das.file.lastIndexOf('.'))
+  const name = displayname.replaceAll(' ', '_')
   const extension = das.file.substring(das.file.lastIndexOf('.'))
   const fullname = createFullname(navbasenode, relativepath, name)
   const route = createRoute(navbasenode, relativepath, name)
@@ -356,6 +359,7 @@ function createComponentDescription({
   )
   return {
     name,
+    displayname,
     basepath,
     navbasenode,
     fullnavnode,
