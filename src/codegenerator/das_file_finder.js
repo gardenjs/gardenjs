@@ -4,11 +4,16 @@ import { createHash } from 'crypto'
 
 export async function findAndReadDasFiles({ basepath, navbasenode }) {
   const promises = (await findDasFiles(basepath)).map(async (file) => {
-    file.das = await readDasFile(file)
-    file.navbasenode = navbasenode
-    return file
+    try {
+      file.das = await readDasFile(file)
+      file.navbasenode = navbasenode
+      return file
+    } catch (e) {
+      console.error(e)
+      return undefined
+    }
   })
-  return await Promise.all(promises)
+  return (await Promise.all(promises)).filter((das) => das !== undefined)
 }
 
 async function findDasFiles(
@@ -102,6 +107,7 @@ async function readDasFile({ filename, relativepath, basepath }) {
   )
   // js file
   const module = await import(
+    /* @vite-ignore */
     path.resolve(basepath, relativepath, filename) +
       '?' +
       createMd5Hash(content)
