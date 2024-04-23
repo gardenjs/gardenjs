@@ -168,7 +168,6 @@
 
 <style>
   .sidebar_container {
-    --c-sidebar: var(--c-bg-panels);
     --w-sidebar: 260px;
     display: flex;
     flex-direction: column;
@@ -177,8 +176,8 @@
     width: 0;
     max-width: var(--w-sidebar);
     height: calc(100vh - 0.75rem);
-    background-color: var(--c-sidebar);
-    border-radius: 0.5rem;
+    background-color: var(--c-sidebar-bg);
+    border-radius: 0.625rem;
     transition: width 0.1s;
     overflow: hidden;
   }
@@ -299,7 +298,7 @@
     align-self: center;
     margin-left: 0.75rem;
     width: 100%;
-    color: var(--c-basic-700);
+    color: var(--c-basic-900);
     font-size: 0.875rem;
     font-weight: 400;
   }

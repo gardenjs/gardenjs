@@ -49,7 +49,13 @@
   <div class="top" style="height: {topHeightWithUnit};">
     <slot name="top" />
   </div>
-  <div class="dragbar" class:dragging on:mousedown={register}></div>
+  <!-- eslint-disable-next-line -->
+  <div
+    class="dragbar"
+    class:dragging
+    on:mousedown={register}
+    role="separator"
+  ></div>
   <slot name="bottom" />
 </div>
 
@@ -66,7 +72,7 @@
     flex-grow: 0;
     flex-shrink: 0;
     border-bottom: 0;
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-radius: 0.625rem 0.625rem 0 0;
     overflow: hidden;
   }
   .dragbar {

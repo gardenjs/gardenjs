@@ -88,6 +88,9 @@
   :root {
     --h-panelnav: 2.375rem;
   }
+  .panel_container {
+    background-color: var(--c-basic-75);
+  }
   .panel_nav {
     position: sticky;
     top: 0;
@@ -136,6 +139,7 @@
   }
   .panel_nav nav li button.active {
     color: var(--c-primary);
+    font-weight: 600;
   }
   .panel_toggle {
     padding: 0 0.75rem;
