@@ -42,7 +42,6 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 - [task] Type infos of das in editor.
 - [task] Handle component out in svelte/vue/react.
 - [task] Run Gardenjs with Sveltekit projects.
-- [task] Check for svelte, react and vue. Preprocessors scss, postcss, less, tailwind and stylus to garden.vite.config.js.
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [docs] Explain garden.vite.config.js.
 - [docs] Add renderer to docs.
@@ -62,6 +61,7 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
 - [task] Add tests.
+- [task] In das files import component instead of use relative filename as string
 
 ### Later (no specific order)
 

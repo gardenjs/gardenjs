@@ -5,7 +5,9 @@ import { createHash } from 'crypto'
 export async function findAndReadDasFiles({ basepath, navbasenode }) {
   const promises = (await findDasFiles(basepath)).map(async (file) => {
     try {
-      file.das = await readDasFile(file)
+      const das = await readDasFile(file)
+      await validate(das, file)
+      file.das = das
       file.navbasenode = navbasenode
       return file
     } catch (e) {
@@ -14,6 +16,36 @@ export async function findAndReadDasFiles({ basepath, navbasenode }) {
     }
   })
   return (await Promise.all(promises)).filter((das) => das !== undefined)
+}
+
+async function validate(das, file) {
+  assertIsSet(file, das, 'file')
+  await assertFileExist(file, das.file)
+}
+
+function assertIsSet(file, das, prop) {
+  if (!das[prop])
+    throw new Error(
+      `Missing property ${prop} in das file ${file.filename} at ${file.relativepath}`
+    )
+}
+
+async function assertFileExist(
+  { filename, relativepath, basepath },
+  relativeComponentFile
+) {
+  const componentFile = path.resolve(
+    basepath,
+    relativepath,
+    relativeComponentFile
+  )
+  try {
+    await fs.promises.access(componentFile, fs.constants.F_OK)
+  } catch {
+    throw new Error(
+      `Cannost access component file ${componentFile} in ${relativepath}/${filename}. Does the file exist?`
+    )
+  }
 }
 
 async function findDasFiles(

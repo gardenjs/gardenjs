@@ -16,6 +16,9 @@ export async function createServer() {
 
   const server = await createViteServer({
     configFile,
+    optimizeDeps: {
+      disabled: true,
+    },
     server: {
       port: serverport,
     },
