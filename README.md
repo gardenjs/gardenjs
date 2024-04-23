@@ -2,25 +2,37 @@
 
 +++ TEST RELEASE, COMING SOON +++
 
-Gardenjs is an open source JS/Svelte-based UI component library explorer for JS frameworks.
+The quick and easy alternative. Watch the <a href="https://www.gardenjs.org/demo/">demo</a>.
 
-## Getting Started
-
-Please follow the documentation at <a href="https://www.gardenjs.org" target="_blank">gardenjs.org</a>. Happy Gardening :)
+<div>
+  <a href="https://github.com/gardenjs/gardenjs/blob/main/LICENSE.md">
+    <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License" data-canonical-src="https://img.shields.io/github/license/gardenjs/gardenjs.svg" style="max-width: 100%;">
+  </a>
+  <a href="https://www.npmjs.com/package/gardenjs" target="_blank">
+    <img alt="NPM Version" src="https://img.shields.io/npm/v/gardenjs?color=blue">
+  </a>
+  <a href="https://github.com/gardenjs/gardenjs/actions">
+    <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/gardenjs/gardenjs/workflow">
+  </a>
+</div>
 
 ## What is Gardenjs?
 
-Gardenjs provides a centralized platform for developers to create, test and present UI components and pages in isolation. Gardenjs promotes modular and reusable code, streamlines collaboration between team members and increases overall productivity. Gardenjs is designed for projects of any size.
+Gardenjs is an open source JS/Svelte-based UI component library explorer for JS frameworks and provides a centralized platform for developers to create, test and present UI components and pages in isolation. Gardenjs promotes modular and reusable code, streamlines collaboration between team members and increases overall productivity. Gardenjs is designed for projects of any size.
 
 ## Why Gardenjs?
 
-- Simple and efficient working.
 - Significantly faster than comparable tools such as Storybook.
-- Multiple frameworks running in a single instance.
-- Integration of external libraries within a project.
-- More flexible and extensive work with decorators.
+- Simple and efficient working.
 - Many useful features without being complex and bloated.
+- Integration of external libraries within a project.
+- Multiple frameworks running in a single instance.
+- More flexible and extensive work with decorators.
 - Simply looks good :)
+
+## Getting Started
+
+Please follow the documentation at <a href="https://www.gardenjs.org/docs" target="_blank">gardenjs.org</a>. Happy Gardening!
 
 ## Supported Frameworks
 
@@ -50,6 +62,7 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 - [docs] Add decorator to docs.
 - [docs] Add hooks to docs.
 - [task] Public Gardenjs docs & set Gardenjs repository public.
+- [task] Readme: Check links & build badge.
 - [task] Public Gardenjs demo of Gardenjs docs & set repository of Gardenjs docs public.
 - [task] Public Rabbit Dev website.
 - [task] Create Linkedin profil for Rabbit Dev & Gardenjs.
