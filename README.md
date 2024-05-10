@@ -63,6 +63,8 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 - [task] Public Gardenjs demo of Gardenjs docs & set repository of Gardenjs docs public.
 - [task] Public Rabbit Dev website.
 - [task] Create Linkedin profil for Rabbit Dev & Gardenjs.
+- [bug] If clicked on a link inside the iframe the gardenjs frame will get rendered again inside the parent iframe.
+- [bug] Component in separate tab opened renders with default theme instead of selected.
 
 ## Roadmap
 
