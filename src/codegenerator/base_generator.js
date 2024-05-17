@@ -4,9 +4,9 @@ import { findAndReadDasFiles } from './das_file_finder.js'
 import { getConfig } from '../config.js'
 
 const pathRelativeToGarden = '../'
+const destination = '.garden/'
 
 export async function generateGardenBase() {
-  const destination = '.garden/'
   const { structure, additional_style_files, welcome_page, devmodus } =
     await getConfig()
   const targetBaseFile = destination + 'base.js'
@@ -96,14 +96,15 @@ export const navTree = ${JSON.stringify(
 `
 }
 
-export function generateComponentMapCode(
-  componentdescriptions,
-  welcome_page = './Hellogarden.html'
-) {
+export function generateComponentMapCode(componentdescriptions, welcome_page) {
+  const defaultWelcomePage = `${destination}Hellogarden.html`
+  const relativeWelcomePageUrl = `${pathRelativeToGarden}${
+    welcome_page ?? defaultWelcomePage
+  }`
   return `
 ${componentdescriptions.map(createComponentImportStmt).join('\n')}
 
-import Welcome from '${welcome_page}?raw' 
+import Welcome from '${relativeWelcomePageUrl}?raw' 
 
 export const componentMap = {
   'Welcome': Welcome,
