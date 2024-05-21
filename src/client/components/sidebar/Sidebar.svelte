@@ -28,13 +28,8 @@
     <span>{projectTitle}</span>
   </a>
   <div class="filter">
-    <input
-      class="filter_input"
-      type="text"
-      value={filter || ''}
-      placeholder="Filter"
-      on:input={updateFilter}
-    />
+    <!-- prettier-ignore -->
+    <input class="filter_input" type="text" value={filter || ''} placeholder="Filter" on:input={updateFilter} />
   </div>
   {#if nodes.length == 0 && filter}
     <div>
@@ -46,120 +41,32 @@
     </nav>
   {/if}
   <nav class="controls">
+    <!-- prettier-ignore -->
     <ul>
       <li>
-        <button
-          class="controls_btn"
-          title={rootNodesExpanded ? 'Collapse' : 'Restore'}
-          on:click={toggleRootFolders}
-        >
+        <button class="controls_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
           {#if rootNodesExpanded}
-            <svg
-              class="controls_btn-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              height="20"
-              viewBox="0 0 24 24"
-              width="20"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><path d="M7 20l5-5 5 5M7 4l5 5 5-5" /></svg
-            >
+            <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l5-5 5 5M7 4l5 5 5-5" /></svg>
           {:else}
-            <svg
-              class="controls_btn-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              height="20"
-              viewBox="0 0 24 24"
-              width="20"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><path d="M7 15l5 5 5-5M7 9l5-5 5 5" /></svg
-            >
+            <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5M7 9l5-5 5 5" /></svg>
           {/if}
-          <span class="controls_btn-label"
-            >{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span
-          >
+          <span class="controls_btn-label">{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span>
         </button>
       </li>
       <li>
-        <button
-          class="controls_btn"
-          title={panelExpanded ? 'Collapse' : 'Restore'}
-          on:click={toggleExpandPanel}
-        >
+        <button class="controls_btn" title={panelExpanded ? 'Collapse' : 'Restore'} on:click={toggleExpandPanel}>
           {#if panelExpanded}
-            <svg
-              class="controls_btn-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line
-                x1="3"
-                x2="21"
-                y1="15"
-                y2="15"
-              /><path d="m15 8-3 3-3-3" /></svg
-            >
+            <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line x1="3" x2="21" y1="15" y2="15" /><path d="m15 8-3 3-3-3" /></svg>
           {:else}
-            <svg
-              class="controls_btn-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line
-                x1="3"
-                x2="21"
-                y1="15"
-                y2="15"
-              /><path d="m9 10 3-3 3 3" /></svg
-            >
+            <svg  class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line x1="3" x2="21" y1="15" y2="15"/><path d="m9 10 3-3 3 3" /></svg>
           {/if}
-          <span class="controls_btn-label"
-            >{panelExpanded ? 'Collapse' : 'Expand'} Panel</span
-          >
+          <span class="controls_btn-label">{panelExpanded ? 'Collapse' : 'Expand'} Panel</span>
         </button>
       </li>
       <li>
-        <a
-          class="controls_btn"
-          href="https://github.com/rabbitdevelopment/garden"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <svg
-            class="controls_btn-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><circle cx="12" cy="12" r="10" /><path
-              d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01"
-            /></svg
-          >
-          <span class="controls_btn-label">Garden Docs</span>
+        <a class="controls_btn" href="https://github.com/rabbitdevelopment/garden" target="_blank" rel="noreferrer">
+          <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
+          <span class="controls_btn-label">Gardenjs Docs</span>
         </a>
       </li>
     </ul>
