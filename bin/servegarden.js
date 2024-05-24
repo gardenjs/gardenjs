@@ -264,6 +264,21 @@ export default {
 
 function createViteConfig(libraries) {
   const viteLibs = getViteImports(libraries)
+  const optionalPathImport = libraries.includes('Svelte')
+    ? 'import { join, resolve } from "node:path";'
+    : ''
+  const sveltekit_alias = libraries.includes('Svelte')
+    ? `
+    resolve: {
+      alias: [
+        {
+          find: /\\$app\\/(.*)/,
+          replacement: join(resolve(__dirname, "node_modules/@gardenjs/render-plugin-svelte/src/sveltekit_mocks/"), "$1"),
+        },
+      ],
+    },
+    `
+    : ''
 
   const optimizeDeps = libraries.includes('React')
     ? `optimizeDeps: {
@@ -274,6 +289,7 @@ function createViteConfig(libraries) {
 
   const content = `
 import { defineConfig } from "vite"
+${optionalPathImport}
 ${viteLibs.importStmts.join('\n')}
 
 // https://vitejs.dev/config/
@@ -283,6 +299,7 @@ export default defineConfig(({ command, mode }) => {
     root: ".garden",
     assetsInclude: ['**/*.md'],
     publicDir: "../public",
+    ${sveltekit_alias}
     ${optimizeDeps}
     build: {
       rollupOptions: {
