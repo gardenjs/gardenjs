@@ -72,6 +72,7 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 
 ### Next
 
+- [feature] Slot handling.
 - [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
 - [task] Add tests.
