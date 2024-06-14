@@ -25,7 +25,7 @@ export function initRouter(nRoutes, newBaseUrl, listener) {
   routes = nRoutes
   baseurl = newBaseUrl
   if (listener) onUpdateRoute(listener)
-  dispatchUpdateRoute(initialState, '', currentUrl)
+  dispatchUpdateRoute(initialState, currentUrl)
 }
 
 export function setRoutes(nRoutes) {
@@ -36,7 +36,7 @@ export function onUpdateRoute(listener) {
   listeners.push(listener)
 }
 
-function dispatchUpdateRoute(state, title, url) {
+function dispatchUpdateRoute(state, url) {
   listeners.forEach((listener) => {
     listener(findRoute(url), state)
   })
@@ -62,10 +62,10 @@ export function findRoute(url) {
       state.url !== history.state.url ||
       state.selectedExample !== history.state.selectedExample
     ) {
-      dispatchUpdateRoute(state, title, currentUrl)
+      dispatchUpdateRoute(state, currentUrl)
       return pushState.apply(history, [state, '', currentUrl])
     } else {
-      window.location.reload()
+      dispatchUpdateRoute(state, currentUrl)
     }
   }
 })(globalThis.history)
@@ -73,5 +73,5 @@ export function findRoute(url) {
 globalThis.onpopstate = function (event) {
   if (event.state) currentUrl = event.state.url
   else currentUrl = baseurl.length > 0 ? baseurl : '/'
-  dispatchUpdateRoute(event.state, event.title, currentUrl)
+  dispatchUpdateRoute(event.state, currentUrl)
 }
