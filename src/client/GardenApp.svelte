@@ -60,7 +60,11 @@
       const targetWindow = window.open('/frame.html', '_blank')
       targetWindow.onload = () => {
         targetWindow.postMessage(
-          { selectedExample: $selectedExample, componentName: $componentName },
+          {
+            selectedExample: $selectedExample,
+            componentName: $componentName,
+            theme: $activeTheme.name,
+          },
           window.location.origin
         )
       }
@@ -106,42 +110,52 @@
   }
 </script>
 
-<div class="garden">
-  <div class="sidebar">
-    <Sidebar
-      {projectTitle}
-      show={showSidebar}
-      rootNodesExpanded={$rootNodesExpanded}
-      nodes={$nodes}
-      filter={$filterNavTree}
-      panelExpanded={$panelExpanded}
-      on:out={handleSidebarOut}
-    />
+{#if window.top !== window.self}
+  <h1>Relative Link was clicked</h1>
+  <div>To go back click on button</div>
+  <button
+    on:click={() => {
+      window.top.location.reload()
+    }}>back</button
+  >
+{:else}
+  <div class="garden">
+    <div class="sidebar">
+      <Sidebar
+        {projectTitle}
+        show={showSidebar}
+        rootNodesExpanded={$rootNodesExpanded}
+        nodes={$nodes}
+        filter={$filterNavTree}
+        panelExpanded={$panelExpanded}
+        on:out={handleSidebarOut}
+      />
+    </div>
+    <div class="main">
+      <Topbar
+        active={showSidebar}
+        themes={$themes}
+        {stageRect}
+        stageSize={$stageSize}
+        landscape={$landscape}
+        on:out={handleTopbarOut}
+      />
+      <Stage
+        componentName={$componentName}
+        das={$das}
+        selectedExample={$selectedExample}
+        stageStyle={$stageStyle}
+        stageSize={$stageSize}
+        stageHeight={$stageHeight}
+        stageMaxHeight={$stageMaxHeight}
+        theme={$activeTheme?.name}
+        panelExpanded={$panelExpanded}
+        devmodus={config.devmodus}
+        on:out={handleStageOut}
+      />
+    </div>
   </div>
-  <div class="main">
-    <Topbar
-      active={showSidebar}
-      themes={$themes}
-      {stageRect}
-      stageSize={$stageSize}
-      landscape={$landscape}
-      on:out={handleTopbarOut}
-    />
-    <Stage
-      componentName={$componentName}
-      das={$das}
-      selectedExample={$selectedExample}
-      stageStyle={$stageStyle}
-      stageSize={$stageSize}
-      stageHeight={$stageHeight}
-      stageMaxHeight={$stageMaxHeight}
-      theme={$activeTheme?.name}
-      panelExpanded={$panelExpanded}
-      devmodus={config.devmodus}
-      on:out={handleStageOut}
-    />
-  </div>
-</div>
+{/if}
 
 <style>
   .sidebar {

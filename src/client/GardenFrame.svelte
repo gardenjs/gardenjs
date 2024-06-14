@@ -27,6 +27,7 @@
     if (config.themeHandler) {
       config.themeHandler(evt.data.theme)
     }
+
     full = evt.data.stageSize === 'full'
     das = dasMap[evt.data.componentName]
     selectedExample =
