@@ -24,10 +24,10 @@ export function initRouting(initialDasMap, routes, baseurl) {
 }
 
 function updateRoute(routeobj, state) {
-  if (!routeobj || !dasMap) {
-    das.set({})
-    componentName.set('')
-  } else {
+  das.set({})
+  componentName.set('')
+  selectedExample.set({})
+  if (routeobj && dasMap) {
     componentName.set(routeobj.fullname)
     currentRoute.set(routeobj.route)
     const newDas = dasMap[routeobj.fullname]
