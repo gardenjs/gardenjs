@@ -115,6 +115,10 @@
     font-weight: 900;
     line-height: 1;
   }
+  .project_title:focus {
+    color: var(--c-basic-500);
+    outline: none;
+  }
   .project_title span {
     overflow: hidden;
   }
@@ -143,6 +147,8 @@
   }
   .filter_input:focus {
     outline: none;
+    background-color: var(--c-basic-100);
+    border: 1px solid var(--c-basic-500);
   }
   .filter_zero-results {
     width: var(--w-sidebar);
@@ -193,8 +199,12 @@
     padding: 0 0.688rem;
     text-align: left;
   }
-  .controls_btn:hover {
+  .controls_btn:hover,
+  .controls_btn:focus {
     background-color: var(--c-basic-100);
+  }
+  .controls_btn:focus {
+    outline: none;
   }
   .controls_btn-icon {
     margin: 0;
@@ -210,7 +220,9 @@
     font-weight: 400;
   }
   .controls_btn:hover .controls_btn-label,
-  .controls_btn:hover .controls_btn-icon {
+  .controls_btn:hover .controls_btn-icon,
+  .controls_btn:focus .controls_btn-label,
+  .controls_btn:focus .controls_btn-icon {
     color: var(--c-primary);
   }
 </style>

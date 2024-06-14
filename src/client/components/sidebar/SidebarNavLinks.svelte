@@ -36,6 +36,9 @@
     font-weight: 500;
     background-color: var(--c-basic-100);
   }
+  .component_link:focus {
+    outline: none;
+  }
   .component_link .component_dot {
     display: block;
     margin: 0 0.5rem 0 -0.219rem;

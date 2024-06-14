@@ -166,8 +166,13 @@
     height: 1.125rem;
     color: var(--c-basic-700);
   }
-  .topbar_btn:hover svg {
+  .topbar_btn:hover svg,
+  .topbar_btn:focus svg {
     color: var(--c-primary);
+  }
+  .topbar_btn:focus {
+    outline: none;
+    background-color: var(--c-basic-150);
   }
   .is-first-btn {
     border-radius: 0.5rem 0 0 0.5rem;
@@ -231,12 +236,17 @@
       background: none;
       overflow: hidden;
     }
+    .stagesize-nav button:focus {
+      outline: none;
+      background-color: var(--c-basic-150);
+    }
     .stagesize-nav button svg {
       height: 1.125rem;
       color: var(--c-basic-700);
       transition: 0.2s;
     }
     .stagesize-nav button:hover svg,
+    .stagesize-nav button:focus svg,
     .stagesize-nav button.active svg {
       color: var(--c-primary);
     }
@@ -311,7 +321,8 @@
   .dropdown_items ul li button.active:hover .dropdown_item-dot {
     background-color: var(--c-primary);
   }
-  .dropdown_items ul li button:hover {
+  .dropdown_items ul li button:hover,
+  .dropdown_items ul li button:focus {
     color: var(--c-primary);
     font-weight: 500;
     background-color: var(--c-basic-100);

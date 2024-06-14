@@ -53,15 +53,21 @@
   .stories li:nth-child(odd) button {
     background-color: var(--c-basic-50);
   }
-  .stories li:focus button,
-  .stories li:hover button {
+  .stories li button:hover,
+  .stories li button:focus {
     color: var(--c-primary);
     font-weight: 500;
-    background-color: var(--c-basic-100);
+    background-color: var(--c-basic-150);
+  }
+  .stories li button:focus {
+    outline: none;
   }
   .stories li.active button {
     color: var(--c-primary);
     font-weight: 500;
     background-color: var(--c-primary-bg);
+  }
+  .stories li.active button:focus {
+    background-color: var(--c-basic-150);
   }
 </style>
