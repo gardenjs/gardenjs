@@ -134,15 +134,22 @@
   .panel_nav nav li button.active .dot {
     background-color: var(--c-primary);
   }
-  .panel_nav nav li button:hover {
+  .panel_nav nav li button:hover,
+  .panel_nav nav li button:focus {
     color: var(--c-primary);
+    font-weight: 500;
+  }
+  .panel_nav nav li button:focus {
+    outline: none;
+    background-color: var(--c-basic-150);
   }
   .panel_nav nav li button.active {
     color: var(--c-primary);
-    font-weight: 600;
+    font-weight: 500;
   }
   .panel_toggle {
     padding: 0 0.75rem;
+    height: 100%;
     background: none;
   }
   .panel_toggle svg {
@@ -150,8 +157,13 @@
     height: 1.375rem;
     color: var(--c-basic-700);
   }
-  .panel_toggle:hover svg {
+  .panel_toggle:hover svg,
+  .panel_toggle:focus svg {
     color: var(--c-primary);
+  }
+  .panel_toggle:focus {
+    outline: none;
+    background-color: var(--c-basic-150);
   }
   .panel_pane {
     position: absolute;
