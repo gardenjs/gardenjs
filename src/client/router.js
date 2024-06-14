@@ -55,23 +55,18 @@ export function findRoute(url) {
   var pushState = history.pushState
   history.pushState = function (state, title, url) {
     // @ts-ignore
-    if (typeof history.onpushstate == 'function') {
-      // @ts-ignore
-      history.onpushstate(state, title, url)
-    }
-    return pushState.apply(history, arguments)
-  }
-
-  // @ts-ignore
-  history.onpushstate = function (state, title, target) {
-    if (target.startsWith(baseurl) && baseurl.length > 0) return // TODO check this line
-    currentUrl = baseurl + target
+    if (url.startsWith(baseurl) && baseurl.length > 0) return // TODO check this line
+    currentUrl = baseurl + url
     state.url = currentUrl
-    dispatchUpdateRoute(state, title, currentUrl)
-    setTimeout(
-      () => globalThis.history.replaceState(state, title, currentUrl),
-      1
-    )
+    if (
+      state.url !== history.state.url ||
+      state.selectedExample !== history.state.selectedExample
+    ) {
+      dispatchUpdateRoute(state, title, currentUrl)
+      return pushState.apply(history, [state, '', currentUrl])
+    } else {
+      window.location.reload()
+    }
   }
 })(globalThis.history)
 
