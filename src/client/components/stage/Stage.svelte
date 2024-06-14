@@ -61,6 +61,12 @@
 
   $: {
     if (myframeready) {
+      if (
+        !myframe.contentDocument ||
+        !/frame.html$/.test(myframe.contentWindow.location)
+      ) {
+        window.location.reload
+      }
       myframe.contentWindow.postMessage(
         { selectedExample, componentName, stageSize, theme },
         window.location

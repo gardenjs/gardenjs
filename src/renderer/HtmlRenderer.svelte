@@ -8,5 +8,7 @@
   })
 </script>
 
-<!-- eslint-disable-next-line svelte/no-at-html-tags-->
-{@html component}
+{#if component}
+  <!-- eslint-disable-next-line svelte/no-at-html-tags-->
+  {@html component}
+{/if}
