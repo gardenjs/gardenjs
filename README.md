@@ -27,7 +27,7 @@ Gardenjs is an open source JS/Svelte-based UI component library explorer for JS 
 - Many useful features without being complex and bloated.
 - Integration of external libraries within a project.
 - Multiple frameworks running in a single instance.
-- More flexible and extensive work with decorators.
+- More flexible and extensive work with decorators and hooks.
 - Simply looks good :)
 
 ## Getting Started
@@ -58,13 +58,12 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 - [docs] Add renderer to docs.
 - [docs] Add decorator to docs.
 - [docs] Add hooks to docs.
+- [docs] Slot handling workaround.
 - [task] Public Gardenjs docs & set Gardenjs repository public.
 - [task] Readme: Check links & build badge.
 - [task] Public Gardenjs demo of Gardenjs docs & set repository of Gardenjs docs public.
 - [task] Public Rabbit Dev website.
 - [task] Create Linkedin profil for Rabbit Dev & Gardenjs.
-- [bug] If clicked on a link inside the iframe the gardenjs frame will get rendered again inside the parent iframe.
-- [bug] Component in separate tab opened renders with default theme instead of selected.
 
 ## Roadmap
 
@@ -80,10 +79,12 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 
 ### Later (no specific order)
 
-- [feature] use das-files from other modules (e.g. show carrots in custom project).
+- [feature] Use das-files from other modules (e.g. show carrots in custom project).
+- [task] Hide the Component code tab in the panel by setting an option in garden.config.js.
 - [task] Keep user state after refresh.
   - [task] Store selection in panel nav for refresh or if another component is selected.
   - [task] Store selection of stage for refresh or if another component is selected.
+  - [task] Reload only iFrame if nav link is selected twice.
 - [feature] Add testing library. E.g. [Testing Library](https://testing-library.com/).
 - [feature] Collect events and show in panel.
 - [feature] Bookmarks. (siehe ReactCosmos)
@@ -108,5 +109,6 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 - [feature] Build kickstarter "carrots". Define components for carrots.
 - [feature] Measure.
 - [feature] Manually change properties via control panel.
+- [feature] On the fly generate examples for whole project / instant project viewer.
 
 <br><br><br><p align="center"><img src="src/client/assets/icons/logo.svg"></p>
