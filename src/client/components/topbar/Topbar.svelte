@@ -3,11 +3,13 @@
   const dispatch = createEventDispatcher()
 
   export let active = true
-  export let dark = false
+  export let appTheme = 'default'
   export let landscape = false
   export let stageSize = 'full'
   export let themes = []
   export let stageRect
+
+  let dark = false
 
   let stageWidth, stageHeight
 
@@ -18,7 +20,8 @@
   }
 
   $: {
-    if (dark) document.body.classList.add('dark')
+    dark = appTheme === 'dark'
+    if (appTheme === 'dark') document.body.classList.add('dark')
     else document.body.classList.remove('dark')
   }
 
@@ -28,7 +31,10 @@
   }
 
   function toggleDarkmode() {
-    dark = !dark
+    const theme = appTheme === 'dark' ? 'default' : 'dark'
+    dispatch('out', {
+      updateAppTheme: theme,
+    })
   }
 
   function setFramesize(nStageSize) {

@@ -51,8 +51,6 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 ## Todo's up to v1.0
 
 - [task] Type infos of das in editor.
-- [task] Handle component out in svelte/vue/react.
-- [task] Run Gardenjs with Sveltekit projects.
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [docs] Explain garden.vite.config.js.
 - [docs] Add renderer to docs.
@@ -71,8 +69,8 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 
 ### Next
 
+- [task] Handle component out in svelte/vue/react.
 - [feature] Slot handling.
-- [refactor] Move logic to own file / use stores?. Handle user interaction.
 - [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
 - [task] Add tests.
 - [task] In das files import component instead of use relative filename as string
@@ -81,10 +79,6 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 
 - [feature] Use das-files from other modules (e.g. show carrots in custom project).
 - [task] Hide the Component code tab in the panel by setting an option in garden.config.js.
-- [task] Keep user state after refresh.
-  - [task] Store selection in panel nav for refresh or if another component is selected.
-  - [task] Store selection of stage for refresh or if another component is selected.
-  - [task] Reload only iFrame if nav link is selected twice.
 - [feature] Add testing library. E.g. [Testing Library](https://testing-library.com/).
 - [feature] Collect events and show in panel.
 - [feature] Bookmarks. (siehe ReactCosmos)

@@ -13,6 +13,8 @@
     setThemes,
     selectTheme,
     themes,
+    appTheme,
+    updateAppTheme,
     activeTheme,
     toggleExpandPanel,
     updateStageHeight,
@@ -63,13 +65,15 @@
           {
             selectedExample: $selectedExample,
             componentName: $componentName,
-            theme: $activeTheme.name,
+            theme: $activeTheme,
           },
           window.location.origin
         )
       }
     } else if (evt.detail.selectTheme) {
       selectTheme(evt.detail.selectTheme)
+    } else if (evt.detail.updateAppTheme) {
+      updateAppTheme(evt.detail.updateAppTheme)
     } else {
       showSidebar = evt.detail.active
       updateStage({
@@ -135,6 +139,7 @@
       <Topbar
         active={showSidebar}
         themes={$themes}
+        appTheme={$appTheme}
         {stageRect}
         stageSize={$stageSize}
         landscape={$landscape}
@@ -148,7 +153,7 @@
         stageSize={$stageSize}
         stageHeight={$stageHeight}
         stageMaxHeight={$stageMaxHeight}
-        theme={$activeTheme?.name}
+        theme={$activeTheme}
         panelExpanded={$panelExpanded}
         devmodus={config.devmodus}
         on:out={handleStageOut}

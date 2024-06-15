@@ -1,15 +1,34 @@
-import { writable, derived, get } from 'svelte/store'
+import { writable, get } from 'svelte/store'
+
+function localStore(
+  name,
+  defaultValue,
+  parseString = (value) => value,
+  stringify = (value) => value
+) {
+  const store = writable(
+    parseString(localStorage.getItem(name)) ?? defaultValue
+  )
+  store.subscribe((value) => {
+    localStorage.setItem(name, stringify(value))
+  })
+  return store
+}
 
 export const themes = writable([])
 export const stageStyle = writable('')
-export const stageSize = writable('full')
-export const landscape = writable(false)
-export const activeTheme = derived(themes, ($themes) => {
-  return $themes?.find((theme) => theme.active)
-})
+export const stageSize = localStore('stageSize', 'full')
+export const landscape = localStore(
+  'landscape',
+  false,
+  (value) => value === 'true'
+)
 export const stageHeight = writable('65vh')
 export const stageMaxHeight = writable(9999)
 export const panelExpanded = writable(true)
+export const appTheme = localStore('appTheme', 'default')
+
+export const activeTheme = localStore('frameTheme')
 
 let previousPanelHeight = '65vh'
 
@@ -33,10 +52,18 @@ const sizes = {
 }
 
 export function setThemes(newThemes) {
-  if (newThemes && !newThemes.some((theme) => theme.active)) {
-    newThemes[0].active = true
+  if (!get(activeTheme)) {
+    activeTheme.set(
+      newThemes.find((theme) => theme.active)?.name ?? newThemes[0].name
+    )
   }
-  themes.set(newThemes)
+
+  themes.set(
+    newThemes.map((theme) => ({
+      ...theme,
+      active: theme.name === get(activeTheme),
+    }))
+  )
   computeStageStyle()
 }
 
@@ -44,6 +71,7 @@ export function selectTheme(themeName) {
   themes.set(
     get(themes).map((theme) => ({ ...theme, active: theme.name === themeName }))
   )
+  activeTheme.set(themeName)
   computeStageStyle()
 }
 
@@ -53,8 +81,22 @@ export function updateStage(newStage) {
   computeStageStyle()
 }
 
+export function updateAppTheme(newTheme) {
+  appTheme.set(newTheme)
+}
+
+export function getCurrentTheme() {
+  if (get(themes) && get(themes).length > 0) {
+    return (
+      get(themes).find((theme) => theme.name === get(activeTheme)) ??
+      get(themes)[0]
+    )
+  }
+  return { stageBg: 'white' }
+}
+
 function computeStageStyle() {
-  const stageBg = get(activeTheme)?.stageBg || 'white'
+  const stageBg = getCurrentTheme().stageBg
   const { frameheight, framewidth } = sizes[get(stageSize)]
   const size = get(landscape)
     ? `width: ${frameheight}; height: ${framewidth}`
