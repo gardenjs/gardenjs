@@ -66,6 +66,7 @@ export function findRoute(url) {
       return pushState.apply(history, [state, '', currentUrl])
     } else {
       dispatchUpdateRoute(state, currentUrl)
+      window.location.reload()
     }
   }
 })(globalThis.history)
