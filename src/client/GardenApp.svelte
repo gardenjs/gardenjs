@@ -115,13 +115,17 @@
 </script>
 
 {#if window.top !== window.self}
-  <h1>Relative Link was clicked</h1>
-  <div>To go back click on button</div>
-  <button
-    on:click={() => {
-      window.top.location.reload()
-    }}>back</button
-  >
+  <div class="message">
+    <div class="click-completed">Relative link was clicked!</div>
+    <div class="instruction">
+      Click the button to return:
+      <button
+        on:click={() => {
+          window.top.location.reload()
+        }}>back</button
+      >
+    </div>
+  </div>
 {:else}
   <div class="garden">
     <div class="sidebar">
@@ -185,5 +189,26 @@
     width: 100%;
     height: 100vh;
     overflow-y: auto;
+  }
+  .message {
+    display: inline-block;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0.625rem;
+  }
+  .click-completed {
+    margin: 0 0 0.75rem;
+    font-size: 120%;
+    font-weight: 500;
+  }
+  .instruction button {
+    padding: 0.125rem 0.75rem;
+    background: var(--c-basic-150);
+    border-radius: 0.375rem;
+    font-size: 90%;
+    color: var(--c-basic-900);
+    font-weight: 600;
+    text-transform: uppercase;
   }
 </style>
