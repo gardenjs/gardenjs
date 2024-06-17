@@ -75,17 +75,16 @@
     overflow: hidden;
     white-space: nowrap;
   }
+  .folder_btn:hover {
+    background-color: var(--c-basic-100);
+  }
   .folder_btn:hover .folder_label {
     color: var(--c-primary);
-    background-color: var(--c-basic-100);
   }
   .folder_btn:focus {
     color: var(--c-primary);
     outline: none;
     background-color: var(--c-basic-100);
-  }
-  .folder_btn:hover .folder_label {
-    color: var(--c-basic-900);
   }
   .folder_arrow {
     display: flex;
