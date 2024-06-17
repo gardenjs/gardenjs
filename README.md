@@ -50,6 +50,7 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
+- [bug] If a component has been selected in the sidenav and you then collapse a folder, the focus/hover style remains on the folder (background gray), even if you move away with the cursor.
 - [task] Type infos of das in editor.
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [docs] Explain garden.vite.config.js.
@@ -78,6 +79,8 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 ### Later (no specific order)
 
 - [feature] Use das-files from other modules (e.g. show carrots in custom project).
+- [task] Control the sidenav via arrow keys instead of tabs.
+- [task] Alternatively, add logo instead of project-title to the sidebar.
 - [task] Hide the Component code tab in the panel by setting an option in garden.config.js.
 - [feature] Add testing library. E.g. [Testing Library](https://testing-library.com/).
 - [feature] Collect events and show in panel.
