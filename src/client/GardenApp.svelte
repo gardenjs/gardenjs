@@ -56,6 +56,8 @@
   $: projectTitle = config.project_title || ''
   let stageRect = {}
 
+  $: docsLink = config.docs_link ? 1 : 0
+
   let showSidebar = true
   function handleTopbarOut(evt) {
     if (evt.detail.openInTab) {
@@ -137,6 +139,7 @@
         filter={$filterNavTree}
         panelExpanded={$panelExpanded}
         on:out={handleSidebarOut}
+        {docsLink}
       />
     </div>
     <div class="main">

@@ -50,6 +50,7 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
+- [task] Alternatively, add logo instead of project-title to the sidebar. Almost done (pull request)...
 - [task] Type infos of das in editor.
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [docs] Explain garden.vite.config.js.
@@ -88,10 +89,9 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 - [task] Sidebarnav is closed by default on narrow display devices.
 - [task] Make setting of default mode possible via garden.config.js.
 - [task] If full mode is active, switching to portrait mode is deactivated.
-- [task] Make Gardenjs docs link optional via garden.config.js.
 - [task] Move demo components from core to the renderer plugins.
 - [task] Show custom favicon.svg configured in garden.config.js.
-- [task] Color variables are made configurable for your own Gardenjs themes.
+- [task] Color variables are made configurable for Gardenjs themes.
 - [feature] Screenshot tests:
   - Docker image oder alternativ for screenshot test.
   - Automatic create test file & and folder (like init garden).

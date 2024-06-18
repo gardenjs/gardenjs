@@ -217,6 +217,9 @@ export default {
   // The HTML file may only contain the body part, i.e. without the doctype, head and body tag:
   // "welcome_page": "./src/custom_welcome_page.html",
 
+  // Show the link to the docs in the sidebar:
+  docs_link: true,
+
   // vite config file:
   vite_config: "./garden.vite.config.js",
   

@@ -9,6 +9,7 @@
   export let projectTitle
   export let filter
   export let panelExpanded = true
+  export let docsLink
 
   function toggleRootFolders() {
     dispatch('out', { toggleRootFolders: true })
@@ -63,12 +64,14 @@
           <span class="controls_btn-label">{panelExpanded ? 'Collapse' : 'Expand'} Panel</span>
         </button>
       </li>
-      <li>
-        <a class="controls_btn" href="https://github.com/rabbitdevelopment/garden" target="_blank" rel="noreferrer">
-          <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
-          <span class="controls_btn-label">Gardenjs Docs</span>
-        </a>
-      </li>
+      {#if docsLink === 1}
+        <li>
+          <a class="controls_btn" href="https://gardenjs.org/docs" target="_blank" rel="noreferrer">
+            <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
+            <span class="controls_btn-label">Gardenjs Docs</span>
+          </a>
+        </li>
+      {/if}
     </ul>
   </nav>
 </header>
