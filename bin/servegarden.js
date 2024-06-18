@@ -211,7 +211,9 @@ export default {
   // "no_open_browser": true,
 
   // This title is displayed above the navigation:
+  // If the path to a logo is specified, "project_title" is used as the alt tag.
   project_title: "${title}",
+  // project_logo: "./src/assets/logo.svg",
 
   // Here you can set a path to your own start page.
   // The HTML file may only contain the body part, i.e. without the doctype, head and body tag:

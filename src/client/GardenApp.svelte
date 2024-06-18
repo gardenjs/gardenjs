@@ -53,7 +53,9 @@
   $: setThemes(config.themes)
   $: updateSelectedComponent($currentRoute, $componentName)
 
-  $: projectTitle = config.project_title || ''
+  let projectTitle = config.project_title || ''
+  let projectLogo = config.project_logo || ''
+
   let stageRect = {}
 
   let showSidebar = true
@@ -131,6 +133,7 @@
     <div class="sidebar">
       <Sidebar
         {projectTitle}
+        {projectLogo}
         show={showSidebar}
         rootNodesExpanded={$rootNodesExpanded}
         nodes={$nodes}
