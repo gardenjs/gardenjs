@@ -173,11 +173,10 @@
     color: var(--c-basic-700);
   }
   .topbar_btn:hover svg,
-  .topbar_btn:focus svg {
+  .topbar_btn:focus-visible svg {
     color: var(--c-primary);
   }
-  .topbar_btn:focus {
-    outline: none;
+  .topbar_btn:focus-visible {
     background-color: var(--c-basic-150);
   }
   .is-first-btn {
@@ -242,8 +241,7 @@
       background: none;
       overflow: hidden;
     }
-    .stagesize-nav button:focus {
-      outline: none;
+    .stagesize-nav button:focus-visible {
       background-color: var(--c-basic-150);
     }
     .stagesize-nav button svg {
@@ -252,7 +250,7 @@
       transition: 0.2s;
     }
     .stagesize-nav button:hover svg,
-    .stagesize-nav button:focus svg,
+    .stagesize-nav button:focus-visible svg,
     .stagesize-nav button.active svg {
       color: var(--c-primary);
     }
@@ -328,7 +326,7 @@
     background-color: var(--c-primary);
   }
   .dropdown_items ul li button:hover,
-  .dropdown_items ul li button:focus {
+  .dropdown_items ul li button:focus-visible {
     color: var(--c-primary);
     font-weight: 500;
     background-color: var(--c-basic-100);
@@ -340,7 +338,7 @@
     border-color: var(--c-primary);
   }
   .dropdown:hover > .dropdown_items,
-  .dropdown:focus > .dropdown_items {
+  .dropdown:focus-visible > .dropdown_items {
     display: block;
     visibility: visible;
   }

@@ -31,13 +31,10 @@
     font-weight: 400;
   }
   .component_link:hover,
-  .component_link:focus {
+  .component_link:focus-visible {
     color: var(--c-primary);
     font-weight: 500;
     background-color: var(--c-basic-100);
-  }
-  .component_link:focus {
-    outline: none;
   }
   .component_link .component_dot {
     display: block;

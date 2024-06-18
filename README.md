@@ -50,7 +50,6 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Todo's up to v1.0
 
-- [bug] If a component has been selected in the sidenav and you then collapse a folder, the focus/hover style remains on the folder (background gray), even if you move away with the cursor.
 - [task] Type infos of das in editor.
 - [bug] On reload css defect (only problem in ubuntu). Maybe writing issue in gardenjs?
 - [docs] Explain garden.vite.config.js.

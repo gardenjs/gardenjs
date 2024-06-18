@@ -115,9 +115,8 @@
     font-weight: 900;
     line-height: 1;
   }
-  .project_title:focus {
+  .project_title:focus-visible {
     color: var(--c-basic-500);
-    outline: none;
   }
   .project_title span {
     overflow: hidden;
@@ -145,8 +144,7 @@
     font-size: 0.813rem;
     color: var(--c-basic-900);
   }
-  .filter_input:focus {
-    outline: none;
+  .filter_input:focus-visible {
     background-color: var(--c-basic-100);
     border: 1px solid var(--c-basic-500);
   }
@@ -200,11 +198,8 @@
     text-align: left;
   }
   .controls_btn:hover,
-  .controls_btn:focus {
+  .controls_btn:focus-visible {
     background-color: var(--c-basic-100);
-  }
-  .controls_btn:focus {
-    outline: none;
   }
   .controls_btn-icon {
     margin: 0;
@@ -221,8 +216,8 @@
   }
   .controls_btn:hover .controls_btn-label,
   .controls_btn:hover .controls_btn-icon,
-  .controls_btn:focus .controls_btn-label,
-  .controls_btn:focus .controls_btn-icon {
+  .controls_btn:focus-visible .controls_btn-label,
+  .controls_btn:focus-visible .controls_btn-icon {
     color: var(--c-primary);
   }
 </style>

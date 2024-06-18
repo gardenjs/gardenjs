@@ -135,12 +135,11 @@
     background-color: var(--c-primary);
   }
   .panel_nav nav li button:hover,
-  .panel_nav nav li button:focus {
+  .panel_nav nav li button:focus-visible {
     color: var(--c-primary);
     font-weight: 500;
   }
-  .panel_nav nav li button:focus {
-    outline: none;
+  .panel_nav nav li button:focus-visible {
     background-color: var(--c-basic-150);
   }
   .panel_nav nav li button.active {
@@ -158,11 +157,10 @@
     color: var(--c-basic-700);
   }
   .panel_toggle:hover svg,
-  .panel_toggle:focus svg {
+  .panel_toggle:focus-visible svg {
     color: var(--c-primary);
   }
-  .panel_toggle:focus {
-    outline: none;
+  .panel_toggle:focus-visible {
     background-color: var(--c-basic-150);
   }
   .panel_pane {

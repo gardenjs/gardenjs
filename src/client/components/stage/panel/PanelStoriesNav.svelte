@@ -54,20 +54,17 @@
     background-color: var(--c-basic-50);
   }
   .stories li button:hover,
-  .stories li button:focus {
+  .stories li button:focus-visible {
     color: var(--c-primary);
     font-weight: 500;
     background-color: var(--c-basic-150);
-  }
-  .stories li button:focus {
-    outline: none;
   }
   .stories li.active button {
     color: var(--c-primary);
     font-weight: 500;
     background-color: var(--c-primary-bg);
   }
-  .stories li.active button:focus {
+  .stories li.active button:focus-visible {
     background-color: var(--c-basic-150);
   }
 </style>

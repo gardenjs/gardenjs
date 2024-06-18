@@ -81,7 +81,7 @@
   .folder_btn:hover .folder_label {
     color: var(--c-primary);
   }
-  .folder_btn:focus {
+  .folder_btn:focus-visible {
     color: var(--c-primary);
     outline: none;
     background-color: var(--c-basic-100);
