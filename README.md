@@ -1,4 +1,4 @@
-<p align="center"><img style="max-width:400;" src="src/client/assets/icons/logo.svg"></p>
+<p align="center"><img src="src/client/assets/icons/logo.svg"></p>
 
 # Gardenjs
 
