@@ -1,3 +1,5 @@
+<p align="center"><img src="src/client/assets/icons/logo.svg"></p>
+
 # Gardenjs
 
 +++ TEST RELEASE, COMING SOON +++
@@ -107,4 +109,4 @@ Gardenjs will continue to be maintained. Further features will also be integrate
 - [feature] Manually change properties via control panel.
 - [feature] On the fly generate examples for whole project / instant project viewer.
 
-<br><br><br><p align="center"><img src="src/client/assets/icons/logo.svg"></p>
+<br><br><br><p align="center"><img src="src/client/assets/icons/vegetables.svg"></p>
