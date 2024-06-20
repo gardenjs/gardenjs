@@ -77,7 +77,7 @@
     border-bottom: 1px solid var(--c-bg-body);
   }
   .panel_nav nav {
-    margin: 0 1.25rem;
+    margin: 0 1.25rem 0 0;
   }
   .panel_nav nav ul {
     display: flex;
