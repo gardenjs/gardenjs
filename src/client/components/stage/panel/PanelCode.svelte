@@ -37,7 +37,7 @@
 
 <div>
   {#if devmodus}
-    Running in devmodus. No Code view supported.
+    Running Gardenjs in devmodus. No Code view supported.
   {/if}
   {#if code}
     <pre><code class="language-xml" bind:this={codeblock}>{code}</code></pre>
