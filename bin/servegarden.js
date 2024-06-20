@@ -210,6 +210,9 @@ export default {
   // Stop auto opening Gardenjs on start:
   // "no_open_browser": true,
 
+  // For garden development purposes only!!!
+  // devmodus: true,
+
   // This title is displayed above the navigation:
   project_title: "${title}",
 
@@ -217,7 +220,7 @@ export default {
   // The HTML file may only contain the body part, i.e. without the doctype, head and body tag:
   // "welcome_page": "./src/custom_welcome_page.html",
 
-  // Show the link to the docs in the sidebar:
+  // Show/hide the link to the docs in the sidebar:
   docs_link: true,
 
   // vite config file:
