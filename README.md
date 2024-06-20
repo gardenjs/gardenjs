@@ -1,15 +1,11 @@
-<p align="right">
+<p>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="src/client/assets/icons/logo_neg.svg">
     <img src="src/client/assets/icons/logo.svg">
   </picture
 </p>
 
-# Gardenjs
-
 +++ TEST RELEASE, COMING SOON +++
-
-The quick and easy alternative. Watch the <a href="https://www.gardenjs.org/demo/">demo</a>.
 
 <div>
   <a href="https://github.com/gardenjs/gardenjs/blob/main/LICENSE.md">
@@ -23,9 +19,11 @@ The quick and easy alternative. Watch the <a href="https://www.gardenjs.org/demo
   </a>
 </div>
 
-## What is Gardenjs?
+## The quick and easy alternative:
 
-Gardenjs is an open source JS/Svelte-based UI component library explorer for JS frameworks and provides a centralized platform for developers to create, test and present UI components and pages in isolation. Gardenjs promotes modular and reusable code, streamlines collaboration between team members and increases overall productivity. Gardenjs is designed for projects of any size.
+Gardenjs is an open source UI component library explorer for JS frameworks and provides a centralized platform for developers to create, test and present UI components and pages in isolation. Gardenjs promotes modular and reusable code, streamlines collaboration between team members and increases overall productivity. Gardenjs is designed for projects of any size.
+
+Watch the <a href="https://www.gardenjs.org/demo/">demo</a>.
 
 ## Why Gardenjs?
 
@@ -43,7 +41,7 @@ Please follow the documentation at <a href="https://www.gardenjs.org/docs" targe
 
 ## Supported Frameworks
 
-HTML snippets are rendered by default. The support of JS frameworks is realized by renderer plugins. There are currently plugins for <a href="https://github.com/gardenjs/render-plugin-svelte" target="_blank">Svelte</a>, <a href="https://github.com/gardenjs/render-plugin-vue" target="_blank">Vue</a> and <a href="https://github.com/gardenjs/render-plugin-react" target="_blank">React</a>. You can also easily create plugins for other frameworks. Contact us, for example we will be happy to create a repository for your renderer plugin.
+HTML snippets are rendered by default. The support of JS frameworks is realized by renderer plugins. There are currently plugins for <a href="https://github.com/gardenjs/render-plugin-svelte" target="_blank">Svelte</a>, <a href="https://github.com/gardenjs/render-plugin-vue" target="_blank">Vue</a> and <a href="https://github.com/gardenjs/render-plugin-react" target="_blank">React</a>. You can also easily create plugins for other frameworks, see the documentation. Contact us, we will be happy to create a repository for your renderer plugin.
 
 ## Contributing
 
@@ -73,45 +71,49 @@ Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
 ## Roadmap
 
-Gardenjs will continue to be maintained. Further features will also be integrated depending on how well Gardenjs is accepted.
+Gardenjs will continue to be maintained. The extent to which further functions will be integrated depends on the acceptance of Gardenjs.
 
 ### Next
 
+- [task] Sidebarnav should be closed by default on devices with a narrow screen.
+- [task] Hide the Component code tab in the panel by setting an option in garden.config.js.
 - [task] Handle component out in svelte/vue/react.
 - [feature] Slot handling.
-- [feature] Evaluation of "Make Storybook stories compatible with Garden". If relatively easy possible then development. Otherwise prioritize other tasks/features depending on complexity.
-- [task] Add tests.
+- [feature] Evaluation of "Make Storybook stories compatible with Garden". (If very complex rather later)
 - [task] In das files import component instead of use relative filename as string
 
 ### Later (no specific order)
 
-- [feature] Use das-files from other modules (e.g. show carrots in custom project).
-- [task] Control the sidenav via arrow keys instead of tabs.
-- [task] Alternatively, add logo instead of project-title to the sidebar.
-- [task] Hide the Component code tab in the panel by setting an option in garden.config.js.
-- [feature] Add testing library. E.g. [Testing Library](https://testing-library.com/).
-- [feature] Collect events and show in panel.
-- [feature] Bookmarks. (siehe ReactCosmos)
-- [task] Add [line numbers plugin](https://github.com/wcoder/highlightjs-line-numbers.js) to highlightjs.
-- [task] Sidebarnav is closed by default on narrow display devices.
-- [task] Make setting of default mode possible via garden.config.js.
-- [task] If full mode is active, switching to portrait mode is deactivated.
-- [task] Move demo components from core to the renderer plugins.
-- [task] Show custom favicon.svg configured in garden.config.js.
-- [task] Color variables are made configurable for Gardenjs themes.
-- [feature] Screenshot tests:
+- **General features/tasks:**
+  - [feature] Use das-files from other modules (e.g. show carrots in custom project).
+  - [feature] Collect events and show in panel.
+  - [task] Move demo components from core to the renderer plugins.
+  - [task] Switch from md to mdx.
+  - [feature] Build kickstarter "carrots". Define components for carrots.
+  - [feature] Manually change properties via control panel.
+  - [feature] On the fly generate examples for whole project / instant project viewer.
+- **Tests:**
+  - [task] Add tests to code.
+  - [feature] Add testing library. E.g. [Testing Library](https://testing-library.com/).
+- **UX improvements:**
+  - [feature] Set the width and height of the stage by entering the size directly.
+  - [task] If full mode is active, switching to portrait mode is deactivated.
+  - [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour.
+  - [task] Add [line numbers plugin](https://github.com/wcoder/highlightjs-line-numbers.js) to highlightjs.
+  - [feature] Bookmarks for components. (like ReactCosmos)
+  - [feature] Ruler, visualization of margin and padding, spacing etc.
+  - [task] Integrate Svelte A11y features.
+  - [feature] Add zoom.
+  - [feature] Use shortcuts. Control the sidenav via arrow keys instead of tabs.
+- **Customization:**
+  - [task] Make setting of default mode possible via garden.config.js.
+  - [task] Show custom favicon.svg configured in garden.config.js.
+  - [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js or next:
+  - Set custom values such as "iPhone 15", "iPad Air", "Galaxy A" or as pixel values in garden.config and display them in a dropdown instead of icons.
+  - [task] Color variables are made configurable for own Gardenjs themes.
+- **Screenshot tests** [feature]:
   - Docker image oder alternativ for screenshot test.
   - Automatic create test file & and folder (like init garden).
   - Settings.
-- [feature] Set width and height of stage by size input.
-- [feature] Add zoom button 100% and if zoomed show size in % with switch possibility.
-- [feature] Vertical dragbar to drag stage horizontical to show rwd behaviour. Already integrated staticly, just needs to be commented out in topbar.svelte: Show 'px' width/height of stage next to rwd-navi.
-- [task] Switch from md to mdx.
-- [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js. Option: Set list of custom values like iPhone 13,14,15, iPad, Samsung Galaxy A/Sx or as pixel values in garden.config and show dropdown in Gardenjs instead of icons.
-- [task] Integrate Svelte A11y features.
-- [feature] Build kickstarter "carrots". Define components for carrots.
-- [feature] Measure.
-- [feature] Manually change properties via control panel.
-- [feature] On the fly generate examples for whole project / instant project viewer.
 
 <br><br><br><p align="center"><img src="src/client/assets/icons/vegetables.svg"></p>
