@@ -1,4 +1,9 @@
-<p align="center"><img src="src/client/assets/icons/logo.svg"></p>
+<p align="right">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="src/client/assets/icons/logo_neg.svg">
+    <img src="src/client/assets/icons/logo.svg">
+  </picture
+</p>
 
 # Gardenjs
 
