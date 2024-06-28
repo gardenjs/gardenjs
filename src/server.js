@@ -21,6 +21,9 @@ export async function createServer() {
     },
     server: {
       port: serverport,
+      fs: {
+        cachedChecks: false,
+      },
     },
   })
   await runWatch(server)
