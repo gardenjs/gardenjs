@@ -7,6 +7,7 @@
   export let show
   export let rootNodesExpanded = true
   export let projectTitle
+  export let projectLogo
   export let filter
   export let panelExpanded = true
   export let docsLink
@@ -25,8 +26,16 @@
 </script>
 
 <header class="sidebar_container" class:show-sidebar={show}>
-  <a class="project_title" href="/">
-    <span>{projectTitle}</span>
+  <a class="project-identifier" class:has-logo={projectLogo} href="/">
+    {#if projectLogo}
+      <img
+        src="/assets/{projectLogo}"
+        title="start"
+        alt="{projectTitle} Logo"
+      />
+    {:else}
+      <span>{projectTitle}</span>
+    {/if}
   </a>
   <div class="filter">
     <!-- prettier-ignore -->
@@ -96,7 +105,7 @@
     width: var(--w-sidebar);
     box-sizing: border-box;
   }
-  .project_title {
+  .project-identifier {
     position: relative;
     display: flex;
     flex-shrink: 0;
@@ -118,10 +127,13 @@
     font-weight: 900;
     line-height: 1;
   }
-  .project_title:focus-visible {
+  .project-identifier.has-logo {
+    height: auto;
+  }
+  .project-identifier:focus-visible {
     color: var(--c-basic-500);
   }
-  .project_title span {
+  .project-identifier span {
     overflow: hidden;
   }
   .filter {

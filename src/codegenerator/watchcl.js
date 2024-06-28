@@ -15,7 +15,6 @@ export async function init() {
 }
 
 async function generate(serverport) {
-  console.clear()
   console.log('PROJECT ROOT: ', process.cwd())
   console.log('')
   console.log('generate Gardenjs')

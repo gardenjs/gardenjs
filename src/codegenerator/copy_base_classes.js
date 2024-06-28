@@ -18,6 +18,19 @@ export async function copyBaseClasses() {
   const config = await getConfig()
   fs.mkdirSync(targetfolder, { recursive: true })
   copyFolder(sourcefolder, targetfolder)
+  if (config.project_logo) {
+    try {
+      fs.copyFileSync(
+        config.project_logo,
+        targetfolder + '/assets/' + config.project_logo.split('/').pop()
+      )
+    } catch (e) {
+      console.error(
+        'Could not copy logo file. Check if file exist and path is correct.',
+        e
+      )
+    }
+  }
   if (config.devmodus) return
   copyFolder(distfolder, targetfolder)
 }
