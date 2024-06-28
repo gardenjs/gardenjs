@@ -63,7 +63,7 @@
     if (config.renderer) {
       const newRendererBuilder = await getRendererBuilderFor(das?.file)
       if (newRendererBuilder !== currentRendererBuilder) {
-        await updateRenderer(newRendererBuilder, das?.decorators)
+        await updateRenderer(newRendererBuilder)
       }
     }
 
@@ -74,6 +74,8 @@
         component,
         selectedExample,
         das,
+        decorators: das?.decorators,
+        afterRenderHook,
       })
     } catch (e) {
       console.error(e)
@@ -146,13 +148,13 @@
     }
   }
 
-  async function updateRenderer(rendererBuilder, decorators) {
+  async function updateRenderer(rendererBuilder) {
     try {
       await currentRenderer?.destroy()
     } catch (e) {
       console.error('Could not destroy current renderer', e)
     }
-    currentRenderer = await rendererBuilder.create(afterRenderHook, decorators)
+    currentRenderer = await rendererBuilder.create()
   }
 
   $: {
