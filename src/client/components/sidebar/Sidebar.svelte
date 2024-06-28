@@ -31,7 +31,7 @@
       <img
         src="/assets/{projectLogo}"
         title="start"
-        alt="{projectTitle} Logo"
+        alt="{projectTitle} logo"
       />
     {:else}
       <span>{projectTitle}</span>
