@@ -54,7 +54,7 @@
   $: updateSelectedComponent($currentRoute, $componentName)
 
   let projectTitle = config.project_title || ''
-  let projectLogo = config.project_logo || ''
+  let projectLogo = config.project_logo?.split('/').pop() || ''
 
   let stageRect = {}
 

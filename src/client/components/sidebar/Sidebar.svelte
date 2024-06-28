@@ -25,9 +25,13 @@
 </script>
 
 <header class="sidebar_container" class:show-sidebar={show}>
-  <a class="project-identifier" href="/">
+  <a class="project-identifier" class:has-logo={projectLogo} href="/">
     {#if projectLogo}
-      <img src={projectLogo} title="start" alt="{projectTitle} Logo" />
+      <img
+        src="/assets/{projectLogo}"
+        title="start"
+        alt="{projectTitle} Logo"
+      />
     {:else}
       <span>{projectTitle}</span>
     {/if}
@@ -120,16 +124,14 @@
     font-weight: 900;
     line-height: 1;
   }
+  .project-identifier.has-logo {
+    height: auto;
+  }
   .project-identifier:focus-visible {
     color: var(--c-basic-500);
   }
   .project-identifier span {
     overflow: hidden;
-  }
-  .project-identifier img {
-    max-width: 100%;
-    height: auto;
-    max-height: 100px;
   }
   .filter {
     display: flex;
