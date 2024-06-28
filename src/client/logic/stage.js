@@ -54,12 +54,12 @@ const sizes = {
 export function setThemes(newThemes) {
   if (!get(activeTheme)) {
     activeTheme.set(
-      newThemes.find((theme) => theme.active)?.name ?? newThemes[0].name
+      newThemes?.find((theme) => theme.active)?.name ?? newThemes[0].name
     )
   }
 
   themes.set(
-    newThemes.map((theme) => ({
+    newThemes?.map((theme) => ({
       ...theme,
       active: theme.name === get(activeTheme),
     }))
