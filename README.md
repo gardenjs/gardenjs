@@ -5,7 +5,7 @@
   </picture
 </p>
 
-+++ TEST RELEASE, COMING SOON +++
++++ TEST RELEASE. COMING SOON... +++
 
 <div>
   <a href="https://github.com/gardenjs/gardenjs/blob/main/LICENSE.md">
@@ -19,7 +19,7 @@
   </a>
 </div>
 
-## The quick and easy alternative:
+## The quick and easy alternative
 
 Gardenjs is an open source UI component library explorer for JS frameworks and provides a centralized platform for developers to create, test and present UI components and pages in isolation. Gardenjs promotes modular and reusable code, streamlines collaboration between team members and increases overall productivity. Gardenjs is designed for projects of any size.
 
@@ -80,7 +80,8 @@ Gardenjs will continue to be maintained. The extent to which further functions w
 - [task] Handle component out in svelte/vue/react.
 - [feature] Slot handling.
 - [feature] Evaluation of "Make Storybook stories compatible with Garden". (If very complex rather later)
-- [task] In das files import component instead of use relative filename as string
+- [task] In das files import component instead of use relative filename as string.
+- [task] Check Gardenjs with Next.js and Nuxt.
 
 ### Later (no specific order)
 
@@ -95,6 +96,10 @@ Gardenjs will continue to be maintained. The extent to which further functions w
 - **Tests:**
   - [task] Add tests to code.
   - [feature] Add testing library. E.g. [Testing Library](https://testing-library.com/).
+  - [feature] Screenshot tests:
+    - Docker image oder alternativ for screenshot test.
+    - Automatic create test file & and folder (like init garden).
+    - Settings.
 - **UX improvements:**
   - [feature] Set the width and height of the stage by entering the size directly.
   - [task] If full mode is active, switching to portrait mode is deactivated.
@@ -109,11 +114,7 @@ Gardenjs will continue to be maintained. The extent to which further functions w
   - [task] Make setting of default mode possible via garden.config.js.
   - [task] Show custom favicon.svg configured in garden.config.js.
   - [feature] Set stagesize values for "mobile, tablet, desktop" inside garden.config.js or next:
-  - Set custom values such as "iPhone 15", "iPad Air", "Galaxy A" or as pixel values in garden.config and display them in a dropdown instead of icons.
+  - [feature] Set custom values such as "iPhone 15", "iPad Air", "Galaxy A" or as pixel values in garden.config and display them in a dropdown instead of icons.
   - [task] Color variables are made configurable for own Gardenjs themes.
-- **Screenshot tests** [feature]:
-  - Docker image oder alternativ for screenshot test.
-  - Automatic create test file & and folder (like init garden).
-  - Settings.
 
 <br><br><br><p align="center"><img src="src/client/assets/icons/vegetables.svg"></p>
