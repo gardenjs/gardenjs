@@ -92,7 +92,7 @@
         out: handleSelectionChange,
       })
     }
-    if (das.componentfile) {
+    if (!devmodus && das.componentfile) {
       tabs.push({
         name: 'Code',
         props: { componentName, devmodus },

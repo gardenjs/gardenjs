@@ -197,12 +197,10 @@
 </script>
 
 <div class:full id="garden_app">
-  {#if config.devmodus}
+  {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}
     <svelte:component
       this={component}
       {...selectedExample?.input}
-      {...redirectData}
-      {afterRenderHook}
       on:out={handleComponentOut}
     />
   {/if}

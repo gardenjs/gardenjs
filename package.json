@@ -43,7 +43,7 @@
     "sass": "1.69.0",
     "svelte": "4.2.9",
     "typescript": "^5.4.4",
-    "vite": "5.0.12"
+    "vite": "5.3.2"
   },
   "dependencies": {
     "@inquirer/checkbox": "1.5.0",

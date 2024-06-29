@@ -173,7 +173,6 @@ import config from '../../garden.config.js'
  
 const app = new GardenFrame({
   target: document.body,
-  hydrate: true,
   props: {componentMap, dasMap, config}
 })
 
