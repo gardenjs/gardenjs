@@ -39,7 +39,7 @@
   </a>
   <div class="filter">
     <!-- prettier-ignore -->
-    <input class="filter_input" type="text" value={filter || ''} placeholder="Filter" on:input={updateFilter} />
+    <input aria-autocomplete="list" id="filter" class="filter_input" autocomplete="off" type="search" value={filter || ''} placeholder="Filter..." on:input={updateFilter} />
   </div>
   {#if nodes.length == 0 && filter}
     <div>
@@ -152,12 +152,12 @@
     border: 1px solid var(--c-primary);
     border-radius: 1.75rem;
   }
-  input.filter_input[type='text'] {
+  input.filter_input[type='search'] {
     font-size: 0.813rem;
   }
   .filter_input::placeholder {
     font-size: 0.813rem;
-    color: var(--c-basic-900);
+    color: var(--c-basic-500);
   }
   .filter_input:focus-visible {
     background-color: var(--c-basic-100);
