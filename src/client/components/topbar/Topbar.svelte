@@ -168,6 +168,9 @@
     height: var(--h-topbar);
     background: none;
   }
+  .topbar_btn:hover {
+    background-color: var(--c-basic-100);
+  }
   .topbar_btn svg {
     height: 1.125rem;
     color: var(--c-basic-700);
@@ -241,6 +244,7 @@
       background: none;
       overflow: hidden;
     }
+    .stagesize-nav button:hover,
     .stagesize-nav button:focus-visible {
       background-color: var(--c-basic-150);
     }
@@ -268,6 +272,9 @@
       width: 0.313rem;
       background-color: transparent;
       border-radius: 50%;
+    }
+    .stagesize-nav button.active {
+      background-color: var(--c-primary-bg);
     }
     .stagesize-nav button.active .dot {
       background-color: var(--c-primary);

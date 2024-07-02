@@ -92,7 +92,7 @@
     align-items: center;
     padding: 0.563rem 1.25rem 0.188rem;
     padding: 0 1.25rem;
-    height: var(--h-panelnav);
+    height: calc(var(--h-panelnav) - 1px);
     font-size: 0.875rem;
     color: var(--c-basic-700);
     white-space: nowrap;
@@ -113,6 +113,7 @@
   .panel_nav nav li button:focus-visible {
     color: var(--c-primary);
     font-weight: 500;
+    background-color: var(--c-basic-100);
   }
   .panel_nav nav li button:focus-visible {
     background-color: var(--c-basic-150);
@@ -120,6 +121,7 @@
   .panel_nav nav li button.active {
     color: var(--c-primary);
     font-weight: 500;
+    background-color: var(--c-primary-bg);
   }
   .panel_toggle {
     padding: 0 0.75rem;
