@@ -21,8 +21,9 @@
 
   $: {
     dark = appTheme === 'dark'
-    if (appTheme === 'dark') document.body.classList.add('dark')
-    else document.body.classList.remove('dark')
+    if (appTheme === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark')
+    else document.documentElement.setAttribute('data-theme', 'light')
   }
 
   function toggleSidebar() {
