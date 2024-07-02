@@ -210,7 +210,8 @@ export default {
   // Stop auto opening Gardenjs on start:
   // no_open_browser: true,
 
-  // For garden development purposes only!!!
+  // For garden development purposes only !!!
+  // If this option is set to true, the "Code" tab is not displayed in the panel.
   // devmodus: true,
 
   // This title is displayed above the navigation:
