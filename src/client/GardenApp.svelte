@@ -55,6 +55,7 @@
 
   let projectTitle = config.project_title || ''
   let projectLogo = config.project_logo?.split('/').pop() || ''
+  let projectLogoDarkmode = config.project_logo_darkmode?.split('/').pop() || ''
 
   let stageRect = {}
 
@@ -136,6 +137,7 @@
       <Sidebar
         {projectTitle}
         {projectLogo}
+        {projectLogoDarkmode}
         show={showSidebar}
         rootNodesExpanded={$rootNodesExpanded}
         nodes={$nodes}

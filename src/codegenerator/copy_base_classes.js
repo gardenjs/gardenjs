@@ -31,6 +31,21 @@ export async function copyBaseClasses() {
       )
     }
   }
+  if (config.project_logo_darkmode) {
+    try {
+      fs.copyFileSync(
+        config.project_logo_darkmode,
+        targetfolder +
+          '/assets/' +
+          config.project_logo_darkmode.split('/').pop()
+      )
+    } catch (e) {
+      console.error(
+        'Could not copy darkmode logo file. Check if file exist and path is correct.',
+        e
+      )
+    }
+  }
   if (config.devmodus) return
   copyFolder(distfolder, targetfolder)
 }

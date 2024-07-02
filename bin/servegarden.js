@@ -208,7 +208,7 @@ export default {
   serverport: 3010,
 
   // Stop auto opening Gardenjs on start:
-  // "no_open_browser": true,
+  // no_open_browser: true,
 
   // For garden development purposes only!!!
   // devmodus: true,
@@ -216,26 +216,27 @@ export default {
   // This title is displayed above the navigation:
   // If the path to a logo is specified, "project_title" is used as the alt tag.
   project_title: "${title}",
-  // project_logo: "./src/assets/logo.svg",
+  // project_logo: './src/assets/logo.svg',
+  // project_logo_darkmode: './src/assets/logo_neg.svg',
 
   // Here you can set a path to your own start page.
   // The HTML file may only contain the body part, i.e. without the doctype, head and body tag:
-  // "welcome_page": "./src/custom_welcome_page.html",
+  // welcome_page: './src/custom_welcome_page.html',
 
   // Show/hide the link to the docs in the sidebar:
   docs_link: true,
 
   // vite config file:
-  vite_config: "./garden.vite.config.js",
+  vite_config: './garden.vite.config.js',
   
   // Each entry is output with its subpages in the page tree:
   structure: {
-    components: "${componentFolder}",
+    components: '${componentFolder}',
   },
 
   watch: {
-    directories: ["${componentFolder}"],
-    include: [${watchLibFiles}, ".scss", ".css", ".less", ".js", ".ts"],
+    directories: ['${componentFolder}'],
+    include: [${watchLibFiles}, '.scss', '.css', '.less', '.js', '.ts'],
   },
 
   renderer: {
@@ -243,19 +244,19 @@ export default {
   },
 
   // Add global style files needed for your project:
-  // "additional_style_files": [
+  // additional_style_files: [
   //   'src/assets/scss/main.scss'
   // ],
 
   // Edit or disable "Themes" depending on whether your app uses themes.
   // According to your requirements, you may also need to adjust the
   // "onThemeChange" function below accordingly.
-  // "themes": [
+  // themes: [
   //   {name: 'default', stageBg: 'white'},
   //   {name: 'dark', stageBg: '#101010'}, // manually set default active theme on start {active: true, name: 'dark', stageBg: '#101010'},
   //   {name: 'light', stageBg: '#eee'}
   // ],
-  // "themeHandler": onThemeChange
+  // themeHandler: onThemeChange
 }
 
 ////  Edit or disable the function "onThemeChange" according to your project (see also "themes" above):

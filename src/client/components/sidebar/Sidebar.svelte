@@ -8,6 +8,7 @@
   export let rootNodesExpanded = true
   export let projectTitle
   export let projectLogo
+  // export let projectLogoDarkmode
   export let filter
   export let panelExpanded = true
   export let docsLink
