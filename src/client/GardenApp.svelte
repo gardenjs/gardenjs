@@ -54,7 +54,9 @@
   $: updateSelectedComponent($currentRoute, $componentName)
 
   let projectTitle = config.project_title || ''
-  let projectLogo = config.project_logo?.split('/').pop() || ''
+  let projectLogo = config.project_logo?.split('/').pop() || null
+  let projectLogoDarkmode =
+    config.project_logo_darkmode?.split('/').pop() || null
 
   let stageRect = {}
 
@@ -136,6 +138,8 @@
       <Sidebar
         {projectTitle}
         {projectLogo}
+        {projectLogoDarkmode}
+        appTheme={$appTheme}
         show={showSidebar}
         rootNodesExpanded={$rootNodesExpanded}
         nodes={$nodes}
