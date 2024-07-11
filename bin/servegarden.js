@@ -215,7 +215,7 @@ export default {
   // devmodus: true,
 
   // This title is displayed above the navigation:
-  // If the path to a logo is specified, "project_title" is used as the alt tag.
+  // If the path to a logo is specified, "project_title" is used as the alt tag. Additional darkmode logo can be added.
   project_title: '${title}',
   // project_logo: './src/assets/logo.svg',
   // project_logo_darkmode: './src/assets/logo_neg.svg',
