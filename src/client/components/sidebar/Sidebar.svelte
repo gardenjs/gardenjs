@@ -8,10 +8,11 @@
   export let rootNodesExpanded = true
   export let projectTitle
   export let projectLogo
-  // export let projectLogoDarkmode
+  export let projectLogoDarkmode
   export let filter
   export let panelExpanded = true
   export let docsLink
+  export let appTheme
 
   function toggleRootFolders() {
     dispatch('out', { toggleRootFolders: true })
@@ -28,7 +29,13 @@
 
 <header class="sidebar_container" class:show-sidebar={show}>
   <a class="project-identifier" class:has-logo={projectLogo} href="/">
-    {#if projectLogo}
+    {#if projectLogoDarkmode && appTheme === 'dark'}
+      <img
+        src="/assets/{projectLogoDarkmode}"
+        title="start"
+        alt="{projectTitle} logo"
+      />
+    {:else if projectLogo}
       <img
         src="/assets/{projectLogo}"
         title="start"

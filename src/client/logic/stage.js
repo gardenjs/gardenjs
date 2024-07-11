@@ -121,6 +121,7 @@ export function updateStageMaxHeight(newHeight) {
 export function toggleExpandPanel() {
   if (get(panelExpanded)) {
     previousPanelHeight = get(stageHeight)
+    // @ts-ignore
     stageHeight.set(get(stageMaxHeight))
   } else {
     stageHeight.set(previousPanelHeight)

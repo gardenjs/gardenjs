@@ -16,38 +16,28 @@ export async function clearBaseFolder() {
 
 export async function copyBaseClasses() {
   const config = await getConfig()
+
   fs.mkdirSync(targetfolder, { recursive: true })
   copyFolder(sourcefolder, targetfolder)
-  if (config.project_logo) {
-    try {
-      fs.copyFileSync(
-        config.project_logo,
-        targetfolder + '/assets/' + config.project_logo.split('/').pop()
-      )
-    } catch (e) {
-      console.error(
-        'Could not copy logo file. Check if file exist and path is correct.',
-        e
-      )
-    }
-  }
-  if (config.project_logo_darkmode) {
-    try {
-      fs.copyFileSync(
-        config.project_logo_darkmode,
-        targetfolder +
-          '/assets/' +
-          config.project_logo_darkmode.split('/').pop()
-      )
-    } catch (e) {
-      console.error(
-        'Could not copy darkmode logo file. Check if file exist and path is correct.',
-        e
-      )
-    }
-  }
+  copyLogoFile(config.project_logo)
+  copyLogoFile(config.project_logo_darkmode)
+
   if (config.devmodus) return
   copyFolder(distfolder, targetfolder)
+}
+
+function copyLogoFile(file) {
+  if (!file) {
+    return
+  }
+  try {
+    fs.copyFileSync(file, targetfolder + '/assets/' + file.split('/').pop())
+  } catch (e) {
+    console.error(
+      'Could not copy darkmode logo file. Check if file exist and path is correct.',
+      e
+    )
+  }
 }
 
 function copyFolder(sourcefolder, targetfolder) {
