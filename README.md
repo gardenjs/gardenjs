@@ -13,7 +13,7 @@
     <img alt="NPM Version" src="https://img.shields.io/npm/v/gardenjs?color=blue">
   </a>
   <a href="https://github.com/gardenjs/gardenjs/actions">
-    <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/gardenjs/gardenjs/workflow">
+    <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/gardenjs/gardenjs/npm-publish.yml">
   </a>
 </div>
 
@@ -50,5 +50,7 @@ Gardenjs was developed and is contributed by <a href="https://www.rabbitdevelopm
 [MIT](https://github.com/gardenjs/gardenjs?tab=MIT-1-ov-file#readme)
 
 Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
+
+## Todo's up to v1.0
 
 <br><br><br><p align="center"><img src="src/client/assets/icons/vegetables.svg"></p>
