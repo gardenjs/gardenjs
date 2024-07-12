@@ -51,6 +51,4 @@ Gardenjs was developed and is contributed by <a href="https://www.rabbitdevelopm
 
 Copyright (C) 2020-present, Robin Danzinger & Martin Farkas.
 
-## Todo's up to v1.0
-
 <br><br><br><p align="center"><img src="src/client/assets/icons/vegetables.svg"></p>
