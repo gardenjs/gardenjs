@@ -35,7 +35,7 @@ Watch the <a href="https://www.gardenjs.org/demo/">demo</a> (coming very soon).
 
 ## Getting Started
 
-Please follow the documentation at <a href="https://www.gardenjs.org/docs" target="_blank">gardenjs.org</a> (coming very soon). Happy Gardening!
+Please follow the documentation at <a href="https://gardenjs.github.io/docs/" target="_blank">gardenjs.org</a>. Happy Gardening!
 
 ## Supported Frameworks
 
