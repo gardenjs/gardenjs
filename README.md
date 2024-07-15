@@ -21,7 +21,7 @@
 
 Gardenjs is an open source UI component library explorer for JS frameworks and provides a centralized platform for developers to create, test and present UI components and pages in isolation. Gardenjs promotes modular and reusable code, streamlines collaboration between team members and increases overall productivity. Gardenjs is designed for projects of any size.
 
-Watch the <a href="https://www.gardenjs.org/demo/">demo</a> (coming very soon).
+Watch the <a href="https://demo.gardenjs.org/">demo</a>.
 
 ## Why Gardenjs?
 
@@ -35,7 +35,7 @@ Watch the <a href="https://www.gardenjs.org/demo/">demo</a> (coming very soon).
 
 ## Getting Started
 
-Please follow the documentation at <a href="https://gardenjs.github.io/docs/" target="_blank">gardenjs.org</a>. Happy Gardening!
+Please follow the documentation at <a href="https://gardenjs.org/" target="_blank">gardenjs.org</a>. Happy Gardening!
 
 ## Supported Frameworks
 
