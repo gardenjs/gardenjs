@@ -8,6 +8,25 @@
   "type": "module",
   "author": "Robin Danzinger, Martin Farkas",
   "license": "MIT",
+  "keywords": [
+    "gardenjs",
+    "testing",
+    "documentation",
+    "styleguide",
+    "design-systems",
+    "storybook",
+    "component-library",
+    "ui-components",
+    "stories",
+    "ui",
+    "javascript",
+    "js-framework",
+    "js",
+    "svelte",
+    "react",
+    "vue",
+    "sveltekit"
+  ],
   "bin": {
     "garden": "bin/servegarden.js"
   },
