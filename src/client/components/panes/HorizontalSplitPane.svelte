@@ -44,6 +44,7 @@
     window.getSelection().removeAllRanges()
     const newHeight = Math.min(maxHeight, e.pageY - element.offsetTop - 7)
     topHeight = newHeight
+    dispatch('out', { topHeight: topHeight })
   }
 
   function unregister() {
