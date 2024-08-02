@@ -23,8 +23,9 @@ export const landscape = localStore(
   false,
   (value) => value === 'true'
 )
-export const stageHeight = writable('65vh')
-export const stageMaxHeight = writable(9999)
+export const stageHeight = writable('')
+export const stageWidth = writable('')
+export const stageMaxHeight = writable('')
 export const panelExpanded = writable(true)
 export const appTheme = localStore('appTheme', 'default')
 
@@ -116,6 +117,10 @@ export function updateStageHeight(newHeight) {
 
 export function updateStageMaxHeight(newHeight) {
   stageMaxHeight.set(newHeight - 10)
+}
+
+export function updateStageWidth(newWidth) {
+  stageWidth.set(newWidth - 8)
 }
 
 export function toggleExpandPanel() {

@@ -8,6 +8,7 @@
     stageSize,
     stageHeight,
     stageMaxHeight,
+    stageWidth,
     panelExpanded,
     landscape,
     setThemes,
@@ -18,6 +19,7 @@
     activeTheme,
     toggleExpandPanel,
     updateStageHeight,
+    updateStageWidth,
     updateStageMaxHeight,
   } from './logic/stage.js'
   import {
@@ -102,6 +104,9 @@
     if (evt.detail.stageMaxHeight) {
       updateStageMaxHeight(evt.detail.stageMaxHeight)
     }
+    if (evt.detail.stageWidth) {
+      updateStageWidth(evt.detail.stageWidth)
+    }
   }
 
   function handleSidebarOut(evt) {
@@ -167,6 +172,7 @@
         stageSize={$stageSize}
         stageHeight={$stageHeight}
         stageMaxHeight={$stageMaxHeight}
+        stageWidth={$stageWidth}
         theme={$activeTheme}
         panelExpanded={$panelExpanded}
         devmodus={config.devmodus}

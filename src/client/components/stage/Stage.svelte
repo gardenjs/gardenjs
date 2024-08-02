@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
-  import HorizontalSplitPane from '../splitpanes/HorizontalSplitPane.svelte'
+  import HorizontalSplitPane from '../panes/HorizontalSplitPane.svelte'
+  import ResizePane from '../panes/ResizePane.svelte'
   import PanelComponent from './panel/PanelComponent.svelte'
   import PanelStoriesNav from './panel/PanelStoriesNav.svelte'
   import PanelDescription from './panel/PanelDescription.svelte'
@@ -15,6 +16,7 @@
   export let selectedExample
   export let stageHeight
   export let stageMaxHeight
+  export let stageWidth
   export let panelExpanded
   export let theme
   export let devmodus
@@ -123,6 +125,9 @@
     if (evt.detail.maxHeight) {
       dispatch('out', { stageMaxHeight: evt.detail.maxHeight })
     }
+    if (evt.detail.width) {
+      dispatch('out', { stageWidth: evt.detail.width })
+    }
   }
 </script>
 
@@ -132,13 +137,19 @@
   on:out={handleHorizontalSplitPaneOut}
 >
   <div slot="top" class="stage_container">
-    <iframe
-      class="stage_iframe"
-      title="preview"
-      bind:this={myframe}
-      src="/frame.html"
-      style={stageStyle}
-    ></iframe>
+    <ResizePane
+      disabled={stageSize !== 'full'}
+      maxHeight={stageHeight - 8}
+      maxWidth={stageWidth}
+    >
+      <iframe
+        class="stage_iframe"
+        title="preview"
+        bind:this={myframe}
+        src="/frame.html"
+        style={stageStyle}
+      ></iframe>
+    </ResizePane>
   </div>
   <div slot="bottom" class="panel">
     {#if panelExpanded}
@@ -150,7 +161,7 @@
 <style>
   .stage_container {
     height: 100%;
-    width: auto;
+    width: 100%;
   }
   .stage_iframe {
     display: block;
