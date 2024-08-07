@@ -86,53 +86,94 @@
   </div>
   <!-- eslint-disable-next-line -->
   <div
-    class="vertical dragbar"
+    class="dragbar vertical"
     class:disabled
     on:mousedown={register('vertical')}
-  ></div>
+  >
+    <svg width="6" height="24" xmlns="http://www.w3.org/2000/svg"
+      ><path
+        d="M1 1v22M5 1v22"
+        fill="none"
+        stroke-linecap="round"
+        stroke="#000"
+        stroke-width="2"
+      /></svg
+    >
+  </div>
   <!-- eslint-disable-next-line -->
   <div
-    class="horizontal dragbar"
+    class="dragbar horizontal"
     class:disabled
     on:mousedown={register('horizontal')}
-  ></div>
+  >
+    <svg width="24" height="6" xmlns="http://www.w3.org/2000/svg"
+      ><path
+        d="M1 1h22M1 5h22"
+        fill="none"
+        stroke-linecap="round"
+        stroke="#000"
+        stroke-width="2"
+      /></svg
+    >
+  </div>
   <!-- eslint-disable-next-line -->
   <div
-    class="corner dragbar"
+    class="dragbar corner"
     class:disabled
     on:mousedown={register('verticalhorizontal')}
-  ></div>
+  >
+    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
+      ><path
+        d="M12 4l-8 8m9-3l-4 4"
+        fill="none"
+        stroke-linecap="round"
+        stroke="#000"
+        stroke-width="2"
+      /></svg
+    >
+  </div>
 </div>
 
 <style>
   .grid {
     display: grid;
-    grid-template: min-content 8px / min-content 8px;
+    grid-template: min-content 1rem / min-content 1rem;
     width: 100%;
     height: 100%;
     overflow: auto;
   }
   .dragbar {
+    display: flex;
     flex-grow: 0;
     flex-shrink: 0;
-    height: 0.188rem;
-    background-color: grey;
-    z-index: 10;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     width: 100%;
+    background-color: var(--c-dragbar-bg);
+    z-index: 10;
+  }
+  .dragbar:hover {
+    background-color: var(--c-dragbar-bg-hover);
+  }
+  .dragbar svg path {
+    stroke: var(--c-basic-700);
   }
   .vertical {
     cursor: ew-resize;
+    border-top: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-radius: 0 0.625rem 0 0;
   }
   .horizontal {
+    border-bottom: 1px solid #fff;
+    border-left: 1px solid #fff;
     cursor: ns-resize;
   }
   .corner {
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
     cursor: nwse-resize;
-  }
-
-  .dragbar:hover {
-    background-color: dimgray;
   }
   .dragbar.disabled {
     display: none;

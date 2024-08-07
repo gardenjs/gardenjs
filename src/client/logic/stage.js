@@ -120,7 +120,7 @@ export function updateStageMaxHeight(newHeight) {
 }
 
 export function updateStageWidth(newWidth) {
-  stageWidth.set(newWidth - 8)
+  stageWidth.set(newWidth - 16)
 }
 
 export function toggleExpandPanel() {

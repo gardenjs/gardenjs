@@ -139,7 +139,7 @@
   <div slot="top" class="stage_container">
     <ResizePane
       disabled={stageSize !== 'full'}
-      maxHeight={stageHeight - 8}
+      maxHeight={stageHeight - 16}
       maxWidth={stageWidth}
     >
       <iframe

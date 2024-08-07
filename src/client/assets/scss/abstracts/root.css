@@ -19,6 +19,8 @@
   --c-bg-body: var(--c-basic-200);
   --c-topbar-bg: var(--c-basic-0);
   --c-sidebar-bg: var(--c-basic-0);
+  --c-dragbar-bg: var(--c-basic-200);
+  --c-dragbar-bg-hover: var(--c-basic-250);
 }
 [data-theme='dark'] {
   --c-primary: hsl(185, 80%, 75%); /* hsl(185, 100%, 45%); */
@@ -41,4 +43,6 @@
   --c-bg-body: var(--c-basic-150);
   --c-topbar-bg: var(--c-basic-0);
   --c-sidebar-bg: var(--c-basic-0);
+  --c-dragbar-bg: var(--c-basic-150);
+  --c-dragbar-bg-hover: var(--c-basic-200);
 }
