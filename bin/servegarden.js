@@ -221,7 +221,8 @@ export default {
   // project_logo_darkmode: './src/assets/logo_neg.svg',
 
   // Here you can set a path to your own start page.
-  // The HTML file may only contain the body part, i.e. without the doctype, head and body tag:
+  // The HTML file may only contain the body part (without doctype, head, body tag).
+  // Mark up the CSS styles within a style tag under the html.:
   // welcome_page: './src/custom_welcome_page.html',
 
   // Show/hide the link to the docs in the sidebar:
