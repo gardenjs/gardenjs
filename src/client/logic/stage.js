@@ -103,7 +103,7 @@ function computeStageStyle() {
     ? `width: ${frameheight}; height: ${framewidth}`
     : `width: ${framewidth}; height: ${frameheight}`
   const background = `background-color: ${stageBg}`
-  const transition = 'transition: 0.2s'
+  const transition = 'transition: 0s'
 
   stageStyle.set(`${size}; ${background}; ${transition};`)
 }
@@ -116,11 +116,11 @@ export function updateStageHeight(newHeight) {
 }
 
 export function updateStageMaxHeight(newHeight) {
-  stageMaxHeight.set(newHeight - 10)
+  stageMaxHeight.set(newHeight - 20)
 }
 
 export function updateStageWidth(newWidth) {
-  stageWidth.set(newWidth - 16)
+  stageWidth.set(newWidth - 20)
 }
 
 export function toggleExpandPanel() {

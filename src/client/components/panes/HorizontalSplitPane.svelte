@@ -60,13 +60,9 @@
   <div class="top" style="height: {topHeightWithUnit};">
     <slot name="top" />
   </div>
+  <!-- prettier-ignore -->
   <!-- eslint-disable-next-line -->
-  <div
-    class="dragbar"
-    class:dragging
-    on:mousedown={register}
-    role="separator"
-  ></div>
+  <div class="dragbar" class:dragging on:mousedown={register}></div>
   <slot name="bottom" />
 </div>
 

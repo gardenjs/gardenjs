@@ -74,70 +74,29 @@
   }
 </script>
 
+<!-- prettier-ignore -->
 <div class="grid" class:disabled bind:this={grid}>
-  <div
-    class="pane"
-    class:disabled
-    style:width={disabled ? undefined : paneWidthWithUnit}
-    style:height={disabled ? undefined : paneHeightWithUnit}
-    bind:this={pane}
-  >
+  <div class="pane" class:disabled style:width={disabled ? undefined : paneWidthWithUnit} style:height={disabled ? undefined : paneHeightWithUnit} bind:this={pane}>
     <slot />
   </div>
   <!-- eslint-disable-next-line -->
-  <div
-    class="dragbar vertical"
-    class:disabled
-    on:mousedown={register('vertical')}
-  >
-    <svg width="6" height="24" xmlns="http://www.w3.org/2000/svg"
-      ><path
-        d="M1 1v22M5 1v22"
-        fill="none"
-        stroke-linecap="round"
-        stroke="#000"
-        stroke-width="2"
-      /></svg
-    >
+  <div class="dragbar vertical" class:disabled on:mousedown={register('vertical')}>
+    <svg width="6" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M1 1v22M5 1v22" fill="none" stroke-linecap="round" stroke="#000" stroke-width="2" /></svg>
   </div>
   <!-- eslint-disable-next-line -->
-  <div
-    class="dragbar horizontal"
-    class:disabled
-    on:mousedown={register('horizontal')}
-  >
-    <svg width="24" height="6" xmlns="http://www.w3.org/2000/svg"
-      ><path
-        d="M1 1h22M1 5h22"
-        fill="none"
-        stroke-linecap="round"
-        stroke="#000"
-        stroke-width="2"
-      /></svg
-    >
+  <div class="dragbar horizontal" class:disabled on:mousedown={register('horizontal')}>
+    <svg width="24" height="6" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h22M1 5h22" fill="none" stroke-linecap="round" stroke="#000" stroke-width="2" /></svg>
   </div>
   <!-- eslint-disable-next-line -->
-  <div
-    class="dragbar corner"
-    class:disabled
-    on:mousedown={register('verticalhorizontal')}
-  >
-    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"
-      ><path
-        d="M12 4l-8 8m9-3l-4 4"
-        fill="none"
-        stroke-linecap="round"
-        stroke="#000"
-        stroke-width="2"
-      /></svg
-    >
+  <div class="dragbar corner" class:disabled on:mousedown={register('verticalhorizontal')}>
+    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l-8 8m9-3l-4 4" fill="none" stroke-linecap="round" stroke="#000" stroke-width="2" /></svg>
   </div>
 </div>
 
 <style>
   .grid {
     display: grid;
-    grid-template: min-content 1rem / min-content 1rem;
+    grid-template: min-content 1.25rem / min-content 1.25rem;
     width: 100%;
     height: 100%;
     overflow: auto;
@@ -160,19 +119,23 @@
     stroke: var(--c-basic-700);
   }
   .vertical {
-    cursor: ew-resize;
-    border-top: 1px solid #fff;
-    border-right: 1px solid #fff;
+    width: 1.25rem;
+    border-top: 1px solid var(--c-dragbar-bg);
+    border-right: 1px solid var(--c-dragbar-bg);
     border-radius: 0 0.625rem 0 0;
+    cursor: ew-resize;
   }
   .horizontal {
-    border-bottom: 1px solid #fff;
-    border-left: 1px solid #fff;
+    height: 1.25rem;
+    border-bottom: 1px solid var(--c-dragbar-bg);
+    border-left: 1px solid var(--c-dragbar-bg);
     cursor: ns-resize;
   }
   .corner {
-    border-right: 1px solid #fff;
-    border-bottom: 1px solid #fff;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-right: 1px solid var(--c-dragbar-bg);
+    border-bottom: 1px solid var(--c-dragbar-bg);
     cursor: nwse-resize;
   }
   .dragbar.disabled {
