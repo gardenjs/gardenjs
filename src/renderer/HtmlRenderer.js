@@ -16,7 +16,7 @@ async function create(afterRenderHook) {
       },
     }
   } catch (e) {
-    console.log('DEBUG', 'error', e)
+    console.log('error', e)
   }
 }
 

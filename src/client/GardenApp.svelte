@@ -6,9 +6,9 @@
     updateStage,
     stageStyle,
     stageSize,
-    stageHeight,
-    stageMaxHeight,
-    stageWidth,
+    stageContainerHeight,
+    stageContainerMaxHeight,
+    stageContainerWidth,
     panelExpanded,
     landscape,
     setThemes,
@@ -18,9 +18,9 @@
     updateAppTheme,
     activeTheme,
     toggleExpandPanel,
-    updateStageHeight,
-    updateStageWidth,
-    updateStageMaxHeight,
+    updateStageContainerHeight,
+    updateStageContainerWidth,
+    updateStageContainerMaxHeight,
   } from './logic/stage.js'
   import {
     nodes,
@@ -95,17 +95,17 @@
     if (evt.detail.stageRect) {
       stageRect = evt.detail.stageRect
     }
-    if (evt.detail.stageHeight) {
-      updateStageHeight(evt.detail.stageHeight)
+    if (evt.detail.stageContainerHeight) {
+      updateStageContainerHeight(evt.detail.stageContainerHeight)
     }
     if (evt.detail.toggleExpandPanel) {
       toggleExpandPanel()
     }
-    if (evt.detail.stageMaxHeight) {
-      updateStageMaxHeight(evt.detail.stageMaxHeight)
+    if (evt.detail.stageContainerWidth) {
+      updateStageContainerWidth(evt.detail.stageContainerWidth)
     }
-    if (evt.detail.stageWidth) {
-      updateStageWidth(evt.detail.stageWidth)
+    if (evt.detail.stageContainerMaxHeight) {
+      updateStageContainerMaxHeight(evt.detail.stageContainerMaxHeight)
     }
   }
 
@@ -170,9 +170,9 @@
         selectedExample={$selectedExample}
         stageStyle={$stageStyle}
         stageSize={$stageSize}
-        stageHeight={$stageHeight}
-        stageMaxHeight={$stageMaxHeight}
-        stageWidth={$stageWidth}
+        stageContainerHeight={$stageContainerHeight}
+        stageContainerMaxHeight={$stageContainerMaxHeight}
+        stageContainerWidth={$stageContainerWidth}
         theme={$activeTheme}
         panelExpanded={$panelExpanded}
         devmodus={config.devmodus}

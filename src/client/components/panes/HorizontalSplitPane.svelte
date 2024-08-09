@@ -4,24 +4,35 @@
 
   export let topHeight
   export let maxHeight
-  $: {
-    if (!Number.isInteger(topHeight) && Number.isInteger(maxHeight)) {
-      topHeight = maxHeight * 0.7
-      dispatch('out', { topHeight: topHeight })
-    }
-  }
-  $: topHeightWithUnit = Number.isInteger(topHeight)
-    ? topHeight + 'px'
-    : topHeight
-
   let element
   let dragging = false
+
+  let init = false
+
+  $: {
+    if (element && !init) {
+      init = true
+      const elementHeight = element.offsetHeight
+      dispatch('out', {
+        maxHeight: elementHeight,
+        topHeight: Math.round(elementHeight * 0.7),
+      })
+    }
+  }
+
+  let topHeightWithUnit
+  $: {
+    if (Number.isInteger(topHeight) && Number.isInteger(maxHeight)) {
+      topHeightWithUnit =
+        maxHeight < topHeight ? maxHeight + 'px' : topHeight + 'px'
+    }
+  }
 
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach(() => {
       dispatch('out', {
         maxHeight: element.offsetHeight,
-        width: element.offsetWidth,
+        maxWidth: element.offsetWidth,
       })
     })
   })

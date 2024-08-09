@@ -11,12 +11,12 @@
 
   let dark = false
 
-  let stageWidth, stageHeight
+  let stageContainerWidth, stageContainerHeight
 
   $: {
-    ;({ width: stageWidth, height: stageHeight } = stageRect)
-    stageWidth = Math.round(stageWidth)
-    stageHeight = Math.round(stageHeight)
+    ;({ width: stageContainerWidth, height: stageContainerHeight } = stageRect)
+    stageContainerWidth = Math.round(stageContainerWidth)
+    stageContainerHeight = Math.round(stageContainerHeight)
   }
 
   $: {
@@ -81,9 +81,9 @@
     </button>
     <div class="topbar_nav">
       <div class="stagesize-value">
-        <div>{stageWidth}px</div>
+        <div>{stageContainerWidth}px</div>
         <div class="stagesize-value-multi_sign">&#10005;</div>
-        <div>{stageHeight}px</div>
+        <div>{stageContainerHeight}px</div>
       </div>
       <div class="stagesize-nav">
         <button title="Small" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>

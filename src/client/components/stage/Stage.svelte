@@ -14,9 +14,14 @@
   export let stageStyle
   export let stageSize
   export let selectedExample
-  export let stageHeight
-  export let stageMaxHeight
-  export let stageWidth
+  export let stageContainerHeight
+  export let stageContainerMaxHeight
+  export let stageContainerWidth
+
+  $: stagePaneMaxWidth = stageContainerWidth - 20
+  $: stagePaneMaxHeight =
+    Math.min(stageContainerHeight, stageContainerMaxHeight) - 20
+
   export let panelExpanded
   export let theme
   export let devmodus
@@ -120,37 +125,36 @@
 
   function handleHorizontalSplitPaneOut(evt) {
     if (evt.detail.topHeight) {
-      dispatch('out', { stageHeight: evt.detail.topHeight })
+      dispatch('out', { stageContainerHeight: evt.detail.topHeight })
     }
     if (evt.detail.maxHeight) {
-      dispatch('out', { stageMaxHeight: evt.detail.maxHeight })
+      dispatch('out', { stageContainerMaxHeight: evt.detail.maxHeight })
     }
-    if (evt.detail.width) {
-      dispatch('out', { stageWidth: evt.detail.width })
+    if (evt.detail.maxWidth) {
+      dispatch('out', { stageContainerWidth: evt.detail.maxWidth })
     }
   }
 </script>
 
 <HorizontalSplitPane
-  topHeight={stageHeight}
-  maxHeight={stageMaxHeight}
+  topHeight={stageContainerHeight}
+  maxHeight={stageContainerMaxHeight}
   on:out={handleHorizontalSplitPaneOut}
 >
-  <div slot="top" class="stage_container">
-    <ResizePane
-      disabled={stageSize !== 'full'}
-      maxHeight={stageHeight - 20}
-      maxWidth={stageWidth}
-    >
-      <iframe
-        class="stage_iframe"
-        title="preview"
-        bind:this={myframe}
-        src="/frame.html"
-        style={stageStyle}
-      ></iframe>
-    </ResizePane>
-  </div>
+  <ResizePane
+    slot="top"
+    disabled={stageSize !== 'full'}
+    maxHeight={stagePaneMaxHeight}
+    maxWidth={stagePaneMaxWidth}
+  >
+    <iframe
+      class="stage_iframe"
+      title="preview"
+      bind:this={myframe}
+      src="/frame.html"
+      style={stageStyle}
+    ></iframe>
+  </ResizePane>
   <div slot="bottom" class="panel">
     {#if panelExpanded}
       <PanelComponent {tabs} on:out />
@@ -159,10 +163,6 @@
 </HorizontalSplitPane>
 
 <style>
-  .stage_container {
-    height: 100%;
-    width: 100%;
-  }
   .stage_iframe {
     display: block;
     align-self: center;

@@ -23,15 +23,16 @@ export const landscape = localStore(
   false,
   (value) => value === 'true'
 )
-export const stageHeight = writable('')
-export const stageWidth = writable('')
-export const stageMaxHeight = writable('')
+export const stageContainerHeight = writable('')
+export const stageContainerWidth = writable('')
+export const stageContainerMaxHeight = writable('')
+
 export const panelExpanded = writable(true)
 export const appTheme = localStore('appTheme', 'default')
 
 export const activeTheme = localStore('frameTheme')
 
-let previousPanelHeight = '65vh'
+let previousPanelHeight = ''
 
 const sizes = {
   small: {
@@ -108,28 +109,32 @@ function computeStageStyle() {
   stageStyle.set(`${size}; ${background}; ${transition};`)
 }
 
-export function updateStageHeight(newHeight) {
-  if (Number.isInteger(newHeight)) {
-    panelExpanded.set(newHeight < get(stageMaxHeight))
+export function updateStageContainerHeight(newHeight) {
+  if (
+    Number.isInteger(newHeight) &&
+    Number.isInteger(get(stageContainerMaxHeight))
+  ) {
+    panelExpanded.set(newHeight < get(stageContainerMaxHeight))
   }
-  stageHeight.set(newHeight)
+  stageContainerHeight.set(newHeight)
 }
 
-export function updateStageMaxHeight(newHeight) {
-  stageMaxHeight.set(newHeight - 9) // 9px = trackbar + margin-bottom
+export function updateStageContainerMaxHeight(newHeight) {
+  const maxHeight = newHeight - 9 // 9px = trackbar + margin-bottom
+  stageContainerMaxHeight.set(maxHeight)
 }
 
-export function updateStageWidth(newWidth) {
-  stageWidth.set(newWidth - 20)
+export function updateStageContainerWidth(newWidth) {
+  stageContainerWidth.set(newWidth)
 }
 
 export function toggleExpandPanel() {
   if (get(panelExpanded)) {
-    previousPanelHeight = get(stageHeight)
+    previousPanelHeight = get(stageContainerHeight)
     // @ts-ignore
-    stageHeight.set(get(stageMaxHeight))
+    stageContainerHeight.set(get(stageContainerMaxHeight))
   } else {
-    stageHeight.set(previousPanelHeight)
+    stageContainerHeight.set(previousPanelHeight)
   }
   panelExpanded.set(!get(panelExpanded))
 }

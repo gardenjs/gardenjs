@@ -1,17 +1,11 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-  const dispatch = createEventDispatcher()
-
   export let disabled = false
   export let maxHeight
   export let maxWidth
-  let paneHeight = maxHeight
-  let paneWidth = maxWidth
-  let previousMaxHeight
-  let previousMaxWidth
+  $: paneHeight = !paneHeight || paneHeight < 0 ? maxHeight : paneHeight
+  $: paneWidth = !paneWidth || paneWidth < 0 ? maxWidth : paneWidth
 
-  let grid
-  let pane
+  let resizepane
   let dragType = ''
 
   $: {
@@ -27,22 +21,10 @@
       paneHeightWithUnit = Math.min(paneHeight, maxHeight) + 'px'
     }
   }
-  $: {
-    if (previousMaxHeight !== maxHeight) {
-      paneHeightWithUnit = maxHeight + 'px'
-      previousMaxHeight = maxHeight
-    }
-  }
   let paneWidthWithUnit
   $: {
     if (Number.isInteger(paneWidth)) {
       paneWidthWithUnit = Math.min(paneWidth, maxWidth) + 'px'
-    }
-  }
-  $: {
-    if (previousMaxWidth !== maxWidth) {
-      paneWidthWithUnit = maxWidth + 'px'
-      previousMaxWidth = maxWidth
     }
   }
 
@@ -55,28 +37,25 @@
   const drag = (e) => {
     window.getSelection().removeAllRanges()
     if (dragType.includes('horizontal')) {
-      const newHeight = Math.min(maxHeight, e.pageY - pane.offsetTop)
-      paneHeight = newHeight
+      const newHeight = Math.min(maxHeight, e.pageY - resizepane.offsetTop)
+      paneHeight = Math.max(50, newHeight)
     }
 
     if (dragType.includes('vertical')) {
-      const newWidth = Math.min(maxWidth, e.pageX - pane.offsetLeft)
-      paneWidth = newWidth
+      const newWidth = Math.min(maxWidth, e.pageX - resizepane.offsetLeft)
+      paneWidth = Math.max(50, newWidth)
     }
   }
 
   function unregister() {
     document.removeEventListener('mousemove', drag)
     document.removeEventListener('mouseup', unregister)
-
-    dispatch('out', { paneHeight: paneHeight })
-    dispatch('out', { paneWidth: paneWidth })
   }
 </script>
 
 <!-- prettier-ignore -->
-<div class="grid" class:disabled bind:this={grid}>
-  <div class="pane" class:disabled style:width={disabled ? undefined : paneWidthWithUnit} style:height={disabled ? undefined : paneHeightWithUnit} bind:this={pane}>
+<div class="resizepane-container" class:disabled>
+  <div class="resizepane" class:disabled style:width={disabled ? undefined : paneWidthWithUnit} style:height={disabled ? undefined : paneHeightWithUnit} bind:this={resizepane}>
     <slot />
   </div>
   <!-- eslint-disable-next-line -->
@@ -94,7 +73,7 @@
 </div>
 
 <style>
-  .grid {
+  .resizepane-container {
     display: grid;
     grid-template: min-content 1.25rem / min-content 1.25rem;
     width: 100%;
@@ -141,7 +120,7 @@
   .dragbar.disabled {
     display: none;
   }
-  .grid.disabled {
+  .resizepane-container.disabled {
     display: flex;
     justify-content: center;
   }
