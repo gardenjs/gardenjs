@@ -116,7 +116,7 @@ export function updateStageHeight(newHeight) {
 }
 
 export function updateStageMaxHeight(newHeight) {
-  stageMaxHeight.set(newHeight - 20)
+  stageMaxHeight.set(newHeight - 9) // 9px = trackbar + margin-bottom
 }
 
 export function updateStageWidth(newWidth) {
