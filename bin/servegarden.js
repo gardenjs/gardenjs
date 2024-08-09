@@ -100,7 +100,7 @@ async function runSetupScript() {
 
   const shallCreateViteConfig = await confirm({
     message:
-      'You need a vite configuration file for gardenjs. Shall we create the file?',
+      'You need a vite configuration file for gardenjs. Shall we create the file garden.vite.config.js?',
   })
   if (shallCreateViteConfig) {
     separator()
@@ -220,9 +220,9 @@ export default {
   // project_logo: './src/assets/logo.svg',
   // project_logo_darkmode: './src/assets/logo_neg.svg',
 
-  // Here you can set a path to your own start page.
-  // The HTML file may only contain the body part (without doctype, head, body tag).
-  // Mark up the CSS styles within a style tag under the html.:
+  // Enter a path to your user-defined start page.
+  // The HTML file may only contain the body part (without doctype, html-, head- & body tag).
+  // Specify the CSS styles in a style tag under the HTML part.
   // welcome_page: './src/custom_welcome_page.html',
 
   // Show/hide the link to the docs in the sidebar:
