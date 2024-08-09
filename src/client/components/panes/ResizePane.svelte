@@ -2,8 +2,8 @@
   export let disabled = false
   export let maxHeight
   export let maxWidth
-  $: paneHeight = !paneHeight || paneHeight < 0 ? maxHeight : paneHeight
-  $: paneWidth = !paneWidth || paneWidth < 0 ? maxWidth : paneWidth
+  let paneHeight = 'full'
+  let paneWidth = 'full'
 
   let resizepane
   let dragType = ''
@@ -19,12 +19,16 @@
   $: {
     if (Number.isInteger(paneHeight)) {
       paneHeightWithUnit = Math.min(paneHeight, maxHeight) + 'px'
+    } else {
+      paneHeightWithUnit = maxHeight + 'px'
     }
   }
   let paneWidthWithUnit
   $: {
     if (Number.isInteger(paneWidth)) {
       paneWidthWithUnit = Math.min(paneWidth, maxWidth) + 'px'
+    } else {
+      paneWidthWithUnit = maxWidth + 'px'
     }
   }
 
@@ -37,13 +41,23 @@
   const drag = (e) => {
     window.getSelection().removeAllRanges()
     if (dragType.includes('horizontal')) {
-      const newHeight = Math.min(maxHeight, e.pageY - resizepane.offsetTop)
-      paneHeight = Math.max(50, newHeight)
+      let newHeight = e.pageY - resizepane.offsetTop
+      if (newHeight > maxHeight) {
+        paneHeight = 'full'
+      } else {
+        newHeight = Math.min(maxHeight, newHeight)
+        paneHeight = Math.max(50, newHeight)
+      }
     }
 
     if (dragType.includes('vertical')) {
-      const newWidth = Math.min(maxWidth, e.pageX - resizepane.offsetLeft)
-      paneWidth = Math.max(50, newWidth)
+      let newWidth = e.pageX - resizepane.offsetLeft
+      if (newWidth > maxWidth) {
+        paneWidth = 'full'
+      } else {
+        newWidth = Math.min(maxWidth, newWidth)
+        paneWidth = Math.max(50, newWidth)
+      }
     }
   }
 

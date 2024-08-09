@@ -110,22 +110,27 @@ function computeStageStyle() {
 }
 
 export function updateStageContainerHeight(newHeight) {
-  if (
-    Number.isInteger(newHeight) &&
-    Number.isInteger(get(stageContainerMaxHeight))
-  ) {
-    panelExpanded.set(newHeight < get(stageContainerMaxHeight))
-  }
   stageContainerHeight.set(newHeight)
+  updateExpandPanel()
 }
 
 export function updateStageContainerMaxHeight(newHeight) {
   const maxHeight = newHeight - 9 // 9px = trackbar + margin-bottom
   stageContainerMaxHeight.set(maxHeight)
+  updateExpandPanel()
 }
 
 export function updateStageContainerWidth(newWidth) {
   stageContainerWidth.set(newWidth)
+}
+
+function updateExpandPanel() {
+  if (
+    Number.isInteger(get(stageContainerHeight)) &&
+    Number.isInteger(get(stageContainerMaxHeight))
+  ) {
+    panelExpanded.set(get(stageContainerHeight) < get(stageContainerMaxHeight))
+  }
 }
 
 export function toggleExpandPanel() {
@@ -134,6 +139,15 @@ export function toggleExpandPanel() {
     // @ts-ignore
     stageContainerHeight.set(get(stageContainerMaxHeight))
   } else {
+    if (
+      !Number.isInteger(previousPanelHeight) ||
+      (Number.isInteger(previousPanelHeight) &&
+        // @ts-ignore
+        get(stageContainerMaxHeight) - previousPanelHeight < 50)
+    ) {
+      // @ts-ignore
+      previousPanelHeight = Math.round(get(stageContainerMaxHeight) * 0.7)
+    }
     stageContainerHeight.set(previousPanelHeight)
   }
   panelExpanded.set(!get(panelExpanded))
