@@ -8,7 +8,10 @@
     stageSize,
     stageContainerHeight,
     stageContainerMaxHeight,
-    stageContainerWidth,
+    stageHeight,
+    stageWidth,
+    stageMaxHeight,
+    stageMaxWidth,
     panelExpanded,
     landscape,
     setThemes,
@@ -21,6 +24,8 @@
     updateStageContainerHeight,
     updateStageContainerWidth,
     updateStageContainerMaxHeight,
+    updateStageHeight,
+    updateStageWidth,
   } from './logic/stage.js'
   import {
     nodes,
@@ -78,16 +83,25 @@
           window.location.origin
         )
       }
-    } else if (evt.detail.selectTheme) {
+    }
+    if (evt.detail.selectTheme) {
       selectTheme(evt.detail.selectTheme)
-    } else if (evt.detail.updateAppTheme) {
+    }
+    if (evt.detail.updateAppTheme) {
       updateAppTheme(evt.detail.updateAppTheme)
-    } else {
+    }
+    if (evt.detail.active) {
       showSidebar = evt.detail.active
       updateStage({
         stageSize: evt.detail.stageSize,
         landscape: evt.detail.landscape,
       })
+    }
+    if (evt.detail.stageWidth) {
+      updateStageWidth(evt.detail.stageWidth)
+    }
+    if (evt.detail.stageHeight) {
+      updateStageHeight(evt.detail.stageHeight)
     }
   }
 
@@ -106,6 +120,12 @@
     }
     if (evt.detail.stageContainerMaxHeight) {
       updateStageContainerMaxHeight(evt.detail.stageContainerMaxHeight)
+    }
+    if (evt.detail.stageWidth) {
+      updateStageWidth(evt.detail.stageWidth)
+    }
+    if (evt.detail.stageHeight) {
+      updateStageHeight(evt.detail.stageHeight)
     }
   }
 
@@ -162,6 +182,10 @@
         {stageRect}
         stageSize={$stageSize}
         landscape={$landscape}
+        stageWidth={$stageWidth}
+        stageHeight={$stageHeight}
+        stageMaxHeight={$stageMaxHeight}
+        stageMaxWidth={$stageMaxWidth}
         on:out={handleTopbarOut}
       />
       <Stage
@@ -172,7 +196,10 @@
         stageSize={$stageSize}
         stageContainerHeight={$stageContainerHeight}
         stageContainerMaxHeight={$stageContainerMaxHeight}
-        stageContainerWidth={$stageContainerWidth}
+        stageHeight={$stageHeight}
+        stageWidth={$stageWidth}
+        stageMaxHeight={$stageMaxHeight}
+        stageMaxWidth={$stageMaxWidth}
         theme={$activeTheme}
         panelExpanded={$panelExpanded}
         devmodus={config.devmodus}

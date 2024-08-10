@@ -1,23 +1,18 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
   export let disabled = false
   export let maxHeight
   export let maxWidth
-  let paneHeight = 'full'
-  let paneWidth = 'full'
+  export let paneHeight
+  export let paneWidth
+  const dispatch = createEventDispatcher()
 
   let resizepane
   let dragType = ''
 
-  $: {
-    if (disabled) {
-      paneHeight = maxHeight
-      paneWidth = maxWidth
-    }
-  }
-
   let paneHeightWithUnit
   $: {
-    if (Number.isInteger(paneHeight)) {
+    if (Number.isInteger(paneHeight) && !disabled) {
       paneHeightWithUnit = Math.min(paneHeight, maxHeight) + 'px'
     } else {
       paneHeightWithUnit = maxHeight + 'px'
@@ -43,21 +38,23 @@
     if (dragType.includes('horizontal')) {
       let newHeight = e.pageY - resizepane.offsetTop
       if (newHeight > maxHeight) {
-        paneHeight = 'full'
+        newHeight = 'full'
       } else {
         newHeight = Math.min(maxHeight, newHeight)
-        paneHeight = Math.max(50, newHeight)
+        newHeight = Math.max(50, newHeight)
       }
+      dispatch('out', { stageHeight: newHeight })
     }
 
     if (dragType.includes('vertical')) {
       let newWidth = e.pageX - resizepane.offsetLeft
       if (newWidth > maxWidth) {
-        paneWidth = 'full'
+        newWidth = 'full'
       } else {
         newWidth = Math.min(maxWidth, newWidth)
-        paneWidth = Math.max(50, newWidth)
+        newWidth = Math.max(50, newWidth)
       }
+      dispatch('out', { stageWidth: newWidth })
     }
   }
 

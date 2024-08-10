@@ -8,15 +8,17 @@
   export let stageSize = 'full'
   export let themes = []
   export let stageRect
+  export let stageMaxHeight
+  export let stageMaxWidth
 
   let dark = false
 
   let stageContainerWidth, stageContainerHeight
 
   $: {
-    ;({ width: stageContainerWidth, height: stageContainerHeight } = stageRect)
-    stageContainerWidth = Math.round(stageContainerWidth)
-    stageContainerHeight = Math.round(stageContainerHeight)
+    let { width, height } = stageRect
+    stageContainerWidth = Math.round(width)
+    stageContainerHeight = Math.round(height)
   }
 
   $: {
@@ -67,6 +69,18 @@
       selectTheme: theme,
     })
   }
+
+  function handleSetContainerWidth(evt) {
+    dispatch('out', {
+      stageWidth: Number.parseInt(evt.target.value),
+    })
+  }
+
+  function handleSetContainerHeight(evt) {
+    dispatch('out', {
+      stageHeight: Number.parseInt(evt.target.value),
+    })
+  }
 </script>
 
 <!-- prettier-ignore -->
@@ -81,9 +95,9 @@
     </button>
     <div class="topbar_nav">
       <div class="stagesize-value">
-        <div>{stageContainerWidth}px</div>
+        <input type="number" disabled={stageSize !== 'full'} value={stageContainerWidth} on:change={handleSetContainerWidth}  min="50" max={stageMaxWidth}/><span>px</span>
         <div class="stagesize-value-multi_sign">&#10005;</div>
-        <div>{stageContainerHeight}px</div>
+        <input type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} on:change={handleSetContainerHeight} min="50" max={stageMaxHeight}/><span>px</span>
       </div>
       <div class="stagesize-nav">
         <button title="Small" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>

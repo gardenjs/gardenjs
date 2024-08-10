@@ -16,12 +16,10 @@
   export let selectedExample
   export let stageContainerHeight
   export let stageContainerMaxHeight
-  export let stageContainerWidth
-
-  $: stagePaneMaxWidth = stageContainerWidth - 20
-  $: stagePaneMaxHeight =
-    Math.min(stageContainerHeight, stageContainerMaxHeight) - 20
-
+  export let stageHeight
+  export let stageWidth
+  export let stageMaxHeight
+  export let stageMaxWidth
   export let panelExpanded
   export let theme
   export let devmodus
@@ -134,6 +132,15 @@
       dispatch('out', { stageContainerWidth: evt.detail.maxWidth })
     }
   }
+
+  function handleResizePaneOut(evt) {
+    if (evt.detail.stageHeight) {
+      dispatch('out', { stageHeight: evt.detail.stageHeight })
+    }
+    if (evt.detail.stageWidth) {
+      dispatch('out', { stageWidth: evt.detail.stageWidth })
+    }
+  }
 </script>
 
 <HorizontalSplitPane
@@ -144,8 +151,11 @@
   <ResizePane
     slot="top"
     disabled={stageSize !== 'full'}
-    maxHeight={stagePaneMaxHeight}
-    maxWidth={stagePaneMaxWidth}
+    maxHeight={stageMaxHeight}
+    maxWidth={stageMaxWidth}
+    paneHeight={stageHeight}
+    paneWidth={stageWidth}
+    on:out={handleResizePaneOut}
   >
     <iframe
       class="stage_iframe"

@@ -1,4 +1,4 @@
-import { writable, get } from 'svelte/store'
+import { writable, get, derived } from 'svelte/store'
 
 function localStore(
   name,
@@ -26,6 +26,17 @@ export const landscape = localStore(
 export const stageContainerHeight = writable('')
 export const stageContainerWidth = writable('')
 export const stageContainerMaxHeight = writable('')
+export const stageHeight = writable('full')
+export const stageWidth = writable('full')
+export const stageMaxHeight = derived(
+  [stageContainerHeight, stageContainerMaxHeight],
+  ([$stageContainerHeight, $stageContainerMaxHeight]) =>
+    Math.min($stageContainerHeight, $stageContainerMaxHeight) - 20
+)
+export const stageMaxWidth = derived(
+  stageContainerWidth,
+  ($stageContainerWidth) => $stageContainerWidth - 20
+)
 
 export const panelExpanded = writable(true)
 export const appTheme = localStore('appTheme', 'default')
@@ -122,6 +133,22 @@ export function updateStageContainerMaxHeight(newHeight) {
 
 export function updateStageContainerWidth(newWidth) {
   stageContainerWidth.set(newWidth)
+}
+
+export function updateStageHeight(newHeight) {
+  if (!Number.isInteger(newHeight)) {
+    stageHeight.set(newHeight)
+  } else {
+    stageHeight.set(Math.max(50, newHeight))
+  }
+}
+
+export function updateStageWidth(newWidth) {
+  if (!Number.isInteger(newWidth)) {
+    stageWidth.set(newWidth)
+  } else {
+    stageWidth.set(Math.max(50, newWidth))
+  }
 }
 
 function updateExpandPanel() {
