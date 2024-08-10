@@ -90,7 +90,7 @@
     if (evt.detail.updateAppTheme) {
       updateAppTheme(evt.detail.updateAppTheme)
     }
-    if (evt.detail.active) {
+    if (evt.detail.active !== undefined) {
       showSidebar = evt.detail.active
       updateStage({
         stageSize: evt.detail.stageSize,
