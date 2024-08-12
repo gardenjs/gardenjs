@@ -95,9 +95,9 @@
     </button>
     <div class="topbar_nav">
       <div class="stagesize-value">
-        <input type="number" disabled={stageSize !== 'full'} value={stageContainerWidth} on:change={handleSetContainerWidth}  min="50" max={stageMaxWidth}/><span>px</span>
-        <div class="stagesize-value-multi_sign">&#10005;</div>
-        <input type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} on:change={handleSetContainerHeight} min="50" max={stageMaxHeight}/><span>px</span>
+        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerWidth} on:change={handleSetContainerWidth}  min="50" max={stageMaxWidth}/>
+        <div class="stagesize-value-multi_sign">&#47;</div>
+        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} on:change={handleSetContainerHeight} min="50" max={stageMaxHeight}/>
       </div>
       <div class="stagesize-nav">
         <button title="Small" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
@@ -212,8 +212,13 @@
     .stagesize-value {
       display: inline-flex;
       align-items: center;
-      font-size: 0.75rem;
       padding: 0 1rem;
+      font-size: 0.75rem;
+    }
+    .stagesize-input {
+      padding: 0.25rem 0.375rem;
+      width: 42px;
+      font-size: 0.75rem;
       font-family:
         ui-monospace,
         Menlo,
@@ -229,10 +234,14 @@
         Courier New,
         'monospace';
       color: var(--c-basic-600);
+      text-align: right;
+      background-color: transparent;
+      border: 1px solid var(--c-primary);
+      border-radius: 0.125rem;
     }
     .stagesize-value-multi_sign {
       margin: 0 0.25rem;
-      font-size: 0.813rem;
+      color: var(--c-basic-700);
     }
   }
 

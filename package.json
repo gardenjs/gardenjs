@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "A lightweight UI component explorer for JavaScript front-end libraries",
   "repository": "https://github.com/gardenjs/gardenjs",
-  "homepage": "https://github.com/gardenjs/gardenjs/blob/main/README.md",
+  "homepage": "https://gardenjs.org/",
   "main": "index.js",
   "type": "module",
   "author": "Robin Danzinger, Martin Farkas",
