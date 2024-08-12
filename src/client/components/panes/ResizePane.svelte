@@ -113,7 +113,7 @@
     cursor: ew-resize;
   }
   .vertical .dragbar-icon {
-    width: 5px;
+    width: 0.25rem;
     height: 60%;
     max-height: 3.75rem;
     background-color: var(--c-dragbar-icon);
@@ -128,7 +128,7 @@
   .horizontal .dragbar-icon {
     width: 60%;
     max-width: 3.75rem;
-    height: 5px;
+    height: 0.25rem;
     background-color: var(--c-dragbar-icon);
     border-radius: 1rem;
   }
@@ -141,7 +141,7 @@
   }
   .corner .dragbar-icon {
     width: 1rem;
-    height: 5px;
+    height: 0.25rem;
     transform: rotate(-45deg);
     background-color: var(--c-dragbar-icon);
     border-radius: 1rem;
