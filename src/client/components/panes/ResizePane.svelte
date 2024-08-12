@@ -71,15 +71,15 @@
   </div>
   <!-- eslint-disable-next-line -->
   <div class="dragbar vertical" class:disabled on:mousedown={register('vertical')}>
-    <svg width="6" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M1 1v22M5 1v22" fill="none" stroke-linecap="round" stroke="#000" stroke-width="2" /></svg>
+     <div class="dragbar-icon"></div>
   </div>
   <!-- eslint-disable-next-line -->
   <div class="dragbar horizontal" class:disabled on:mousedown={register('horizontal')}>
-    <svg width="24" height="6" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h22M1 5h22" fill="none" stroke-linecap="round" stroke="#000" stroke-width="2" /></svg>
+    <div class="dragbar-icon"></div>
   </div>
   <!-- eslint-disable-next-line -->
   <div class="dragbar corner" class:disabled on:mousedown={register('verticalhorizontal')}>
-    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l-8 8m9-3l-4 4" fill="none" stroke-linecap="round" stroke="#000" stroke-width="2" /></svg>
+    <div class="dragbar-icon"></div>
   </div>
 </div>
 
@@ -105,9 +105,6 @@
   .dragbar:hover {
     background-color: var(--c-dragbar-bg-hover);
   }
-  .dragbar svg path {
-    stroke: var(--c-basic-700);
-  }
   .vertical {
     width: 1.25rem;
     border-top: 1px solid var(--c-dragbar-bg);
@@ -115,11 +112,25 @@
     border-radius: 0 0.625rem 0 0;
     cursor: ew-resize;
   }
+  .vertical .dragbar-icon {
+    width: 5px;
+    height: 60%;
+    max-height: 3.75rem;
+    background-color: var(--c-dragbar-icon);
+    border-radius: 1rem;
+  }
   .horizontal {
     height: 1.25rem;
     border-bottom: 1px solid var(--c-dragbar-bg);
     border-left: 1px solid var(--c-dragbar-bg);
     cursor: ns-resize;
+  }
+  .horizontal .dragbar-icon {
+    width: 60%;
+    max-width: 3.75rem;
+    height: 5px;
+    background-color: var(--c-dragbar-icon);
+    border-radius: 1rem;
   }
   .corner {
     width: 1.25rem;
@@ -127,6 +138,13 @@
     border-right: 1px solid var(--c-dragbar-bg);
     border-bottom: 1px solid var(--c-dragbar-bg);
     cursor: nwse-resize;
+  }
+  .corner .dragbar-icon {
+    width: 1rem;
+    height: 5px;
+    transform: rotate(-45deg);
+    background-color: var(--c-dragbar-icon);
+    border-radius: 1rem;
   }
   .dragbar.disabled {
     display: none;
