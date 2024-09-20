@@ -36,7 +36,7 @@
   const drag = (e) => {
     window.getSelection().removeAllRanges()
     if (dragType.includes('horizontal')) {
-      let newHeight = e.pageY - resizepane.offsetTop
+      let newHeight = e.pageY - resizepane.offsetTop - 11
       if (newHeight > maxHeight) {
         newHeight = 'full'
       } else {
@@ -47,7 +47,7 @@
     }
 
     if (dragType.includes('vertical')) {
-      let newWidth = e.pageX - resizepane.offsetLeft
+      let newWidth = e.pageX - resizepane.offsetLeft - 10
       if (newWidth > maxWidth) {
         newWidth = 'full'
       } else {
