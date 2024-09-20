@@ -1,4 +1,14 @@
 <script>
+  import Link from './SidebarNavLinks.svelte'
+  import { createEventDispatcher } from 'svelte'
+
+  const dispatch = createEventDispatcher()
+
+  export let bookmarks = []
+
+  function toggleBookmark(bookmark) {
+    dispatch('out', { toggleBookmark: bookmark })
+  }
 </script>
 
 <nav class="bookmarks">
@@ -12,37 +22,19 @@
         <span class="bookmarks_title-label">Bookmarks</span>
       </div>
       <ul class="components">
-        <li class="component">
-          <!-- possibly take links from SidebarNavLinks: -->
-          <a href="." class="component_link">
-            <span class="component_dot"></span>
-            <span class="component_icon">
+        {#each bookmarks as bookmark}
+          <li class="component">
+            <Link
+              href={bookmark.href}
+              selected={bookmark.selected}
+              text={bookmark.name}
+            />
+            <button class="close" on:click={() => toggleBookmark(bookmark)}>
               <!-- prettier-ignore -->
-              <svg  xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /><path d="M3.3 7l8.7 5 8.7-5M12 22V12" /></svg>
-            </span>
-            <span class="component_label">Bookmarked item 1</span>
-          </a>
-          <button class="close">
-            <!-- prettier-ignore -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="close-icon" height="12" viewBox="0 0 24 24" width="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
-          </button>
-        </li>
-        <li class="component">
-          <!-- prettier-ignore -->
-          <!-- possibly take links from SidebarNavLinks: -->
-          <a href="." class="component_link selected">
-            <span class="component_dot"></span>
-            <span class="component_icon">
-              <!-- prettier-ignore -->
-              <svg  xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /><path d="M3.3 7l8.7 5 8.7-5M12 22V12" /></svg>
-            </span>
-            <span class="component_label">Bookmarked item 2</span>
-          </a>
-          <button class="close">
-            <!-- prettier-ignore -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="close-icon" height="12" viewBox="0 0 24 24" width="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
-          </button>
-        </li>
+              <svg xmlns="http://www.w3.org/2000/svg" class="close-icon" height="12" viewBox="0 0 24 24" width="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+            </button>
+          </li>
+        {/each}
       </ul>
     </li>
   </ul>
@@ -91,10 +83,10 @@
     width: 100%;
     z-index: 1;
   }
-  .component:hover {
+  :global(.component:hover) {
     background-color: var(--c-basic-100);
   }
-  .component:hover .component_link {
+  :global(.component:hover .component_link) {
     color: var(--c-primary);
   }
   .component:focus-visible {
@@ -107,11 +99,11 @@
     height: 22px;
     z-index: 9;
   }
-  .component:has(.close:hover) a {
+  :global(.component:has(.close:hover) a) {
     color: var(--c-basic-900);
     font-weight: 400;
   }
-  .component:has(.close:hover) a.selected {
+  :global(.component:has(.close:hover) a.selected) {
     color: var(--c-primary);
     font-weight: 600;
   }
@@ -127,56 +119,5 @@
   /* must be set global inside SidebarNavLinks  */
   :global(.component:has(.component_link.selected) .close) {
     background-color: var(--c-primary-bg);
-  }
-
-  /* same like in SidebarNavLinks... take links from there later and delete styles underneath */
-  .component_link {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 0;
-    padding: 0.188rem 0;
-    width: 100%;
-    height: 1.375rem;
-    text-transform: initial;
-    font-size: 0.813rem;
-    color: var(--c-basic-600);
-    line-height: 1.2;
-    font-weight: 400;
-  }
-  .component_link:hover,
-  .component_link:focus-visible {
-    color: var(--c-primary);
-    font-weight: 500;
-    background-color: var(--c-basic-100);
-  }
-  .component_link .component_dot {
-    display: block;
-    margin: 0 0.5rem 0 -0.219rem;
-    height: 0.375rem;
-    width: 0.375rem;
-    background-color: transparent;
-    border-radius: 50%;
-  }
-  .component_link.selected .component_dot {
-    background-color: var(--c-primary);
-  }
-  .component_link.selected {
-    margin-left: -1px;
-    color: var(--c-primary);
-    font-weight: 600;
-    background-color: var(--c-primary-bg);
-    border-left: 1px solid var(--c-primary);
-  }
-  .component_icon {
-    display: flex;
-    align-items: center;
-    margin-right: 0.438rem;
-    color: var(--c-basic-400);
-  }
-  .component_label {
-    margin-right: 0.5rem;
-    overflow: hidden;
-    white-space: nowrap;
   }
 </style>

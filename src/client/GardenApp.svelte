@@ -36,6 +36,9 @@
     updateFilter,
     updateNavTree,
     updateSelectedComponent,
+    toggleBookmark,
+    selectedNode,
+    bookmarks,
   } from './logic/navTree.js'
   import {
     initRouting,
@@ -103,6 +106,9 @@
     if (evt.detail.stageHeight) {
       updateStageHeight(evt.detail.stageHeight)
     }
+    if (evt.detail.toggleBookmark) {
+      toggleBookmark(evt.detail.toggleBookmark)
+    }
   }
 
   function handleStageOut(evt) {
@@ -142,6 +148,9 @@
     if (evt.detail.toggleExpandPanel) {
       toggleExpandPanel()
     }
+    if (evt.detail.toggleBookmark) {
+      toggleBookmark(evt.detail.toggleBookmark)
+    }
   }
 </script>
 
@@ -170,6 +179,7 @@
         nodes={$nodes}
         filter={$filterNavTree}
         panelExpanded={$panelExpanded}
+        bookmarks={$bookmarks}
         on:out={handleSidebarOut}
         {docsLink}
       />
@@ -177,6 +187,7 @@
     <div class="main">
       <Topbar
         active={showSidebar}
+        node={$selectedNode}
         themes={$themes}
         appTheme={$appTheme}
         {stageRect}

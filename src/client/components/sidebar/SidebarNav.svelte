@@ -14,10 +14,7 @@
   {#each nodes as node}
     {#if node.isLeaf}
       <li class="component">
-        <Link href={node.href} selected={node.selected}>
-          <!-- eslint-disable-next-line -->
-          {@html node.name}
-        </Link>
+        <Link href={node.href} selected={node.selected} text={node.name} />
       </li>
     {:else}
       <!-- prettier-ignore -->

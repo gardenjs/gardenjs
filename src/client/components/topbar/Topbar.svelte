@@ -10,6 +10,7 @@
   export let stageRect
   export let stageMaxHeight
   export let stageMaxWidth
+  export let node
 
   let dark = false
 
@@ -31,6 +32,10 @@
   function toggleSidebar() {
     active = !active
     updateStage()
+  }
+
+  function toggleBookmark() {
+    dispatch('out', { toggleBookmark: node })
   }
 
   function toggleDarkmode() {
@@ -94,9 +99,15 @@
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M9 3v18m5-12l3 3-3 3" /></svg>
         {/if}
       </button>
-      <button class="topbar_btn">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      {#if node}
+      <button class="topbar_btn" on:click={toggleBookmark}>
+        {#if node.bookmark}
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        {:else }
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        {/if}
       </button>
+      {/if}
     </div>
     <div class="topbar_nav">
       <div class="stagesize-value">

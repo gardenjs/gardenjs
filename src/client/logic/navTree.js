@@ -1,14 +1,16 @@
 import { writable, get } from 'svelte/store'
 
 export const nodes = writable([])
+export const bookmarks = writable([])
 export const rootNodesExpanded = writable(true)
 export const filterNavTree = writable()
+export const selectedNode = writable()
 
 let initialized = false
 let currentRoute = ''
-let selectedNode
 let navtree = []
 let unfoldedNodes = []
+let selectedComponent
 
 function initializeTree(navtree) {
   const all = navtree.flatMap(getAllNodes)
@@ -28,7 +30,7 @@ function getAllChildNodes(node) {
 
 export function updateSelectedComponent(route, componentName) {
   currentRoute = route
-  selectedNode = componentName
+  selectedComponent = componentName
   updateTree()
 }
 
@@ -61,14 +63,20 @@ function transformNavTree(nodes, parentVisible) {
         filter && filterMatches ? highlightFilterMatch(child.name) : child.name
       if (child.isLeaf) {
         const visible = parentVisible || filterMatches
-        return visible
+        const node = visible
           ? {
               ...child,
               name,
-              selected: selectedNode === child.key,
+              selected: selectedComponent === child.key,
               isLeaf: true,
+              bookmark:
+                get(bookmarks).find((b) => b.key === child.key) !== undefined,
             }
           : undefined
+        if (node.selected) {
+          selectedNode.set(node)
+        }
+        return node
       } else {
         const children = transformNavTree(
           child.children,
@@ -142,5 +150,36 @@ function expandRootNode(node) {
     }
   })
   nodes.set(newNodes)
+  updateTree()
+}
+
+export function toggleBookmark(node) {
+  if (node.bookmark) {
+    removeBookmark({ ...node, bookmark: false })
+  } else {
+    addBookmark({ ...node, bookmark: true })
+  }
+  updateTree()
+}
+
+function removeBookmark(node) {
+  bookmarks.set(
+    get(bookmarks)
+      .filter((bookmark) => node.key !== bookmark.key)
+      .map((bookmark) => {
+        return { ...bookmark, selected: bookmark.key === selectedComponent }
+      })
+  )
+  updateTree()
+}
+
+function addBookmark(node) {
+  bookmarks.set(
+    [...get(bookmarks), node]
+      .map((bookmark) => {
+        return { ...bookmark, selected: bookmark.key === selectedComponent }
+      })
+      .sort((a, b) => a.name.localeCompare(b.name))
+  )
   updateTree()
 }

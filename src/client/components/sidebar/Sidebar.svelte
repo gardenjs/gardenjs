@@ -14,6 +14,7 @@
   export let panelExpanded = true
   export let docsLink
   export let appTheme
+  export let bookmarks = []
 
   function toggleRootFolders() {
     dispatch('out', { toggleRootFolders: true })
@@ -55,7 +56,7 @@
       <div class="filter_zero-results">No results for '{filter}'</div>
     </div>
   {:else}
-    <Bookmarks />
+    <Bookmarks {bookmarks} on:out />
     <nav class="components">
       <SidebarNav {nodes} on:out />
     </nav>
