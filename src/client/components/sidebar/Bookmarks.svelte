@@ -11,8 +11,9 @@
         </span>
         <span class="bookmarks_title-label">Bookmarks</span>
       </div>
-      <ul class="items">
-        <li class="item">
+      <ul class="components">
+        <li class="component">
+          <!-- prettier-ignore -->
           <!-- possibly take links from SidebarNavLinks: -->
           <a href="." class="component_link">
             <span class="component_dot"></span>
@@ -38,9 +39,9 @@
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="close-icon"
-              height="15"
+              height="12"
               viewBox="0 0 24 24"
-              width="15"
+              width="12"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -49,7 +50,8 @@
             >
           </button>
         </li>
-        <li class="item">
+        <li class="component">
+          <!-- prettier-ignore -->
           <!-- possibly take links from SidebarNavLinks: -->
           <a href="." class="component_link selected">
             <span class="component_dot"></span>
@@ -75,9 +77,9 @@
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="close-icon"
-              height="15"
+              height="12"
               viewBox="0 0 24 24"
-              width="15"
+              width="12"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
@@ -121,35 +123,55 @@
     overflow: hidden;
     white-space: nowrap;
   }
-  .items {
+  .components {
     margin-left: 1.063rem;
     border-left: 1px solid var(--c-basic-250);
   }
-  .item {
+  .component {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0;
+    height: 1.375rem;
     width: 100%;
+    z-index: 1;
   }
-  .item:hover {
+  .component:hover {
     background-color: var(--c-basic-100);
   }
-  .item:hover .component_link {
+  .component:hover .component_link {
     color: var(--c-primary);
   }
-  .item:focus-visible {
+  .component:focus-visible {
     color: var(--c-primary);
     outline: none;
     background-color: var(--c-basic-100);
   }
   .close {
-    position: absolute;
-    right: 0;
+    margin-left: auto;
+    height: 22px;
+    z-index: 9;
+  }
+  .component:has(.close:hover) a {
+    color: var(--c-basic-900);
+    font-weight: 400;
+  }
+  .component:has(.close:hover) a.selected {
+    color: var(--c-primary);
+    font-weight: 600;
   }
   .close-icon {
     display: block;
     color: var(--c-basic-600);
+  }
+  .close:hover .close-icon,
+  .close:focus-visible .close-icon {
+    color: var(--c-primary);
+  }
+
+  /* must be set global inside SidebarNavLinks  */
+  :global(.component:has(.component_link.selected) .close) {
+    background-color: var(--c-primary-bg);
   }
 
   /* same like in SidebarNavLinks... take links from there later and delete styles underneath */
@@ -159,6 +181,8 @@
     align-items: center;
     margin: 0;
     padding: 0.188rem 0;
+    width: 100%;
+    height: 1.375rem;
     text-transform: initial;
     font-size: 0.813rem;
     color: var(--c-basic-600);

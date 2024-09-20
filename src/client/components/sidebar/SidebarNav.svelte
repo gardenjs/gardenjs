@@ -10,10 +10,10 @@
   }
 </script>
 
-<ul class="filter_list items level-{level}">
+<ul class="filter_list components level-{level}">
   {#each nodes as node}
     {#if node.isLeaf}
-      <li class="item">
+      <li class="component">
         <Link href={node.href} selected={node.selected}>
           <!-- eslint-disable-next-line -->
           {@html node.name}
@@ -43,9 +43,12 @@
 </ul>
 
 <style>
-  .items {
+  .components {
     margin-left: 1.063rem;
     border-left: 1px solid var(--c-basic-250);
+  }
+  .component {
+    height: 1.375rem;
   }
   .level-1 {
     width: 100%;
