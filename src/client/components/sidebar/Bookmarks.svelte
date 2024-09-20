@@ -13,41 +13,18 @@
       </div>
       <ul class="components">
         <li class="component">
-          <!-- prettier-ignore -->
           <!-- possibly take links from SidebarNavLinks: -->
           <a href="." class="component_link">
             <span class="component_dot"></span>
             <span class="component_icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                viewBox="0 0 24 24"
-                height="15"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><path
-                  d="M21 8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"
-                /><path d="M3.3 7l8.7 5 8.7-5M12 22V12" /></svg
-              >
+              <!-- prettier-ignore -->
+              <svg  xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /><path d="M3.3 7l8.7 5 8.7-5M12 22V12" /></svg>
             </span>
             <span class="component_label">Bookmarked item 1</span>
           </a>
           <button class="close">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="close-icon"
-              height="12"
-              viewBox="0 0 24 24"
-              width="12"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg
-            >
+            <!-- prettier-ignore -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="close-icon" height="12" viewBox="0 0 24 24" width="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
           </button>
         </li>
         <li class="component">
@@ -56,36 +33,14 @@
           <a href="." class="component_link selected">
             <span class="component_dot"></span>
             <span class="component_icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                viewBox="0 0 24 24"
-                height="15"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><path
-                  d="M21 8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"
-                /><path d="M3.3 7l8.7 5 8.7-5M12 22V12" /></svg
-              >
+              <!-- prettier-ignore -->
+              <svg  xmlns="http://www.w3.org/2000/svg" width="15" viewBox="0 0 24 24" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /><path d="M3.3 7l8.7 5 8.7-5M12 22V12" /></svg>
             </span>
             <span class="component_label">Bookmarked item 2</span>
           </a>
           <button class="close">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="close-icon"
-              height="12"
-              viewBox="0 0 24 24"
-              width="12"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg
-            >
+            <!-- prettier-ignore -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="close-icon" height="12" viewBox="0 0 24 24" width="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
           </button>
         </li>
       </ul>
