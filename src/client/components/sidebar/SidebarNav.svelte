@@ -14,7 +14,7 @@
   {#each nodes as node}
     {#if node.isLeaf}
       <li class="item">
-        <Link href={node.href} selected={node.selected} {level}>
+        <Link href={node.href} selected={node.selected}>
           <!-- eslint-disable-next-line -->
           {@html node.name}
         </Link>

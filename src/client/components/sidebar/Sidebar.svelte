@@ -1,4 +1,5 @@
 <script>
+  import Bookmarks from './Bookmarks.svelte'
   import SidebarNav from './SidebarNav.svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
@@ -54,6 +55,7 @@
       <div class="filter_zero-results">No results for '{filter}'</div>
     </div>
   {:else}
+    <Bookmarks />
     <nav class="components">
       <SidebarNav {nodes} on:out />
     </nav>
