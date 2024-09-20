@@ -19,7 +19,7 @@
 
 ## The quick and easy alternative
 
-Gardenjs is an open source UI component library explorer for JS frameworks and provides a centralized platform for developers to create, test and present UI components and pages in isolation. Gardenjs promotes modular and reusable code, streamlines collaboration between team members and increases overall productivity. Gardenjs is designed for projects of any size.
+Gardenjs is an open source UI component library explorer and provides a centralized platform for developers to create, test and present UI components and pages in isolation. Gardenjs promotes modular and reusable code, streamlines collaboration between team members and increases overall productivity. Gardenjs is designed for projects of any size.
 
 Watch the <a href="https://demo.gardenjs.org/">demo</a>.
 
@@ -39,7 +39,7 @@ Please follow the documentation at <a href="https://gardenjs.org/" target="_blan
 
 ## Supported Frameworks
 
-HTML snippets are rendered by default. The support of JS frameworks is realized by renderer plugins. There are currently plugins for <a href="https://github.com/gardenjs/render-plugin-svelte" target="_blank">Svelte</a>, <a href="https://github.com/gardenjs/render-plugin-vue" target="_blank">Vue</a> and <a href="https://github.com/gardenjs/render-plugin-react" target="_blank">React</a>. You can also easily create plugins for other frameworks, see the documentation. Contact us, we will be happy to create a repository for your renderer plugin.
+HTML snippets are rendered by default. The support of frameworks and template languages is realized by renderer plugins. There are currently plugins for <a href="https://github.com/gardenjs/render-plugin-svelte" target="_blank">Svelte</a>, <a href="https://github.com/gardenjs/render-plugin-vue" target="_blank">Vue</a> and <a href="https://github.com/gardenjs/render-plugin-react" target="_blank">React</a>. You can also easily create plugins for other frameworks, see the documentation. Contact us, we will be happy to create a repository for your renderer plugin.
 
 ## Contributing
 
