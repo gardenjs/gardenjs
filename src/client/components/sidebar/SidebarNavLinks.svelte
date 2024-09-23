@@ -39,10 +39,9 @@
     background-color: var(--c-basic-100);
   }
   .component_link .component_dot {
-    display: block;
     margin: 0 0.5rem 0 -0.219rem;
     height: 0.375rem;
-    width: 0.375rem;
+    width: 0.375rem !important;
     background-color: transparent;
     border-radius: 50%;
   }
@@ -59,7 +58,7 @@
   .component_icon {
     display: flex;
     align-items: center;
-    margin-right: 0.438rem;
+    margin: 0 0.5rem 0 0;
     color: var(--c-basic-400);
   }
   .component_label {
