@@ -56,7 +56,9 @@
       <div class="filter_zero-results">No results for '{filter}'</div>
     </div>
   {:else}
-    <Bookmarks {bookmarks} on:out />
+    {#if bookmarks.length > 0}
+      <Bookmarks {bookmarks} on:out />
+    {/if}
     <nav class="components-nav">
       <SidebarNav {nodes} on:out />
     </nav>

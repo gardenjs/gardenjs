@@ -1,7 +1,22 @@
 import { writable, get } from 'svelte/store'
 
+function localStore(
+  name,
+  defaultValue,
+  parseString = (value) => value,
+  stringify = (value) => value
+) {
+  const store = writable(
+    parseString(localStorage.getItem(name)) ?? defaultValue
+  )
+  store.subscribe((value) => {
+    localStorage.setItem(name, stringify(value))
+  })
+  return store
+}
+
 export const nodes = writable([])
-export const bookmarks = writable([])
+export const bookmarks = localStore('bookmarks', [], JSON.parse, JSON.stringify)
 export const rootNodesExpanded = writable(true)
 export const filterNavTree = writable()
 export const selectedNode = writable()
@@ -32,6 +47,7 @@ export function updateSelectedComponent(route, componentName) {
   currentRoute = route
   selectedComponent = componentName
   updateTree()
+  updateBookmarks()
 }
 
 export function updateFilter(newFilter) {
@@ -182,4 +198,14 @@ function addBookmark(node) {
       .sort((a, b) => a.name.localeCompare(b.name))
   )
   updateTree()
+}
+
+function updateBookmarks() {
+  bookmarks.set(
+    [...get(bookmarks)]
+      .map((bookmark) => {
+        return { ...bookmark, selected: bookmark.key === selectedComponent }
+      })
+      .sort((a, b) => a.name.localeCompare(b.name))
+  )
 }
