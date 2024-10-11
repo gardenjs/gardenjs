@@ -38,15 +38,38 @@
         <ul>
           {#each tabs as tab}
             <li>
-              <!-- prettier-ignore -->
-              <button class:active={tab == selectedTab} on:click={handleSelect(tab)}>{tab.name}<span class="dot"></span></button>
+              <button
+                class:active={tab == selectedTab}
+                on:click={handleSelect(tab)}
+                >{tab.name}<span class="dot"></span></button
+              >
             </li>
           {/each}
         </ul>
       </nav>
-      <!-- prettier-ignore -->
-      <button class="panel_toggle" title="Collapse panel" on:click={handleCollapsePanel}>
-        <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line x1="3" x2="21" y1="15" y2="15"/><path d="m15 8-3 3-3-3" /></svg>
+      <button
+        class="panel_toggle"
+        title="Collapse panel"
+        on:click={handleCollapsePanel}
+      >
+        <svg
+          class="controls_btn-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line
+            x1="3"
+            x2="21"
+            y1="15"
+            y2="15"
+          /><path d="m15 8-3 3-3-3" /></svg
+        >
       </button>
     </div>
     <div class="panel_pane">
@@ -64,16 +87,21 @@
     --h-panelnav: 2.375rem;
   }
   .panel_container {
-    background-color: var(--c-basic-75);
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    height: 100%;
   }
   .panel_nav {
     position: sticky;
+    overflow-x: auto;
     top: 0;
     display: flex;
-    flex-shrink: 0;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     height: var(--h-panelnav);
+    background-color: var(--c-basic-75);
     border-bottom: 1px solid var(--c-bg-body);
   }
   .panel_nav nav {
@@ -87,10 +115,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     justify-content: center;
     align-items: center;
-    padding: 0.563rem 1.25rem 0.188rem;
     padding: 0 1.25rem;
     height: calc(var(--h-panelnav) - 1px);
     font-size: 0.875rem;
@@ -101,8 +127,8 @@
   }
   .panel_nav nav li button .dot {
     display: block;
-    height: 0.313rem;
     width: 0.313rem;
+    height: 0.313rem;
     background-color: transparent;
     border-radius: 50%;
   }
@@ -142,11 +168,12 @@
   }
   .panel_pane {
     position: absolute;
-    left: 0;
+    top: var(--h-panelnav);
     right: 0;
     bottom: 0;
-    top: var(--h-panelnav);
+    left: 0;
     padding: 1.25rem;
     overflow-y: auto;
+    width: 100%;
   }
 </style>
