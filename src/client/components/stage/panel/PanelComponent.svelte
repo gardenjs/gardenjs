@@ -94,7 +94,6 @@
   }
   .panel_nav {
     position: sticky;
-    overflow-x: auto;
     top: 0;
     display: flex;
     justify-content: space-between;
@@ -103,6 +102,7 @@
     height: var(--h-panelnav);
     background-color: var(--c-basic-75);
     border-bottom: 1px solid var(--c-bg-body);
+    overflow-x: auto;
   }
   .panel_nav nav {
     margin: 0 1.25rem 0 0;
@@ -173,7 +173,7 @@
     bottom: 0;
     left: 0;
     padding: 1.25rem;
-    overflow-y: auto;
     width: 100%;
+    overflow-y: auto;
   }
 </style>
