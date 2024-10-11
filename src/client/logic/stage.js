@@ -43,7 +43,7 @@ export const appTheme = localStore('appTheme', 'default')
 
 export const activeTheme = localStore('frameTheme')
 
-export const desktopSidebarExpanded = writable(window.innerWidth > 840)
+export const desktopSidebarExpanded = writable(true)
 export const mobileSidebarExpanded = writable(false)
 
 let previousPanelHeight = ''
@@ -209,3 +209,9 @@ export const sidebarExpanded = derived(
     return $mobileNav ? $mobileSidebarExpanded : $desktopSidebarExpanded
   }
 )
+
+export function handleSelectionChanged() {
+  if (get(mobileNav)) {
+    mobileSidebarExpanded.set(false)
+  }
+}

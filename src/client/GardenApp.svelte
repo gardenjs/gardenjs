@@ -27,7 +27,7 @@
     updateStageWidth,
     sidebarExpanded,
     toggleExpandSidebar,
-    mobileNav,
+    handleSelectionChanged,
   } from './logic/stage.js'
   import {
     nodes,
@@ -65,9 +65,7 @@
   $: setThemes(config.themes)
   $: {
     updateSelectedComponent($currentRoute, $componentName)
-    if ($mobileNav) {
-      toggleExpandSidebar()
-    }
+    handleSelectionChanged()
   }
 
   let projectTitle = config.project_title || ''
