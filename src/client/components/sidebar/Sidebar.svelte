@@ -57,7 +57,7 @@
     </div>
   {:else}
     <Bookmarks {bookmarks} on:out />
-    <nav class="components">
+    <nav class="components-nav">
       <SidebarNav {nodes} on:out />
     </nav>
   {/if}
@@ -128,7 +128,7 @@
     width: var(--w-sidebar);
     height: 2.25rem;
     background-color: var(--c-sidebar);
-    z-index: 9;
+    /* z-index: 9; */
     inline-size: var(--w-sidebar);
     overflow: hidden;
     white-space: nowrap;
@@ -185,14 +185,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .components {
+  .components-nav {
     display: flex;
     flex-shrink: 1;
     overflow: hidden;
     visibility: visible;
     width: var(--w-sidebar);
     overflow-y: auto;
-    z-index: 1;
+    /* z-index: 1; */
     margin: 0 0 1rem;
   }
   .controls {
