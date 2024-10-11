@@ -193,8 +193,8 @@
     overflow: hidden;
     visibility: visible;
     width: var(--w-sidebar);
+    min-height: 2.625rem;
     overflow-y: auto;
-    /* z-index: 1; */
     margin: 0 0 1rem;
   }
   .controls {
