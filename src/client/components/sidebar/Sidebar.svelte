@@ -130,7 +130,6 @@
     width: var(--w-sidebar);
     height: 2.25rem;
     background-color: var(--c-sidebar);
-    /* z-index: 9; */
     inline-size: var(--w-sidebar);
     overflow: hidden;
     white-space: nowrap;
@@ -193,7 +192,6 @@
     overflow: hidden;
     visibility: visible;
     width: var(--w-sidebar);
-    min-height: 2.625rem;
     overflow-y: auto;
     margin: 0 0 1rem;
   }
