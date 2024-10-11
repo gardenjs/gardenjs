@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 
-  export let active = true
+  export let sidebarExpanded = true
   export let appTheme = 'default'
   export let landscape = false
   export let stageSize = 'full'
@@ -29,9 +29,8 @@
     else document.documentElement.setAttribute('data-theme', 'light')
   }
 
-  function toggleSidebar() {
-    active = !active
-    updateStage()
+  function toggleExpandSidebar() {
+    dispatch('out', { toggleExpandSidebar: true })
   }
 
   function toggleBookmark() {
@@ -63,7 +62,6 @@
 
   function updateStage() {
     dispatch('out', {
-      active,
       stageSize,
       landscape,
     })
@@ -92,8 +90,8 @@
 <div class="topbar">
   <div class="topbar_container">
     <div class="topbar_nav">
-      <button class="topbar_btn is-first-btn" on:click={toggleSidebar} title={active ? 'Collapse sidebar' : 'Expand sidebar'}>
-        {#if active}
+      <button class="topbar_btn is-first-btn" on:click={toggleExpandSidebar} title={sidebarExpanded ? 'Collapse sidebar' : 'Expand sidebar'}>
+        {#if sidebarExpanded}
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M9 3v18m7-6l-3-3 3-3" /></svg>
         {:else}
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M9 3v18m5-12l3 3-3 3" /></svg>

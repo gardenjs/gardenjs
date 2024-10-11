@@ -3,7 +3,6 @@
   import Sidebar from './components/sidebar/Sidebar.svelte'
   import Topbar from './components/topbar/Topbar.svelte'
   import {
-    updateStage,
     stageStyle,
     stageSize,
     stageContainerHeight,
@@ -26,6 +25,9 @@
     updateStageContainerMaxHeight,
     updateStageHeight,
     updateStageWidth,
+    sidebarExpanded,
+    toggleExpandSidebar,
+    mobileNav,
   } from './logic/stage.js'
   import {
     nodes,
@@ -61,7 +63,12 @@
   }
   $: updateDasMap(dasMap)
   $: setThemes(config.themes)
-  $: updateSelectedComponent($currentRoute, $componentName)
+  $: {
+    updateSelectedComponent($currentRoute, $componentName)
+    if ($mobileNav) {
+      toggleExpandSidebar()
+    }
+  }
 
   let projectTitle = config.project_title || ''
   let projectLogo = config.project_logo?.split('/').pop() || null
@@ -72,7 +79,6 @@
 
   $: docsLink = config.docs_link ? 1 : 0
 
-  let showSidebar = true
   function handleTopbarOut(evt) {
     if (evt.detail.openInTab) {
       const targetWindow = window.open('/frame.html', '_blank')
@@ -93,12 +99,8 @@
     if (evt.detail.updateAppTheme) {
       updateAppTheme(evt.detail.updateAppTheme)
     }
-    if (evt.detail.active !== undefined) {
-      showSidebar = evt.detail.active
-      updateStage({
-        stageSize: evt.detail.stageSize,
-        landscape: evt.detail.landscape,
-      })
+    if (evt.detail.toggleExpandSidebar) {
+      toggleExpandSidebar()
     }
     if (evt.detail.stageWidth) {
       updateStageWidth(evt.detail.stageWidth)
@@ -174,7 +176,7 @@
         {projectLogo}
         {projectLogoDarkmode}
         appTheme={$appTheme}
-        show={showSidebar}
+        sidebarExpanded={$sidebarExpanded}
         rootNodesExpanded={$rootNodesExpanded}
         nodes={$nodes}
         filter={$filterNavTree}
@@ -186,7 +188,7 @@
     </div>
     <div class="main">
       <Topbar
-        active={showSidebar}
+        sidebarExpanded={$sidebarExpanded}
         node={$selectedNode}
         themes={$themes}
         appTheme={$appTheme}

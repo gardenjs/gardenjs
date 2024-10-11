@@ -5,7 +5,7 @@
   const dispatch = createEventDispatcher()
 
   export let nodes = []
-  export let show
+  export let sidebarExpanded = true
   export let rootNodesExpanded = true
   export let projectTitle
   export let projectLogo
@@ -29,7 +29,7 @@
   }
 </script>
 
-<header class="sidebar_container" class:show-sidebar={show}>
+<header class="sidebar_container" class:show-sidebar={sidebarExpanded}>
   <a class="project-identifier" class:has-logo={projectLogo} href="/">
     {#if projectLogoDarkmode && appTheme === 'dark'}
       <img
