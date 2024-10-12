@@ -20,6 +20,8 @@
     updateAppTheme,
     activeTheme,
     toggleExpandPanel,
+    setStagesize,
+    setLandscape,
     updateStageContainerHeight,
     updateStageContainerWidth,
     updateStageContainerMaxHeight,
@@ -108,6 +110,12 @@
     }
     if (evt.detail.toggleBookmark) {
       toggleBookmark(evt.detail.toggleBookmark)
+    }
+    if (evt.detail.stageSize) {
+      setStagesize(evt.detail.stageSize)
+    }
+    if (evt.detail.landscape !== undefined) {
+      setLandscape(evt.detail.landscape)
     }
   }
 

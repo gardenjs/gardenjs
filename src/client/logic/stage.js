@@ -215,3 +215,13 @@ export function handleSelectionChanged() {
     mobileSidebarExpanded.set(false)
   }
 }
+
+export function setStagesize(nStageSize) {
+  stageSize.set(nStageSize)
+  computeStageStyle()
+}
+
+export function setLandscape(nLandscape) {
+  landscape.set(nLandscape)
+  computeStageStyle()
+}

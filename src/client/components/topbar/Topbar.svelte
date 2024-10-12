@@ -45,25 +45,20 @@
   }
 
   function setFramesize(nStageSize) {
-    stageSize = nStageSize
-    updateStage()
+    dispatch('out', {
+      stageSize: nStageSize,
+    })
   }
 
   function toggleOrientation() {
-    landscape = !landscape
-    updateStage()
+    dispatch('out', {
+      landscape: !landscape,
+    })
   }
 
   function openInTab() {
     dispatch('out', {
       openInTab: true,
-    })
-  }
-
-  function updateStage() {
-    dispatch('out', {
-      stageSize,
-      landscape,
     })
   }
 
