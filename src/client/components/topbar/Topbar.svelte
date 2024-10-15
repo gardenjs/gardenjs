@@ -256,6 +256,9 @@
       border: 1px solid var(--c-primary);
       border-radius: 0.125rem;
     }
+    .stagesize-input:disabled {
+      border-color: transparent;
+    }
     .stagesize-value-multi_sign {
       margin: 0 0.25rem;
       color: var(--c-basic-700);
