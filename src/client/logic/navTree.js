@@ -16,10 +16,10 @@ function localStore(
 }
 
 export const nodes = writable([])
-export const bookmarks = localStore('bookmarks', [], JSON.parse, JSON.stringify)
 export const rootNodesExpanded = writable(true)
 export const filterNavTree = writable()
 export const selectedNode = writable()
+export const bookmarks = localStore('bookmarks', [], JSON.parse, JSON.stringify)
 
 let initialized = false
 let currentRoute = ''
@@ -59,6 +59,7 @@ export function updateNavTree(newNavTree) {
   navtree = newNavTree
   if (!initialized) {
     initializeTree(navtree)
+    cleanupBookmarks()
     initialized = true
   }
   nodes.set(transformNavTree(navtree))
@@ -208,4 +209,13 @@ function updateBookmarks() {
       })
       .sort((a, b) => a.name.localeCompare(b.name))
   )
+}
+
+function cleanupBookmarks() {
+  const allNodes = navtree.flatMap(getAllNodes)
+  const validBookmarks = get(bookmarks).filter((bookmark) => {
+    console.log('DEBUG', 'bookmark', bookmark, 'allno', allNodes)
+    return allNodes.some((node) => node.key === bookmark.key)
+  })
+  bookmarks.set(validBookmarks)
 }
