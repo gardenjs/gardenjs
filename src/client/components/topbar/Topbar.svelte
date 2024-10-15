@@ -178,7 +178,7 @@
     width: 100%;
     height: 100%;
     padding: 0;
-    overflow: auto hidden;
+    z-index: 999999;
   }
   .topbar_nav {
     display: flex;
@@ -193,7 +193,8 @@
     height: var(--h-topbar);
     background: none;
   }
-  .topbar_btn:hover {
+  .topbar_btn:hover,
+  .topbar_btn:focus-visible {
     background-color: var(--c-basic-100);
   }
   .topbar_btn svg {
@@ -203,9 +204,6 @@
   .topbar_btn:hover svg,
   .topbar_btn:focus-visible svg {
     color: var(--c-primary);
-  }
-  .topbar_btn:focus-visible {
-    background-color: var(--c-basic-150);
   }
   .is-first-btn {
     border-radius: 0.5rem 0 0 0.5rem;
@@ -329,6 +327,7 @@
   .dropdown {
     position: relative;
     display: inline-block;
+    z-index: 99;
   }
   .dropdown_items {
     visibility: hidden;
