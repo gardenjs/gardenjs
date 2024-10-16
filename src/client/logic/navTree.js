@@ -90,7 +90,7 @@ function transformNavTree(nodes, parentVisible) {
                 get(bookmarks).find((b) => b.key === child.key) !== undefined,
             }
           : undefined
-        if (node.selected) {
+        if (node?.selected) {
           selectedNode.set(node)
         }
         return node
@@ -214,7 +214,6 @@ function updateBookmarks() {
 function cleanupBookmarks() {
   const allNodes = navtree.flatMap(getAllNodes)
   const validBookmarks = get(bookmarks).filter((bookmark) => {
-    console.log('DEBUG', 'bookmark', bookmark, 'allno', allNodes)
     return allNodes.some((node) => node.key === bookmark.key)
   })
   bookmarks.set(validBookmarks)
