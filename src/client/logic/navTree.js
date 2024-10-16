@@ -70,7 +70,7 @@ function updateTree() {
 }
 
 function transformNavTree(nodes, parentVisible) {
-  const filter = get(filterNavTree)
+  const filter = get(filterNavTree)?.toLowerCase()
   return nodes
     .map((child) => {
       const filterMatches = filter
@@ -115,7 +115,7 @@ function transformNavTree(nodes, parentVisible) {
 }
 
 function highlightFilterMatch(text) {
-  const filter = get(filterNavTree)
+  const filter = get(filterNavTree).toLowerCase()
   const matchStart = text.toLowerCase().indexOf(filter)
   const matchEnd = matchStart + filter.length
   const start = text.substring(0, matchStart)

@@ -151,7 +151,7 @@
       toggleRootFolders()
     }
     if (evt.detail.filter) {
-      updateFilter(evt.detail.filter.value?.toLowerCase())
+      updateFilter(evt.detail.filter.value)
     }
     if (evt.detail.toggleExpandPanel) {
       toggleExpandPanel()
