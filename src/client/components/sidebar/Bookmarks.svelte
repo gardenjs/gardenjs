@@ -40,7 +40,7 @@
   .bookmarks {
     display: none;
   }
-  @media (min-height: 500px) {
+  @media (min-height: 500px) and (min-width: 500px) {
     .bookmarks {
       display: block;
     }
