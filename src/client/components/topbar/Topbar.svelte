@@ -212,7 +212,12 @@
     border-radius: 0 0.5rem 0.5rem 0;
   }
 
-  /* bookmarks btn */
+  /* remove btns on small screens */
+  @media (max-height: 499px) {
+    .bookmark_btn {
+      display: none;
+    }
+  }
   @media (max-width: 499px) {
     .bookmark_btn,
     .openexternal_btn {
