@@ -129,6 +129,9 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="12" height="20" x="6" y="2" rx="2" /><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
         </button>
       </div>
+      <button class="topbar_btn openexternal_btn" title="Open component in new tab" on:click={openInTab}>
+        <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3" /></svg>
+      </button>
       {#if themes.length > 1}
         <div class="dropdown">
           <button class="dropdown_btn topbar_btn" title="Switch component theme">
@@ -148,9 +151,6 @@
           </div>
         </div>
       {/if}
-      <button class="topbar_btn openexternal_btn" title="Open component in new tab" on:click={openInTab}>
-        <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3" /></svg>
-      </button>
       <button class="topbar_btn is-last-btn" on:click={toggleDarkmode} title={dark ? 'Light mode' : 'Dark mode'}>
         {#if dark}
           <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></svg>
@@ -212,7 +212,12 @@
     border-radius: 0 0.5rem 0.5rem 0;
   }
 
-  /* bookmarks btn */
+  /* remove btns on small screens */
+  @media (max-height: 499px) {
+    .bookmark_btn {
+      display: none;
+    }
+  }
   @media (max-width: 499px) {
     .bookmark_btn,
     .openexternal_btn {
@@ -333,7 +338,7 @@
   .dropdown_items {
     visibility: hidden;
     position: absolute;
-    left: -0.75rem;
+    right: 0;
     padding: 0.375rem 0 0;
     z-index: 9;
   }
@@ -357,7 +362,7 @@
     align-items: center;
     justify-items: flex-start;
     width: 100%;
-    min-width: 113px;
+    min-width: 5rem;
     padding: 0.5rem;
     font-size: 0.75rem;
     color: var(--c-basic-900);

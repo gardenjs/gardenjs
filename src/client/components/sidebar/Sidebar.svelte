@@ -48,8 +48,16 @@
     {/if}
   </a>
   <div class="filter">
-    <!-- prettier-ignore -->
-    <input aria-autocomplete="list" id="filter" class="filter_input" autocomplete="off" type="search" value={filter || ''} placeholder="Filter..." on:input={updateFilter} />
+    <input
+      aria-autocomplete="list"
+      id="filter"
+      class="filter_input"
+      autocomplete="off"
+      type="search"
+      value={filter || ''}
+      placeholder="Filter..."
+      on:input={updateFilter}
+    />
   </div>
   {#if nodes.length == 0 && filter}
     <div>
@@ -167,6 +175,9 @@
   input.filter_input[type='search'] {
     font-size: 0.813rem;
   }
+  input[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
   .filter_input::placeholder {
     font-size: 0.813rem;
     color: var(--c-basic-500);
@@ -241,8 +252,8 @@
     font-weight: 400;
   }
   .controls_btn:hover .controls_btn-label,
-  .controls_btn:hover .controls_btn-icon,
   .controls_btn:focus-visible .controls_btn-label,
+  .controls_btn:hover .controls_btn-icon,
   .controls_btn:focus-visible .controls_btn-icon {
     color: var(--c-primary);
   }
