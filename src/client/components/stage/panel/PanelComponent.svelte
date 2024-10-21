@@ -52,6 +52,7 @@
         title="Collapse panel"
         on:click={handleCollapsePanel}
       >
+        <span class="is-hidden">Collapse panel</span>
         <svg
           class="controls_btn-icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -153,6 +154,15 @@
     padding: 0 0.75rem;
     height: 100%;
     background: none;
+  }
+  .is-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
   }
   .panel_toggle svg {
     margin-top: 0.188rem;

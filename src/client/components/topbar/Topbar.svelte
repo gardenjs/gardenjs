@@ -86,6 +86,7 @@
   <div class="topbar_container">
     <div class="topbar_nav">
       <button class="topbar_btn is-first-btn" on:click={toggleExpandSidebar} title={sidebarExpanded ? 'Collapse sidebar' : 'Expand sidebar'}>
+        <span class="is-hidden">{sidebarExpanded ? 'Collapse sidebar' : 'Expand sidebar'}</span>
         {#if sidebarExpanded}
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M9 3v18m7-6l-3-3 3-3" /></svg>
         {:else}
@@ -94,6 +95,7 @@
       </button>
       {#if node}
       <button class="topbar_btn bookmark_btn" on:click={toggleBookmark}>
+        <span class="is-hidden">{node.bookmark ? 'Remove from bookmarks' : 'Add to bookmarks'}</span>
         {#if node.bookmark}
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         {:else }
@@ -110,31 +112,38 @@
       </div>
       <div class="stagesize-nav">
         <button title="Small" class:active={stageSize === 'small'} on:click={() => setFramesize('small')}>
+          <span class="is-hidden">Resize viewport to medium</span>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><path d="M12 18h.01" /></svg>
           <span class="dot"></span>
         </button>
         <button title="Medium" class:active={stageSize === 'medium'} on:click={() => setFramesize('medium')}>
+          <span class="is-hidden">Resize viewport to medium</span>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M12 18h.01" /></svg>
           <span class="dot"></span>
         </button>
         <button title="Large" class:active={stageSize === 'large'} on:click={() => setFramesize('large')}>
+          <span class="is-hidden">Resize viewport to large</span>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" ry="2" /><path d="M2 20h20" /></svg>
           <span class="dot"></span>
         </button>
         <button title="Full" class:active={stageSize === 'full'} on:click={() => setFramesize('full')}>
+          <span class="is-hidden">Resize viewport to full</span>
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><path d="M8 21h8m-4-4v4" /></svg>
           <span class="dot"></span>
         </button>
         <button title={landscape ? 'Portrait mode' : 'Landscape mode'} on:click={toggleOrientation}>
+          <span class="is-hidden">Reverse the aspect ratio to {landscape ? 'portrait mode' : 'landscape mode'}</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="12" height="20" x="6" y="2" rx="2" /><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
         </button>
       </div>
       <button class="topbar_btn openexternal_btn" title="Open component in new tab" on:click={openInTab}>
+        <span class="is-hidden">Open component in new tab</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3" /></svg>
       </button>
       {#if themes.length > 1}
         <div class="dropdown">
           <button class="dropdown_btn topbar_btn" title="Switch component theme">
+            <span class="is-hidden">Open menu for selecting themes</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" /><circle cx="17.5" cy="10.5" r=".5" /><circle cx="8.5" cy="7.5" r=".5" /><circle cx="6.5" cy="12.5" r=".5" /><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" /></svg>
           </button>
           <div class="dropdown_items">
@@ -152,6 +161,7 @@
         </div>
       {/if}
       <button class="topbar_btn is-last-btn" on:click={toggleDarkmode} title={dark ? 'Light mode' : 'Dark mode'}>
+        <span class="is-hidden">{dark ? 'Light mode' : 'Dark mode'}</span>
         {#if dark}
           <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></svg>
         {:else}
@@ -196,6 +206,15 @@
   .topbar_btn:hover,
   .topbar_btn:focus-visible {
     background-color: var(--c-basic-100);
+  }
+  .is-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
   }
   .topbar_btn svg {
     height: 1.125rem;
