@@ -260,6 +260,10 @@
       border: 1px solid var(--c-primary);
       border-radius: 0.125rem;
     }
+    /* same styles as the input in the sidebar: */
+    .stagesize-input:focus-visible {
+      background-color: var(--c-primary-bg);
+    }
     .stagesize-input:disabled {
       border-color: transparent;
     }
