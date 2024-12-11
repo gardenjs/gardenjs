@@ -47,6 +47,7 @@ async function runSetupScript() {
       { name: 'Svelte', value: 'Svelte' },
       { name: 'Vue', value: 'Vue' },
       { name: 'React', value: 'React' },
+      { name: 'Svelte4', value: 'Svelte4' },
     ],
   })
 
@@ -179,6 +180,7 @@ async function runCommand(cmd) {
 const lib2FileExtension = {
   React: '"[tj]sx"',
   Svelte: '"svelte"',
+  Svelte4: '"svelte"',
   Vue: '"vue"',
 }
 
