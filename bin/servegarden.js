@@ -43,17 +43,19 @@ async function runSetupScript() {
       return true
     },
     choices: [
-      { name: 'No Library', value: 'None' },
-      { name: 'Svelte', value: 'Svelte' },
+      { name: 'Svelte 5', value: 'Svelte' },
+      { name: 'Svelte 4', value: 'Svelte4' },
       { name: 'Vue', value: 'Vue' },
       { name: 'React', value: 'React' },
-      { name: 'Svelte4', value: 'Svelte4' },
+      { name: 'No Library', value: 'None' },
     ],
   })
 
   if (libraries.includes('None')) {
     libraries = []
   }
+
+  console.log('DEBUG', 'lib', libraries)
 
   const componentFolder = await input({
     message: 'Enter your component source folder:',
@@ -178,10 +180,10 @@ async function runCommand(cmd) {
 }
 
 const lib2FileExtension = {
-  React: '"[tj]sx"',
-  Svelte: '"svelte"',
-  Svelte4: '"svelte"',
-  Vue: '"vue"',
+  React: '[tj]sx',
+  Svelte: 'svelte',
+  Svelte4: 'svelte',
+  Vue: 'vue',
 }
 
 function createConfigFile({ title, componentFolder, libraries }) {
@@ -192,13 +194,13 @@ function createConfigFile({ title, componentFolder, libraries }) {
     .join('\n')
   const renderer = libraries
     .map((lib) => {
-      return `${lib2FileExtension[lib]}: ${lib}RendererBuilder,`
+      return `"${lib2FileExtension[lib]}": ${lib}RendererBuilder,`
     })
     .join('\n    ')
 
   const watchLibFiles = libraries
     .map((lib) => {
-      return `".${lib.toLowerCase()}"`
+      return `".${lib2FileExtension[lib]}"`
     })
     .join(', ')
 
@@ -277,16 +279,20 @@ export default {
 
 function createViteConfig(libraries) {
   const viteLibs = getViteImports(libraries)
-  const optionalPathImport = libraries.includes('Svelte')
+  const hasSvelteLib = libraries.some((lib) => lib.indexOf('Svelte') >= 0)
+  const renderPluginSvelte = libraries.includes('Svelte4')
+    ? 'render-plugin-svelte4'
+    : 'render-plugin-svelte'
+  const optionalPathImport = hasSvelteLib
     ? 'import { join, resolve } from "node:path";'
     : ''
-  const sveltekit_alias = libraries.includes('Svelte')
+  const sveltekit_alias = hasSvelteLib
     ? `
     resolve: {
       alias: [
         {
           find: /\\$app\\/(.*)/,
-          replacement: join(resolve(__dirname, "node_modules/@gardenjs/render-plugin-svelte/src/sveltekit_mocks/"), "$1"),
+          replacement: join(resolve(__dirname, "node_modules/@gardenjs/${renderPluginSvelte}/src/sveltekit_mocks/"), "$1"),
         },
       ],
     },
@@ -331,12 +337,15 @@ export default defineConfig(({ command, mode }) => {
 const lib2ViteImport = {
   Svelte:
     'import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte"',
+  Svelte4:
+    'import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte"',
   React: 'import react from "@vitejs/plugin-react"',
   Vue: 'import vue from "@vitejs/plugin-vue"',
 }
 
 const lib2VitePluginStmt = {
   Svelte: 'svelte({preprocess: vitePreprocess()})',
+  Svelte4: 'svelte({preprocess: vitePreprocess()})',
   React: 'react()',
   Vue: 'vue()',
 }
