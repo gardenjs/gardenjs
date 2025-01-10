@@ -1,5 +1,11 @@
 <script>
-  export let item = {}
+  /**
+   * @typedef {Object} Props
+   * @property {any} [item]
+   */
+
+  /** @type {Props} */
+  let { item = {} } = $props()
 </script>
 
-<svelte:component this={item.page} {...item.props} on:out />
+<item.page {...item.props} on:out />

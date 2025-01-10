@@ -1,19 +1,28 @@
 <script>
+  import { run } from 'svelte/legacy'
+
   import TabContent from './PanelContent.svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 
-  export let tabs = []
+  /**
+   * @typedef {Object} Props
+   * @property {any} [tabs]
+   * @property {import('svelte').Snippet} [children]
+   */
 
-  let selectedTabName = {}
-  let selectedTab
-  $: {
+  /** @type {Props} */
+  let { tabs = [], children } = $props()
+
+  let selectedTabName = $state({})
+  let selectedTab = $state()
+  run(() => {
     if (tabs) {
       selectedTab = tabs.find((t) => t.name === selectedTabName) || tabs[0]
     } else {
       selectedTab = {}
     }
-  }
+  })
 
   const handleSelect = (tab) => () => {
     selectedTabName = tab.name
@@ -40,7 +49,7 @@
             <li>
               <button
                 class:active={tab == selectedTab}
-                on:click={handleSelect(tab)}
+                onclick={handleSelect(tab)}
                 >{tab.name}<span class="dot"></span></button
               >
             </li>
@@ -50,7 +59,7 @@
       <button
         class="panel_toggle"
         title="Collapse panel"
-        on:click={handleCollapsePanel}
+        onclick={handleCollapsePanel}
       >
         <span class="is-hidden">Collapse panel</span>
         <svg
@@ -76,9 +85,7 @@
     <div class="panel_pane">
       {#if selectedTab && selectedTab.page}
         <TabContent item={selectedTab} on:out={handleout} />
-      {:else}
-        <slot>No tab content provided</slot>
-      {/if}
+      {:else if children}{@render children()}{:else}No tab content provided{/if}
     </div>
   {/if}
 </div>

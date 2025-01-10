@@ -1,8 +1,14 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  export let items = []
-  export let selected
+  /**
+   * @typedef {Object} Props
+   * @property {any} [items]
+   * @property {any} selected
+   */
+
+  /** @type {Props} */
+  let { items = [], selected } = $props()
 
   const dispatch = createEventDispatcher()
 
@@ -14,7 +20,7 @@
 <ul class="stories">
   {#each items as item}
     <li class:active={selected == item}>
-      <button on:click={handleselect(item)}>
+      <button onclick={handleselect(item)}>
         <span class="dot"></span>
         {item}
       </button>

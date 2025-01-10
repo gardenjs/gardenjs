@@ -1,7 +1,15 @@
 <script>
-  export let href
-  export let selected
-  export let text
+  import { preventDefault } from 'svelte/legacy'
+
+  /**
+   * @typedef {Object} Props
+   * @property {any} href
+   * @property {any} selected
+   * @property {any} text
+   */
+
+  /** @type {Props} */
+  let { href, selected, text } = $props()
 
   function handleClick() {
     globalThis.history.pushState({}, '', href)
@@ -9,7 +17,7 @@
 </script>
 
 <!-- prettier-ignore -->
-<a {href} class="component_link" class:selected on:click|preventDefault={handleClick}>
+<a {href} class="component_link" class:selected onclick={preventDefault(handleClick)}>
   <div class="component_link-container">
     <div class="component_dot"></div>
     <div class="component_icon">

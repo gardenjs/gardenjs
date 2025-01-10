@@ -1,7 +1,13 @@
 <script>
   import { onMount } from 'svelte'
-  export let component
-  export let afterRenderHook = () => {}
+  /**
+   * @typedef {Object} Props
+   * @property {any} component
+   * @property {any} [afterRenderHook]
+   */
+
+  /** @type {Props} */
+  let { component, afterRenderHook = () => {} } = $props()
 
   onMount(async () => {
     await afterRenderHook()

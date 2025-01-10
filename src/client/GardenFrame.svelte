@@ -1,18 +1,26 @@
 <script>
+  import { run } from 'svelte/legacy'
+
   import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
-  export let componentMap = {}
-  export let dasMap = {}
-  export let config
+  /**
+   * @typedef {Object} Props
+   * @property {any} [componentMap]
+   * @property {any} [dasMap]
+   * @property {any} config
+   */
+
+  /** @type {Props} */
+  let { componentMap = {}, dasMap = {}, config } = $props()
 
   let hookTimeout = config.hookTimeout | 5000
-  let das = {}
-  let selectedExample = {}
+  let das = $state({})
+  let selectedExample = $state({})
   let selectedExampleTitle
-  let full = false
+  let full = $state(false)
   let currentRendererBuilder
   let currentRenderer
   let componentName
-  let component
+  let component = $state()
   let redirectData = {}
   let componentChanged
   let selectedExampleChanged
@@ -106,7 +114,7 @@
                 (currentHook) => newHook === currentHook
               )
             })
-          : das?.hooks ?? []
+          : (das?.hooks ?? [])
 
       currentHooks = das?.hooks ?? []
 
@@ -157,11 +165,11 @@
     currentRenderer = await rendererBuilder.create()
   }
 
-  $: {
+  run(() => {
     if (!config.devmodus) {
       updateRenderer(DefaultRendererBuilder)
     }
-  }
+  })
 
   function handleComponentOut(evt) {
     if (das.out) {
@@ -198,11 +206,8 @@
 
 <div class:full id="garden_app">
   {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}
-    <svelte:component
-      this={component}
-      {...selectedExample?.input}
-      on:out={handleComponentOut}
-    />
+    {@const SvelteComponent = component}
+    <SvelteComponent {...selectedExample?.input} on:out={handleComponentOut} />
   {/if}
 </div>
 

@@ -1,9 +1,16 @@
 <script>
+  import SidebarNav from './SidebarNav.svelte'
   import Link from './SidebarNavLinks.svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
-  export let nodes = []
-  export let level = 1
+  /**
+   * @typedef {Object} Props
+   * @property {any} [nodes]
+   * @property {number} [level]
+   */
+
+  /** @type {Props} */
+  let { nodes = [], level = 1 } = $props()
 
   function toggleFoldStatusOfNode(node) {
     dispatch('out', { toggleFoldStatusOfNode: { ...node } })
@@ -19,7 +26,7 @@
     {:else}
       <!-- prettier-ignore -->
       <li class="folder" class:unfolded={node.unfolded}>
-        <button class="folder_btn btn_level-{level}" title={node.unfolded ? 'fold' : 'unfold'} on:click={() => toggleFoldStatusOfNode(node)}>
+        <button class="folder_btn btn_level-{level}" title={node.unfolded ? 'fold' : 'unfold'} onclick={() => toggleFoldStatusOfNode(node)}>
           <span class="folder_arrow" class:unfolded_icon={node.unfolded}>
             <svg xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6" /></svg>
           </span>
@@ -32,7 +39,7 @@
           </span>
         </button>
         {#if node.unfolded}
-          <svelte:self nodes={node.children} level={level + 1} on:out />
+          <SidebarNav nodes={node.children} level={level + 1} on:out />
         {/if}
       </li>
     {/if}

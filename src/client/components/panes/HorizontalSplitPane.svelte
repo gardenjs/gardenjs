@@ -1,15 +1,25 @@
 <script>
+  import { run } from 'svelte/legacy'
+
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   const dispatch = createEventDispatcher()
 
-  export let topHeight
-  export let maxHeight
-  let element
-  let dragging = false
+  /**
+   * @typedef {Object} Props
+   * @property {any} topHeight
+   * @property {any} maxHeight
+   * @property {import('svelte').Snippet} [top]
+   * @property {import('svelte').Snippet} [bottom]
+   */
 
-  let init = false
+  /** @type {Props} */
+  let { topHeight = $bindable(), maxHeight, top, bottom } = $props()
+  let element = $state()
+  let dragging = $state(false)
 
-  $: {
+  let init = $state(false)
+
+  run(() => {
     if (element && !init) {
       init = true
       const elementHeight = element.offsetHeight
@@ -18,15 +28,15 @@
         topHeight: Math.round(elementHeight * 0.7),
       })
     }
-  }
+  })
 
-  let topHeightWithUnit
-  $: {
+  let topHeightWithUnit = $state()
+  run(() => {
     if (Number.isInteger(topHeight) && Number.isInteger(maxHeight)) {
       topHeightWithUnit =
         maxHeight < topHeight ? maxHeight + 'px' : topHeight + 'px'
     }
-  }
+  })
 
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach(() => {
@@ -69,11 +79,11 @@
 
 <div class="container" bind:this={element}>
   <div class="top" style="height: {topHeightWithUnit};">
-    <slot name="top" />
+    {@render top?.()}
   </div>
   <!-- eslint-disable-next-line -->
-  <div class="dragbar" class:dragging on:mousedown={register}></div>
-  <slot name="bottom" />
+  <div class="dragbar" class:dragging onmousedown={register}></div>
+  {@render bottom?.()}
 </div>
 
 <style>
