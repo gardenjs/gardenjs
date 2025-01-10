@@ -1,31 +1,47 @@
 <script>
+  import { run } from 'svelte/legacy'
+
   import { createEventDispatcher } from 'svelte'
-  export let disabled = false
-  export let maxHeight
-  export let maxWidth
-  export let paneHeight
-  export let paneWidth
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [disabled]
+   * @property {any} maxHeight
+   * @property {any} maxWidth
+   * @property {any} paneHeight
+   * @property {any} paneWidth
+   * @property {import('svelte').Snippet} [children]
+   */
+
+  /** @type {Props} */
+  let {
+    disabled = false,
+    maxHeight,
+    maxWidth,
+    paneHeight,
+    paneWidth,
+    children,
+  } = $props()
   const dispatch = createEventDispatcher()
 
-  let resizepane
+  let resizepane = $state()
   let dragType = ''
 
-  let paneHeightWithUnit
-  $: {
+  let paneHeightWithUnit = $state()
+  run(() => {
     if (Number.isInteger(paneHeight) && !disabled) {
       paneHeightWithUnit = Math.min(paneHeight, maxHeight) + 'px'
     } else {
       paneHeightWithUnit = maxHeight + 'px'
     }
-  }
-  let paneWidthWithUnit
-  $: {
+  })
+  let paneWidthWithUnit = $state()
+  run(() => {
     if (Number.isInteger(paneWidth)) {
       paneWidthWithUnit = Math.min(paneWidth, maxWidth) + 'px'
     } else {
       paneWidthWithUnit = maxWidth + 'px'
     }
-  }
+  })
 
   const register = (type) => () => {
     dragType = type
@@ -67,18 +83,18 @@
 <!-- prettier-ignore -->
 <div class="resizepane-container" class:disabled>
   <div class="resizepane" class:disabled style:width={disabled ? undefined : paneWidthWithUnit} style:height={disabled ? undefined : paneHeightWithUnit} bind:this={resizepane}>
-    <slot />
+    {@render children?.()}
   </div>
   <!-- eslint-disable-next-line -->
-  <div class="dragbar vertical" class:disabled on:mousedown={register('vertical')}>
+  <div class="dragbar vertical" class:disabled onmousedown={register('vertical')}>
      <div class="dragbar-icon"></div>
   </div>
   <!-- eslint-disable-next-line -->
-  <div class="dragbar horizontal" class:disabled on:mousedown={register('horizontal')}>
+  <div class="dragbar horizontal" class:disabled onmousedown={register('horizontal')}>
     <div class="dragbar-icon"></div>
   </div>
   <!-- eslint-disable-next-line -->
-  <div class="dragbar corner" class:disabled on:mousedown={register('verticalhorizontal')}>
+  <div class="dragbar corner" class:disabled onmousedown={register('verticalhorizontal')}>
     <div class="dragbar-icon"></div>
   </div>
 </div>

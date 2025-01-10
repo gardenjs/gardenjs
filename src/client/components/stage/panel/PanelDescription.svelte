@@ -1,11 +1,19 @@
 <script>
+  import { run } from 'svelte/legacy'
+
   import './markdown.css'
   import { marked } from 'marked'
   import { highlightElement } from '../../highlight/Highlight.js'
-  export let das
-  let element
+  /**
+   * @typedef {Object} Props
+   * @property {any} das
+   */
 
-  $: {
+  /** @type {Props} */
+  let { das } = $props()
+  let element = $state()
+
+  run(() => {
     if (das && element) {
       setTimeout(() => {
         if (element) {
@@ -17,7 +25,7 @@
         }
       }, 200)
     }
-  }
+  })
 </script>
 
 <div class="markdown-body" bind:this={element}>

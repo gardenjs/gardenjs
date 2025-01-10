@@ -1,4 +1,6 @@
 <script>
+  import { run } from 'svelte/legacy'
+
   import Stage from './components/stage/Stage.svelte'
   import Sidebar from './components/sidebar/Sidebar.svelte'
   import Topbar from './components/topbar/Topbar.svelte'
@@ -54,30 +56,42 @@
   } from './logic/routing.js'
 
   let baseurl = '/garden'
-  export let routes
-  export let navTree
-  export let dasMap
-  export let config
+  /**
+   * @typedef {Object} Props
+   * @property {any} routes
+   * @property {any} navTree
+   * @property {any} dasMap
+   * @property {any} config
+   */
 
-  $: updateNavTree(navTree)
-  $: {
+  /** @type {Props} */
+  let { routes, navTree, dasMap, config } = $props()
+
+  run(() => {
+    updateNavTree(navTree)
+  })
+  run(() => {
     if (routes && dasMap) initRouting(dasMap, routes, baseurl)
-  }
-  $: updateDasMap(dasMap)
-  $: setThemes(config.themes)
-  $: {
+  })
+  run(() => {
+    updateDasMap(dasMap)
+  })
+  run(() => {
+    setThemes(config.themes)
+  })
+  run(() => {
     updateSelectedComponent($currentRoute, $componentName)
     handleSelectionChanged()
-  }
+  })
 
   let projectTitle = config.project_title || ''
   let projectLogo = config.project_logo?.split('/').pop() || null
   let projectLogoDarkmode =
     config.project_logo_darkmode?.split('/').pop() || null
 
-  let stageRect = {}
+  let stageRect = $state({})
 
-  $: docsLink = config.docs_link ? 1 : 0
+  let docsLink = $derived(config.docs_link ? 1 : 0)
 
   function handleTopbarOut(evt) {
     if (evt.detail.openInTab) {
@@ -168,7 +182,7 @@
     <div class="instruction">
       Click the button to return:
       <button
-        on:click={() => {
+        onclick={() => {
           window.top.location.reload()
         }}>back</button
       >

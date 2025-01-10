@@ -4,17 +4,35 @@
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 
-  export let nodes = []
-  export let sidebarExpanded = true
-  export let rootNodesExpanded = true
-  export let projectTitle
-  export let projectLogo
-  export let projectLogoDarkmode
-  export let filter
-  export let panelExpanded = true
-  export let docsLink
-  export let appTheme
-  export let bookmarks = []
+  /**
+   * @typedef {Object} Props
+   * @property {any} [nodes]
+   * @property {boolean} [sidebarExpanded]
+   * @property {boolean} [rootNodesExpanded]
+   * @property {any} projectTitle
+   * @property {any} projectLogo
+   * @property {any} projectLogoDarkmode
+   * @property {any} filter
+   * @property {boolean} [panelExpanded]
+   * @property {any} docsLink
+   * @property {any} appTheme
+   * @property {any} [bookmarks]
+   */
+
+  /** @type {Props} */
+  let {
+    nodes = [],
+    sidebarExpanded = true,
+    rootNodesExpanded = true,
+    projectTitle,
+    projectLogo,
+    projectLogoDarkmode,
+    filter,
+    panelExpanded = true,
+    docsLink,
+    appTheme,
+    bookmarks = [],
+  } = $props()
 
   function toggleRootFolders() {
     dispatch('out', { toggleRootFolders: true })
@@ -56,7 +74,7 @@
       type="search"
       value={filter || ''}
       placeholder="Filter..."
-      on:input={updateFilter}
+      oninput={updateFilter}
     />
   </div>
   {#if nodes.length == 0 && filter}
@@ -75,7 +93,7 @@
     <!-- prettier-ignore -->
     <ul>
       <li>
-        <button class="controls_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} on:click={toggleRootFolders}>
+        <button class="controls_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} onclick={toggleRootFolders}>
           {#if rootNodesExpanded}
             <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l5-5 5 5M7 4l5 5 5-5" /></svg>
           {:else}
@@ -85,7 +103,7 @@
         </button>
       </li>
       <li>
-        <button class="controls_btn" title={panelExpanded ? 'Collapse' : 'Restore'} on:click={toggleExpandPanel}>
+        <button class="controls_btn" title={panelExpanded ? 'Collapse' : 'Restore'} onclick={toggleExpandPanel}>
           {#if panelExpanded}
             <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line x1="3" x2="21" y1="15" y2="15" /><path d="m15 8-3 3-3-3" /></svg>
           {:else}

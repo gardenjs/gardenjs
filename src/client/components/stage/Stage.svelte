@@ -1,4 +1,6 @@
 <script>
+  import { run } from 'svelte/legacy'
+
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   import HorizontalSplitPane from '../panes/HorizontalSplitPane.svelte'
   import ResizePane from '../panes/ResizePane.svelte'
@@ -9,23 +11,44 @@
 
   const dispatch = createEventDispatcher()
 
-  export let componentName
-  export let das = {}
-  export let stageStyle
-  export let stageSize
-  export let selectedExample
-  export let stageContainerHeight
-  export let stageContainerMaxHeight
-  export let stageHeight
-  export let stageWidth
-  export let stageMaxHeight
-  export let stageMaxWidth
-  export let panelExpanded
-  export let theme
-  export let devmodus
+  /**
+   * @typedef {Object} Props
+   * @property {any} componentName
+   * @property {any} [das]
+   * @property {any} stageStyle
+   * @property {any} stageSize
+   * @property {any} selectedExample
+   * @property {any} stageContainerHeight
+   * @property {any} stageContainerMaxHeight
+   * @property {any} stageHeight
+   * @property {any} stageWidth
+   * @property {any} stageMaxHeight
+   * @property {any} stageMaxWidth
+   * @property {any} panelExpanded
+   * @property {any} theme
+   * @property {any} devmodus
+   */
 
-  let myframeready
-  let myframe
+  /** @type {Props} */
+  let {
+    componentName,
+    das = {},
+    stageStyle,
+    stageSize,
+    selectedExample,
+    stageContainerHeight,
+    stageContainerMaxHeight,
+    stageHeight,
+    stageWidth,
+    stageMaxHeight,
+    stageMaxWidth,
+    panelExpanded,
+    theme,
+    devmodus,
+  } = $props()
+
+  let myframeready = $state()
+  let myframe = $state()
 
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach((entry) => {
@@ -63,23 +86,6 @@
   onDestroy(() => {
     resizeObserver.disconnect()
   })
-
-  $: {
-    if (myframeready) {
-      if (
-        !myframe.contentDocument ||
-        !/frame.html$/.test(myframe.contentWindow.location)
-      ) {
-        window.location.reload
-      }
-      myframe.contentWindow.postMessage(
-        { selectedExample, componentName, stageSize, theme },
-        window.location
-      )
-    }
-  }
-
-  $: tabs = createTabs(das)
 
   function createTabs(das) {
     const tabs = []
@@ -141,6 +147,21 @@
       dispatch('out', { stageWidth: evt.detail.stageWidth })
     }
   }
+  run(() => {
+    if (myframeready) {
+      if (
+        !myframe.contentDocument ||
+        !/frame.html$/.test(myframe.contentWindow.location)
+      ) {
+        window.location.reload
+      }
+      myframe.contentWindow.postMessage(
+        { selectedExample, componentName, stageSize, theme },
+        window.location
+      )
+    }
+  })
+  let tabs = $derived(createTabs(das))
 </script>
 
 <HorizontalSplitPane
@@ -148,28 +169,31 @@
   maxHeight={stageContainerMaxHeight}
   on:out={handleHorizontalSplitPaneOut}
 >
-  <ResizePane
-    slot="top"
-    disabled={stageSize !== 'full'}
-    maxHeight={stageMaxHeight}
-    maxWidth={stageMaxWidth}
-    paneHeight={stageHeight}
-    paneWidth={stageWidth}
-    on:out={handleResizePaneOut}
-  >
-    <iframe
-      class="stage_iframe"
-      title="preview"
-      bind:this={myframe}
-      src="/frame.html"
-      style={stageStyle}
-    ></iframe>
-  </ResizePane>
-  <div slot="bottom" class="panel">
-    {#if panelExpanded}
-      <PanelComponent {tabs} on:out />
-    {/if}
-  </div>
+  {#snippet top()}
+    <ResizePane
+      disabled={stageSize !== 'full'}
+      maxHeight={stageMaxHeight}
+      maxWidth={stageMaxWidth}
+      paneHeight={stageHeight}
+      paneWidth={stageWidth}
+      on:out={handleResizePaneOut}
+    >
+      <iframe
+        class="stage_iframe"
+        title="preview"
+        bind:this={myframe}
+        src="/frame.html"
+        style={stageStyle}
+      ></iframe>
+    </ResizePane>
+  {/snippet}
+  {#snippet bottom()}
+    <div class="panel">
+      {#if panelExpanded}
+        <PanelComponent {tabs} on:out />
+      {/if}
+    </div>
+  {/snippet}
 </HorizontalSplitPane>
 
 <style>

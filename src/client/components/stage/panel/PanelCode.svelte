@@ -1,16 +1,20 @@
 <script>
+  import { run } from 'svelte/legacy'
+
   import { highlightElement } from '../../highlight/Highlight.js'
 
-  export let componentName
-  export let devmodus
+  /**
+   * @typedef {Object} Props
+   * @property {any} componentName
+   * @property {any} devmodus
+   */
 
-  let code
-  let codeblock
-  let rawComponentMap = []
+  /** @type {Props} */
+  let { componentName, devmodus } = $props()
 
-  $: {
-    updateCode(componentName, rawComponentMap)
-  }
+  let code = $state()
+  let codeblock = $state()
+  let rawComponentMap = $state([])
 
   if (!devmodus) {
     importComponentMap()
@@ -28,11 +32,14 @@
     })
   }
 
-  $: {
+  run(() => {
+    updateCode(componentName, rawComponentMap)
+  })
+  run(() => {
     if (code && codeblock) {
       highlightElement(codeblock)
     }
-  }
+  })
 </script>
 
 <div>
