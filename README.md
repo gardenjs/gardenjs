@@ -6,19 +6,19 @@
 </p>
 
 <div>
-  <a href="https://github.com/gardenjs/gardenjs/blob/main/LICENSE.md" style="margin: 2px;">
+  <a href="https://github.com/gardenjs/gardenjs/blob/main/LICENSE.md">
     <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License" data-canonical-src="https://img.shields.io/github/license/gardenjs/gardenjs.svg">
   </a>
-  <a href="https://www.npmjs.com/package/gardenjs" target="_blank" style="margin: 2px;">
+  <a href="https://www.npmjs.com/package/gardenjs" target="_blank">
     <img alt="NPM Version" src="https://img.shields.io/npm/v/gardenjs?color=blue">
   </a>
-  <a href="https://github.com/gardenjs/gardenjs/actions" style="margin: 2px;">
+  <a href="https://github.com/gardenjs/gardenjs/actions">
     <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/gardenjs/gardenjs/npm-publish.yml">
   </a>
-  <a href="https://gardenjs.org/" target="_blank" style="margin: 2px;">
+  <a href="https://gardenjs.org/" target="_blank">
     <img alt="Gardenjs Website & Docs" src="https://github.com/gardenjs/branding/blob/main/badge/badge_website.svg?raw=true">
   </a>
-  <a href="https://demo.gardenjs.org/" target="_blank" style="margin: 2px;">
+  <a href="https://demo.gardenjs.org/" target="_blank">
     <img alt="Gardenjs Demo" src="https://github.com/gardenjs/branding/blob/main/badge/badge_demo.svg?raw=true">
   </a>
 </div>
