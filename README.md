@@ -15,6 +15,12 @@
   <a href="https://github.com/gardenjs/gardenjs/actions">
     <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/gardenjs/gardenjs/npm-publish.yml">
   </a>
+  <a href="https://gardenjs.org/" target="_blank">
+    <img alt="Gardenjs Website & Docs" src="https://github.com/gardenjs/branding/blob/main/badge/badge_website.svg?raw=true">
+  </a>
+  <a href="https://demo.gardenjs.org/" target="_blank">
+    <img alt="Gardenjs Demo" src="https://github.com/gardenjs/branding/blob/main/badge/badge_demo.svg?raw=true">
+  </a>
 </div>
 
 ## The quick and easy alternative
