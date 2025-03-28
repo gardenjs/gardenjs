@@ -3,10 +3,13 @@ import path from 'path'
 import { createHash } from 'crypto'
 
 export async function findAndReadDasFiles({ basepath, navbasenode }) {
+  const uniqueNames = {}
   const promises = (await findDasFiles(basepath)).map(async (file) => {
     try {
       const das = await readDasFile(file)
       await validate(das, file)
+      makeNameUnique(das, navbasenode, file.relativepath, uniqueNames)
+      uniqueNames[navbasenode + file.relativepath + das.name] = true
       file.das = das
       file.navbasenode = navbasenode
       return file
@@ -28,6 +31,28 @@ function assertIsSet(file, das, prop) {
     throw new Error(
       `Missing property ${prop} in das file ${file.filename} at ${file.relativepath}`
     )
+}
+
+function isUnique(fullname, uniqueNames) {
+  return uniqueNames[fullname] === undefined
+}
+
+function makeNameUnique(das, navbasenode, relativepath, uniqueNames) {
+  const name =
+    das.name ??
+    das.file.substring(das.file.lastIndexOf('/') + 1, das.file.lastIndexOf('.'))
+  das.name = name
+  if (!isUnique(navbasenode + relativepath + name, uniqueNames)) {
+    let counter = 2
+    let nameWithCounter = name + '_' + counter
+    while (
+      !isUnique(navbasenode + relativepath + nameWithCounter, uniqueNames)
+    ) {
+      counter++
+      nameWithCounter = name + '_' + counter
+    }
+    das.name = nameWithCounter
+  }
 }
 
 async function assertFileExist(

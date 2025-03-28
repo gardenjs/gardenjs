@@ -302,9 +302,7 @@ function createComponentDescription({
   hooks,
   decorators,
 }) {
-  const displayname =
-    das.name ??
-    das.file.substring(das.file.lastIndexOf('/') + 1, das.file.lastIndexOf('.'))
+  const displayname = das.name
   const name = displayname.replaceAll(' ', '_')
   const extension = das.file.substring(das.file.lastIndexOf('.'))
   const fullname = createFullname(navbasenode, relativepath, name)
