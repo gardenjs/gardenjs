@@ -206,8 +206,12 @@
 
 <div class:full id="garden_app">
   {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}
-    {@const SvelteComponent = component}
-    <SvelteComponent {...selectedExample?.input} on:out={handleComponentOut} />
+    <svelte:component
+      this={component}
+      {...selectedExample?.input}
+      {...redirectData}
+      on:out={handleComponentOut}
+    />
   {/if}
 </div>
 

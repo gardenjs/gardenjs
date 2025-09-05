@@ -18,6 +18,8 @@
     setThemes,
     selectTheme,
     themes,
+    stageSizes,
+    setStageSizes,
     appTheme,
     updateAppTheme,
     activeTheme,
@@ -78,6 +80,9 @@
   })
   run(() => {
     setThemes(config.themes)
+  })
+  run(() => {
+    setStageSizes(config.devices)
   })
   run(() => {
     updateSelectedComponent($currentRoute, $componentName)
@@ -211,6 +216,7 @@
         sidebarExpanded={$sidebarExpanded}
         node={$selectedNode}
         themes={$themes}
+        stageSizes={$stageSizes}
         appTheme={$appTheme}
         {stageRect}
         stageSize={$stageSize}
