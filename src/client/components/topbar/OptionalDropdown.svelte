@@ -12,7 +12,7 @@
     {@render buttonSnippet?.()}
     <div class="dropdown_items" class:dropdown_items-right={dropright}>
       <ul>
-        {#each options as option}
+        {#each options as option (option.name)}
           <li>
             <button
               class:active={option.active}
@@ -76,6 +76,7 @@
     padding: 0.5rem;
     font-size: 0.75rem;
     color: var(--c-basic-900);
+    font-weight: 500;
     text-transform: capitalize;
     white-space: nowrap;
   }
@@ -94,7 +95,6 @@
   .dropdown_items ul li button:hover,
   .dropdown_items ul li button:focus-visible {
     color: var(--c-primary);
-    font-weight: 500;
     background-color: var(--c-basic-100);
   }
   .dropdown_items ul li button.active {
