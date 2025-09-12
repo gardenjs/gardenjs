@@ -16,6 +16,18 @@ function localStore(
 }
 
 export const themes = writable([])
+export const stageSizes = writable({
+  small: [{ name: 'small', h: 1170, w: 550 }],
+  medium: [{ name: 'medium', h: 1080, w: 810 }],
+  large: [{ name: 'large', h: 960, w: 1536 }],
+})
+
+const fullStageSize = {
+  name: 'full',
+  h: '100%',
+  w: '100%',
+}
+
 export const stageStyle = writable('')
 export const stageSize = localStore('stageSize', 'full')
 export const landscape = localStore(
@@ -48,23 +60,8 @@ export const mobileSidebarExpanded = writable(false)
 
 let previousPanelHeight = ''
 
-const sizes = {
-  small: {
-    frameheight: '1170px',
-    framewidth: '550px',
-  },
-  medium: {
-    frameheight: '1080px',
-    framewidth: '810px',
-  },
-  large: {
-    frameheight: '960px',
-    framewidth: '1536px',
-  },
-  full: {
-    frameheight: '100%',
-    framewidth: '100%',
-  },
+export function setStageSizes(newStageSizes) {
+  stageSizes.set(newStageSizes)
 }
 
 export function setThemes(newThemes) {
@@ -105,9 +102,25 @@ export function getCurrentTheme() {
   return { stageBg: 'white' }
 }
 
+function findStageSize(name) {
+  if (name === 'full') {
+    return fullStageSize
+  }
+  const sizes = get(stageSizes)
+
+  const found = [
+    ...(sizes.small ?? []),
+    ...(sizes.medium ?? []),
+    ...(sizes.large ?? []),
+  ].find((sts) => sts.name === name)
+  return found
+    ? { ...found, h: `${found.h}px`, w: `${found.w}px` }
+    : fullStageSize
+}
+
 function computeStageStyle() {
   const stageBg = getCurrentTheme().stageBg
-  const { frameheight, framewidth } = sizes[get(stageSize)]
+  const { h: frameheight, w: framewidth } = findStageSize(get(stageSize))
   const size = get(landscape)
     ? `width: ${frameheight}; height: ${framewidth}`
     : `width: ${framewidth}; height: ${frameheight}`
@@ -218,6 +231,15 @@ export function handleSelectionChanged() {
 
 export function setStagesize(nStageSize) {
   stageSize.set(nStageSize)
+  const oldStageSizes = get(stageSizes)
+  const newStageSizes = Object.keys(oldStageSizes).reduce((acc, key) => {
+    acc[key] = oldStageSizes[key].map((s) => ({
+      ...s,
+      active: s.name === nStageSize,
+    }))
+    return acc
+  }, {})
+  stageSizes.set(newStageSizes)
   computeStageStyle()
 }
 

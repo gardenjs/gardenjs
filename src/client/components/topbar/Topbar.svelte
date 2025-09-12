@@ -1,6 +1,7 @@
 <script>
   import { run } from 'svelte/legacy'
 
+  import OptionalDropdown from './OptionalDropdown.svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 
@@ -10,6 +11,7 @@
    * @property {string} [appTheme]
    * @property {boolean} [landscape]
    * @property {string} [stageSize]
+   * @property {any} [stageSizes]
    * @property {any} [themes]
    * @property {any} stageRect
    * @property {any} stageMaxHeight
@@ -23,6 +25,7 @@
     appTheme = 'default',
     landscape = false,
     stageSize = 'full',
+    stageSizes = {},
     themes = [],
     stageRect,
     stageMaxHeight,
@@ -63,9 +66,9 @@
     })
   }
 
-  function setFramesize(nStageSize) {
+  function dispatchStageSizeChange(stageSize) {
     dispatch('out', {
-      stageSize: nStageSize,
+      stageSize,
     })
   }
 
@@ -81,9 +84,9 @@
     })
   }
 
-  function handleThemeChange(theme) {
+  function handleThemeChange(selectTheme) {
     dispatch('out', {
-      selectTheme: theme,
+      selectTheme,
     })
   }
 
@@ -96,6 +99,12 @@
   function handleSetContainerHeight(evt) {
     dispatch('out', {
       stageHeight: Number.parseInt(evt.target.value),
+    })
+  }
+
+  function handleButtonClick(stageSize) {
+    dispatch('out', {
+      stageSize,
     })
   }
 </script>
@@ -124,28 +133,42 @@
       {/if}
     </div>
     <div class="topbar_nav">
-      <div class="stagesize-value">
-        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerWidth} onchange={handleSetContainerWidth}  min="50" max={stageMaxWidth}/>
-        <div class="stagesize-value-multi_sign">&#47;</div>
-        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} onchange={handleSetContainerHeight} min="50" max={stageMaxHeight}/>
-      </div>
       <div class="stagesize-nav">
-        <button title="Small" class:active={stageSize === 'small'} onclick={() => setFramesize('small')}>
-          <span class="is-hidden">Resize viewport to medium</span>
+        {#if stageSizes.small?.length > 0}
+          <OptionalDropdown options={stageSizes.small} handleButtonClick={dispatchStageSizeChange }>
+            {#snippet buttonSnippet({onClick})}
+            <button class="dropdown_btn topbar_btn" class:active={stageSizes.small.some(s => s.active)} title="Small" onclick={onClick}>
+          <span class="is-hidden">Resize viewport to small</span>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><path d="M12 18h.01" /></svg>
           <span class="dot"></span>
-        </button>
-        <button title="Medium" class:active={stageSize === 'medium'} onclick={() => setFramesize('medium')}>
+  </button>
+  {/snippet}
+        </OptionalDropdown>
+        {/if}
+        {#if stageSizes.medium?.length > 0}
+          <OptionalDropdown options={stageSizes.medium} handleButtonClick={dispatchStageSizeChange} >
+            {#snippet buttonSnippet({onClick})}
+            <button class="dropdown_btn topbar_btn" class:active={stageSizes.medium.some(s => s.active)} title="Medium" onclick={onClick}>
           <span class="is-hidden">Resize viewport to medium</span>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M12 18h.01" /></svg>
           <span class="dot"></span>
-        </button>
-        <button title="Large" class:active={stageSize === 'large'} onclick={() => setFramesize('large')}>
+  </button>
+  {/snippet}
+        </OptionalDropdown>
+        {/if}
+        {#if stageSizes.large?.length > 0}
+          <OptionalDropdown options={stageSizes.large} handleButtonClick={dispatchStageSizeChange}>
+            {#snippet buttonSnippet({onClick})}
+            <button class="dropdown_btn topbar_btn" class:active={stageSizes.large.some(s => s.active)} title="Large" onclick={onClick}>
+
           <span class="is-hidden">Resize viewport to large</span>
           <svg xmlns="http://www.w3.org/2000/svg" class:landscape height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" ry="2" /><path d="M2 20h20" /></svg>
           <span class="dot"></span>
-        </button>
-        <button title="Full" class:active={stageSize === 'full'} onclick={() => setFramesize('full')}>
+  </button>
+  {/snippet}
+        </OptionalDropdown>
+        {/if}
+        <button title="Full" class:active={stageSize === 'full'} onclick={() => dispatchStageSizeChange('full')}>
           <span class="is-hidden">Resize viewport to full</span>
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><path d="M8 21h8m-4-4v4" /></svg>
           <span class="dot"></span>
@@ -155,29 +178,24 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="12" height="20" x="6" y="2" rx="2" /><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
         </button>
       </div>
+      <div class="stagesize-value">
+        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerWidth} onchange={handleSetContainerWidth}  min="50" max={stageMaxWidth}/>
+        <div class="stagesize-value-multi_sign">&#47;</div>
+        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} onchange={handleSetContainerHeight} min="50" max={stageMaxHeight}/>
+      </div>
       <button class="topbar_btn openexternal_btn" title="Open component in new tab" onclick={openInTab}>
         <span class="is-hidden">Open component in new tab</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3" /></svg>
       </button>
       {#if themes.length > 1}
-        <div class="dropdown">
-          <button class="dropdown_btn topbar_btn" title="Switch component theme">
-            <span class="is-hidden">Open menu for selecting themes</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" /><circle cx="17.5" cy="10.5" r=".5" /><circle cx="8.5" cy="7.5" r=".5" /><circle cx="6.5" cy="12.5" r=".5" /><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" /></svg>
-          </button>
-          <div class="dropdown_items">
-            <ul>
-              {#each themes as theme}
-                <li>
-                  <button class:active={theme.active} onclick={() => handleThemeChange(theme.name)}>
-                    <span class="dropdown_item-dot"></span>
-                    {theme.name}
-                  </button>
-                </li>
-              {/each}
-            </ul>
-          </div>
-        </div>
+        <OptionalDropdown options={themes} dropright={true} handleButtonClick={handleThemeChange}>
+          {#snippet buttonSnippet()}
+  <button class="dropdown_btn topbar_btn" title="Switch component theme" >
+        <span class="is-hidden">Open menu for selecting themes</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" /><circle cx="17.5" cy="10.5" r=".5" /><circle cx="8.5" cy="7.5" r=".5" /><circle cx="6.5" cy="12.5" r=".5" /><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" /></svg>
+  </button>
+  {/snippet}
+      </OptionalDropdown> 
       {/if}
       <button class="topbar_btn is-last-btn" onclick={toggleDarkmode} title={dark ? 'Light mode' : 'Dark mode'}>
         <span class="is-hidden">{dark ? 'Light mode' : 'Dark mode'}</span>
@@ -319,7 +337,6 @@
     .stagesize-nav {
       position: relative;
       display: inline-flex;
-      margin: 0 0.75rem;
       background-color: var(--c-basic-100);
     }
     .stagesize-nav button {
@@ -338,7 +355,7 @@
     .stagesize-nav button:focus-visible {
       background-color: var(--c-basic-150);
     }
-    .stagesize-nav button svg {
+    .stagesize-nav svg {
       height: 1.125rem;
       color: var(--c-basic-700);
       transition: 0.2s;
@@ -348,11 +365,11 @@
     .stagesize-nav button.active svg {
       color: var(--c-primary);
     }
-    .stagesize-nav button svg.landscape {
+    .stagesize-nav svg.landscape {
       transform: rotate(90deg);
       transition: 0.2s;
     }
-    .stagesize-nav button .dot {
+    .stagesize-nav .dot {
       display: block;
       position: absolute;
       left: 50%;
@@ -369,75 +386,5 @@
     .stagesize-nav button.active .dot {
       background-color: var(--c-primary);
     }
-  }
-
-  /* theme dropdown nav */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    z-index: 99;
-  }
-  .dropdown_items {
-    visibility: hidden;
-    position: absolute;
-    right: 0;
-    padding: 0.375rem 0 0;
-    z-index: 9;
-  }
-  .dropdown_items ul {
-    margin: 0;
-    padding: 0;
-    background-color: var(--c-basic-50);
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
-      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
-  .dropdown_items ul li {
-    display: block;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .dropdown_items ul li button {
-    display: flex;
-    align-items: center;
-    justify-items: flex-start;
-    width: 100%;
-    min-width: 5rem;
-    padding: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--c-basic-900);
-    text-transform: capitalize;
-    white-space: nowrap;
-  }
-  .dropdown_items ul li button .dropdown_item-dot {
-    display: block;
-    margin: 0 0.5rem 0 0;
-    height: 0.313rem;
-    width: 0.313rem;
-    background-color: transparent;
-    border-radius: 50%;
-  }
-  .dropdown_items ul li button.active .dropdown_item-dot,
-  .dropdown_items ul li button.active:hover .dropdown_item-dot {
-    background-color: var(--c-primary);
-  }
-  .dropdown_items ul li button:hover,
-  .dropdown_items ul li button:focus-visible {
-    color: var(--c-primary);
-    font-weight: 500;
-    background-color: var(--c-basic-100);
-  }
-  .dropdown_items ul li button.active {
-    color: var(--c-primary);
-    font-weight: 500;
-    background-color: var(--c-primary-bg);
-    border-color: var(--c-primary);
-  }
-  .dropdown:hover > .dropdown_items,
-  .dropdown:focus-visible > .dropdown_items {
-    display: block;
-    visibility: visible;
   }
 </style>
