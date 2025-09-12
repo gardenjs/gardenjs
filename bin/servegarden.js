@@ -254,6 +254,20 @@ export default {
   //   'src/assets/scss/main.scss'
   // ],
 
+  // Define the devices you want to simulate in the stage for each category.
+  // There are three categories: small, medium, large.
+  // If devices is not set , default devices for each category are used.
+  // If a category is not set, no devices of this category are used.
+  //  devices: {
+  //    small: [
+  //      {name: 'phone', w: 375, h: 667},
+  //      {name: 'phone-small', w: 320, h: 568},
+  //      {name: 'phone-plus', w: 414, h: 896}
+  //    ],
+  //    medium: [{name: 'tablet', w: 768, h: 1024}],
+  //    large: [{name: 'laptop', w: 1440, h: 900}],
+  //  },
+
   // Edit or disable "Themes" depending on whether your app uses themes.
   // According to your requirements, you may also need to adjust the
   // "onThemeChange" function below accordingly.
