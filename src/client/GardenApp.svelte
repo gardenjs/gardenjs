@@ -82,7 +82,9 @@
     setThemes(config.themes)
   })
   run(() => {
-    setStageSizes(config.devices)
+    if (config.devices) {
+      setStageSizes(config.devices)
+    }
   })
   run(() => {
     updateSelectedComponent($currentRoute, $componentName)
