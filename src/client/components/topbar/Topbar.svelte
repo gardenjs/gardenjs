@@ -101,12 +101,6 @@
       stageHeight: Number.parseInt(evt.target.value),
     })
   }
-
-  function handleButtonClick(stageSize) {
-    dispatch('out', {
-      stageSize,
-    })
-  }
 </script>
 
 <!-- prettier-ignore -->
@@ -183,6 +177,10 @@
         <div class="stagesize-value-multi_sign">&#47;</div>
         <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} onchange={handleSetContainerHeight} min="50" max={stageMaxHeight}/>
       </div>
+      <button class="topbar_btn show-m-p_btn" title="Visualise margins and paddings">
+        <span class="is-hidden">Visualise margins and paddings</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="show-margins-paddings" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15v-3.014M16 15v-3.014M20 6H4m16 2V4M4 8V4m4 11v-3.014"/><rect x="3" y="12" width="18" height="7" rx="1"/></svg>
+      </button>
       <button class="topbar_btn openexternal_btn" title="Open component in new tab" onclick={openInTab}>
         <span class="is-hidden">Open component in new tab</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3" /></svg>
