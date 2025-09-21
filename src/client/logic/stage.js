@@ -58,6 +58,8 @@ export const activeTheme = localStore('frameTheme')
 export const desktopSidebarExpanded = writable(true)
 export const mobileSidebarExpanded = writable(false)
 
+export const showInspector = writable(true)
+
 let previousPanelHeight = ''
 
 export function setStageSizes(newStageSizes) {

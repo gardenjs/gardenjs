@@ -1,7 +1,10 @@
 <script>
   import { run } from 'svelte/legacy'
 
+  import { onMount } from 'svelte'
+
   import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
+  import Inspector from '../client/components/stage/Inspector.svelte'
   /**
    * @typedef {Object} Props
    * @property {any} [componentMap]
@@ -24,12 +27,20 @@
   let redirectData = {}
   let componentChanged
   let selectedExampleChanged
+  let showInspector = true
 
   let afterFns = []
   let afterAllFns = []
   let beforeFns = []
   let beforeAllFns = []
   let afterRenderedFns = []
+
+  let contentPane = $state()
+  let mounted = $state(false)
+
+  onMount(() => {
+    mounted = true
+  })
 
   window.addEventListener('message', (evt) => {
     if (config.themeHandler) {
@@ -204,7 +215,10 @@
   }
 </script>
 
-<div class:full id="garden_app">
+{#if mounted && showInspector && contentPane}
+  <Inspector active={showInspector} {contentPane} />
+{/if}
+<div class:full id="garden_app" bind:this={contentPane}>
   {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}
     <svelte:component
       this={component}

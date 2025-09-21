@@ -34,6 +34,7 @@
     sidebarExpanded,
     toggleExpandSidebar,
     handleSelectionChanged,
+    showInspector,
   } from './logic/stage.js'
   import {
     nodes,
@@ -241,6 +242,7 @@
         stageWidth={$stageWidth}
         stageMaxHeight={$stageMaxHeight}
         stageMaxWidth={$stageMaxWidth}
+        showInspector={$showInspector}
         theme={$activeTheme}
         panelExpanded={$panelExpanded}
         devmodus={config.devmodus}
