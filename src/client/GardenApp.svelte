@@ -33,6 +33,7 @@
     updateStageWidth,
     sidebarExpanded,
     toggleExpandSidebar,
+    toggleShowInspector,
     handleSelectionChanged,
     showInspector,
   } from './logic/stage.js'
@@ -139,6 +140,9 @@
     if (evt.detail.landscape !== undefined) {
       setLandscape(evt.detail.landscape)
     }
+    if (evt.detail.toggleShowInspector) {
+      toggleShowInspector()
+    }
   }
 
   function handleStageOut(evt) {
@@ -228,6 +232,7 @@
         stageHeight={$stageHeight}
         stageMaxHeight={$stageMaxHeight}
         stageMaxWidth={$stageMaxWidth}
+        showInspector={$showInspector}
         on:out={handleTopbarOut}
       />
       <Stage

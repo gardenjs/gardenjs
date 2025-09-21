@@ -1,7 +1,5 @@
 <script>
-  import { onMount } from 'svelte'
-
-  let showInspector = true
+  import { onMount, onDestroy } from 'svelte'
 
   let { contentPane } = $props()
   let overlay
@@ -18,8 +16,6 @@
   function updateOverlay(el) {
     const rect = el.getBoundingClientRect()
     const style = getComputedStyle(el)
-
-    console.log('DEBUG', 'uh', rect, style)
 
     let scrollTop = document.body.scrollTop
     let scrollLeft = document.body.scrollLeft
@@ -46,7 +42,6 @@
 
     // Overlay position + size (margin box)
     overlay.style.display = 'block'
-    console.log('DEBUG', 'scroll', scrollLeft, scrollTop)
     overlay.style.top = scrollTop + rect.top - margin.top + 'px'
     overlay.style.left = scrollLeft + rect.left - margin.left + 'px'
     overlay.style.width = rect.width + margin.left + margin.right + 'px'
@@ -65,26 +60,32 @@
     paddingBox.style.height = rect.height + 'px'
   }
 
+  const mouseMoveHandler = (event) => {
+    if (
+      event.target &&
+      event.target !== overlay &&
+      !overlay?.contains(event.target)
+    ) {
+      updateOverlay(event.target)
+    }
+  }
+  const mouseOutHandler = (event) => {
+    if (overlay && !overlay.contains(event.relatedTarget)) {
+      overlay.style.display = 'none'
+      //          padding = null
+      //          margin = null
+    }
+  }
+
   onMount(() => {
     if (contentPane) {
-      contentPane.addEventListener('mousemove', function (event) {
-        if (
-          showInspector &&
-          event.target &&
-          event.target !== overlay &&
-          !overlay?.contains(event.target)
-        ) {
-          updateOverlay(event.target)
-        }
-      })
-      contentPane.addEventListener('mouseout', function (event) {
-        if (overlay && !overlay.contains(event.relatedTarget)) {
-          //          overlay.style.display = 'none'
-          //          padding = null
-          //          margin = null
-        }
-      })
+      contentPane.addEventListener('mousemove', mouseMoveHandler)
+      contentPane.addEventListener('mouseout', mouseOutHandler)
     }
+  })
+  onDestroy(() => {
+    contentPane.removeEventListener('mousemove', mouseMoveHandler)
+    contentPane.removeEventListener('mouseout', mouseOutHandler)
   })
 </script>
 

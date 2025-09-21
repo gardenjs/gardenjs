@@ -27,7 +27,7 @@
   let redirectData = {}
   let componentChanged
   let selectedExampleChanged
-  let showInspector = true
+  let showInspector = $state(false)
 
   let afterFns = []
   let afterAllFns = []
@@ -48,6 +48,7 @@
     }
 
     full = evt.data.stageSize === 'full'
+    showInspector = evt.data.showInspector === true
     das = dasMap[evt.data.componentName]
     selectedExample =
       das?.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
@@ -216,8 +217,9 @@
 </script>
 
 {#if mounted && showInspector && contentPane}
-  <Inspector active={showInspector} {contentPane} />
+  <Inspector {contentPane} />
 {/if}
+<div>{showInspector}</div>
 <div class:full id="garden_app" bind:this={contentPane}>
   {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}
     <svelte:component

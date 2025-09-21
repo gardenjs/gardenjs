@@ -58,7 +58,7 @@ export const activeTheme = localStore('frameTheme')
 export const desktopSidebarExpanded = writable(true)
 export const mobileSidebarExpanded = writable(false)
 
-export const showInspector = writable(true)
+export const showInspector = writable(false)
 
 let previousPanelHeight = ''
 
@@ -200,6 +200,10 @@ export function toggleExpandSidebar() {
   } else {
     desktopSidebarExpanded.set(!get(desktopSidebarExpanded))
   }
+}
+
+export function toggleShowInspector() {
+  showInspector.set(!get(showInspector))
 }
 
 export const mobileNav = readable(window.innerWidth < 840, (set) => {

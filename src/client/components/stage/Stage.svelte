@@ -42,6 +42,7 @@
     stageWidth,
     stageMaxHeight,
     stageMaxWidth,
+    showInspector,
     panelExpanded,
     theme,
     devmodus,
@@ -156,7 +157,7 @@
         window.location.reload
       }
       myframe.contentWindow.postMessage(
-        { selectedExample, componentName, stageSize, theme },
+        { selectedExample, componentName, stageSize, theme, showInspector },
         window.location
       )
     }
