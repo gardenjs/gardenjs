@@ -9,6 +9,7 @@
   let margin = $state()
   let padding = $state()
   let content = $state()
+  let infobox = $state()
 
   //  let scrollTop = $state()
   //  let scrollLeft = $state()
@@ -40,6 +41,10 @@
       left: parseFloat(style.paddingLeft),
     }
 
+    const overlayTop = scrollTop + rect.top - margin.top
+    const overlayHeight = rect.height + margin.top + margin.bottom
+    const overlayBottom = overlayTop + overlayHeight
+
     // Overlay position + size (margin box)
     overlay.style.display = 'block'
     overlay.style.top = scrollTop + rect.top - margin.top + 'px'
@@ -58,6 +63,11 @@
     paddingBox.style.left = margin.left + 'px'
     paddingBox.style.width = rect.width + 'px'
     paddingBox.style.height = rect.height + 'px'
+
+    infobox.style.top =
+      overlayBottom + 200 < contentPane.offsetHeight
+        ? overlayBottom + 10 + 'px'
+        : overlayTop - 200 + 'px'
   }
 
   const mouseMoveHandler = (event) => {
@@ -94,32 +104,32 @@
     <div class="marginBox" bind:this={marginBox} />
     <div class="paddingBox" bind:this={paddingBox} />
   </div>
-  {#if padding && margin}
-    <div class="infobox">
-      <div>
-        width: {content.width}
-      </div>
-      <div>
-        height: {content.height}
-      </div>
-      <div>
-        background: {content.background}
-      </div>
-      <div>
-        margin: {margin.top}
-        {margin.right}
-        {margin.bottom}
-        {margin.left}
-      </div>
-      <div>
-        padding: {padding.top}
-        {padding.right}
-        {padding.bottom}
-        {padding.left}
-      </div>
-    </div>
-  {/if}
 </div>
+{#if padding && margin}
+  <div class="infobox" bind:this={infobox}>
+    <div>
+      width: {content.width}
+    </div>
+    <div>
+      height: {content.height}
+    </div>
+    <div>
+      background: {content.background}
+    </div>
+    <div>
+      margin: {margin.top}
+      {margin.right}
+      {margin.bottom}
+      {margin.left}
+    </div>
+    <div>
+      padding: {padding.top}
+      {padding.right}
+      {padding.bottom}
+      {padding.left}
+    </div>
+  </div>
+{/if}
 
 <style>
   .overlay {

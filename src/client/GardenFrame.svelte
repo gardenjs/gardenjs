@@ -219,7 +219,6 @@
 {#if mounted && showInspector && contentPane}
   <Inspector {contentPane} />
 {/if}
-<div>{showInspector}</div>
 <div class:full id="garden_app" bind:this={contentPane}>
   {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}
     <svelte:component
