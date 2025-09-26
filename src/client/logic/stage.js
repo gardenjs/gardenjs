@@ -59,6 +59,7 @@ export const desktopSidebarExpanded = writable(true)
 export const mobileSidebarExpanded = writable(false)
 
 export const showInspector = writable(false)
+export const showGrid = writable(false)
 
 let previousPanelHeight = ''
 
@@ -204,6 +205,10 @@ export function toggleExpandSidebar() {
 
 export function toggleShowInspector() {
   showInspector.set(!get(showInspector))
+}
+
+export function toggleShowGrid() {
+  showGrid.set(!get(showGrid))
 }
 
 export const mobileNav = readable(window.innerWidth < 840, (set) => {

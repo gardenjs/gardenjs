@@ -5,6 +5,7 @@
 
   import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
   import Inspector from '../client/components/stage/Inspector.svelte'
+  import BackgroundGrid from '../client/components/stage/BackgroundGrid.svelte'
   /**
    * @typedef {Object} Props
    * @property {any} [componentMap]
@@ -28,6 +29,7 @@
   let componentChanged
   let selectedExampleChanged
   let showInspector = $state(false)
+  let showGrid = $state(false)
 
   let afterFns = []
   let afterAllFns = []
@@ -49,6 +51,7 @@
 
     full = evt.data.stageSize === 'full'
     showInspector = evt.data.showInspector === true
+    showGrid = evt.data.showGrid === true
     das = dasMap[evt.data.componentName]
     selectedExample =
       das?.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
@@ -218,6 +221,9 @@
 
 {#if mounted && showInspector && contentPane}
   <Inspector {contentPane} />
+{/if}
+{#if mounted && showGrid}
+  <BackgroundGrid {contentPane} margin={full ? '0.5rem 0.5rem 0' : 0} />
 {/if}
 <div class:full id="garden_app" bind:this={contentPane}>
   {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}

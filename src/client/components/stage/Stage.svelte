@@ -25,6 +25,8 @@
    * @property {any} stageMaxHeight
    * @property {any} stageMaxWidth
    * @property {any} panelExpanded
+   * @property {any} showInspector
+   * @property {any} showGrid
    * @property {any} theme
    * @property {any} devmodus
    */
@@ -43,6 +45,7 @@
     stageMaxHeight,
     stageMaxWidth,
     showInspector,
+    showGrid,
     panelExpanded,
     theme,
     devmodus,
@@ -157,7 +160,14 @@
         window.location.reload
       }
       myframe.contentWindow.postMessage(
-        { selectedExample, componentName, stageSize, theme, showInspector },
+        {
+          selectedExample,
+          componentName,
+          stageSize,
+          theme,
+          showInspector,
+          showGrid,
+        },
         window.location
       )
     }
