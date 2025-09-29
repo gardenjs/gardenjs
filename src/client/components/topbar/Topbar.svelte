@@ -189,14 +189,14 @@
         <div class="stagesize-value-multi_sign">&#47;</div>
         <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} onchange={handleSetContainerHeight} min="50" max={stageMaxHeight}/>
       </div>
-      <button class="topbar_btn show-m-p_btn" class:active={showGrid === true} title="Show background grid" onclick="{toggleShowGrid}">
+      <button class="topbar_btn show-grid" class:active={showGrid === true} title="Show background grid" onclick="{toggleShowGrid}">
         <span class="is-hidden">Show background grid</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="show-margins-paddings" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15v-3.014M16 15v-3.014M20 6H4m16 2V4M4 8V4m4 11v-3.014"/><rect x="3" y="12" width="18" height="7" rx="1"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18M9 3v18m6-18v18"/></svg>
         <span class="dot"></span>
       </button>
       <button class="topbar_btn show-m-p_btn" class:active={showInspector === true} title="Visualise margins and paddings" onclick="{toggleShowInspector}">
         <span class="is-hidden">Visualise margins and paddings</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="show-margins-paddings" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15v-3.014M16 15v-3.014M20 6H4m16 2V4M4 8V4m4 11v-3.014"/><rect x="3" y="12" width="18" height="7" rx="1"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15v-3.014M16 15v-3.014M20 6H4m16 2V4M4 8V4m4 11v-3.014"/><rect x="3" y="12" width="18" height="7" rx="1"/></svg>
         <span class="dot"></span>
       </button>
       <button class="topbar_btn openexternal_btn" title="Open component in new tab" onclick={openInTab}>
