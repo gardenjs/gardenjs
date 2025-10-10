@@ -61,6 +61,18 @@ export const mobileSidebarExpanded = writable(false)
 export const showInspector = writable(false)
 export const showGrid = writable(false)
 
+export const gridSettings = writable({
+  size: 16,
+  style: 'lined',
+})
+
+export function setGridSettings({ size, style }) {
+  gridSettings.set({
+    size: size ?? 50,
+    style: style ?? 'lined',
+  })
+}
+
 let previousPanelHeight = ''
 
 export function setStageSizes(newStageSizes) {

@@ -46,6 +46,7 @@
     stageMaxWidth,
     showInspector,
     showGrid,
+    gridSettings,
     panelExpanded,
     theme,
     devmodus,
@@ -167,6 +168,7 @@
           theme,
           showInspector,
           showGrid,
+          gridSettings,
         },
         window.location
       )

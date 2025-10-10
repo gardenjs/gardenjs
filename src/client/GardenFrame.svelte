@@ -30,6 +30,7 @@
   let selectedExampleChanged
   let showInspector = $state(false)
   let showGrid = $state(false)
+  let gridSettings = $state({})
 
   let afterFns = []
   let afterAllFns = []
@@ -52,6 +53,7 @@
     full = evt.data.stageSize === 'full'
     showInspector = evt.data.showInspector === true
     showGrid = evt.data.showGrid === true
+    gridSettings = evt.data.gridSettings
     das = dasMap[evt.data.componentName]
     selectedExample =
       das?.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
@@ -223,7 +225,11 @@
   <Inspector {contentPane} />
 {/if}
 {#if mounted && showGrid}
-  <BackgroundGrid {contentPane} margin={full ? '0.5rem 0.5rem 0' : 0} />
+  <BackgroundGrid
+    {gridSettings}
+    {contentPane}
+    margin={full ? '0.5rem 0.5rem 0' : 0}
+  />
 {/if}
 <div class:full id="garden_app" bind:this={contentPane}>
   {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}
