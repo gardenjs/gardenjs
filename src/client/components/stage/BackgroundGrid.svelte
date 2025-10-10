@@ -8,10 +8,15 @@
   function updateGrid() {
     grid.style.margin = margin
     const size = gridSettings.size
+    const color = gridSettings.color
     grid.style.backgroundSize = `${size}px ${size}px`
+    if (gridSettings.style === 'lined') {
+      grid.style.backgroundImage = `linear-gradient(to right, ${color} 1px, transparent 1px), linear-gradient(to bottom, ${color} 1px, transparent 1px)`
+    }
     if (gridSettings.style === 'dotted') {
       grid.style.top = `-${size / 2}px`
       grid.style.left = `-${size / 2}px`
+      grid.style.backgroundImage = `radial-gradient(circle, ${color} 1px, transparent 1px)`
     }
   }
 

@@ -64,12 +64,14 @@ export const showGrid = writable(false)
 export const gridSettings = writable({
   size: 16,
   style: 'lined',
+  color: '#ddd',
 })
 
-export function setGridSettings({ size, style }) {
+export function setGridSettings({ size, style, color }) {
   gridSettings.set({
     size: size ?? 50,
     style: style ?? 'lined',
+    color: color ?? 'grey',
   })
 }
 
