@@ -1,7 +1,11 @@
 <script>
   import { run } from 'svelte/legacy'
 
+  import { onMount } from 'svelte'
+
   import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
+  import Inspector from '../client/components/stage/Inspector.svelte'
+  import BackgroundGrid from '../client/components/stage/BackgroundGrid.svelte'
   /**
    * @typedef {Object} Props
    * @property {any} [componentMap]
@@ -24,6 +28,9 @@
   let redirectData = {}
   let componentChanged
   let selectedExampleChanged
+  let showInspector = $state(false)
+  let showGrid = $state(false)
+  let gridSettings = $state({})
 
   let afterFns = []
   let afterAllFns = []
@@ -31,12 +38,22 @@
   let beforeAllFns = []
   let afterRenderedFns = []
 
+  let contentPane = $state()
+  let mounted = $state(false)
+
+  onMount(() => {
+    mounted = true
+  })
+
   window.addEventListener('message', (evt) => {
     if (config.themeHandler) {
       config.themeHandler(evt.data.theme)
     }
 
     full = evt.data.stageSize === 'full'
+    showInspector = evt.data.showInspector === true
+    showGrid = evt.data.showGrid === true
+    gridSettings = evt.data.gridSettings
     das = dasMap[evt.data.componentName]
     selectedExample =
       das?.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
@@ -204,7 +221,17 @@
   }
 </script>
 
-<div class:full id="garden_app">
+{#if mounted && showInspector && contentPane}
+  <Inspector {contentPane} />
+{/if}
+{#if mounted && showGrid}
+  <BackgroundGrid
+    {gridSettings}
+    {contentPane}
+    margin={full ? '0.5rem 0.5rem 0' : 0}
+  />
+{/if}
+<div class:full id="garden_app" bind:this={contentPane}>
   {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}
     <svelte:component
       this={component}

@@ -58,6 +58,23 @@ export const activeTheme = localStore('frameTheme')
 export const desktopSidebarExpanded = writable(true)
 export const mobileSidebarExpanded = writable(false)
 
+export const showInspector = writable(false)
+export const showGrid = writable(false)
+
+export const gridSettings = writable({
+  size: 16,
+  style: 'lined',
+  color: '#ddd',
+})
+
+export function setGridSettings({ size, style, color }) {
+  gridSettings.set({
+    size: size ?? 50,
+    style: style ?? 'lined',
+    color: color ?? 'grey',
+  })
+}
+
 let previousPanelHeight = ''
 
 export function setStageSizes(newStageSizes) {
@@ -198,6 +215,14 @@ export function toggleExpandSidebar() {
   } else {
     desktopSidebarExpanded.set(!get(desktopSidebarExpanded))
   }
+}
+
+export function toggleShowInspector() {
+  showInspector.set(!get(showInspector))
+}
+
+export function toggleShowGrid() {
+  showGrid.set(!get(showGrid))
 }
 
 export const mobileNav = readable(window.innerWidth < 840, (set) => {

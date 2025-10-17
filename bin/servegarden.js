@@ -267,6 +267,13 @@ export default {
   //    medium: [{name: 'tablet', w: 768, h: 1024}],
   //    large: [{name: 'laptop', w: 1440, h: 900}],
   //  },
+  
+  // Define custom background grid.
+  //  grid: {
+  //    style: 'dotted', // or 'lined'
+  //    size: 16, // in px
+  //    color: '#ddd', // any css color
+  //  }
 
   // Edit or disable "Themes" depending on whether your app uses themes.
   // According to your requirements, you may also need to adjust the
