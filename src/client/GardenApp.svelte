@@ -262,6 +262,7 @@
         showGrid={$showGrid}
         gridSettings={$gridSettings}
         theme={$activeTheme}
+        appTheme={$appTheme}
         panelExpanded={$panelExpanded}
         devmodus={config.devmodus}
         on:out={handleStageOut}

@@ -49,6 +49,7 @@
     gridSettings,
     panelExpanded,
     theme,
+    appTheme,
     devmodus,
   } = $props()
 
@@ -166,6 +167,7 @@
           componentName,
           stageSize,
           theme,
+          appTheme,
           showInspector,
           showGrid,
           gridSettings,

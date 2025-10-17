@@ -21,6 +21,7 @@
   let selectedExample = $state({})
   let selectedExampleTitle
   let full = $state(false)
+  let appTheme = $state()
   let currentRendererBuilder
   let currentRenderer
   let componentName
@@ -61,6 +62,7 @@
     componentName = evt.data.componentName || 'Welcome'
     selectedExampleChanged = selectedExampleTitle !== evt.data.selectedExample
     selectedExampleTitle = evt.data.selectedExample
+    appTheme = evt.data.appTheme
 
     component = componentMap?.[componentName]
 
@@ -222,7 +224,7 @@
 </script>
 
 {#if mounted && showInspector && contentPane}
-  <Inspector {contentPane} />
+  <Inspector {contentPane} {appTheme} />
 {/if}
 {#if mounted && showGrid}
   <BackgroundGrid
