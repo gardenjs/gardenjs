@@ -1,8 +1,9 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
 
-  let { contentPane } = $props()
+  let { contentPane, appTheme } = $props()
   let overlay
+  let infobox
   let marginBox
   let paddingBox
   let contentBox
@@ -10,14 +11,18 @@
   let margin = $state()
   let padding = $state()
   let content = $state()
-  let infobox = $state()
+  let target = $state()
 
-  //  let scrollTop = $state()
-  //  let scrollLeft = $state()
-
-  function updateOverlay(el) {
-    const rect = el.getBoundingClientRect()
-    const style = getComputedStyle(el)
+  function updateOverlay() {
+    if (!target) {
+      if (overlay?.style) {
+        overlay.style.display = 'none'
+      }
+      return
+    }
+    overlay.style.display = 'block'
+    const rect = target.getBoundingClientRect()
+    const style = getComputedStyle(target)
 
     let scrollTop = document.body.scrollTop
     let scrollLeft = document.body.scrollLeft
@@ -49,11 +54,12 @@
 
     const overlayTop = scrollTop + rect.top - margin.top
     const overlayHeight = rect.height
+    const overlayWidth = rect.width
     const overlayBottom = overlayTop + overlayHeight
     const overlayLeft = scrollLeft + rect.left - margin.left
+    const overlayRight = overlayLeft + overlayWidth
 
     // Overlay position + size (margin box)
-    overlay.style.display = 'block'
     overlay.style.top = overlayTop + 'px'
     overlay.style.left = overlayLeft + 'px'
     overlay.style.width = rect.width + 'px'
@@ -77,13 +83,19 @@
 
     const bodyRect = document.body.getBoundingClientRect()
     const infoboxHeight = 100
+    const infoboxWidth = 225
     const bodyHeight = bodyRect.height
+    const bodyWidth = bodyRect.width
 
-    const posTopPossible = overlayTop - infoboxHeight > 0
-    const posBottomPossible = overlayBottom + infoboxHeight < bodyHeight
+    const posTopPossible = overlayTop - scrollTop - infoboxHeight > 0
+    const posBottomPossible =
+      overlayBottom - scrollTop + infoboxHeight < bodyHeight
+    const posLeftPossible = overlayLeft - scrollLeft + infoboxWidth < bodyWidth
 
+    if (!infobox) {
+      return
+    }
     infobox.style.bottom = 'unset'
-    infobox.style.left = overlayLeft + 'px'
     if (posBottomPossible) {
       infobox.style.top = overlayBottom + margin.top + margin.bottom + 15 + 'px'
       infobox.classList.add('infobox-bottom')
@@ -94,9 +106,20 @@
       infobox.classList.remove('infobox-bottom')
     } else {
       infobox.style.top = 'unset'
-      infobox.style.bottom = 0
+      infobox.style.bottom = -scrollTop + 'px'
       infobox.classList.remove('infobox-top')
       infobox.classList.remove('infobox-bottom')
+    }
+    if (posLeftPossible) {
+      infobox.style.left = overlayLeft + 'px'
+      infobox.style.right = 'unset'
+      infobox.classList.add('infobox-left')
+      infobox.classList.remove('infobox-right')
+    } else {
+      infobox.style.left = 'unset'
+      infobox.style.right = bodyWidth - overlayRight + 'px'
+      infobox.classList.add('infobox-right')
+      infobox.classList.remove('infobox-left')
     }
   }
 
@@ -106,11 +129,13 @@
       event.target !== overlay &&
       !overlay?.contains(event.target)
     ) {
-      updateOverlay(event.target)
+      target = event.target
+      updateOverlay()
     }
   }
   const mouseOutHandler = (event) => {
     if (overlay && !overlay.contains(event.relatedTarget)) {
+      target = null
       overlay.style.display = 'none'
     }
   }
@@ -119,11 +144,13 @@
     if (contentPane) {
       contentPane.addEventListener('mousemove', mouseMoveHandler)
       contentPane.addEventListener('mouseout', mouseOutHandler)
+      document.body.addEventListener('scroll', updateOverlay, { passive: true })
     }
   })
   onDestroy(() => {
     contentPane.removeEventListener('mousemove', mouseMoveHandler)
     contentPane.removeEventListener('mouseout', mouseOutHandler)
+    document.body.removeEventListener('scroll', updateOverlay)
   })
 </script>
 
@@ -133,7 +160,11 @@
   <div class="contentBox" bind:this={contentBox} />
 </div>
 {#if padding && margin}
-  <div class="infobox infobox-bottom infobox-top" bind:this={infobox}>
+  <div
+    class="infobox infobox-left infobox-right infobox-bottom infobox-top"
+    class:dark={appTheme === 'dark'}
+    bind:this={infobox}
+  >
     <div class="info-item">
       <div class="attribute">Width:</div>
       <div class="value">{content.width}px</div>
@@ -206,7 +237,7 @@
     padding: 0.5rem;
     position: absolute;
     z-index: 999999;
-    background-color: #fff;
+    background-color: hsl(185, 100%, 95%);
     border-radius: 0.5rem;
     filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
@@ -222,33 +253,66 @@
       'Apple Color Emoji',
       'Segoe UI Emoji';
     font-size: 0.75rem;
-    color: #000;
+    color: hsl(216, 20%, 10%);
     letter-spacing: 0.5px;
     line-height: 1.6;
     overflow: visible;
   }
-  .infobox-bottom::before {
+  .infobox.dark {
+    background-color: hsl(185, 80%, 17%);
+    color: hsl(216, 30%, 98%);
+  }
+  .infobox-bottom.infobox-left::before {
     content: '';
     position: absolute;
     margin-top: -1.25rem;
     width: 1.75rem;
     height: 1.125rem;
-    background: #fff;
+    background-color: hsl(185, 100%, 95%);
     filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
-    left: 1rem;
+    left: 0.375rem;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
   }
-  .infobox-top::after {
+  .infobox-bottom.infobox-right::before {
+    content: '';
+    position: absolute;
+    margin-top: -1.25rem;
+    width: 1.75rem;
+    height: 1.125rem;
+    background-color: hsl(185, 100%, 95%);
+    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
+      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    right: 0.375rem;
+  }
+  .infobox-top.infobox-left::after {
     content: '';
     position: absolute;
     width: 1.75rem;
     height: 1.125rem;
-    background: #fff;
+    background-color: hsl(185, 100%, 95%);
     filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
-    left: 1rem;
+    left: 0.375rem;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+  .infobox-top.infobox-right::after {
+    content: '';
+    position: absolute;
+    width: 1.75rem;
+    height: 1.125rem;
+    background-color: hsl(185, 100%, 95%);
+    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
+      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    right: 0.375rem;
+  }
+  .dark.infobox-bottom.infobox-left::before,
+  .dark.infobox-bottom.infobox-right::before,
+  .dark.infobox-top.infobox-left::after,
+  .dark.infobox-top.infobox-right::after {
+    background-color: hsl(185, 80%, 17%);
   }
   .info-item {
     display: flex;

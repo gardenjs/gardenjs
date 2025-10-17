@@ -45,6 +45,7 @@
     showInspector,
     panelExpanded,
     theme,
+    appTheme,
     devmodus,
   } = $props()
 
@@ -157,7 +158,14 @@
         window.location.reload
       }
       myframe.contentWindow.postMessage(
-        { selectedExample, componentName, stageSize, theme, showInspector },
+        {
+          selectedExample,
+          componentName,
+          stageSize,
+          theme,
+          appTheme,
+          showInspector,
+        },
         window.location
       )
     }

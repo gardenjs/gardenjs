@@ -249,6 +249,7 @@
         stageMaxWidth={$stageMaxWidth}
         showInspector={$showInspector}
         theme={$activeTheme}
+        appTheme={$appTheme}
         panelExpanded={$panelExpanded}
         devmodus={config.devmodus}
         on:out={handleStageOut}

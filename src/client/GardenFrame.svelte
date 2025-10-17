@@ -20,6 +20,7 @@
   let selectedExample = $state({})
   let selectedExampleTitle
   let full = $state(false)
+  let appTheme = $state()
   let currentRendererBuilder
   let currentRenderer
   let componentName
@@ -56,6 +57,7 @@
     componentName = evt.data.componentName || 'Welcome'
     selectedExampleChanged = selectedExampleTitle !== evt.data.selectedExample
     selectedExampleTitle = evt.data.selectedExample
+    appTheme = evt.data.appTheme
 
     component = componentMap?.[componentName]
 
@@ -217,7 +219,7 @@
 </script>
 
 {#if mounted && showInspector && contentPane}
-  <Inspector {contentPane} />
+  <Inspector {contentPane} {appTheme} />
 {/if}
 <div class:full id="garden_app" bind:this={contentPane}>
   {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}
