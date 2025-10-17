@@ -34,8 +34,12 @@
     sidebarExpanded,
     toggleExpandSidebar,
     toggleShowInspector,
+    toggleShowGrid,
     handleSelectionChanged,
     showInspector,
+    showGrid,
+    gridSettings,
+    setGridSettings,
   } from './logic/stage.js'
   import {
     nodes,
@@ -86,6 +90,9 @@
   run(() => {
     if (config.devices) {
       setStageSizes(config.devices)
+    }
+    if (config.grid) {
+      setGridSettings(config.grid)
     }
   })
   run(() => {
@@ -142,6 +149,9 @@
     }
     if (evt.detail.toggleShowInspector) {
       toggleShowInspector()
+    }
+    if (evt.detail.toggleShowGrid) {
+      toggleShowGrid()
     }
   }
 
@@ -233,6 +243,7 @@
         stageMaxHeight={$stageMaxHeight}
         stageMaxWidth={$stageMaxWidth}
         showInspector={$showInspector}
+        showGrid={$showGrid}
         on:out={handleTopbarOut}
       />
       <Stage
@@ -248,6 +259,8 @@
         stageMaxHeight={$stageMaxHeight}
         stageMaxWidth={$stageMaxWidth}
         showInspector={$showInspector}
+        showGrid={$showGrid}
+        gridSettings={$gridSettings}
         theme={$activeTheme}
         appTheme={$appTheme}
         panelExpanded={$panelExpanded}
