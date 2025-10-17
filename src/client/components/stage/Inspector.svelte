@@ -48,37 +48,56 @@
     }
 
     const overlayTop = scrollTop + rect.top - margin.top
-    const overlayHeight = rect.height + margin.top + margin.bottom
+    const overlayHeight = rect.height
     const overlayBottom = overlayTop + overlayHeight
+    const overlayLeft = scrollLeft + rect.left - margin.left
 
     // Overlay position + size (margin box)
     overlay.style.display = 'block'
-    overlay.style.top = scrollTop + rect.top - margin.top + 'px'
-    overlay.style.left = scrollLeft + rect.left - margin.left + 'px'
-    overlay.style.width = rect.width + margin.left + margin.right + 'px'
-    overlay.style.height = rect.height + margin.top + margin.bottom + 'px'
+    overlay.style.top = overlayTop + 'px'
+    overlay.style.left = overlayLeft + 'px'
+    overlay.style.width = rect.width + 'px'
+    overlay.style.height = overlayHeight + 'px'
 
     // Margin visualization
-    marginBox.style.top = 0
-    marginBox.style.left = 0
-    marginBox.style.width = '100%'
-    marginBox.style.height = '100%'
+    marginBox.style.borderWidth = `${margin.top}px ${margin.right}px ${margin.bottom}px ${margin.left}px`
 
     // Padding visualization (inside content box)
     paddingBox.style.top = margin.top + 'px'
     paddingBox.style.left = margin.left + 'px'
-    paddingBox.style.width = rect.width + 'px'
-    paddingBox.style.height = rect.height + 'px'
+    paddingBox.style.width = rect.width - padding.left - padding.right + 'px'
+    paddingBox.style.height = rect.height - padding.top - padding.bottom + 'px'
+
+    paddingBox.style.borderWidth = `${padding.top}px ${padding.right}px ${padding.bottom}px ${padding.left}px`
 
     contentBox.style.top = margin.top + padding.top + 'px'
     contentBox.style.left = margin.left + padding.left + 'px'
-    contentBox.style.width = rect.width + -padding.left - padding.right + 'px'
-    contentBox.style.height = rect.height + -padding.top - padding.bottom + 'px'
+    contentBox.style.width = rect.width - padding.left - padding.right + 'px'
+    contentBox.style.height = rect.height - padding.top - padding.bottom + 'px'
 
-    infobox.style.top =
-      overlayBottom + 200 < contentPane.offsetHeight
-        ? overlayBottom + 10 + 'px'
-        : overlayTop - 200 + 'px'
+    const bodyRect = document.body.getBoundingClientRect()
+    const infoboxHeight = 100
+    const bodyHeight = bodyRect.height
+
+    const posTopPossible = overlayTop - infoboxHeight > 0
+    const posBottomPossible = overlayBottom + infoboxHeight < bodyHeight
+
+    infobox.style.bottom = 'unset'
+    infobox.style.left = overlayLeft + 'px'
+    if (posBottomPossible) {
+      infobox.style.top = overlayBottom + margin.top + margin.bottom + 15 + 'px'
+      infobox.classList.add('infobox-bottom')
+      infobox.classList.remove('infobox-top')
+    } else if (posTopPossible) {
+      infobox.style.top = overlayTop - 105 + 'px'
+      infobox.classList.add('infobox-top')
+      infobox.classList.remove('infobox-bottom')
+    } else {
+      infobox.style.top = 'unset'
+      infobox.style.bottom = 0
+      infobox.classList.remove('infobox-top')
+      infobox.classList.remove('infobox-bottom')
+    }
   }
 
   const mouseMoveHandler = (event) => {
@@ -93,8 +112,6 @@
   const mouseOutHandler = (event) => {
     if (overlay && !overlay.contains(event.relatedTarget)) {
       overlay.style.display = 'none'
-      //          padding = null
-      //          margin = null
     }
   }
 
@@ -111,14 +128,12 @@
 </script>
 
 <div bind:this={overlay} class="overlay">
-  <div class="boxes">
-    <div class="marginBox" bind:this={marginBox} />
-    <div class="paddingBox" bind:this={paddingBox} />
-    <div class="contentBox" bind:this={contentBox} />
-  </div>
+  <div class="marginBox" bind:this={marginBox} />
+  <div class="paddingBox" bind:this={paddingBox} />
+  <div class="contentBox" bind:this={contentBox} />
 </div>
 {#if padding && margin}
-  <div class="infobox" bind:this={infobox}>
+  <div class="infobox infobox-bottom infobox-top" bind:this={infobox}>
     <div class="info-item">
       <div class="attribute">Width:</div>
       <div class="value">{content.width}px</div>
@@ -143,7 +158,7 @@
     <div class="info-item">
       <div class="attribute">Padding:</div>
       <div class="value">
-        {padding.top}{margin.top !== 0 ? 'px' : ''}
+        {padding.top}{padding.top !== 0 ? 'px' : ''}
         {padding.right}{padding.right !== 0 ? 'px' : ''}
         {padding.bottom}{padding.bottom !== 0 ? 'px' : ''}
         {padding.left}{padding.left !== 0 ? 'px' : ''}
@@ -159,24 +174,28 @@
     z-index: 999999;
     pointer-events: none;
   }
-  .boxes {
-    width: 100%;
-    height: 100%;
-  }
   .contentBox {
     position: absolute;
     background: hsla(210, 75%, 50%, 0.45);
     overflow: hidden;
   }
   .marginBox {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    background: hsla(30, 80%, 50%, 0.45);
+    border-color: hsla(30, 80%, 50%, 0.45);
+    border-style: solid;
     overflow: hidden;
+    box-sizing: content-box;
   }
   .paddingBox {
     position: absolute;
-    background: hsla(120, 50%, 70%, 0.45);
+    border-color: hsla(120, 50%, 70%, 0.45);
+    border-style: solid;
     overflow: hidden;
+    box-sizing: content-box;
   }
   /* .gapBox {
     position: absolute;
@@ -208,16 +227,28 @@
     line-height: 1.6;
     overflow: visible;
   }
-  .infobox::after {
+  .infobox-bottom::before {
+    content: '';
+    position: absolute;
+    margin-top: -1.25rem;
+    width: 1.75rem;
+    height: 1.125rem;
+    background: #fff;
+    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
+      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+    left: 1rem;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+  .infobox-top::after {
     content: '';
     position: absolute;
     width: 1.75rem;
     height: 1.125rem;
     background: #fff;
-    clip-path: polygon(0 0, 100% 0, 50% 100%); /* pointy at the bottom */
     filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
     left: 1rem;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
   }
   .info-item {
     display: flex;
