@@ -15,9 +15,15 @@
 
   function updateOverlay() {
     if (!target) {
+      if (infobox?.style) {
+        infobox.style.display = 'none'
+      }
       if (overlay?.style) {
         overlay.style.display = 'none'
       }
+      margin = null
+      padding = null
+      content = null
       return
     }
     overlay.style.display = 'block'
@@ -121,6 +127,7 @@
       infobox.classList.add('infobox-right')
       infobox.classList.remove('infobox-left')
     }
+    infobox.style.display = 'block'
   }
 
   const mouseMoveHandler = (event) => {
@@ -130,13 +137,20 @@
       !overlay?.contains(event.target)
     ) {
       target = event.target
+      console.log('DEBUG', 'update overlay')
       updateOverlay()
     }
   }
+
   const mouseOutHandler = (event) => {
     if (overlay && !overlay.contains(event.relatedTarget)) {
+      console.log('DEBUG', 'mouseout', event.relatedTarget, target)
+      margin = null
+      padding = null
+      content = null
       target = null
       overlay.style.display = 'none'
+      infobox.style.display = 'none'
     }
   }
 
@@ -159,12 +173,12 @@
   <div class="paddingBox" bind:this={paddingBox} />
   <div class="contentBox" bind:this={contentBox} />
 </div>
-{#if padding && margin}
-  <div
-    class="infobox infobox-left infobox-right infobox-bottom infobox-top"
-    class:dark={appTheme === 'dark'}
-    bind:this={infobox}
-  >
+<div
+  class="infobox infobox-left infobox-right infobox-bottom infobox-top"
+  class:dark={appTheme === 'dark'}
+  bind:this={infobox}
+>
+  {#if content && margin && padding && target}
     <div class="info-item">
       <div class="attribute">Width:</div>
       <div class="value">{content.width}px</div>
@@ -195,8 +209,8 @@
         {padding.left}{padding.left !== 0 ? 'px' : ''}
       </div>
     </div>
-  </div>
-{/if}
+  {/if}
+</div>
 
 <style>
   .overlay {
@@ -234,6 +248,8 @@
     overflow: hidden;
   } */
   .infobox {
+    display: none;
+    pointer-events: none;
     padding: 0.5rem;
     position: absolute;
     z-index: 999999;
