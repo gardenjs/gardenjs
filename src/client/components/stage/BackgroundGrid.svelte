@@ -6,10 +6,19 @@
   let resizeObserver
 
   function updateGrid() {
+    const appStyle = document
+      .getElementById('garden_app')
+      .getBoundingClientRect()
+    const bodyStyle = document.body.getBoundingClientRect()
+    const appHeight = Math.max(appStyle.height, bodyStyle.height)
+    const appWidth = Math.max(appStyle.width, bodyStyle.width)
     grid.style.margin = margin
     const size = gridSettings.size
     const color = gridSettings.color
     grid.style.backgroundSize = `${size}px ${size}px`
+    const computedGridStyle = getComputedStyle(grid)
+    grid.style.width = `calc(${appWidth}px - ${computedGridStyle.marginLeft} - ${computedGridStyle.marginRight})`
+    grid.style.height = `calc(${appHeight}px - ${computedGridStyle.marginTop} - ${computedGridStyle.marginBottom})`
     if (gridSettings.style === 'lined') {
       grid.style.backgroundImage = `linear-gradient(to right, ${color} 1px, transparent 1px), linear-gradient(to bottom, ${color} 1px, transparent 1px)`
     }
@@ -27,6 +36,7 @@
         updateGrid()
       })
       resizeObserver.observe(contentPane)
+      resizeObserver.observe(document.body)
     }
   })
 
@@ -50,8 +60,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
     background-size: 16px 16;
   }
   .lined {
