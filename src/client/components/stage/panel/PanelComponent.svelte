@@ -45,10 +45,10 @@
     <div class="panel_nav">
       <nav>
         <ul>
-          {#each tabs as tab}
+          {#each tabs as tab (tab.name)}
             <li>
               <button
-                class:active={tab == selectedTab}
+                class:active={tab.name === selectedTab.name}
                 onclick={handleSelect(tab)}
                 >{tab.name}<span class="dot"></span></button
               >
