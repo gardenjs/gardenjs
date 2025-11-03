@@ -230,7 +230,7 @@
   <BackgroundGrid
     {gridSettings}
     {contentPane}
-    margin={full ? '0.5rem 0.5rem 0' : 0}
+    appMargin={full ? '0.5rem 0.5rem 0' : 0}
   />
 {/if}
 <div class:full id="garden_app" bind:this={contentPane}>

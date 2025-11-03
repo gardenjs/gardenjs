@@ -1,7 +1,9 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
+  import GapMask from './GapMask.svelte'
 
   let { contentPane, appTheme } = $props()
+
   let overlay
   let infobox
   let marginBox
@@ -12,6 +14,19 @@
   let padding = $state()
   let content = $state()
   let target = $state()
+  let hasGaps = $state(false)
+  let childElements = $state([])
+
+  let overlayTop = $state()
+  let overlayLeft = $state()
+  let overlayHeight = $state()
+  let overlayWidth = $state()
+  let contentBoxTop = $state()
+  let contentBoxLeft = $state()
+  let contentBoxWidth = $state()
+  let contentBoxHeight = $state()
+  let scrollTop = $state()
+  let scrollLeft = $state()
 
   function updateOverlay() {
     if (!target) {
@@ -30,8 +45,10 @@
     const rect = target.getBoundingClientRect()
     const style = getComputedStyle(target)
 
-    let scrollTop = document.body.scrollTop
-    let scrollLeft = document.body.scrollLeft
+    scrollTop = document.body.scrollTop
+    scrollLeft = document.body.scrollLeft
+
+    hasGaps = style.display === 'grid' || style.display === 'flex'
 
     content = {
       width: parseFloat(style.width),
@@ -58,11 +75,11 @@
       left: parseFloat(style.paddingLeft),
     }
 
-    const overlayTop = scrollTop + rect.top - margin.top
-    const overlayHeight = rect.height
-    const overlayWidth = rect.width
+    overlayTop = scrollTop + rect.top - margin.top
+    overlayHeight = rect.height
+    overlayWidth = rect.width
     const overlayBottom = overlayTop + overlayHeight
-    const overlayLeft = scrollLeft + rect.left - margin.left
+    overlayLeft = scrollLeft + rect.left - margin.left
     const overlayRight = overlayLeft + overlayWidth
 
     // Overlay position + size (margin box)
@@ -82,10 +99,66 @@
 
     paddingBox.style.borderWidth = `${padding.top}px ${padding.right}px ${padding.bottom}px ${padding.left}px`
 
-    contentBox.style.top = margin.top + padding.top + 'px'
-    contentBox.style.left = margin.left + padding.left + 'px'
-    contentBox.style.width = rect.width - padding.left - padding.right + 'px'
-    contentBox.style.height = rect.height - padding.top - padding.bottom + 'px'
+    contentBoxTop = margin.top + padding.top
+    contentBoxLeft = margin.left + padding.left
+    contentBoxWidth = rect.width - padding.left - padding.right
+    contentBoxHeight = rect.height - padding.top - padding.bottom
+    contentBox.style.top = contentBoxTop + 'px'
+    contentBox.style.left = contentBoxLeft + 'px'
+    contentBox.style.width = contentBoxWidth + 'px'
+    contentBox.style.height = contentBoxHeight + 'px'
+
+    if (hasGaps) {
+      updateGaps(target, scrollTop, scrollLeft)
+    }
+
+    updateInfoBox(
+      overlayTop,
+      overlayBottom,
+      scrollTop,
+      overlayLeft,
+      scrollLeft,
+      overlayRight,
+      margin
+    )
+  }
+
+  function updateGaps(element, scrollTop, scrollLeft) {
+    childElements = Array.from(element.children).map((child) => {
+      const { marginTop, marginLeft, marginRight, marginBottom } =
+        getComputedStyle(child)
+      const rect = child.getBoundingClientRect()
+      return {
+        y:
+          scrollTop +
+          rect.top -
+          overlayTop -
+          margin.top -
+          parseFloat(marginTop),
+        x:
+          scrollLeft +
+          rect.left -
+          overlayLeft -
+          margin.left -
+          parseFloat(marginLeft),
+        width: rect.width + parseFloat(marginTop) + parseFloat(marginBottom),
+        height: rect.height + parseFloat(marginLeft) + parseFloat(marginRight),
+      }
+    })
+  }
+
+  function updateInfoBox(
+    overlayTop,
+    overlayBottom,
+    scrollTop,
+    overlayLeft,
+    overlayRight,
+    scrollLeft,
+    margin
+  ) {
+    if (!infobox) {
+      return
+    }
 
     const bodyRect = document.body.getBoundingClientRect()
     const infoboxHeight = 100
@@ -98,9 +171,6 @@
       overlayBottom - scrollTop + infoboxHeight < bodyHeight
     const posLeftPossible = overlayLeft - scrollLeft + infoboxWidth < bodyWidth
 
-    if (!infobox) {
-      return
-    }
     infobox.style.bottom = 'unset'
     if (posBottomPossible) {
       infobox.style.top = overlayBottom + margin.top + margin.bottom + 15 + 'px'
@@ -137,14 +207,12 @@
       !overlay?.contains(event.target)
     ) {
       target = event.target
-      console.log('DEBUG', 'update overlay')
       updateOverlay()
     }
   }
 
   const mouseOutHandler = (event) => {
     if (overlay && !overlay.contains(event.relatedTarget)) {
-      console.log('DEBUG', 'mouseout', event.relatedTarget, target)
       margin = null
       padding = null
       content = null
@@ -169,9 +237,19 @@
 </script>
 
 <div bind:this={overlay} class="overlay">
-  <div class="marginBox" bind:this={marginBox} />
-  <div class="paddingBox" bind:this={paddingBox} />
-  <div class="contentBox" bind:this={contentBox} />
+  <div class="marginBox" bind:this={marginBox}></div>
+  <div class="paddingBox" bind:this={paddingBox}></div>
+  {#if hasGaps}
+    <GapMask
+      top={margin?.top + padding?.top}
+      left={margin?.left + padding?.left}
+      width={contentBoxWidth}
+      height={contentBoxHeight}
+      {childElements}
+    />
+  {:else}
+    <div class="contentBox" bind:this={contentBox}></div>
+  {/if}
 </div>
 <div
   class="infobox infobox-left infobox-right infobox-bottom infobox-top"

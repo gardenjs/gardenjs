@@ -1,7 +1,7 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
 
-  let { contentPane, margin, gridSettings } = $props()
+  let { contentPane, appMargin, gridSettings } = $props()
   let grid
   let resizeObserver
 
@@ -12,7 +12,7 @@
     const bodyStyle = document.body.getBoundingClientRect()
     const appHeight = Math.max(appStyle.height, bodyStyle.height)
     const appWidth = Math.max(appStyle.width, bodyStyle.width)
-    grid.style.margin = margin
+    grid.style.margin = appMargin
     const size = gridSettings.size
     const color = gridSettings.color
     grid.style.backgroundSize = `${size}px ${size}px`
