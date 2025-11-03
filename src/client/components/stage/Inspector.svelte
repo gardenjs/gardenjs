@@ -135,12 +135,14 @@
           rect.top -
           overlayTop -
           margin.top -
+          padding.top -
           parseFloat(marginTop),
         x:
           scrollLeft +
           rect.left -
           overlayLeft -
           margin.left -
+          padding.left -
           parseFloat(marginLeft),
         width: rect.width + parseFloat(marginTop) + parseFloat(marginBottom),
         height: rect.height + parseFloat(marginLeft) + parseFloat(marginRight),
