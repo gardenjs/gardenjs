@@ -103,13 +103,14 @@
     contentBoxLeft = margin.left + padding.left
     contentBoxWidth = rect.width - padding.left - padding.right
     contentBoxHeight = rect.height - padding.top - padding.bottom
-    contentBox.style.top = contentBoxTop + 'px'
-    contentBox.style.left = contentBoxLeft + 'px'
-    contentBox.style.width = contentBoxWidth + 'px'
-    contentBox.style.height = contentBoxHeight + 'px'
 
     if (hasGaps) {
       updateGaps(target, scrollTop, scrollLeft)
+    } else if (contentBox) {
+      contentBox.style.top = contentBoxTop + 'px'
+      contentBox.style.left = contentBoxLeft + 'px'
+      contentBox.style.width = contentBoxWidth + 'px'
+      contentBox.style.height = contentBoxHeight + 'px'
     }
 
     updateInfoBox(
@@ -159,7 +160,6 @@
     if (!infobox) {
       return
     }
-
     const bodyRect = document.body.getBoundingClientRect()
     const infoboxHeight = 100
     const infoboxWidth = 225
