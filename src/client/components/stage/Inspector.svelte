@@ -48,7 +48,9 @@
     scrollTop = document.body.scrollTop
     scrollLeft = document.body.scrollLeft
 
-    hasGaps = style.display === 'grid' || style.display === 'flex'
+    hasGaps =
+      (style.display === 'grid' || style.display === 'flex') &&
+      target.children.length > 0
 
     content = {
       width: parseFloat(style.width),
@@ -76,8 +78,8 @@
     }
 
     overlayTop = scrollTop + rect.top - margin.top
-    overlayHeight = rect.height
-    overlayWidth = rect.width
+    overlayHeight = rect.height + margin.top + margin.bottom
+    overlayWidth = rect.width + margin.left + margin.right
     const overlayBottom = overlayTop + overlayHeight
     overlayLeft = scrollLeft + rect.left - margin.left
     const overlayRight = overlayLeft + overlayWidth
@@ -85,7 +87,7 @@
     // Overlay position + size (margin box)
     overlay.style.top = overlayTop + 'px'
     overlay.style.left = overlayLeft + 'px'
-    overlay.style.width = rect.width + 'px'
+    overlay.style.width = overlayWidth + 'px'
     overlay.style.height = overlayHeight + 'px'
 
     // Margin visualization
@@ -94,8 +96,8 @@
     // Padding visualization (inside content box)
     paddingBox.style.top = margin.top + 'px'
     paddingBox.style.left = margin.left + 'px'
-    paddingBox.style.width = rect.width - padding.left - padding.right + 'px'
-    paddingBox.style.height = rect.height - padding.top - padding.bottom + 'px'
+    paddingBox.style.width = rect.width + 'px'
+    paddingBox.style.height = rect.height + 'px'
 
     paddingBox.style.borderWidth = `${padding.top}px ${padding.right}px ${padding.bottom}px ${padding.left}px`
 
@@ -298,6 +300,7 @@
     position: absolute;
     z-index: 999999;
     pointer-events: none;
+    border: 1px dashed lightgray;
   }
   .contentBox {
     position: absolute;
@@ -313,14 +316,14 @@
     border-color: hsla(30, 80%, 50%, 0.45);
     border-style: solid;
     overflow: hidden;
-    box-sizing: content-box;
+    box-sizing: border-box;
   }
   .paddingBox {
     position: absolute;
     border-color: hsla(120, 50%, 70%, 0.45);
     border-style: solid;
     overflow: hidden;
-    box-sizing: content-box;
+    box-sizing: border-box;
   }
   /* .gapBox {
     position: absolute;
