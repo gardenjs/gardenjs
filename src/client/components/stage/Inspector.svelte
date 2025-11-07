@@ -61,7 +61,6 @@
       width: parseFloat(style.width),
       height: parseFloat(style.height),
       background: style.backgroundColor,
-
       gap: style.gap,
       rowGap: style.rowGap,
       columnGap: style.columnGap,
@@ -273,7 +272,7 @@
       <div class="attribute">Height:</div>
       <div class="value">{content.height}px</div>
     </div>
-    {#if content.gap}
+    {#if hasGaps}
       <div class="info-item">
         <div class="attribute">Gap:</div>
         <div class="value">
