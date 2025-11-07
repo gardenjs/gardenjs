@@ -52,7 +52,16 @@
       (style.display === 'grid' || style.display === 'flex') &&
       target.children.length > 0
 
+    let tagName = target.tagName
+    if (target.classList.length > 0) {
+      tagName += '.' + Array.from(target.classList).join('.')
+      if (tagName.length > 33) {
+        tagName = tagName.substring(0, 30) + '...'
+      }
+    }
+
     content = {
+      tagName,
       width: parseFloat(style.width),
       height: parseFloat(style.height),
       background: style.backgroundColor,
@@ -262,6 +271,9 @@
 >
   {#if content && margin && padding && target}
     <div class="info-item">
+      <div class="value">{content.tagName}</div>
+    </div>
+    <div class="info-item">
       <div class="attribute">Width:</div>
       <div class="value">{content.width}px</div>
     </div>
@@ -301,6 +313,7 @@
     z-index: 999999;
     pointer-events: none;
     border: 1px dashed lightgray;
+    overflow: hidden;
   }
   .contentBox {
     position: absolute;
@@ -338,6 +351,7 @@
     z-index: 999999;
     background-color: hsl(185, 100%, 95%);
     border-radius: 0.5rem;
+    overflow: hidden;
     filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
     font-variation-settings: normal;
