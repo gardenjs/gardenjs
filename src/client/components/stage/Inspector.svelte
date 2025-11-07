@@ -347,11 +347,6 @@
     overflow: hidden;
     box-sizing: border-box;
   }
-  /* .gapBox {
-    position: absolute;
-    background: hsla(256, 55%, 55%, 0.45);
-    overflow: hidden;
-  } */
   .infobox {
     display: none;
     pointer-events: none;
