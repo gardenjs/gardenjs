@@ -13,7 +13,6 @@
     <defs>
       <mask id="mask">
         <rect y="0" x="0" width="100%" height="100%" fill="white" />
-        <!-- Transparente Rechtecke: Schwarz in der Maske = unsichtbar -->
         {#each childElements as child, index (index)}
           <rect
             x="{child.x}px"
