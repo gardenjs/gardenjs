@@ -245,6 +245,7 @@
 </script>
 
 <div bind:this={overlay} class="overlay">
+  <div class="borderBox"></div>
   <div class="marginBox" bind:this={marginBox}></div>
   <div class="paddingBox" bind:this={paddingBox}></div>
   {#if hasGaps}
@@ -322,8 +323,16 @@
     position: absolute;
     z-index: 999999;
     pointer-events: none;
-    border: 1px dashed lightgray;
     overflow: hidden;
+    box-sizing: border-box;
+  }
+  .borderBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px dashed lightgray;
   }
   .contentBox {
     position: absolute;
