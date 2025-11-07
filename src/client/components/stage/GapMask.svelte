@@ -14,6 +14,7 @@
       <mask id="meineMaske">
         <!-- Weißen Hintergrund für die Maske (sichtbar) -->
         <rect y="0" x="0" width="100%" height="100%" fill="white" />
+
         <!-- Transparente Rechtecke: Schwarz in der Maske = unsichtbar -->
         {#each childElements as child, index (index)}
           <rect
@@ -35,6 +36,15 @@
       fill="rgba(128, 0, 128, 0.5)"
       mask="url(#meineMaske)"
     />
+    {#each childElements as child, index (index)}
+      <rect
+        x="{child.x}px"
+        y="{child.y}px"
+        width="{child.width}px"
+        height="{child.height}px"
+        fill="hsla(210, 75%, 50%, 0.45)"
+      />
+    {/each}
   </svg>
 </div>
 
