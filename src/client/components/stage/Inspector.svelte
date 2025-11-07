@@ -270,9 +270,6 @@
 >
   {#if content && margin && padding && target}
     <div class="info-item">
-      <div class="value">{content.tagName}{content.classList}</div>
-    </div>
-    <div class="info-item">
       <div class="attribute">Width:</div>
       <div class="value">{content.width}px</div>
     </div>
@@ -301,6 +298,14 @@
         {padding.bottom}{padding.bottom !== 0 ? 'px' : ''}
         {padding.left}{padding.left !== 0 ? 'px' : ''}
       </div>
+    </div>
+    <div class="info-item">
+      <div class="attribute">Role:</div>
+      <div class="value">{content.tagName}</div>
+    </div>
+    <div class="info-item">
+      <div class="attribute">Class Name:</div>
+      <div class="value">{content.classList}</div>
     </div>
   {/if}
 </div>
