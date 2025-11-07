@@ -181,11 +181,11 @@
 
     infobox.style.bottom = 'unset'
     if (posBottomPossible) {
-      infobox.style.top = overlayBottom + margin.top + margin.bottom + 15 + 'px'
+      infobox.style.top = overlayBottom + margin.top + margin.bottom + 8 + 'px'
       infobox.classList.add('infobox-bottom')
       infobox.classList.remove('infobox-top')
     } else if (posTopPossible) {
-      infobox.style.top = overlayTop - 105 + 'px'
+      infobox.style.top = overlayTop + 5 - infoboxHeight + 'px'
       infobox.classList.add('infobox-top')
       infobox.classList.remove('infobox-bottom')
     } else {
