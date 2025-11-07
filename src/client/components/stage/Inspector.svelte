@@ -52,16 +52,15 @@
       (style.display === 'grid' || style.display === 'flex') &&
       target.children.length > 0
 
-    let tagName = target.tagName
+    const tagName = target.tagName
+    let classList = ''
     if (target.classList.length > 0) {
-      tagName += '.' + Array.from(target.classList).join('.')
-      if (tagName.length > 33) {
-        tagName = tagName.substring(0, 30) + '...'
-      }
+      classList = '.' + Array.from(target.classList).join('.')
     }
 
     content = {
       tagName,
+      classList,
       width: parseFloat(style.width),
       height: parseFloat(style.height),
       background: style.backgroundColor,
@@ -271,7 +270,7 @@
 >
   {#if content && margin && padding && target}
     <div class="info-item">
-      <div class="value">{content.tagName}</div>
+      <div class="value">{content.tagName}{content.classList}</div>
     </div>
     <div class="info-item">
       <div class="attribute">Width:</div>
