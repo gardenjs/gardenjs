@@ -11,10 +11,8 @@
 >
   <svg xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <mask id="meineMaske">
-        <!-- Weißen Hintergrund für die Maske (sichtbar) -->
+      <mask id="mask">
         <rect y="0" x="0" width="100%" height="100%" fill="white" />
-        <!-- Transparente Rechtecke: Schwarz in der Maske = unsichtbar -->
         {#each childElements as child, index (index)}
           <rect
             x="{child.x}px"
@@ -26,14 +24,13 @@
         {/each}
       </mask>
     </defs>
-    <!-- Lila Hintergrund, der durch die Maske sichtbar wird -->
     <rect
       y="0"
       x="0"
       width="100%"
       height="100%"
-      fill="rgba(128, 0, 128, 0.5)"
-      mask="url(#meineMaske)"
+      fill="hsla(256, 55%, 45%, 0.45)"
+      mask="url(#mask)"
     />
   </svg>
 </div>
