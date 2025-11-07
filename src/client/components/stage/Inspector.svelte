@@ -168,7 +168,8 @@
       return
     }
     const bodyRect = document.body.getBoundingClientRect()
-    const infoboxHeight = 100
+    const infoboxHeight =
+      130 + (hasGaps ? 20 : 0) + content.classList.length * 20
     const infoboxWidth = 225
     const bodyHeight = bodyRect.height
     const bodyWidth = bodyRect.width
