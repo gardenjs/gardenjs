@@ -53,10 +53,7 @@
       target.children.length > 0
 
     const tagName = target.tagName
-    let classList = ''
-    if (target.classList.length > 0) {
-      classList = '.' + Array.from(target.classList).join('.')
-    }
+    const classList = Array.from(target.classList)
 
     content = {
       tagName,
@@ -65,10 +62,9 @@
       height: parseFloat(style.height),
       background: style.backgroundColor,
 
-      gap: parseFloat(style.gap),
-      gapUnit: style.gap.replace(/[0-9.]/g, ''),
-      rowGap: parseFloat(style.rowGap),
-      columnGap: parseFloat(style.columnGap),
+      gap: style.gap,
+      rowGap: style.rowGap,
+      columnGap: style.columnGap,
     }
 
     margin = {
@@ -277,10 +273,16 @@
       <div class="attribute">Height:</div>
       <div class="value">{content.height}px</div>
     </div>
-    <!-- <div class="info-item">
-      <div class="attribute">Gap:</div>
-      <div class="value">{content.gap} {content.gapUnit} {content.columnGap} {content.rowGap}</div>
-    </div> -->
+    {#if content.gap}
+      <div class="info-item">
+        <div class="attribute">Gap:</div>
+        <div class="value">
+          {content.gap}
+          {content.columnGap}
+          {content.rowGap}
+        </div>
+      </div>
+    {/if}
     <div class="info-item">
       <div class="attribute">Margin:</div>
       <div class="value">
@@ -305,7 +307,11 @@
     </div>
     <div class="info-item">
       <div class="attribute">Class Name:</div>
-      <div class="value">{content.classList}</div>
+      <div class="info-classlist">
+        {#each content.classList as clazz, index (index)}
+          <div class="value">{clazz}</div>
+        {/each}
+      </div>
     </div>
   {/if}
 </div>
@@ -438,5 +444,9 @@
   .attribute {
     width: 8rem;
     /* font-weight: 600; */
+  }
+  .info-classlist {
+    display: flex;
+    flex-direction: column;
   }
 </style>
