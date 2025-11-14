@@ -149,8 +149,9 @@
           margin.left -
           padding.left -
           parseFloat(marginLeft),
-        width: rect.width + parseFloat(marginTop) + parseFloat(marginBottom),
-        height: rect.height + parseFloat(marginLeft) + parseFloat(marginRight),
+        width: rect.width + parseFloat(marginLeft) + parseFloat(marginRight),
+        height:
+          rect.height + parseFloat(marginRight) + parseFloat(marginBottom),
       }
     })
   }
