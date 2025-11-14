@@ -150,8 +150,7 @@
           padding.left -
           parseFloat(marginLeft),
         width: rect.width + parseFloat(marginLeft) + parseFloat(marginRight),
-        height:
-          rect.height + parseFloat(marginRight) + parseFloat(marginBottom),
+        height: rect.height + parseFloat(marginTop) + parseFloat(marginBottom),
       }
     })
   }
