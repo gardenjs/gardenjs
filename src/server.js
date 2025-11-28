@@ -15,17 +15,33 @@ export async function createServer() {
   const configFile = vite_config || './vite.config.js'
 
   const server = await createViteServer({
-    configFile,
+    configFile: configFile,
+    root: path.resolve('.garden'),
+    base: '/',
+    assetsInclude: ['**/*.md'],
+    publicDir: '../public',
     optimizeDeps: {
       noDiscovery: true,
+    },
+    build: {
+      rollupOptions: {
+        input: {
+          app: path.resolve('.garden/index.html'),
+          frame: path.resolve('.garden/frame.html'),
+        },
+      },
     },
     server: {
       port: serverport,
       fs: {
-        cachedChecks: false,
+        allow: [path.resolve('.garden')],
+      },
+      watch: {
+        ignored: ['!**/.garden/**'],
       },
     },
   })
+
   await runWatch(server)
 
   if (devmodus) {
@@ -33,6 +49,9 @@ export async function createServer() {
   }
 
   server.listen()
+
+  // vite-Bug, if we don't restart server.watch.ignored will not work
+  server.restart()
   if (!no_open_browser) open(`http://localhost:${serverport}`)
 }
 

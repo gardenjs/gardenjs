@@ -352,19 +352,8 @@ ${viteLibs.importStmts.join('\n')}
 export default defineConfig(({ command, mode }) => {
   return {
     plugins: [${viteLibs.pluginStmts.join(', ')}],
-    root: ".garden",
-    assetsInclude: ['**/*.md'],
-    publicDir: "../public",
     ${sveltekit_alias}
     ${optimizeDeps}
-    build: {
-      rollupOptions: {
-        input: {
-          app: ".garden/index.html",
-          frame: ".garden/frame.html",
-        },
-      },
-    },
   };
 });
   `

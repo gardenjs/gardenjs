@@ -52,8 +52,8 @@
     "lint": "eslint src/."
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "6.1.0",
     "@eslint/compat": "1.2.5",
+    "@sveltejs/vite-plugin-svelte": "6.1.0",
     "eslint": "9.31.0",
     "eslint-config-prettier": "10.1.5",
     "eslint-plugin-svelte": "3.11.0",
@@ -70,6 +70,7 @@
     "@inquirer/checkbox": "1.5.0",
     "@inquirer/prompts": "3.3.0",
     "@inquirer/select": "^2.0.0",
+    "chokidar": "^5.0.0",
     "highlight.js": "11.11.1",
     "marked": "4.3.0",
     "node-watch": "0.7.4",
