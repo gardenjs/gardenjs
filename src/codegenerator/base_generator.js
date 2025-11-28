@@ -7,8 +7,14 @@ const pathRelativeToGarden = '../'
 const destination = '.garden/'
 
 export async function generateGardenBase() {
-  const { structure, additional_style_files, welcome_page, devmodus } =
-    await getConfig()
+  const {
+    structure,
+    additional_style_files,
+    welcome_page,
+    devmodus,
+    getComponentFileNames,
+    getComponentName,
+  } = await getConfig()
   const targetBaseFile = destination + 'base.js'
   const targetComponentMapFile = destination + 'component_import_map.js'
   const targetRawComponentMapFile = destination + 'raw_component_import_map.js'
@@ -18,8 +24,29 @@ export async function generateGardenBase() {
 
   const basefolders = getDasBaseFolders(structure)
 
+  const defaultGetComponentFileNames = (dasFilename) => {
+    const name = dasFilename.substring(0, dasFilename.indexOf('.das'))
+    return [
+      name + '.svelte',
+      name + '.vue',
+      name + '.tsx',
+      name + '.jsx',
+      name + '.ts',
+      name + '.js',
+      name,
+    ]
+  }
+
+  const defaultGetComponentName = (dasFilename) => {
+    return dasFilename.substring(0, dasFilename.indexOf('.das'))
+  }
+
   const cds = await basefolders.reduce(async (acc, basePathAndNode) => {
-    const filemetaAndDasArray = await findAndReadDasFiles(basePathAndNode)
+    const filemetaAndDasArray = await findAndReadDasFiles(
+      basePathAndNode,
+      getComponentName ?? defaultGetComponentName,
+      getComponentFileNames ?? defaultGetComponentFileNames
+    )
     try {
       return (await acc).concat(
         filemetaAndDasArray.map(createComponentDescription)
@@ -267,6 +294,8 @@ function createComponentMapEntry(description) {
 function createDasMapEntry(description) {
   return `'${description.fullname}': {
     ...${description.fullname}Das,
+    name: '${description.name}',
+    file: '${description.file}',
     ${
       description.decorators
         ? 'decorators: [' +
@@ -312,6 +341,7 @@ function createComponentDescription({
   const file = das.file
     ? path.join(basepath, relativepath, das.file)
     : undefined
+  const relativeFile = das.file
   const dasfile = path.join(basepath, relativepath, filename)
   const descriptionfile = das.description?.endsWith('.md')
     ? path.join(basepath, relativepath, das.description)
@@ -365,6 +395,7 @@ function createComponentDescription({
     relativepath,
     fullpath,
     file,
+    relativeFile,
     dasfile,
     descriptionfile,
     extension,

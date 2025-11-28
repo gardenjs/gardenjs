@@ -2,11 +2,19 @@ import fs from 'fs'
 import path from 'path'
 import { createHash } from 'crypto'
 
-export async function findAndReadDasFiles({ basepath, navbasenode }) {
+export async function findAndReadDasFiles(
+  { basepath, navbasenode },
+  getComponentName,
+  getComponentFileNames
+) {
   const uniqueNames = {}
   const promises = (await findDasFiles(basepath)).map(async (file) => {
     try {
-      const das = await readDasFile(file)
+      const das = await readDasFile(
+        file,
+        getComponentName,
+        getComponentFileNames
+      )
       await validate(das, file)
       makeNameUnique(das, navbasenode, file.relativepath, uniqueNames)
       uniqueNames[navbasenode + file.relativepath + das.name] = true
@@ -157,7 +165,11 @@ async function findDasFiles(
   })
 }
 
-async function readDasFile({ filename, relativepath, basepath }) {
+async function readDasFile(
+  { filename, relativepath, basepath },
+  getComponentName,
+  getComponentFileNames
+) {
   let content = await fs.promises.readFile(
     path.resolve(basepath, relativepath, filename),
     { encoding: 'utf-8' }
@@ -169,7 +181,22 @@ async function readDasFile({ filename, relativepath, basepath }) {
       '?' +
       createMd5Hash(content)
   )
-  return module.default
+  const dasContent = module.default
+  if (!dasContent.name) {
+    dasContent.name = getComponentName(filename)
+  }
+  if (!dasContent.file) {
+    const potentialFileNames = getComponentFileNames(filename)
+    let allFiles = await fs.promises.readdir(
+      path.resolve(basepath, relativepath)
+    )
+    dasContent.file = potentialFileNames.find((candidate) => {
+      return allFiles.some((file) => {
+        return file === candidate
+      })
+    }, null)
+  }
+  return dasContent
 }
 
 function createMd5Hash(str) {

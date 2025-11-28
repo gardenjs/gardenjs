@@ -249,6 +249,22 @@ export default {
     ${renderer}
   },
 
+  // Option to generate component names in the component tree from dasFileName using your own function. e.g.:
+  //  getComponentName: (dasFileName) => {
+  //    return dasFileName.substring(0, dasFileName.indexOf('.das')
+  //  }
+  //
+  // Option to generate component file names from dasFileName using your own function. Must return an array. First match will be used. e.g.:
+  //  getComponentFileNames: (dasFileName) => {
+  //    const nameWithoutExtension = dasFileName.substring(0, dasFileName.indexOf('.das')
+  //    return [
+  //      nameWithoutExtension + '.svelte',
+  //      nameWithoutExtension + '.vue',
+  //      nameWithoutExtension + '.tsx',
+  //      nameWithoutExtension,
+  //    ]
+  //  }
+
   // Add global style files needed for your project:
   // additional_style_files: [
   //   'src/assets/scss/main.scss'
