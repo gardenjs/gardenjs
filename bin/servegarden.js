@@ -162,7 +162,13 @@ async function runSetupScript() {
   console.log(`Creating ${gardenFile}...:`)
   console.log('')
 
-  createConfigFile({ title, libraries, componentFolder }, gardenFile)
+  createConfigFile({
+    title,
+    libraries,
+    componentFolder,
+    gardenViteFile,
+    gardenFile,
+  })
 
   console.log('')
   console.log('Done. Edit garden.config.js file according to your needs.')
@@ -215,7 +221,13 @@ const lib2FileExtension = {
   Vue: 'vue',
 }
 
-function createConfigFile({ title, componentFolder, libraries }, gardenFile) {
+function createConfigFile({
+  title,
+  componentFolder,
+  libraries,
+  gardenViteFile,
+  gardenFile,
+}) {
   const importStmts = libraries
     .map((lib) => {
       return `import ${lib}RendererBuilder from "@gardenjs/render-plugin-${lib.toLowerCase()}"`
@@ -262,7 +274,7 @@ export default {
   docs_link: true,
 
   // vite config file:
-  vite_config: './garden.vite.config.js',
+  vite_config: './${gardenViteFile}',
   
   // Each entry is output with its subpages in the page tree:
   structure: {
