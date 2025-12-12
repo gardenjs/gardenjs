@@ -54,6 +54,7 @@
   "devDependencies": {
     "@eslint/compat": "1.2.5",
     "@sveltejs/vite-plugin-svelte": "6.1.0",
+    "@types/node": "25.0.1",
     "eslint": "9.31.0",
     "eslint-config-prettier": "10.1.5",
     "eslint-plugin-svelte": "3.11.0",
@@ -63,6 +64,7 @@
     "prettier-plugin-svelte": "3.4.0",
     "sass": "1.89.2",
     "svelte": "5.36.7",
+    "ts-node": "^10.9.2",
     "typescript": "5.8.3",
     "vite": "7.0.5"
   },
@@ -76,6 +78,18 @@
     "node-watch": "0.7.4",
     "open": "10.2.0",
     "vite-node": "3.2.4"
+  },
+  "peerDependencies": {
+    "ts-node": "^10.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "ts-node": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
   },
   "lint-staged": {
     "**/*.{js,ts,svelte}": "eslint --fix",

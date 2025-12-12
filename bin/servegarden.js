@@ -16,6 +16,23 @@ const execAsync = promisify(exec)
 
 if (fs.existsSync('./garden.config.js')) {
   createNodeViteServer()
+} else if (fs.existsSync('./garden.config.ts')) {
+  try {
+    const tsNode = await import('ts-node')
+    tsNode.register({
+      transpileOnly: true,
+      compilerOptions: {
+        module: 'ESNext',
+      },
+    })
+    createNodeViteServer()
+  } catch (e) {
+    throw new Error(
+      `For typescript support you need to install ts-node and typescript\n\n` +
+        `npm install --save-dev ts-node typescript\n\n` +
+        `Original error: ${e.message}`
+    )
+  }
 } else {
   runSetupScript()
 }
@@ -30,6 +47,20 @@ async function runSetupScript() {
   console.log('')
   separator()
   console.log('')
+
+  const filetype = await select({
+    message: 'Do you want to use typescript or javascript',
+    choices: [
+      { name: 'javascript', value: 'javascript', checked: true },
+      { name: 'typescript', value: 'typescript' },
+    ],
+  })
+  const gardenFile =
+    filetype === 'javascript' ? 'garden.config.js' : 'garden.config.ts'
+  const gardenViteFile =
+    filetype === 'javascript'
+      ? 'garden.vite.config.js'
+      : 'garden.vite.config.ts'
 
   const title = await input({ message: 'Enter your project title:' })
 
@@ -54,8 +85,6 @@ async function runSetupScript() {
   if (libraries.includes('None')) {
     libraries = []
   }
-
-  console.log('DEBUG', 'lib', libraries)
 
   const componentFolder = await input({
     message: 'Enter your component source folder:',
@@ -103,14 +132,14 @@ async function runSetupScript() {
 
   const shallCreateViteConfig = await confirm({
     message:
-      'You need a vite configuration file for gardenjs. Shall we create the file garden.vite.config.js?',
+      'You need a vite configuration file for gardenjs. Shall we create the file garden.vite.config file?',
   })
   if (shallCreateViteConfig) {
     separator()
     console.log('')
-    console.log('Creating garden.vite.config.js ...:')
+    console.log(`Creating ${gardenViteFile} ...:`)
     console.log('')
-    createViteConfig(libraries)
+    createViteConfig(libraries, gardenViteFile)
   } else {
     if (libraries.some((library) => library === 'React')) {
       console.log('')
@@ -130,10 +159,10 @@ async function runSetupScript() {
 
   separator()
   console.log('')
-  console.log('Creating garden.config.js ...:')
+  console.log(`Creating ${gardenFile}...:`)
   console.log('')
 
-  createConfigFile({ title, libraries, componentFolder })
+  createConfigFile({ title, libraries, componentFolder }, gardenFile)
 
   console.log('')
   console.log('Done. Edit garden.config.js file according to your needs.')
@@ -186,7 +215,7 @@ const lib2FileExtension = {
   Vue: 'vue',
 }
 
-function createConfigFile({ title, componentFolder, libraries }) {
+function createConfigFile({ title, componentFolder, libraries }, gardenFile) {
   const importStmts = libraries
     .map((lib) => {
       return `import ${lib}RendererBuilder from "@gardenjs/render-plugin-${lib.toLowerCase()}"`
@@ -311,10 +340,10 @@ export default {
 //  }
 //}
   `
-  fs.writeFileSync('garden.config.js', content)
+  fs.writeFileSync(gardenFile, content)
 }
 
-function createViteConfig(libraries) {
+function createViteConfig(libraries, filename) {
   const viteLibs = getViteImports(libraries)
   const hasSvelteLib = libraries.some((lib) => lib.indexOf('Svelte') >= 0)
   const renderPluginSvelte = libraries.includes('Svelte4')
@@ -357,7 +386,7 @@ export default defineConfig(({ command, mode }) => {
   };
 });
   `
-  fs.writeFileSync('garden.vite.config.js', content)
+  fs.writeFileSync(filename, content)
 }
 
 const lib2ViteImport = {

@@ -10,12 +10,17 @@ export async function getConfig() {
 }
 
 async function readConfig() {
-  if (fs.existsSync(path.resolve('garden.config.js'))) {
-    console.log('the path is', path.resolve('garden.config.js'))
-    const config = await import(
-      /* @vite-ignore */ path.resolve('garden.config.js')
-    )
+  return (
+    (await tryRead('garden.config.js')) ??
+    (await tryRead('garden.config.ts')) ?? { garden: {} }
+  )
+}
+
+async function tryRead(filename) {
+  if (fs.existsSync(path.resolve(filename))) {
+    console.log('the path is', path.resolve(filename))
+    const config = await import(/* @vite-ignore */ path.resolve(filename))
     return config.default
   }
-  return { garden: {} }
+  return undefined
 }
