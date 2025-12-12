@@ -7,28 +7,43 @@ on:
   release:
     types: [created]
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
       - run: npm ci
       - run: npm run build
+
+      # Artefakt hochladen, damit publish-job darauf zugreifen kann
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           registry-url: https://registry.npmjs.org/
+      - run: npm install -g npm@latest
       - run: npm ci
-      - run: npm run build
+
+      # Artefakt wieder herunterladen
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
