@@ -7,38 +7,20 @@ import { exec } from 'node:child_process'
 import fs from 'node:fs'
 import { promisify } from 'node:util'
 import path, { dirname } from 'path'
+import { createServer, createTsServer } from '../src/server.js'
 import { fileURLToPath } from 'url'
-import { createServer } from '../src/server.js'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const exampleSourceFolder = path.resolve(__dirname, '../examples') + '/'
 const execAsync = promisify(exec)
 
 if (fs.existsSync('./garden.config.js')) {
-  createNodeViteServer()
+  await createServer()
 } else if (fs.existsSync('./garden.config.ts')) {
-  try {
-    const tsNode = await import('ts-node')
-    tsNode.register({
-      transpileOnly: true,
-      compilerOptions: {
-        module: 'ESNext',
-      },
-    })
-    createNodeViteServer()
-  } catch (e) {
-    throw new Error(
-      `For typescript support you need to install ts-node and typescript\n\n` +
-        `npm install --save-dev ts-node typescript\n\n` +
-        `Original error: ${e.message}`
-    )
-  }
+  await createTsServer()
 } else {
   runSetupScript()
-}
-
-async function createNodeViteServer() {
-  await createServer()
 }
 
 async function runSetupScript() {
@@ -48,13 +30,29 @@ async function runSetupScript() {
   separator()
   console.log('')
 
-  const filetype = await select({
-    message: 'Do you want to use typescript or javascript',
-    choices: [
-      { name: 'javascript', value: 'javascript', checked: true },
-      { name: 'typescript', value: 'typescript' },
-    ],
-  })
+  const isTypescriptProject =
+    fs.existsSync('./tsconfig.json') || fs.existsSync('vite.config.ts')
+  const filetype = isTypescriptProject
+    ? await select({
+        message: 'Do you want to use TypeScript or JavaScript',
+        choices: [
+          { name: 'TypeScript', value: 'typescript' },
+          {
+            name: 'JavaScript',
+            value: 'javascript',
+          },
+        ],
+      })
+    : await select({
+        message: 'Do you want to use JavaScript or TypeScript',
+        choices: [
+          {
+            name: 'JavaScript',
+            value: 'javascript',
+          },
+          { name: 'TypeScript', value: 'typescript' },
+        ],
+      })
   const gardenFile =
     filetype === 'javascript' ? 'garden.config.js' : 'garden.config.ts'
   const gardenViteFile =
@@ -171,7 +169,8 @@ async function runSetupScript() {
   })
 
   console.log('')
-  console.log('Done. Edit garden.config.js file according to your needs.')
+  console.log(`Done. Edit ${gardenFile} file according to your needs.`)
+  console.log('')
   console.log('Run npm run garden again, to start gardenjs.')
   separator()
   console.log('Happy gardening!')

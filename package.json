@@ -1,6 +1,6 @@
 {
   "name": "gardenjs",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "A component library explorer for UI development, testing and documentation.",
   "repository": {
     "type": "git",
@@ -67,15 +67,15 @@
     "prettier-plugin-svelte": "3.4.0",
     "sass": "1.89.2",
     "svelte": "5.36.7",
-    "ts-node": "^10.9.2",
-    "typescript": "5.8.3",
     "vite": "7.0.5"
   },
   "dependencies": {
     "@inquirer/checkbox": "1.5.0",
     "@inquirer/prompts": "3.3.0",
     "@inquirer/select": "^2.0.0",
+    "build": "^0.1.4",
     "chokidar": "^5.0.0",
+    "execa": "^9.6.1",
     "highlight.js": "11.11.1",
     "marked": "4.3.0",
     "node-watch": "0.7.4",
@@ -83,11 +83,11 @@
     "vite-node": "3.2.4"
   },
   "peerDependencies": {
-    "ts-node": "^10.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "tsx": "^4.21.0"
   },
   "peerDependenciesMeta": {
-    "ts-node": {
+    "tsx": {
       "optional": true
     },
     "typescript": {

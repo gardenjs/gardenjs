@@ -1,12 +1,32 @@
 import { getConfig } from './config.js'
 import { fileURLToPath } from 'url'
-const __filename = fileURLToPath(import.meta.url)
 import { dirname } from 'path'
-import path from 'path'
+import path, { join } from 'path'
+import open from 'open'
+import { execa } from 'execa'
+import { createServer as createViteServer } from 'vite'
+const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-import open from 'open'
-import { createServer as createViteServer } from 'vite'
+export async function createTsServer() {
+  const { tsconfig } = await getConfig()
+  try {
+    const tsconfigPath = join(process.cwd(), tsconfig ?? 'tsconfig.json')
+    await execa(
+      'tsx',
+      ['--tsconfig', tsconfigPath, path.resolve(__dirname, './runTsServer.js')],
+      {
+        stdio: 'inherit',
+      }
+    )
+  } catch (e) {
+    throw new Error(
+      `For typescript support you need to install tsx and typescript\n\n` +
+        `npm install --save-dev tsx typescript\n\n` +
+        `Original error: ${e.message}`
+    )
+  }
+}
 
 export async function createServer() {
   const { serverport, vite_config, devmodus, no_open_browser } =
