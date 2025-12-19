@@ -53,20 +53,31 @@ export function findRoute(url) {
 ;(function (history) {
   if (!history) return
   var pushState = history.pushState
+  var replaceState = history.replaceState
   history.pushState = function (state, title, url) {
+    const rawUrl = typeof url === 'string' ? url : ''
+    let nextPath = rawUrl
+    if (baseurl.length > 0 && nextPath.startsWith(baseurl)) {
+      nextPath = nextPath.substring(baseurl.length) || '/'
+    }
+    if (nextPath.length === 0) nextPath = '/'
+    if (nextPath[0] !== '/') nextPath = '/' + nextPath
+
+    currentUrl = baseurl + nextPath
+    const nextState = state && typeof state === 'object' ? state : {}
     // @ts-ignore
-    if (url.startsWith(baseurl) && baseurl.length > 0) return // TODO check this line
-    currentUrl = baseurl + url
-    state.url = currentUrl
+    nextState.url = currentUrl
     if (
-      state.url !== history.state.url ||
-      state.selectedExample !== history.state.selectedExample
+      // @ts-ignore
+      nextState.url !== history.state?.url ||
+      // @ts-ignore
+      nextState.selectedExample !== history.state?.selectedExample
     ) {
-      dispatchUpdateRoute(state, currentUrl)
-      return pushState.apply(history, [state, '', currentUrl])
+      dispatchUpdateRoute(nextState, currentUrl)
+      return pushState.apply(history, [nextState, '', currentUrl])
     } else {
-      dispatchUpdateRoute(state, currentUrl)
-      window.location.reload()
+      dispatchUpdateRoute(nextState, currentUrl)
+      return replaceState.apply(history, [nextState, '', currentUrl])
     }
   }
 })(globalThis.history)
