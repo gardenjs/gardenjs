@@ -97,7 +97,7 @@ export function setThemes(newThemes) {
   computeStageStyle()
 }
 
-export function selectTheme(themeName) {
+export function setTheme(themeName) {
   themes.set(
     get(themes).map((theme) => ({ ...theme, active: theme.name === themeName }))
   )
@@ -105,8 +105,8 @@ export function selectTheme(themeName) {
   computeStageStyle()
 }
 
-export function updateAppTheme(newTheme) {
-  appTheme.set(newTheme)
+export function toggleAppTheme() {
+  appTheme.set(get(appTheme) === 'dark' ? 'default' : 'dark')
 }
 
 export function getCurrentTheme() {

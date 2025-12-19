@@ -1,25 +1,6 @@
 <script>
   import OptionalDropdown from './OptionalDropdown.svelte'
-  import { createEventDispatcher } from 'svelte'
-  const dispatch = createEventDispatcher()
 
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [sidebarExpanded]
-   * @property {string} [appTheme]
-   * @property {boolean} [landscape]
-   * @property {string} [stageSize]
-   * @property {any} [stageSizes]
-   * @property {any} [themes]
-   * @property {any} stageRect
-   * @property {any} stageMaxHeight
-   * @property {any} stageMaxWidth
-   * @property {any} showInspector
-   * @property {any} showGrid
-   * @property {any} node
-   */
-
-  /** @type {Props} */
   let {
     sidebarExpanded = true,
     appTheme = 'default',
@@ -33,6 +14,17 @@
     showInspector,
     showGrid,
     node,
+    onToggleExpandSidebar,
+    onToggleBookmark,
+    onToggleShowInspector,
+    onToggleShowGrid,
+    onToggleAppTheme,
+    onToggleOrientation,
+    onSetStageSize,
+    onOpenInTab,
+    onSetTheme,
+    onSetContainerWidth,
+    onSetContainerHeight,
   } = $props()
 
   let dark = $state(false)
@@ -46,72 +38,13 @@
       document.documentElement.setAttribute('data-theme', 'dark')
     else document.documentElement.setAttribute('data-theme', 'light')
   })
-
-  function toggleExpandSidebar() {
-    dispatch('out', { toggleExpandSidebar: true })
-  }
-
-  function toggleBookmark() {
-    dispatch('out', { toggleBookmark: node })
-  }
-
-  function toggleShowInspector() {
-    dispatch('out', { toggleShowInspector: true })
-  }
-
-  function toggleShowGrid() {
-    dispatch('out', { toggleShowGrid: true })
-  }
-
-  function toggleDarkmode() {
-    const theme = appTheme === 'dark' ? 'default' : 'dark'
-    dispatch('out', {
-      updateAppTheme: theme,
-    })
-  }
-
-  function dispatchStageSizeChange(stageSize) {
-    dispatch('out', {
-      stageSize,
-    })
-  }
-
-  function toggleOrientation() {
-    dispatch('out', {
-      landscape: !landscape,
-    })
-  }
-
-  function openInTab() {
-    dispatch('out', {
-      openInTab: true,
-    })
-  }
-
-  function handleThemeChange(selectTheme) {
-    dispatch('out', {
-      selectTheme,
-    })
-  }
-
-  function handleSetContainerWidth(evt) {
-    dispatch('out', {
-      stageWidth: Number.parseInt(evt.target.value),
-    })
-  }
-
-  function handleSetContainerHeight(evt) {
-    dispatch('out', {
-      stageHeight: Number.parseInt(evt.target.value),
-    })
-  }
 </script>
 
 <!-- prettier-ignore -->
 <div class="topbar">
   <div class="topbar_container">
     <div class="topbar_nav">
-      <button class="topbar_btn is-first-btn" onclick={toggleExpandSidebar} title={sidebarExpanded ? 'Collapse sidebar' : 'Expand sidebar'}>
+      <button class="topbar_btn is-first-btn" onclick={onToggleExpandSidebar} title={sidebarExpanded ? 'Collapse sidebar' : 'Expand sidebar'}>
         <span class="is-hidden">{sidebarExpanded ? 'Collapse sidebar' : 'Expand sidebar'}</span>
         {#if sidebarExpanded}
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M9 3v18m7-6l-3-3 3-3" /></svg>
@@ -120,7 +53,7 @@
         {/if}
       </button>
       {#if node}
-      <button class="topbar_btn bookmark_btn" onclick={toggleBookmark}>
+        <button class="topbar_btn bookmark_btn" onclick={() => onToggleBookmark(node)}>
         <span class="is-hidden">{node.bookmark ? 'Remove from bookmarks' : 'Add to bookmarks'}</span>
         {#if node.bookmark}
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -133,7 +66,7 @@
     <div class="topbar_nav">
       <div class="stagesize-nav">
         {#if stageSizes.small?.length > 0}
-          <OptionalDropdown options={stageSizes.small} handleButtonClick={dispatchStageSizeChange }>
+          <OptionalDropdown options={stageSizes.small} handleButtonClick={onSetStageSize}>
             {#snippet buttonSnippet({onClick})}
             <button class="dropdown_btn topbar_btn" class:active={stageSizes.small.some(s => s.active)} title="Small" onclick={onClick}>
           <span class="is-hidden">Resize viewport to small</span>
@@ -144,7 +77,7 @@
         </OptionalDropdown>
         {/if}
         {#if stageSizes.medium?.length > 0}
-          <OptionalDropdown options={stageSizes.medium} handleButtonClick={dispatchStageSizeChange} >
+          <OptionalDropdown options={stageSizes.medium} handleButtonClick={onSetStageSize} >
             {#snippet buttonSnippet({onClick})}
             <button class="dropdown_btn topbar_btn" class:active={stageSizes.medium.some(s => s.active)} title="Medium" onclick={onClick}>
           <span class="is-hidden">Resize viewport to medium</span>
@@ -155,7 +88,7 @@
         </OptionalDropdown>
         {/if}
         {#if stageSizes.large?.length > 0}
-          <OptionalDropdown options={stageSizes.large} handleButtonClick={dispatchStageSizeChange}>
+          <OptionalDropdown options={stageSizes.large} handleButtonClick={onSetStageSize}>
             {#snippet buttonSnippet({onClick})}
             <button class="dropdown_btn topbar_btn" class:active={stageSizes.large.some(s => s.active)} title="Large" onclick={onClick}>
 
@@ -166,37 +99,37 @@
   {/snippet}
         </OptionalDropdown>
         {/if}
-        <button title="Full" class:active={stageSize === 'full'} onclick={() => dispatchStageSizeChange('full')}>
+        <button title="Full" class:active={stageSize === 'full'} onclick={() => onSetStageSize('full')}>
           <span class="is-hidden">Resize viewport to full</span>
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><path d="M8 21h8m-4-4v4" /></svg>
           <span class="dot"></span>
         </button>
-        <button title={landscape ? 'Portrait mode' : 'Landscape mode'} onclick={toggleOrientation}>
+        <button title={landscape ? 'Portrait mode' : 'Landscape mode'} onclick={onToggleOrientation}>
           <span class="is-hidden">Reverse the aspect ratio to {landscape ? 'portrait mode' : 'landscape mode'}</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="12" height="20" x="6" y="2" rx="2" /><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
         </button>
       </div>
       <div class="stagesize-value">
-        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerWidth} onchange={handleSetContainerWidth}  min="50" max={stageMaxWidth}/>
+        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerWidth} onchange={onSetContainerWidth}  min="50" max={stageMaxWidth}/>
         <div class="stagesize-value-multi_sign">&#47;</div>
-        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} onchange={handleSetContainerHeight} min="50" max={stageMaxHeight}/>
+        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} onchange={onSetContainerHeight} min="50" max={stageMaxHeight}/>
       </div>
-      <button class="topbar_btn show-grid" class:active={showGrid === true} title="Show background grid" onclick="{toggleShowGrid}">
+      <button class="topbar_btn show-grid" class:active={showGrid === true} title="Show background grid" onclick="{onToggleShowGrid}">
         <span class="is-hidden">Show background grid</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18M9 3v18m6-18v18"/></svg>
         <span class="dot"></span>
       </button>
-      <button class="topbar_btn show-m-p_btn" class:active={showInspector === true} title="Visualise margins and paddings" onclick="{toggleShowInspector}">
+      <button class="topbar_btn show-m-p_btn" class:active={showInspector === true} title="Visualise margins and paddings" onclick="{onToggleShowInspector}">
         <span class="is-hidden">Visualise margins and paddings</span>
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15v-3.014M16 15v-3.014M20 6H4m16 2V4M4 8V4m4 11v-3.014"/><rect x="3" y="12" width="18" height="7" rx="1"/></svg>
         <span class="dot"></span>
       </button>
-      <button class="topbar_btn openexternal_btn" title="Open component in new tab" onclick={openInTab}>
+      <button class="topbar_btn openexternal_btn" title="Open component in new tab" onclick={onOpenInTab}>
         <span class="is-hidden">Open component in new tab</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="open-new-tab-icon" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6m4-3h6v6m-11 5L21 3" /></svg>
       </button>
       {#if themes.length > 1}
-        <OptionalDropdown options={themes} dropright={true} handleButtonClick={handleThemeChange}>
+        <OptionalDropdown options={themes} dropright={true} handleButtonClick={onSetTheme}>
           {#snippet buttonSnippet()}
   <button class="dropdown_btn topbar_btn" title="Switch component theme" >
         <span class="is-hidden">Open menu for selecting themes</span>
@@ -205,7 +138,7 @@
   {/snippet}
       </OptionalDropdown> 
       {/if}
-      <button class="topbar_btn is-last-btn" onclick={toggleDarkmode} title={dark ? 'Light mode' : 'Dark mode'}>
+      <button class="topbar_btn is-last-btn" onclick={onToggleAppTheme} title={dark ? 'Light mode' : 'Dark mode'}>
         <span class="is-hidden">{dark ? 'Light mode' : 'Dark mode'}</span>
         {#if dark}
           <svg xmlns="http://www.w3.org/2000/svg" class="mode-icon" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></svg>

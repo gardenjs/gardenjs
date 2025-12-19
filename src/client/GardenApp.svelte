@@ -14,12 +14,12 @@
     panelExpanded,
     landscape,
     setThemes,
-    selectTheme,
+    setTheme,
     themes,
     stageSizes,
     setStageSizes,
     appTheme,
-    updateAppTheme,
+    toggleAppTheme,
     activeTheme,
     toggleExpandPanel,
     setStagesize,
@@ -107,52 +107,6 @@
 
   let docsLink = $derived(config.docs_link ? 1 : 0)
 
-  function handleTopbarOut(evt) {
-    if (evt.detail.openInTab) {
-      const targetWindow = window.open('/frame.html', '_blank')
-      targetWindow.onload = () => {
-        targetWindow.postMessage(
-          {
-            selectedExample: $selectedExample,
-            componentName: $componentName,
-            theme: $activeTheme,
-          },
-          window.location.origin
-        )
-      }
-    }
-    if (evt.detail.selectTheme) {
-      selectTheme(evt.detail.selectTheme)
-    }
-    if (evt.detail.updateAppTheme) {
-      updateAppTheme(evt.detail.updateAppTheme)
-    }
-    if (evt.detail.toggleExpandSidebar) {
-      toggleExpandSidebar()
-    }
-    if (evt.detail.stageWidth) {
-      updateStageWidth(evt.detail.stageWidth)
-    }
-    if (evt.detail.stageHeight) {
-      updateStageHeight(evt.detail.stageHeight)
-    }
-    if (evt.detail.toggleBookmark) {
-      toggleBookmark(evt.detail.toggleBookmark)
-    }
-    if (evt.detail.stageSize) {
-      setStagesize(evt.detail.stageSize)
-    }
-    if (evt.detail.landscape !== undefined) {
-      setLandscape(evt.detail.landscape)
-    }
-    if (evt.detail.toggleShowInspector) {
-      toggleShowInspector()
-    }
-    if (evt.detail.toggleShowGrid) {
-      toggleShowGrid()
-    }
-  }
-
   function handleStageOut(evt) {
     if (evt.detail.stageRect) {
       stageRect = evt.detail.stageRect
@@ -192,6 +146,20 @@
     }
     if (evt.detail.toggleBookmark) {
       toggleBookmark(evt.detail.toggleBookmark)
+    }
+  }
+
+  function openInTab() {
+    const targetWindow = window.open('/frame.html', '_blank')
+    targetWindow.onload = () => {
+      targetWindow.postMessage(
+        {
+          selectedExample: $selectedExample,
+          componentName: $componentName,
+          theme: $activeTheme,
+        },
+        window.location.origin
+      )
     }
   }
 </script>
@@ -242,7 +210,17 @@
         stageMaxWidth={$stageMaxWidth}
         showInspector={$showInspector}
         showGrid={$showGrid}
-        on:out={handleTopbarOut}
+        onOpenInTab={openInTab}
+        onToggleAppTheme={toggleAppTheme}
+        onToggleExpandSidebar={toggleExpandSidebar}
+        onSetContainerWidth={updateStageWidth}
+        onSetContainerHeight={updateStageHeight}
+        onToggleBookmark={toggleBookmark}
+        onSetStageSize={setStagesize}
+        onSetTheme={setTheme}
+        onToggleOrientation={setLandscape}
+        onToggleShowInspector={toggleShowInspector}
+        onToggleShowGrid={toggleShowGrid}
       />
       <Stage
         componentName={$componentName}
