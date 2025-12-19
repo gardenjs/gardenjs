@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import OptionalDropdown from './OptionalDropdown.svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
@@ -39,16 +37,10 @@
 
   let dark = $state(false)
 
-  let stageContainerWidth = $state(),
-    stageContainerHeight = $state()
+  const stageContainerWidth = $derived(Math.round(stageRect.width))
+  const stageContainerHeight = $derived(Math.round(stageRect.height))
 
-  run(() => {
-    let { width, height } = stageRect
-    stageContainerWidth = Math.round(width)
-    stageContainerHeight = Math.round(height)
-  })
-
-  run(() => {
+  $effect(() => {
     dark = appTheme === 'dark'
     if (appTheme === 'dark')
       document.documentElement.setAttribute('data-theme', 'dark')

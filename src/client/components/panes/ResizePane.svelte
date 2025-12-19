@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import { createEventDispatcher } from 'svelte'
   /**
    * @typedef {Object} Props
@@ -26,21 +24,18 @@
   let resizepane = $state()
   let dragType = ''
 
-  let paneHeightWithUnit = $state()
-  run(() => {
+  const paneHeightWithUnit = $derived.by(() => {
     if (Number.isInteger(paneHeight) && !disabled) {
-      paneHeightWithUnit = Math.min(paneHeight, maxHeight) + 'px'
-    } else {
-      paneHeightWithUnit = maxHeight + 'px'
+      return Math.min(paneHeight, maxHeight) + 'px'
     }
+    return maxHeight + 'px'
   })
-  let paneWidthWithUnit = $state()
-  run(() => {
+
+  const paneWidthWithUnit = $derived.by(() => {
     if (Number.isInteger(paneWidth)) {
-      paneWidthWithUnit = Math.min(paneWidth, maxWidth) + 'px'
-    } else {
-      paneWidthWithUnit = maxWidth + 'px'
+      return Math.min(paneWidth, maxWidth) + 'px'
     }
+    return maxWidth + 'px'
   })
 
   const register = (type) => () => {

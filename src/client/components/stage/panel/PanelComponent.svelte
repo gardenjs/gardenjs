@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import TabContent from './PanelContent.svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
@@ -15,13 +13,11 @@
   let { tabs = [], children } = $props()
 
   let selectedTabName = $state({})
-  let selectedTab = $state()
-  run(() => {
+  const selectedTab = $derived.by(() => {
     if (tabs) {
-      selectedTab = tabs.find((t) => t.name === selectedTabName) || tabs[0]
-    } else {
-      selectedTab = {}
+      return tabs.find((t) => t.name === selectedTabName) || tabs[0]
     }
+    return {}
   })
 
   const handleSelect = (tab) => () => {

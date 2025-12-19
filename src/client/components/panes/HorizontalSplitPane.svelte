@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   const dispatch = createEventDispatcher()
 
@@ -19,7 +17,7 @@
 
   let init = $state(false)
 
-  run(() => {
+  $effect(() => {
     if (element && !init) {
       init = true
       const elementHeight = element.offsetHeight
@@ -30,12 +28,11 @@
     }
   })
 
-  let topHeightWithUnit = $state()
-  run(() => {
+  const topHeightWithUnit = $derived.by(() => {
     if (Number.isInteger(topHeight) && Number.isInteger(maxHeight)) {
-      topHeightWithUnit =
-        maxHeight < topHeight ? maxHeight + 'px' : topHeight + 'px'
+      return maxHeight < topHeight ? maxHeight + 'px' : topHeight + 'px'
     }
+    return undefined
   })
 
   const resizeObserver = new ResizeObserver((entries) => {

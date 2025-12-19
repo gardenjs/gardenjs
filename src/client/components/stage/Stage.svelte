@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import { createEventDispatcher, onMount, onDestroy } from 'svelte'
   import HorizontalSplitPane from '../panes/HorizontalSplitPane.svelte'
   import ResizePane from '../panes/ResizePane.svelte'
@@ -153,7 +151,8 @@
       dispatch('out', { stageWidth: evt.detail.stageWidth })
     }
   }
-  run(() => {
+
+  $effect(() => {
     if (myframeready) {
       if (
         !myframe.contentDocument ||
@@ -176,7 +175,8 @@
       )
     }
   })
-  let tabs = $derived(createTabs(das))
+
+  const tabs = $derived(createTabs(das))
 </script>
 
 <HorizontalSplitPane

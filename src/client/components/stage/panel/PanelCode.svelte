@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import { highlightElement } from '../../highlight/Highlight.js'
 
   /**
@@ -32,10 +30,11 @@
     })
   }
 
-  run(() => {
+  $effect(() => {
     updateCode(componentName, rawComponentMap)
   })
-  run(() => {
+
+  $effect(() => {
     if (code && codeblock) {
       highlightElement(codeblock)
     }

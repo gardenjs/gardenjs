@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import Stage from './components/stage/Stage.svelte'
   import Sidebar from './components/sidebar/Sidebar.svelte'
   import Topbar from './components/topbar/Topbar.svelte'
@@ -75,19 +73,19 @@
   /** @type {Props} */
   let { routes, navTree, dasMap, config } = $props()
 
-  run(() => {
+  $effect(() => {
     updateNavTree(navTree)
   })
-  run(() => {
+  $effect(() => {
     if (routes && dasMap) initRouting(dasMap, routes, baseurl)
   })
-  run(() => {
+  $effect(() => {
     updateDasMap(dasMap)
   })
-  run(() => {
+  $effect(() => {
     setThemes(config.themes)
   })
-  run(() => {
+  $effect(() => {
     if (config.devices) {
       setStageSizes(config.devices)
     }
@@ -95,7 +93,7 @@
       setGridSettings(config.grid)
     }
   })
-  run(() => {
+  $effect(() => {
     updateSelectedComponent($currentRoute, $componentName)
     handleSelectionChanged()
   })

@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import { onMount } from 'svelte'
 
   import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
@@ -184,7 +182,7 @@
     currentRenderer = await rendererBuilder.create()
   }
 
-  run(() => {
+  $effect(() => {
     if (!config.devmodus) {
       updateRenderer(DefaultRendererBuilder)
     }

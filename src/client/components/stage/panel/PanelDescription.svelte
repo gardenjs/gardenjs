@@ -1,6 +1,4 @@
 <script>
-  import { run } from 'svelte/legacy'
-
   import './markdown.css'
   import { marked } from 'marked'
   import { highlightElement } from '../../highlight/Highlight.js'
@@ -13,7 +11,7 @@
   let { das } = $props()
   let element = $state()
 
-  run(() => {
+  $effect(() => {
     if (das && element) {
       setTimeout(() => {
         if (element) {
