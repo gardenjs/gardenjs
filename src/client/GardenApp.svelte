@@ -131,24 +131,6 @@
     }
   }
 
-  function handleSidebarOut(evt) {
-    if (evt.detail.toggleFoldStatusOfNode) {
-      toggleFolder(evt.detail.toggleFoldStatusOfNode)
-    }
-    if (evt.detail.toggleRootFolders) {
-      toggleRootFolders()
-    }
-    if (evt.detail.filter) {
-      updateFilter(evt.detail.filter.value)
-    }
-    if (evt.detail.toggleExpandPanel) {
-      toggleExpandPanel()
-    }
-    if (evt.detail.toggleBookmark) {
-      toggleBookmark(evt.detail.toggleBookmark)
-    }
-  }
-
   function openInTab() {
     const targetWindow = window.open('/frame.html', '_blank')
     targetWindow.onload = () => {
@@ -190,8 +172,12 @@
         filter={$filterNavTree}
         panelExpanded={$panelExpanded}
         bookmarks={$bookmarks}
-        on:out={handleSidebarOut}
         {docsLink}
+        onToggleFoldStatusOfNode={toggleFolder}
+        onToggleRootFolders={toggleRootFolders}
+        onToggleBookmark={toggleBookmark}
+        onUpdateFilter={updateFilter}
+        onToggleExpandPanel={toggleExpandPanel}
       />
     </div>
     <div class="main">

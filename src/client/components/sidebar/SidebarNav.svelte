@@ -1,24 +1,12 @@
 <script>
   import SidebarNav from './SidebarNav.svelte'
   import Link from './SidebarNavLinks.svelte'
-  import { createEventDispatcher } from 'svelte'
-  const dispatch = createEventDispatcher()
-  /**
-   * @typedef {Object} Props
-   * @property {any} [nodes]
-   * @property {number} [level]
-   */
 
-  /** @type {Props} */
-  let { nodes = [], level = 1 } = $props()
-
-  function toggleFoldStatusOfNode(node) {
-    dispatch('out', { toggleFoldStatusOfNode: { ...node } })
-  }
+  let { nodes = [], level = 1, onToggleFoldStatusOfNode } = $props()
 </script>
 
 <ul class="filter_list components level-{level}">
-  {#each nodes as node}
+  {#each nodes as node (node.key)}
     {#if node.isLeaf}
       <li class="component">
         <Link href={node.href} selected={node.selected} text={node.name} />
@@ -26,7 +14,7 @@
     {:else}
       <!-- prettier-ignore -->
       <li class="folder" class:unfolded={node.unfolded}>
-        <button class="folder_btn btn_level-{level}" title={node.unfolded ? 'fold' : 'unfold'} onclick={() => toggleFoldStatusOfNode(node)}>
+        <button class="folder_btn btn_level-{level}" title={node.unfolded ? 'fold' : 'unfold'} onclick={() => onToggleFoldStatusOfNode({...node})}>
           <span class="folder_arrow" class:unfolded_icon={node.unfolded}>
             <svg xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6" /></svg>
           </span>

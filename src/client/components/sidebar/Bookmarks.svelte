@@ -1,20 +1,6 @@
 <script>
   import Link from './SidebarNavLinks.svelte'
-  import { createEventDispatcher } from 'svelte'
-
-  const dispatch = createEventDispatcher()
-
-  /**
-   * @typedef {Object} Props
-   * @property {any} [bookmarks]
-   */
-
-  /** @type {Props} */
-  let { bookmarks = [] } = $props()
-
-  function toggleBookmark(bookmark) {
-    dispatch('out', { toggleBookmark: bookmark })
-  }
+  let { bookmarks = [], onToggleBookmark } = $props()
 </script>
 
 <div class="bookmarks">
@@ -27,11 +13,11 @@
   </div>
   <nav class="bookmarks_nav">
     <ul class="components">
-      {#each bookmarks as bookmark}
+      {#each bookmarks as bookmark (bookmark.key)}
         <li class="component">
           <!-- prettier-ignore -->
           <Link href={bookmark.href} selected={bookmark.selected} text={bookmark.name} />
-          <button class="close" onclick={() => toggleBookmark(bookmark)}>
+          <button class="close" onclick={() => onToggleBookmark(bookmark)}>
             <!-- prettier-ignore -->
             <svg xmlns="http://www.w3.org/2000/svg" class="close-icon" height="12" viewBox="0 0 24 24" width="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
           </button>

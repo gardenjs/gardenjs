@@ -1,12 +1,4 @@
 <script>
-  /**
-   * @typedef {Object} Props
-   * @property {any} href
-   * @property {any} selected
-   * @property {any} text
-   */
-
-  /** @type {Props} */
   let { href, selected, text } = $props()
 
   function handleClick(event) {
