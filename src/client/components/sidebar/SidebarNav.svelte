@@ -27,7 +27,7 @@
           </span>
         </button>
         {#if node.unfolded}
-          <SidebarNav nodes={node.children} level={level + 1} on:out />
+        <SidebarNav nodes={node.children} level={level + 1} {onToggleFoldStatusOfNode}/>
         {/if}
       </li>
     {/if}
