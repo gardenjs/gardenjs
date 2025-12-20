@@ -1,25 +1,14 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-  /**
-   * @typedef {Object} Props
-   * @property {boolean} [disabled]
-   * @property {any} maxHeight
-   * @property {any} maxWidth
-   * @property {any} paneHeight
-   * @property {any} paneWidth
-   * @property {import('svelte').Snippet} [children]
-   */
-
-  /** @type {Props} */
   let {
     disabled = false,
     maxHeight,
     maxWidth,
     paneHeight,
     paneWidth,
+    onSetStageHeight,
+    onSetStageWidth,
     children,
   } = $props()
-  const dispatch = createEventDispatcher()
 
   let resizepane = $state()
   let dragType = ''
@@ -54,7 +43,7 @@
         newHeight = Math.min(maxHeight, newHeight)
         newHeight = Math.max(50, newHeight)
       }
-      dispatch('out', { stageHeight: newHeight })
+      onSetStageHeight(newHeight)
     }
 
     if (dragType.includes('vertical')) {
@@ -65,7 +54,7 @@
         newWidth = Math.min(maxWidth, newWidth)
         newWidth = Math.max(50, newWidth)
       }
-      dispatch('out', { stageWidth: newWidth })
+      onSetStageWidth(newWidth)
     }
   }
 

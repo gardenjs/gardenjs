@@ -1,13 +1,6 @@
 <script>
   import { highlightElement } from '../../highlight/Highlight.js'
 
-  /**
-   * @typedef {Object} Props
-   * @property {any} componentName
-   * @property {any} devmodus
-   */
-
-  /** @type {Props} */
   let { componentName, devmodus } = $props()
 
   let code = $state()

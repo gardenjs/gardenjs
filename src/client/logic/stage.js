@@ -50,6 +50,8 @@ export const stageMaxWidth = derived(
   ($stageContainerWidth) => $stageContainerWidth - 20
 )
 
+export const stageRect = writable({})
+
 export const panelExpanded = writable(true)
 export const appTheme = localStore('appTheme', 'default')
 
@@ -150,6 +152,10 @@ function computeStageStyle() {
 export function updateStageContainerHeight(newHeight) {
   stageContainerHeight.set(newHeight)
   updateExpandPanel()
+}
+
+export function updateStageRect(newStageRect) {
+  stageRect.set(newStageRect)
 }
 
 export function updateStageContainerMaxHeight(newHeight) {
@@ -268,7 +274,7 @@ export function setStagesize(nStageSize) {
   computeStageStyle()
 }
 
-export function setLandscape(nLandscape) {
-  landscape.set(nLandscape)
+export function toggleOrientation() {
+  landscape.set(!get(landscape))
   computeStageStyle()
 }

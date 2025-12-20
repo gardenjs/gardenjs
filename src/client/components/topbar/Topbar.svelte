@@ -2,29 +2,29 @@
   import OptionalDropdown from './OptionalDropdown.svelte'
 
   let {
-    sidebarExpanded = true,
     appTheme = 'default',
     landscape = false,
+    node,
+    showGrid,
+    showInspector,
+    sidebarExpanded = true,
+    stageMaxHeight,
+    stageMaxWidth,
+    stageRect,
     stageSize = 'full',
     stageSizes = {},
     themes = [],
-    stageRect,
-    stageMaxHeight,
-    stageMaxWidth,
-    showInspector,
-    showGrid,
-    node,
-    onToggleExpandSidebar,
-    onToggleBookmark,
-    onToggleShowInspector,
-    onToggleShowGrid,
-    onToggleAppTheme,
-    onToggleOrientation,
-    onSetStageSize,
     onOpenInTab,
+    onSetStageHeight,
+    onSetStageWidth,
+    onSetStageSize,
     onSetTheme,
-    onSetContainerWidth,
-    onSetContainerHeight,
+    onToggleAppTheme,
+    onToggleBookmark,
+    onToggleExpandSidebar,
+    onToggleOrientation,
+    onToggleShowGrid,
+    onToggleShowInspector,
   } = $props()
 
   let dark = $state(false)
@@ -110,9 +110,9 @@
         </button>
       </div>
       <div class="stagesize-value">
-        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerWidth} onchange={onSetContainerWidth}  min="50" max={stageMaxWidth}/>
+        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerWidth} onchange={(evt) => {onSetStageWidth(Number.parseInt(evt.target.value))}} min="50" max={stageMaxWidth}/>
         <div class="stagesize-value-multi_sign">&#47;</div>
-        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} onchange={onSetContainerHeight} min="50" max={stageMaxHeight}/>
+        <input class="stagesize-input" type="number" disabled={stageSize !== 'full'} value={stageContainerHeight} onchange={(evt) => {onSetStageHeight(Number.parseInt(evt.target.value))}} min="50" max={stageMaxHeight}/>
       </div>
       <button class="topbar_btn show-grid" class:active={showGrid === true} title="Show background grid" onclick="{onToggleShowGrid}">
         <span class="is-hidden">Show background grid</span>

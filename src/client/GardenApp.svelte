@@ -11,6 +11,7 @@
     stageWidth,
     stageMaxHeight,
     stageMaxWidth,
+    stageRect,
     panelExpanded,
     landscape,
     setThemes,
@@ -23,16 +24,17 @@
     activeTheme,
     toggleExpandPanel,
     setStagesize,
-    setLandscape,
     updateStageContainerHeight,
     updateStageContainerWidth,
     updateStageContainerMaxHeight,
     updateStageHeight,
     updateStageWidth,
+    updateStageRect,
     sidebarExpanded,
     toggleExpandSidebar,
     toggleShowInspector,
     toggleShowGrid,
+    toggleOrientation,
     handleSelectionChanged,
     showInspector,
     showGrid,
@@ -62,15 +64,7 @@
   } from './logic/routing.js'
 
   let baseurl = '/garden'
-  /**
-   * @typedef {Object} Props
-   * @property {any} routes
-   * @property {any} navTree
-   * @property {any} dasMap
-   * @property {any} config
-   */
 
-  /** @type {Props} */
   let { routes, navTree, dasMap, config } = $props()
 
   $effect(() => {
@@ -103,33 +97,7 @@
   let projectLogoDarkmode =
     config.project_logo_darkmode?.split('/').pop() || null
 
-  let stageRect = $state({})
-
   let docsLink = $derived(config.docs_link ? 1 : 0)
-
-  function handleStageOut(evt) {
-    if (evt.detail.stageRect) {
-      stageRect = evt.detail.stageRect
-    }
-    if (evt.detail.stageContainerHeight) {
-      updateStageContainerHeight(evt.detail.stageContainerHeight)
-    }
-    if (evt.detail.toggleExpandPanel) {
-      toggleExpandPanel()
-    }
-    if (evt.detail.stageContainerWidth) {
-      updateStageContainerWidth(evt.detail.stageContainerWidth)
-    }
-    if (evt.detail.stageContainerMaxHeight) {
-      updateStageContainerMaxHeight(evt.detail.stageContainerMaxHeight)
-    }
-    if (evt.detail.stageWidth) {
-      updateStageWidth(evt.detail.stageWidth)
-    }
-    if (evt.detail.stageHeight) {
-      updateStageHeight(evt.detail.stageHeight)
-    }
-  }
 
   function openInTab() {
     const targetWindow = window.open('/frame.html', '_blank')
@@ -162,72 +130,78 @@
   <div class="garden">
     <div class="sidebar">
       <Sidebar
-        {projectTitle}
-        {projectLogo}
-        {projectLogoDarkmode}
-        appTheme={$appTheme}
-        sidebarExpanded={$sidebarExpanded}
-        rootNodesExpanded={$rootNodesExpanded}
-        nodes={$nodes}
-        filter={$filterNavTree}
-        panelExpanded={$panelExpanded}
-        bookmarks={$bookmarks}
         {docsLink}
+        {projectLogoDarkmode}
+        {projectLogo}
+        {projectTitle}
+        appTheme={$appTheme}
+        bookmarks={$bookmarks}
+        filter={$filterNavTree}
+        nodes={$nodes}
+        panelExpanded={$panelExpanded}
+        rootNodesExpanded={$rootNodesExpanded}
+        sidebarExpanded={$sidebarExpanded}
+        onToggleBookmark={toggleBookmark}
+        onToggleExpandPanel={toggleExpandPanel}
         onToggleFoldStatusOfNode={toggleFolder}
         onToggleRootFolders={toggleRootFolders}
-        onToggleBookmark={toggleBookmark}
         onUpdateFilter={updateFilter}
-        onToggleExpandPanel={toggleExpandPanel}
       />
     </div>
     <div class="main">
       <Topbar
-        sidebarExpanded={$sidebarExpanded}
-        node={$selectedNode}
-        themes={$themes}
-        stageSizes={$stageSizes}
         appTheme={$appTheme}
-        {stageRect}
-        stageSize={$stageSize}
         landscape={$landscape}
-        stageWidth={$stageWidth}
+        node={$selectedNode}
+        showGrid={$showGrid}
+        showInspector={$showInspector}
+        sidebarExpanded={$sidebarExpanded}
         stageHeight={$stageHeight}
         stageMaxHeight={$stageMaxHeight}
         stageMaxWidth={$stageMaxWidth}
-        showInspector={$showInspector}
-        showGrid={$showGrid}
+        stageRect={$stageRect}
+        stageSize={$stageSize}
+        stageSizes={$stageSizes}
+        stageWidth={$stageWidth}
+        themes={$themes}
         onOpenInTab={openInTab}
-        onToggleAppTheme={toggleAppTheme}
-        onToggleExpandSidebar={toggleExpandSidebar}
-        onSetContainerWidth={updateStageWidth}
-        onSetContainerHeight={updateStageHeight}
-        onToggleBookmark={toggleBookmark}
+        onSetStageHeight={updateStageHeight}
+        onSetStageWidth={updateStageWidth}
         onSetStageSize={setStagesize}
         onSetTheme={setTheme}
-        onToggleOrientation={setLandscape}
-        onToggleShowInspector={toggleShowInspector}
+        onToggleAppTheme={toggleAppTheme}
+        onToggleBookmark={toggleBookmark}
+        onToggleExpandSidebar={toggleExpandSidebar}
+        onToggleOrientation={toggleOrientation}
         onToggleShowGrid={toggleShowGrid}
+        onToggleShowInspector={toggleShowInspector}
       />
       <Stage
+        appTheme={$appTheme}
         componentName={$componentName}
         das={$das}
+        devmodus={config.devmodus}
+        gridSettings={$gridSettings}
+        panelExpanded={$panelExpanded}
         selectedExample={$selectedExample}
-        stageStyle={$stageStyle}
-        stageSize={$stageSize}
+        showGrid={$showGrid}
+        showInspector={$showInspector}
         stageContainerHeight={$stageContainerHeight}
         stageContainerMaxHeight={$stageContainerMaxHeight}
         stageHeight={$stageHeight}
-        stageWidth={$stageWidth}
         stageMaxHeight={$stageMaxHeight}
         stageMaxWidth={$stageMaxWidth}
-        showInspector={$showInspector}
-        showGrid={$showGrid}
-        gridSettings={$gridSettings}
+        stageSize={$stageSize}
+        stageStyle={$stageStyle}
+        stageWidth={$stageWidth}
         theme={$activeTheme}
-        appTheme={$appTheme}
-        panelExpanded={$panelExpanded}
-        devmodus={config.devmodus}
-        on:out={handleStageOut}
+        onSetStageContainerHeight={updateStageContainerHeight}
+        onSetStageContainerMaxHeight={updateStageContainerMaxHeight}
+        onSetStageContainerWidth={updateStageContainerWidth}
+        onSetStageHeight={updateStageHeight}
+        onSetStageWidth={updateStageWidth}
+        onToggleExpandPanel={toggleExpandPanel}
+        onUpdateStageRect={updateStageRect}
       />
     </div>
   </div>

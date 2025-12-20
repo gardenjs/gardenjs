@@ -1,18 +1,10 @@
 <script>
-  import TabContent from './PanelContent.svelte'
-  import { createEventDispatcher } from 'svelte'
-  const dispatch = createEventDispatcher()
+  import PanelContent from './PanelContent.svelte'
 
-  /**
-   * @typedef {Object} Props
-   * @property {any} [tabs]
-   * @property {import('svelte').Snippet} [children]
-   */
-
-  /** @type {Props} */
-  let { tabs = [], children } = $props()
+  let { tabs = [], children, onToggleExpandPanel } = $props()
 
   let selectedTabName = $state({})
+
   const selectedTab = $derived.by(() => {
     if (tabs) {
       return tabs.find((t) => t.name === selectedTabName) || tabs[0]
@@ -20,19 +12,8 @@
     return {}
   })
 
-  const handleSelect = (tab) => () => {
+  const onSelectTab = (tab) => {
     selectedTabName = tab.name
-    dispatch('out', { selecteditem: tab })
-  }
-
-  function handleCollapsePanel() {
-    dispatch('out', { toggleExpandPanel: true })
-  }
-
-  function handleout(evt) {
-    if (selectedTab.out) {
-      selectedTab.out(evt)
-    }
   }
 </script>
 
@@ -45,7 +26,7 @@
             <li>
               <button
                 class:active={tab.name === selectedTab.name}
-                onclick={handleSelect(tab)}
+                onclick={() => onSelectTab(tab)}
                 >{tab.name}<span class="dot"></span></button
               >
             </li>
@@ -55,7 +36,7 @@
       <button
         class="panel_toggle"
         title="Collapse panel"
-        onclick={handleCollapsePanel}
+        onclick={onToggleExpandPanel}
       >
         <span class="is-hidden">Collapse panel</span>
         <svg
@@ -80,8 +61,9 @@
     </div>
     <div class="panel_pane">
       {#if selectedTab && selectedTab.page}
-        <TabContent item={selectedTab} on:out={handleout} />
-      {:else if children}{@render children()}{:else}No tab content provided{/if}
+        <PanelContent item={selectedTab} />
+      {:else if children}{@render children()}
+      {:else}No tab content provided{/if}
     </div>
   {/if}
 </div>

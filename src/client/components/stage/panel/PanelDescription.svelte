@@ -2,12 +2,7 @@
   import './markdown.css'
   import { marked } from 'marked'
   import { highlightElement } from '../../highlight/Highlight.js'
-  /**
-   * @typedef {Object} Props
-   * @property {any} das
-   */
 
-  /** @type {Props} */
   let { das } = $props()
   let element = $state()
 

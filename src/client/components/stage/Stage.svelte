@@ -1,54 +1,38 @@
 <script>
-  import { createEventDispatcher, onMount, onDestroy } from 'svelte'
+  import { onMount, onDestroy } from 'svelte'
   import HorizontalSplitPane from '../panes/HorizontalSplitPane.svelte'
   import ResizePane from '../panes/ResizePane.svelte'
   import PanelComponent from './panel/PanelComponent.svelte'
-  import PanelStoriesNav from './panel/PanelStoriesNav.svelte'
+  import PanelExamplesNav from './panel/PanelExamplesNav.svelte'
   import PanelDescription from './panel/PanelDescription.svelte'
   import PanelCode from './panel/PanelCode.svelte'
 
-  const dispatch = createEventDispatcher()
-
-  /**
-   * @typedef {Object} Props
-   * @property {any} componentName
-   * @property {any} [das]
-   * @property {any} stageStyle
-   * @property {any} stageSize
-   * @property {any} selectedExample
-   * @property {any} stageContainerHeight
-   * @property {any} stageContainerMaxHeight
-   * @property {any} stageHeight
-   * @property {any} stageWidth
-   * @property {any} stageMaxHeight
-   * @property {any} stageMaxWidth
-   * @property {any} panelExpanded
-   * @property {any} showInspector
-   * @property {any} showGrid
-   * @property {any} theme
-   * @property {any} devmodus
-   */
-
-  /** @type {Props} */
   let {
+    appTheme,
     componentName,
     das = {},
-    stageStyle,
-    stageSize,
+    devmodus,
+    gridSettings,
+    panelExpanded,
     selectedExample,
+    showGrid,
+    showInspector,
     stageContainerHeight,
     stageContainerMaxHeight,
     stageHeight,
-    stageWidth,
     stageMaxHeight,
     stageMaxWidth,
-    showInspector,
-    showGrid,
-    gridSettings,
-    panelExpanded,
+    stageSize,
+    stageStyle,
+    stageWidth,
     theme,
-    appTheme,
-    devmodus,
+    onSetStageContainerHeight,
+    onSetStageContainerMaxHeight,
+    onSetStageContainerWidth,
+    onSetStageHeight,
+    onSetStageWidth,
+    onToggleExpandPanel,
+    onUpdateStageRect,
   } = $props()
 
   let myframeready = $state()
@@ -56,7 +40,7 @@
 
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach((entry) => {
-      updateStageRect(entry.contentRect)
+      onUpdateStageRect(entry.contentRect)
     })
   })
 
@@ -101,10 +85,10 @@
         name: 'Examples',
         props: {
           selected: selectedExample,
-          items: das.examples.map((ex) => ex.title),
+          examples: das.examples.map((ex) => ex.title),
+          onSelectExample: setSelectedExample,
         },
-        page: PanelStoriesNav,
-        out: handleSelectionChange,
+        page: PanelExamplesNav,
       })
     }
     if (!devmodus && das.componentfile) {
@@ -117,39 +101,12 @@
     return tabs
   }
 
-  function handleSelectionChange(evt) {
+  function setSelectedExample(selectedExample) {
     globalThis.history.pushState(
-      { selectedExample: evt.detail.selecteditem },
+      { selectedExample },
       '',
       window.location.pathname.substring('/garden'.length)
     )
-  }
-
-  function updateStageRect(stageRect) {
-    dispatch('out', {
-      stageRect,
-    })
-  }
-
-  function handleHorizontalSplitPaneOut(evt) {
-    if (evt.detail.topHeight) {
-      dispatch('out', { stageContainerHeight: evt.detail.topHeight })
-    }
-    if (evt.detail.maxHeight) {
-      dispatch('out', { stageContainerMaxHeight: evt.detail.maxHeight })
-    }
-    if (evt.detail.maxWidth) {
-      dispatch('out', { stageContainerWidth: evt.detail.maxWidth })
-    }
-  }
-
-  function handleResizePaneOut(evt) {
-    if (evt.detail.stageHeight) {
-      dispatch('out', { stageHeight: evt.detail.stageHeight })
-    }
-    if (evt.detail.stageWidth) {
-      dispatch('out', { stageWidth: evt.detail.stageWidth })
-    }
   }
 
   $effect(() => {
@@ -182,7 +139,9 @@
 <HorizontalSplitPane
   topHeight={stageContainerHeight}
   maxHeight={stageContainerMaxHeight}
-  on:out={handleHorizontalSplitPaneOut}
+  onSetTopHeight={onSetStageContainerHeight}
+  onSetMaxHeight={onSetStageContainerMaxHeight}
+  onSetMaxWidth={onSetStageContainerWidth}
 >
   {#snippet top()}
     <ResizePane
@@ -191,7 +150,8 @@
       maxWidth={stageMaxWidth}
       paneHeight={stageHeight}
       paneWidth={stageWidth}
-      on:out={handleResizePaneOut}
+      {onSetStageHeight}
+      {onSetStageWidth}
     >
       <iframe
         class="stage_iframe"
@@ -205,7 +165,7 @@
   {#snippet bottom()}
     <div class="panel">
       {#if panelExpanded}
-        <PanelComponent {tabs} on:out />
+        <PanelComponent {tabs} {onToggleExpandPanel} />
       {/if}
     </div>
   {/snippet}

@@ -3,22 +3,22 @@
   import SidebarNav from './SidebarNav.svelte'
 
   let {
-    nodes = [],
-    sidebarExpanded = true,
-    rootNodesExpanded = true,
-    projectTitle,
-    projectLogo,
-    projectLogoDarkmode,
-    filter,
-    panelExpanded = true,
-    docsLink,
     appTheme,
     bookmarks = [],
-    onToggleRootFolders,
-    onUpdateFilter,
+    docsLink,
+    filter,
+    nodes = [],
+    panelExpanded = true,
+    projectLogo,
+    projectLogoDarkmode,
+    projectTitle,
+    rootNodesExpanded = true,
+    sidebarExpanded = true,
+    onToggleBookmark,
     onToggleExpandPanel,
     onToggleFoldStatusOfNode,
-    onToggleBookmark,
+    onToggleRootFolders,
+    onUpdateFilter,
   } = $props()
 </script>
 

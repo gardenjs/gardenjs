@@ -1,17 +1,14 @@
 <script>
-  import { createEventDispatcher, onMount, onDestroy } from 'svelte'
-  const dispatch = createEventDispatcher()
-
-  /**
-   * @typedef {Object} Props
-   * @property {any} topHeight
-   * @property {any} maxHeight
-   * @property {import('svelte').Snippet} [top]
-   * @property {import('svelte').Snippet} [bottom]
-   */
-
-  /** @type {Props} */
-  let { topHeight = $bindable(), maxHeight, top, bottom } = $props()
+  import { onMount, onDestroy } from 'svelte'
+  let {
+    topHeight = $bindable(),
+    maxHeight,
+    top,
+    bottom,
+    onSetMaxWidth,
+    onSetMaxHeight,
+    onSetTopHeight,
+  } = $props()
   let element = $state()
   let dragging = $state(false)
 
@@ -21,10 +18,8 @@
     if (element && !init) {
       init = true
       const elementHeight = element.offsetHeight
-      dispatch('out', {
-        maxHeight: elementHeight,
-        topHeight: Math.round(elementHeight * 0.7),
-      })
+      onSetMaxHeight(elementHeight)
+      onSetTopHeight(Math.round(elementHeight * 0.7))
     }
   })
 
@@ -37,10 +32,8 @@
 
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach(() => {
-      dispatch('out', {
-        maxHeight: element.offsetHeight,
-        maxWidth: element.offsetWidth,
-      })
+      onSetMaxHeight(element.offsetHeight)
+      onSetMaxWidth(element.offsetWidth)
     })
   })
 
@@ -62,14 +55,14 @@
     window.getSelection().removeAllRanges()
     const newHeight = Math.min(maxHeight, e.pageY - element.offsetTop - 7)
     topHeight = newHeight
-    dispatch('out', { topHeight: topHeight })
+    onSetTopHeight(topHeight)
   }
 
   function unregister() {
     document.removeEventListener('mousemove', drag)
     document.removeEventListener('mouseup', unregister)
 
-    dispatch('out', { topHeight: topHeight })
+    onSetTopHeight(topHeight)
     dragging = false
   }
 </script>
