@@ -128,7 +128,7 @@ function isUnfolded(node, route, filter, visible) {
   return (
     (filter && visible) ||
     unfoldedNodes[node.key] ||
-    route?.indexOf(node.key) === 0
+    (unfoldedNodes[node.key] !== false && route?.indexOf(node.key) === 0)
   )
 }
 
@@ -146,11 +146,7 @@ export function toggleFolder(node) {
     expandRootNode(node)
     return
   }
-  if (unfoldedNodes[node.key] && !(currentRoute.indexOf(node.key) === 0)) {
-    unfoldedNodes[node.key] = false
-  } else {
-    unfoldedNodes[node.key] = true
-  }
+  unfoldedNodes[node.key] = !unfoldedNodes[node.key]
   updateTree()
 }
 
