@@ -15,6 +15,13 @@ function localStore(
   return store
 }
 
+const textOrNumberParser = (value) => {
+  if (Number.isNaN(Number(value))) {
+    return value
+  }
+  return Number(value)
+}
+
 export const themes = writable([])
 export const stageSizes = writable({
   small: [{ name: 'small', h: 1170, w: 550 }],
@@ -35,11 +42,24 @@ export const landscape = localStore(
   false,
   (value) => value === 'true'
 )
-export const stageContainerHeight = writable('')
-export const stageContainerWidth = writable('')
-export const stageContainerMaxHeight = writable('')
-export const stageHeight = writable('full')
-export const stageWidth = writable('full')
+export const stageContainerHeight = localStore(
+  'stageContainerHeight',
+  '',
+  textOrNumberParser
+)
+export const stageContainerWidth = localStore(
+  'stageContainerWidth',
+  '',
+  textOrNumberParser
+)
+export const stageContainerMaxHeight = localStore(
+  'stageContainerMaxHeight',
+  '',
+  textOrNumberParser
+)
+export const stageHeight = localStore('stageHeight', 'full', textOrNumberParser)
+export const stageWidth = localStore('stageWidth', 'full', textOrNumberParser)
+
 export const stageMaxHeight = derived(
   [stageContainerHeight, stageContainerMaxHeight],
   ([$stageContainerHeight, $stageContainerMaxHeight]) =>
@@ -69,6 +89,17 @@ export const gridSettings = writable({
   color: '#ddd',
 })
 
+export const resetStage = () => {
+  stageSize.set('full')
+  landscape.set(false)
+  stageContainerHeight.set('')
+  stageContainerWidth.set('')
+  stageContainerMaxHeight.set('')
+  stageHeight.set('full')
+  stageWidth.set('full')
+  appTheme.set('default')
+}
+
 export function setGridSettings({ size, style, color }) {
   gridSettings.set({
     size: size ?? 50,
@@ -81,6 +112,7 @@ let previousPanelHeight = ''
 
 export function setStageSizes(newStageSizes) {
   stageSizes.set(newStageSizes)
+  setStagesize(get(stageSize))
 }
 
 export function setThemes(newThemes) {
@@ -213,8 +245,6 @@ export function toggleExpandPanel() {
   panelExpanded.set(!get(panelExpanded))
 }
 
-computeStageStyle()
-
 export function toggleExpandSidebar() {
   if (get(mobileNav)) {
     mobileSidebarExpanded.set(!get(mobileSidebarExpanded))
@@ -278,3 +308,5 @@ export function toggleOrientation() {
   landscape.set(!get(landscape))
   computeStageStyle()
 }
+
+computeStageStyle()

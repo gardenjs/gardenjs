@@ -14,15 +14,15 @@
   let dragType = ''
 
   const paneHeightWithUnit = $derived.by(() => {
-    if (Number.isInteger(paneHeight) && !disabled) {
-      return Math.min(paneHeight, maxHeight) + 'px'
+    if (Number.isInteger(Number(paneHeight)) && !disabled) {
+      return Math.min(Number(paneHeight), Number(maxHeight)) + 'px'
     }
     return maxHeight + 'px'
   })
 
   const paneWidthWithUnit = $derived.by(() => {
-    if (Number.isInteger(paneWidth)) {
-      return Math.min(paneWidth, maxWidth) + 'px'
+    if (Number.isInteger(Number(paneWidth))) {
+      return Math.min(Number(paneWidth), Number(maxWidth)) + 'px'
     }
     return maxWidth + 'px'
   })

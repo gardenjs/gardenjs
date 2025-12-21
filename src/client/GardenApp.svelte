@@ -30,6 +30,7 @@
     updateStageHeight,
     updateStageWidth,
     updateStageRect,
+    resetStage,
     sidebarExpanded,
     toggleExpandSidebar,
     toggleShowInspector,
@@ -141,6 +142,7 @@
         panelExpanded={$panelExpanded}
         rootNodesExpanded={$rootNodesExpanded}
         sidebarExpanded={$sidebarExpanded}
+        onLogoClicked={resetStage}
         onToggleBookmark={toggleBookmark}
         onToggleExpandPanel={toggleExpandPanel}
         onToggleFoldStatusOfNode={toggleFolder}

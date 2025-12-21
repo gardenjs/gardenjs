@@ -19,11 +19,17 @@
     onToggleFoldStatusOfNode,
     onToggleRootFolders,
     onUpdateFilter,
+    onLogoClicked,
   } = $props()
 </script>
 
 <header class="sidebar_container" class:show-sidebar={sidebarExpanded}>
-  <a class="project-identifier" class:has-logo={projectLogo} href="/">
+  <a
+    class="project-identifier"
+    class:has-logo={projectLogo}
+    href="/"
+    onclick={onLogoClicked}
+  >
     {#if projectLogoDarkmode && appTheme === 'dark'}
       <img
         src="/assets/{projectLogoDarkmode}"

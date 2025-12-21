@@ -17,6 +17,9 @@
   $effect(() => {
     if (element && !init) {
       init = true
+      if (topHeight && maxHeight) {
+        return
+      }
       const elementHeight = element.offsetHeight
       onSetMaxHeight(elementHeight)
       onSetTopHeight(Math.round(elementHeight * 0.7))
