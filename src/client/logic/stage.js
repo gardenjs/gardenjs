@@ -97,7 +97,6 @@ export const resetStage = () => {
   stageContainerMaxHeight.set('')
   stageHeight.set('full')
   stageWidth.set('full')
-  appTheme.set('default')
 }
 
 export function setGridSettings({ size, style, color }) {
