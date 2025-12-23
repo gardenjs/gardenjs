@@ -47,7 +47,7 @@
     "./main.scss": "./src/client/assets/scss/main.scss"
   },
   "scripts": {
-    "prepare": "husky",
+    "prepare": "test -d .git && husky install || true",
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview",
