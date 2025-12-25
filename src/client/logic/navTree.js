@@ -128,8 +128,31 @@ function isUnfolded(node, route, filter, visible) {
   return (
     (filter && visible) ||
     unfoldedNodes[node.key] ||
-    route?.indexOf(node.key) === 0
+    (unfoldedNodes[node.key] !== false && route?.indexOf(node.key) === 0)
   )
+}
+
+function normalizeHref(href) {
+  return href.split('#')[0].split('?')[0].replace(/\/+$/, '')
+}
+
+export function navigateToLeafNode(href) {
+  const targetHref = normalizeHref(href)
+
+  const all = navtree.flatMap(getAllNodes)
+  const leaf = all.find((n) => n.isLeaf && normalizeHref(n.href) === targetHref)
+
+  const hrefToUse = normalizeHref(leaf?.href) || targetHref
+  const parts = hrefToUse.split('/').filter((p) => p.length > 0)
+  if (parts.length < 2) return leaf
+
+  for (let i = 0; i < parts.length - 1; i++) {
+    const key = '/' + parts.slice(0, i + 1).join('/') + '/'
+    unfoldedNodes[key] = true
+  }
+
+  rootNodesExpanded.set(true)
+  updateTree()
 }
 
 export function toggleRootFolders() {
@@ -146,11 +169,7 @@ export function toggleFolder(node) {
     expandRootNode(node)
     return
   }
-  if (unfoldedNodes[node.key] && !(currentRoute.indexOf(node.key) === 0)) {
-    unfoldedNodes[node.key] = false
-  } else {
-    unfoldedNodes[node.key] = true
-  }
+  unfoldedNodes[node.key] = !unfoldedNodes[node.key]
   updateTree()
 }
 
