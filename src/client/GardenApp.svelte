@@ -47,6 +47,7 @@
     rootNodesExpanded,
     toggleFolder,
     toggleRootFolders,
+    navigateToLeafNode,
     filterNavTree,
     updateFilter,
     updateNavTree,
@@ -102,6 +103,7 @@
 
   function openInTab() {
     const targetWindow = window.open('/frame.html', '_blank')
+    if (!targetWindow) return
     targetWindow.onload = () => {
       targetWindow.postMessage(
         {
@@ -177,6 +179,7 @@
         onToggleOrientation={toggleOrientation}
         onToggleShowGrid={toggleShowGrid}
         onToggleShowInspector={toggleShowInspector}
+        onRevealInExplorer={() => navigateToLeafNode($selectedNode?.href)}
       />
       <Stage
         appTheme={$appTheme}
