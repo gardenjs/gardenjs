@@ -75,7 +75,7 @@
     <!-- prettier-ignore -->
     <ul>
       <li>
-        <button class="controls_btn" title={treeCollapsed ? 'Restore' : 'Collapse'} onclick={() => treeCollapsed ? onExpandTree() : onCollapseTree()}>
+        <button class="controls_btn" title={treeCollapsed ? 'Expand' : 'Collapse'} onclick={() => treeCollapsed ? onExpandTree() : onCollapseTree()}>
           {#if treeCollapsed}
             <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5M7 9l5-5 5 5" /></svg>
           {:else}
@@ -85,7 +85,7 @@
         </button>
       </li>
       <li>
-        <button class="controls_btn" title={panelExpanded ? 'Collapse' : 'Restore'} onclick={onToggleExpandPanel}>
+        <button class="controls_btn" title={panelExpanded ? 'Collapse' : 'Expand'} onclick={onToggleExpandPanel}>
           {#if panelExpanded}
             <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><line x1="3" x2="21" y1="15" y2="15" /><path d="m15 8-3 3-3-3" /></svg>
           {:else}
