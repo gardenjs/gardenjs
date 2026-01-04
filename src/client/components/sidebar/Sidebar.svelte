@@ -12,12 +12,13 @@
     projectLogo,
     projectLogoDarkmode,
     projectTitle,
-    rootNodesExpanded = true,
     sidebarExpanded = true,
+    treeCollapsed = false,
     onToggleBookmark,
     onToggleExpandPanel,
     onToggleFoldStatusOfNode,
-    onToggleRootFolders,
+    onCollapseTree,
+    onExpandTree,
     onUpdateFilter,
     onLogoClicked,
   } = $props()
@@ -74,13 +75,13 @@
     <!-- prettier-ignore -->
     <ul>
       <li>
-        <button class="controls_btn" title={rootNodesExpanded ? 'Collapse' : 'Restore'} onclick={onToggleRootFolders}>
-          {#if rootNodesExpanded}
-            <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l5-5 5 5M7 4l5 5 5-5" /></svg>
-          {:else}
+        <button class="controls_btn" title={treeCollapsed ? 'Restore' : 'Collapse'} onclick={() => treeCollapsed ? onExpandTree() : onCollapseTree()}>
+          {#if treeCollapsed}
             <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5M7 9l5-5 5 5" /></svg>
+          {:else}
+            <svg class="controls_btn-icon" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20l5-5 5 5M7 4l5 5 5-5" /></svg>
           {/if}
-          <span class="controls_btn-label">{rootNodesExpanded ? 'Collapse' : 'Expand'} Navigation</span>
+          <span class="controls_btn-label">{treeCollapsed ? 'Expand' : 'Collapse'} Navigation</span>
         </button>
       </li>
       <li>

@@ -44,9 +44,10 @@
   } from './logic/stage.js'
   import {
     nodes,
-    rootNodesExpanded,
+    treeCollapsed,
     toggleFolder,
-    toggleRootFolders,
+    collapseTree,
+    expandTree,
     navigateToLeafNode,
     filterNavTree,
     updateFilter,
@@ -142,14 +143,15 @@
         filter={$filterNavTree}
         nodes={$nodes}
         panelExpanded={$panelExpanded}
-        rootNodesExpanded={$rootNodesExpanded}
+        treeCollapsed={$treeCollapsed}
         sidebarExpanded={$sidebarExpanded}
         onLogoClicked={resetStage}
         onToggleBookmark={toggleBookmark}
         onToggleExpandPanel={toggleExpandPanel}
         onToggleFoldStatusOfNode={toggleFolder}
-        onToggleRootFolders={toggleRootFolders}
         onUpdateFilter={updateFilter}
+        onCollapseTree={collapseTree}
+        onExpandTree={expandTree}
       />
     </div>
     <div class="main">
