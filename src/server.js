@@ -54,7 +54,7 @@ export async function createServer() {
     server: {
       port: serverport,
       fs: {
-        allow: [path.resolve('.garden')],
+        allow: [path.resolve('.garden'), '..'],
       },
       watch: {
         ignored: ['!**/.garden/**'],
