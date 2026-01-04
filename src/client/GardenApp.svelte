@@ -44,9 +44,10 @@
   } from './logic/stage.js'
   import {
     nodes,
-    rootNodesExpanded,
+    treeCollapsed,
     toggleFolder,
-    toggleRootFolders,
+    collapseTree,
+    expandTree,
     navigateToLeafNode,
     filterNavTree,
     updateFilter,
@@ -54,6 +55,7 @@
     updateSelectedComponent,
     toggleBookmark,
     selectedNode,
+    selectedNodeVisibleInTree,
     bookmarks,
   } from './logic/navTree.js'
   import {
@@ -62,7 +64,6 @@
     componentName,
     selectedExample,
     updateDasMap,
-    currentRoute,
   } from './logic/routing.js'
 
   let baseurl = '/garden'
@@ -90,7 +91,7 @@
     }
   })
   $effect(() => {
-    updateSelectedComponent($currentRoute, $componentName)
+    updateSelectedComponent($componentName)
     handleSelectionChanged()
   })
 
@@ -142,14 +143,15 @@
         filter={$filterNavTree}
         nodes={$nodes}
         panelExpanded={$panelExpanded}
-        rootNodesExpanded={$rootNodesExpanded}
+        treeCollapsed={$treeCollapsed}
         sidebarExpanded={$sidebarExpanded}
         onLogoClicked={resetStage}
         onToggleBookmark={toggleBookmark}
         onToggleExpandPanel={toggleExpandPanel}
         onToggleFoldStatusOfNode={toggleFolder}
-        onToggleRootFolders={toggleRootFolders}
         onUpdateFilter={updateFilter}
+        onCollapseTree={collapseTree}
+        onExpandTree={expandTree}
       />
     </div>
     <div class="main">
@@ -158,6 +160,7 @@
         landscape={$landscape}
         node={$selectedNode}
         showGrid={$showGrid}
+        nodeVisibleInExplorer={$selectedNodeVisibleInTree}
         showInspector={$showInspector}
         sidebarExpanded={$sidebarExpanded}
         stageHeight={$stageHeight}
