@@ -206,7 +206,7 @@ function removeBookmark(node) {
 
 function addBookmark(node) {
   bookmarks.set(
-    [...get(bookmarks), node]
+    [...get(bookmarks), { ...node, parent: undefined }]
       .map((bookmark) => {
         return { ...bookmark, selected: bookmark.key === selectedComponent }
       })
