@@ -1,4 +1,4 @@
-import { writable, get } from 'svelte/store'
+import { writable, get, derived } from 'svelte/store'
 
 function localStore(
   name,
@@ -16,24 +16,31 @@ function localStore(
 }
 
 export const nodes = writable([])
-export const rootNodesExpanded = writable(true)
 export const filterNavTree = writable()
 export const selectedNode = writable()
 export const bookmarks = localStore('bookmarks', [], JSON.parse, JSON.stringify)
 
 let initialized = false
-let currentRoute = ''
-let navtree = []
+let navtree = writable([])
 let unfoldedNodes = []
 let selectedComponent
 
-function initializeTree(navtree) {
-  const all = navtree.flatMap(getAllNodes)
-  unfoldedNodes = all.reduce((acc, cur) => {
-    acc[cur.key] = true
-    return acc
-  }, {})
-}
+export const treeCollapsed = derived(navtree, ($navtree) => {
+  return !$navtree.some((node) => isUnfolded(node))
+})
+
+export const selectedNodeVisibleInTree = derived(
+  selectedNode,
+  ($selectedNode) => {
+    const parentNodes = []
+    let node = $selectedNode
+    while (node.parent) {
+      parentNodes.push(node.parent)
+      node = node.parent
+    }
+    return parentNodes.every((node) => isUnfolded(node))
+  }
+)
 
 function getAllNodes(node) {
   return [node, ...getAllChildNodes(node)]
@@ -43,8 +50,7 @@ function getAllChildNodes(node) {
   return node.children ? node.children.flatMap(getAllNodes) : []
 }
 
-export function updateSelectedComponent(route, componentName) {
-  currentRoute = route
+export function updateSelectedComponent(componentName) {
   selectedComponent = componentName
   updateTree()
   updateBookmarks()
@@ -56,20 +62,22 @@ export function updateFilter(newFilter) {
 }
 
 export function updateNavTree(newNavTree) {
-  navtree = newNavTree
+  navtree.set(newNavTree)
   if (!initialized) {
-    initializeTree(navtree)
+    expandTree()
     cleanupBookmarks()
     initialized = true
   }
-  nodes.set(transformNavTree(navtree))
+  nodes.set(transformNavTree(get(navtree)))
+  navtree.set(newNavTree)
 }
 
 function updateTree() {
-  nodes.set(transformNavTree(navtree))
+  nodes.set(transformNavTree(get(navtree)))
+  navtree.set(get(navtree))
 }
 
-function transformNavTree(nodes, parentVisible) {
+function transformNavTree(nodes, parent) {
   const filter = get(filterNavTree)?.toLowerCase()
   return nodes
     .map((child) => {
@@ -79,10 +87,11 @@ function transformNavTree(nodes, parentVisible) {
       const name =
         filter && filterMatches ? highlightFilterMatch(child.name) : child.name
       if (child.isLeaf) {
-        const visible = parentVisible || filterMatches
+        const visible = parent?.visible || filterMatches
         const node = visible
           ? {
               ...child,
+              parent,
               name,
               selected: selectedComponent === child.key,
               isLeaf: true,
@@ -95,17 +104,19 @@ function transformNavTree(nodes, parentVisible) {
         }
         return node
       } else {
-        const children = transformNavTree(
-          child.children,
-          parentVisible || filterMatches
-        ).filter((n) => n)
+        child.parent = parent
+        const children = transformNavTree(child.children, child).filter(
+          (n) => n
+        )
         const visible = filterMatches || children.length > 0
+
         return visible
           ? {
               ...child,
+              parent,
               name,
               children,
-              unfolded: isUnfolded(child, currentRoute, filter, visible),
+              unfolded: isUnfolded(child, filter, visible),
               filterMatches,
             }
           : undefined
@@ -124,12 +135,8 @@ function highlightFilterMatch(text) {
   return `${start}<span class="highlight">${middle}</span>${end}`
 }
 
-function isUnfolded(node, route, filter, visible) {
-  return (
-    (filter && visible) ||
-    unfoldedNodes[node.key] ||
-    (unfoldedNodes[node.key] !== false && route?.indexOf(node.key) === 0)
-  )
+function isUnfolded(node, filter, visible) {
+  return (filter && visible) || unfoldedNodes[node.key]
 }
 
 function normalizeHref(href) {
@@ -139,7 +146,7 @@ function normalizeHref(href) {
 export function navigateToLeafNode(href) {
   const targetHref = normalizeHref(href)
 
-  const all = navtree.flatMap(getAllNodes)
+  const all = get(navtree).flatMap(getAllNodes)
   const leaf = all.find((n) => n.isLeaf && normalizeHref(n.href) === targetHref)
 
   const hrefToUse = normalizeHref(leaf?.href) || targetHref
@@ -151,41 +158,29 @@ export function navigateToLeafNode(href) {
     unfoldedNodes[key] = true
   }
 
-  rootNodesExpanded.set(true)
   updateTree()
 }
 
-export function toggleRootFolders() {
-  rootNodesExpanded.set(!get(rootNodesExpanded))
-  const newNodes = get(nodes).map((n) => ({
-    ...n,
-    unfolded: get(rootNodesExpanded) && unfoldedNodes[n.key],
-  }))
-  nodes.set(newNodes)
-}
-
 export function toggleFolder(node) {
-  if (!get(rootNodesExpanded)) {
-    expandRootNode(node)
-    return
-  }
   unfoldedNodes[node.key] = !unfoldedNodes[node.key]
   updateTree()
 }
 
-function expandRootNode(node) {
-  rootNodesExpanded.set(true)
-  Object.keys(unfoldedNodes).forEach((key) => (unfoldedNodes[key] = false))
-  const newNodes = get(nodes).map((n) => {
-    if (n.key === node.key || currentRoute.indexOf(n.key) === 0) {
-      unfoldedNodes[n.key] = true
-      return { ...n, unfolded: true }
-    } else {
-      unfoldedNodes[n.key] = false
-      return { ...n, unfolded: false }
-    }
-  })
-  nodes.set(newNodes)
+export function collapseTree() {
+  const all = get(navtree).flatMap(getAllNodes)
+  unfoldedNodes = all.reduce((acc, cur) => {
+    acc[cur.key] = false
+    return acc
+  }, {})
+  updateTree()
+}
+
+export function expandTree() {
+  const all = get(navtree).flatMap(getAllNodes)
+  unfoldedNodes = all.reduce((acc, cur) => {
+    acc[cur.key] = true
+    return acc
+  }, {})
   updateTree()
 }
 
@@ -231,7 +226,7 @@ function updateBookmarks() {
 }
 
 function cleanupBookmarks() {
-  const allNodes = navtree.flatMap(getAllNodes)
+  const allNodes = get(navtree).flatMap(getAllNodes)
   const validBookmarks = get(bookmarks).filter((bookmark) => {
     return allNodes.some((node) => node.key === bookmark.key)
   })
