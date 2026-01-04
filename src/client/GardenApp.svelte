@@ -55,6 +55,7 @@
     updateSelectedComponent,
     toggleBookmark,
     selectedNode,
+    selectedNodeVisibleInTree,
     bookmarks,
   } from './logic/navTree.js'
   import {
@@ -63,7 +64,6 @@
     componentName,
     selectedExample,
     updateDasMap,
-    currentRoute,
   } from './logic/routing.js'
 
   let baseurl = '/garden'
@@ -91,7 +91,7 @@
     }
   })
   $effect(() => {
-    updateSelectedComponent($currentRoute, $componentName)
+    updateSelectedComponent($componentName)
     handleSelectionChanged()
   })
 
@@ -160,6 +160,7 @@
         landscape={$landscape}
         node={$selectedNode}
         showGrid={$showGrid}
+        nodeVisibleInExplorer={$selectedNodeVisibleInTree}
         showInspector={$showInspector}
         sidebarExpanded={$sidebarExpanded}
         stageHeight={$stageHeight}

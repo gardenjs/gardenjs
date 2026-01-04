@@ -16,7 +16,6 @@ function localStore(
 }
 
 export const nodes = writable([])
-export const rootNodesExpanded = writable(true)
 export const filterNavTree = writable()
 export const selectedNode = writable()
 export const bookmarks = localStore('bookmarks', [], JSON.parse, JSON.stringify)
@@ -30,13 +29,18 @@ export const treeCollapsed = derived(navtree, ($navtree) => {
   return !$navtree.some((node) => isUnfolded(node))
 })
 
-function initializeTree() {
-  const all = get(navtree).flatMap(getAllNodes)
-  unfoldedNodes = all.reduce((acc, cur) => {
-    acc[cur.key] = true
-    return acc
-  }, {})
-}
+export const selectedNodeVisibleInTree = derived(
+  selectedNode,
+  ($selectedNode) => {
+    const parentNodes = []
+    let node = $selectedNode
+    while (node.parent) {
+      parentNodes.push(node.parent)
+      node = node.parent
+    }
+    return parentNodes.every((node) => isUnfolded(node))
+  }
+)
 
 function getAllNodes(node) {
   return [node, ...getAllChildNodes(node)]
@@ -46,7 +50,7 @@ function getAllChildNodes(node) {
   return node.children ? node.children.flatMap(getAllNodes) : []
 }
 
-export function updateSelectedComponent(route, componentName) {
+export function updateSelectedComponent(componentName) {
   selectedComponent = componentName
   updateTree()
   updateBookmarks()
@@ -58,12 +62,13 @@ export function updateFilter(newFilter) {
 }
 
 export function updateNavTree(newNavTree) {
+  navtree.set(newNavTree)
   if (!initialized) {
-    initializeTree()
+    expandTree()
     cleanupBookmarks()
     initialized = true
   }
-  nodes.set(transformNavTree(newNavTree))
+  nodes.set(transformNavTree(get(navtree)))
   navtree.set(newNavTree)
 }
 
@@ -72,7 +77,7 @@ function updateTree() {
   navtree.set(get(navtree))
 }
 
-function transformNavTree(nodes, parentVisible) {
+function transformNavTree(nodes, parent) {
   const filter = get(filterNavTree)?.toLowerCase()
   return nodes
     .map((child) => {
@@ -82,10 +87,11 @@ function transformNavTree(nodes, parentVisible) {
       const name =
         filter && filterMatches ? highlightFilterMatch(child.name) : child.name
       if (child.isLeaf) {
-        const visible = parentVisible || filterMatches
+        const visible = parent?.visible || filterMatches
         const node = visible
           ? {
               ...child,
+              parent,
               name,
               selected: selectedComponent === child.key,
               isLeaf: true,
@@ -98,14 +104,16 @@ function transformNavTree(nodes, parentVisible) {
         }
         return node
       } else {
-        const children = transformNavTree(
-          child.children,
-          parentVisible || filterMatches
-        ).filter((n) => n)
+        child.parent = parent
+        const children = transformNavTree(child.children, child).filter(
+          (n) => n
+        )
         const visible = filterMatches || children.length > 0
+
         return visible
           ? {
               ...child,
+              parent,
               name,
               children,
               unfolded: isUnfolded(child, filter, visible),
@@ -150,7 +158,6 @@ export function navigateToLeafNode(href) {
     unfoldedNodes[key] = true
   }
 
-  rootNodesExpanded.set(true)
   updateTree()
 }
 
@@ -165,7 +172,6 @@ export function collapseTree() {
     acc[cur.key] = false
     return acc
   }, {})
-  console.log('DEBUG', 'collapse')
   updateTree()
 }
 
