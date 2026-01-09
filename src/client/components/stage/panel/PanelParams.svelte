@@ -23,7 +23,7 @@
 
         <div class="row">
           <div class="label">
-            {param.name}
+            {param.label || param.name}
           </div>
 
           <div class="input">
