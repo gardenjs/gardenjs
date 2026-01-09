@@ -266,6 +266,14 @@
       background-color: transparent;
       border: 1px solid var(--c-primary);
       border-radius: 0.125rem;
+      -moz-appearance: textfield;
+      appearance: textfield;
+      margin: 0;
+    }
+    .stagesize-input::-webkit-inner-spin-button,
+    .stagesize-input::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
     /* same styles as the input in the sidebar: */
     .stagesize-input:focus-visible {
