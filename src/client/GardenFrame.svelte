@@ -54,8 +54,14 @@
     showGrid = evt.data.showGrid === true
     gridSettings = evt.data.gridSettings
     das = dasMap[evt.data.componentName]
-    selectedExample =
+    const rawSelectedExample =
       das?.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
+    const argsFromMessage =
+      evt.data?.args && typeof evt.data.args === 'object' ? evt.data.args : {}
+    selectedExample = {
+      ...rawSelectedExample,
+      input: { ...(rawSelectedExample?.input ?? {}), ...argsFromMessage },
+    }
     componentChanged = componentName !== evt.data.componentName
     componentName = evt.data.componentName || 'Welcome'
     selectedExampleChanged = selectedExampleTitle !== evt.data.selectedExample

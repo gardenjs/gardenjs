@@ -4,6 +4,7 @@
   import ResizePane from '../panes/ResizePane.svelte'
   import PanelComponent from './panel/PanelComponent.svelte'
   import PanelExamplesNav from './panel/PanelExamplesNav.svelte'
+  import PanelParams from './panel/PanelParams.svelte'
   import PanelDescription from './panel/PanelDescription.svelte'
   import PanelCode from './panel/PanelCode.svelte'
 
@@ -37,6 +38,49 @@
 
   let myframeready = $state()
   let myframe = $state()
+
+  const params = $derived.by(() => {
+    if (das?.params && Array.isArray(das.params)) return das.params
+    return []
+  })
+
+  const selectedExampleObj = $derived.by(() => {
+    if (!das?.examples?.length) return {}
+    return das.examples.find((ex) => ex.title === selectedExample) ?? {}
+  })
+
+  const selectedExampleInput = $derived.by(() => {
+    const input = selectedExampleObj?.input
+    if (input && typeof input === 'object') return input
+    return {}
+  })
+
+  const computeInitialParamValues = (params, input) => {
+    const next = {}
+    for (const p of params ?? []) {
+      if (!p?.name) continue
+      if (Object.prototype.hasOwnProperty.call(input, p.name)) {
+        next[p.name] = input[p.name]
+      }
+    }
+    return next
+  }
+
+  let paramValues = $derived(
+    computeInitialParamValues(params, selectedExampleInput)
+  )
+
+  const mergedArgs = $derived.by(() => {
+    return { ...paramValues }
+  })
+
+  const argsForMessage = $derived.by(() => {
+    try {
+      return JSON.parse(JSON.stringify(mergedArgs))
+    } catch {
+      return {}
+    }
+  })
 
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach((entry) => {
@@ -79,6 +123,25 @@
     const tabs = []
     if (das.description) {
       tabs.push({ name: 'Notes', props: { das }, page: PanelDescription })
+    }
+    if (params.length > 0) {
+      tabs.push({
+        name: 'Parameters',
+        props: {
+          params,
+          values: paramValues,
+          onChange: (prop, value) => {
+            paramValues = { ...paramValues, [prop]: value }
+          },
+          onReset: () => {
+            paramValues = computeInitialParamValues(
+              params,
+              selectedExampleInput
+            )
+          },
+        },
+        page: PanelParams,
+      })
     }
     if (das.examples?.length) {
       tabs.push({
@@ -127,6 +190,7 @@
           showInspector,
           showGrid,
           gridSettings,
+          args: argsForMessage,
         },
         window.location
       )
@@ -165,7 +229,7 @@
   {#snippet bottom()}
     <div class="panel">
       {#if panelExpanded}
-        <PanelComponent {tabs} {onToggleExpandPanel} />
+        <PanelComponent {tabs} {onToggleExpandPanel} children={undefined} />
       {/if}
     </div>
   {/snippet}
