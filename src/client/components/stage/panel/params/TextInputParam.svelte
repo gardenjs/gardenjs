@@ -1,26 +1,20 @@
 <script lang="ts">
-  import ParamType from './ParamType.svelte'
-  import type { ComponentProps } from 'svelte'
-
   let {
-    value = $bindable(''),
+    value,
     onChange,
-  }: Omit<ComponentProps<typeof ParamType>, 'children'> = $props()
+  }: { value: string; onChange: (value: string) => void } = $props()
 </script>
 
-<ParamType {onChange} bind:value>
-  {#snippet children(setValue)}
-    <input
-      type="text"
-      value={String(value ?? '')}
-      oninput={(e) =>
-        setValue(String((e.currentTarget as HTMLInputElement).value ?? ''))}
-    />
-  {/snippet}
-</ParamType>
+<input
+  type="text"
+  value={String(value ?? '')}
+  oninput={(e) => {
+    onChange(String((e.currentTarget as HTMLInputElement).value ?? ''))
+  }}
+/>
 
 <style>
-  :global(.param_type input[type='text']) {
+  input {
     width: 100%;
     border: 1px solid var(--c-basic-150);
     border-radius: 0.375rem;

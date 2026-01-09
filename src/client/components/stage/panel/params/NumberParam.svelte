@@ -1,29 +1,21 @@
 <script lang="ts">
-  import ParamType from './ParamType.svelte'
-  import type { ComponentProps } from 'svelte'
-
   let {
-    value = $bindable(0),
+    value,
     onChange,
-  }: Omit<ComponentProps<typeof ParamType>, 'children'> = $props()
+  }: { value: number; onChange: (value: number) => void } = $props()
 </script>
 
-<ParamType {onChange} bind:value>
-  {#snippet children(setValue)}
-    <input
-      type="number"
-      value={value ?? 0}
-      oninput={(e) => {
-        const t = e.currentTarget as HTMLInputElement
-        const n = t.valueAsNumber
-        if (Number.isFinite(n)) setValue(n)
-      }}
-    />
-  {/snippet}
-</ParamType>
+<input
+  type="number"
+  value={value ?? 0}
+  oninput={(e) => {
+    const newValue = (e.currentTarget as HTMLInputElement).valueAsNumber
+    if (Number.isFinite(newValue)) onChange(newValue)
+  }}
+/>
 
 <style>
-  :global(.param_type input[type='number']) {
+  input {
     width: 100%;
     border: 1px solid var(--c-basic-150);
     border-radius: 0.375rem;
@@ -33,8 +25,8 @@
     appearance: auto;
   }
 
-  :global(.param_type input[type='number']::-webkit-inner-spin-button),
-  :global(.param_type input[type='number']::-webkit-outer-spin-button) {
+  input::-webkit-inner-spin-button,
+  input::-webkit-outer-spin-button {
     -webkit-appearance: auto;
     margin: 0;
   }

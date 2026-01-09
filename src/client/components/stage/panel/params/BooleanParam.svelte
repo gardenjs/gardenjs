@@ -1,25 +1,20 @@
 <script lang="ts">
-  import ParamType from './ParamType.svelte'
-  import type { ComponentProps } from 'svelte'
-
   let {
-    value = $bindable(false),
+    value,
     onChange,
-  }: Omit<ComponentProps<typeof ParamType>, 'children'> = $props()
+  }: { value: boolean; onChange: (value: boolean) => void } = $props()
 </script>
 
-<ParamType {onChange} bind:value>
-  {#snippet children(setValue)}
-    <input
-      type="checkbox"
-      checked={value === true}
-      onchange={(e) => setValue((e.currentTarget as HTMLInputElement).checked)}
-    />
-  {/snippet}
-</ParamType>
+<input
+  type="checkbox"
+  checked={value === true}
+  onchange={(e) => {
+    onChange((e.currentTarget as HTMLInputElement).checked)
+  }}
+/>
 
 <style>
-  :global(.param_type input[type='checkbox']) {
+  input {
     border: 1px solid var(--c-basic-150);
     border-radius: 0.375rem;
     background: var(--c-basic-0);
