@@ -1,14 +1,14 @@
 <script>
-  import BooleanParam from './params/BooleanParam.svelte'
-  import NumberParam from './params/NumberParam.svelte'
-  import TextInputParam from './params/TextInputParam.svelte'
+  import BooleanParam from './BooleanParam.svelte'
+  import NumberParam from './NumberParam.svelte'
+  import TextInputParam from './TextInputParam.svelte'
 
   let { params = [], values = {}, onChange, onReset } = $props()
 
   const getParamType = (param) => String(param?.type ?? '').toLowerCase()
 </script>
 
-<div class="params">
+<div class="pane">
   <div class="header">
     <div class="title">Parameters</div>
     <button class="reset" onclick={() => onReset?.()}>Reset</button>
@@ -51,6 +51,9 @@
 </div>
 
 <style>
+  .pane {
+    width: 100%;
+  }
   .header {
     display: flex;
     justify-content: space-between;

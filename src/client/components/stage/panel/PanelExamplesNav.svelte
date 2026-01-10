@@ -1,23 +1,43 @@
 <script>
-  let { examples = [], selected, onSelectExample } = $props()
+  import ParamsPane from './params/ParamsPane.svelte'
+  let {
+    examples = [],
+    params,
+    values,
+    onChange,
+    onReset,
+    selected,
+    onSelectExample,
+  } = $props()
 </script>
 
-<ul class="examples">
-  {#each examples as example, index (index)}
-    <li class:active={selected == example}>
-      <button onclick={() => onSelectExample(example)}>
-        <span class="dot"></span>
-        {example}
-      </button>
-    </li>
-  {/each}
-</ul>
+<div class="splitpane">
+  <ul class="examples">
+    {#each examples as example, index (index)}
+      <li class:active={selected == example}>
+        <button onclick={() => onSelectExample(example)}>
+          <span class="dot"></span>
+          {example}
+        </button>
+      </li>
+    {/each}
+  </ul>
+  <ParamsPane {params} {values} {onChange} {onReset} />
+</div>
 
 <style>
+  .splitpane {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
   .examples {
     list-style: none;
     margin: 0;
     padding: 0;
+    min-width: 100px;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   .examples li button {
     display: flex;

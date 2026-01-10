@@ -4,7 +4,6 @@
   import ResizePane from '../panes/ResizePane.svelte'
   import PanelComponent from './panel/PanelComponent.svelte'
   import PanelExamplesNav from './panel/PanelExamplesNav.svelte'
-  import PanelParams from './panel/PanelParams.svelte'
   import PanelDescription from './panel/PanelDescription.svelte'
   import PanelCode from './panel/PanelCode.svelte'
 
@@ -124,9 +123,9 @@
     if (das.description) {
       tabs.push({ name: 'Notes', props: { das }, page: PanelDescription })
     }
-    if (params.length > 0) {
+    if (das.examples?.length) {
       tabs.push({
-        name: 'Parameters',
+        name: 'Examples',
         props: {
           params,
           values: paramValues,
@@ -139,14 +138,6 @@
               selectedExampleInput
             )
           },
-        },
-        page: PanelParams,
-      })
-    }
-    if (das.examples?.length) {
-      tabs.push({
-        name: 'Examples',
-        props: {
           selected: selectedExample,
           examples: das.examples.map((ex) => ex.title),
           onSelectExample: setSelectedExample,
