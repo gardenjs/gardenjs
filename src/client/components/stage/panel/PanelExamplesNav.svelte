@@ -35,7 +35,8 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    min-width: 100px;
+    min-width: 10%;
+    width: 30%;
     max-width: 100%;
     overflow-x: hidden;
   }
