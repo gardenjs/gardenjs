@@ -31,10 +31,6 @@
       outline: none;
       border: 1px solid var(--c-primary);
       border-radius: 1.125rem;
-      transition:
-        background 0.3s,
-        border-color 0.3s,
-        box-shadow 0.2s;
       cursor: pointer;
       &:after {
         position: absolute;
