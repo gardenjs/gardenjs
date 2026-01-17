@@ -1,5 +1,6 @@
 <script>
   import BooleanParam from './BooleanParam.svelte'
+  import ColorPickerParam from './ColorPickerParam.svelte'
   import NumberParam from './NumberParam.svelte'
   import TextInputParam from './TextInputParam.svelte'
 
@@ -20,30 +21,31 @@
     <div class="grid">
       {#each params as param (param.name)}
         {@const paramType = getParamType(param)}
-
-        <div class="row">
-          <div class="label">
-            {param.label || param.name}
-          </div>
-
-          <div class="input">
-            {#if paramType === 'boolean'}
-              <BooleanParam
-                value={values?.[param.name] ?? false}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if paramType === 'number'}
-              <NumberParam
-                value={values?.[param.name] ?? 0}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else}
-              <TextInputParam
-                value={values?.[param.name] ?? ''}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {/if}
-          </div>
+        <div class="label">
+          {param.label || param.name}
+        </div>
+        <div class="input">
+          {#if paramType === 'boolean'}
+            <BooleanParam
+              value={values?.[param.name] ?? false}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
+          {:else if paramType === 'number'}
+            <NumberParam
+              value={values?.[param.name] ?? 0}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
+          {:else if paramType === 'color'}
+            <ColorPickerParam
+              value={values?.[param.name] ?? param.default ?? '#000000'}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
+          {:else}
+            <TextInputParam
+              value={values?.[param.name] ?? ''}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
+          {/if}
         </div>
       {/each}
     </div>
@@ -83,16 +85,14 @@
   }
   .grid {
     display: grid;
+    grid-template-columns: minmax(120px, auto) 1fr;
     gap: 0.75rem;
-  }
-  .row {
-    display: grid;
-    grid-template-columns: minmax(120px, 220px) 1fr;
-    gap: 0.75rem;
-    align-items: center;
+    align-items: start;
   }
   .label {
-    font-size: 0.85rem;
+    font-size: 0.938rem;
+    font-weight: 500;
     color: var(--c-basic-700);
+    max-width: 220px;
   }
 </style>

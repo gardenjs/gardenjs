@@ -62,9 +62,6 @@
           }
         }
       }
-      // &:focus {
-      //   box-shadow: 0 0 0 .031rem var(--c-primary);
-      // }
       & + label {
         line-height: 1.25rem;
         display: inline-block;
