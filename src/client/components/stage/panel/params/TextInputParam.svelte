@@ -14,11 +14,5 @@
 />
 
 <style>
-  input {
-    width: 100%;
-    border: 1px solid var(--c-basic-150);
-    border-radius: 0.375rem;
-    background: var(--c-basic-0);
-    color: var(--c-basic-800);
-  }
+  @import './styles.scss';
 </style>
