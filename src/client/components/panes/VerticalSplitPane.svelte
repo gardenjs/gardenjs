@@ -1,12 +1,12 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
   let {
-    topHeight = $bindable(),
-    maxHeight,
-    top,
-    bottom,
-    onSetMaxHeight,
-    onSetTopHeight,
+    leftWidth = $bindable(),
+    maxWidth,
+    left,
+    right,
+    onSetMaxWidth,
+    onSetLeftWidth,
   } = $props()
   let element = $state()
   let dragging = $state(false)
@@ -16,25 +16,29 @@
   $effect(() => {
     if (element && !init) {
       init = true
-      if (topHeight && maxHeight) {
+      if (leftWidth && maxWidth) {
         return
       }
-      const elementHeight = element.offsetHeight
-      onSetMaxHeight(elementHeight)
-      onSetTopHeight(Math.round(elementHeight * 0.7))
+      const elementWidth = element.offsetWidth
+      onSetMaxWidth(elementWidth)
+      onSetLeftWidth(Math.round(elementWidth * 0.2))
     }
   })
 
-  const topHeightWithUnit = $derived.by(() => {
-    if (Number.isInteger(topHeight) && Number.isInteger(maxHeight)) {
-      return maxHeight < topHeight ? maxHeight + 'px' : topHeight + 'px'
+  const leftPos = $derived.by(() => {
+    return element ? element.getBoundingClientRect().left + window.scrollX : 0
+  })
+
+  const leftWidthWithUnit = $derived.by(() => {
+    if (Number.isInteger(leftWidth) && Number.isInteger(maxWidth)) {
+      return maxWidth < leftWidth ? maxWidth + 'px' : leftWidth + 'px'
     }
     return undefined
   })
 
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach(() => {
-      onSetMaxHeight(element.offsetHeight)
+      onSetMaxWidth(element.offsetWidth)
     })
   })
 
@@ -54,56 +58,65 @@
 
   const drag = (e) => {
     window.getSelection().removeAllRanges()
-    const newHeight = Math.min(maxHeight, e.pageY - element.offsetTop - 7)
-    topHeight = newHeight
-    onSetTopHeight(topHeight)
+    console.log(
+      'DEBUG',
+      'epagex',
+      e.pageX,
+      'offsetleft',
+      element.offsetLeft,
+      leftPos
+    )
+    const newWidth = Math.min(maxWidth, e.pageX - leftPos)
+    leftWidth = newWidth
+    onSetLeftWidth(leftWidth)
   }
 
   function unregister() {
     document.removeEventListener('mousemove', drag)
     document.removeEventListener('mouseup', unregister)
 
-    onSetTopHeight(topHeight)
+    onSetLeftWidth(leftWidth)
     dragging = false
   }
 </script>
 
 <div class="container" bind:this={element}>
-  <div class="top" style="height: {topHeightWithUnit};">
-    {@render top?.()}
+  <div class="left" style="width: {leftWidthWithUnit};">
+    {@render left?.()}
   </div>
   <!-- eslint-disable-next-line -->
   <div class="dragbar" class:dragging onmousedown={register}></div>
-  {@render bottom?.()}
+  {@render right?.()}
 </div>
 
 <style>
   .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: nowrap;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
+    overflow-x: auto;
   }
-  .top {
+  .left {
     flex-grow: 0;
     flex-shrink: 0;
-    border-bottom: 0;
+    border-right: 0;
     border-radius: 0.625rem 0.625rem 0 0;
     overflow: hidden;
+    padding: 0 20px;
   }
   .dragbar {
     flex-grow: 0;
     flex-shrink: 0;
-    height: 0.188rem;
+    width: 0.188rem;
     background-color: var(--c-primary);
-    cursor: row-resize;
+    cursor: col-resize;
     z-index: 10;
   }
   .dragging,
   .dragbar:hover {
     background-color: var(--c-primary);
-    transform: scaleY(2);
+    transform: scaleX(2);
   }
 </style>

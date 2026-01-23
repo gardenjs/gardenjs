@@ -53,6 +53,7 @@
 <style>
   .pane {
     width: 100%;
+    margin-left: 2rem;
   }
   .header {
     display: flex;
