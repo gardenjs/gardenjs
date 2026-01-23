@@ -14,7 +14,6 @@ input {
   justify-content: center;
   padding: 0.375rem 0.75rem;
   background-color: var(--c-basic-100);
-  border: 1px solid var(--c-basic-100);
   border-radius: 0.375rem;
   font-size: 0.875rem;
   color: var(--c-basic-800);
@@ -22,7 +21,6 @@ input {
 .btn:hover,
 .btn:focus-visible {
   background-color: var(--c-primary-bg);
-  border-color: var(--c-primary);
   color: var(--c-primary);
 }
 
@@ -39,7 +37,6 @@ input {
   padding: 0.25rem 0.5rem;
   height: 1.25rem;
   background-color: var(--c-basic-100);
-  border: 1px solid var(--c-basic-100);
   border-radius: 0.375rem;
   font-size: 0.75rem;
   color: var(--c-basic-800);
@@ -47,7 +44,6 @@ input {
 .btn_unset:hover,
 .btn_unset:focus-visible {
   background-color: var(--c-primary-bg);
-  border-color: var(--c-primary);
   color: var(--c-primary);
 }
 .btn_unset .close {

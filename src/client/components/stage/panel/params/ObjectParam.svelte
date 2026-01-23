@@ -73,7 +73,7 @@
       </div>
     {/each}
   {/if}
-  <button class="btn btn_add" onclick={addProperty}>
+  <button class="btn" onclick={addProperty}>
     <svg
       class="plus"
       xmlns="http://www.w3.org/2000/svg"
@@ -131,13 +131,12 @@
     border-radius: 0.125rem;
   }
 
-  .btn_add {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
+  .btn {
+    max-width: 8.5rem;
   }
 
   .plus {
     display: block;
+    margin-right: 0.25rem;
   }
 </style>
