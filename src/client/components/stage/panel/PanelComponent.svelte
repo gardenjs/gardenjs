@@ -167,7 +167,6 @@
     right: 0;
     bottom: 0;
     left: 0;
-    padding: 1.25rem;
     width: 100%;
     overflow-y: auto;
   }

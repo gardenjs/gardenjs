@@ -34,7 +34,7 @@
   })
 </script>
 
-<div>
+<div class="panel_code">
   {#if devmodus}
     Running Gardenjs in devmodus. No Code view supported.
   {/if}
@@ -42,3 +42,9 @@
     <pre><code class="language-xml" bind:this={codeblock}>{code}</code></pre>
   {/if}
 </div>
+
+<style>
+  .panel_code {
+    padding: 1.25rem;
+  }
+</style>

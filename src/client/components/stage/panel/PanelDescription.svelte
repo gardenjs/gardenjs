@@ -25,3 +25,9 @@
   <!-- eslint-disable-next-line -->
   {@html marked(das.descriptionfile || das.description)}
 </div>
+
+<style>
+  .markdown-body {
+    padding: 1.25rem;
+  }
+</style>

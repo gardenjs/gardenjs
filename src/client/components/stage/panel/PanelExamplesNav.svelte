@@ -41,7 +41,7 @@
   .examples {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 1.25rem 0 1.25rem 1.25rem;
     width: 100%;
     overflow-x: hidden;
   }

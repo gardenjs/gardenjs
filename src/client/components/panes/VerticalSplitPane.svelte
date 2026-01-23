@@ -103,8 +103,8 @@
     flex-shrink: 0;
     border-right: 0;
     border-radius: 0.625rem 0.625rem 0 0;
-    overflow: hidden;
-    padding: 0 20px;
+    padding: 0 1.25rem 0 0;
+    overflow: auto;
   }
   .dragbar {
     flex-grow: 0;

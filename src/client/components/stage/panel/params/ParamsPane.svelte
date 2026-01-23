@@ -74,7 +74,8 @@
 
   .pane {
     width: 100%;
-    margin-left: 2rem;
+    padding: 1.25rem;
+    overflow-y: auto;
   }
   .header {
     display: flex;
