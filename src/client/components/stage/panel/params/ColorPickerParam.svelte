@@ -2,7 +2,7 @@
   let { value, onChange } = $props()
 
   function colorToHex(color) {
-    if (!color) return '#000000'
+    if (!color) return '#ffffff'
 
     const str = String(color).trim()
 
@@ -36,16 +36,35 @@
     return /rgba\s*\(/.test(str) || /hsla\s*\(/.test(str)
   }
 
+  function handleColorPickerClick() {
+    if (isUnset) {
+      onChange('#000000')
+    }
+  }
+
+  function handleTextInput(e) {
+    const newValue = e.currentTarget.value.trim()
+    if (newValue === '') {
+      onChange(undefined)
+    } else {
+      onChange(newValue)
+    }
+  }
+
+  let isUnset = $derived(!value || value === undefined || value === null)
   let hexValue = $derived(colorToHex(value))
   let showPreview = $derived(hasTransparency(value))
 </script>
 
 <div class="row">
-  <input
-    type="color"
-    value={hexValue}
-    oninput={(e) => onChange(e.currentTarget.value)}
-  />
+  <div class="color-picker-wrapper" class:picker-unset={isUnset}>
+    <input
+      type="color"
+      value={hexValue}
+      onfocus={handleColorPickerClick}
+      oninput={(e) => onChange(e.currentTarget.value)}
+    />
+  </div>
   {#if showPreview}
     <div
       class="alpha-preview"
@@ -54,9 +73,29 @@
   {/if}
   <input
     type="text"
-    value={value || '#000000'}
-    oninput={(e) => onChange(e.currentTarget.value)}
+    class="text-input"
+    value={value || ''}
+    oninput={handleTextInput}
   />
+  {#if isUnset}
+    <span class="unset">is not set</span>
+  {:else}
+    <button class="btn_unset" onclick={() => onChange(undefined)}>
+      <svg
+        class="close"
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg
+      >
+      unset
+    </button>
+  {/if}
 </div>
 
 <style>
@@ -67,13 +106,73 @@
     gap: 0.5rem;
     align-items: center;
   }
-  input[type='color'] {
+
+  .color-picker-wrapper {
+    position: relative;
     width: 2.5rem;
     height: 1.469rem;
+    border-radius: 0.125rem;
+    overflow: hidden;
+  }
+
+  .color-picker-wrapper.picker-unset {
+    border: 1px solid var(--c-primary);
+  }
+
+  .color-picker-wrapper.picker-unset input[type='color'] {
+    opacity: 0;
+  }
+
+  .color-picker-wrapper.picker-unset::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      150deg,
+      transparent calc(50% - 1px),
+      red calc(50% - 1px),
+      red calc(50% + 1px),
+      transparent calc(50% + 1px)
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  input[type='color'] {
+    width: 100%;
+    height: 100%;
     padding: 0;
     border: none;
     border-radius: 0.125rem;
     cursor: pointer;
+  }
+
+  .not-set {
+    font-size: 0.75rem;
+    color: var(--c-basic-500);
+    white-space: nowrap;
+  }
+
+  .btn-unset {
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    border: 1px solid var(--c-basic-300);
+    border-radius: 0.125rem;
+    background: var(--c-basic-50);
+    color: var(--c-basic-700);
+    cursor: pointer;
+  }
+
+  .btn-unset:hover {
+    background: var(--c-basic-100);
+    color: var(--c-primary);
+  }
+
+  .text-input {
+    max-width: 12.5rem;
   }
   .alpha-preview {
     width: 2.5rem;
@@ -98,8 +197,5 @@
   input[type='color']::-webkit-color-swatch {
     border: none;
     border-radius: 0.063rem;
-  }
-  input[type='text'] {
-    max-width: 12.5rem;
   }
 </style>
