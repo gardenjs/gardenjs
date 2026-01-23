@@ -1,5 +1,5 @@
 <script>
-  let { value, onChange } = $props()
+  let { value, onChange, defaultValue = undefined } = $props()
 
   function colorToHex(color) {
     if (!color) return '#ffffff'
@@ -54,6 +54,10 @@
   let isUnset = $derived(!value || value === undefined || value === null)
   let hexValue = $derived(colorToHex(value))
   let showPreview = $derived(hasTransparency(value))
+  let hasChanged = $derived(
+    (defaultValue === undefined && !isUnset) ||
+      (defaultValue !== undefined && value !== defaultValue)
+  )
 </script>
 
 <div class="row">
@@ -79,8 +83,12 @@
   />
   {#if isUnset}
     <span class="unset">is not set</span>
-  {:else}
-    <button class="btn_unset" onclick={() => onChange(undefined)}>
+  {:else if hasChanged}
+    <button
+      class="btn_unset"
+      onclick={() =>
+        onChange(defaultValue === undefined ? undefined : defaultValue)}
+    >
       <svg
         class="close"
         xmlns="http://www.w3.org/2000/svg"
