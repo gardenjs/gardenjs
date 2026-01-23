@@ -15,7 +15,7 @@
 {#if value === undefined || value === null}
   <span class="unset">is not set</span>
 {:else}
-  <button class="btn" onclick={() => onChange(undefined as any)}>
+  <button class="btn_unset" onclick={() => onChange(undefined as any)}>
     <svg
       class="close"
       xmlns="http://www.w3.org/2000/svg"
@@ -33,33 +33,7 @@
 {/if}
 
 <style lang="scss">
-  .unset {
-    margin: 0 0 0 0.5rem;
-    color: var(--c-basic-800);
-    font-size: 0.75rem;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 0 0.5rem;
-    padding: 0.25rem 0.5rem;
-    height: 1.25rem;
-    background-color: var(--c-basic-100);
-    border: 1px solid var(--c-basic-100);
-    border-radius: 0.375rem;
-    font-size: 0.75rem;
-    color: var(--c-basic-800);
-  }
-  .btn:hover,
-  .btn:focus-visible {
-    background-color: var(--c-primary-bg);
-    border-color: var(--c-primary);
-    color: var(--c-primary);
-  }
-  .close {
-    margin-right: 0.25rem;
-  }
+  @import './styles.scss';
 
   input {
     border: 1px solid var(--c-basic-150);
