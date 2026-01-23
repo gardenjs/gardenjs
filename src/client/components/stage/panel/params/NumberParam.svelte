@@ -15,16 +15,13 @@
 />
 
 <style>
+  @import './styles.scss';
+
   input {
-    width: 100%;
-    border: 1px solid var(--c-basic-150);
-    border-radius: 0.375rem;
-    background: var(--c-basic-0);
-    color: var(--c-basic-800);
+    padding-right: 0;
     -moz-appearance: auto;
     appearance: auto;
   }
-
   input::-webkit-inner-spin-button,
   input::-webkit-outer-spin-button {
     -webkit-appearance: auto;
