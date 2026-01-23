@@ -7,7 +7,7 @@
 
 <input
   type="number"
-  value={value ?? 0}
+  {value}
   oninput={(e) => {
     const newValue = (e.currentTarget as HTMLInputElement).valueAsNumber
     if (Number.isFinite(newValue)) onChange(newValue)
