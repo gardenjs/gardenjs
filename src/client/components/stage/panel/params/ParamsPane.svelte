@@ -1,4 +1,5 @@
 <script>
+  import ArrayParam from './ArrayParam.svelte'
   import BooleanParam from './BooleanParam.svelte'
   import ColorPickerParam from './ColorPickerParam.svelte'
   import NumberParam from './NumberParam.svelte'
@@ -12,7 +13,12 @@
 <div class="pane">
   <div class="header">
     <div class="title">Parameters</div>
-    <button class="reset" onclick={() => onReset?.()}>Reset</button>
+    <button
+      class="btn btn_reset"
+      title="Reset all parameters to their default values"
+      aria-label="Reset all parameters to their default values"
+      onclick={() => onReset?.()}>Reset</button
+    >
   </div>
 
   {#if params.length === 0}
@@ -40,6 +46,11 @@
               value={values?.[param.name] ?? param.default ?? '#000000'}
               onChange={(v) => onChange?.(param.name, v)}
             />
+          {:else if paramType === 'array'}
+            <ArrayParam
+              value={values?.[param.name] ?? param.default ?? []}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
           {:else}
             <TextInputParam
               value={values?.[param.name] ?? ''}
@@ -53,6 +64,8 @@
 </div>
 
 <style>
+  @import './styles.scss';
+
   .pane {
     width: 100%;
   }
@@ -66,18 +79,6 @@
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--c-basic-800);
-  }
-  .reset {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.8rem;
-    background: var(--c-basic-100);
-    border-radius: 0.375rem;
-    color: var(--c-basic-800);
-  }
-  .reset:hover,
-  .reset:focus-visible {
-    background: var(--c-basic-150);
-    color: var(--c-primary);
   }
   .empty {
     color: var(--c-basic-600);
