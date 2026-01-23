@@ -1,5 +1,6 @@
 <script>
   import ParamsPane from './params/ParamsPane.svelte'
+  import VerticalSplitPane from './../../panes/VerticalSplitPane.svelte'
   let {
     examples = [],
     params,
@@ -9,35 +10,39 @@
     selected,
     onSelectExample,
   } = $props()
+  let leftWidth = $state('')
+  let maxWidth = $state('')
 </script>
 
-<div class="splitpane">
-  <ul class="examples">
-    {#each examples as example, index (index)}
-      <li class:active={selected == example}>
-        <button onclick={() => onSelectExample(example)}>
-          <span class="dot"></span>
-          {example}
-        </button>
-      </li>
-    {/each}
-  </ul>
-  <ParamsPane {params} {values} {onChange} {onReset} />
-</div>
+<VerticalSplitPane
+  {leftWidth}
+  {maxWidth}
+  onSetLeftWidth={(newLeftWidth) => (leftWidth = newLeftWidth)}
+  onSetMaxWidth={(newMaxWidth) => (maxWidth = newMaxWidth)}
+>
+  {#snippet left()}
+    <ul class="examples">
+      {#each examples as example, index (index)}
+        <li class:active={selected == example}>
+          <button onclick={() => onSelectExample(example)}>
+            <span class="dot"></span>
+            {example}
+          </button>
+        </li>
+      {/each}
+    </ul>
+  {/snippet}
+  {#snippet right()}
+    <ParamsPane {params} {values} {onChange} {onReset} />
+  {/snippet}
+</VerticalSplitPane>
 
 <style>
-  .splitpane {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-  }
   .examples {
     list-style: none;
     margin: 0;
     padding: 0;
-    min-width: 10%;
-    width: 30%;
-    max-width: 100%;
+    width: 100%;
     overflow-x: hidden;
   }
   .examples li button {
