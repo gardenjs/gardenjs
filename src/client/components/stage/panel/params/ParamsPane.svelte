@@ -34,17 +34,17 @@
         <div class="input">
           {#if paramType === 'boolean'}
             <BooleanParam
-              value={values?.[param.name] ?? false}
+              value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'number'}
             <NumberParam
-              value={values?.[param.name] ?? 0}
+              value={values?.[param.name] ?? null}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'color'}
             <ColorPickerParam
-              value={values?.[param.name] ?? param.default ?? '#000000'}
+              value={values?.[param.name] ?? param.default ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'array'}
