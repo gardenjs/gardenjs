@@ -3,6 +3,7 @@
   import BooleanParam from './BooleanParam.svelte'
   import ColorPickerParam from './ColorPickerParam.svelte'
   import NumberParam from './NumberParam.svelte'
+  import ObjectParam from './ObjectParam.svelte'
   import TextInputParam from './TextInputParam.svelte'
 
   let { params = [], values = {}, onChange, onReset } = $props()
@@ -49,6 +50,11 @@
           {:else if paramType === 'array'}
             <ArrayParam
               value={values?.[param.name] ?? param.default ?? []}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
+          {:else if paramType === 'object'}
+            <ObjectParam
+              value={values?.[param.name] ?? param.default ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else}
