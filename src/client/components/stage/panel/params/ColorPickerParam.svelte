@@ -63,6 +63,7 @@
 <div class="row">
   <div class="color-picker-wrapper" class:picker-unset={isUnset}>
     <input
+      class="input"
       type="color"
       value={hexValue}
       onfocus={handleColorPickerClick}
@@ -76,13 +77,13 @@
     ></div>
   {/if}
   <input
+    class="input"
     type="text"
-    class="text-input"
     value={value || ''}
     oninput={handleTextInput}
   />
   {#if isUnset}
-    <span class="unset">is not set</span>
+    <span class="unset-info">is not set</span>
   {:else if hasChanged}
     <button
       class="btn_unset"
@@ -107,7 +108,8 @@
 </div>
 
 <style>
-  @import './styles.scss';
+  @import './button_unset.scss';
+  @import './input.scss';
 
   .row {
     display: flex;
@@ -158,28 +160,7 @@
     cursor: pointer;
   }
 
-  .not-set {
-    font-size: 0.75rem;
-    color: var(--c-basic-500);
-    white-space: nowrap;
-  }
-
-  .btn-unset {
-    padding: 0.125rem 0.5rem;
-    font-size: 0.75rem;
-    border: 1px solid var(--c-basic-300);
-    border-radius: 0.125rem;
-    background: var(--c-basic-50);
-    color: var(--c-basic-700);
-    cursor: pointer;
-  }
-
-  .btn-unset:hover {
-    background: var(--c-basic-100);
-    color: var(--c-primary);
-  }
-
-  .text-input {
+  .input {
     max-width: 12.5rem;
   }
   .alpha-preview {

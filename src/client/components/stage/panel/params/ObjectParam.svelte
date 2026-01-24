@@ -38,8 +38,8 @@
     {#each entries as [key, val], index (index)}
       <div class="object-item">
         <input
+          class="input input_key"
           type="text"
-          class="key-input"
           value={key}
           placeholder="key"
           oninput={(e) => updateKey(key, e.currentTarget.value)}
@@ -47,7 +47,7 @@
         <span class="separator">:</span>
         <input
           type="text"
-          class="value-input"
+          class="input input_value"
           value={String(val ?? '')}
           placeholder="value"
           oninput={(e) => updateValue(key, e.currentTarget.value)}
@@ -91,7 +91,8 @@
 </div>
 
 <style>
-  @import './styles.scss';
+  @import './button.scss';
+  @import './input.scss';
 
   .object-param {
     display: flex;
@@ -106,7 +107,7 @@
     align-items: center;
   }
 
-  .key-input {
+  .input_key {
     flex: 0 0 35%;
     min-width: 0;
   }
@@ -116,7 +117,7 @@
     font-weight: 500;
   }
 
-  .value-input {
+  .input.input_value {
     flex: 1;
     min-width: 0;
   }

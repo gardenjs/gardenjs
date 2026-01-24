@@ -24,6 +24,7 @@
     {#each value as item, index (index)}
       <div class="array-item">
         <input
+          class="input"
           type="text"
           value={JSON.stringify(item ?? '')}
           onblur={(e) => updateItem(index, JSON.parse(e.currentTarget.value))}
@@ -67,7 +68,8 @@
 </div>
 
 <style>
-  @import './styles.scss';
+  @import './button.scss';
+  @import './input.scss';
 
   .array-param {
     display: flex;

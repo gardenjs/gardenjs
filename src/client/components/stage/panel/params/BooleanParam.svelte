@@ -13,7 +13,7 @@
   }}
 />
 {#if value === undefined || value === null}
-  <span class="unset">is not set</span>
+  <span class="unset-info">is not set</span>
 {:else}
   <button class="btn_unset" onclick={() => onChange(undefined as any)}>
     <svg
@@ -33,7 +33,7 @@
 {/if}
 
 <style lang="scss">
-  @import './styles.scss';
+  @import './button_unset.scss';
 
   input {
     border: 1px solid var(--c-basic-150);
@@ -72,9 +72,6 @@
           background-color: var(--c-text);
           border-color: var(--c-text);
         }
-        & + label {
-          cursor: not-allowed;
-        }
       }
       &:hover {
         &:not(:checked) {
@@ -82,12 +79,6 @@
             border-color: var(--c-primary);
           }
         }
-      }
-      & + label {
-        line-height: 1.25rem;
-        display: inline-block;
-        vertical-align: top;
-        padding-left: 0.25rem;
       }
       width: 1.25rem;
       &:after {

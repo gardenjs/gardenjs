@@ -6,6 +6,7 @@
 </script>
 
 <input
+  class="input"
   type="number"
   {value}
   oninput={(e) => {
@@ -15,15 +16,15 @@
 />
 
 <style>
-  @import './styles.scss';
+  @import './input.scss';
 
-  input {
+  .input {
     padding-right: 0;
     -moz-appearance: auto;
     appearance: auto;
   }
-  input::-webkit-inner-spin-button,
-  input::-webkit-outer-spin-button {
+  .input::-webkit-inner-spin-button,
+  .input::-webkit-outer-spin-button {
     -webkit-appearance: auto;
     margin: 0;
   }

@@ -6,6 +6,7 @@
 </script>
 
 <input
+  class="input"
   type="text"
   value={String(value ?? '')}
   oninput={(e) => {
@@ -14,5 +15,5 @@
 />
 
 <style>
-  @import './styles.scss';
+  @import './input.scss';
 </style>
