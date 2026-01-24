@@ -4,6 +4,7 @@
   import ColorPickerParam from './ColorPickerParam.svelte'
   import NumberParam from './NumberParam.svelte'
   import ObjectParam from './ObjectParam.svelte'
+  import ObjectRendererParam from './ObjectRendererParam.svelte'
   import TextInputParam from './TextInputParam.svelte'
 
   let { params = [], values = {}, onChange, onReset } = $props()
@@ -58,6 +59,12 @@
               value={values?.[param.name] ?? param.default ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
+          {:else if paramType === 'objectrenderer'}
+            <ObjectRendererParam
+              value={values?.[param.name] ?? param.default ?? []}
+              schema={param.schema ?? {}}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
           {:else}
             <TextInputParam
               value={values?.[param.name] ?? ''}
@@ -71,7 +78,7 @@
 </div>
 
 <style>
-  @import './styles.scss';
+  @import './button.scss';
 
   .pane {
     width: 100%;
