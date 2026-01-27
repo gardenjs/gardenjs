@@ -26,8 +26,8 @@
         <input
           class="input"
           type="text"
-          value={JSON.stringify(item ?? '')}
-          onblur={(e) => updateItem(index, JSON.parse(e.currentTarget.value))}
+          value={item ?? ''}
+          oninput={(e) => updateItem(index, e.currentTarget.value)}
         />
         <button
           class="btn btn_remove"

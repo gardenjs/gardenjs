@@ -1,4 +1,9 @@
 <script>
+  import BooleanParam from './BooleanParam.svelte'
+  import NumberParam from './NumberParam.svelte'
+  import ColorPickerParam from './ColorPickerParam.svelte'
+  import TextInputParam from './TextInputParam.svelte'
+
   let { value, onChange, schema = {} } = $props()
 
   function addItem() {
@@ -21,6 +26,8 @@
     newArray[index] = { ...newArray[index], [propertyKey]: newValue }
     onChange(newArray)
   }
+
+  const getFieldType = (config) => String(config?.type ?? 'text').toLowerCase()
 
   let items = $derived(Array.isArray(value) ? value : [])
 </script>
@@ -52,18 +59,32 @@
         </div>
         <div class="grid">
           {#each Object.entries(schema) as [key, config] (key)}
+            {@const fieldType = getFieldType(config)}
             <div class="label">
               <div class="field-label">{config.label || key}</div>
             </div>
             <div class="input_wrapper">
-              <input
-                class="input"
-                type="text"
-                value={item[key] ?? ''}
-                placeholder={config.placeholder || ''}
-                oninput={(e) =>
-                  updateItemProperty(index, key, e.currentTarget.value)}
-              />
+              {#if fieldType === 'boolean'}
+                <BooleanParam
+                  value={item[key] ?? config.default ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'number'}
+                <NumberParam
+                  value={item[key] ?? config.default ?? null}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'color'}
+                <ColorPickerParam
+                  value={item[key] ?? config.default ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else}
+                <TextInputParam
+                  value={item[key] ?? config.default ?? ''}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {/if}
             </div>
           {/each}
         </div>

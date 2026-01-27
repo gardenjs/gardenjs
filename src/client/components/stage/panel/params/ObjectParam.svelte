@@ -1,8 +1,10 @@
 <script>
-  let { value, onChange } = $props()
+  let { value, onChange, schema = {} } = $props()
 
   function addProperty() {
-    const newObject = { ...(value || {}), '': '' }
+    const defaultKey = schema.keyDefault ?? ''
+    const defaultValue = schema.valueDefault ?? ''
+    const newObject = { ...(value || {}), [defaultKey]: defaultValue }
     onChange(newObject)
   }
 

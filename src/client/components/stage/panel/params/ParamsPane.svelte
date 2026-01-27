@@ -17,8 +17,8 @@
     <div class="title">Parameters</div>
     <button
       class="btn btn_reset"
-      title="Reset all parameters to their default values"
-      aria-label="Reset all parameters to their default values"
+      title="Reset all parameters"
+      aria-label="Reset all parameters"
       onclick={() => onReset?.()}>Reset</button
     >
   </div>
@@ -50,17 +50,18 @@
             />
           {:else if paramType === 'array'}
             <ArrayParam
-              value={values?.[param.name] ?? param.default ?? []}
+              value={values?.[param.name] ?? []}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'object'}
             <ObjectParam
-              value={values?.[param.name] ?? param.default ?? {}}
+              value={values?.[param.name] ?? {}}
+              schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'objectrenderer'}
             <ObjectRendererParam
-              value={values?.[param.name] ?? param.default ?? []}
+              value={values?.[param.name] ?? []}
               schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
