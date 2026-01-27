@@ -6,6 +6,7 @@
     top,
     bottom,
     onSetMaxHeight,
+    onSetMaxWidth,
     onSetTopHeight,
   } = $props()
   let element = $state()
@@ -35,6 +36,7 @@
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach(() => {
       onSetMaxHeight(element.offsetHeight)
+      onSetMaxWidth(element.offsetWidth)
     })
   })
 
