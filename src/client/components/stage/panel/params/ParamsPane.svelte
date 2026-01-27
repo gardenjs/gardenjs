@@ -45,8 +45,7 @@
             />
           {:else if paramType === 'color'}
             <ColorPickerParam
-              value={values?.[param.name] ?? param.default ?? undefined}
-              defaultValue={param.default}
+              value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'array'}
