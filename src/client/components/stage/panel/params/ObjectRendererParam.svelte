@@ -3,13 +3,27 @@
   import NumberParam from './NumberParam.svelte'
   import ColorPickerParam from './ColorPickerParam.svelte'
   import TextInputParam from './TextInputParam.svelte'
+  import SelectParam from './SelectParam.svelte'
+  import ArrayParam from './ArrayParam.svelte'
+  import ObjectParam from './ObjectParam.svelte'
 
   let { value, onChange, schema = {} } = $props()
 
   function addItem() {
     const newItem = {}
     Object.keys(schema).forEach((key) => {
-      newItem[key] = schema[key].default ?? ''
+      const fieldType = getFieldType(schema[key])
+      if (fieldType === 'boolean') {
+        newItem[key] = undefined
+      } else if (fieldType === 'number') {
+        newItem[key] = null
+      } else if (fieldType === 'array') {
+        newItem[key] = []
+      } else if (fieldType === 'object') {
+        newItem[key] = {}
+      } else {
+        newItem[key] = undefined
+      }
     })
     const newArray = [...(value || []), newItem]
     onChange(newArray)
@@ -66,22 +80,39 @@
             <div class="input_wrapper">
               {#if fieldType === 'boolean'}
                 <BooleanParam
-                  value={item[key] ?? config.default ?? undefined}
+                  value={item[key] ?? undefined}
                   onChange={(v) => updateItemProperty(index, key, v)}
                 />
               {:else if fieldType === 'number'}
                 <NumberParam
-                  value={item[key] ?? config.default ?? null}
+                  value={item[key] ?? null}
                   onChange={(v) => updateItemProperty(index, key, v)}
                 />
               {:else if fieldType === 'color'}
                 <ColorPickerParam
-                  value={item[key] ?? config.default ?? undefined}
+                  value={item[key] ?? undefined}
                   onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'select'}
+                <SelectParam
+                  value={item[key] ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                  options={config.options ?? []}
+                />
+              {:else if fieldType === 'array'}
+                <ArrayParam
+                  value={item[key] ?? []}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'object'}
+                <ObjectParam
+                  value={item[key] ?? {}}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                  schema={config.schema ?? {}}
                 />
               {:else}
                 <TextInputParam
-                  value={item[key] ?? config.default ?? ''}
+                  value={item[key] ?? ''}
                   onChange={(v) => updateItemProperty(index, key, v)}
                 />
               {/if}
