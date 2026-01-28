@@ -68,7 +68,7 @@
             />
           {:else if paramType === 'select'}
             <SelectParam
-              value={values?.[param.name] ?? ''}
+              value={values?.[param.name] ?? undefined}
               options={param.options ?? []}
               onChange={(v) => onChange?.(param.name, v)}
             />
