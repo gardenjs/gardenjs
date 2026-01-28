@@ -5,6 +5,7 @@
   import NumberParam from './NumberParam.svelte'
   import ObjectParam from './ObjectParam.svelte'
   import ObjectRendererParam from './ObjectRendererParam.svelte'
+  import SelectParam from './SelectParam.svelte'
   import TextInputParam from './TextInputParam.svelte'
 
   let { params = [], values = {}, onChange, onReset } = $props()
@@ -63,6 +64,12 @@
             <ObjectRendererParam
               value={values?.[param.name] ?? []}
               schema={param.schema ?? {}}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
+          {:else if paramType === 'select'}
+            <SelectParam
+              value={values?.[param.name] ?? ''}
+              options={param.options ?? []}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else}
