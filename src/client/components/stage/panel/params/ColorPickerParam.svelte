@@ -2,7 +2,7 @@
   let { value, onChange } = $props()
 
   function colorToHex(color) {
-    if (!color) return '#ffffff'
+    if (!color) return '#000000'
 
     const str = String(color).trim()
 
