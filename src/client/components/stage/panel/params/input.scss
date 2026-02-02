@@ -8,7 +8,8 @@
   font-size: 0.938rem;
   color: var(--c-basic-800);
 }
-.input:focus {
+.filter_input:focus-visible {
   outline: none;
+  background-color: var(--c-primary-bg);
   box-shadow: 0 0 0 1px var(--c-primary);
 }

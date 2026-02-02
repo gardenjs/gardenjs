@@ -185,6 +185,7 @@
   /* same styles as the input in the topbar: */
   .filter_input:focus-visible {
     background-color: var(--c-primary-bg);
+    box-shadow: 0 0 0 1px var(--c-primary);
   }
   .filter_zero-results {
     width: var(--w-sidebar);
