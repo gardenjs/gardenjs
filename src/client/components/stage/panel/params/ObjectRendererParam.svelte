@@ -61,13 +61,16 @@
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
-              height="16"
               viewBox="0 0 24 24"
+              height="16"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="1.5"
               stroke-linecap="round"
-              stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg
+              stroke-linejoin="round"
+              ><path
+                d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
+              /></svg
             >
           </button>
         </div>
