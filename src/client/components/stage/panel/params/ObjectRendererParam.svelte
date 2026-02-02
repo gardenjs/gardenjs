@@ -155,7 +155,7 @@
 
   .item {
     border-left: 1px solid var(--c-basic-250);
-    padding: 0 0.75rem 0.75rem;
+    padding: 0 0 0 0.75rem;
     background: var(--c-basic-0);
   }
 
