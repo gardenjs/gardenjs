@@ -37,6 +37,7 @@
           {#if paramType === 'boolean'}
             <BooleanParam
               value={values?.[param.name] ?? undefined}
+              variant={param.variant ?? 'checkbox'}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'number'}
@@ -70,6 +71,7 @@
             <SelectParam
               value={values?.[param.name] ?? undefined}
               options={param.options ?? []}
+              variant={param.variant ?? 'dropdown'}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else}

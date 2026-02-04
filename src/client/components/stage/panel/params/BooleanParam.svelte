@@ -2,11 +2,17 @@
   let {
     value,
     onChange,
-  }: { value: boolean; onChange: (value: boolean) => void } = $props()
+    variant = 'checkbox',
+  }: {
+    value: boolean
+    onChange: (value: boolean) => void
+    variant?: 'checkbox' | 'toggle'
+  } = $props()
 </script>
 
 <input
   type="checkbox"
+  class={variant}
   checked={value === true}
   onchange={(e) => {
     onChange((e.currentTarget as HTMLInputElement).checked)
@@ -51,7 +57,6 @@
       vertical-align: top;
       outline: none;
       border: 1px solid var(--c-primary);
-      border-radius: 1.125rem;
       cursor: pointer;
       &:after {
         position: absolute;
@@ -80,15 +85,15 @@
           }
         }
       }
-      width: 1.25rem;
-      &:after {
-        opacity: var(--o, 0);
-      }
-      &:checked {
-        --o: 1;
+      &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 1px var(--c-primary);
       }
     }
-    input[type='checkbox'] {
+
+    // checkbox variant
+    input[type='checkbox'].checkbox {
+      width: 1.25rem;
       border-radius: 0;
       &:after {
         width: 0.313rem;
@@ -96,13 +101,39 @@
         border: 2px solid #fff;
         border-top: 0;
         border-left: 0;
-        left: 0.35rem;
-        top: 0.2rem;
+        left: 0.4rem;
+        top: 0.2125rem;
         transform: rotate(43deg);
         opacity: var(--o, 0);
       }
       &:checked {
         --o: 1;
+      }
+    }
+
+    // toggle variant
+    input[type='checkbox'].toggle {
+      width: 2.5rem;
+      border-radius: 1.125rem;
+      transition: background-color 0.2s ease;
+
+      &:after {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: var(--c-basic-0);
+        left: 0.0625rem;
+        top: 0.0625rem;
+        transition: left 0.2s ease;
+      }
+
+      &:checked:after {
+        left: 1.3125rem;
+      }
+
+      &:not(:checked) {
+        background-color: var(--c-basic-300);
+        border-color: var(--c-basic-300);
       }
     }
   }
