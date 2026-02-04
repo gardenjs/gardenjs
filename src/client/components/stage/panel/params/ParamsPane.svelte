@@ -7,6 +7,7 @@
   import NumberParam from './NumberParam.svelte'
   import ObjectParam from './ObjectParam.svelte'
   import ObjectRendererParam from './ObjectRendererParam.svelte'
+  import RangeParam from './RangeParam.svelte'
   import SelectParam from './SelectParam.svelte'
   import TextInputParam from './TextInputParam.svelte'
   import TimeParam from './TimeParam.svelte'
@@ -85,6 +86,14 @@
               schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
+          {:else if paramType === 'range'}
+            <RangeParam
+              value={values?.[param.name] ?? null}
+              min={param.min}
+              max={param.max}
+              step={param.step}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
           {:else if paramType === 'select'}
             <SelectParam
               value={values?.[param.name] ?? undefined}
@@ -95,8 +104,6 @@
           {:else}
             <TextInputParam
               value={values?.[param.name] ?? ''}
-              variant={param.variant ?? 'text'}
-              rows={param.rows}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {/if}

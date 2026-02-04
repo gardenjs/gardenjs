@@ -6,6 +6,7 @@
   import DatetimeParam from './DatetimeParam.svelte'
   import NumberParam from './NumberParam.svelte'
   import ObjectParam from './ObjectParam.svelte'
+  import RangeParam from './RangeParam.svelte'
   import SelectParam from './SelectParam.svelte'
   import TextInputParam from './TextInputParam.svelte'
   import TimeParam from './TimeParam.svelte'
@@ -20,7 +21,7 @@
         newItem[key] = []
       } else if (fieldType === 'boolean') {
         newItem[key] = undefined
-      } else if (fieldType === 'number') {
+      } else if (fieldType === 'number' || fieldType === 'range') {
         newItem[key] = null
       } else if (fieldType === 'object') {
         newItem[key] = {}
@@ -119,6 +120,14 @@
                   value={item[key] ?? {}}
                   onChange={(v) => updateItemProperty(index, key, v)}
                   schema={config.schema ?? {}}
+                />
+              {:else if fieldType === 'range'}
+                <RangeParam
+                  value={item[key] ?? null}
+                  min={config.min}
+                  max={config.max}
+                  step={config.step}
+                  onChange={(v) => updateItemProperty(index, key, v)}
                 />
               {:else if fieldType === 'select'}
                 <SelectParam
