@@ -143,7 +143,6 @@
 </div>
 
 <style>
-  @import './input.scss';
   @import './button.scss';
 
   .items {
