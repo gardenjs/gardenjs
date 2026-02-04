@@ -95,6 +95,8 @@
           {:else}
             <TextInputParam
               value={values?.[param.name] ?? ''}
+              variant={param.variant ?? 'text'}
+              rows={param.rows}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {/if}
