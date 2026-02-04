@@ -1,11 +1,14 @@
 <script>
-  import BooleanParam from './BooleanParam.svelte'
-  import NumberParam from './NumberParam.svelte'
-  import ColorPickerParam from './ColorPickerParam.svelte'
-  import TextInputParam from './TextInputParam.svelte'
-  import SelectParam from './SelectParam.svelte'
   import ArrayParam from './ArrayParam.svelte'
+  import BooleanParam from './BooleanParam.svelte'
+  import ColorPickerParam from './ColorPickerParam.svelte'
+  import DateParam from './DateParam.svelte'
+  import DatetimeParam from './DatetimeParam.svelte'
+  import NumberParam from './NumberParam.svelte'
   import ObjectParam from './ObjectParam.svelte'
+  import SelectParam from './SelectParam.svelte'
+  import TextInputParam from './TextInputParam.svelte'
+  import TimeParam from './TimeParam.svelte'
 
   let { value, onChange, schema = {} } = $props()
 
@@ -13,12 +16,12 @@
     const newItem = {}
     Object.keys(schema).forEach((key) => {
       const fieldType = getFieldType(schema[key])
-      if (fieldType === 'boolean') {
+      if (fieldType === 'array') {
+        newItem[key] = []
+      } else if (fieldType === 'boolean') {
         newItem[key] = undefined
       } else if (fieldType === 'number') {
         newItem[key] = null
-      } else if (fieldType === 'array') {
-        newItem[key] = []
       } else if (fieldType === 'object') {
         newItem[key] = {}
       } else {
@@ -81,8 +84,28 @@
               <div class="field-label">{config.label || key}</div>
             </div>
             <div class="input_wrapper">
-              {#if fieldType === 'boolean'}
+              {#if fieldType === 'array'}
+                <ArrayParam
+                  value={item[key] ?? []}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'boolean'}
                 <BooleanParam
+                  value={item[key] ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'color'}
+                <ColorPickerParam
+                  value={item[key] ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'date'}
+                <DateParam
+                  value={item[key] ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'datetime'}
+                <DatetimeParam
                   value={item[key] ?? undefined}
                   onChange={(v) => updateItemProperty(index, key, v)}
                 />
@@ -91,10 +114,11 @@
                   value={item[key] ?? null}
                   onChange={(v) => updateItemProperty(index, key, v)}
                 />
-              {:else if fieldType === 'color'}
-                <ColorPickerParam
-                  value={item[key] ?? undefined}
+              {:else if fieldType === 'object'}
+                <ObjectParam
+                  value={item[key] ?? {}}
                   onChange={(v) => updateItemProperty(index, key, v)}
+                  schema={config.schema ?? {}}
                 />
               {:else if fieldType === 'select'}
                 <SelectParam
@@ -102,20 +126,16 @@
                   onChange={(v) => updateItemProperty(index, key, v)}
                   options={config.options ?? []}
                 />
-              {:else if fieldType === 'array'}
-                <ArrayParam
-                  value={item[key] ?? []}
+              {:else if fieldType === 'time'}
+                <TimeParam
+                  value={item[key] ?? undefined}
                   onChange={(v) => updateItemProperty(index, key, v)}
-                />
-              {:else if fieldType === 'object'}
-                <ObjectParam
-                  value={item[key] ?? {}}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                  schema={config.schema ?? {}}
                 />
               {:else}
                 <TextInputParam
                   value={item[key] ?? ''}
+                  variant={config.variant ?? 'text'}
+                  rows={config.rows}
                   onChange={(v) => updateItemProperty(index, key, v)}
                 />
               {/if}
