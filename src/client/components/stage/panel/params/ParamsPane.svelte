@@ -2,11 +2,14 @@
   import ArrayParam from './ArrayParam.svelte'
   import BooleanParam from './BooleanParam.svelte'
   import ColorPickerParam from './ColorPickerParam.svelte'
+  import DateParam from './DateParam.svelte'
+  import DatetimeParam from './DatetimeParam.svelte'
   import NumberParam from './NumberParam.svelte'
   import ObjectParam from './ObjectParam.svelte'
   import ObjectRendererParam from './ObjectRendererParam.svelte'
   import SelectParam from './SelectParam.svelte'
   import TextInputParam from './TextInputParam.svelte'
+  import TimeParam from './TimeParam.svelte'
 
   let { params = [], values = {}, onChange, onReset } = $props()
 
@@ -47,6 +50,21 @@
             />
           {:else if paramType === 'color'}
             <ColorPickerParam
+              value={values?.[param.name] ?? undefined}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
+          {:else if paramType === 'date'}
+            <DateParam
+              value={values?.[param.name] ?? undefined}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
+          {:else if paramType === 'time'}
+            <TimeParam
+              value={values?.[param.name] ?? undefined}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
+          {:else if paramType === 'datetime'}
+            <DatetimeParam
               value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
