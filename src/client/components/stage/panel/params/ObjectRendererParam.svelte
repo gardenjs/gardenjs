@@ -4,6 +4,7 @@
   import ColorPickerParam from './ColorPickerParam.svelte'
   import DateParam from './DateParam.svelte'
   import DatetimeParam from './DatetimeParam.svelte'
+  import MultiselectParam from './MultiselectParam.svelte'
   import NumberParam from './NumberParam.svelte'
   import ObjectParam from './ObjectParam.svelte'
   import RangeParam from './RangeParam.svelte'
@@ -17,7 +18,7 @@
     const newItem = {}
     Object.keys(schema).forEach((key) => {
       const fieldType = getFieldType(schema[key])
-      if (fieldType === 'array') {
+      if (fieldType === 'array' || fieldType === 'multiselect') {
         newItem[key] = []
       } else if (fieldType === 'boolean') {
         newItem[key] = undefined
@@ -109,6 +110,13 @@
                 <DatetimeParam
                   value={item[key] ?? undefined}
                   onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'multiselect'}
+                <MultiselectParam
+                  value={item[key] ?? []}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                  options={config.options ?? []}
+                  variant={config.variant ?? 'dropdown'}
                 />
               {:else if fieldType === 'number'}
                 <NumberParam

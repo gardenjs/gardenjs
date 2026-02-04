@@ -4,6 +4,7 @@
   import ColorPickerParam from './ColorPickerParam.svelte'
   import DateParam from './DateParam.svelte'
   import DatetimeParam from './DatetimeParam.svelte'
+  import MultiselectParam from './MultiselectParam.svelte'
   import NumberParam from './NumberParam.svelte'
   import ObjectParam from './ObjectParam.svelte'
   import ObjectRendererParam from './ObjectRendererParam.svelte'
@@ -86,6 +87,13 @@
               schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
+          {:else if paramType === 'multiselect'}
+            <MultiselectParam
+              value={values?.[param.name] ?? []}
+              options={param.options ?? []}
+              variant={param.variant ?? 'dropdown'}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
           {:else if paramType === 'range'}
             <RangeParam
               value={values?.[param.name] ?? null}
@@ -104,6 +112,8 @@
           {:else}
             <TextInputParam
               value={values?.[param.name] ?? ''}
+              variant={param.variant ?? 'text'}
+              rows={param.rows}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {/if}
