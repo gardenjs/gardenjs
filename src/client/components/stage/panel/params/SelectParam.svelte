@@ -102,7 +102,7 @@
 {/if}
 
 <style lang="scss">
-  @import './button_unset.scss';
+  @use './button_unset.scss';
 
   .row {
     display: flex;

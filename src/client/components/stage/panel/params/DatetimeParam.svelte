@@ -41,8 +41,8 @@
 </div>
 
 <style lang="scss">
-  @import './input.scss';
-  @import './button_unset.scss';
+  @use './input.scss';
+  @use './button_unset.scss';
 
   .row {
     display: flex;

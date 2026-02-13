@@ -33,7 +33,7 @@
 {/if}
 
 <style lang="scss">
-  @import './input.scss';
+  @use './input.scss';
 
   .textarea {
     resize: vertical;

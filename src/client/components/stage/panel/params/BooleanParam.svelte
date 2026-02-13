@@ -39,7 +39,7 @@
 {/if}
 
 <style lang="scss">
-  @import './button_unset.scss';
+  @use './button_unset.scss';
 
   input {
     border: 1px solid var(--c-basic-150);
