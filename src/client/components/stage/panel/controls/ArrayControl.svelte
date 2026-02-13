@@ -1,8 +1,36 @@
 <script>
-  let { value, onChange } = $props()
+  import ArrayControl from './ArrayControl.svelte'
+  import BooleanControl from './BooleanControl.svelte'
+  import ColorPickerControl from './ColorPickerControl.svelte'
+  import DateControl from './DateControl.svelte'
+  import DatetimeControl from './DatetimeControl.svelte'
+  import MultiselectControl from './MultiselectControl.svelte'
+  import NumberControl from './NumberControl.svelte'
+  import ObjectControl from './ObjectControl.svelte'
+  import RangeControl from './RangeControl.svelte'
+  import SelectControl from './SelectControl.svelte'
+  import TextInputControl from './TextInputControl.svelte'
+  import TimeControl from './TimeControl.svelte'
+
+  let { value, onChange, schema = {} } = $props()
 
   function addItem() {
-    const newArray = [...(value || []), '']
+    const newItem = {}
+    Object.keys(schema).forEach((key) => {
+      const fieldType = getFieldType(schema[key])
+      if (fieldType === 'array' || fieldType === 'multiselect') {
+        newItem[key] = []
+      } else if (fieldType === 'boolean') {
+        newItem[key] = undefined
+      } else if (fieldType === 'number' || fieldType === 'range') {
+        newItem[key] = null
+      } else if (fieldType === 'object') {
+        newItem[key] = {}
+      } else {
+        newItem[key] = undefined
+      }
+    })
+    const newArray = [...(value || []), newItem]
     onChange(newArray)
   }
 
@@ -12,48 +40,129 @@
     onChange(newArray)
   }
 
-  function updateItem(index, newValue) {
+  function updateItemProperty(index, propertyKey, newValue) {
     const newArray = [...value]
-    newArray[index] = newValue
+    newArray[index] = { ...newArray[index], [propertyKey]: newValue }
     onChange(newArray)
   }
+
+  const getFieldType = (config) => String(config?.type ?? 'text').toLowerCase()
+
+  let items = $derived(Array.isArray(value) ? value : [])
 </script>
 
-<div class="array-param">
-  {#if Array.isArray(value) && value.length > 0}
-    {#each value as item, index (index)}
-      <div class="array-item">
-        <input
-          class="input"
-          type="text"
-          value={item ?? ''}
-          oninput={(e) => updateItem(index, e.currentTarget.value)}
-        />
-        <button
-          class="btn btn_remove"
-          title="Remove item"
-          aria-label="Remove item"
-          onclick={() => removeItem(index)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            viewBox="0 0 24 24"
-            height="16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><path
-              d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
-            /></svg
+<div class="items">
+  {#if items.length > 0}
+    {#each items as item, index (index)}
+      <div class="item">
+        <div class="item_header">
+          <span class="item_number">#{index + 1}</span>
+          <button
+            class="btn btn_remove"
+            title="Remove item"
+            aria-label="Remove item"
+            onclick={() => removeItem(index)}
           >
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              viewBox="0 0 24 24"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><path
+                d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
+              /></svg
+            >
+          </button>
+        </div>
+        <div class="grid">
+          {#each Object.entries(schema) as [key, config] (key)}
+            {@const fieldType = getFieldType(config)}
+            <div class="label">
+              <div class="field-label">{config.label || key}</div>
+            </div>
+            <div class="input_wrapper">
+              {#if fieldType === 'array'}
+                <ArrayControl
+                  value={item[key] ?? []}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'boolean'}
+                <BooleanControl
+                  value={item[key] ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'color'}
+                <ColorPickerControl
+                  value={item[key] ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'date'}
+                <DateControl
+                  value={item[key] ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'datetime'}
+                <DatetimeControl
+                  value={item[key] ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'multiselect'}
+                <MultiselectControl
+                  value={item[key] ?? []}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                  options={config.options ?? []}
+                  variant={config.variant ?? 'dropdown'}
+                />
+              {:else if fieldType === 'number'}
+                <NumberControl
+                  value={item[key] ?? null}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'object'}
+                <ObjectControl
+                  value={item[key] ?? {}}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                  schema={config.schema ?? {}}
+                />
+              {:else if fieldType === 'range'}
+                <RangeControl
+                  value={item[key] ?? null}
+                  min={config.min}
+                  max={config.max}
+                  step={config.step}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else if fieldType === 'select'}
+                <SelectControl
+                  value={item[key] ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                  options={config.options ?? []}
+                />
+              {:else if fieldType === 'time'}
+                <TimeControl
+                  value={item[key] ?? undefined}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {:else}
+                <TextInputControl
+                  value={item[key] ?? ''}
+                  variant={config.variant ?? 'text'}
+                  rows={config.rows}
+                  onChange={(v) => updateItemProperty(index, key, v)}
+                />
+              {/if}
+            </div>
+          {/each}
+        </div>
       </div>
     {/each}
   {/if}
-  <button class="btn" onclick={addItem}>
+  <button class="btn btn_add" onclick={addItem}>
     <svg
       class="plus"
       xmlns="http://www.w3.org/2000/svg"
@@ -72,23 +181,44 @@
 
 <style>
   @import './button.scss';
-  @import './input.scss';
 
-  .array-param {
+  .items {
     display: flex;
     flex-direction: column;
-    gap: 0.375rem;
+    gap: 1rem;
     width: 100%;
   }
 
-  .array-item {
-    display: flex;
-    gap: 0.25rem;
-    align-items: center;
+  .item {
+    border-left: 1px solid var(--c-basic-250);
+    padding: 0 0 0 0.75rem;
+    background: var(--c-basic-0);
   }
 
-  .array-item input {
-    flex: 1;
+  .item_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .item_number {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--c-basic-600);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(120px, auto) 1fr;
+    gap: 0.75rem;
+    align-items: start;
+  }
+  .label {
+    font-size: 0.938rem;
+    font-weight: 500;
+    color: var(--c-basic-700);
+    max-width: 220px;
   }
 
   .btn_remove {
@@ -101,8 +231,8 @@
     border-radius: 0.125rem;
   }
 
-  .btn {
-    max-width: 6.5rem;
+  .btn_add {
+    max-width: 8.5rem;
   }
 
   .plus {

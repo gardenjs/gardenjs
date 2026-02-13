@@ -1,17 +1,16 @@
 <script>
-  import ArrayParam from './controls/ArrayControl.svelte'
-  import BooleanParam from './controls/BooleanControl.svelte'
-  import ColorPickerParam from './controls/ColorPickerControl.svelte'
-  import DateParam from './controls/DateControl.svelte'
-  import DatetimeParam from './controls/DatetimeControl.svelte'
-  import MultiselectParam from './controls/MultiselectControl.svelte'
-  import NumberParam from './controls/NumberControl.svelte'
-  import ObjectParam from './controls/ObjectControl.svelte'
-  import ObjectRendererParam from './controls/ObjectRendererControl.svelte'
-  import RangeParam from './controls/RangeControl.svelte'
-  import SelectParam from './controls/SelectControl.svelte'
-  import TextInputParam from './controls/TextInputControl.svelte'
-  import TimeParam from './controls/TimeControl.svelte'
+  import ArrayControl from './controls/ArrayControl.svelte'
+  import BooleanControl from './controls/BooleanControl.svelte'
+  import ColorPickerControl from './controls/ColorPickerControl.svelte'
+  import DateControl from './controls/DateControl.svelte'
+  import DatetimeControl from './controls/DatetimeControl.svelte'
+  import MultiselectControl from './controls/MultiselectControl.svelte'
+  import NumberControl from './controls/NumberControl.svelte'
+  import ObjectControl from './controls/ObjectControl.svelte'
+  import RangeControl from './controls/RangeControl.svelte'
+  import SelectControl from './controls/SelectControl.svelte'
+  import TextInputControl from './controls/TextInputControl.svelte'
+  import TimeControl from './controls/TimeControl.svelte'
 
   let { params = [], values = {}, onChange, onReset } = $props()
 
@@ -40,62 +39,57 @@
         </div>
         <div class="input">
           {#if paramType === 'boolean'}
-            <BooleanParam
+            <BooleanControl
               value={values?.[param.name] ?? undefined}
               variant={param.variant ?? 'checkbox'}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'number'}
-            <NumberParam
+            <NumberControl
               value={values?.[param.name] ?? null}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'color'}
-            <ColorPickerParam
+            <ColorPickerControl
               value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'date'}
-            <DateParam
+            <DateControl
               value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'time'}
-            <TimeParam
+            <TimeControl
               value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'datetime'}
-            <DatetimeParam
+            <DatetimeControl
               value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'array'}
-            <ArrayParam
+            <ArrayControl
               value={values?.[param.name] ?? []}
+              schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'object'}
-            <ObjectParam
+            <ObjectControl
               value={values?.[param.name] ?? {}}
               schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'objectrenderer'}
-            <ObjectRendererParam
-              value={values?.[param.name] ?? []}
-              schema={param.schema ?? {}}
-              onChange={(v) => onChange?.(param.name, v)}
-            />
           {:else if paramType === 'multiselect'}
-            <MultiselectParam
+            <MultiselectControl
               value={values?.[param.name] ?? []}
               options={param.options ?? []}
               variant={param.variant ?? 'dropdown'}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'range'}
-            <RangeParam
+            <RangeControl
               value={values?.[param.name] ?? null}
               min={param.min}
               max={param.max}
@@ -103,14 +97,14 @@
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if paramType === 'select'}
-            <SelectParam
+            <SelectControl
               value={values?.[param.name] ?? undefined}
               options={param.options ?? []}
               variant={param.variant ?? 'dropdown'}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else}
-            <TextInputParam
+            <TextInputControl
               value={values?.[param.name] ?? ''}
               variant={param.variant ?? 'text'}
               rows={param.rows}
