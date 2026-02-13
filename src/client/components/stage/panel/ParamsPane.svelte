@@ -4,6 +4,7 @@
   import ColorPickerControl from './controls/ColorPickerControl.svelte'
   import DateControl from './controls/DateControl.svelte'
   import DatetimeControl from './controls/DatetimeControl.svelte'
+  import JsonControl from './controls/JsonControl.svelte'
   import MultiselectControl from './controls/MultiselectControl.svelte'
   import NumberControl from './controls/NumberControl.svelte'
   import ObjectControl from './controls/ObjectControl.svelte'
@@ -14,7 +15,47 @@
 
   let { params = [], values = {}, onChange, onReset } = $props()
 
-  const getParamType = (param) => String(param?.type ?? '').toLowerCase()
+  const CONTROL_TYPES = [
+    'checkbox',
+    'number',
+    'color',
+    'date',
+    'time',
+    'datetime',
+    'array',
+    'object',
+    'dropdown',
+    'checkboxes',
+    'toggle',
+    'radio',
+    'textarea',
+    'text',
+    'range',
+    'select',
+  ]
+
+  const isValidControl = (control) =>
+    CONTROL_TYPES.includes(control.toLowerCase())
+
+  const getControlType = (param) => {
+    if (param.control && isValidControl(param.control)) {
+      return param.control.toLowerCase()
+    }
+    switch (param.type?.toLowerCase()) {
+      case 'boolean':
+        return 'checkbox'
+      case 'number':
+        return 'number'
+      case 'string':
+        return 'text'
+      case 'date':
+        return 'date'
+      case 'array':
+      case 'object':
+      default:
+        return 'json'
+    }
+  }
 </script>
 
 <div class="pane">
@@ -33,62 +74,62 @@
   {:else}
     <div class="grid">
       {#each params as param (param.name)}
-        {@const paramType = getParamType(param)}
+        {@const controlType = getControlType(param)}
         <div class="label">
           {param.label || param.name}
         </div>
         <div class="input">
-          {#if paramType === 'boolean'}
+          {#if controlType === 'checkbox' || controlType === 'toggle'}
             <BooleanControl
               value={values?.[param.name] ?? undefined}
-              variant={param.variant ?? 'checkbox'}
+              variant={controlType}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'number'}
+          {:else if controlType === 'number'}
             <NumberControl
               value={values?.[param.name] ?? null}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'color'}
+          {:else if controlType === 'color'}
             <ColorPickerControl
               value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'date'}
+          {:else if controlType === 'date'}
             <DateControl
               value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'time'}
+          {:else if controlType === 'time'}
             <TimeControl
               value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'datetime'}
+          {:else if controlType === 'datetime'}
             <DatetimeControl
               value={values?.[param.name] ?? undefined}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'array'}
+          {:else if controlType === 'array'}
             <ArrayControl
               value={values?.[param.name] ?? []}
               schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'object'}
+          {:else if controlType === 'object'}
             <ObjectControl
               value={values?.[param.name] ?? {}}
               schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'multiselect'}
+          {:else if controlType === 'dropdown' || controlType === 'checkboxes'}
             <MultiselectControl
               value={values?.[param.name] ?? []}
               options={param.options ?? []}
-              variant={param.variant ?? 'dropdown'}
+              variant={controlType}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'range'}
+          {:else if controlType === 'range'}
             <RangeControl
               value={values?.[param.name] ?? null}
               min={param.min}
@@ -96,17 +137,24 @@
               step={param.step}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if paramType === 'select'}
+          {:else if controlType === 'dropdown' || controlType === 'radio'}
             <SelectControl
               value={values?.[param.name] ?? undefined}
               options={param.options ?? []}
-              variant={param.variant ?? 'dropdown'}
+              variant={controlType}
+              onChange={(v) => onChange?.(param.name, v)}
+            />
+          {:else if controlType === 'textarea' || controlType === 'text'}
+            <TextInputControl
+              value={values?.[param.name] ?? ''}
+              variant={controlType}
+              rows={param.rows}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else}
-            <TextInputControl
+            <JsonControl
               value={values?.[param.name] ?? ''}
-              variant={param.variant ?? 'text'}
+              variant={controlType}
               rows={param.rows}
               onChange={(v) => onChange?.(param.name, v)}
             />
