@@ -1,5 +1,5 @@
 <script>
-  import ParamsPane from './params/ParamsPane.svelte'
+  import ParamsPane from './ParamsPane.svelte'
   import VerticalSplitPane from './../../panes/VerticalSplitPane.svelte'
   let {
     examples = [],

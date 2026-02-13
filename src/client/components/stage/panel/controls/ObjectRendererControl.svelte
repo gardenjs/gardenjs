@@ -1,16 +1,16 @@
 <script>
-  import ArrayParam from './ArrayParam.svelte'
-  import BooleanParam from './BooleanParam.svelte'
-  import ColorPickerParam from './ColorPickerParam.svelte'
-  import DateParam from './DateParam.svelte'
-  import DatetimeParam from './DatetimeParam.svelte'
-  import MultiselectParam from './MultiselectParam.svelte'
-  import NumberParam from './NumberParam.svelte'
-  import ObjectParam from './ObjectParam.svelte'
-  import RangeParam from './RangeParam.svelte'
-  import SelectParam from './SelectParam.svelte'
-  import TextInputParam from './TextInputParam.svelte'
-  import TimeParam from './TimeParam.svelte'
+  import ArrayParam from './ArrayControl.svelte'
+  import BooleanParam from './BooleanControl.svelte'
+  import ColorPickerParam from './ColorPickerControl.svelte'
+  import DateParam from './DateControl.svelte'
+  import DatetimeParam from './DatetimeControl.svelte'
+  import MultiselectParam from './MultiselectControl.svelte'
+  import NumberParam from './NumberControl.svelte'
+  import ObjectParam from './ObjectControl.svelte'
+  import RangeParam from './RangeControl.svelte'
+  import SelectParam from './SelectControl.svelte'
+  import TextInputParam from './TextInputControl.svelte'
+  import TimeParam from './TimeControl.svelte'
 
   let { value, onChange, schema = {} } = $props()
 

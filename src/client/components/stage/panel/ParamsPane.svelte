@@ -1,17 +1,17 @@
 <script>
-  import ArrayParam from './ArrayParam.svelte'
-  import BooleanParam from './BooleanParam.svelte'
-  import ColorPickerParam from './ColorPickerParam.svelte'
-  import DateParam from './DateParam.svelte'
-  import DatetimeParam from './DatetimeParam.svelte'
-  import MultiselectParam from './MultiselectParam.svelte'
-  import NumberParam from './NumberParam.svelte'
-  import ObjectParam from './ObjectParam.svelte'
-  import ObjectRendererParam from './ObjectRendererParam.svelte'
-  import RangeParam from './RangeParam.svelte'
-  import SelectParam from './SelectParam.svelte'
-  import TextInputParam from './TextInputParam.svelte'
-  import TimeParam from './TimeParam.svelte'
+  import ArrayParam from './controls/ArrayControl.svelte'
+  import BooleanParam from './controls/BooleanControl.svelte'
+  import ColorPickerParam from './controls/ColorPickerControl.svelte'
+  import DateParam from './controls/DateControl.svelte'
+  import DatetimeParam from './controls/DatetimeControl.svelte'
+  import MultiselectParam from './controls/MultiselectControl.svelte'
+  import NumberParam from './controls/NumberControl.svelte'
+  import ObjectParam from './controls/ObjectControl.svelte'
+  import ObjectRendererParam from './controls/ObjectRendererControl.svelte'
+  import RangeParam from './controls/RangeControl.svelte'
+  import SelectParam from './controls/SelectControl.svelte'
+  import TextInputParam from './controls/TextInputControl.svelte'
+  import TimeParam from './controls/TimeControl.svelte'
 
   let { params = [], values = {}, onChange, onReset } = $props()
 
@@ -124,7 +124,7 @@
 </div>
 
 <style>
-  @import './button.scss';
+  @import './controls/button.scss';
 
   .pane {
     width: 100%;
