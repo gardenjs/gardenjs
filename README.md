@@ -31,7 +31,7 @@ Watch the <a href="https://demo.gardenjs.org/">demo</a>.
 
 ## Why Gardenjs?
 
-- Significantly faster than comparable tools such as Storybook.
+- Significantly faster than comparable tools.
 - Simple and efficient working.
 - Many useful features without being complex and bloated.
 - Integration of external libraries within a project.
