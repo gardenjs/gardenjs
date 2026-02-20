@@ -3,12 +3,12 @@
     value,
     onChange,
     options = [],
-    variant = 'dropdown',
+    control = 'dropdown',
   }: {
     value: string[]
     onChange: (value: string[]) => void
     options?: string[] | { label: string; value: string }[]
-    variant?: 'dropdown' | 'checkboxes'
+    control?: 'dropdown' | 'checkboxes'
   } = $props()
 
   let isUnset = $derived(
@@ -36,7 +36,7 @@
   }
 </script>
 
-{#if variant === 'dropdown'}
+{#if control === 'dropdown'}
   <div class="row">
     <div class="select-wrapper">
       <button
@@ -104,7 +104,7 @@
       <span class="unset-info">is not set</span>
     {/if}
   </div>
-{:else if variant === 'checkboxes'}
+{:else if control === 'checkboxes'}
   <div class="checkboxes-container">
     {#each normalizedOptions as option (option.value)}
       <label class="checkbox-item">

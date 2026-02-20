@@ -116,7 +116,7 @@
                   value={item[key] ?? []}
                   onChange={(v) => updateItemProperty(index, key, v)}
                   options={config.options ?? []}
-                  variant={config.variant ?? 'dropdown'}
+                  control={config.control ?? 'dropdown'}
                 />
               {:else if fieldType === 'number'}
                 <NumberControl
@@ -151,7 +151,7 @@
               {:else}
                 <TextInputControl
                   value={item[key] ?? ''}
-                  variant={config.variant ?? 'text'}
+                  control={config.control ?? 'text'}
                   rows={config.rows}
                   onChange={(v) => updateItemProperty(index, key, v)}
                 />

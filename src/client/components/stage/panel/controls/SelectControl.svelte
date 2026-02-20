@@ -1,10 +1,10 @@
 <script>
-  let { value, onChange, options = [], variant = 'dropdown' } = $props()
+  let { value, onChange, options = [], control = 'dropdown' } = $props()
 
   let isUnset = $derived(!value || value === undefined || value === null)
 </script>
 
-{#if variant === 'radio'}
+{#if control === 'radio'}
   <div class="radio-group">
     {#each options as option, index (option.value ?? option ?? index)}
       {@const optionValue = option.value ?? option}

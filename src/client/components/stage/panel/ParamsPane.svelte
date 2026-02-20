@@ -82,7 +82,7 @@
           {#if controlType === 'checkbox' || controlType === 'toggle'}
             <BooleanControl
               value={values?.[param.name] ?? undefined}
-              variant={controlType}
+              control={controlType}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if controlType === 'number'}
@@ -126,7 +126,7 @@
             <MultiselectControl
               value={values?.[param.name] ?? []}
               options={param.options ?? []}
-              variant={controlType}
+              control={controlType}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if controlType === 'range'}
@@ -141,20 +141,20 @@
             <SelectControl
               value={values?.[param.name] ?? undefined}
               options={param.options ?? []}
-              variant={controlType}
+              control={controlType}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if controlType === 'textarea' || controlType === 'text'}
             <TextInputControl
               value={values?.[param.name] ?? ''}
-              variant={controlType}
+              control={controlType}
               rows={param.rows}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else}
             <JsonControl
               value={values?.[param.name] ?? ''}
-              variant={controlType}
+              control={controlType}
               rows={param.rows}
               onChange={(v) => onChange?.(param.name, v)}
             />

@@ -2,17 +2,17 @@
   let {
     value,
     onChange,
-    variant = 'text',
+    control = 'text',
     rows = 4,
   }: {
     value: string
     onChange: (value: string) => void
-    variant?: 'text' | 'textarea'
+    control?: 'text' | 'textarea'
     rows?: number
   } = $props()
 </script>
 
-{#if variant === 'textarea'}
+{#if control === 'textarea'}
   <textarea
     class="input textarea"
     {rows}
