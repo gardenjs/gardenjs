@@ -148,7 +148,7 @@
             <TextInputControl
               value={values?.[param.name] ?? ''}
               control={controlType}
-              numberOfRows={param.rows}
+              numberOfRows={param.numberOfRows}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else}
