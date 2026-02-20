@@ -10,10 +10,10 @@
 
 <textarea
   class="input textarea"
-  rows="5"
-  value={String(value ?? '')}
+  rows="10"
+  value={JSON.stringify(value ?? '', null, 2)}
   onchange={(e) => {
-    onChange(JSON.parse((e.currentTarget as HTMLTextAreaElement).value ?? ''))
+    onChange(JSON.parse(e.currentTarget.value ?? ''))
   }}
 ></textarea>
 

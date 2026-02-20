@@ -38,11 +38,6 @@
   let myframeready = $state()
   let myframe = $state()
 
-  const params = $derived.by(() => {
-    if (das?.params && Array.isArray(das.params)) return das.params
-    return []
-  })
-
   const selectedExampleObj = $derived.by(() => {
     if (!das?.examples?.length) return {}
     return das.examples.find((ex) => ex.title === selectedExample) ?? {}
@@ -54,30 +49,44 @@
     return {}
   })
 
-  const computeInitialParamValues = (params, input) => {
-    const next = {}
-    for (const p of params ?? []) {
-      if (!p?.name) continue
-      if (Object.prototype.hasOwnProperty.call(input, p.name)) {
-        next[p.name] = input[p.name]
-      }
+  function getType(value) {
+    if (Array.isArray(value)) {
+      return 'array'
     }
-    return next
+    if (value instanceof Date) {
+      return 'date'
+    }
+    return typeof value
   }
 
-  let paramValues = $derived(
-    computeInitialParamValues(params, selectedExampleInput)
-  )
+  function capitalize(str) {
+    if (str.length > 1) {
+      return str.charAt(0).toUpperCase() + str.substring(1)
+    }
+    return str
+  }
 
-  const mergedArgs = $derived.by(() => {
-    return { ...paramValues }
+  const params = $derived.by(() => {
+    const configuredParams = das?.params ?? []
+    return Object.entries(selectedExampleInput).reduce((acc, [name, value]) => {
+      let configuredParam = configuredParams.find((p) => p.name === name)
+      if (configuredParam) {
+        acc.push(configuredParam)
+      } else {
+        acc.push({ name, type: getType(value), label: capitalize(name) })
+      }
+      return acc
+    }, [])
   })
 
-  const argsForMessage = $derived.by(() => {
+  let paramValues = $derived(structuredClone(selectedExampleInput))
+
+  const paramValuesForPostMessage = $derived.by(() => {
     try {
-      return JSON.parse(JSON.stringify(mergedArgs))
-    } catch {
-      return {}
+      return JSON.parse(JSON.stringify(paramValues))
+    } catch (e) {
+      console.err(e)
+      return null
     }
   })
 
@@ -133,10 +142,7 @@
             paramValues = { ...paramValues, [prop]: value }
           },
           onReset: () => {
-            paramValues = computeInitialParamValues(
-              params,
-              selectedExampleInput
-            )
+            paramValues = { ...selectedExampleInput }
           },
           selected: selectedExample,
           examples: das.examples.map((ex) => ex.title),
@@ -181,7 +187,7 @@
           showInspector,
           showGrid,
           gridSettings,
-          args: argsForMessage,
+          paramValues: paramValuesForPostMessage,
         },
         window.location
       )

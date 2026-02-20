@@ -24,7 +24,7 @@
     'datetime',
     'array',
     'object',
-    'dropdown',
+    'multiselect',
     'checkboxes',
     'toggle',
     'radio',
@@ -46,14 +46,14 @@
         return 'checkbox'
       case 'number':
         return 'number'
-      case 'string':
-        return 'text'
       case 'date':
         return 'date'
       case 'array':
       case 'object':
-      default:
         return 'json'
+      case 'string':
+      default:
+        return 'text'
     }
   }
 </script>
@@ -122,7 +122,7 @@
               schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if controlType === 'dropdown' || controlType === 'checkboxes'}
+          {:else if controlType === 'multiselect' || controlType === 'checkboxes'}
             <MultiselectControl
               value={values?.[param.name] ?? []}
               options={param.options ?? []}
@@ -137,7 +137,7 @@
               step={param.step}
               onChange={(v) => onChange?.(param.name, v)}
             />
-          {:else if controlType === 'dropdown' || controlType === 'radio'}
+          {:else if controlType === 'select' || controlType === 'radio'}
             <SelectControl
               value={values?.[param.name] ?? undefined}
               options={param.options ?? []}

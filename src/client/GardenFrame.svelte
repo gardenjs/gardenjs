@@ -56,11 +56,10 @@
     das = dasMap[evt.data.componentName]
     const rawSelectedExample =
       das?.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
-    const argsFromMessage =
-      evt.data?.args && typeof evt.data.args === 'object' ? evt.data.args : {}
+    const paramValues = evt.data?.paramValues ?? undefined
     selectedExample = {
       ...rawSelectedExample,
-      input: { ...(rawSelectedExample?.input ?? {}), ...argsFromMessage },
+      input: paramValues ?? rawSelectedExample?.input ?? {},
     }
     componentChanged = componentName !== evt.data.componentName
     componentName = evt.data.componentName || 'Welcome'
