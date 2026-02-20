@@ -2,17 +2,17 @@
   let {
     value,
     onChange,
-    variant = 'checkbox',
+    control = 'checkbox',
   }: {
     value: boolean
     onChange: (value: boolean) => void
-    variant?: 'checkbox' | 'toggle'
+    control?: 'checkbox' | 'toggle'
   } = $props()
 </script>
 
 <input
   type="checkbox"
-  class={variant}
+  class={control}
   checked={value === true}
   onchange={(e) => {
     onChange((e.currentTarget as HTMLInputElement).checked)
