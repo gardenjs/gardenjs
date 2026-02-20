@@ -58,14 +58,6 @@
 
   const drag = (e) => {
     window.getSelection().removeAllRanges()
-    console.log(
-      'DEBUG',
-      'epagex',
-      e.pageX,
-      'offsetleft',
-      element.offsetLeft,
-      leftPos
-    )
     const newWidth = Math.min(maxWidth, e.pageX - leftPos)
     leftWidth = newWidth
     onSetLeftWidth(leftWidth)

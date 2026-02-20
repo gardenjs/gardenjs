@@ -73,7 +73,7 @@
       redirectData = {}
       return
     } else {
-      updateComponent(component, selectedExample, das)
+      executeLatest(() => updateComponent(component, selectedExample, das))
     }
   })
 
@@ -89,6 +89,23 @@
     return DefaultRendererBuilder
   }
 
+  let latestTask
+  let running = false
+
+  const executeLatest = async (task) => {
+    latestTask = task
+    if (running) return
+    if (!running) {
+      running = true
+      while (latestTask != null) {
+        const currentTask = latestTask
+        latestTask = undefined
+        await currentTask()
+      }
+      running = false
+    }
+  }
+
   async function updateComponent(component, selectedExample, das) {
     if (config.renderer) {
       const newRendererBuilder = await getRendererBuilderFor(das?.file)
@@ -100,7 +117,7 @@
     await runHooks()
 
     try {
-      currentRenderer?.updateComponent({
+      await currentRenderer?.updateComponent({
         component,
         selectedExample,
         das,
