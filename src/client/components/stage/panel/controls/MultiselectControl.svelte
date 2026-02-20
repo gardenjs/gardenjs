@@ -82,8 +82,46 @@
         </div>
       {/if}
     </div>
+    <div class="unset-area">
+      {#if !isUnset}
+        <button class="btn_unset" onclick={handleUnset}>
+          <svg
+            class="close"
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+          unset
+        </button>
+      {:else}
+        <span class="unset-info">is not set</span>
+      {/if}
+    </div>
+  </div>
+{:else if control === 'checkboxes'}
+  <div class="checkboxes-container">
+    {#each normalizedOptions as option (option.value)}
+      <label class="checkbox-item">
+        <input
+          type="checkbox"
+          checked={value?.includes(option.value) || false}
+          onchange={() => toggleOption(option.value)}
+        />
+        <span>{option.label}</span>
+      </label>
+    {/each}
+  </div>
+  <div class="unset-area">
     {#if !isUnset}
-      <button class="btn_unset" onclick={handleUnset}>
+      <button class="btn_unset checkboxes-btn-unset" onclick={handleUnset}>
         <svg
           class="close"
           xmlns="http://www.w3.org/2000/svg"
@@ -101,43 +139,9 @@
         unset
       </button>
     {:else}
-      <span class="unset-info">is not set</span>
+      <div class="unset-info checkboxes-unset">is not set</div>
     {/if}
   </div>
-{:else if control === 'checkboxes'}
-  <div class="checkboxes-container">
-    {#each normalizedOptions as option (option.value)}
-      <label class="checkbox-item">
-        <input
-          type="checkbox"
-          checked={value?.includes(option.value) || false}
-          onchange={() => toggleOption(option.value)}
-        />
-        <span>{option.label}</span>
-      </label>
-    {/each}
-  </div>
-  {#if !isUnset}
-    <button class="btn_unset checkboxes-btn-unset" onclick={handleUnset}>
-      <svg
-        class="close"
-        xmlns="http://www.w3.org/2000/svg"
-        width="12"
-        height="12"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M18 6L6 18M6 6l12 12" />
-      </svg>
-      unset
-    </button>
-  {:else}
-    <div class="unset-info checkboxes-unset">is not set</div>
-  {/if}
 {/if}
 
 <style lang="scss">
