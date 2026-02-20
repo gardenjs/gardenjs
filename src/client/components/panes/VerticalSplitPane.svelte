@@ -20,7 +20,7 @@
         return
       }
       const elementWidth = element.offsetWidth
-      onSetMaxWidth(elementWidth)
+      onSetMaxWidth(elementWidth - 100)
       onSetLeftWidth(Math.round(elementWidth * 0.2))
     }
   })
@@ -38,7 +38,7 @@
 
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach(() => {
-      onSetMaxWidth(element.offsetWidth)
+      onSetMaxWidth(element.offsetWidth - 100)
     })
   })
 
@@ -48,6 +48,7 @@
 
   onDestroy(() => {
     resizeObserver.disconnect()
+    unregister()
   })
 
   function register() {
@@ -59,7 +60,7 @@
   const drag = (e) => {
     window.getSelection().removeAllRanges()
     const newWidth = Math.min(maxWidth, e.pageX - leftPos)
-    leftWidth = newWidth
+    leftWidth = Math.max(100, newWidth)
     onSetLeftWidth(leftWidth)
   }
 
