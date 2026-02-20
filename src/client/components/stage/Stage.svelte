@@ -68,15 +68,29 @@
 
   const params = $derived.by(() => {
     const configuredParams = das?.params ?? []
-    return Object.entries(selectedExampleInput).reduce((acc, [name, value]) => {
-      let configuredParam = configuredParams.find((p) => p.name === name)
-      if (configuredParam) {
-        acc.push(configuredParam)
-      } else {
-        acc.push({ name, type: getType(value), label: capitalize(name) })
-      }
-      return acc
-    }, [])
+    const exampleParams = Object.entries(selectedExampleInput).reduce(
+      (acc, [name, value]) => {
+        let configuredParam = configuredParams.find((p) => p.name === name)
+        if (configuredParam) {
+          acc.push(configuredParam)
+        } else {
+          acc.push({ name, type: getType(value), label: capitalize(name) })
+        }
+        return acc
+      },
+      []
+    )
+
+    return [
+      ...exampleParams,
+      ...configuredParams
+        .filter((configuredParam) =>
+          exampleParams.every(
+            (exampleParam) => exampleParam.name !== configuredParam.name
+          )
+        )
+        .map((p) => ({ ...p, value: undefined })),
+    ]
   })
 
   let paramValues = $derived(structuredClone(selectedExampleInput))
