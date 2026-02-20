@@ -3,19 +3,19 @@
     value,
     onChange,
     control = 'text',
-    rows = 4,
+    numberOfRows = 4,
   }: {
     value: string
     onChange: (value: string) => void
     control?: 'text' | 'textarea'
-    rows?: number
+    numberOfRows?: number
   } = $props()
 </script>
 
 {#if control === 'textarea'}
   <textarea
     class="input textarea"
-    {rows}
+    rows={numberOfRows}
     value={String(value ?? '')}
     oninput={(e) => {
       onChange(String((e.currentTarget as HTMLTextAreaElement).value ?? ''))

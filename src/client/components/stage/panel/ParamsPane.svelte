@@ -148,14 +148,12 @@
             <TextInputControl
               value={values?.[param.name] ?? ''}
               control={controlType}
-              rows={param.rows}
+              numberOfRows={param.numberOfRows}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else}
             <JsonControl
               value={values?.[param.name] ?? ''}
-              control={controlType}
-              rows={param.rows}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {/if}

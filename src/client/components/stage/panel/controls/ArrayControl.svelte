@@ -152,7 +152,7 @@
                 <TextInputControl
                   value={item[key] ?? ''}
                   control={config.control ?? 'text'}
-                  rows={config.rows}
+                  numberOfRows={config.numberOfRows}
                   onChange={(v) => updateItemProperty(index, key, v)}
                 />
               {/if}
