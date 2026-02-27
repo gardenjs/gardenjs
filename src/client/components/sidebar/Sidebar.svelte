@@ -108,13 +108,10 @@
 
 <style>
   .sidebar_container {
-    --w-sidebar: 260px;
+    margin-right: 0.375rem;
     display: flex;
     flex-direction: column;
     position: relative;
-    margin: 0.375rem 0;
-    width: 0;
-    max-width: var(--w-sidebar);
     height: calc(100vh - 0.75rem);
     background-color: var(--c-sidebar-bg);
     border-radius: 0.625rem;
@@ -123,7 +120,6 @@
   }
   .show-sidebar {
     margin: 0.375rem 0.375rem 0.375rem 0;
-    width: var(--w-sidebar);
     box-sizing: border-box;
   }
   .project-identifier {
@@ -135,10 +131,10 @@
     align-items: center;
     padding: 0.25rem 0.688rem;
     margin: 0 0 0.125rem;
-    width: var(--w-sidebar);
+    width: 100%;
     height: 2.25rem;
     background-color: var(--c-sidebar);
-    inline-size: var(--w-sidebar);
+    inline-size: 100%;
     overflow: hidden;
     white-space: nowrap;
     font-size: 1.25rem;
@@ -188,7 +184,7 @@
     box-shadow: 0 0 0 1px var(--c-primary);
   }
   .filter_zero-results {
-    width: var(--w-sidebar);
+    width: 100%;
     padding: 0.5rem 0.688rem 0.375rem 0.688rem;
     text-transform: initial;
     font-size: 0.813rem;
@@ -214,7 +210,7 @@
     .controls {
       display: block;
       flex-shrink: 0;
-      width: var(--w-sidebar);
+      width: 100%;
       height: 103px;
       bottom: 0.375rem;
       padding: 0;

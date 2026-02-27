@@ -1,4 +1,4 @@
-import { writable, get, derived, readable } from 'svelte/store'
+import { writable, get, derived } from 'svelte/store'
 
 function localStore(
   name,
@@ -76,9 +76,6 @@ export const panelExpanded = writable(true)
 export const appTheme = localStore('appTheme', 'default')
 
 export const activeTheme = localStore('frameTheme')
-
-export const desktopSidebarExpanded = writable(true)
-export const mobileSidebarExpanded = writable(false)
 
 export const showInspector = writable(false)
 export const showGrid = writable(false)
@@ -244,49 +241,12 @@ export function toggleExpandPanel() {
   panelExpanded.set(!get(panelExpanded))
 }
 
-export function toggleExpandSidebar() {
-  if (get(mobileNav)) {
-    mobileSidebarExpanded.set(!get(mobileSidebarExpanded))
-  } else {
-    desktopSidebarExpanded.set(!get(desktopSidebarExpanded))
-  }
-}
-
 export function toggleShowInspector() {
   showInspector.set(!get(showInspector))
 }
 
 export function toggleShowGrid() {
   showGrid.set(!get(showGrid))
-}
-
-export const mobileNav = readable(window.innerWidth < 840, (set) => {
-  // Funktion zum Aktualisieren der Fensterbreite
-  const updateWidth = () => {
-    set(window.innerWidth < 840)
-    mobileSidebarExpanded.set(false)
-  }
-
-  // Event-Listener für das Resize-Event hinzufügen
-  window.addEventListener('resize', updateWidth)
-
-  // Cleanup-Funktion, um den Event-Listener zu entfernen, wenn der Store nicht mehr verwendet wird
-  return () => {
-    window.removeEventListener('resize', updateWidth)
-  }
-})
-
-export const sidebarExpanded = derived(
-  [desktopSidebarExpanded, mobileSidebarExpanded, mobileNav],
-  ([$desktopSidebarExpanded, $mobileSidebarExpanded, $mobileNav]) => {
-    return $mobileNav ? $mobileSidebarExpanded : $desktopSidebarExpanded
-  }
-)
-
-export function handleSelectionChanged() {
-  if (get(mobileNav)) {
-    mobileSidebarExpanded.set(false)
-  }
 }
 
 export function setStagesize(nStageSize) {

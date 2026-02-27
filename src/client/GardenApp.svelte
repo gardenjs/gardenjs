@@ -2,6 +2,13 @@
   import Stage from './components/stage/Stage.svelte'
   import Sidebar from './components/sidebar/Sidebar.svelte'
   import Topbar from './components/topbar/Topbar.svelte'
+  import VerticalSplitPane from './components/panes/VerticalSplitPane.svelte'
+  import {
+    sidebar,
+    toggleExpandSidebar,
+    collapseMobileNavIfVisible,
+    initSidebar,
+  } from './logic/sidebar.svelte.js'
   import {
     stageStyle,
     stageSize,
@@ -31,12 +38,9 @@
     updateStageWidth,
     updateStageRect,
     resetStage,
-    sidebarExpanded,
-    toggleExpandSidebar,
     toggleShowInspector,
     toggleShowGrid,
     toggleOrientation,
-    handleSelectionChanged,
     showInspector,
     showGrid,
     gridSettings,
@@ -92,8 +96,10 @@
   })
   $effect(() => {
     updateSelectedComponent($componentName)
-    handleSelectionChanged()
+    collapseMobileNavIfVisible()
   })
+
+  initSidebar()
 
   let projectTitle = config.project_title || ''
   let projectLogo = config.project_logo?.split('/').pop() || null
@@ -132,99 +138,104 @@
   </div>
 {:else}
   <div class="garden">
-    <div class="sidebar">
-      <Sidebar
-        {docsLink}
-        {projectLogoDarkmode}
-        {projectLogo}
-        {projectTitle}
-        appTheme={$appTheme}
-        bookmarks={$bookmarks}
-        filter={$filterNavTree}
-        nodes={$nodes}
-        panelExpanded={$panelExpanded}
-        treeCollapsed={$treeCollapsed}
-        sidebarExpanded={$sidebarExpanded}
-        onLogoClicked={resetStage}
-        onToggleBookmark={toggleBookmark}
-        onToggleExpandPanel={toggleExpandPanel}
-        onToggleFoldStatusOfNode={toggleFolder}
-        onUpdateFilter={updateFilter}
-        onCollapseTree={collapseTree}
-        onExpandTree={expandTree}
-      />
-    </div>
-    <div class="main">
-      <Topbar
-        appTheme={$appTheme}
-        landscape={$landscape}
-        node={$selectedNode}
-        showGrid={$showGrid}
-        nodeVisibleInExplorer={$selectedNodeVisibleInTree}
-        showInspector={$showInspector}
-        sidebarExpanded={$sidebarExpanded}
-        stageHeight={$stageHeight}
-        stageMaxHeight={$stageMaxHeight}
-        stageMaxWidth={$stageMaxWidth}
-        stageRect={$stageRect}
-        stageSize={$stageSize}
-        stageSizes={$stageSizes}
-        stageWidth={$stageWidth}
-        themes={$themes}
-        onOpenInTab={openInTab}
-        onSetStageHeight={updateStageHeight}
-        onSetStageWidth={updateStageWidth}
-        onSetStageSize={setStagesize}
-        onSetTheme={setTheme}
-        onToggleAppTheme={toggleAppTheme}
-        onToggleBookmark={toggleBookmark}
-        onToggleExpandSidebar={toggleExpandSidebar}
-        onToggleOrientation={toggleOrientation}
-        onToggleShowGrid={toggleShowGrid}
-        onToggleShowInspector={toggleShowInspector}
-        onRevealInExplorer={() => navigateToLeafNode($selectedNode?.href)}
-      />
-      <Stage
-        appTheme={$appTheme}
-        componentName={$componentName}
-        das={$das}
-        devmodus={config.devmodus}
-        gridSettings={$gridSettings}
-        panelExpanded={$panelExpanded}
-        selectedExample={$selectedExample}
-        showGrid={$showGrid}
-        showInspector={$showInspector}
-        stageContainerHeight={$stageContainerHeight}
-        stageContainerMaxHeight={$stageContainerMaxHeight}
-        stageHeight={$stageHeight}
-        stageMaxHeight={$stageMaxHeight}
-        stageMaxWidth={$stageMaxWidth}
-        stageSize={$stageSize}
-        stageStyle={$stageStyle}
-        stageWidth={$stageWidth}
-        theme={$activeTheme}
-        onSetStageContainerHeight={updateStageContainerHeight}
-        onSetStageContainerMaxHeight={updateStageContainerMaxHeight}
-        onSetStageContainerWidth={updateStageContainerWidth}
-        onSetStageHeight={updateStageHeight}
-        onSetStageWidth={updateStageWidth}
-        onToggleExpandPanel={toggleExpandPanel}
-        onUpdateStageRect={updateStageRect}
-      />
-    </div>
+    <VerticalSplitPane
+      leftWidth={sidebar.width}
+      maxWidth={sidebar.maxWidth}
+      onSetLeftWidth={(leftWidth) => {
+        sidebar.width = leftWidth
+      }}
+      onSetMaxWidth={(maxWidth) => {
+        sidebar.maxWidth = maxWidth
+      }}
+    >
+      {#snippet left()}
+        <Sidebar
+          {docsLink}
+          {projectLogoDarkmode}
+          {projectLogo}
+          {projectTitle}
+          appTheme={$appTheme}
+          bookmarks={$bookmarks}
+          filter={$filterNavTree}
+          nodes={$nodes}
+          panelExpanded={$panelExpanded}
+          treeCollapsed={$treeCollapsed}
+          sidebarExpanded={sidebar.sidebarExpanded}
+          onLogoClicked={resetStage}
+          onToggleBookmark={toggleBookmark}
+          onToggleExpandPanel={toggleExpandPanel}
+          onToggleFoldStatusOfNode={toggleFolder}
+          onUpdateFilter={updateFilter}
+          onCollapseTree={collapseTree}
+          onExpandTree={expandTree}
+        />
+      {/snippet}
+      {#snippet right()}
+        <div class="main">
+          <Topbar
+            appTheme={$appTheme}
+            landscape={$landscape}
+            node={$selectedNode}
+            showGrid={$showGrid}
+            nodeVisibleInExplorer={$selectedNodeVisibleInTree}
+            showInspector={$showInspector}
+            sidebarExpanded={sidebar.sidebarExpanded}
+            stageHeight={$stageHeight}
+            stageMaxHeight={$stageMaxHeight}
+            stageMaxWidth={$stageMaxWidth}
+            stageRect={$stageRect}
+            stageSize={$stageSize}
+            stageSizes={$stageSizes}
+            stageWidth={$stageWidth}
+            themes={$themes}
+            onOpenInTab={openInTab}
+            onSetStageHeight={updateStageHeight}
+            onSetStageWidth={updateStageWidth}
+            onSetStageSize={setStagesize}
+            onSetTheme={setTheme}
+            onToggleAppTheme={toggleAppTheme}
+            onToggleBookmark={toggleBookmark}
+            onToggleExpandSidebar={toggleExpandSidebar}
+            onToggleOrientation={toggleOrientation}
+            onToggleShowGrid={toggleShowGrid}
+            onToggleShowInspector={toggleShowInspector}
+            onRevealInExplorer={() => navigateToLeafNode($selectedNode?.href)}
+          />
+          <Stage
+            appTheme={$appTheme}
+            componentName={$componentName}
+            das={$das}
+            devmodus={config.devmodus}
+            gridSettings={$gridSettings}
+            panelExpanded={$panelExpanded}
+            selectedExample={$selectedExample}
+            showGrid={$showGrid}
+            showInspector={$showInspector}
+            stageContainerHeight={$stageContainerHeight}
+            stageContainerMaxHeight={$stageContainerMaxHeight}
+            stageHeight={$stageHeight}
+            stageMaxHeight={$stageMaxHeight}
+            stageMaxWidth={$stageMaxWidth}
+            stageSize={$stageSize}
+            stageStyle={$stageStyle}
+            stageWidth={$stageWidth}
+            theme={$activeTheme}
+            onSetStageContainerHeight={updateStageContainerHeight}
+            onSetStageContainerMaxHeight={updateStageContainerMaxHeight}
+            onSetStageContainerWidth={updateStageContainerWidth}
+            onSetStageHeight={updateStageHeight}
+            onSetStageWidth={updateStageWidth}
+            onToggleExpandPanel={toggleExpandPanel}
+            onUpdateStageRect={updateStageRect}
+          />
+        </div>
+      {/snippet}
+    </VerticalSplitPane>
   </div>
 {/if}
 
 <style>
-  .sidebar {
-    flex-grow: 0;
-    flex-shrink: 0;
-  }
   .garden {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    flex-grow: 1;
     margin: 0;
     padding: 0 0.375rem;
     width: 100vw;

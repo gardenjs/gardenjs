@@ -38,7 +38,7 @@
 
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach(() => {
-      onSetMaxWidth(element.offsetWidth - 100)
+      element && onSetMaxWidth(element.offsetWidth - 100)
     })
   })
 
@@ -58,7 +58,6 @@
   }
 
   const drag = (e) => {
-    window.getSelection().removeAllRanges()
     const newWidth = Math.min(maxWidth, e.pageX - leftPos)
     leftWidth = Math.max(100, newWidth)
     onSetLeftWidth(leftWidth)
@@ -96,7 +95,6 @@
     flex-shrink: 0;
     border-right: 0;
     border-radius: 0.625rem 0.625rem 0 0;
-    padding: 0 1.25rem 0 0;
     overflow: auto;
   }
   .dragbar {
