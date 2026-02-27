@@ -4,7 +4,11 @@
   import Topbar from './components/topbar/Topbar.svelte'
   import VerticalSplitPane from './components/panes/VerticalSplitPane.svelte'
   import {
-    sidebar,
+    sidebarWidth,
+    sidebarExpanded,
+    sidebarMaxWidth,
+    updateSidebarWidth,
+    updateSidebarMaxWidth,
     toggleExpandSidebar,
     collapseMobileNavIfVisible,
     initSidebar,
@@ -139,14 +143,10 @@
 {:else}
   <div class="garden">
     <VerticalSplitPane
-      leftWidth={sidebar.width}
-      maxWidth={sidebar.maxWidth}
-      onSetLeftWidth={(leftWidth) => {
-        sidebar.width = leftWidth
-      }}
-      onSetMaxWidth={(maxWidth) => {
-        sidebar.maxWidth = maxWidth
-      }}
+      leftWidth={$sidebarWidth}
+      maxWidth={$sidebarMaxWidth}
+      onSetLeftWidth={updateSidebarWidth}
+      onSetMaxWidth={updateSidebarMaxWidth}
     >
       {#snippet left()}
         <Sidebar
@@ -160,7 +160,7 @@
           nodes={$nodes}
           panelExpanded={$panelExpanded}
           treeCollapsed={$treeCollapsed}
-          sidebarExpanded={sidebar.sidebarExpanded}
+          sidebarExpanded={$sidebarExpanded}
           onLogoClicked={resetStage}
           onToggleBookmark={toggleBookmark}
           onToggleExpandPanel={toggleExpandPanel}
@@ -179,7 +179,7 @@
             showGrid={$showGrid}
             nodeVisibleInExplorer={$selectedNodeVisibleInTree}
             showInspector={$showInspector}
-            sidebarExpanded={sidebar.sidebarExpanded}
+            sidebarExpanded={$sidebarExpanded}
             stageHeight={$stageHeight}
             stageMaxHeight={$stageMaxHeight}
             stageMaxWidth={$stageMaxWidth}

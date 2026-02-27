@@ -1,10 +1,10 @@
+import { writable, get } from 'svelte/store'
+import { localStore, textOrNumberParser } from './localStore'
 import { innerWidth } from 'svelte/reactivity/window'
 
-export const sidebar = $state({
-  width: 260,
-  maxWidth: 260,
-  sidebarExpanded: false,
-})
+export const sidebarWidth = localStore('sidebarWidth', 260, textOrNumberParser)
+export const sidebarMaxWidth = writable(260)
+export const sidebarExpanded = localStore('sidebarExpanded', false)
 
 let previousWidth = $state(260)
 let desktopExpanded = $state(true)
@@ -22,16 +22,16 @@ export const initSidebar = () => {
   })
 
   $effect(() => {
-    sidebar.sidebarExpanded = showMobileNav ? mobileExpanded : desktopExpanded
+    sidebarExpanded.set(showMobileNav ? mobileExpanded : desktopExpanded)
   })
 }
 
 export function toggleExpandSidebar() {
-  if (sidebar.sidebarExpanded) {
-    previousWidth = sidebar.width
-    sidebar.width = 0
+  if (get(sidebarExpanded)) {
+    previousWidth = get(sidebarWidth)
+    sidebarWidth.set(0)
   } else {
-    sidebar.width = previousWidth ?? 260
+    sidebarWidth.set(previousWidth ?? 260)
   }
   if (showMobileNav) {
     mobileExpanded = !mobileExpanded
@@ -44,4 +44,12 @@ export function collapseMobileNavIfVisible() {
   if (showMobileNav) {
     mobileExpanded = false
   }
+}
+
+export function updateSidebarWidth(newWidth) {
+  sidebarWidth.set(newWidth)
+}
+
+export function updateSidebarMaxWidth(newMaxWidth) {
+  sidebarMaxWidth.set(newMaxWidth)
 }

@@ -1,26 +1,5 @@
 import { writable, get, derived } from 'svelte/store'
-
-function localStore(
-  name,
-  defaultValue,
-  parseString = (value) => value,
-  stringify = (value) => value
-) {
-  const store = writable(
-    parseString(localStorage.getItem(name)) ?? defaultValue
-  )
-  store.subscribe((value) => {
-    localStorage.setItem(name, stringify(value))
-  })
-  return store
-}
-
-const textOrNumberParser = (value) => {
-  if (Number.isNaN(Number(value))) {
-    return value
-  }
-  return Number(value)
-}
+import { localStore, textOrNumberParser } from './localStore'
 
 export const themes = writable([])
 export const stageSizes = writable({

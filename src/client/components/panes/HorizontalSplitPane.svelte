@@ -1,5 +1,4 @@
 <script>
-  import { onMount, onDestroy } from 'svelte'
   let {
     topHeight = $bindable(),
     maxHeight,
@@ -33,39 +32,38 @@
     return undefined
   })
 
-  const resizeObserver = new ResizeObserver((entries) => {
-    entries.forEach(() => {
-      onSetMaxHeight(element.offsetHeight)
-      onSetMaxWidth(element.offsetWidth)
+  $effect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach(() => {
+        if (element) {
+          onSetMaxHeight(element.offsetHeight)
+          onSetMaxWidth(element.offsetWidth)
+        }
+      })
     })
-  })
-
-  onMount(() => {
     resizeObserver.observe(element)
+
+    return () => {
+      resizeObserver.disconnect()
+    }
   })
 
-  onDestroy(() => {
-    resizeObserver.disconnect()
-  })
-
-  function register() {
-    document.addEventListener('mousemove', drag)
-    document.addEventListener('mouseup', unregister)
+  function startDrag(e) {
+    e.currentTarget.setPointerCapture(e.pointerId)
+    document.body.style.userSelect = 'none'
     dragging = true
   }
 
   const drag = (e) => {
-    window.getSelection().removeAllRanges()
-    const newHeight = Math.min(maxHeight, e.pageY - element.offsetTop - 7)
-    topHeight = newHeight
+    if (e.buttons !== 1) return
+    const newHeight = Math.min(maxHeight, topHeight + e.movementY)
+    topHeight = Math.max(100, newHeight)
     onSetTopHeight(topHeight)
   }
 
-  function unregister() {
-    document.removeEventListener('mousemove', drag)
-    document.removeEventListener('mouseup', unregister)
-
-    onSetTopHeight(topHeight)
+  function stopDrag(e) {
+    e.currentTarget.releasePointerCapture(e.pointerId)
+    document.body.style.userSelect = ''
     dragging = false
   }
 </script>
@@ -75,7 +73,13 @@
     {@render top?.()}
   </div>
   <!-- eslint-disable-next-line -->
-  <div class="dragbar" class:dragging onmousedown={register}></div>
+  <div
+    class="dragbar"
+    class:dragging
+    onpointerdown={startDrag}
+    onpointerup={stopDrag}
+    onpointermove={drag}
+  ></div>
   {@render bottom?.()}
 </div>
 
