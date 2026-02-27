@@ -6,6 +6,7 @@
     right,
     onSetMaxWidth,
     onSetLeftWidth,
+    hideDragBar,
   } = $props()
   let element = $state()
   let dragging = $state(false)
@@ -74,6 +75,7 @@
   <div
     class="dragbar"
     class:dragging
+    class:hide-drag-bar={hideDragBar}
     onpointerdown={startDrag}
     onpointerup={stopDrag}
     onpointermove={drag}
@@ -109,5 +111,8 @@
   .dragbar:hover {
     background-color: var(--c-primary);
     transform: scaleX(2);
+  }
+  .hide-drag-bar {
+    background-color: unset;
   }
 </style>

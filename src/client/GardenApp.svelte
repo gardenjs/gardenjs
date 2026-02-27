@@ -147,6 +147,7 @@
       maxWidth={$sidebarMaxWidth}
       onSetLeftWidth={updateSidebarWidth}
       onSetMaxWidth={updateSidebarMaxWidth}
+      hideDragBar
     >
       {#snippet left()}
         <Sidebar
@@ -244,6 +245,7 @@
     background-color: var(--c-bg-body);
   }
   .main {
+    margin-left: 0.125rem;
     display: flex;
     flex-direction: column;
     width: 100%;

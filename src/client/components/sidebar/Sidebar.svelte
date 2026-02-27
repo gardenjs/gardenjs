@@ -108,7 +108,7 @@
 
 <style>
   .sidebar_container {
-    margin-right: 0.375rem;
+    margin-right: 0.125rem;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -119,7 +119,7 @@
     overflow: hidden;
   }
   .show-sidebar {
-    margin: 0.375rem 0.375rem 0.375rem 0;
+    margin: 0.375rem 0.125rem 0.375rem 0;
     box-sizing: border-box;
   }
   .project-identifier {
