@@ -1,5 +1,4 @@
 <script>
-  import { onMount, onDestroy } from 'svelte'
   let {
     leftWidth = $bindable(),
     maxWidth,
@@ -7,6 +6,7 @@
     right,
     onSetMaxWidth,
     onSetLeftWidth,
+    hideDragBar,
   } = $props()
   let element = $state()
   let dragging = $state(false)
@@ -25,10 +25,6 @@
     }
   })
 
-  const leftPos = $derived.by(() => {
-    return element ? element.getBoundingClientRect().left + window.scrollX : 0
-  })
-
   const leftWidthWithUnit = $derived.by(() => {
     if (Number.isInteger(leftWidth) && Number.isInteger(maxWidth)) {
       return maxWidth < leftWidth ? maxWidth + 'px' : leftWidth + 'px'
@@ -36,39 +32,37 @@
     return undefined
   })
 
-  const resizeObserver = new ResizeObserver((entries) => {
-    entries.forEach(() => {
-      onSetMaxWidth(element.offsetWidth - 100)
+  $effect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach(() => {
+        if (element) {
+          onSetMaxWidth(element.offsetWidth - 100)
+        }
+      })
     })
-  })
-
-  onMount(() => {
     resizeObserver.observe(element)
+
+    return () => {
+      resizeObserver.disconnect()
+    }
   })
 
-  onDestroy(() => {
-    resizeObserver.disconnect()
-    unregister()
-  })
-
-  function register() {
-    document.addEventListener('mousemove', drag)
-    document.addEventListener('mouseup', unregister)
+  function startDrag(e) {
+    e.currentTarget.setPointerCapture(e.pointerId)
+    document.body.style.userSelect = 'none'
     dragging = true
   }
 
   const drag = (e) => {
-    window.getSelection().removeAllRanges()
-    const newWidth = Math.min(maxWidth, e.pageX - leftPos)
+    if (e.buttons !== 1) return
+    const newWidth = Math.min(maxWidth, leftWidth + e.movementX)
     leftWidth = Math.max(100, newWidth)
     onSetLeftWidth(leftWidth)
   }
 
-  function unregister() {
-    document.removeEventListener('mousemove', drag)
-    document.removeEventListener('mouseup', unregister)
-
-    onSetLeftWidth(leftWidth)
+  function stopDrag(e) {
+    e.currentTarget.releasePointerCapture(e.pointerId)
+    document.body.style.userSelect = ''
     dragging = false
   }
 </script>
@@ -78,7 +72,14 @@
     {@render left?.()}
   </div>
   <!-- eslint-disable-next-line -->
-  <div class="dragbar" class:dragging onmousedown={register}></div>
+  <div
+    class="dragbar"
+    class:dragging
+    class:hide-drag-bar={hideDragBar}
+    onpointerdown={startDrag}
+    onpointerup={stopDrag}
+    onpointermove={drag}
+  ></div>
   {@render right?.()}
 </div>
 
@@ -96,7 +97,6 @@
     flex-shrink: 0;
     border-right: 0;
     border-radius: 0.625rem 0.625rem 0 0;
-    padding: 0 1.25rem 0 0;
     overflow: auto;
   }
   .dragbar {
@@ -111,5 +111,8 @@
   .dragbar:hover {
     background-color: var(--c-primary);
     transform: scaleX(2);
+  }
+  .hide-drag-bar {
+    background-color: unset;
   }
 </style>
