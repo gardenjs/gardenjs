@@ -1,4 +1,5 @@
 <script>
+  import { SvelteSet } from 'svelte/reactivity'
   import ArrayControl from './controls/ArrayControl.svelte'
   import BooleanControl from './controls/BooleanControl.svelte'
   import ColorPickerControl from './controls/ColorPickerControl.svelte'
@@ -56,6 +57,13 @@
         return 'text'
     }
   }
+
+  let openDescriptionKeys = new SvelteSet()
+
+  function toggleDescription(name) {
+    if (openDescriptionKeys.has(name)) openDescriptionKeys.delete(name)
+    else openDescriptionKeys.add(name)
+  }
 </script>
 
 <div class="pane">
@@ -75,8 +83,38 @@
     <div class="grid">
       {#each params as param (param.name)}
         {@const controlType = getControlType(param)}
-        <div class="label">
-          {param.label || param.name}
+        <div class="label-cell">
+          <span class="label">{param.label || param.name}</span>
+          {#if param.description}
+            <button
+              type="button"
+              class="info-btn"
+              title={openDescriptionKeys.has(param.name)
+                ? 'Close description'
+                : 'Show description'}
+              aria-label={openDescriptionKeys.has(param.name)
+                ? 'Close description'
+                : 'Show description'}
+              aria-expanded={openDescriptionKeys.has(param.name)}
+              onclick={() => toggleDescription(param.name)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                viewBox="0 0 24 24"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                ><circle cx="12" cy="12" r="10" /><path
+                  d="M12 16v-4m0-4h.01"
+                /></svg
+              >
+            </button>
+          {/if}
         </div>
         <div class="input">
           {#if controlType === 'checkbox' || controlType === 'toggle'}
@@ -158,6 +196,9 @@
             />
           {/if}
         </div>
+        {#if param.description && openDescriptionKeys.has(param.name)}
+          <div class="description">{param.description}</div>
+        {/if}
       {/each}
     </div>
   {/if}
@@ -192,10 +233,36 @@
     gap: 0.75rem;
     align-items: start;
   }
+  .label-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
   .label {
     font-size: 0.938rem;
     font-weight: 500;
-    color: var(--c-basic-700);
-    max-width: 220px;
+    color: var(--c-basic-900);
+  }
+  .info-btn {
+    display: inline-flex;
+    margin: -0.15rem 0;
+    padding: 0.15rem;
+    color: var(--c-basic-900);
+    border-radius: 0.375rem;
+  }
+  .info-btn:hover {
+    background-color: var(--c-basic-100);
+  }
+  .info-btn[aria-expanded='true'] {
+    color: var(--c-primary);
+  }
+  .description {
+    grid-column: 1 / -1;
+    margin: -0.25rem 0 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.813rem;
+    color: var(--c-basic-800);
+    line-height: 1.35;
+    background-color: var(--c-primary-bg);
   }
 </style>
