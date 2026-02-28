@@ -153,7 +153,7 @@
             />
           {:else}
             <JsonControl
-              value={values?.[param.name] ?? ''}
+              value={values?.[param.name] ?? null}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {/if}
