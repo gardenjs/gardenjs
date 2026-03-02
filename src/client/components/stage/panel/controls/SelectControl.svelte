@@ -5,47 +5,49 @@
 </script>
 
 {#if control === 'radio'}
-  <div class="radio-group">
-    {#each options as option, index (option.value ?? option ?? index)}
-      {@const optionValue = option.value ?? option}
-      {@const optionLabel = option.label ?? option}
-      <label class="radio-option">
-        <input
-          type="radio"
-          name="radio-{Math.random()}"
-          value={optionValue}
-          checked={value === optionValue}
-          onchange={(e) => onChange(e.currentTarget.value)}
-        />
-        <span class="radio-label">{optionLabel}</span>
-      </label>
-    {/each}
-  </div>
-  <div class="unset-area">
-    {#if isUnset}
-      <div class="unset-info radio-unset">is not set</div>
-    {:else}
-      <button
-        class="btn_unset radio-btn-unset"
-        onclick={() => onChange(undefined)}
-      >
-        <svg
-          class="close"
-          xmlns="http://www.w3.org/2000/svg"
-          width="12"
-          height="12"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+  <div class="radio-row">
+    <div class="radio-group">
+      {#each options as option, index (option.value ?? option ?? index)}
+        {@const optionValue = option.value ?? option}
+        {@const optionLabel = option.label ?? option}
+        <label class="radio-option">
+          <input
+            type="radio"
+            name="radio-{Math.random()}"
+            value={optionValue}
+            checked={value === optionValue}
+            onchange={(e) => onChange(e.currentTarget.value)}
+          />
+          <span class="radio-label">{optionLabel}</span>
+        </label>
+      {/each}
+    </div>
+    <div class="unset-area">
+      {#if isUnset}
+        <div class="unset-info radio-unset">is not set</div>
+      {:else}
+        <button
+          class="btn_unset radio-btn-unset"
+          onclick={() => onChange(undefined)}
         >
-          <path d="M18 6L6 18M6 6l12 12" />
-        </svg>
-        unset
-      </button>
-    {/if}
+          <svg
+            class="close"
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+          unset
+        </button>
+      {/if}
+    </div>
   </div>
 {:else}
   <div class="row">
@@ -154,7 +156,19 @@
     pointer-events: none;
   }
 
-  /* Radio variant styles */
+  /* Radio variant: same row layout as select – radio group fills width, unset right, top-aligned */
+  .radio-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .radio-row .radio-group {
+    flex: 1;
+    min-width: 0;
+  }
+
   .radio-group {
     display: flex;
     flex-direction: column;
@@ -222,9 +236,14 @@
     }
   }
 
+  .radio-row .unset-area {
+    flex-shrink: 0;
+    margin-top: 0;
+  }
+
   .radio-unset,
   .radio-btn-unset {
-    margin: 0.75rem 0 0;
+    margin: 0;
   }
 
   .radio-unset {
