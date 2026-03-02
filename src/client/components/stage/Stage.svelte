@@ -81,16 +81,7 @@
       []
     )
 
-    return [
-      ...exampleParams,
-      ...configuredParams
-        .filter((configuredParam) =>
-          exampleParams.every(
-            (exampleParam) => exampleParam.name !== configuredParam.name
-          )
-        )
-        .map((p) => ({ ...p, value: undefined })),
-    ]
+    return exampleParams
   })
 
   let paramValues = $derived(structuredClone(selectedExampleInput))
