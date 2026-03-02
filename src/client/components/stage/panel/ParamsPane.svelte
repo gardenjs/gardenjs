@@ -239,6 +239,7 @@
     gap: 0.35rem;
   }
   .label {
+    margin: 0.313rem 0 0;
     font-size: 0.938rem;
     font-weight: 500;
     color: var(--c-basic-900);
