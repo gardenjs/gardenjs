@@ -249,10 +249,9 @@
     margin: -0.15rem 0;
     padding: 0.15rem;
     color: var(--c-basic-900);
-    border-radius: 0.375rem;
   }
   .info-btn:hover {
-    background-color: var(--c-basic-100);
+    color: var(--c-primary);
   }
   .info-btn[aria-expanded='true'] {
     color: var(--c-primary);
