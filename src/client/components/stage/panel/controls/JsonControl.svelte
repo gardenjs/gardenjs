@@ -32,6 +32,7 @@
       onchange={(e) =>
         handleChange((e.currentTarget as HTMLTextAreaElement).value ?? '')}
     ></textarea>
+    <button type="button" class="btn-set-changes">Set changes</button>
   </div>
   <div class="unset-area">
     {#if isUnset}
@@ -77,5 +78,22 @@
     height: auto;
     line-height: 1.4;
     padding: 0.375rem 0.5rem;
+  }
+
+  .btn-set-changes {
+    display: block;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.813rem;
+    color: var(--c-basic-700);
+    background: var(--c-basic-100);
+    border: 1px solid var(--c-basic-300);
+    border-radius: 0.375rem;
+    cursor: pointer;
+  }
+
+  .btn-set-changes:hover {
+    background: var(--c-basic-200);
+    color: var(--c-basic-800);
   }
 </style>
