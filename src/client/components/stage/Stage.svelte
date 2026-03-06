@@ -99,7 +99,7 @@
     try {
       return JSON.parse(JSON.stringify(paramValues))
     } catch (e) {
-      console.err(e)
+      console.error(e)
       return null
     }
   })
