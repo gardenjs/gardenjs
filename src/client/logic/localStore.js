@@ -16,7 +16,7 @@ export function localStore(
 }
 
 export const textOrNumberParser = (value) => {
-  if (Number.isNaN(Number(value))) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) {
     return value
   }
   return Number(value)
