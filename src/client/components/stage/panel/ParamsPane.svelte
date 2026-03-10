@@ -204,8 +204,8 @@
   {/if}
 </div>
 
-<style>
-  @import './controls/button.scss';
+<style lang="scss">
+  @use './controls/button.scss';
 
   .pane {
     width: 100%;
