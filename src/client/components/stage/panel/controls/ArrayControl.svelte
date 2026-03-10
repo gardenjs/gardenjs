@@ -51,136 +51,153 @@
   let items = $derived(Array.isArray(value) ? value : [])
 </script>
 
-<div class="items">
-  {#if items.length > 0}
-    {#each items as item, index (index)}
-      <div class="item">
-        <div class="item_header">
-          <span class="item_number">#{index + 1}</span>
-          <button
-            class="btn btn_remove"
-            title="Remove item"
-            aria-label="Remove item"
-            onclick={() => removeItem(index)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              viewBox="0 0 24 24"
-              height="16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              ><path
-                d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
-              /></svg
-            >
-          </button>
-        </div>
-        <div class="grid">
-          {#each Object.entries(schema) as [key, config] (key)}
-            {@const fieldType = getFieldType(config)}
-            <div class="label">
-              <div class="field-label">{config.label || key}</div>
+<div class="row">
+  <div class="container">
+    <div class="items">
+      {#if items.length > 0}
+        {#each items as item, index (index)}
+          <div class="item">
+            <div class="item_header">
+              <span class="item_number">#{index + 1}</span>
+              <button
+                type="button"
+                class="btn btn_remove"
+                title="Remove item"
+                aria-label="Remove item"
+                onclick={() => removeItem(index)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  viewBox="0 0 24 24"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
+                  /></svg
+                >
+              </button>
             </div>
-            <div class="input_wrapper">
-              {#if fieldType === 'array'}
-                <ArrayControl
-                  value={item[key] ?? []}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                />
-              {:else if fieldType === 'boolean'}
-                <BooleanControl
-                  value={item[key] ?? undefined}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                />
-              {:else if fieldType === 'color'}
-                <ColorPickerControl
-                  value={item[key] ?? undefined}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                />
-              {:else if fieldType === 'date'}
-                <DateControl
-                  value={item[key] ?? undefined}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                />
-              {:else if fieldType === 'datetime'}
-                <DatetimeControl
-                  value={item[key] ?? undefined}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                />
-              {:else if fieldType === 'multiselect'}
-                <MultiselectControl
-                  value={item[key] ?? []}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                  options={config.options ?? []}
-                  control={config.control ?? 'dropdown'}
-                />
-              {:else if fieldType === 'number'}
-                <NumberControl
-                  value={item[key] ?? null}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                />
-              {:else if fieldType === 'object'}
-                <ObjectControl
-                  value={item[key] ?? {}}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                  schema={config.schema ?? {}}
-                />
-              {:else if fieldType === 'range'}
-                <RangeControl
-                  value={item[key] ?? null}
-                  min={config.min}
-                  max={config.max}
-                  step={config.step}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                />
-              {:else if fieldType === 'select'}
-                <SelectControl
-                  value={item[key] ?? undefined}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                  options={config.options ?? []}
-                />
-              {:else if fieldType === 'time'}
-                <TimeControl
-                  value={item[key] ?? undefined}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                />
-              {:else}
-                <TextInputControl
-                  value={item[key] ?? ''}
-                  control={config.control ?? 'text'}
-                  numberOfRows={config.numberOfRows}
-                  onChange={(v) => updateItemProperty(index, key, v)}
-                />
-              {/if}
+            <div class="grid">
+              {#each Object.entries(schema) as [key, config] (key)}
+                {@const fieldType = getFieldType(config)}
+                <div class="label">
+                  <div class="field-label">{config.label || key}</div>
+                </div>
+                <div class="input_wrapper">
+                  {#if fieldType === 'array'}
+                    <ArrayControl
+                      value={item[key] ?? []}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                    />
+                  {:else if fieldType === 'boolean'}
+                    <BooleanControl
+                      value={item[key] ?? undefined}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                    />
+                  {:else if fieldType === 'color'}
+                    <ColorPickerControl
+                      value={item[key] ?? undefined}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                    />
+                  {:else if fieldType === 'date'}
+                    <DateControl
+                      value={item[key] ?? undefined}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                    />
+                  {:else if fieldType === 'datetime'}
+                    <DatetimeControl
+                      value={item[key] ?? undefined}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                    />
+                  {:else if fieldType === 'multiselect'}
+                    <MultiselectControl
+                      value={item[key] ?? []}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                      options={config.options ?? []}
+                      control={config.control ?? 'dropdown'}
+                    />
+                  {:else if fieldType === 'number'}
+                    <NumberControl
+                      value={item[key] ?? null}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                    />
+                  {:else if fieldType === 'object'}
+                    <ObjectControl
+                      value={item[key] ?? {}}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                      schema={config.schema ?? {}}
+                    />
+                  {:else if fieldType === 'range'}
+                    <RangeControl
+                      value={item[key] ?? null}
+                      min={config.min}
+                      max={config.max}
+                      step={config.step}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                    />
+                  {:else if fieldType === 'select'}
+                    <SelectControl
+                      value={item[key] ?? undefined}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                      options={config.options ?? []}
+                    />
+                  {:else if fieldType === 'time'}
+                    <TimeControl
+                      value={item[key] ?? undefined}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                    />
+                  {:else}
+                    <TextInputControl
+                      value={item[key] ?? ''}
+                      control={config.control ?? 'text'}
+                      numberOfRows={config.numberOfRows}
+                      onChange={(v) => updateItemProperty(index, key, v)}
+                    />
+                  {/if}
+                </div>
+              {/each}
             </div>
-          {/each}
-        </div>
-      </div>
-    {/each}
-  {/if}
-  <button class="btn btn_add" onclick={addItem}>
-    <svg
-      class="plus"
-      xmlns="http://www.w3.org/2000/svg"
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg
-    >
-    Add Item
-  </button>
+          </div>
+        {/each}
+      {/if}
+      <button class="btn btn_add" onclick={addItem}>
+        <svg
+          class="plus"
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><path d="M5 12h14" /><path d="M12 5v14" /></svg
+        >
+        Add Item
+      </button>
+    </div>
+  </div>
 </div>
 
 <style>
   @import './button.scss';
+
+  .row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .container {
+    flex: 1;
+    min-width: 0;
+  }
 
   .items {
     display: flex;
@@ -197,8 +214,8 @@
 
   .item_header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 0.35rem;
     margin-bottom: 0.75rem;
   }
 

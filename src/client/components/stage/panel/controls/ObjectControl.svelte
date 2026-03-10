@@ -35,69 +35,86 @@
   let entries = $derived(Object.entries(value || {}))
 </script>
 
-<div class="object-param">
-  {#if entries.length > 0}
-    {#each entries as [key, val], index (index)}
-      <div class="object-item">
-        <input
-          class="input input_key"
-          type="text"
-          value={key}
-          placeholder="key"
-          oninput={(e) => updateKey(key, e.currentTarget.value)}
-        />
-        <span class="separator">:</span>
-        <input
-          type="text"
-          class="input input_value"
-          value={String(val ?? '')}
-          placeholder="value"
-          oninput={(e) => updateValue(key, e.currentTarget.value)}
-        />
-        <button
-          class="btn btn_remove"
-          title="Remove property"
-          aria-label="Remove property"
-          onclick={() => removeProperty(key)}
+<div class="row">
+  <div class="container">
+    <div class="object-param">
+      {#if entries.length > 0}
+        {#each entries as [key, val], index (index)}
+          <div class="object-item">
+            <button
+              type="button"
+              class="btn btn_remove"
+              title="Remove property"
+              aria-label="Remove property"
+              onclick={() => removeProperty(key)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                viewBox="0 0 24 24"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path
+                  d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
+                /></svg
+              >
+            </button>
+            <input
+              class="input input_key"
+              type="text"
+              value={key}
+              placeholder="key"
+              oninput={(e) => updateKey(key, e.currentTarget.value)}
+            />
+            <span class="separator">:</span>
+            <input
+              type="text"
+              class="input input_value"
+              value={String(val ?? '')}
+              placeholder="value"
+              oninput={(e) => updateValue(key, e.currentTarget.value)}
+            />
+          </div>
+        {/each}
+      {/if}
+      <button class="btn" onclick={addProperty}>
+        <svg
+          class="plus"
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><path d="M5 12h14" /><path d="M12 5v14" /></svg
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            viewBox="0 0 24 24"
-            height="16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><path
-              d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
-            /></svg
-          >
-        </button>
-      </div>
-    {/each}
-  {/if}
-  <button class="btn" onclick={addProperty}>
-    <svg
-      class="plus"
-      xmlns="http://www.w3.org/2000/svg"
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg
-    >
-    Add Property
-  </button>
+        Add Property
+      </button>
+    </div>
+  </div>
 </div>
 
-<style>
-  @import './button.scss';
-  @import './input.scss';
+<style lang="scss">
+  @use './button.scss';
+  @use './input.scss';
+
+  .row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .container {
+    flex: 1;
+    min-width: 0;
+  }
 
   .object-param {
     display: flex;
@@ -128,6 +145,7 @@
   }
 
   .btn_remove {
+    flex-shrink: 0;
     width: 1.5rem;
     height: 1.5rem;
     padding: 0;
