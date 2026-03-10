@@ -37,6 +37,7 @@ Watch the <a href="https://demo.gardenjs.org/">demo</a>.
 - Integration of external libraries within a project.
 - Multiple frameworks running in a single instance.
 - More flexible and extensive work with decorators and hooks.
+- Automatically generated parameters with a selection of controls.
 - Simply looks good :)
 
 ## Getting Started
