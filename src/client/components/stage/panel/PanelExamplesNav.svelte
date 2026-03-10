@@ -5,6 +5,7 @@
     examples = [],
     params,
     values,
+    valuesChanged = false,
     onChange,
     onReset,
     selected,
@@ -23,7 +24,10 @@
   {#snippet left()}
     <ul class="examples">
       {#each examples as example, index (index)}
-        <li class:active={selected == example}>
+        <li
+          class:active={selected == example}
+          class:modified={selected == example && valuesChanged}
+        >
           <button onclick={() => onSelectExample(example)}>
             <span class="dot"></span>
             {example}
@@ -80,6 +84,9 @@
     color: var(--c-primary);
     font-weight: 500;
     background-color: var(--c-primary-bg);
+  }
+  .examples li.active.modified button {
+    background-color: var(--c-basic-100);
   }
   .examples li.active button:focus-visible {
     background-color: var(--c-basic-150);

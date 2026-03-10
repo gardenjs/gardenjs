@@ -104,6 +104,16 @@
     }
   })
 
+  const valuesChanged = $derived.by(() => {
+    try {
+      return (
+        JSON.stringify(paramValues) !== JSON.stringify(selectedExampleInput)
+      )
+    } catch {
+      return false
+    }
+  })
+
   const resizeObserver = new ResizeObserver((entries) => {
     entries.forEach((entry) => {
       onUpdateStageRect(entry.contentRect)
@@ -152,6 +162,7 @@
         props: {
           params,
           values: paramValues,
+          valuesChanged,
           onChange: (prop, value) => {
             paramValues = { ...paramValues, [prop]: value }
           },
