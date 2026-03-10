@@ -6,9 +6,12 @@
   background-color: var(--c-basic-100);
   font-size: 0.875rem;
   color: var(--c-basic-800);
-}
-.btn:hover,
-.btn:focus-visible {
-  background-color: var(--c-primary-bg);
-  color: var(--c-primary);
+  .btn-label {
+    margin-left: 0.25rem;
+  }
+  &:hover,
+  &:focus-visible {
+    background-color: var(--c-primary-bg);
+    color: var(--c-primary);
+  }
 }

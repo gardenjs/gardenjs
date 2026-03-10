@@ -60,21 +60,90 @@
 
   let openDescriptionKeys = new SvelteSet()
 
+  const paramsWithDescription = $derived(params.filter((p) => p.description))
+  const allDescriptionKeys = $derived(paramsWithDescription.map((p) => p.name))
+  const allDescriptionsOpen = $derived.by(() => {
+    const keys = allDescriptionKeys
+    if (keys.length === 0) return false
+    // Read .size so this derived updates when icons toggle (add/delete) the set
+    void openDescriptionKeys.size
+    return keys.every((k) => openDescriptionKeys.has(k))
+  })
+
   function toggleDescription(name) {
     if (openDescriptionKeys.has(name)) openDescriptionKeys.delete(name)
     else openDescriptionKeys.add(name)
+  }
+
+  function toggleAllDescriptions() {
+    if (allDescriptionsOpen) {
+      allDescriptionKeys.forEach((k) => openDescriptionKeys.delete(k))
+    } else {
+      allDescriptionKeys.forEach((k) => openDescriptionKeys.add(k))
+    }
   }
 </script>
 
 <div class="pane">
   <div class="header">
     <div class="title">Parameters</div>
-    <button
-      class="btn btn_reset"
-      title="Reset all parameters"
-      aria-label="Reset all parameters"
-      onclick={() => onReset?.()}>Reset</button
-    >
+    <div class="header-actions">
+      {#if paramsWithDescription.length > 0}
+        <button
+          type="button"
+          class="btn btn_descriptions"
+          title={allDescriptionsOpen
+            ? 'Collapse all descriptions'
+            : 'Expand all descriptions'}
+          aria-label={allDescriptionsOpen
+            ? 'Collapse all descriptions'
+            : 'Expand all descriptions'}
+          onclick={toggleAllDescriptions}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            viewBox="0 0 24 24"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path
+              d="M12 7v14m-9-3a1 1 0 01-1-1V4a1 1 0 011-1h5a4 4 0 014 4 4 4 0 014-4h5a1 1 0 011 1v13a1 1 0 01-1 1h-6a3 3 0 00-3 3 3 3 0 00-3-3z"
+            /></svg
+          >
+          <span class="btn-label"
+            >{allDescriptionsOpen
+              ? 'Close descriptions'
+              : 'Open descriptions'}</span
+          >
+        </button>
+      {/if}
+      <button
+        class="btn"
+        title="Reset all parameters"
+        aria-label="Reset all parameters"
+        onclick={() => onReset?.()}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          viewBox="0 0 24 24"
+          height="12"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8" /><path
+            d="M3 3v5h5"
+          /></svg
+        >
+        <span class="btn-label">Reset</span>
+      </button>
+    </div>
   </div>
 
   {#if params.length === 0}
@@ -217,6 +286,11 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   .title {
     font-size: 0.95rem;
