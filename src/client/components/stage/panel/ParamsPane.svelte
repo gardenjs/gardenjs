@@ -65,7 +65,6 @@
   const allDescriptionsOpen = $derived.by(() => {
     const keys = allDescriptionKeys
     if (keys.length === 0) return false
-    // Read .size so this derived updates when icons toggle (add/delete) the set
     void openDescriptionKeys.size
     return keys.every((k) => openDescriptionKeys.has(k))
   })
@@ -100,24 +99,43 @@
             : 'Expand all descriptions'}
           onclick={toggleAllDescriptions}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            viewBox="0 0 24 24"
-            height="14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><path
-              d="M12 7v14m-9-3a1 1 0 01-1-1V4a1 1 0 011-1h5a4 4 0 014 4 4 4 0 014-4h5a1 1 0 011 1v13a1 1 0 01-1 1h-6a3 3 0 00-3 3 3 3 0 00-3-3z"
-            /></svg
-          >
+          {#if allDescriptionsOpen}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 19.5v-15A2.5 2.5 0 016.5 2H19a1 1 0 011 1v18a1 1 0 01-1 1H6.5a1 1 0 010-5H20"
+              />
+            </svg>
+          {:else}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 7v14m-9-3a1 1 0 01-1-1V4a1 1 0 011-1h5a4 4 0 014 4 4 4 0 014-4h5a1 1 0 011 1v13a1 1 0 01-1 1h-6a3 3 0 00-3 3 3 3 0 00-3-3z"
+              />
+            </svg>
+          {/if}
           <span class="btn-label"
-            >{allDescriptionsOpen
-              ? 'Close descriptions'
-              : 'Open descriptions'}</span
+            >{allDescriptionsOpen ? 'Descriptions' : 'Descriptions'}</span
           >
         </button>
       {/if}
