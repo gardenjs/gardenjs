@@ -127,7 +127,6 @@
     display: flex;
     flex-shrink: 0;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     padding: 0.25rem 0.688rem;
     margin: 0 0 0.125rem;
