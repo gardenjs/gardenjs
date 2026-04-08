@@ -60,28 +60,30 @@
           <div class="item">
             <div class="item_header">
               <span class="item_number">#{index + 1}</span>
-              <button
-                type="button"
-                class="btn btn_remove"
-                title="Remove item"
-                aria-label="Remove item"
-                onclick={() => removeItem(index)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  viewBox="0 0 24 24"
-                  height="16"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path
-                    d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
-                  /></svg
+              <div class="item_header_actions">
+                <button
+                  type="button"
+                  class="btn btn_remove"
+                  title="Remove item"
+                  aria-label="Remove item"
+                  onclick={() => removeItem(index)}
                 >
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    viewBox="0 0 24 24"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path
+                      d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
+                    /></svg
+                  >
+                </button>
+              </div>
             </div>
             <div class="grid">
               {#each Object.entries(schema) as [key, config] (key)}
@@ -234,6 +236,7 @@
     flex-direction: column;
     gap: 1rem;
     width: 100%;
+    --delete-col-width: 4.75rem;
   }
 
   .item {
@@ -243,10 +246,18 @@
   }
 
   .item_header {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr var(--delete-col-width);
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.5rem;
     margin-bottom: 0.75rem;
+  }
+
+  .item_header_actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: var(--delete-col-width);
   }
 
   .item_number {

@@ -42,43 +42,47 @@
       {#if entries.length > 0}
         {#each entries as [key, val], index (index)}
           <div class="object-item">
-            <button
-              type="button"
-              class="btn btn_remove"
-              title="Remove property"
-              aria-label="Remove property"
-              onclick={() => removeProperty(key)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                viewBox="0 0 24 24"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><path
-                  d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
-                /></svg
+            <div class="object-fields">
+              <input
+                class="input input_key"
+                type="text"
+                value={key}
+                placeholder="key"
+                oninput={(e) => updateKey(key, e.currentTarget.value)}
+              />
+              <span class="separator">:</span>
+              <input
+                type="text"
+                class="input input_value"
+                value={String(val ?? '')}
+                placeholder="value"
+                oninput={(e) => updateValue(key, e.currentTarget.value)}
+              />
+            </div>
+            <div class="object-actions">
+              <button
+                type="button"
+                class="btn btn_remove"
+                title="Remove property"
+                aria-label="Remove property"
+                onclick={() => removeProperty(key)}
               >
-            </button>
-            <input
-              class="input input_key"
-              type="text"
-              value={key}
-              placeholder="key"
-              oninput={(e) => updateKey(key, e.currentTarget.value)}
-            />
-            <span class="separator">:</span>
-            <input
-              type="text"
-              class="input input_value"
-              value={String(val ?? '')}
-              placeholder="value"
-              oninput={(e) => updateValue(key, e.currentTarget.value)}
-            />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  viewBox="0 0 24 24"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M10 11v6m4-6v6m5-11v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"
+                  /></svg
+                >
+              </button>
+            </div>
           </div>
         {/each}
       {/if}
@@ -151,12 +155,28 @@
     flex-direction: column;
     gap: 0.375rem;
     width: 100%;
+    --delete-col-width: 4.75rem;
   }
 
   .object-item {
+    display: grid;
+    grid-template-columns: 1fr var(--delete-col-width);
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .object-fields {
     display: flex;
     gap: 0.25rem;
     align-items: center;
+    min-width: 0;
+  }
+
+  .object-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: var(--delete-col-width);
   }
 
   .input_key {
