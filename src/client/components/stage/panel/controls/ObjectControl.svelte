@@ -33,6 +33,7 @@
   }
 
   let entries = $derived(Object.entries(value || {}))
+  let isUnset = $derived(value === undefined || value === null)
 </script>
 
 <div class="row">
@@ -81,22 +82,51 @@
           </div>
         {/each}
       {/if}
-      <button class="btn" onclick={addProperty}>
-        <svg
-          class="plus"
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><path d="M5 12h14" /><path d="M12 5v14" /></svg
-        >
-        Add Property
-      </button>
+      <div class="actions">
+        <button class="btn" onclick={addProperty}>
+          <svg
+            class="plus"
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path d="M5 12h14" /><path d="M12 5v14" /></svg
+          >
+          <span class="btn-label">Add Property</span>
+        </button>
+        <div class="unset-area">
+          {#if !isUnset}
+            <button
+              type="button"
+              class="btn btn_unset_action"
+              title="Unset"
+              aria-label="Unset"
+              onclick={() => onChange?.(undefined)}
+            >
+              <svg
+                class="close"
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+              <span class="btn-label">Unset</span>
+            </button>
+          {/if}
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -161,6 +191,26 @@
 
   .plus {
     display: block;
+    margin-right: 0.25rem;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .unset-area {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .btn_unset_action {
+    max-width: 8.5rem;
+  }
+
+  .btn_unset_action .close {
     margin-right: 0.25rem;
   }
 </style>

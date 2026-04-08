@@ -213,40 +213,6 @@
               </button>
             {/if}
           </div>
-          {#if controlType === 'array' || controlType === 'object'}
-            {@const paramValue = values?.[param.name]}
-            {@const isParamUnset =
-              paramValue === undefined || paramValue === null}
-            <div class="label-cell-unset">
-              {#if isParamUnset}
-                <span class="unset-info">is not set</span>
-              {:else}
-                <button
-                  type="button"
-                  class="btn_unset"
-                  title="Unset"
-                  aria-label="Unset"
-                  onclick={() => onChange?.(param.name, undefined)}
-                >
-                  <svg
-                    class="close"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M18 6L6 18M6 6l12 12" />
-                  </svg>
-                  unset
-                </button>
-              {/if}
-            </div>
-          {/if}
         </div>
         <div class="input">
           {#if controlType === 'checkbox' || controlType === 'toggle'}
@@ -282,13 +248,13 @@
             />
           {:else if controlType === 'array'}
             <ArrayControl
-              value={values?.[param.name] ?? []}
+              value={values?.[param.name] ?? undefined}
               schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
           {:else if controlType === 'object'}
             <ObjectControl
-              value={values?.[param.name] ?? {}}
+              value={values?.[param.name] ?? undefined}
               schema={param.schema ?? {}}
               onChange={(v) => onChange?.(param.name, v)}
             />
@@ -338,7 +304,6 @@
 
 <style lang="scss">
   @use './controls/button.scss';
-  @use './controls/button_unset.scss';
 
   .pane {
     width: 100%;
@@ -382,17 +347,6 @@
     display: flex;
     align-items: center;
     gap: 0.35rem;
-  }
-  .label-cell-unset {
-    display: flex;
-    justify-content: flex-start;
-  }
-  .btn_unset {
-    margin-left: 0;
-  }
-  .unset-info {
-    margin: 0;
-    text-align: left;
   }
   .label {
     margin: 0.313rem 0 0;
