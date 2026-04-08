@@ -18,6 +18,7 @@
 <VerticalSplitPane
   {leftWidth}
   {maxWidth}
+  hideDragBar={false}
   onSetLeftWidth={(newLeftWidth) => (leftWidth = newLeftWidth)}
   onSetMaxWidth={(newMaxWidth) => (maxWidth = newMaxWidth)}
 >
@@ -37,7 +38,7 @@
     </ul>
   {/snippet}
   {#snippet right()}
-    <ParamsPane {params} {values} {onChange} {onReset} />
+    <ParamsPane {params} {values} {valuesChanged} {onChange} {onReset} />
   {/snippet}
 </VerticalSplitPane>
 
