@@ -14,7 +14,13 @@
   import TextInputControl from './controls/TextInputControl.svelte'
   import TimeControl from './controls/TimeControl.svelte'
 
-  let { params = [], values = {}, onChange, onReset } = $props()
+  let {
+    params = [],
+    values = {},
+    valuesChanged = false,
+    onChange,
+    onReset,
+  } = $props()
 
   const CONTROL_TYPES = [
     'checkbox',
@@ -139,28 +145,31 @@
           >
         </button>
       {/if}
-      <button
-        class="btn"
-        title="Reset all parameters"
-        aria-label="Reset all parameters"
-        onclick={() => onReset?.()}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="12"
-          viewBox="0 0 24 24"
-          height="12"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8" /><path
-            d="M3 3v5h5"
-          /></svg
+      {#if valuesChanged}
+        <button
+          class="btn"
+          title="Reset all parameters"
+          aria-label="Reset all parameters"
+          onclick={() => onReset?.()}
         >
-        <span class="btn-label">Reset</span>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+          </svg>
+          <span class="btn-label">Reset</span>
+        </button>
+      {/if}
     </div>
   </div>
 
@@ -340,11 +349,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 2.125rem;
     margin-bottom: 1rem;
   }
   .header-actions {
     display: flex;
     align-items: center;
+    min-height: 2.125rem;
     gap: 0.5rem;
   }
   .title {
