@@ -4,6 +4,7 @@
   import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
   import Inspector from '../client/components/stage/Inspector.svelte'
   import BackgroundGrid from '../client/components/stage/BackgroundGrid.svelte'
+  import DistanceMeasure from '../client/components/stage/DistanceMeasure.svelte'
   /**
    * @typedef {Object} Props
    * @property {any} [componentMap]
@@ -28,6 +29,7 @@
   let componentChanged
   let selectedExampleChanged
   let showInspector = $state(false)
+  let showDistanceMeasure = $state(false)
   let showGrid = $state(false)
   let gridSettings = $state({})
 
@@ -51,6 +53,7 @@
 
     full = evt.data.stageSize === 'full'
     showInspector = evt.data.showInspector === true
+    showDistanceMeasure = evt.data.showDistanceMeasure === true
     showGrid = evt.data.showGrid === true
     gridSettings = evt.data.gridSettings
     das = dasMap[evt.data.componentName]
@@ -253,6 +256,10 @@
     appMargin={full ? '0.5rem 0.5rem 0' : 0}
   />
 {/if}
+{#if mounted && showDistanceMeasure}
+  <DistanceMeasure />
+{/if}
+
 <div class:full id="garden_app" bind:this={contentPane}>
   {#if config.devmodus && component && (das?.file ?? '').indexOf('.svelte') > 0}
     <svelte:component

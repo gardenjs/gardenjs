@@ -43,9 +43,11 @@
     updateStageRect,
     resetStage,
     toggleShowInspector,
+    toggleShowDistanceMeasure,
     toggleShowGrid,
     toggleOrientation,
     showInspector,
+    showDistanceMeasure,
     showGrid,
     gridSettings,
     setGridSettings,
@@ -180,6 +182,7 @@
             showGrid={$showGrid}
             nodeVisibleInExplorer={$selectedNodeVisibleInTree}
             showInspector={$showInspector}
+            showDistanceMeasure={$showDistanceMeasure}
             sidebarExpanded={$sidebarExpanded}
             stageHeight={$stageHeight}
             stageMaxHeight={$stageMaxHeight}
@@ -200,6 +203,7 @@
             onToggleOrientation={toggleOrientation}
             onToggleShowGrid={toggleShowGrid}
             onToggleShowInspector={toggleShowInspector}
+            onToggleShowDistanceMeasure={toggleShowDistanceMeasure}
             onRevealInExplorer={() => navigateToLeafNode($selectedNode?.href)}
           />
           <Stage
@@ -212,6 +216,7 @@
             selectedExample={$selectedExample}
             showGrid={$showGrid}
             showInspector={$showInspector}
+            showDistanceMeasure={$showDistanceMeasure}
             stageContainerHeight={$stageContainerHeight}
             stageContainerMaxHeight={$stageContainerMaxHeight}
             stageHeight={$stageHeight}
