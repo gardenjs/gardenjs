@@ -186,7 +186,7 @@
           <span class="btn-label">Add Item</span>
         </button>
         <div class="unset-area">
-          {#if !isUnset}
+          {#if !isUnset && items.length > 0}
             <button
               type="button"
               class="btn btn_unset_action"
