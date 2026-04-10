@@ -60,16 +60,5 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-size: 16px 16;
-  }
-  .lined {
-    background-image:
-      linear-gradient(to right, grey 1px, transparent 1px),
-      linear-gradient(to bottom, grey 1px, transparent 1px);
-  }
-  .dotted {
-    top: -8px;
-    left: -8px;
-    background-image: radial-gradient(circle, grey 1px, transparent 1px);
   }
 </style>
