@@ -5,6 +5,7 @@ const DEFAULT_THEME = {
   name: 'default',
   stageBg: 'black',
   color: 'white',
+  highlightColor: '#14aab8',
   grid: {
     style: 'lined', // 'dotted'
     color: 'grey',

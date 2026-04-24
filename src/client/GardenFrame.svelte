@@ -257,7 +257,7 @@
   />
 {/if}
 {#if mounted && showDistanceMeasure}
-  <DistanceMeasure />
+  <DistanceMeasure {activeTheme} />
 {/if}
 
 <div class:full id="garden_app" bind:this={contentPane}>
