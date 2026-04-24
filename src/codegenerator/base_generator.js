@@ -268,7 +268,7 @@ function createDasImportStmt(description) {
 }
 
 function createDecoratorImportStmt(decorator) {
-  return `import ${decorator.fullname} from '${decorator.fullpath}'`
+  return `import ${decorator.fullname} from '${pathRelativeToGarden}${decorator.fullpath}'`
 }
 
 function createHookImportStmt(hook) {
@@ -361,27 +361,20 @@ function createComponentDescription({
     }
   })
 
-  const dasDecorator = das.decorator
-    ? [
-        {
-          basepath,
-          relativepath,
-          filename: das.decorator,
-          extension,
-        },
-      ]
-    : []
+  const dasDecorators = (das.decorators ?? []).map((filename) => {
+    return {
+      basepath,
+      relativepath,
+      filename,
+      extension,
+    }
+  })
 
-  decorators = [...decorators, ...dasDecorator].map(
+  decorators = [...decorators, ...dasDecorators].map(
     ({ basepath, relativepath, filename, extension }) => {
       return {
         fullname: createFullname(navbasenode, relativepath, filename),
-        fullpath: path.join(
-          pathRelativeToGarden,
-          basepath,
-          relativepath,
-          filename
-        ),
+        fullpath: path.join(basepath, relativepath, filename),
         extension,
       }
     }
@@ -422,7 +415,7 @@ function createFullname(navfolder, relativepath, name) {
   return navfolder
     .split('/')
     .concat(relativepath.split('/'))
-    .concat([name.replaceAll('.', '')])
+    .concat(name.replaceAll('.', '').replaceAll('-', '_').split('/'))
     .map(firstLetterToUpperCase)
     .join('')
 }
