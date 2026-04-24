@@ -117,15 +117,13 @@
     height: 6px;
     border: 2px solid;
     border-radius: 3px;
-    border-color: grey;
-    background-color: grey;
   }
   .label {
     position: absolute;
-    text-shadow:
-      -2px -2px white,
-      -2px 2px white,
-      2px -2px white,
-      2px 2px white;
+    padding: 0 0.375rem;
+  }
+  .label::selection {
+    background-color: transparent;
+    color: inherit;
   }
 </style>
