@@ -70,7 +70,7 @@
       class="point"
       style:top={startPoint.y - 3 + 'px'}
       style:left={startPoint.x - 3 + 'px'}
-      style:color={activeTheme.highlightColor}
+      style:color={activeTheme.color}
     />
     <div
       class="label"
@@ -90,7 +90,7 @@
         y1={startPoint.y}
         x2={currentEndPoint.x}
         y2={currentEndPoint.y}
-        stroke={activeTheme.highlightColor}
+        stroke={activeTheme.color}
         stroke-width="2"
       />
     </svg>

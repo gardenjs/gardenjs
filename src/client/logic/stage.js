@@ -3,13 +3,12 @@ import { localStore, textOrNumberParser } from './localStore'
 
 const DEFAULT_THEME = {
   name: 'default',
-  stageBg: 'black',
-  color: 'white',
-  highlightColor: '#14aab8',
+  stageBg: 'white',
+  color: '#14aab8',
   grid: {
     style: 'lined', // 'dotted'
     color: 'grey',
-    size: '50', // px
+    size: '16', // px
   },
 }
 
