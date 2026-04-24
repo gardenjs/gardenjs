@@ -51,7 +51,7 @@
 
 <style lang="scss">
   @use './button_unset.scss';
-  @import './input.scss';
+  @use './input.scss';
 
   .row {
     display: flex;
