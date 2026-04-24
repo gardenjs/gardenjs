@@ -21,6 +21,7 @@
   let selectedExampleTitle
   let full = $state(false)
   let appTheme = $state()
+  let activeTheme = $state()
   let currentRendererBuilder
   let currentRenderer
   let componentName
@@ -31,7 +32,6 @@
   let showInspector = $state(false)
   let showDistanceMeasure = $state(false)
   let showGrid = $state(false)
-  let gridSettings = $state({})
 
   let afterFns = []
   let afterAllFns = []
@@ -48,14 +48,14 @@
 
   window.addEventListener('message', (evt) => {
     if (config.themeHandler) {
-      config.themeHandler(evt.data.theme)
+      config.themeHandler(evt.data.activeTheme?.name)
     }
 
     full = evt.data.stageSize === 'full'
     showInspector = evt.data.showInspector === true
     showDistanceMeasure = evt.data.showDistanceMeasure === true
     showGrid = evt.data.showGrid === true
-    gridSettings = evt.data.gridSettings
+    activeTheme = evt.data.activeTheme
     das = dasMap[evt.data.componentName]
     const rawSelectedExample =
       das?.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
@@ -251,8 +251,8 @@
 {/if}
 {#if mounted && showGrid}
   <BackgroundGrid
-    {gridSettings}
     {contentPane}
+    gridSettings={activeTheme.grid}
     appMargin={full ? '0.5rem 0.5rem 0' : 0}
   />
 {/if}

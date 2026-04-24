@@ -1,12 +1,43 @@
 import { writable, get, derived } from 'svelte/store'
 import { localStore, textOrNumberParser } from './localStore'
 
-export const themes = writable([])
+const DEFAULT_THEME = {
+  name: 'default',
+  stageBg: 'black',
+  color: 'white',
+  grid: {
+    style: 'lined', // 'dotted'
+    color: 'grey',
+    size: '50', // px
+  },
+}
+
+// DEPRECATED
+export function setGridSettings({ size, style, color }) {
+  themes.set(
+    get(themes).map((theme) => {
+      return {
+        ...theme,
+        grid: { ...DEFAULT_THEME.grid, ...theme.grid, size, style, color },
+      }
+    })
+  )
+}
+
+export const themes = writable([{ ...DEFAULT_THEME }])
 export const stageSizes = writable({
   small: [{ name: 'small', h: 1170, w: 550 }],
   medium: [{ name: 'medium', h: 1080, w: 810 }],
   large: [{ name: 'large', h: 960, w: 1536 }],
 })
+
+const activeThemeName = localStore('frameTheme', 'default')
+
+export const activeTheme = derived(
+  [themes, activeThemeName],
+  ([themes, activeThemeName]) =>
+    themes.find((theme) => theme.name === activeThemeName) ?? DEFAULT_THEME
+)
 
 const fullStageSize = {
   name: 'full',
@@ -54,17 +85,9 @@ export const stageRect = writable({})
 export const panelExpanded = writable(true)
 export const appTheme = localStore('appTheme', 'default')
 
-export const activeTheme = localStore('frameTheme')
-
 export const showInspector = writable(false)
 export const showDistanceMeasure = writable(false)
 export const showGrid = writable(false)
-
-export const gridSettings = writable({
-  size: 16,
-  style: 'lined',
-  color: '#ddd',
-})
 
 export const resetStage = () => {
   stageSize.set('full')
@@ -76,14 +99,6 @@ export const resetStage = () => {
   stageWidth.set('full')
 }
 
-export function setGridSettings({ size, style, color }) {
-  gridSettings.set({
-    size: size ?? 50,
-    style: style ?? 'lined',
-    color: color ?? 'grey',
-  })
-}
-
 let previousPanelHeight = ''
 
 export function setStageSizes(newStageSizes) {
@@ -91,19 +106,54 @@ export function setStageSizes(newStageSizes) {
   setStagesize(get(stageSize))
 }
 
-export function setThemes(newThemes) {
-  if (!get(activeTheme)) {
-    activeTheme.set(
-      newThemes?.find((theme) => theme.active)?.name ?? newThemes[0].name
-    )
+export function setThemes(themeSettings) {
+  if (!themeSettings) {
+    return
   }
+  if (Array.isArray(themeSettings)) {
+    // deprecated
+    if (!get(activeThemeName)) {
+      activeThemeName.set(
+        themeSettings?.find((theme) => theme.active)?.name ??
+          themeSettings[0].name
+      )
+    }
 
-  themes.set(
-    newThemes?.map((theme) => ({
-      ...theme,
-      active: theme.name === get(activeTheme),
-    }))
-  )
+    themes.set(
+      themeSettings?.map((theme) => ({
+        ...theme,
+        active: theme.name === get(activeThemeName),
+      }))
+    )
+  } else {
+    // new way
+    const defaultTheme = {
+      ...DEFAULT_THEME,
+      ...themeSettings.default,
+      grid: {
+        ...DEFAULT_THEME.grid,
+        ...themeSettings.default?.grid,
+      },
+    }
+    themes.set([
+      defaultTheme,
+      ...(themeSettings.extended?.map((extendedTheme) => {
+        return {
+          ...defaultTheme,
+          ...extendedTheme,
+          grid: {
+            ...defaultTheme.grid,
+            ...extendedTheme.grid,
+          },
+        }
+      }) ?? []),
+    ])
+
+    const themeName =
+      get(themes).find((theme) => theme.name === get(activeThemeName))?.name ??
+      defaultTheme.name
+    setTheme(themeName)
+  }
   computeStageStyle()
 }
 
@@ -111,7 +161,7 @@ export function setTheme(themeName) {
   themes.set(
     get(themes).map((theme) => ({ ...theme, active: theme.name === themeName }))
   )
-  activeTheme.set(themeName)
+  activeThemeName.set(themeName)
   computeStageStyle()
 }
 
@@ -122,11 +172,11 @@ export function toggleAppTheme() {
 export function getCurrentTheme() {
   if (get(themes) && get(themes).length > 0) {
     return (
-      get(themes).find((theme) => theme.name === get(activeTheme)) ??
+      get(themes).find((theme) => theme.name === get(activeThemeName)) ??
       get(themes)[0]
     )
   }
-  return { stageBg: 'white' }
+  return DEFAULT_THEME
 }
 
 function findStageSize(name) {

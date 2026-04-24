@@ -324,21 +324,24 @@ export default {
   //    large: [{name: 'laptop', w: 1440, h: 900}],
   //  },
   
-  // Define custom background grid.
-  //  grid: {
-  //    style: 'dotted', // or 'lined'
-  //    size: 16, // in px
-  //    color: '#ddd', // any css color
-  //  }
-
   // Edit or disable "Themes" depending on whether your app uses themes.
   // According to your requirements, you may also need to adjust the
   // "onThemeChange" function below accordingly.
-  // themes: [
-  //   {name: 'default', stageBg: 'white'},
-  //   {name: 'dark', stageBg: '#101010'}, // manually set default active theme on start {active: true, name: 'dark', stageBg: '#101010'},
-  //   {name: 'light', stageBg: '#eee'}
-  // ],
+  // themes: {
+  //  default: {
+  //    name: 'default', stageBg: 'white', color: 'black', 
+  //    grid: {
+  //      color: 'grey',
+  //      size: '16', // px
+  //      style: 'lined', // or 'dotted'
+  //    },
+  //  },
+  //  extended: [  // uses default theme as base and overwrites with defined values
+  //   {name: 'dark', stageBg: '#101010', color: 'white'}, 
+  //   {name: 'light', stageBg: '#eee'} 
+  //  ]
+  // },
+  //
   // themeHandler: onThemeChange
 }
 

@@ -49,7 +49,6 @@
     showInspector,
     showDistanceMeasure,
     showGrid,
-    gridSettings,
     setGridSettings,
   } from './logic/stage.js'
   import {
@@ -122,7 +121,7 @@
         {
           selectedExample: $selectedExample,
           componentName: $componentName,
-          theme: $activeTheme,
+          activeTheme: $activeTheme,
         },
         window.location.origin
       )
@@ -211,7 +210,6 @@
             componentName={$componentName}
             das={$das}
             devmodus={config.devmodus}
-            gridSettings={$gridSettings}
             panelExpanded={$panelExpanded}
             selectedExample={$selectedExample}
             showGrid={$showGrid}
@@ -225,7 +223,7 @@
             stageSize={$stageSize}
             stageStyle={$stageStyle}
             stageWidth={$stageWidth}
-            theme={$activeTheme}
+            activeTheme={$activeTheme}
             onSetStageContainerHeight={updateStageContainerHeight}
             onSetStageContainerMaxHeight={updateStageContainerMaxHeight}
             onSetStageContainerWidth={updateStageContainerWidth}
