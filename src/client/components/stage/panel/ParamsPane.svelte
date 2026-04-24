@@ -196,18 +196,27 @@
                 onclick={() => toggleDescription(param.name)}
               >
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
                   width="16"
-                  viewBox="0 0 24 24"
                   height="16"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
+                  viewBox="0 0 16 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  aria-hidden="true"
-                  ><circle cx="12" cy="12" r="10" /><path
-                    d="M12 16v-4m0-4h.01"
+                  ><circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    fill="none"
+                    stroke="#000"
+                    stroke-width="1.5"
+                    transform="scale(.66667)"
+                  /><path
+                    d="M8 10.667V8m0-2.667h.007"
+                    fill="none"
+                    stroke="#000"
+                    stroke-width="1.5"
                   /></svg
                 >
               </button>
