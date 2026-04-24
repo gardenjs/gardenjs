@@ -70,7 +70,8 @@
       class="point"
       style:top={startPoint.y - 3 + 'px'}
       style:left={startPoint.x - 3 + 'px'}
-      style:color={activeTheme.color}
+      style:background-color={activeTheme.color}
+      style:border-color={activeTheme.color}
     />
     <div
       class="label"
@@ -100,7 +101,8 @@
       class="point"
       style:top={endPoint.y - 3 + 'px'}
       style:left={endPoint.x - 3 + 'px'}
-      style:color={activeTheme.highlightColor}
+      style:background-color={activeTheme.color}
+      style:border-color={activeTheme.color}
     />
   {/if}
 </div>
