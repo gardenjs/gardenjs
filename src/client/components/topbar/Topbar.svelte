@@ -136,7 +136,7 @@
       </button>
       <button class="topbar_btn distance-measure-btn" class:active={showDistanceMeasure === true} title="Measure distances between selected points" onclick="{onToggleShowDistanceMeasure}">
         <span class="is-hidden">Measure distances between selected points</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M22 12h-4M6 12H2m10-6V2m0 20v-4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15v-3.014M16 15v-3.014M20 6H4m16 2V4M4 8V4m4 11v-3.014"/><rect x="3" y="12" width="18" height="7" rx="1"/></svg>
         <span class="dot"></span>
       </button>
       <button class="topbar_btn openexternal_btn" title="Open component in new tab" onclick={onOpenInTab}>
