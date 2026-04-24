@@ -1,10 +1,27 @@
 <script>
+  import { onMount, onDestroy } from 'svelte'
+  let overlay
   let startPoint = $state()
   let endPoint = $state()
   let currentPosition = $state()
-  let overlay
-
   let currentEndPoint = $derived(endPoint ?? currentPosition)
+  let scrollPos = $state({ x: 0, y: 0 })
+
+  function onScroll() {
+    const scrollTop = document.body.scrollTop
+    const scrollLeft = document.body.scrollLeft
+    const delta = { x: scrollPos.x - scrollLeft, y: scrollPos.y - scrollTop }
+    scrollPos = { x: scrollLeft, y: scrollTop }
+    overlay.style.top = scrollTop + 'px'
+    overlay.style.left = scrollLeft + 'px'
+    startPoint = updatePoint(startPoint, delta)
+    endPoint = updatePoint(endPoint, delta)
+    currentPosition = updatePoint(currentPosition, delta)
+  }
+
+  function updatePoint(point, delta) {
+    return point ? { x: point.x + delta.x, y: point.y + delta.y } : point
+  }
 
   const handleClick = (evt) => {
     const newPoint = { x: evt.pageX, y: evt.pageY }
@@ -30,6 +47,15 @@
         )
       : undefined
   )
+
+  onMount(() => {
+    document.body.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+  })
+
+  onDestroy(() => {
+    document.body.removeEventListener('scroll', onScroll)
+  })
 </script>
 
 <div
@@ -46,14 +72,11 @@
     />
     <div
       class="label"
-      style:top={Math.abs(
-        startPoint.y + (currentEndPoint.y - startPoint.y) / 2
-      ) +
+      style:top={startPoint.y +
         6 +
+        (currentEndPoint.y - startPoint.y) / 2 +
         'px'}
-      style:left={Math.abs(
-        startPoint.x + (currentEndPoint.x - startPoint.x) / 2
-      ) + 'px'}
+      style:left={startPoint.x + (currentEndPoint.x - startPoint.x) / 2 + 'px'}
     >
       {distance}px
     </div>
@@ -79,10 +102,10 @@
 
 <style>
   .overlay {
-    width: 100%;
-    height: 100%;
     background-color: transparent;
     position: absolute;
+    height: 100%;
+    width: 100%;
     z-index: 999999;
     overflow: hidden;
     box-sizing: border-box;
