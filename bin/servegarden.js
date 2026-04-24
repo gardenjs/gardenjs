@@ -88,13 +88,14 @@ async function runSetupScript() {
     message: 'Enter your component source folder:',
     default: './src/',
   })
+  if (libraries.length > 0) {
+    const shallCreateExample = await confirm({
+      message: 'Should garden create an example component?',
+    })
 
-  const shallCreateExample = await confirm({
-    message: 'Should garden create an example component?',
-  })
-
-  if (shallCreateExample) {
-    createExample({ libraries, componentFolder })
+    if (shallCreateExample) {
+      createExample({ libraries, componentFolder })
+    }
   }
 
   separator()
