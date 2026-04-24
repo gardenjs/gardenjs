@@ -1,5 +1,6 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
+  let { activeTheme } = $props()
   let overlay
   let startPoint = $state()
   let endPoint = $state()
@@ -69,6 +70,7 @@
       class="point"
       style:top={startPoint.y - 3 + 'px'}
       style:left={startPoint.x - 3 + 'px'}
+      style:color={activeTheme.color}
     />
     <div
       class="label"
@@ -77,6 +79,8 @@
         (currentEndPoint.y - startPoint.y) / 2 +
         'px'}
       style:left={startPoint.x + (currentEndPoint.x - startPoint.x) / 2 + 'px'}
+      style:color={activeTheme.color}
+      style:background-color={activeTheme.stageBg}
     >
       {distance}px
     </div>
@@ -86,7 +90,7 @@
         y1={startPoint.y}
         x2={currentEndPoint.x}
         y2={currentEndPoint.y}
-        stroke="grey"
+        stroke={activeTheme.color}
         stroke-width="2"
       />
     </svg>
@@ -96,6 +100,7 @@
       class="point"
       style:top={endPoint.y - 3 + 'px'}
       style:left={endPoint.x - 3 + 'px'}
+      style:color={activeTheme.highlightColor}
     />
   {/if}
 </div>
