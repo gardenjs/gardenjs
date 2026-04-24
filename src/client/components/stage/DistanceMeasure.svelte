@@ -64,14 +64,14 @@
   class="overlay"
   onclick={handleClick}
   onmousemove={updateCurrentPosition}
+  style:--label-fg={activeTheme.color}
+  style:--label-bg={activeTheme.stageBg}
 >
   {#if startPoint}
     <div
       class="point"
       style:top={startPoint.y - 3 + 'px'}
       style:left={startPoint.x - 3 + 'px'}
-      style:background-color={activeTheme.color}
-      style:border-color={activeTheme.color}
     />
     <div
       class="label"
@@ -80,8 +80,6 @@
         (currentEndPoint.y - startPoint.y) / 2 +
         'px'}
       style:left={startPoint.x + (currentEndPoint.x - startPoint.x) / 2 + 'px'}
-      style:color={activeTheme.color}
-      style:background-color={activeTheme.stageBg}
     >
       {distance}px
     </div>
@@ -101,8 +99,6 @@
       class="point"
       style:top={endPoint.y - 3 + 'px'}
       style:left={endPoint.x - 3 + 'px'}
-      style:background-color={activeTheme.color}
-      style:border-color={activeTheme.color}
     />
   {/if}
 </div>
@@ -124,13 +120,18 @@
     height: 6px;
     border: 2px solid;
     border-radius: 3px;
+    border-color: var(--label-fg);
+    background-color: var(--label-fg);
   }
   .label {
     position: absolute;
     padding: 0 0.375rem;
+    line-height: 1;
+    color: var(--label-fg);
+    background-color: var(--label-bg);
   }
   .label::selection {
-    background-color: transparent;
-    color: inherit;
+    background-color: var(--label-bg);
+    color: var(--label-fg);
   }
 </style>
