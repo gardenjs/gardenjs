@@ -46,7 +46,9 @@ Please follow the documentation at <a href="https://gardenjs.org/" target="_blan
 
 ## Supported Frameworks
 
-HTML snippets are rendered by default. The support of frameworks and template languages is realized by renderer plugins. There are currently plugins for <a href="https://github.com/gardenjs/render-plugin-svelte" target="_blank">Svelte</a>, <a href="https://github.com/gardenjs/render-plugin-vue" target="_blank">Vue</a> and <a href="https://github.com/gardenjs/render-plugin-react" target="_blank">React</a>. You can also easily create plugins for other frameworks, see the documentation. Contact us, we will be happy to create a repository for your renderer plugin.
+HTML snippets are rendered by default. The support of frameworks and template languages is realized by renderer plugins. There are currently plugins for <a href="https://github.com/gardenjs/render-plugin-svelte" target="_blank">Svelte</a>, <a href="https://github.com/gardenjs/render-plugin-vue" target="_blank">Vue</a> and <a href="https://github.com/gardenjs/render-plugin-react" target="_blank">React</a>. A third-party renderer for <a href="https://github.com/direct-democracy-solutions/gardenjs-render-plugin-webcomponents" target="_blank">Web Components</a> is currently being developed here. You can also easily create plugins for other frameworks, see the documentation.
+
+Please contact us; we'd be happy to set up a repository for your renderer plugin or link to yours.
 
 ## Contributing
 
