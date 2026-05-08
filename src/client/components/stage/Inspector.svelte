@@ -1,6 +1,7 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
   import GapMask from './GapMask.svelte'
+  import InspectorInfoBox from './InspectorInfoBox.svelte'
 
   let { contentPane, appTheme } = $props()
 
@@ -27,6 +28,8 @@
   let contentBoxHeight = $state()
   let scrollTop = $state()
   let scrollLeft = $state()
+
+  let infoboxPosition = $state()
 
   function updateOverlay() {
     if (!target) {
@@ -55,17 +58,6 @@
     const tagName = target.tagName
     const classList = Array.from(target.classList)
 
-    content = {
-      tagName,
-      classList,
-      width: parseFloat(style.width),
-      height: parseFloat(style.height),
-      background: style.backgroundColor,
-      gap: style.gap,
-      rowGap: style.rowGap,
-      columnGap: style.columnGap,
-    }
-
     margin = {
       top: parseFloat(style.marginTop),
       right: parseFloat(style.marginRight),
@@ -78,6 +70,19 @@
       right: parseFloat(style.paddingRight),
       bottom: parseFloat(style.paddingBottom),
       left: parseFloat(style.paddingLeft),
+    }
+
+    content = {
+      tagName,
+      classList,
+      width: parseFloat(style.width),
+      height: parseFloat(style.height),
+      background: style.backgroundColor,
+      gap: style.gap,
+      rowGap: style.rowGap,
+      columnGap: style.columnGap,
+      margin,
+      padding,
     }
 
     overlayTop = scrollTop + rect.top - margin.top
@@ -180,30 +185,26 @@
     const posLeftPossible = overlayLeft - scrollLeft + infoboxWidth < bodyWidth
 
     infobox.style.bottom = 'unset'
+    infoboxPosition = undefined
     if (posBottomPossible) {
       infobox.style.top = overlayBottom + margin.top + margin.bottom + 8 + 'px'
-      infobox.classList.add('infobox-bottom')
-      infobox.classList.remove('infobox-top')
+      infoboxPosition = 'bottom'
     } else if (posTopPossible) {
       infobox.style.top = overlayTop + 5 - infoboxHeight + 'px'
-      infobox.classList.add('infobox-top')
-      infobox.classList.remove('infobox-bottom')
+      infoboxPosition = 'top'
     } else {
       infobox.style.top = 'unset'
       infobox.style.bottom = -scrollTop + 'px'
-      infobox.classList.remove('infobox-top')
-      infobox.classList.remove('infobox-bottom')
+      infoboxPosition = 'center'
     }
     if (posLeftPossible) {
       infobox.style.left = overlayLeft + 'px'
       infobox.style.right = 'unset'
-      infobox.classList.add('infobox-left')
-      infobox.classList.remove('infobox-right')
+      infoboxPosition += 'left'
     } else {
       infobox.style.left = 'unset'
       infobox.style.right = bodyWidth - overlayRight + 'px'
-      infobox.classList.add('infobox-right')
-      infobox.classList.remove('infobox-left')
+      infoboxPosition += 'right'
     }
     infobox.style.display = 'block'
   }
@@ -260,61 +261,12 @@
     <div class="contentBox" bind:this={contentBox}></div>
   {/if}
 </div>
-<div
-  class="infobox infobox-left infobox-right infobox-bottom infobox-top"
-  class:dark={appTheme === 'dark'}
-  bind:this={infobox}
->
-  {#if content && margin && padding && target}
-    <div class="info-item">
-      <div class="attribute">Width:</div>
-      <div class="value">{content.width}px</div>
-    </div>
-    <div class="info-item">
-      <div class="attribute">Height:</div>
-      <div class="value">{content.height}px</div>
-    </div>
-    {#if hasGaps}
-      <div class="info-item">
-        <div class="attribute">Gap:</div>
-        <div class="value">
-          {content.gap}
-          {content.columnGap}
-          {content.rowGap}
-        </div>
-      </div>
-    {/if}
-    <div class="info-item">
-      <div class="attribute">Margin:</div>
-      <div class="value">
-        {margin.top}{margin.top !== 0 ? 'px' : ''}
-        {margin.right}{margin.right !== 0 ? 'px' : ''}
-        {margin.bottom}{margin.bottom !== 0 ? 'px' : ''}
-        {margin.left}{margin.left !== 0 ? 'px' : ''}
-      </div>
-    </div>
-    <div class="info-item">
-      <div class="attribute">Padding:</div>
-      <div class="value">
-        {padding.top}{padding.top !== 0 ? 'px' : ''}
-        {padding.right}{padding.right !== 0 ? 'px' : ''}
-        {padding.bottom}{padding.bottom !== 0 ? 'px' : ''}
-        {padding.left}{padding.left !== 0 ? 'px' : ''}
-      </div>
-    </div>
-    <div class="info-item">
-      <div class="attribute">Role:</div>
-      <div class="value">{content.tagName}</div>
-    </div>
-    <div class="info-item">
-      <div class="attribute">Class Name:</div>
-      <div class="info-classlist">
-        {#each content.classList as clazz, index (index)}
-          <div class="value">{clazz}</div>
-        {/each}
-      </div>
-    </div>
-  {/if}
+<div bind:this={infobox} class="infobox">
+  <InspectorInfoBox
+    position={infoboxPosition}
+    element={content}
+    theme={appTheme}
+  />
 </div>
 
 <style>
@@ -360,97 +312,7 @@
   .infobox {
     display: none;
     pointer-events: none;
-    padding: 0.5rem;
     position: absolute;
     z-index: 999999;
-    background-color: hsl(185, 100%, 95%);
-    border-radius: 0.5rem;
-    overflow: hidden;
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
-      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
-    font-variation-settings: normal;
-    font-family:
-      system-ui,
-      -apple-system,
-      'Segoe UI',
-      Roboto,
-      Helvetica,
-      Arial,
-      sans-serif,
-      'Apple Color Emoji',
-      'Segoe UI Emoji';
-    font-size: 0.75rem;
-    color: hsl(216, 20%, 10%);
-    letter-spacing: 0.5px;
-    line-height: 1.6;
-    overflow: visible;
-  }
-  .infobox.dark {
-    background-color: hsl(185, 80%, 17%);
-    color: hsl(216, 30%, 98%);
-  }
-  .infobox-bottom.infobox-left::before {
-    content: '';
-    position: absolute;
-    margin-top: -1.25rem;
-    width: 1.75rem;
-    height: 1.125rem;
-    background-color: hsl(185, 100%, 95%);
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
-      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
-    left: 0.375rem;
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  }
-  .infobox-bottom.infobox-right::before {
-    content: '';
-    position: absolute;
-    margin-top: -1.25rem;
-    width: 1.75rem;
-    height: 1.125rem;
-    background-color: hsl(185, 100%, 95%);
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
-      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);
-    right: 0.375rem;
-  }
-  .infobox-top.infobox-left::after {
-    content: '';
-    position: absolute;
-    width: 1.75rem;
-    height: 1.125rem;
-    background-color: hsl(185, 100%, 95%);
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
-      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
-    left: 0.375rem;
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-  }
-  .infobox-top.infobox-right::after {
-    content: '';
-    position: absolute;
-    width: 1.75rem;
-    height: 1.125rem;
-    background-color: hsl(185, 100%, 95%);
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
-      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    right: 0.375rem;
-  }
-  .dark.infobox-bottom.infobox-left::before,
-  .dark.infobox-bottom.infobox-right::before,
-  .dark.infobox-top.infobox-left::after,
-  .dark.infobox-top.infobox-right::after {
-    background-color: hsl(185, 80%, 17%);
-  }
-  .info-item {
-    display: flex;
-    flex-direction: row;
-  }
-  .attribute {
-    width: 8rem;
-    /* font-weight: 600; */
-  }
-  .info-classlist {
-    display: flex;
-    flex-direction: column;
   }
 </style>

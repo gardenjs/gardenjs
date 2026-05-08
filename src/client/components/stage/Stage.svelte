@@ -6,6 +6,7 @@
   import PanelExamplesNav from './panel/PanelExamplesNav.svelte'
   import PanelDescription from './panel/PanelDescription.svelte'
   import PanelCode from './panel/PanelCode.svelte'
+  import PanelInspector from './panel/PanelInspector.svelte'
 
   let {
     appTheme,
@@ -183,6 +184,12 @@
         page: PanelCode,
       })
     }
+    // FOR TEST always active
+    tabs.push({
+      name: 'Inspector',
+      props: {},
+      page: PanelInspector,
+    })
     return tabs
   }
 
