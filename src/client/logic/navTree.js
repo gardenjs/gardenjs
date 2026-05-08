@@ -105,18 +105,20 @@ function transformNavTree(nodes, parent) {
         return node
       } else {
         child.parent = parent
-        const children = transformNavTree(child.children, child).filter(
-          (n) => n
-        )
-        const visible = filterMatches || children.length > 0
+        let visible = parent?.visible || filterMatches
+        const children = transformNavTree(child.children, {
+          ...child,
+          visible,
+        }).filter((n) => n)
+        let anyChildVisible = children.length > 0
 
-        return visible
+        return visible || anyChildVisible
           ? {
               ...child,
               parent,
               name,
               children,
-              unfolded: isUnfolded(child, filter, visible),
+              unfolded: isUnfolded(child, filter, visible || anyChildVisible),
               filterMatches,
             }
           : undefined
