@@ -1,5 +1,6 @@
 <script>
   import OptionalDropdown from './OptionalDropdown.svelte'
+  import Notification from '../notification/Notification.svelte'
 
   let {
     appTheme = 'default',
@@ -32,6 +33,51 @@
   } = $props()
 
   let dark = $state(false)
+  let notificationOpen = $state(false)
+  /** @type {ReturnType<typeof setTimeout> | undefined} */
+  let notificationTimeout
+  /** @type {number | null} */
+  let notificationCloseAt = null
+
+  /** @param {number} ms */
+  function scheduleNotificationClose(ms) {
+    clearTimeout(notificationTimeout)
+    if (ms <= 0) {
+      notificationOpen = false
+      return
+    }
+    notificationTimeout = setTimeout(() => {
+      notificationOpen = false
+    }, ms)
+  }
+
+  function onInspectorClick() {
+    const willEnableInspector = !showInspector
+    onToggleShowInspector?.()
+    // nur beim Aktivieren anzeigen (showInspector ist der Zustand VOR dem Toggle)
+    if (willEnableInspector) {
+      notificationOpen = true
+      notificationCloseAt = Date.now() + 5000
+      scheduleNotificationClose(5000)
+    } else {
+      closeNotification()
+    }
+  }
+
+  function pauseNotificationClose() {
+    clearTimeout(notificationTimeout)
+  }
+
+  function resumeNotificationClose() {
+    if (!notificationCloseAt) return
+    scheduleNotificationClose(notificationCloseAt - Date.now())
+  }
+
+  function closeNotification() {
+    notificationOpen = false
+    clearTimeout(notificationTimeout)
+    notificationCloseAt = null
+  }
 
   const stageContainerWidth = $derived(Math.round(stageRect.width))
   const stageContainerHeight = $derived(Math.round(stageRect.height))
@@ -129,12 +175,12 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18M9 3v18m6-18v18"/></svg>
         <span class="dot"></span>
       </button>
-      <button class="topbar_btn show-m-p_btn" class:active={showInspector === true} title="Visualise margins and paddings" onclick="{onToggleShowInspector}">
+      <button class="topbar_btn inspector-btn" class:active={showInspector === true} title="Visualise margins and paddings" onclick={onInspectorClick}>
         <span class="is-hidden">Visualise margins and paddings</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.034 12.681a.498.498 0 01.647-.647l9 3.5a.5.5 0 01-.033.943l-3.444 1.068a1 1 0 00-.66.66l-1.067 3.443a.5.5 0 01-.943.033zM5 3a2 2 0 00-2 2m16-2a2 2 0 012 2M5 21a2 2 0 01-2-2M9 3h1M9 21h2m3-18h1M3 9v1m18-1v2M3 14v1"/></svg>
         <span class="dot"></span>
       </button>
-      <button class="topbar_btn distance-measure-btn" class:active={showDistanceMeasure === true} title="Measure distances between selected points" onclick="{onToggleShowDistanceMeasure}">
+      <button class="topbar_btn measure-btn" class:active={showDistanceMeasure === true} title="Measure distances between selected points" onclick="{onToggleShowDistanceMeasure}">
         <span class="is-hidden">Measure distances between selected points</span>
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15v-3.014M16 15v-3.014M20 6H4m16 2V4M4 8V4m4 11v-3.014"/><rect x="3" y="12" width="18" height="7" rx="1"/></svg>
         <span class="dot"></span>
@@ -164,6 +210,13 @@
     </div>
   </div>
 </div>
+<Notification
+  open={notificationOpen}
+  message="“Right-click” to pin an element and inspect more elements Element Inspector"
+  onClose={closeNotification}
+  onMouseEnter={pauseNotificationClose}
+  onMouseLeave={resumeNotificationClose}
+/>
 
 <style>
   .topbar {
