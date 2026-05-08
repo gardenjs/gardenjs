@@ -56,7 +56,10 @@
       type="search"
       value={filter || ''}
       placeholder="Filter..."
-      oninput={(evt) => onUpdateFilter(evt.target.value)}
+      oninput={(evt) =>
+        onUpdateFilter(
+          /** @type {HTMLInputElement} */ (evt.currentTarget).value
+        )}
     />
   </div>
   {#if nodes.length == 0 && filter}
@@ -172,6 +175,25 @@
   }
   input[type='search']::-webkit-search-cancel-button {
     -webkit-appearance: none;
+    appearance: none;
+    margin-right: 0.25rem;
+    height: 1.125rem;
+    width: 1.125rem;
+    border-radius: 50rem;
+    background-color: var(--c-primary);
+    opacity: 0.8;
+    cursor: pointer;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4Z'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: 0.75rem 0.75rem;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4Z'/%3E%3C/svg%3E");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 0.75rem 0.75rem;
+  }
+  input[type='search']::-webkit-search-cancel-button:hover {
+    opacity: 1;
   }
   .filter_input::placeholder {
     font-size: 0.813rem;
