@@ -30,16 +30,16 @@
   }
 
   const elements = [
-    { element: createElement(), theme: 'light', position: 'top left' },
-    { element: createElement(), theme: 'light', position: 'top right' },
-    { element: createElement(), theme: 'light', position: 'bottom left' },
-    { element: createElement(), theme: 'light', position: 'bottom right' },
-    { element: createElement(), theme: 'light', position: 'center' },
-    { element: createElement(), theme: 'dark', position: 'left top' },
-    { element: createElement(), theme: 'dark', position: 'right top' },
-    { element: createElement(), theme: 'dark', position: 'left bottom' },
-    { element: createElement(), theme: 'dark', position: 'right bottom' },
-    { element: createElement(), theme: 'dark', position: 'center' },
+    { element: createElement(), theme: 'light' },
+    { element: createElement(), theme: 'light' },
+    { element: createElement(), theme: 'light' },
+    { element: createElement(), theme: 'light' },
+    { element: createElement(), theme: 'light' },
+    { element: createElement(), theme: 'dark' },
+    { element: createElement(), theme: 'dark' },
+    { element: createElement(), theme: 'dark' },
+    { element: createElement(), theme: 'dark' },
+    { element: createElement(), theme: 'dark' },
   ]
 </script>
 

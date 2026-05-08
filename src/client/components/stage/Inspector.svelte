@@ -129,8 +129,7 @@
       scrollTop,
       overlayLeft,
       scrollLeft,
-      overlayRight,
-      margin
+      overlayRight
     )
   }
 
@@ -166,8 +165,7 @@
     scrollTop,
     overlayLeft,
     overlayRight,
-    scrollLeft,
-    margin
+    scrollLeft
   ) {
     if (!infobox) {
       return
@@ -187,7 +185,7 @@
     infobox.style.bottom = 'unset'
     infoboxPosition = undefined
     if (posBottomPossible) {
-      infobox.style.top = overlayBottom + margin.top + margin.bottom + 8 + 'px'
+      infobox.style.top = overlayBottom + 8 + 'px'
       infoboxPosition = 'bottom'
     } else if (posTopPossible) {
       infobox.style.top = overlayTop + 5 - infoboxHeight + 'px'
@@ -274,8 +272,8 @@
     display: none;
     position: absolute;
     z-index: 999999;
-    pointer-events: none;
     overflow: hidden;
+    pointer-events: none;
     box-sizing: border-box;
   }
   .borderBox {
