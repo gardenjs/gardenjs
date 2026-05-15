@@ -49,6 +49,7 @@
       element={element.element}
       theme={element.theme}
       position={element.position}
+      showUnpin={true}
     />
   {/each}
 </div>
