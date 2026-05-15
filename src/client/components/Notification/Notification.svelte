@@ -49,25 +49,29 @@
     right: 0.375rem;
     top: calc(0.75rem + var(--h-topbar, 2.25rem));
     z-index: 99999;
-    max-width: min(32rem, calc(100vw - 1.5rem));
     display: flex;
     align-items: flex-start;
-    gap: 0.5rem;
-    padding: 0.625rem 0.75rem;
+    gap: 0.75rem;
+    padding: 0.5rem 0.25rem 0.5rem 0.75rem;
     border-radius: 0.75rem;
     color: var(--c-basic-900);
     background-color: var(--c-primary-bg);
-    border: 1px solid var(--c-primary);
     box-shadow: 0 0.625rem 2rem hsla(0, 0%, 0%, 0.12);
   }
   .notification_text {
+    width: auto;
+    max-width: 400px;
     font-size: 0.875rem;
     line-height: 1.4;
   }
   .notification_close {
     flex-shrink: 0;
     align-self: flex-start;
-    border-radius: 999px;
+    margin: 0.125rem 0.25rem 0 0;
+    padding: 0;
+    line-height: 1;
+    width: 1rem;
+    height: 1rem;
     color: var(--c-primary);
   }
   .is-hidden {
