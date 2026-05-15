@@ -264,6 +264,7 @@
     position={infoboxPosition}
     element={content}
     theme={appTheme}
+    variant="stage"
   />
 </div>
 

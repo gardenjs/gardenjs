@@ -1,5 +1,11 @@
 <script>
-  let { position, theme, element, showUnpin = false } = $props()
+  let {
+    position,
+    theme,
+    element,
+    variant = 'stage',
+    showUnpin = false,
+  } = $props()
 
   const emptyBox = { top: 0, right: 0, bottom: 0, left: 0 }
   const margin = $derived(element?.margin ?? emptyBox)
@@ -8,7 +14,8 @@
 
 <div
   class="infobox"
-  class:infobox-panel={showUnpin}
+  class:infobox-stage={variant === 'stage'}
+  class:infobox-panel={variant === 'panel'}
   class:dark={theme === 'dark'}
   class:infobox-left={position?.includes('left')}
   class:infobox-right={position?.includes('right')}
@@ -81,12 +88,11 @@
 
 <style>
   .infobox {
+    position: relative;
     pointer-events: none;
     padding: 0.75rem;
     background-color: hsl(185, 100%, 95%);
     border-radius: 0.5rem;
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
-      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
     font-variation-settings: normal;
     font-family:
       system-ui,
@@ -103,16 +109,29 @@
     letter-spacing: 0.5px;
     line-height: 1.6;
     overflow: visible;
+    max-width: 500px;
   }
+
+  /* Floating tooltip on stage only – drop-shadow würde im Panel Grid stapeln/stören */
+  .infobox-stage {
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.05))
+      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+  }
+
   .infobox.dark {
     background-color: hsl(185, 80%, 17%);
     color: hsl(216, 30%, 98%);
   }
+
   .infobox.infobox-panel {
     padding: 1.5rem 0.5rem 0.5rem;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
   }
   .btn_unpin {
     position: absolute;
+    z-index: 1;
     top: 0.375rem;
     right: 0.375rem;
     padding: 0;
@@ -132,7 +151,7 @@
     width: 1.75rem;
     height: 1.125rem;
     background-color: hsl(185, 100%, 95%);
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.05))
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
     left: 0.375rem;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
@@ -155,7 +174,7 @@
     width: 1.75rem;
     height: 1.125rem;
     background-color: hsl(185, 100%, 95%);
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.05))
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
     left: 0.375rem;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
@@ -166,7 +185,7 @@
     width: 1.75rem;
     height: 1.125rem;
     background-color: hsl(185, 100%, 95%);
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.05))
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.05))
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
     clip-path: polygon(0 0, 100% 0, 50% 100%);
     right: 0.375rem;
@@ -177,16 +196,25 @@
   .dark.infobox-top.infobox-right::after {
     background-color: hsl(185, 80%, 17%);
   }
+
+  /* Panel: Sprechblasen-Pfeil ohne eigenen Schatten */
+  .infobox-panel.infobox-bottom.infobox-left::before,
+  .infobox-panel.infobox-bottom.infobox-right::before,
+  .infobox-panel.infobox-top.infobox-left::after,
+  .infobox-panel.infobox-top.infobox-right::after {
+    filter: none;
+  }
   .info-item {
     display: flex;
     flex-direction: row;
   }
   .attribute {
     width: 8rem;
-    /* font-weight: 600; */
+    font-weight: 600;
   }
   .info-classlist {
-    display: flex;
-    flex-direction: row;
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
   }
 </style>
