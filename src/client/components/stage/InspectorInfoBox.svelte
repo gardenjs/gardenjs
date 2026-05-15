@@ -10,6 +10,14 @@
   const emptyBox = { top: 0, right: 0, bottom: 0, left: 0 }
   const margin = $derived(element?.margin ?? emptyBox)
   const padding = $derived(element?.padding ?? emptyBox)
+  const tagNameLower = $derived((element?.tagName ?? '').toLowerCase())
+  const primaryLabel = $derived(
+    element?.id
+      ? `${tagNameLower}#${element.id}`
+      : element?.classList?.length
+        ? `${tagNameLower}.${element.classList[0]}`
+        : null
+  )
 </script>
 
 <div
@@ -22,23 +30,33 @@
   class:infobox-bottom={position?.includes('bottom')}
   class:infobox-top={position?.includes('top')}
 >
-  {#if showUnpin}
-    <button class="btn_unpin" type="button">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <title>Unpin element from inspector</title>
-        <path d="M18 6L6 18M6 6l12 12" />
-      </svg>
-    </button>
+  {#if showUnpin || primaryLabel}
+    <div
+      class="infobox_header-row"
+      class:infobox_header-row--with-primary={!!primaryLabel}
+    >
+      {#if primaryLabel}
+        <div class="infobox_primary-class">{primaryLabel}</div>
+      {/if}
+      {#if showUnpin}
+        <button class="btn_unpin" type="button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <title>Unpin element from inspector</title>
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      {/if}
+    </div>
   {/if}
   {#if element}
     <div class="info-item">
@@ -73,16 +91,14 @@
         {padding.left}{padding.left !== 0 ? 'px' : ''}
       </div>
     </div>
-    <div class="info-item">
-      <div class="attribute">Role:</div>
-      <div class="value">{element.tagName}</div>
-    </div>
-    <div class="info-item">
-      <div class="attribute">Class Name:</div>
-      <div class="info-classlist value">
-        {element.classList.join(' ')}
+    {#if (element.classList?.length ?? 0) > 1}
+      <div class="info-item">
+        <div class="attribute">Class names:</div>
+        <div class="info-classlist value">
+          {element.classList.join(' ')}
+        </div>
       </div>
-    </div>
+    {/if}
   {/if}
 </div>
 
@@ -111,29 +127,42 @@
     overflow: visible;
     max-width: 500px;
   }
-
-  /* Floating tooltip on stage only – drop-shadow würde im Panel Grid stapeln/stören */
   .infobox-stage {
     filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.05))
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
   }
-
   .infobox.dark {
     background-color: hsl(185, 80%, 17%);
     color: hsl(216, 30%, 98%);
   }
-
   .infobox.infobox-panel {
-    padding: 1.5rem 0.5rem 0.5rem;
+    padding: 0.5rem;
     width: 100%;
     min-width: 0;
     max-width: none;
   }
+  .infobox_header-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .infobox_primary-class {
+    flex: 1;
+    min-width: 0;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    color: hsl(185, 80%, 40%);
+  }
+  .infobox.dark .infobox_primary-class {
+    color: hsl(185, 80%, 70%);
+  }
+  .infobox_header-row:not(.infobox_header-row--with-primary) .btn_unpin {
+    margin-left: auto;
+  }
   .btn_unpin {
-    position: absolute;
+    position: relative;
     z-index: 1;
-    top: 0.375rem;
-    right: 0.375rem;
+    flex-shrink: 0;
     padding: 0;
     width: 1rem;
     height: 1rem;
@@ -196,13 +225,16 @@
   .dark.infobox-top.infobox-right::after {
     background-color: hsl(185, 80%, 17%);
   }
-
-  /* Panel: Sprechblasen-Pfeil ohne eigenen Schatten */
   .infobox-panel.infobox-bottom.infobox-left::before,
   .infobox-panel.infobox-bottom.infobox-right::before,
   .infobox-panel.infobox-top.infobox-left::after,
   .infobox-panel.infobox-top.infobox-right::after {
     filter: none;
+  }
+  .infobox_primary-class {
+    font-weight: 600;
+    margin-bottom: 0.375rem;
+    overflow-wrap: break-word;
   }
   .info-item {
     display: flex;

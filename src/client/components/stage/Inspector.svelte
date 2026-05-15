@@ -56,6 +56,7 @@
       target.children.length > 0
 
     const tagName = target.tagName
+    const id = target.id
     const classList = Array.from(target.classList)
 
     margin = {
@@ -74,6 +75,7 @@
 
     content = {
       tagName,
+      id,
       classList,
       width: parseFloat(style.width),
       height: parseFloat(style.height),
