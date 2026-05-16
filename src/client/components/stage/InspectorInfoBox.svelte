@@ -18,6 +18,38 @@
         ? `${tagNameLower}.${element.classList[0]}`
         : null
   )
+
+  /** @param {number | string | null | undefined} value */
+  function roundPx(value) {
+    return Math.round((Number(value) || 0) * 100) / 100
+  }
+
+  /** @param {number | string | null | undefined} value */
+  function formatPx(value) {
+    const n = roundPx(value)
+    return n === 0 ? '0' : `${n}px`
+  }
+
+  /** @param {{ top?: number, right?: number, bottom?: number, left?: number }} box */
+  function formatBoxShorthand(box) {
+    const top = roundPx(box.top)
+    const right = roundPx(box.right)
+    const bottom = roundPx(box.bottom)
+    const left = roundPx(box.left)
+    /** @param {number} n */
+    const unit = (n) => (n === 0 ? '0' : `${n}px`)
+
+    if (top === right && right === bottom && bottom === left) {
+      return unit(top)
+    }
+    if (top === bottom && left === right) {
+      return `${unit(top)} ${unit(left)}`
+    }
+    if (left === right) {
+      return `${unit(top)} ${unit(left)} ${unit(bottom)}`
+    }
+    return `${unit(top)} ${unit(right)} ${unit(bottom)} ${unit(left)}`
+  }
 </script>
 
 <div
@@ -60,42 +92,36 @@
   {/if}
   {#if element}
     <div class="info-item">
-      <div class="attribute">Size:</div>
-      <div class="value">{element.width} x {element.height}</div>
+      <div class="attribute">Size</div>
+      <div class="value">
+        {formatPx(element.width)} x {formatPx(element.height)}
+      </div>
     </div>
     {#if element.gap || element.columnGap || element.rowGap}
       <div class="info-item">
-        <div class="attribute">Gap:</div>
+        <div class="attribute">Gap</div>
         <div class="value">
-          {element.gap}
-          {element.columnGap}
-          {element.rowGap}
+          {formatPx(element.gap)}
+          {formatPx(element.columnGap)}
+          {formatPx(element.rowGap)}
         </div>
       </div>
     {/if}
     <div class="info-item">
-      <div class="attribute">Margin:</div>
-      <div class="value">
-        {margin.top}{margin.top !== 0 ? 'px' : ''}
-        {margin.right}{margin.right !== 0 ? 'px' : ''}
-        {margin.bottom}{margin.bottom !== 0 ? 'px' : ''}
-        {margin.left}{margin.left !== 0 ? 'px' : ''}
-      </div>
+      <div class="attribute">Margin</div>
+      <div class="value">{formatBoxShorthand(margin)}</div>
     </div>
     <div class="info-item">
-      <div class="attribute">Padding:</div>
-      <div class="value">
-        {padding.top}{padding.top !== 0 ? 'px' : ''}
-        {padding.right}{padding.right !== 0 ? 'px' : ''}
-        {padding.bottom}{padding.bottom !== 0 ? 'px' : ''}
-        {padding.left}{padding.left !== 0 ? 'px' : ''}
-      </div>
+      <div class="attribute">Padding</div>
+      <div class="value">{formatBoxShorthand(padding)}</div>
     </div>
     {#if (element.classList?.length ?? 0) > 1}
-      <div class="info-item">
-        <div class="attribute">Class names:</div>
+      <div class="info-item info-item--classnames">
+        <div class="attribute">Class names</div>
         <div class="info-classlist value">
-          {element.classList.join(' ')}
+          {#each element.classList as className (className)}
+            <span class="info-classname">{className}</span>
+          {/each}
         </div>
       </div>
     {/if}
@@ -106,7 +132,7 @@
   .infobox {
     position: relative;
     pointer-events: none;
-    padding: 0.75rem;
+    padding: 0.5rem;
     background-color: hsl(185, 100%, 95%);
     border-radius: 0.5rem;
     font-variation-settings: normal;
@@ -120,26 +146,23 @@
       sans-serif,
       'Apple Color Emoji',
       'Segoe UI Emoji';
-    font-size: 0.75rem;
+    font-size: 0.813rem;
     color: hsl(216, 20%, 10%);
     letter-spacing: 0.5px;
     line-height: 1.6;
     overflow: visible;
-    max-width: 500px;
-  }
-  .infobox-stage {
-    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.05))
-      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
   }
   .infobox.dark {
     background-color: hsl(185, 80%, 17%);
     color: hsl(216, 30%, 98%);
   }
+  .infobox-stage {
+    width: 18rem;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.05))
+      drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+  }
   .infobox.infobox-panel {
-    padding: 0.5rem;
     width: 100%;
-    min-width: 0;
-    max-width: none;
   }
   .infobox_header-row {
     display: flex;
@@ -149,9 +172,11 @@
   .infobox_primary-class {
     flex: 1;
     min-width: 0;
-    margin-bottom: 0;
+    margin-bottom: 0.25rem;
     font-size: 0.875rem;
     color: hsl(185, 80%, 40%);
+    font-weight: 600;
+    overflow-wrap: break-word;
   }
   .infobox.dark .infobox_primary-class {
     color: hsl(185, 80%, 70%);
@@ -170,8 +195,16 @@
     cursor: pointer;
     color: hsl(216, 20%, 15%);
   }
+  .btn_unpin:hover,
+  .btn_unpin:focus-visible {
+    color: hsl(185, 80%, 40%);
+  }
   .infobox.dark .btn_unpin {
     color: hsl(216, 30%, 96%);
+  }
+  .infobox.dark .btn_unpin:hover,
+  .infobox.dark .btn_unpin:focus-visible {
+    color: hsl(185, 80%, 70%);
   }
   .infobox-bottom.infobox-left::before {
     content: '';
@@ -231,22 +264,42 @@
   .infobox-panel.infobox-top.infobox-right::after {
     filter: none;
   }
-  .infobox_primary-class {
-    font-weight: 600;
-    margin-bottom: 0.375rem;
-    overflow-wrap: break-word;
-  }
   .info-item {
     display: flex;
     flex-direction: row;
   }
-  .attribute {
-    width: 8rem;
-    font-weight: 600;
+  .info-item--classnames {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid hsl(185, 80%, 40%);
   }
-  .info-classlist {
+  .info-item--classnames .attribute {
+    width: auto;
+    font-size: 0.75rem;
+    word-spacing: -0.25rem;
+  }
+  .info-item--classnames .value {
+    flex: none;
+    text-align: left;
+  }
+  .attribute {
+    width: 6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    word-spacing: -0.25rem;
+  }
+  .value {
     flex: 1;
     min-width: 0;
+    text-align: right;
+  }
+  .info-classlist {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     overflow-wrap: break-word;
   }
 </style>

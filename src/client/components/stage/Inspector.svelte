@@ -80,9 +80,9 @@
       width: parseFloat(style.width),
       height: parseFloat(style.height),
       background: style.backgroundColor,
-      gap: style.gap,
-      rowGap: style.rowGap,
-      columnGap: style.columnGap,
+      gap: parseFloat(style.gap) || 0,
+      rowGap: parseFloat(style.rowGap) || 0,
+      columnGap: parseFloat(style.columnGap) || 0,
       margin,
       padding,
     }

@@ -62,15 +62,11 @@
     padding: 0.75rem;
     display: grid;
     gap: 0.75rem;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 25rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
   }
   @container (min-width: 2000px) {
     .infobox-grid {
       grid-template-columns: repeat(5, minmax(0, 1fr));
     }
-  }
-  .infobox-grid :global(.infobox) {
-    width: 100%;
-    min-width: 0;
   }
 </style>
