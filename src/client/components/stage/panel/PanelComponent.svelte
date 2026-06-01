@@ -107,6 +107,7 @@
     height: calc(var(--h-panelnav) - 1px);
     font-size: 0.875rem;
     color: var(--c-basic-700);
+    font-weight: 500;
     white-space: nowrap;
     text-transform: capitalize;
     overflow: hidden;
@@ -124,7 +125,6 @@
   .panel_nav nav li button:hover,
   .panel_nav nav li button:focus-visible {
     color: var(--c-primary);
-    font-weight: 500;
     background-color: var(--c-basic-100);
   }
   .panel_nav nav li button:focus-visible {

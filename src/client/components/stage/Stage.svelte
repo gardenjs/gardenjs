@@ -6,6 +6,13 @@
   import PanelExamplesNav from './panel/PanelExamplesNav.svelte'
   import PanelDescription from './panel/PanelDescription.svelte'
   import PanelCode from './panel/PanelCode.svelte'
+  import PanelA11y from './panel/PanelA11y.svelte'
+  import {
+    A11Y_CLEAR_HIGHLIGHT,
+    A11Y_HIGHLIGHT,
+    A11Y_SCAN_START,
+    A11Y_RESULT,
+  } from '../../a11y/messages.js'
 
   let {
     appTheme,
@@ -37,6 +44,11 @@
 
   let myframeready = $state()
   let myframe = $state()
+  let a11yState = $state({
+    scanning: false,
+    results: null,
+    error: null,
+  })
 
   const selectedExampleObj = $derived.by(() => {
     if (!das?.examples?.length) return {}
@@ -120,12 +132,58 @@
     })
   })
 
+  function postToPreviewFrame(message) {
+    const win = myframe?.contentWindow
+    if (!win) return
+    win.postMessage(message, window.location.origin)
+  }
+
+  /** @param {'violations' | 'incomplete' | 'passes'} section @param {string} ruleId */
+  function onHighlightA11yRule(section, ruleId) {
+    postToPreviewFrame({ type: A11Y_HIGHLIGHT, section, ruleId })
+  }
+
+  function onClearA11yHighlight() {
+    postToPreviewFrame({ type: A11Y_CLEAR_HIGHLIGHT })
+  }
+
+  function onA11yMessage(evt) {
+    if (evt.source !== myframe?.contentWindow) return
+    if (evt.data?.type === A11Y_SCAN_START) {
+      a11yState = {
+        scanning: true,
+        results: a11yState.results,
+        error: null,
+      }
+      return
+    }
+    if (evt.data?.type !== A11Y_RESULT) return
+    a11yState = {
+      scanning: false,
+      results: evt.data.results ?? null,
+      error: evt.data.error ?? null,
+    }
+  }
+
+  function markFrameReady() {
+    if (myframe?.contentDocument?.readyState === 'complete') {
+      myframeready = true
+    }
+  }
+
+  $effect(() => {
+    if (!myframe) return
+    markFrameReady()
+    myframe.addEventListener('load', markFrameReady)
+    return () => myframe.removeEventListener('load', markFrameReady)
+  })
+
   onMount(() => {
+    window.addEventListener('message', onA11yMessage)
+
     if (myframe) {
       resizeObserver.observe(myframe)
-      myframe.contentWindow.onload = () => {
-        myframeready = true
-      }
+      markFrameReady()
       myframe.contentWindow.addEventListener('mousemove', function (event) {
         var boundingClientRect = myframe.getBoundingClientRect()
         var evt = new CustomEvent('mousemove', {
@@ -149,6 +207,7 @@
   })
   onDestroy(() => {
     resizeObserver.disconnect()
+    window.removeEventListener('message', onA11yMessage)
   })
 
   function createTabs(das) {
@@ -183,6 +242,15 @@
         page: PanelCode,
       })
     }
+    tabs.push({
+      name: 'Accessibility',
+      props: {
+        a11yState,
+        onHighlightA11yRule,
+        onClearA11yHighlight,
+      },
+      page: PanelA11y,
+    })
     return tabs
   }
 
@@ -219,7 +287,7 @@
     }
   })
 
-  const tabs = $derived(createTabs(das))
+  const tabs = $derived.by(() => createTabs(das))
 </script>
 
 <HorizontalSplitPane

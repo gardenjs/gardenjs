@@ -1,10 +1,23 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, tick } from 'svelte'
 
   import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
   import Inspector from '../client/components/stage/Inspector.svelte'
   import BackgroundGrid from '../client/components/stage/BackgroundGrid.svelte'
   import DistanceMeasure from '../client/components/stage/DistanceMeasure.svelte'
+  import {
+    A11Y_CLEAR_HIGHLIGHT,
+    A11Y_HIGHLIGHT,
+    A11Y_SCAN,
+  } from './a11y/messages.js'
+  import {
+    clearA11yHighlights,
+    highlightA11yRule,
+  } from './a11y/a11yHighlight.js'
+  import {
+    runA11yScanAndReport,
+    scheduleA11yScan,
+  } from './a11y/runA11yInFrame.js'
   /**
    * @typedef {Object} Props
    * @property {any} [componentMap]
@@ -41,12 +54,44 @@
 
   let contentPane = $state()
   let mounted = $state(false)
+  let lastA11yScanKey = ''
+
+  function scheduleA11yScanIfNeeded() {
+    if (!config.devmodus) return
+    const root = contentPane ?? document.getElementById('garden_app')
+    if (!root) return
+    const scanKey = `${componentName}:${selectedExampleTitle}:${JSON.stringify(selectedExample?.input ?? {})}`
+    if (scanKey === lastA11yScanKey) return
+    lastA11yScanKey = scanKey
+    tick().then(() => scheduleA11yScan(root))
+  }
 
   onMount(() => {
     mounted = true
   })
 
   window.addEventListener('message', (evt) => {
+    if (evt.data?.type === A11Y_SCAN) {
+      const root = contentPane ?? document.getElementById('garden_app')
+      runA11yScanAndReport(root)
+      return
+    }
+
+    if (evt.data?.type === A11Y_CLEAR_HIGHLIGHT) {
+      clearA11yHighlights()
+      return
+    }
+
+    if (evt.data?.type === A11Y_HIGHLIGHT) {
+      const root = contentPane ?? document.getElementById('garden_app')
+      void highlightA11yRule(evt.data.section, evt.data.ruleId, root).catch(
+        (err) => {
+          console.error('A11y highlight failed:', err)
+        }
+      )
+      return
+    }
+
     if (config.themeHandler) {
       config.themeHandler(evt.data.activeTheme?.name)
     }
@@ -65,8 +110,14 @@
       input: paramValues ?? rawSelectedExample?.input ?? {},
     }
     componentChanged = componentName !== evt.data.componentName
+    if (componentChanged) {
+      clearA11yHighlights()
+    }
     componentName = evt.data.componentName || 'Welcome'
     selectedExampleChanged = selectedExampleTitle !== evt.data.selectedExample
+    if (selectedExampleChanged) {
+      clearA11yHighlights()
+    }
     selectedExampleTitle = evt.data.selectedExample
     appTheme = evt.data.appTheme
 
@@ -74,6 +125,7 @@
 
     if (config.devmodus) {
       redirectData = {}
+      scheduleA11yScanIfNeeded()
       return
     } else {
       executeLatest(() => updateComponent(component, selectedExample, das))
@@ -134,7 +186,13 @@
 
   async function afterRenderHook() {
     await runHooksIfSet(afterRenderedFns)
+    scheduleA11yScan(contentPane)
   }
+
+  $effect(() => {
+    if (!config.devmodus || !mounted || !contentPane) return
+    scheduleA11yScanIfNeeded()
+  })
 
   let currentHooks = []
 
@@ -211,6 +269,13 @@
     if (!config.devmodus) {
       updateRenderer(DefaultRendererBuilder)
     }
+  })
+
+  $effect(() => {
+    document.documentElement.setAttribute(
+      'data-theme',
+      appTheme === 'dark' ? 'dark' : 'light'
+    )
   })
 
   function handleComponentOut(evt) {

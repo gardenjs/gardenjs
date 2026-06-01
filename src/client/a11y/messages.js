@@ -1,0 +1,5 @@
+export const A11Y_SCAN = 'garden:a11y-scan'
+export const A11Y_SCAN_START = 'garden:a11y-scan-start'
+export const A11Y_RESULT = 'garden:a11y-result'
+export const A11Y_HIGHLIGHT = 'garden:a11y-highlight'
+export const A11Y_CLEAR_HIGHLIGHT = 'garden:a11y-clear-highlight'

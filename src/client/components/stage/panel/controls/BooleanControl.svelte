@@ -46,6 +46,7 @@
 
 <style lang="scss">
   @use './button_unset.scss';
+  @use './checkbox.scss';
 
   .boolean-row {
     display: flex;
@@ -69,78 +70,25 @@
     color: var(--c-basic-800);
   }
   @supports (appearance: none) {
-    input[type='checkbox'] {
+    input[type='checkbox'].toggle {
       appearance: none;
       position: relative;
       display: inline-block;
       margin: 0;
       padding: 0;
+      width: 2.5rem;
       height: 1.25rem;
       vertical-align: top;
       outline: none;
       border: 1px solid var(--c-primary);
+      border-radius: 1.125rem;
       cursor: pointer;
+      transition: background-color 0.2s ease;
+
       &:after {
         position: absolute;
         display: block;
         content: '';
-        left: 0;
-        top: 0;
-      }
-      &:checked {
-        background-color: var(--c-primary);
-        border: 1px solid var(--c-primary);
-      }
-      &:disabled {
-        background-color: var(--c-text);
-        cursor: not-allowed;
-        opacity: 0.4;
-        &:checked {
-          background-color: var(--c-text);
-          border-color: var(--c-text);
-        }
-      }
-      &:hover {
-        &:not(:checked) {
-          &:not(:disabled) {
-            border-color: var(--c-primary);
-          }
-        }
-      }
-      &:focus-visible {
-        outline: none;
-        box-shadow: 0 0 0 1px var(--c-primary);
-      }
-    }
-
-    // checkbox variant
-    input[type='checkbox'].checkbox {
-      margin: 0.25rem 0 0;
-      width: 1.25rem;
-      border-radius: 0;
-      &:after {
-        width: 0.313rem;
-        height: 0.563rem;
-        border: 2px solid #fff;
-        border-top: 0;
-        border-left: 0;
-        left: 0.4rem;
-        top: 0.2125rem;
-        transform: rotate(43deg);
-        opacity: var(--o, 0);
-      }
-      &:checked {
-        --o: 1;
-      }
-    }
-
-    // toggle variant
-    input[type='checkbox'].toggle {
-      width: 2.5rem;
-      border-radius: 1.125rem;
-      transition: background-color 0.2s ease;
-
-      &:after {
         width: 1rem;
         height: 1rem;
         border-radius: 50%;
@@ -157,6 +105,11 @@
       &:not(:checked) {
         background-color: var(--c-basic-300);
         border-color: var(--c-basic-300);
+      }
+
+      &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 1px var(--c-primary);
       }
     }
   }

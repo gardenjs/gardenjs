@@ -75,6 +75,7 @@
     "@inquirer/checkbox": "1.5.0",
     "@inquirer/prompts": "3.3.0",
     "@inquirer/select": "^2.0.0",
+    "axe-core": "^4.11.4",
     "build": "^0.1.4",
     "chokidar": "^5.0.0",
     "execa": "^9.6.1",
@@ -85,8 +86,8 @@
     "vite-node": "3.2.4"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0",
-    "tsx": "^4.21.0"
+    "tsx": "^4.21.0",
+    "typescript": "^5.0.0"
   },
   "peerDependenciesMeta": {
     "tsx": {

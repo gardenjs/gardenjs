@@ -96,7 +96,6 @@
     flex-grow: 0;
     flex-shrink: 0;
     border-right: 0;
-    border-radius: 0.625rem 0.625rem 0 0;
     overflow: auto;
   }
   .dragbar {
