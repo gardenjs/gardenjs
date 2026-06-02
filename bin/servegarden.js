@@ -324,7 +324,54 @@ export default {
   //    medium: [{name: 'tablet', w: 768, h: 1024}],
   //    large: [{name: 'laptop', w: 1440, h: 900}],
   //  },
-  
+
+  // Optional axe setup for the Accessibility panel (preview iframe).
+  // disable: true turns off all scans. Otherwise uses the axe-core API (config, options, context).
+  // If omitted, Garden scans document.body with the full rule set and disables the region rule.
+  // a11y: {
+  //   disable: false,
+  //   context: {
+  //     include: 'body',
+  //     exclude: ['[data-a11y-ignore]', '.garden-a11y-highlight'],
+  //   },
+  //   config: {
+  //     branding: {
+  //       brand: 'Gardenjs',
+  //       application: 'My project',
+  //       showInapplicable: true,
+  //     },
+  //     rules: [
+  //       { id: 'color-contrast', enabled: true },
+  //       { id: 'duplicate-id', enabled: false },
+  //     ],
+  //   },
+  //   options: {
+  //     runOnly: {
+  //       type: 'tag',
+  //       values: [
+  //         'wcag2a',
+  //         'wcag2aa',
+  //         'wcag21a',
+  //         'wcag21aa',
+  //         'wcag22aa',
+  //         'best-practice',
+  //         'section508',
+  //         'experimental',
+  //         'ACT',
+  //       ],
+  //     },
+  //     resultTypes: ['violations', 'incomplete', 'passes'],
+  //     rules: {
+  //       'color-contrast': { enabled: true },
+  //       'link-in-text-block': { enabled: true },
+  //       tabindex: { enabled: true },
+  //     },
+  //     xpath: true,
+  //     ancestry: true,
+  //     absolutePaths: true,
+  //   },
+  // },
+
   // Edit or disable "Themes" depending on whether your app uses themes.
   // According to your requirements, you may also need to adjust the
   // "onThemeChange" function below accordingly.

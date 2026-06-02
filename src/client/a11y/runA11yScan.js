@@ -1,15 +1,13 @@
+import { a11yForAxe } from './a11yConfig.js'
 import { loadAxe } from './loadAxe.js'
+import { resolveA11ySettings } from './resolveA11ySettings.js'
 
-/**
- * Run axe in the **current** document (preview iframe).
- * @param {ParentNode | null | undefined} root
- * @returns {Promise<import('axe-core').AxeResults>}
- */
-export async function runA11yScan(root) {
+export async function runA11yScan(a11y) {
   const axe = await loadAxe()
-  const context = root ?? document.body
+  const { axeConfig, runOptions, context } = resolveA11ySettings(
+    a11yForAxe(a11y)
+  )
 
-  return axe.run(context, {
-    runOnly: ['wcag2a', 'wcag2aa', 'best-practice'],
-  })
+  axe.configure(axeConfig)
+  return axe.run(context, runOptions)
 }

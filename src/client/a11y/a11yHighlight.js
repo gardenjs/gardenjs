@@ -53,43 +53,64 @@ function ensureHighlightStyles() {
   document.head.appendChild(style)
 }
 
+/** @param {unknown} target */
+function targetToStrings(target) {
+  if (!Array.isArray(target)) return []
+  return target.filter((t) => typeof t === 'string')
+}
+
 /**
- * @param {import('axe-core').Axe} axe
- * @param {string[]} target
- * @param {ParentNode} root
+ * @param {any} axe
+ * @param {unknown} target
+ * @param {ParentNode[]} roots
  * @returns {Element | null}
  */
-function resolveTarget(axe, target, root) {
-  if (!target?.length) return null
+function resolveTarget(axe, target, roots) {
+  if (!Array.isArray(target) || target.length === 0) return null
 
-  if (axe.utils?.select) {
-    try {
-      const el = axe.utils.select(target, root)
-      if (el) return el
-    } catch {
-      /* axe select failed */
+  const targetStrings = targetToStrings(target)
+
+  for (const root of roots) {
+    if (axe.utils?.select) {
+      try {
+        const el = axe.utils.select(target, root)
+        if (el) return el
+      } catch {
+        /* axe select failed */
+      }
     }
-  }
 
-  const joined = target.filter(Boolean).join(' ')
-  if (joined) {
-    try {
-      const el = root.querySelector(joined)
-      if (el) return el
-    } catch {
-      /* invalid selector */
+    const joined = targetStrings.filter(Boolean).join(' ')
+    if (joined) {
+      try {
+        const el = root.querySelector(joined)
+        if (el) return el
+      } catch {
+        /* invalid selector */
+      }
     }
-  }
 
-  const last = target[target.length - 1]
-  if (last) {
-    try {
-      return root.querySelector(last)
-    } catch {
-      /* invalid selector */
+    const last = targetStrings[targetStrings.length - 1]
+    if (last) {
+      try {
+        const el = root.querySelector(last)
+        if (el) return el
+      } catch {
+        /* invalid selector */
+      }
     }
   }
   return null
+}
+
+function highlightSearchRoots(root) {
+  const appRoot =
+    (root instanceof HTMLElement && root.isConnected ? root : null) ??
+    document.getElementById('garden_app')
+  const roots = []
+  if (appRoot) roots.push(appRoot)
+  if (document.body && !roots.includes(document.body)) roots.push(document.body)
+  return roots.length ? roots : [document.body]
 }
 
 export function clearA11yHighlights() {
@@ -141,20 +162,24 @@ export async function highlightA11yRule(section, ruleId, root) {
   const rule = rules.find((r) => r.id === ruleId)
   if (!rule?.nodes?.length) return
 
-  const scope = root ?? document.getElementById('garden_app') ?? document.body
+  const roots = highlightSearchRoots(root)
   const axe = await loadAxe()
   /** @type {HTMLElement[]} */
   const elements = []
+  const seen = new Set()
 
   for (const node of rule.nodes) {
+    /** @type {HTMLElement | null} */
+    let el = null
     if (node.element instanceof HTMLElement && node.element.isConnected) {
-      elements.push(node.element)
-      continue
+      el = node.element
+    } else {
+      const resolved = resolveTarget(axe, node.target, roots)
+      if (resolved instanceof HTMLElement) el = resolved
     }
-    const el = resolveTarget(axe, node.target, scope)
-    if (el instanceof HTMLElement) {
-      elements.push(el)
-    }
+    if (!el || seen.has(el)) continue
+    seen.add(el)
+    elements.push(el)
   }
 
   applyHighlights(elements, section)

@@ -63,7 +63,7 @@
     const scanKey = `${componentName}:${selectedExampleTitle}:${JSON.stringify(selectedExample?.input ?? {})}`
     if (scanKey === lastA11yScanKey) return
     lastA11yScanKey = scanKey
-    tick().then(() => scheduleA11yScan(root))
+    tick().then(() => scheduleA11yScan(root, config?.a11y))
   }
 
   onMount(() => {
@@ -73,7 +73,7 @@
   window.addEventListener('message', (evt) => {
     if (evt.data?.type === A11Y_SCAN) {
       const root = contentPane ?? document.getElementById('garden_app')
-      runA11yScanAndReport(root)
+      runA11yScanAndReport(root, config?.a11y)
       return
     }
 
@@ -186,7 +186,7 @@
 
   async function afterRenderHook() {
     await runHooksIfSet(afterRenderedFns)
-    scheduleA11yScan(contentPane)
+    scheduleA11yScan(contentPane, config?.a11y)
   }
 
   $effect(() => {

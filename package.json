@@ -52,7 +52,9 @@
     "dev": "vite",
     "preview": "vite preview",
     "format": "prettier --write --plugin prettier-plugin-svelte .",
-    "lint": "eslint src/."
+    "lint": "eslint src/.",
+    "test": "node --test test/*.test.js",
+    "test:unit": "node --test test/*.test.js"
   },
   "devDependencies": {
     "@eslint/compat": "1.2.5",
