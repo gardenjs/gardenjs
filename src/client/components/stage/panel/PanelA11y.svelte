@@ -1,6 +1,36 @@
 <script>
-  /** @typedef {'violations' | 'incomplete' | 'passes'} A11ySection */
-  /** @typedef {string | null} MaybeRuleId */
+  import {
+    displayRuleTags,
+    getHighlightTargets,
+    impactLabel,
+    isNodeHighlightChecked,
+    isRuleHighlightPartial,
+    initialHighlightState,
+    pickDefaultSection,
+    reduceNodeToggle,
+  } from '../../../a11y/a11yPanelHighlight.js'
+
+  /**
+   * @typedef {Object} A11yNode
+   * @property {string} html
+   * @property {string[]} target
+   * @property {string} [failureSummary]
+   *
+   * @typedef {Object} A11yRule
+   * @property {string} id
+   * @property {string} [impact]
+   * @property {string} help
+   * @property {string} description
+   * @property {string} helpUrl
+   * @property {string[]} tags
+   * @property {A11yNode[]} nodes
+   *
+   * @typedef {Object} HighlightState
+   * @property {string | null} highlightRuleId
+   * @property {'all' | 'include' | null} highlightScope
+   * @property {number[]} highlightExcludedIndices
+   * @property {number[]} highlightIncludedIndices
+   */
 
   let {
     a11yState = { scanning: false, results: null, error: null },
@@ -8,12 +38,11 @@
     onClearA11yHighlight = () => {},
   } = $props()
 
-  /** @type {A11ySection} */
   let activeSection = $state('violations')
-  /** @type {MaybeRuleId} */
+  /** @type {string | null} */
   let expandedRuleId = $state(null)
-  /** @type {MaybeRuleId} */
-  let highlightedRuleId = $state(null)
+  /** @type {HighlightState} */
+  let highlight = $state(initialHighlightState())
 
   const results = $derived(a11yState.results)
   const violationCount = $derived(results?.violations?.length ?? 0)
@@ -42,49 +71,78 @@
     expandedRuleId = expandedRuleId === id ? null : id
   }
 
+  /** @param {Partial<HighlightState>} next */
+  function applyHighlightState(next) {
+    Object.assign(highlight, next)
+  }
+
   function clearHighlight() {
-    highlightedRuleId = null
+    applyHighlightState(initialHighlightState())
     onClearA11yHighlight()
   }
 
-  /** @param {{ id: string, nodes: { target: string[] }[] }} rule @param {boolean} checked */
-  function toggleRuleHighlight(rule, checked) {
-    if (!checked) {
+  /** @param {A11yRule} rule */
+  function applyRuleHighlight(rule) {
+    const targets = getHighlightTargets(
+      rule,
+      highlight.highlightScope,
+      highlight.highlightIncludedIndices,
+      highlight.highlightExcludedIndices
+    )
+    if (!targets.length) {
       clearHighlight()
       return
     }
-    highlightedRuleId = rule.id
-    onHighlightA11yRule(activeSection, rule.id)
+    onHighlightA11yRule(activeSection, targets)
   }
 
-  /** @param {string | null | undefined} impact @param {A11ySection} section */
-  function impactLabel(impact, section) {
-    if (section === 'passes') return null
-    if (!impact) return 'Issue'
-    return impact.charAt(0).toUpperCase() + impact.slice(1)
-  }
-
-  /** @param {typeof results} results @returns {A11ySection} */
-  function pickDefaultSection(results) {
-    if (!results) return 'violations'
-    if ((results.violations?.length ?? 0) > 0) return 'violations'
-    if ((results.incomplete?.length ?? 0) > 0) return 'incomplete'
-    return 'passes'
-  }
-
-  /** @param {string[] | undefined} tags @returns {string[]} */
-  function displayRuleTags(tags) {
-    if (!tags?.length) return []
-    const visible = tags.filter(
-      /** @param {string} tag */ (tag) =>
-        tag.startsWith('cat.') || tag.startsWith('wcag')
-    )
-    return [...visible].sort((a, b) => {
-      /** @param {string} tag */
-      const rank = (tag) => (tag.startsWith('cat.') ? 0 : 1)
-      const diff = rank(a) - rank(b)
-      return diff !== 0 ? diff : a.localeCompare(b)
+  /** @param {A11yRule} rule */
+  function selectAllNodesHighlight(rule) {
+    applyHighlightState({
+      highlightRuleId: rule.id,
+      highlightScope: 'all',
+      highlightExcludedIndices: [],
+      highlightIncludedIndices: [],
     })
+    onHighlightA11yRule(
+      activeSection,
+      getHighlightTargets(
+        rule,
+        highlight.highlightScope,
+        highlight.highlightIncludedIndices,
+        highlight.highlightExcludedIndices
+      )
+    )
+  }
+
+  /** @param {A11yRule} rule @param {boolean} checked */
+  function toggleRuleHighlight(rule, checked) {
+    if (!checked) {
+      if (highlight.highlightRuleId === rule.id) clearHighlight()
+      return
+    }
+    selectAllNodesHighlight(rule)
+  }
+
+  /** @param {A11yRule} rule @param {number} index @param {boolean} checked */
+  function toggleNodeHighlight(rule, index, checked) {
+    const next = reduceNodeToggle({
+      rule,
+      index,
+      checked,
+      highlightRuleId: highlight.highlightRuleId,
+      highlightScope: highlight.highlightScope,
+      highlightExcludedIndices: highlight.highlightExcludedIndices,
+      highlightIncludedIndices: highlight.highlightIncludedIndices,
+    })
+    if (next.action === 'none') return
+    if (next.action === 'clear') {
+      clearHighlight()
+      return
+    }
+    const { action: _action, ...patch } = next
+    applyHighlightState(/** @type {Partial<HighlightState>} */ (patch))
+    applyRuleHighlight(rule)
   }
 
   $effect(() => {
@@ -109,7 +167,7 @@
             class:nav_btn--incomplete={section.id === 'incomplete'}
             class:nav_btn--passes={section.id === 'passes'}
             onclick={() => {
-              activeSection = /** @type {A11ySection} */ (section.id)
+              activeSection = section.id
               expandedRuleId = null
               clearHighlight()
             }}
@@ -123,107 +181,165 @@
       <div class="panel_divider" aria-hidden="true"></div>
     </div>
     <div class="panel_body">
-      {#if activeRules.length === 0}
-        <p class="infotext">No entries in this category.</p>
-      {:else}
-        <ul class="rules">
-          {#each activeRules as rule (rule.id)}
-            <li class="rule">
-              <div class="rule_header">
-                <button
-                  type="button"
-                  class="rule_summary"
-                  aria-expanded={expandedRuleId === rule.id}
-                  onclick={() => toggleRule(rule.id)}
-                >
-                  <span
-                    class="rule_arrow"
-                    class:unfolded_icon={expandedRuleId === rule.id}
-                    aria-hidden="true"
+      <div class="panel_body_content">
+        {#if activeRules.length === 0}
+          <p class="infotext">No entries in this category.</p>
+        {:else}
+          <ul class="rules">
+            {#each activeRules as rule (rule.id)}
+              <li class="rule">
+                <div class="rule_header">
+                  <button
+                    type="button"
+                    class="rule_summary"
+                    aria-expanded={expandedRuleId === rule.id}
+                    onclick={() => toggleRule(rule.id)}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      viewBox="0 0 24 24"
-                      height="12"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"><path d="M18 15l-6-6-6 6" /></svg
-                    >
-                  </span>
-                  {#if impactLabel(rule.impact, activeSection)}
                     <span
-                      class="impact"
-                      class:impact-critical={activeSection === 'violations' &&
-                        rule.impact === 'critical'}
-                      class:impact-serious={activeSection === 'violations' &&
-                        rule.impact === 'serious'}
-                      class:impact-moderate={activeSection === 'violations' &&
-                        rule.impact === 'moderate'}
-                      class:impact-minor={activeSection === 'violations' &&
-                        rule.impact === 'minor'}
-                      class:impact-issue={activeSection !== 'passes' &&
-                        !rule.impact}
+                      class="rule_arrow"
+                      class:unfolded_icon={expandedRuleId === rule.id}
+                      aria-hidden="true"
                     >
-                      {impactLabel(rule.impact, activeSection)}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        viewBox="0 0 24 24"
+                        height="12"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path d="M18 15l-6-6-6 6" /></svg
+                      >
                     </span>
-                  {/if}
-                  <span class="rule_heading">
-                    <span class="rule_title">{rule.help}</span>
-                    <span class="rule_count">{rule.nodes.length}</span>
-                  </span>
-                </button>
-                <div class="rule_actions">
-                  <label class="rule_highlight" title="Highlight in preview">
-                    <input
-                      type="checkbox"
-                      class="checkbox"
-                      checked={highlightedRuleId === rule.id}
-                      onchange={(e) =>
-                        toggleRuleHighlight(rule, e.currentTarget.checked)}
-                    />
-                    <span class="visually_hidden">Highlight in preview</span>
-                  </label>
-                </div>
-              </div>
-              {#if expandedRuleId === rule.id}
-                {@const visibleTags = displayRuleTags(rule.tags)}
-                <div class="rule_detail">
-                  <p>{rule.description}</p>
-                  {#if rule.helpUrl}
-                    <a
-                      href={rule.helpUrl}
-                      target="_blank"
-                      rel="noopener noreferrer">How to fix</a
+                    {#if impactLabel(rule.impact, activeSection)}
+                      <span
+                        class="impact"
+                        class:impact-critical={activeSection === 'violations' &&
+                          rule.impact === 'critical'}
+                        class:impact-serious={activeSection === 'violations' &&
+                          rule.impact === 'serious'}
+                        class:impact-moderate={activeSection === 'violations' &&
+                          rule.impact === 'moderate'}
+                        class:impact-minor={activeSection === 'violations' &&
+                          rule.impact === 'minor'}
+                        class:impact-issue={activeSection !== 'passes' &&
+                          !rule.impact}
+                      >
+                        {impactLabel(rule.impact, activeSection)}
+                      </span>
+                    {/if}
+                    <span class="rule_heading">
+                      <span class="rule_title">{rule.help}</span>
+                      <span class="rule_count">{rule.nodes.length}</span>
+                    </span>
+                  </button>
+                  <div class="rule_actions">
+                    <label
+                      class="rule_highlight"
+                      title="Highlight all elements in preview"
                     >
-                  {/if}
-                  <ul class="rule_nodes">
-                    {#each rule.nodes as node, index (`${rule.id}-${index}`)}
-                      <li>
-                        <code>{node.target.join(' ')}</code>
-                        {#if node.failureSummary}
-                          <p class="failure_summary">{node.failureSummary}</p>
-                        {/if}
-                      </li>
-                    {/each}
-                  </ul>
-                  {#if visibleTags.length}
-                    <ul class="rule_tags" aria-label="Rule tags">
-                      {#each visibleTags as tag (tag)}
-                        <li>
-                          <span class="rule_tag">{tag}</span>
+                      <input
+                        type="checkbox"
+                        class="checkbox"
+                        class:checkbox--excluded={isRuleHighlightPartial(
+                          rule.id,
+                          highlight.highlightRuleId,
+                          highlight.highlightScope,
+                          highlight.highlightExcludedIndices
+                        )}
+                        checked={highlight.highlightRuleId === rule.id &&
+                          highlight.highlightScope === 'all' &&
+                          highlight.highlightExcludedIndices.length === 0}
+                        aria-checked={isRuleHighlightPartial(
+                          rule.id,
+                          highlight.highlightRuleId,
+                          highlight.highlightScope,
+                          highlight.highlightExcludedIndices
+                        )
+                          ? 'mixed'
+                          : highlight.highlightRuleId === rule.id &&
+                            highlight.highlightScope === 'all' &&
+                            highlight.highlightExcludedIndices.length === 0}
+                        onchange={(e) =>
+                          toggleRuleHighlight(rule, e.currentTarget.checked)}
+                      />
+                      <span class="visually_hidden"
+                        >Highlight all in preview</span
+                      >
+                    </label>
+                  </div>
+                </div>
+                {#if expandedRuleId === rule.id}
+                  {@const visibleTags = displayRuleTags(rule.tags)}
+                  <div class="rule_detail">
+                    <p>{rule.description}</p>
+                    {#if rule.helpUrl}
+                      <a
+                        href={rule.helpUrl}
+                        target="_blank"
+                        rel="noopener noreferrer">How to fix</a
+                      >
+                    {/if}
+                    <ul class="rule_nodes">
+                      {#each rule.nodes as node, index (`${rule.id}-${index}`)}
+                        <li class="rule_node">
+                          <div class="rule_node_body">
+                            <code>{node.target.join(' ')}</code>
+                            {#if node.failureSummary}
+                              <p class="failure_summary">
+                                {node.failureSummary}
+                              </p>
+                            {/if}
+                          </div>
+                          {#if rule.nodes.length > 1}
+                            <label
+                              class="node_highlight"
+                              title="Highlight this element in preview"
+                            >
+                              <input
+                                type="checkbox"
+                                class="checkbox"
+                                checked={isNodeHighlightChecked(
+                                  rule.id,
+                                  index,
+                                  highlight.highlightRuleId,
+                                  highlight.highlightScope,
+                                  highlight.highlightIncludedIndices,
+                                  highlight.highlightExcludedIndices
+                                )}
+                                onchange={(e) =>
+                                  toggleNodeHighlight(
+                                    rule,
+                                    index,
+                                    e.currentTarget.checked
+                                  )}
+                              />
+                              <span class="visually_hidden"
+                                >Highlight in preview</span
+                              >
+                            </label>
+                          {/if}
                         </li>
                       {/each}
                     </ul>
-                  {/if}
-                </div>
-              {/if}
-            </li>
-          {/each}
-        </ul>
-      {/if}
+                    {#if visibleTags.length}
+                      <ul class="rule_tags" aria-label="Rule tags">
+                        {#each visibleTags as tag (tag)}
+                          <li>
+                            <span class="rule_tag">{tag}</span>
+                          </li>
+                        {/each}
+                      </ul>
+                    {/if}
+                  </div>
+                {/if}
+              </li>
+            {/each}
+          </ul>
+        {/if}
+      </div>
     </div>
   {/if}
 </div>
@@ -257,10 +373,12 @@
   .panel_body {
     flex: 1;
     min-height: 0;
-    max-width: 900px;
     overflow-y: auto;
-    padding: 0 0 1.25rem;
     overscroll-behavior: contain;
+  }
+  .panel_body_content {
+    max-width: 900px;
+    padding: 0 0 1.25rem;
   }
   .nav_btn {
     position: relative;
@@ -323,34 +441,43 @@
     list-style: none;
   }
   .rule {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 1.75rem;
+    column-gap: 0.5rem;
     border-bottom: 1px solid var(--c-basic-200);
     overflow: hidden;
   }
   .rule_header {
-    display: flex;
-    align-items: center;
-  }
-  .rule_header:hover .rule_summary,
-  .rule_header:focus-within .rule_summary,
-  .rule_header:hover .rule_actions,
-  .rule_header:focus-within .rule_actions {
-    background-color: var(--c-primary-bg);
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: transparent;
+      pointer-events: none;
+      z-index: 0;
+    }
+    &:hover::before,
+    &:focus-within::before {
+      background-color: var(--c-primary-bg);
+    }
   }
   .rule_summary {
+    grid-column: 1;
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    flex: 1;
     min-width: 0;
     padding: 0.5rem 0.5rem 0.5rem 1.25rem;
     border: 0;
     background: none;
     text-align: left;
     cursor: pointer;
-  }
-  .rule_summary:hover,
-  .rule_summary:focus-visible {
-    background-color: var(--c-primary-bg);
   }
   .rule_arrow {
     display: flex;
@@ -407,11 +534,15 @@
     font-weight: 600;
   }
   .rule_actions {
+    grid-column: 2;
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    flex-shrink: 0;
+    justify-content: flex-end;
+    align-self: center;
     padding: 0.5rem 0.5rem 0.5rem 0;
+    background: none;
   }
   .rule_count {
     display: inline-flex;
@@ -429,16 +560,23 @@
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
-  .rule_highlight {
+  .rule_highlight,
+  .node_highlight {
     display: inline-flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
     width: 1.25rem;
+    min-width: 1.25rem;
     height: 1.25rem;
     margin: 0;
     cursor: pointer;
 
     input[type='checkbox'].checkbox {
+      flex-shrink: 0;
+      width: 1.25rem;
+      min-width: 1.25rem;
+      height: 1.25rem;
       margin: 0;
       vertical-align: middle;
     }
@@ -455,8 +593,17 @@
     border: 0;
   }
   .rule_detail {
-    padding: 0.625rem 1.25rem 0.75rem 2.5rem;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    padding: 0.625rem 0 0.75rem;
     background: var(--c-basic-0);
+  }
+  .rule_detail > p,
+  .rule_detail > a {
+    grid-column: 1;
+    padding-left: 2.5rem;
+    padding-right: 0.5rem;
   }
   .rule_detail p {
     margin: 0 0 0.5rem;
@@ -465,11 +612,12 @@
     color: var(--c-primary);
   }
   .rule_tags {
+    grid-column: 1;
     display: flex;
     flex-wrap: wrap;
     gap: 0.375rem;
     margin: 0.75rem 0 0;
-    padding: 0;
+    padding: 0 0.5rem 0 2.5rem;
     list-style: none;
   }
   .rule_tag {
@@ -484,25 +632,48 @@
     line-height: 1.4;
   }
   .rule_nodes {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
     margin: 0.75rem 0 0;
     padding: 0;
     list-style: none;
   }
-  .rule_nodes li + li {
+  .rule_node {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: start;
+  }
+  .rule_node + .rule_node {
     margin-top: 0.625rem;
     padding-top: 0.625rem;
     border-top: 1px solid var(--c-basic-150);
   }
-  .rule_nodes code {
+  .rule_node_body {
+    grid-column: 1;
+    min-width: 0;
+    padding-left: 2.5rem;
+    padding-right: 0.5rem;
+  }
+  .node_highlight {
+    grid-column: 2;
+    justify-self: end;
+    align-self: start;
+    margin-right: 0.5rem;
+    margin-top: calc(0.25rem + (0.75rem * 1.4) / 2 - 1.25rem / 2);
+  }
+  .rule_node_body code {
     display: block;
     margin-bottom: 0.25rem;
     padding: 0.25rem 0.375rem;
     background: var(--c-basic-100);
     font-family: monospace;
     font-size: 0.75rem;
+    line-height: 1.4;
     word-break: break-all;
   }
-  .rule_nodes p {
+  .rule_node_body p {
     margin: 0.5rem 0 0;
   }
 </style>

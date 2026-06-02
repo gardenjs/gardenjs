@@ -138,9 +138,16 @@
     win.postMessage(message, window.location.origin)
   }
 
-  /** @param {'violations' | 'incomplete' | 'passes'} section @param {string} ruleId */
-  function onHighlightA11yRule(section, ruleId) {
-    postToPreviewFrame({ type: A11Y_HIGHLIGHT, section, ruleId })
+  /**
+   * @param {'violations' | 'incomplete' | 'passes'} section
+   * @param {string[][]} targets
+   */
+  function onHighlightA11yRule(section, targets) {
+    postToPreviewFrame({
+      type: A11Y_HIGHLIGHT,
+      section,
+      targets: targets.map((target) => [...target]),
+    })
   }
 
   function onClearA11yHighlight() {

@@ -12,7 +12,7 @@
   } from './a11y/messages.js'
   import {
     clearA11yHighlights,
-    highlightA11yRule,
+    highlightA11yTargets,
   } from './a11y/a11yHighlight.js'
   import {
     runA11yScanAndReport,
@@ -84,7 +84,7 @@
 
     if (evt.data?.type === A11Y_HIGHLIGHT) {
       const root = contentPane ?? document.getElementById('garden_app')
-      void highlightA11yRule(evt.data.section, evt.data.ruleId, root).catch(
+      void highlightA11yTargets(evt.data.section, root, evt.data.targets).catch(
         (err) => {
           console.error('A11y highlight failed:', err)
         }

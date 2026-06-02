@@ -1,10 +1,7 @@
 import { loadAxe } from './loadAxe.js'
-import { getLastAxeResults } from './a11yScanCache.js'
 
 const HIGHLIGHT_CLASS = 'garden-a11y-highlight'
 const STYLE_ID = 'garden-a11y-highlight-style'
-
-/** @type {readonly ('violations' | 'incomplete' | 'passes')[]} */
 const HIGHLIGHT_SECTIONS = ['violations', 'incomplete', 'passes']
 
 const SECTION_STYLES = {
@@ -22,10 +19,9 @@ const SECTION_STYLES = {
   },
 }
 
-/** @type {HTMLElement[]} */
 let highlightedElements = []
+let highlightGeneration = 0
 
-/** @param {'violations' | 'incomplete' | 'passes'} section */
 function sectionModifierClass(section) {
   return `${HIGHLIGHT_CLASS}--${section}`
 }
@@ -53,18 +49,19 @@ function ensureHighlightStyles() {
   document.head.appendChild(style)
 }
 
-/** @param {unknown} target */
 function targetToStrings(target) {
   if (!Array.isArray(target)) return []
   return target.filter((t) => typeof t === 'string')
 }
 
-/**
- * @param {any} axe
- * @param {unknown} target
- * @param {ParentNode[]} roots
- * @returns {Element | null}
- */
+function queryElement(query) {
+  try {
+    return query()
+  } catch {
+    return null
+  }
+}
+
 function resolveTarget(axe, target, roots) {
   if (!Array.isArray(target) || target.length === 0) return null
 
@@ -72,32 +69,20 @@ function resolveTarget(axe, target, roots) {
 
   for (const root of roots) {
     if (axe.utils?.select) {
-      try {
-        const el = axe.utils.select(target, root)
-        if (el) return el
-      } catch {
-        /* axe select failed */
-      }
+      const el = queryElement(() => axe.utils.select(target, root))
+      if (el) return el
     }
 
     const joined = targetStrings.filter(Boolean).join(' ')
     if (joined) {
-      try {
-        const el = root.querySelector(joined)
-        if (el) return el
-      } catch {
-        /* invalid selector */
-      }
+      const el = queryElement(() => root.querySelector(joined))
+      if (el) return el
     }
 
     const last = targetStrings[targetStrings.length - 1]
     if (last) {
-      try {
-        const el = root.querySelector(last)
-        if (el) return el
-      } catch {
-        /* invalid selector */
-      }
+      const el = queryElement(() => root.querySelector(last))
+      if (el) return el
     }
   }
   return null
@@ -123,10 +108,6 @@ export function clearA11yHighlights() {
   highlightedElements = []
 }
 
-/**
- * @param {HTMLElement[]} elements
- * @param {'violations' | 'incomplete' | 'passes'} section
- */
 function applyHighlights(elements, section) {
   clearA11yHighlights()
   if (!elements.length || !SECTION_STYLES[section]) return
@@ -148,39 +129,34 @@ function applyHighlights(elements, section) {
   }
 }
 
-/**
- * Highlight a rule from the last axe run in this iframe (same document as the scan).
- * @param {'violations' | 'incomplete' | 'passes'} section
- * @param {string} ruleId
- * @param {HTMLElement | null | undefined} root
- */
-export async function highlightA11yRule(section, ruleId, root) {
-  const lastResults = getLastAxeResults()
-  if (!lastResults) return
+function normalizeTargets(targets) {
+  if (!Array.isArray(targets)) return []
+  return targets.filter((target) => Array.isArray(target) && target.length > 0)
+}
 
-  const rules = lastResults[section] ?? []
-  const rule = rules.find((r) => r.id === ruleId)
-  if (!rule?.nodes?.length) return
+export async function highlightA11yTargets(section, root, targets) {
+  const normalizedTargets = normalizeTargets(targets)
+  const generation = ++highlightGeneration
+
+  if (!normalizedTargets.length) {
+    clearA11yHighlights()
+    return
+  }
 
   const roots = highlightSearchRoots(root)
   const axe = await loadAxe()
-  /** @type {HTMLElement[]} */
+  if (generation !== highlightGeneration) return
+
   const elements = []
   const seen = new Set()
 
-  for (const node of rule.nodes) {
-    /** @type {HTMLElement | null} */
-    let el = null
-    if (node.element instanceof HTMLElement && node.element.isConnected) {
-      el = node.element
-    } else {
-      const resolved = resolveTarget(axe, node.target, roots)
-      if (resolved instanceof HTMLElement) el = resolved
-    }
-    if (!el || seen.has(el)) continue
-    seen.add(el)
-    elements.push(el)
+  for (const target of normalizedTargets) {
+    const resolved = resolveTarget(axe, target, roots)
+    if (!(resolved instanceof HTMLElement) || seen.has(resolved)) continue
+    seen.add(resolved)
+    elements.push(resolved)
   }
 
+  if (generation !== highlightGeneration) return
   applyHighlights(elements, section)
 }

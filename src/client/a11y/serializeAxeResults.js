@@ -1,4 +1,3 @@
-/** @param {string | undefined} html */
 function failureSummaryText(html) {
   if (!html) return undefined
   return html
@@ -9,7 +8,6 @@ function failureSummaryText(html) {
     .trim()
 }
 
-/** @param {import('axe-core').Result[]} rules */
 function mapRules(rules) {
   return rules.map((rule) => ({
     id: rule.id,
@@ -26,7 +24,6 @@ function mapRules(rules) {
   }))
 }
 
-/** @param {import('axe-core').AxeResults} results */
 export function serializeAxeResults(results) {
   return {
     url: results.url,

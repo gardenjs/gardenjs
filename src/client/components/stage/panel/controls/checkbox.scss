@@ -13,7 +13,6 @@
     border-radius: 0;
     background: var(--c-basic-0);
     cursor: pointer;
-
     &:after {
       position: absolute;
       display: block;
@@ -28,13 +27,25 @@
       transform: rotate(43deg);
       opacity: var(--o, 0);
     }
-
     &:checked {
       background-color: var(--c-primary);
       border: 1px solid var(--c-primary);
       --o: 1;
     }
-
+    &.checkbox--excluded {
+      background-color: var(--c-primary);
+      border: 1px solid var(--c-primary);
+      &:after {
+        width: 0.625rem;
+        height: 0;
+        border: 0;
+        border-top: 2px solid #fff;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+      }
+    }
     &:disabled {
       background-color: var(--c-text);
       cursor: not-allowed;
@@ -45,11 +56,12 @@
         border-color: var(--c-text);
       }
     }
-
-    &:hover:not(:checked):not(:disabled) {
+    &:hover:not(:checked):not(:disabled):not(.checkbox--excluded) {
       border-color: var(--c-primary);
     }
-
+    &.checkbox--excluded:hover:not(:disabled) {
+      border-color: var(--c-primary);
+    }
     &:focus-visible {
       outline: none;
       box-shadow: 0 0 0 1px var(--c-primary);

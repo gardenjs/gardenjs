@@ -1,4 +1,3 @@
-import { setLastAxeResults } from './a11yScanCache.js'
 import { serializeAxeResults } from './serializeAxeResults.js'
 import { A11Y_RESULT, A11Y_SCAN_START } from './messages.js'
 import { isA11yDisabled } from './a11yConfig.js'
@@ -36,14 +35,12 @@ export async function runA11yScanAndReport(root, a11y) {
   try {
     const results = await runA11yScan(a11y)
     if (generation !== scanGeneration) return
-    setLastAxeResults(results)
     window.parent.postMessage(
       { type: A11Y_RESULT, results: serializeAxeResults(results) },
       window.location.origin
     )
   } catch (err) {
     if (generation !== scanGeneration) return
-    setLastAxeResults(null)
     const message =
       err instanceof Error ? err.message : 'Accessibility scan failed.'
     window.parent.postMessage(
