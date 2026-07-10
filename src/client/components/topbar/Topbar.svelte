@@ -212,7 +212,7 @@
 </div>
 <Notification
   open={notificationOpen}
-  message="“Right-click” to pin an element and inspect more elements Element Inspector"
+  message="“Right-click” to pin an element and examine other elements in the Element Inspector"
   onClose={closeNotification}
   onMouseEnter={pauseNotificationClose}
   onMouseLeave={resumeNotificationClose}
