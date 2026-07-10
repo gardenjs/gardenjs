@@ -95,11 +95,19 @@
         background-color: var(--c-basic-0);
         left: 0.0625rem;
         top: 0.0625rem;
-        transition: left 0.2s ease;
+        transition:
+          left 0.2s ease,
+          background-color 0.2s ease;
+      }
+
+      &:checked {
+        background-color: var(--c-primary-bg);
+        border-color: var(--c-primary);
       }
 
       &:checked:after {
         left: 1.3125rem;
+        background-color: var(--c-primary);
       }
 
       &:not(:checked) {
