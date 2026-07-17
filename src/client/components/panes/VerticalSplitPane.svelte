@@ -54,7 +54,7 @@
   }
 
   const drag = (e) => {
-    if (e.buttons !== 1) return
+    if (!dragging || e.buttons !== 1) return
     const newWidth = Math.min(maxWidth, leftWidth + e.movementX)
     leftWidth = Math.max(100, newWidth)
     onSetLeftWidth(leftWidth)
