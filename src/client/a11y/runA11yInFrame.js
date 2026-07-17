@@ -1,7 +1,6 @@
 import { serializeAxeResults } from './serializeAxeResults.js'
 import { A11Y_RESULT, A11Y_SCAN_START } from './messages.js'
-import { isA11yDisabled } from './a11yConfig.js'
-import { runA11yScan } from './runA11yScan.js'
+import { isA11yDisabled, runA11yScan } from './a11yScan.js'
 
 const AUTO_SCAN_DELAY_MS = 400
 
@@ -21,7 +20,9 @@ export function scheduleA11yScan(root, a11y) {
   if (!pendingRoot) return
   clearTimeout(debounceTimer)
   debounceTimer = setTimeout(() => {
-    void runA11yScanAndReport(pendingRoot, pendingA11y)
+    runA11yScanAndReport(pendingRoot, pendingA11y).catch((err) => {
+      console.error(err)
+    })
   }, AUTO_SCAN_DELAY_MS)
 }
 
@@ -41,10 +42,8 @@ export async function runA11yScanAndReport(root, a11y) {
     )
   } catch (err) {
     if (generation !== scanGeneration) return
-    const message =
-      err instanceof Error ? err.message : 'Accessibility scan failed.'
     window.parent.postMessage(
-      { type: A11Y_RESULT, error: message },
+      { type: A11Y_RESULT, error: String(err?.message ?? err) },
       window.location.origin
     )
   }

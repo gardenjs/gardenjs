@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { a11yForAxe, isA11yDisabled } from '../src/client/a11y/a11yConfig.js'
+import { a11yForAxe, isA11yDisabled } from '../src/client/a11y/a11yScan.js'
 import { resolveA11ySettings } from '../src/client/a11y/resolveA11ySettings.js'
 
 function regionDisabledInConfig(axeConfig) {

@@ -84,7 +84,7 @@
 
     if (evt.data?.type === A11Y_HIGHLIGHT) {
       const root = contentPane ?? document.getElementById('garden_app')
-      void highlightA11yTargets(evt.data.section, root, evt.data.targets).catch(
+      highlightA11yTargets(evt.data.section, root, evt.data.targets).catch(
         (err) => {
           console.error('A11y highlight failed:', err)
         }

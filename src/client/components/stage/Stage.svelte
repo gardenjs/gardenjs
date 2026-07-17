@@ -138,10 +138,6 @@
     win.postMessage(message, window.location.origin)
   }
 
-  /**
-   * @param {'violations' | 'incomplete' | 'passes'} section
-   * @param {string[][]} targets
-   */
   function onHighlightA11yRule(section, targets) {
     postToPreviewFrame({
       type: A11Y_HIGHLIGHT,

@@ -1,4 +1,4 @@
-import { GARDEN_DISABLED_AXE_RULE_IDS } from './axeScanDefaults.js'
+const GARDEN_DISABLED_AXE_RULE_IDS = ['region']
 
 const DEFAULT_PARAMETERS = { config: {}, options: {} }
 

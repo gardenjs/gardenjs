@@ -1,4 +1,4 @@
-import { loadAxe } from './loadAxe.js'
+import { loadAxe } from './a11yScan.js'
 
 const HIGHLIGHT_CLASS = 'garden-a11y-highlight'
 const STYLE_ID = 'garden-a11y-highlight-style'

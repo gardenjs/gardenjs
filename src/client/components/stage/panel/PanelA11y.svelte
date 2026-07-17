@@ -1,37 +1,4 @@
 <script>
-  import {
-    displayRuleTags,
-    getHighlightTargets,
-    impactLabel,
-    isNodeHighlightChecked,
-    isRuleHighlightPartial,
-    initialHighlightState,
-    pickDefaultSection,
-    reduceNodeToggle,
-  } from '../../../a11y/a11yPanelHighlight.js'
-
-  /**
-   * @typedef {Object} A11yNode
-   * @property {string} html
-   * @property {string[]} target
-   * @property {string} [failureSummary]
-   *
-   * @typedef {Object} A11yRule
-   * @property {string} id
-   * @property {string} [impact]
-   * @property {string} help
-   * @property {string} description
-   * @property {string} helpUrl
-   * @property {string[]} tags
-   * @property {A11yNode[]} nodes
-   *
-   * @typedef {Object} HighlightState
-   * @property {string | null} highlightRuleId
-   * @property {'all' | 'include' | null} highlightScope
-   * @property {number[]} highlightExcludedIndices
-   * @property {number[]} highlightIncludedIndices
-   */
-
   let {
     a11yState = { scanning: false, results: null, error: null },
     onHighlightA11yRule = () => {},
@@ -39,10 +6,8 @@
   } = $props()
 
   let activeSection = $state('violations')
-  /** @type {string | null} */
   let expandedRuleId = $state(null)
-  /** @type {HighlightState} */
-  let highlight = $state(initialHighlightState())
+  let highlight = $state(emptyHighlight())
 
   const results = $derived(a11yState.results)
   const violationCount = $derived(results?.violations?.length ?? 0)
@@ -66,29 +31,80 @@
     return results.passes
   })
 
-  /** @param {string} id */
+  function emptyHighlight() {
+    return {
+      highlightRuleId: null,
+      highlightScope: null,
+      highlightExcludedIndices: [],
+      highlightIncludedIndices: [],
+    }
+  }
+
+  function impactLabel(impact, section) {
+    if (section === 'passes') return null
+    if (!impact) return 'Issue'
+    return impact.charAt(0).toUpperCase() + impact.slice(1)
+  }
+
+  function pickDefaultSection(scanResults) {
+    if (!scanResults) return 'violations'
+    if ((scanResults.violations?.length ?? 0) > 0) return 'violations'
+    if ((scanResults.incomplete?.length ?? 0) > 0) return 'incomplete'
+    return 'passes'
+  }
+
+  function displayRuleTags(tags) {
+    if (!tags?.length) return []
+    const visible = tags.filter(
+      (tag) => tag.startsWith('cat.') || tag.startsWith('wcag')
+    )
+    return [...visible].sort((a, b) => {
+      const rank = (tag) => (tag.startsWith('cat.') ? 0 : 1)
+      const diff = rank(a) - rank(b)
+      return diff !== 0 ? diff : a.localeCompare(b)
+    })
+  }
+
+  function getHighlightTargets(rule, state) {
+    if (state.highlightScope === 'include') {
+      return state.highlightIncludedIndices
+        .map((index) => rule.nodes[index]?.target)
+        .filter((target) => Array.isArray(target) && target.length > 0)
+    }
+    const excluded = new Set(state.highlightExcludedIndices)
+    return rule.nodes
+      .filter((_, index) => !excluded.has(index))
+      .map((node) => node.target)
+      .filter((target) => Array.isArray(target) && target.length > 0)
+  }
+
+  function isNodeHighlightChecked(ruleId, index, state) {
+    if (state.highlightRuleId !== ruleId) return false
+    if (state.highlightScope === 'include') {
+      return state.highlightIncludedIndices.includes(index)
+    }
+    return !state.highlightExcludedIndices.includes(index)
+  }
+
+  function isRuleHighlightPartial(ruleId, state) {
+    return (
+      state.highlightRuleId === ruleId &&
+      state.highlightScope === 'all' &&
+      state.highlightExcludedIndices.length > 0
+    )
+  }
+
   function toggleRule(id) {
     expandedRuleId = expandedRuleId === id ? null : id
   }
 
-  /** @param {Partial<HighlightState>} next */
-  function applyHighlightState(next) {
-    Object.assign(highlight, next)
-  }
-
   function clearHighlight() {
-    applyHighlightState(initialHighlightState())
+    highlight = emptyHighlight()
     onClearA11yHighlight()
   }
 
-  /** @param {A11yRule} rule */
   function applyRuleHighlight(rule) {
-    const targets = getHighlightTargets(
-      rule,
-      highlight.highlightScope,
-      highlight.highlightIncludedIndices,
-      highlight.highlightExcludedIndices
-    )
+    const targets = getHighlightTargets(rule, highlight)
     if (!targets.length) {
       clearHighlight()
       return
@@ -96,26 +112,16 @@
     onHighlightA11yRule(activeSection, targets)
   }
 
-  /** @param {A11yRule} rule */
   function selectAllNodesHighlight(rule) {
-    applyHighlightState({
+    highlight = {
       highlightRuleId: rule.id,
       highlightScope: 'all',
       highlightExcludedIndices: [],
       highlightIncludedIndices: [],
-    })
-    onHighlightA11yRule(
-      activeSection,
-      getHighlightTargets(
-        rule,
-        highlight.highlightScope,
-        highlight.highlightIncludedIndices,
-        highlight.highlightExcludedIndices
-      )
-    )
+    }
+    onHighlightA11yRule(activeSection, getHighlightTargets(rule, highlight))
   }
 
-  /** @param {A11yRule} rule @param {boolean} checked */
   function toggleRuleHighlight(rule, checked) {
     if (!checked) {
       if (highlight.highlightRuleId === rule.id) clearHighlight()
@@ -124,24 +130,69 @@
     selectAllNodesHighlight(rule)
   }
 
-  /** @param {A11yRule} rule @param {number} index @param {boolean} checked */
   function toggleNodeHighlight(rule, index, checked) {
-    const next = reduceNodeToggle({
-      rule,
-      index,
-      checked,
-      highlightRuleId: highlight.highlightRuleId,
-      highlightScope: highlight.highlightScope,
-      highlightExcludedIndices: highlight.highlightExcludedIndices,
-      highlightIncludedIndices: highlight.highlightIncludedIndices,
-    })
-    if (next.action === 'none') return
-    if (next.action === 'clear') {
+    if (highlight.highlightRuleId !== rule.id) {
+      if (!checked) return
+      highlight = {
+        highlightRuleId: rule.id,
+        highlightScope: 'include',
+        highlightExcludedIndices: [],
+        highlightIncludedIndices: [index],
+      }
+      applyRuleHighlight(rule)
+      return
+    }
+
+    if (highlight.highlightScope === 'all') {
+      const excluded = [...highlight.highlightExcludedIndices]
+      if (!checked) {
+        if (!excluded.includes(index)) excluded.push(index)
+      } else {
+        const i = excluded.indexOf(index)
+        if (i !== -1) excluded.splice(i, 1)
+      }
+      highlight = {
+        highlightRuleId: rule.id,
+        highlightScope: 'all',
+        highlightExcludedIndices: excluded,
+        highlightIncludedIndices: [],
+      }
+      applyRuleHighlight(rule)
+      return
+    }
+
+    if (checked) {
+      if (highlight.highlightIncludedIndices.includes(index)) return
+      const included = [...highlight.highlightIncludedIndices, index].sort(
+        (a, b) => a - b
+      )
+      if (included.length === rule.nodes.length) {
+        selectAllNodesHighlight(rule)
+        return
+      }
+      highlight = {
+        highlightRuleId: rule.id,
+        highlightScope: 'include',
+        highlightExcludedIndices: [],
+        highlightIncludedIndices: included,
+      }
+      applyRuleHighlight(rule)
+      return
+    }
+
+    const included = highlight.highlightIncludedIndices.filter(
+      (i) => i !== index
+    )
+    if (included.length === 0) {
       clearHighlight()
       return
     }
-    const { action: _action, ...patch } = next
-    applyHighlightState(/** @type {Partial<HighlightState>} */ (patch))
+    highlight = {
+      highlightRuleId: rule.id,
+      highlightScope: 'include',
+      highlightExcludedIndices: [],
+      highlightIncludedIndices: included,
+    }
     applyRuleHighlight(rule)
   }
 
@@ -155,7 +206,11 @@
 </script>
 
 <div class="panel_a11y">
-  {#if results}
+  {#if a11yState.scanning && !results}
+    <p class="infotext">Scanning…</p>
+  {:else if a11yState.error && !results}
+    <p class="infotext errortext">{a11yState.error}</p>
+  {:else if results}
     <div class="panel_head">
       <nav class="nav" aria-label="Result categories">
         {#each sections as section (section.id)}
@@ -245,19 +300,12 @@
                         class="checkbox"
                         class:checkbox--excluded={isRuleHighlightPartial(
                           rule.id,
-                          highlight.highlightRuleId,
-                          highlight.highlightScope,
-                          highlight.highlightExcludedIndices
+                          highlight
                         )}
                         checked={highlight.highlightRuleId === rule.id &&
                           highlight.highlightScope === 'all' &&
                           highlight.highlightExcludedIndices.length === 0}
-                        aria-checked={isRuleHighlightPartial(
-                          rule.id,
-                          highlight.highlightRuleId,
-                          highlight.highlightScope,
-                          highlight.highlightExcludedIndices
-                        )
+                        aria-checked={isRuleHighlightPartial(rule.id, highlight)
                           ? 'mixed'
                           : highlight.highlightRuleId === rule.id &&
                             highlight.highlightScope === 'all' &&
@@ -265,9 +313,7 @@
                         onchange={(e) =>
                           toggleRuleHighlight(rule, e.currentTarget.checked)}
                       />
-                      <span class="visually_hidden"
-                        >Highlight all in preview</span
-                      >
+                      <span class="is-hidden">Highlight all in preview</span>
                     </label>
                   </div>
                 </div>
@@ -304,10 +350,7 @@
                                 checked={isNodeHighlightChecked(
                                   rule.id,
                                   index,
-                                  highlight.highlightRuleId,
-                                  highlight.highlightScope,
-                                  highlight.highlightIncludedIndices,
-                                  highlight.highlightExcludedIndices
+                                  highlight
                                 )}
                                 onchange={(e) =>
                                   toggleNodeHighlight(
@@ -316,8 +359,7 @@
                                     e.currentTarget.checked
                                   )}
                               />
-                              <span class="visually_hidden"
-                                >Highlight in preview</span
+                              <span class="is-hidden">Highlight in preview</span
                               >
                             </label>
                           {/if}
@@ -348,6 +390,12 @@
   @use './controls/checkbox.scss';
 
   .panel_a11y {
+    --a11y-violations: hsl(5, 95%, 60%);
+    --a11y-violations-hover: hsl(5, 95%, 40%);
+    --a11y-incomplete: hsl(43, 91%, 45%);
+    --a11y-incomplete-hover: hsl(43, 91%, 40%);
+    --a11y-passes: hsl(98, 50%, 47%);
+    --a11y-passes-hover: hsl(98, 50%, 40%);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -412,28 +460,31 @@
     background-color: var(--c-primary);
   }
   .nav_btn--violations {
-    color: hsl(5, 95%, 60%);
+    color: var(--a11y-violations);
     &:hover,
     &:focus-visible {
-      color: hsl(5, 95%, 40%);
+      color: var(--a11y-violations-hover);
     }
   }
   .nav_btn--incomplete {
-    color: hsl(43, 91%, 45%);
+    color: var(--a11y-incomplete);
     &:hover,
     &:focus-visible {
-      color: hsl(43, 91%, 40%);
+      color: var(--a11y-incomplete-hover);
     }
   }
   .nav_btn--passes {
-    color: hsl(98, 50%, 47%);
+    color: var(--a11y-passes);
     &:hover,
     &:focus-visible {
-      color: hsl(98, 50%, 40%);
+      color: var(--a11y-passes-hover);
     }
   }
   .infotext {
     padding: 0 1.25rem;
+  }
+  .errortext {
+    color: var(--a11y-violations);
   }
   .rules {
     margin: 0;
@@ -581,7 +632,7 @@
       vertical-align: middle;
     }
   }
-  .visually_hidden {
+  .is-hidden {
     position: absolute;
     width: 1px;
     height: 1px;
