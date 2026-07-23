@@ -1,5 +1,5 @@
 <script>
-  import { onMount, onDestroy } from 'svelte'
+  import { onMount, onDestroy, tick } from 'svelte'
   import HorizontalSplitPane from '../panes/HorizontalSplitPane.svelte'
   import ResizePane from '../panes/ResizePane.svelte'
   import PanelComponent from './panel/PanelComponent.svelte'
@@ -8,11 +8,14 @@
   import PanelCode from './panel/PanelCode.svelte'
   import PanelA11y from './panel/PanelA11y.svelte'
   import {
-    A11Y_CLEAR_HIGHLIGHT,
-    A11Y_HIGHLIGHT,
-    A11Y_SCAN_START,
-    A11Y_RESULT,
-  } from '../../a11y/messages.js'
+    a11yClearHighlightMessage,
+    a11yConfigAction,
+    a11yHighlightMessage,
+    a11yInactiveMessage,
+    a11yScanMessage,
+    a11yStateFromFrameMessage,
+    emptyA11yState,
+  } from '../../a11y/stageA11y.js'
 
   let {
     appTheme,
@@ -33,6 +36,8 @@
     stageStyle,
     stageWidth,
     activeTheme,
+    a11yEnabled = true,
+    a11y = undefined,
     onSetStageContainerHeight,
     onSetStageContainerMaxHeight,
     onSetStageContainerWidth,
@@ -44,11 +49,11 @@
 
   let myframeready = $state()
   let myframe = $state()
-  let a11yState = $state({
-    scanning: false,
-    results: null,
-    error: null,
-  })
+  let a11yPaneActive = $state(false)
+  let a11yUiEnabled = $state(true)
+  let a11yState = $state(emptyA11yState())
+
+  const a11yActive = $derived(a11yEnabled && a11yUiEnabled)
 
   const selectedExampleObj = $derived.by(() => {
     if (!das?.examples?.length) return {}
@@ -138,34 +143,52 @@
     win.postMessage(message, window.location.origin)
   }
 
+  function sendA11yScan() {
+    if (!myframeready || !myframe?.contentWindow) return
+    postToPreviewFrame(a11yScanMessage(a11yActive, a11y))
+  }
+
+  function onA11yPaneChange(active) {
+    a11yPaneActive = active
+    if (!active) {
+      postToPreviewFrame(a11yClearHighlightMessage())
+      a11yState = emptyA11yState()
+      postToPreviewFrame(a11yInactiveMessage())
+      return
+    }
+    sendA11yScan()
+  }
+
+  function onToggleA11yUi() {
+    a11yUiEnabled = !a11yUiEnabled
+    if (!a11yUiEnabled) onA11yPaneChange(false)
+  }
+
   function onHighlightA11yRule(section, targets) {
-    postToPreviewFrame({
-      type: A11Y_HIGHLIGHT,
-      section,
-      targets: targets.map((target) => [...target]),
-    })
+    postToPreviewFrame(a11yHighlightMessage(section, targets))
   }
 
   function onClearA11yHighlight() {
-    postToPreviewFrame({ type: A11Y_CLEAR_HIGHLIGHT })
+    postToPreviewFrame(a11yClearHighlightMessage())
   }
+
+  let prevA11yConfig
+  $effect(() => {
+    const next = { active: a11yActive, a11y }
+    const action = a11yConfigAction(prevA11yConfig, next, a11yPaneActive)
+    prevA11yConfig = next
+    if (action === 'deactivate') {
+      a11yState = emptyA11yState()
+      postToPreviewFrame(a11yInactiveMessage())
+    } else if (action === 'scan') {
+      sendA11yScan()
+    }
+  })
 
   function onA11yMessage(evt) {
     if (evt.source !== myframe?.contentWindow) return
-    if (evt.data?.type === A11Y_SCAN_START) {
-      a11yState = {
-        scanning: true,
-        results: a11yState.results,
-        error: null,
-      }
-      return
-    }
-    if (evt.data?.type !== A11Y_RESULT) return
-    a11yState = {
-      scanning: false,
-      results: evt.data.results ?? null,
-      error: evt.data.error ?? null,
-    }
+    const next = a11yStateFromFrameMessage(evt.data, a11yPaneActive)
+    if (next) a11yState = next
   }
 
   function markFrameReady() {
@@ -174,11 +197,46 @@
     }
   }
 
+  function postPreviewState() {
+    const win = myframe?.contentWindow
+    if (!win) return
+    if (
+      !myframe.contentDocument ||
+      !/frame.html$/.test(myframe.contentWindow.location)
+    ) {
+      window.location.reload
+    }
+    win.postMessage(
+      {
+        selectedExample,
+        componentName,
+        stageSize,
+        activeTheme,
+        appTheme,
+        showInspector,
+        showDistanceMeasure,
+        showGrid,
+        paramValues: paramValuesForPostMessage,
+      },
+      window.location.origin
+    )
+  }
+
+  async function onFrameLoad() {
+    myframeready = false
+    await tick()
+    markFrameReady()
+    if (myframeready) {
+      postPreviewState()
+      if (a11yPaneActive && a11yActive) sendA11yScan()
+    }
+  }
+
   $effect(() => {
     if (!myframe) return
     markFrameReady()
-    myframe.addEventListener('load', markFrameReady)
-    return () => myframe.removeEventListener('load', markFrameReady)
+    myframe.addEventListener('load', onFrameLoad)
+    return () => myframe.removeEventListener('load', onFrameLoad)
   })
 
   onMount(() => {
@@ -234,8 +292,24 @@
           selected: selectedExample,
           examples: das.examples.map((ex) => ex.title),
           onSelectExample: setSelectedExample,
+          a11yEnabled: a11yActive,
+          a11yState,
+          onHighlightA11yRule,
+          onClearA11yHighlight,
+          onA11yPaneChange,
         },
         page: PanelExamplesNav,
+      })
+    } else if (a11yActive) {
+      tabs.push({
+        name: 'Accessibility',
+        props: {
+          a11yState,
+          onHighlightA11yRule,
+          onClearA11yHighlight,
+          onActiveChange: onA11yPaneChange,
+        },
+        page: PanelA11y,
       })
     }
     if (!devmodus && das.componentfile) {
@@ -245,15 +319,6 @@
         page: PanelCode,
       })
     }
-    tabs.push({
-      name: 'Accessibility',
-      props: {
-        a11yState,
-        onHighlightA11yRule,
-        onClearA11yHighlight,
-      },
-      page: PanelA11y,
-    })
     return tabs
   }
 
@@ -267,26 +332,7 @@
 
   $effect(() => {
     if (myframeready) {
-      if (
-        !myframe.contentDocument ||
-        !/frame.html$/.test(myframe.contentWindow.location)
-      ) {
-        window.location.reload
-      }
-      myframe.contentWindow.postMessage(
-        {
-          selectedExample,
-          componentName,
-          stageSize,
-          activeTheme,
-          appTheme,
-          showInspector,
-          showDistanceMeasure,
-          showGrid,
-          paramValues: paramValuesForPostMessage,
-        },
-        window.location
-      )
+      postPreviewState()
     }
   })
 
@@ -322,7 +368,14 @@
   {#snippet bottom()}
     <div class="panel">
       {#if panelExpanded}
-        <PanelComponent {tabs} {onToggleExpandPanel} children={undefined} />
+        <PanelComponent
+          {tabs}
+          {onToggleExpandPanel}
+          a11yAvailable={a11yEnabled}
+          {a11yUiEnabled}
+          {onToggleA11yUi}
+          children={undefined}
+        />
       {/if}
     </div>
   {/snippet}

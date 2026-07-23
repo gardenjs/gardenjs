@@ -13,8 +13,18 @@ function notifyScanStart() {
   window.parent.postMessage({ type: A11Y_SCAN_START }, window.location.origin)
 }
 
+function notifyScanResult(payload) {
+  window.parent.postMessage(
+    { type: A11Y_RESULT, ...payload },
+    window.location.origin
+  )
+}
+
 export function scheduleA11yScan(root, a11y) {
-  if (isA11yDisabled(a11y)) return
+  if (isA11yDisabled(a11y)) {
+    clearTimeout(debounceTimer)
+    return
+  }
   pendingRoot = root ?? pendingRoot
   pendingA11y = a11y ?? pendingA11y
   if (!pendingRoot) return
@@ -27,7 +37,11 @@ export function scheduleA11yScan(root, a11y) {
 }
 
 export async function runA11yScanAndReport(root, a11y) {
-  if (!root || isA11yDisabled(a11y)) return
+  if (isA11yDisabled(a11y)) return
+  if (!root) {
+    notifyScanResult({ error: 'Accessibility scan: preview not ready.' })
+    return
+  }
 
   scanGeneration += 1
   const generation = scanGeneration
@@ -36,15 +50,9 @@ export async function runA11yScanAndReport(root, a11y) {
   try {
     const results = await runA11yScan(a11y)
     if (generation !== scanGeneration) return
-    window.parent.postMessage(
-      { type: A11Y_RESULT, results: serializeAxeResults(results) },
-      window.location.origin
-    )
+    notifyScanResult({ results: serializeAxeResults(results) })
   } catch (err) {
     if (generation !== scanGeneration) return
-    window.parent.postMessage(
-      { type: A11Y_RESULT, error: String(err?.message ?? err) },
-      window.location.origin
-    )
+    notifyScanResult({ error: String(err?.message ?? err) })
   }
 }

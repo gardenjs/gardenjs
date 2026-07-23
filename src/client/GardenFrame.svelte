@@ -55,15 +55,21 @@
   let contentPane = $state()
   let mounted = $state(false)
   let lastA11yScanKey = ''
+  let a11yPaneActive = false
+  let a11ySettings = undefined
+
+  function currentA11ySettings() {
+    return a11ySettings ?? config?.a11y
+  }
 
   function scheduleA11yScanIfNeeded() {
-    if (!config.devmodus) return
+    if (!config.devmodus || !a11yPaneActive) return
     const root = contentPane ?? document.getElementById('garden_app')
     if (!root) return
     const scanKey = `${componentName}:${selectedExampleTitle}:${JSON.stringify(selectedExample?.input ?? {})}`
     if (scanKey === lastA11yScanKey) return
     lastA11yScanKey = scanKey
-    tick().then(() => scheduleA11yScan(root, config?.a11y))
+    tick().then(() => scheduleA11yScan(root, currentA11ySettings()))
   }
 
   onMount(() => {
@@ -72,8 +78,25 @@
 
   window.addEventListener('message', (evt) => {
     if (evt.data?.type === A11Y_SCAN) {
+      if ('a11yPaneActive' in evt.data) {
+        const nextActive = evt.data.a11yPaneActive === true
+        if (a11yPaneActive && !nextActive) {
+          clearA11yHighlights()
+          lastA11yScanKey = ''
+        }
+        a11yPaneActive = nextActive
+      }
+      if ('a11y' in evt.data) a11ySettings = evt.data.a11y
+      if (!a11yPaneActive) return
       const root = contentPane ?? document.getElementById('garden_app')
-      runA11yScanAndReport(root, config?.a11y)
+      lastA11yScanKey = ''
+      const run = () =>
+        runA11yScanAndReport(
+          contentPane ?? document.getElementById('garden_app'),
+          currentA11ySettings()
+        ).catch((err) => console.error(err))
+      if (root) run()
+      else tick().then(run)
       return
     }
 
@@ -186,11 +209,13 @@
 
   async function afterRenderHook() {
     await runHooksIfSet(afterRenderedFns)
-    scheduleA11yScan(contentPane, config?.a11y)
+    if (a11yPaneActive) {
+      scheduleA11yScan(contentPane, currentA11ySettings())
+    }
   }
 
   $effect(() => {
-    if (!config.devmodus || !mounted || !contentPane) return
+    if (!config.devmodus || !mounted || !contentPane || !a11yPaneActive) return
     scheduleA11yScanIfNeeded()
   })
 

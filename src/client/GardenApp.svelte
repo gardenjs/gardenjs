@@ -210,6 +210,8 @@
             componentName={$componentName}
             das={$das}
             devmodus={config.devmodus}
+            a11yEnabled={config?.a11y?.disable !== true}
+            a11y={config?.a11y}
             panelExpanded={$panelExpanded}
             selectedExample={$selectedExample}
             showGrid={$showGrid}

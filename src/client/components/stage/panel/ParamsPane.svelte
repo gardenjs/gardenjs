@@ -173,166 +173,182 @@
     </div>
   </div>
 
-  {#if params.length === 0}
-    <div class="empty">No parameters defined.</div>
-  {:else}
-    <div class="grid">
-      {#each params as param (param.name)}
-        {@const controlType = getControlType(param)}
-        <div class="label-cell">
-          <div class="label-row">
-            <span class="label">{param.label || param.name}</span>
-            {#if param.description}
-              <button
-                type="button"
-                class="info-btn"
-                title={openDescriptionKeys.has(param.name)
-                  ? 'Close description'
-                  : 'Show description'}
-                aria-label={openDescriptionKeys.has(param.name)
-                  ? 'Close description'
-                  : 'Show description'}
-                aria-expanded={openDescriptionKeys.has(param.name)}
-                onclick={() => toggleDescription(param.name)}
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><circle
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    fill="none"
-                    stroke="#000"
-                    stroke-width="1.5"
-                    transform="scale(.66667)"
-                  /><path
-                    d="M8 10.667V8m0-2.667h.007"
-                    fill="none"
-                    stroke="#000"
-                    stroke-width="1.5"
-                  /></svg
+  <div class="pane_body">
+    {#if params.length === 0}
+      <div class="empty">No parameters defined.</div>
+    {:else}
+      <div class="grid">
+        {#each params as param (param.name)}
+          {@const controlType = getControlType(param)}
+          <div class="label-cell">
+            <div class="label-row">
+              <span class="label">{param.label || param.name}</span>
+              {#if param.description}
+                <button
+                  type="button"
+                  class="info-btn"
+                  title={openDescriptionKeys.has(param.name)
+                    ? 'Close description'
+                    : 'Show description'}
+                  aria-label={openDescriptionKeys.has(param.name)
+                    ? 'Close description'
+                    : 'Show description'}
+                  aria-expanded={openDescriptionKeys.has(param.name)}
+                  onclick={() => toggleDescription(param.name)}
                 >
-              </button>
-            {/if}
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      fill="none"
+                      stroke="#000"
+                      stroke-width="1.5"
+                      transform="scale(.66667)"
+                    /><path
+                      d="M8 10.667V8m0-2.667h.007"
+                      fill="none"
+                      stroke="#000"
+                      stroke-width="1.5"
+                    /></svg
+                  >
+                </button>
+              {/if}
+            </div>
           </div>
-        </div>
-        <div class="input-col">
-          {#if param.description && openDescriptionKeys.has(param.name)}
-            <div class="description">{param.description}</div>
-          {/if}
-          <div class="input">
-            {#if controlType === 'checkbox' || controlType === 'toggle'}
-              <BooleanControl
-                value={values?.[param.name] ?? undefined}
-                control={controlType}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'number'}
-              <NumberControl
-                value={values?.[param.name] ?? null}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'color'}
-              <ColorPickerControl
-                value={values?.[param.name] ?? undefined}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'date'}
-              <DateControl
-                value={values?.[param.name] ?? undefined}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'time'}
-              <TimeControl
-                value={values?.[param.name] ?? undefined}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'datetime'}
-              <DatetimeControl
-                value={values?.[param.name] ?? undefined}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'array'}
-              <ArrayControl
-                value={values?.[param.name] ?? undefined}
-                schema={param.schema ?? {}}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'object'}
-              <ObjectControl
-                value={values?.[param.name] ?? undefined}
-                schema={param.schema ?? {}}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'multiselect' || controlType === 'checkboxes'}
-              <MultiselectControl
-                value={values?.[param.name] ?? []}
-                options={param.options ?? []}
-                control={controlType}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'range'}
-              <RangeControl
-                value={values?.[param.name] ?? null}
-                min={param.min}
-                max={param.max}
-                step={param.step}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'select' || controlType === 'radio'}
-              <SelectControl
-                value={values?.[param.name] ?? undefined}
-                options={param.options ?? []}
-                control={controlType}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else if controlType === 'textarea' || controlType === 'text'}
-              <TextInputControl
-                value={values?.[param.name] ?? ''}
-                control={controlType}
-                numberOfRows={param.numberOfRows}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
-            {:else}
-              <JsonControl
-                value={values?.[param.name] ?? null}
-                onChange={(v) => onChange?.(param.name, v)}
-              />
+          <div class="input-col">
+            {#if param.description && openDescriptionKeys.has(param.name)}
+              <div class="description">{param.description}</div>
             {/if}
+            <div class="input">
+              {#if controlType === 'checkbox' || controlType === 'toggle'}
+                <BooleanControl
+                  value={values?.[param.name] ?? undefined}
+                  control={controlType}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'number'}
+                <NumberControl
+                  value={values?.[param.name] ?? null}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'color'}
+                <ColorPickerControl
+                  value={values?.[param.name] ?? undefined}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'date'}
+                <DateControl
+                  value={values?.[param.name] ?? undefined}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'time'}
+                <TimeControl
+                  value={values?.[param.name] ?? undefined}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'datetime'}
+                <DatetimeControl
+                  value={values?.[param.name] ?? undefined}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'array'}
+                <ArrayControl
+                  value={values?.[param.name] ?? undefined}
+                  schema={param.schema ?? {}}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'object'}
+                <ObjectControl
+                  value={values?.[param.name] ?? undefined}
+                  schema={param.schema ?? {}}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'multiselect' || controlType === 'checkboxes'}
+                <MultiselectControl
+                  value={values?.[param.name] ?? []}
+                  options={param.options ?? []}
+                  control={controlType}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'range'}
+                <RangeControl
+                  value={values?.[param.name] ?? null}
+                  min={param.min}
+                  max={param.max}
+                  step={param.step}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'select' || controlType === 'radio'}
+                <SelectControl
+                  value={values?.[param.name] ?? undefined}
+                  options={param.options ?? []}
+                  control={controlType}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else if controlType === 'textarea' || controlType === 'text'}
+                <TextInputControl
+                  value={values?.[param.name] ?? ''}
+                  control={controlType}
+                  numberOfRows={param.numberOfRows}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {:else}
+                <JsonControl
+                  value={values?.[param.name] ?? null}
+                  onChange={(v) => onChange?.(param.name, v)}
+                />
+              {/if}
+            </div>
           </div>
-        </div>
-      {/each}
-    </div>
-  {/if}
+        {/each}
+      </div>
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
   @use './controls/button.scss';
 
   .pane {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding: 1.25rem;
-    overflow-y: auto;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
   }
   .header {
     display: flex;
+    flex-shrink: 0;
     justify-content: space-between;
     align-items: center;
-    min-height: 2.125rem;
-    margin-bottom: 1rem;
+    box-sizing: border-box;
+    height: calc(2.5rem + 1px);
+    padding: 0 1.25rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--c-basic-200);
+    background-color: var(--c-basic-0);
   }
   .header-actions {
     display: flex;
     align-items: center;
-    min-height: 2.125rem;
     gap: 0.5rem;
+  }
+  .pane_body {
+    flex: 1;
+    min-height: 0;
+    padding: 1.25rem;
+    overflow-y: auto;
   }
   .title {
     font-size: 0.95rem;

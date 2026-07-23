@@ -1,9 +1,28 @@
 <script>
+  import { onMount } from 'svelte'
+  import {
+    displayRuleTags,
+    emptyHighlight,
+    getHighlightTargets,
+    impactLabel,
+    isNodeHighlightChecked,
+    isRuleHighlightPartial,
+    nextNodeHighlight,
+    nextRuleHighlight,
+    pickDefaultSection,
+  } from '../../../a11y/a11yPanelUi.js'
+
   let {
     a11yState = { scanning: false, results: null, error: null },
     onHighlightA11yRule = () => {},
     onClearA11yHighlight = () => {},
+    onActiveChange = () => {},
   } = $props()
+
+  onMount(() => {
+    onActiveChange(true)
+    return () => onActiveChange(false)
+  })
 
   let activeSection = $state('violations')
   let expandedRuleId = $state(null)
@@ -31,69 +50,6 @@
     return results.passes
   })
 
-  function emptyHighlight() {
-    return {
-      highlightRuleId: null,
-      highlightScope: null,
-      highlightExcludedIndices: [],
-      highlightIncludedIndices: [],
-    }
-  }
-
-  function impactLabel(impact, section) {
-    if (section === 'passes') return null
-    if (!impact) return 'Issue'
-    return impact.charAt(0).toUpperCase() + impact.slice(1)
-  }
-
-  function pickDefaultSection(scanResults) {
-    if (!scanResults) return 'violations'
-    if ((scanResults.violations?.length ?? 0) > 0) return 'violations'
-    if ((scanResults.incomplete?.length ?? 0) > 0) return 'incomplete'
-    return 'passes'
-  }
-
-  function displayRuleTags(tags) {
-    if (!tags?.length) return []
-    const visible = tags.filter(
-      (tag) => tag.startsWith('cat.') || tag.startsWith('wcag')
-    )
-    return [...visible].sort((a, b) => {
-      const rank = (tag) => (tag.startsWith('cat.') ? 0 : 1)
-      const diff = rank(a) - rank(b)
-      return diff !== 0 ? diff : a.localeCompare(b)
-    })
-  }
-
-  function getHighlightTargets(rule, state) {
-    if (state.highlightScope === 'include') {
-      return state.highlightIncludedIndices
-        .map((index) => rule.nodes[index]?.target)
-        .filter((target) => Array.isArray(target) && target.length > 0)
-    }
-    const excluded = new Set(state.highlightExcludedIndices)
-    return rule.nodes
-      .filter((_, index) => !excluded.has(index))
-      .map((node) => node.target)
-      .filter((target) => Array.isArray(target) && target.length > 0)
-  }
-
-  function isNodeHighlightChecked(ruleId, index, state) {
-    if (state.highlightRuleId !== ruleId) return false
-    if (state.highlightScope === 'include') {
-      return state.highlightIncludedIndices.includes(index)
-    }
-    return !state.highlightExcludedIndices.includes(index)
-  }
-
-  function isRuleHighlightPartial(ruleId, state) {
-    return (
-      state.highlightRuleId === ruleId &&
-      state.highlightScope === 'all' &&
-      state.highlightExcludedIndices.length > 0
-    )
-  }
-
   function toggleRule(id) {
     expandedRuleId = expandedRuleId === id ? null : id
   }
@@ -112,87 +68,25 @@
     onHighlightA11yRule(activeSection, targets)
   }
 
-  function selectAllNodesHighlight(rule) {
-    highlight = {
-      highlightRuleId: rule.id,
-      highlightScope: 'all',
-      highlightExcludedIndices: [],
-      highlightIncludedIndices: [],
-    }
-    onHighlightA11yRule(activeSection, getHighlightTargets(rule, highlight))
-  }
-
   function toggleRuleHighlight(rule, checked) {
-    if (!checked) {
-      if (highlight.highlightRuleId === rule.id) clearHighlight()
-      return
-    }
-    selectAllNodesHighlight(rule)
-  }
-
-  function toggleNodeHighlight(rule, index, checked) {
-    if (highlight.highlightRuleId !== rule.id) {
-      if (!checked) return
-      highlight = {
-        highlightRuleId: rule.id,
-        highlightScope: 'include',
-        highlightExcludedIndices: [],
-        highlightIncludedIndices: [index],
-      }
-      applyRuleHighlight(rule)
-      return
-    }
-
-    if (highlight.highlightScope === 'all') {
-      const excluded = [...highlight.highlightExcludedIndices]
-      if (!checked) {
-        if (!excluded.includes(index)) excluded.push(index)
-      } else {
-        const i = excluded.indexOf(index)
-        if (i !== -1) excluded.splice(i, 1)
-      }
-      highlight = {
-        highlightRuleId: rule.id,
-        highlightScope: 'all',
-        highlightExcludedIndices: excluded,
-        highlightIncludedIndices: [],
-      }
-      applyRuleHighlight(rule)
-      return
-    }
-
-    if (checked) {
-      if (highlight.highlightIncludedIndices.includes(index)) return
-      const included = [...highlight.highlightIncludedIndices, index].sort(
-        (a, b) => a - b
-      )
-      if (included.length === rule.nodes.length) {
-        selectAllNodesHighlight(rule)
-        return
-      }
-      highlight = {
-        highlightRuleId: rule.id,
-        highlightScope: 'include',
-        highlightExcludedIndices: [],
-        highlightIncludedIndices: included,
-      }
-      applyRuleHighlight(rule)
-      return
-    }
-
-    const included = highlight.highlightIncludedIndices.filter(
-      (i) => i !== index
-    )
-    if (included.length === 0) {
+    const next = nextRuleHighlight(rule, checked, highlight)
+    if (next === highlight) return
+    if (next.highlightRuleId == null) {
       clearHighlight()
       return
     }
-    highlight = {
-      highlightRuleId: rule.id,
-      highlightScope: 'include',
-      highlightExcludedIndices: [],
-      highlightIncludedIndices: included,
+    highlight = next
+    onHighlightA11yRule(activeSection, getHighlightTargets(rule, highlight))
+  }
+
+  function toggleNodeHighlight(rule, index, checked) {
+    const next = nextNodeHighlight(rule, index, checked, highlight)
+    if (next === highlight) return
+    if (next.highlightRuleId == null) {
+      clearHighlight()
+      return
     }
+    highlight = next
     applyRuleHighlight(rule)
   }
 
@@ -383,6 +277,8 @@
         {/if}
       </div>
     </div>
+  {:else}
+    <p class="infotext">No accessibility results yet.</p>
   {/if}
 </div>
 
@@ -425,7 +321,6 @@
     overscroll-behavior: contain;
   }
   .panel_body_content {
-    max-width: 900px;
     padding: 0 0 1.25rem;
   }
   .nav_btn {
