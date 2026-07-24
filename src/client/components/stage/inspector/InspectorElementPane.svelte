@@ -1,9 +1,8 @@
 <script>
-  import { onMount, onDestroy } from 'svelte'
   import GapMask from './GapMask.svelte'
   import InspectorInfoBox from './InspectorInfoBox.svelte'
 
-  let { contentPane, appTheme } = $props()
+  let { element, appTheme, fixed } = $props()
 
   let overlay
   let infobox
@@ -30,6 +29,13 @@
   let scrollLeft = $state()
 
   let infoboxPosition = $state()
+
+  $effect(() => {
+    if (target !== element) {
+      target = element
+      updateOverlay()
+    }
+  })
 
   function updateOverlay() {
     if (!target) {
@@ -125,6 +131,10 @@
       contentBox.style.height = contentBoxHeight + 'px'
     }
 
+    if (fixed) {
+      return
+    }
+
     updateInfoBox(
       overlayTop,
       overlayBottom,
@@ -208,41 +218,6 @@
     }
     infobox.style.display = 'block'
   }
-
-  const mouseMoveHandler = (event) => {
-    if (
-      event.target &&
-      event.target !== overlay &&
-      !overlay?.contains(event.target)
-    ) {
-      target = event.target
-      updateOverlay()
-    }
-  }
-
-  const mouseOutHandler = (event) => {
-    if (overlay && !overlay.contains(event.relatedTarget)) {
-      margin = null
-      padding = null
-      content = null
-      target = null
-      overlay.style.display = 'none'
-      infobox.style.display = 'none'
-    }
-  }
-
-  onMount(() => {
-    if (contentPane) {
-      contentPane.addEventListener('mousemove', mouseMoveHandler)
-      contentPane.addEventListener('mouseout', mouseOutHandler)
-      document.body.addEventListener('scroll', updateOverlay, { passive: true })
-    }
-  })
-  onDestroy(() => {
-    contentPane.removeEventListener('mousemove', mouseMoveHandler)
-    contentPane.removeEventListener('mouseout', mouseOutHandler)
-    document.body.removeEventListener('scroll', updateOverlay)
-  })
 </script>
 
 <div bind:this={overlay} class="overlay">

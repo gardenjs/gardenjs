@@ -1,5 +1,5 @@
 <script>
-  import InspectorInfoBox from '../InspectorInfoBox.svelte'
+  import InspectorInfoBox from '../inspector/InspectorInfoBox.svelte'
 
   function rand() {
     return Math.floor(Math.random() * 1000)

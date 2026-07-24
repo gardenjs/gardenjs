@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
 
   import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
-  import Inspector from '../client/components/stage/Inspector.svelte'
+  import Inspector from '../client/components/stage/inspector/Inspector.svelte'
   import BackgroundGrid from '../client/components/stage/BackgroundGrid.svelte'
   import DistanceMeasure from '../client/components/stage/DistanceMeasure.svelte'
   /**

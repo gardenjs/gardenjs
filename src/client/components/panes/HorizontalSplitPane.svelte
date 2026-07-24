@@ -49,8 +49,6 @@
   })
 
   function startDrag(e) {
-    console.log('DEBUG', 'start Drag')
-
     e.currentTarget.setPointerCapture(e.pointerId)
     document.body.style.userSelect = 'none'
     dragging = true
