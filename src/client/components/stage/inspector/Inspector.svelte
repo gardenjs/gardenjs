@@ -40,6 +40,8 @@
     if (!fixedElements.includes(currentHoveredElement)) {
       resizeObserver.observe(currentHoveredElement)
       fixedElements.push(currentHoveredElement)
+    } else {
+      fixedElements = fixedElements.filter((el) => el !== currentHoveredElement)
     }
   }
 </script>
