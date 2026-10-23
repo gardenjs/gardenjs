@@ -1,20 +1,33 @@
 <script>
   import { onMount } from 'svelte'
+  import { calculateInspectorBox } from './inspector.utils.js'
   import InspectorElementPane from './InspectorElementPane.svelte'
 
-  let { appTheme } = $props()
-  let overlay
+  let { appTheme, onInspectorElementsChanged, fixedElementBoxes } = $props()
   let currentHoveredElement = $state()
-  let fixedElements = $state([])
+  let currentElementBox = $state()
+
+  const calcEntries = (entries) => {
+    const updatedFixedElementBoxes = entries.map((element) => {
+      return {
+        ...calculateInspectorBox(
+          element.htmlElement,
+          document.body.scrollTop,
+          document.body.scrollLeft
+        ),
+        id: element.id,
+      }
+    })
+
+    onInspectorElementsChanged(updatedFixedElementBoxes)
+  }
 
   let resizeObserver
-  let show = $state(false)
+
   onMount(() => {
     resizeObserver = new ResizeObserver((entries) => {
-      show = false
-      entries.forEach((_) => {})
-      setTimeout(() => {
-        show = true
+      entries.forEach((_) => {
+        calcEntries(fixedElementBoxes)
       })
     })
     window.addEventListener('mousemove', updateHoveredElement)
@@ -29,30 +42,47 @@
     const elements = document.elementsFromPoint(evt.x, evt.y)
     if (elements.length < 5) {
       currentHoveredElement = null
+      currentElementBox = null
     } else if (currentHoveredElement !== elements[1]) {
       currentHoveredElement = elements[1]
+      currentElementBox = calculateInspectorBox(
+        elements[1],
+        document.body.scrollTop,
+        document.body.scrollLeft
+      )
     }
   }
 
   const handleRightClick = (evt) => {
     evt.preventDefault()
     evt.stopPropagation()
-    if (!fixedElements.includes(currentHoveredElement)) {
+
+    let updatedFixedElementBoxes = []
+
+    if (
+      !fixedElementBoxes
+        .map((box) => box.htmlElement)
+        .includes(currentHoveredElement)
+    ) {
       resizeObserver.observe(currentHoveredElement)
-      fixedElements.push(currentHoveredElement)
+      updatedFixedElementBoxes = [
+        ...fixedElementBoxes,
+        { id: crypto.randomUUID(), htmlElement: currentHoveredElement },
+      ]
     } else {
-      fixedElements = fixedElements.filter((el) => el !== currentHoveredElement)
+      updatedFixedElementBoxes = fixedElementBoxes.filter(
+        (el) => el.htmlElement !== currentHoveredElement
+      )
     }
+    calcEntries(updatedFixedElementBoxes)
   }
 </script>
 
-<div bind:this={overlay} class="overlay" oncontextmenu={handleRightClick}>
-  {#if show}
-    {#each fixedElements as fixedElement, index (index)}
-      <InspectorElementPane element={fixedElement} {appTheme} fixed={true} />
-    {/each}
-  {/if}
-  <InspectorElementPane element={currentHoveredElement} {appTheme} />
+<div class="overlay" oncontextmenu={handleRightClick}>
+  {#each fixedElementBoxes as fixedElementBox, index (index)}
+    <InspectorElementPane {...fixedElementBox} {appTheme} fixed={true} />
+  {/each}
+  <InspectorElementPane {...currentElementBox} {appTheme} />
 </div>
 
 <style>

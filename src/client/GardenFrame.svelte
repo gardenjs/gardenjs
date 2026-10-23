@@ -33,6 +33,8 @@
   let showDistanceMeasure = $state(false)
   let showGrid = $state(false)
 
+  let fixedElementBoxes = $state([])
+
   let afterFns = []
   let afterAllFns = []
   let beforeFns = []
@@ -69,6 +71,11 @@
     selectedExampleChanged = selectedExampleTitle !== evt.data.selectedExample
     selectedExampleTitle = evt.data.selectedExample
     appTheme = evt.data.appTheme
+    if (evt.data.unpinInspectorElement) {
+      const id = evt.data.unpinInspectorElement
+      fixedElementBoxes = fixedElementBoxes.filter((el) => el.id !== id)
+      onInspectorElementsChanged(fixedElementBoxes)
+    }
 
     component = componentMap?.[componentName]
 
@@ -244,10 +251,31 @@
       setTimeout(() => reject(new Error('Timeout on')), ms)
     })
   }
+
+  function onInspectorElementsChanged(newFixedElementBoxes) {
+    fixedElementBoxes = newFixedElementBoxes
+    const elements = fixedElementBoxes.map((b) => ({
+      id: b.id,
+      content: {
+        ...b.content,
+        margin: { ...b.content.margin },
+        padding: { ...b.content.padding },
+        classList: [...b.content.classList],
+      },
+      info: { ...b.info, style: { ...b.info.style } },
+    }))
+
+    window.parent.postMessage({ inspector: elements }, window.opener)
+  }
 </script>
 
 {#if mounted && showInspector && contentPane}
-  <Inspector {contentPane} {appTheme} />
+  <Inspector
+    {contentPane}
+    {appTheme}
+    {onInspectorElementsChanged}
+    {fixedElementBoxes}
+  />
 {/if}
 {#if mounted && showGrid}
   <BackgroundGrid

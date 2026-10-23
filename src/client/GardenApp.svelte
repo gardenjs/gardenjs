@@ -74,6 +74,7 @@
     selectedExample,
     updateDasMap,
   } from './logic/routing.js'
+  import { inspectorElements, setInspectorElements } from './logic/inspector.js'
 
   let baseurl = '/garden'
 
@@ -127,6 +128,13 @@
       )
     }
   }
+
+  window.addEventListener('message', (evt) => {
+    if (event.origin != window.location.origin) return
+    if (evt.data.inspector) {
+      setInspectorElements(evt.data.inspector)
+    }
+  })
 </script>
 
 {#if window.top !== window.self}
@@ -224,6 +232,7 @@
             stageStyle={$stageStyle}
             stageWidth={$stageWidth}
             activeTheme={$activeTheme}
+            inspectorElements={$inspectorElements}
             onSetStageContainerHeight={updateStageContainerHeight}
             onSetStageContainerMaxHeight={updateStageContainerMaxHeight}
             onSetStageContainerWidth={updateStageContainerWidth}

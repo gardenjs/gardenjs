@@ -27,6 +27,7 @@
     stageStyle,
     stageWidth,
     activeTheme,
+    inspectorElements,
     onSetStageContainerHeight,
     onSetStageContainerMaxHeight,
     onSetStageContainerWidth,
@@ -187,7 +188,11 @@
     // FOR TEST always active
     tabs.push({
       name: 'Inspector',
-      props: {},
+      props: {
+        inspectorElements,
+        appTheme,
+        onUnpinInspectorElement: handleUnpinInspectorElement,
+      },
       page: PanelInspector,
     })
     return tabs
@@ -209,24 +214,33 @@
       ) {
         window.location.reload
       }
-      myframe.contentWindow.postMessage(
-        {
-          selectedExample,
-          componentName,
-          stageSize,
-          activeTheme,
-          appTheme,
-          showInspector,
-          showDistanceMeasure,
-          showGrid,
-          paramValues: paramValuesForPostMessage,
-        },
-        window.location
-      )
+      updateFrame()
     }
   })
 
   const tabs = $derived(createTabs(das))
+
+  function handleUnpinInspectorElement(id) {
+    updateFrame({ unpinInspectorElement: id })
+  }
+
+  function updateFrame(additionalValues) {
+    myframe.contentWindow.postMessage(
+      {
+        selectedExample,
+        componentName,
+        stageSize,
+        activeTheme,
+        appTheme,
+        showInspector,
+        showDistanceMeasure,
+        showGrid,
+        paramValues: paramValuesForPostMessage,
+        ...additionalValues,
+      },
+      window.location
+    )
+  }
 </script>
 
 <HorizontalSplitPane

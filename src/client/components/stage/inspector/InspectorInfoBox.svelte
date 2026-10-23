@@ -1,10 +1,12 @@
 <script>
   let {
+    id,
     position,
     theme,
     element,
     variant = 'stage',
     showUnpin = false,
+    onUnpinInspectorElement,
   } = $props()
 
   const emptyBox = { top: 0, right: 0, bottom: 0, left: 0 }
@@ -71,7 +73,11 @@
         <div class="infobox_primary-class">{primaryLabel}</div>
       {/if}
       {#if showUnpin}
-        <button class="btn_unpin" type="button">
+        <button
+          class="btn_unpin"
+          type="button"
+          onclick={() => onUnpinInspectorElement(id)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

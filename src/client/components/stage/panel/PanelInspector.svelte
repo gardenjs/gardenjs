@@ -1,56 +1,19 @@
 <script>
   import InspectorInfoBox from '../inspector/InspectorInfoBox.svelte'
 
-  function rand() {
-    return Math.floor(Math.random() * 1000)
-  }
-
-  function createElement() {
-    return {
-      width: rand(),
-      height: rand(),
-      gap: rand(),
-      columnGap: rand(),
-      rowGap: rand(),
-      margin: {
-        top: rand(),
-        right: rand(),
-        bottom: rand(),
-        left: rand(),
-      },
-      padding: {
-        top: rand(),
-        right: rand(),
-        bottom: rand(),
-        left: rand(),
-      },
-      tagName: 'div',
-      classList: ['classA', 'classB', 'classC'],
-    }
-  }
-
-  const elements = [
-    { element: createElement(), theme: 'light' },
-    { element: createElement(), theme: 'light' },
-    { element: createElement(), theme: 'light' },
-    { element: createElement(), theme: 'light' },
-    { element: createElement(), theme: 'light' },
-    { element: createElement(), theme: 'dark' },
-    { element: createElement(), theme: 'dark' },
-    { element: createElement(), theme: 'dark' },
-    { element: createElement(), theme: 'dark' },
-    { element: createElement(), theme: 'dark' },
-  ]
+  let { inspectorElements, appTheme, onUnpinInspectorElement } = $props()
 </script>
 
 <div class="infobox-grid">
-  {#each elements as element, index (index)}
+  {#each inspectorElements as element, index (index)}
     <InspectorInfoBox
-      element={element.element}
-      theme={element.theme}
+      id={element.id}
+      element={element.content}
+      theme={appTheme}
       position={element.position}
       variant="panel"
       showUnpin={true}
+      {onUnpinInspectorElement}
     />
   {/each}
 </div>
