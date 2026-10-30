@@ -42,12 +42,8 @@
     updateStageWidth,
     updateStageRect,
     resetStage,
-    toggleShowInspector,
-    toggleShowDistanceMeasure,
     toggleShowGrid,
     toggleOrientation,
-    showInspector,
-    showDistanceMeasure,
     showGrid,
     setGridSettings,
   } from './logic/stage.js'
@@ -74,11 +70,20 @@
     selectedExample,
     updateDasMap,
   } from './logic/routing.js'
-  import { inspectorElements, setInspectorElements } from './logic/inspector.js'
+  import {
+    showInspector,
+    showDistanceMeasure,
+    toggleShowDistanceMeasure,
+    toggleShowInspector,
+    inspectorElements,
+    setInspectorElements,
+  } from './logic/inspector.js'
 
   let baseurl = '/garden'
 
   let { routes, navTree, dasMap, config } = $props()
+
+  let selectedTabName = $state()
 
   $effect(() => {
     updateNavTree(navTree)
@@ -133,6 +138,9 @@
     if (event.origin != window.location.origin) return
     if (evt.data.inspector) {
       setInspectorElements(evt.data.inspector)
+      if (evt.data.inspector.length > 0) {
+        selectedTabName = 'Inspector'
+      }
     }
   })
 </script>
@@ -214,6 +222,7 @@
             onRevealInExplorer={() => navigateToLeafNode($selectedNode?.href)}
           />
           <Stage
+            bind:selectedTabName
             appTheme={$appTheme}
             componentName={$componentName}
             das={$das}

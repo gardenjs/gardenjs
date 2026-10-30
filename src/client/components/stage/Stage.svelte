@@ -15,6 +15,7 @@
     devmodus,
     panelExpanded,
     selectedExample,
+    selectedTabName = $bindable(),
     showGrid,
     showInspector,
     showDistanceMeasure,
@@ -155,10 +156,10 @@
 
   function createTabs(das) {
     const tabs = []
-    if (das.description) {
-      tabs.push({ name: 'Notes', props: { das }, page: PanelDescription })
-    }
     if (das.examples?.length) {
+      if (das.description) {
+        tabs.push({ name: 'Notes', props: { das }, page: PanelDescription })
+      }
       tabs.push({
         name: 'Examples',
         props: {
@@ -185,16 +186,17 @@
         page: PanelCode,
       })
     }
-    // FOR TEST always active
-    tabs.push({
-      name: 'Inspector',
-      props: {
-        inspectorElements,
-        appTheme,
-        onUnpinInspectorElement: handleUnpinInspectorElement,
-      },
-      page: PanelInspector,
-    })
+    if (showInspector && inspectorElements.length > 0) {
+      tabs.push({
+        name: 'Inspector',
+        props: {
+          inspectorElements,
+          appTheme,
+          onUnpinInspectorElement: handleUnpinInspectorElement,
+        },
+        page: PanelInspector,
+      })
+    }
     return tabs
   }
 
@@ -272,7 +274,12 @@
   {#snippet bottom()}
     <div class="panel">
       {#if panelExpanded}
-        <PanelComponent {tabs} {onToggleExpandPanel} children={undefined} />
+        <PanelComponent
+          bind:selectedTabName
+          {tabs}
+          {onToggleExpandPanel}
+          children={undefined}
+        />
       {/if}
     </div>
   {/snippet}

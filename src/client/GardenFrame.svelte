@@ -59,18 +59,24 @@
     showGrid = evt.data.showGrid === true
     activeTheme = evt.data.activeTheme
     das = dasMap[evt.data.componentName]
-    const rawSelectedExample =
-      das?.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
-    const paramValues = evt.data?.paramValues ?? undefined
-    selectedExample = {
-      ...rawSelectedExample,
-      input: paramValues ?? rawSelectedExample?.input ?? {},
+    if (das) {
+      const rawSelectedExample =
+        das.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
+      const paramValues = evt.data?.paramValues ?? undefined
+      selectedExample = {
+        ...rawSelectedExample,
+        input: paramValues ?? rawSelectedExample?.input ?? {},
+      }
     }
     componentChanged = componentName !== evt.data.componentName
     componentName = evt.data.componentName || 'Welcome'
     selectedExampleChanged = selectedExampleTitle !== evt.data.selectedExample
     selectedExampleTitle = evt.data.selectedExample
     appTheme = evt.data.appTheme
+    if (componentChanged || selectedExampleChanged) {
+      fixedElementBoxes = []
+      onInspectorElementsChanged(fixedElementBoxes)
+    }
     if (evt.data.unpinInspectorElement) {
       const id = evt.data.unpinInspectorElement
       fixedElementBoxes = fixedElementBoxes.filter((el) => el.id !== id)
