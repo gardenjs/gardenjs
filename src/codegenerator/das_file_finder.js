@@ -108,7 +108,7 @@ async function findDasFiles(
 
             const hookContentPromises = hookfiles.map(async (file) => {
               return {
-                ...(await readDasFile(file)),
+                ...(await readHookFile(file)),
                 ...file,
               }
             })
@@ -165,23 +165,40 @@ async function findDasFiles(
   })
 }
 
-async function readDasFile(
-  { filename, relativepath, basepath },
-  getComponentName,
-  getComponentFileNames
-) {
-  let content = await fs.promises.readFile(
+async function loadDasModuleDefault({ filename, relativepath, basepath }) {
+  const content = await fs.promises.readFile(
     path.resolve(basepath, relativepath, filename),
     { encoding: 'utf-8' }
   )
-  // js file
   const module = await import(
     /* @vite-ignore */
     path.resolve(basepath, relativepath, filename) +
       '?' +
       createMd5Hash(content)
   )
-  const dasContent = module.default
+  return module.default
+}
+
+async function readHookFile(file) {
+  const hookContent = await loadDasModuleDefault(file)
+  if (!hookContent) {
+    throw new Error(
+      `Missing default export in hook file ${file.filename} at ${file.relativepath}`
+    )
+  }
+  return hookContent
+}
+
+async function readDasFile(
+  { filename, relativepath, basepath },
+  getComponentName,
+  getComponentFileNames
+) {
+  const dasContent = await loadDasModuleDefault({
+    filename,
+    relativepath,
+    basepath,
+  })
   if (!dasContent.name) {
     dasContent.name = getComponentName(filename)
   }

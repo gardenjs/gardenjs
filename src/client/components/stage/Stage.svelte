@@ -16,6 +16,7 @@
     a11yStateFromFrameMessage,
     emptyA11yState,
   } from '../../a11y/stageA11y.js'
+  import PanelInspector from './panel/PanelInspector.svelte'
 
   let {
     appTheme,
@@ -24,6 +25,7 @@
     devmodus,
     panelExpanded,
     selectedExample,
+    selectedTabName = $bindable(),
     showGrid,
     showInspector,
     showDistanceMeasure,
@@ -36,8 +38,9 @@
     stageStyle,
     stageWidth,
     activeTheme,
-    a11yEnabled = true,
-    a11y = undefined,
+    a11yEnabled,
+    a11y,
+    inspectorElements,
     onSetStageContainerHeight,
     onSetStageContainerMaxHeight,
     onSetStageContainerWidth,
@@ -273,10 +276,10 @@
 
   function createTabs(das) {
     const tabs = []
-    if (das.description) {
-      tabs.push({ name: 'Notes', props: { das }, page: PanelDescription })
-    }
     if (das.examples?.length) {
+      if (das.description) {
+        tabs.push({ name: 'Notes', props: { das }, page: PanelDescription })
+      }
       tabs.push({
         name: 'Examples',
         props: {
@@ -319,6 +322,17 @@
         page: PanelCode,
       })
     }
+    if (showInspector && inspectorElements.length > 0) {
+      tabs.push({
+        name: 'Inspector',
+        props: {
+          inspectorElements,
+          appTheme,
+          onUnpinInspectorElement: handleUnpinInspectorElement,
+        },
+        page: PanelInspector,
+      })
+    }
     return tabs
   }
 
@@ -332,11 +346,40 @@
 
   $effect(() => {
     if (myframeready) {
+      if (
+        !myframe.contentDocument ||
+        !/frame.html$/.test(myframe.contentWindow.location)
+      ) {
+        window.location.reload
+      }
+      updateFrame()
       postPreviewState()
     }
   })
 
-  const tabs = $derived.by(() => createTabs(das))
+  const tabs = $derived(createTabs(das))
+
+  function handleUnpinInspectorElement(id) {
+    updateFrame({ unpinInspectorElement: id })
+  }
+
+  function updateFrame(additionalValues) {
+    myframe.contentWindow.postMessage(
+      {
+        selectedExample,
+        componentName,
+        stageSize,
+        activeTheme,
+        appTheme,
+        showInspector,
+        showDistanceMeasure,
+        showGrid,
+        paramValues: paramValuesForPostMessage,
+        ...additionalValues,
+      },
+      window.location
+    )
+  }
 </script>
 
 <HorizontalSplitPane
@@ -369,11 +412,12 @@
     <div class="panel">
       {#if panelExpanded}
         <PanelComponent
+          bind:selectedTabName
           {tabs}
-          {onToggleExpandPanel}
           a11yAvailable={a11yEnabled}
           {a11yUiEnabled}
           {onToggleA11yUi}
+          {onToggleExpandPanel}
           children={undefined}
         />
       {/if}

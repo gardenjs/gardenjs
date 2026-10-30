@@ -2,7 +2,7 @@
   import { onMount, tick } from 'svelte'
 
   import DefaultRendererBuilder from '../renderer/HtmlRenderer.js'
-  import Inspector from '../client/components/stage/Inspector.svelte'
+  import Inspector from '../client/components/stage/inspector/Inspector.svelte'
   import BackgroundGrid from '../client/components/stage/BackgroundGrid.svelte'
   import DistanceMeasure from '../client/components/stage/DistanceMeasure.svelte'
   import {
@@ -45,6 +45,8 @@
   let showInspector = $state(false)
   let showDistanceMeasure = $state(false)
   let showGrid = $state(false)
+
+  let fixedElementBoxes = $state([])
 
   let afterFns = []
   let afterAllFns = []
@@ -125,12 +127,14 @@
     showGrid = evt.data.showGrid === true
     activeTheme = evt.data.activeTheme
     das = dasMap[evt.data.componentName]
-    const rawSelectedExample =
-      das?.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
-    const paramValues = evt.data?.paramValues ?? undefined
-    selectedExample = {
-      ...rawSelectedExample,
-      input: paramValues ?? rawSelectedExample?.input ?? {},
+    if (das) {
+      const rawSelectedExample =
+        das.examples?.find((ex) => ex.title === evt.data.selectedExample) ?? {}
+      const paramValues = evt.data?.paramValues ?? undefined
+      selectedExample = {
+        ...rawSelectedExample,
+        input: paramValues ?? rawSelectedExample?.input ?? {},
+      }
     }
     componentChanged = componentName !== evt.data.componentName
     if (componentChanged) {
@@ -143,6 +147,15 @@
     }
     selectedExampleTitle = evt.data.selectedExample
     appTheme = evt.data.appTheme
+    if (componentChanged || selectedExampleChanged) {
+      fixedElementBoxes = []
+      onInspectorElementsChanged(fixedElementBoxes)
+    }
+    if (evt.data.unpinInspectorElement) {
+      const id = evt.data.unpinInspectorElement
+      fixedElementBoxes = fixedElementBoxes.filter((el) => el.id !== id)
+      onInspectorElementsChanged(fixedElementBoxes)
+    }
 
     component = componentMap?.[componentName]
 
@@ -334,10 +347,31 @@
       setTimeout(() => reject(new Error('Timeout on')), ms)
     })
   }
+
+  function onInspectorElementsChanged(newFixedElementBoxes) {
+    fixedElementBoxes = newFixedElementBoxes
+    const elements = fixedElementBoxes.map((b) => ({
+      id: b.id,
+      content: {
+        ...b.content,
+        margin: { ...b.content.margin },
+        padding: { ...b.content.padding },
+        classList: [...b.content.classList],
+      },
+      info: { ...b.info, style: { ...b.info.style } },
+    }))
+
+    window.parent.postMessage({ inspector: elements }, window.opener)
+  }
 </script>
 
 {#if mounted && showInspector && contentPane}
-  <Inspector {contentPane} {appTheme} />
+  <Inspector
+    {contentPane}
+    {appTheme}
+    {onInspectorElementsChanged}
+    {fixedElementBoxes}
+  />
 {/if}
 {#if mounted && showGrid}
   <BackgroundGrid

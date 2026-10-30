@@ -85,8 +85,6 @@ export const stageRect = writable({})
 export const panelExpanded = writable(true)
 export const appTheme = localStore('appTheme', 'default')
 
-export const showInspector = writable(false)
-export const showDistanceMeasure = writable(false)
 export const showGrid = writable(false)
 
 export const resetStage = () => {
@@ -269,20 +267,6 @@ export function toggleExpandPanel() {
     stageContainerHeight.set(previousPanelHeight)
   }
   panelExpanded.set(!get(panelExpanded))
-}
-
-export function toggleShowInspector() {
-  showInspector.set(!get(showInspector))
-  if (get(showInspector) && get(showDistanceMeasure)) {
-    showDistanceMeasure.set(false)
-  }
-}
-
-export function toggleShowDistanceMeasure() {
-  showDistanceMeasure.set(!get(showDistanceMeasure))
-  if (get(showInspector) && get(showDistanceMeasure)) {
-    showInspector.set(false)
-  }
 }
 
 export function toggleShowGrid() {

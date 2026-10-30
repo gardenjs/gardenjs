@@ -55,7 +55,7 @@
   }
 
   const drag = (e) => {
-    if (e.buttons !== 1) return
+    if (!dragging || e.buttons !== 1) return
     const newHeight = Math.min(maxHeight, topHeight + e.movementY)
     topHeight = Math.max(100, newHeight)
     onSetTopHeight(topHeight)

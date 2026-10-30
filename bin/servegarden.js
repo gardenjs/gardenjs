@@ -167,6 +167,7 @@ async function runSetupScript() {
     componentFolder,
     gardenViteFile,
     gardenFile,
+    shallCreateViteConfig,
   })
 
   console.log('')
@@ -227,6 +228,7 @@ function createConfigFile({
   libraries,
   gardenViteFile,
   gardenFile,
+  shallCreateViteConfig,
 }) {
   const importStmts = libraries
     .map((lib) => {
@@ -244,6 +246,10 @@ function createConfigFile({
       return `".${lib2FileExtension[lib]}"`
     })
     .join(', ')
+
+  const viteConfigLine = shallCreateViteConfig
+    ? `  vite_config: './${gardenViteFile}',`
+    : `  // vite_config: './${gardenViteFile}',`
 
   const content = `
 ${importStmts}
@@ -274,7 +280,7 @@ export default {
   docs_link: true,
 
   // vite config file:
-  vite_config: './${gardenViteFile}',
+${viteConfigLine}
   
   // Each entry is output with its subpages in the page tree:
   structure: {

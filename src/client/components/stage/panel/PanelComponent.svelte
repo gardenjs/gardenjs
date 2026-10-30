@@ -8,9 +8,8 @@
     a11yAvailable = false,
     a11yUiEnabled = true,
     onToggleA11yUi = () => {},
+    selectedTabName = $bindable(),
   } = $props()
-
-  let selectedTabName = $state({})
 
   const selectedTab = $derived.by(() => {
     if (tabs) {
