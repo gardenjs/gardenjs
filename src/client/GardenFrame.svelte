@@ -73,14 +73,15 @@
     selectedExampleChanged = selectedExampleTitle !== evt.data.selectedExample
     selectedExampleTitle = evt.data.selectedExample
     appTheme = evt.data.appTheme
-    if (componentChanged || selectedExampleChanged) {
-      fixedElementBoxes = []
-      onInspectorElementsChanged(fixedElementBoxes)
-    }
-    if (evt.data.unpinInspectorElement) {
-      const id = evt.data.unpinInspectorElement
-      fixedElementBoxes = fixedElementBoxes.filter((el) => el.id !== id)
-      onInspectorElementsChanged(fixedElementBoxes)
+    if (fixedElementBoxes.length > 0) {
+      if (!showInspector || componentChanged || selectedExampleChanged) {
+        fixedElementBoxes = []
+        onInspectorElementsChanged(fixedElementBoxes)
+      } else if (evt.data.unpinInspectorElement) {
+        const id = evt.data.unpinInspectorElement
+        fixedElementBoxes = fixedElementBoxes.filter((el) => el.id !== id)
+        onInspectorElementsChanged(fixedElementBoxes)
+      }
     }
 
     component = componentMap?.[componentName]
