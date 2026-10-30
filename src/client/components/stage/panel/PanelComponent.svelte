@@ -1,9 +1,12 @@
 <script>
   import PanelContent from './PanelContent.svelte'
 
-  let { tabs = [], children, onToggleExpandPanel } = $props()
-
-  let selectedTabName = $state({})
+  let {
+    tabs = [],
+    children,
+    onToggleExpandPanel,
+    selectedTabName = $bindable(),
+  } = $props()
 
   const selectedTab = $derived.by(() => {
     if (tabs) {

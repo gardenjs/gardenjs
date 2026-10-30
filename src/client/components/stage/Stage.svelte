@@ -6,6 +6,7 @@
   import PanelExamplesNav from './panel/PanelExamplesNav.svelte'
   import PanelDescription from './panel/PanelDescription.svelte'
   import PanelCode from './panel/PanelCode.svelte'
+  import PanelInspector from './panel/PanelInspector.svelte'
 
   let {
     appTheme,
@@ -14,6 +15,7 @@
     devmodus,
     panelExpanded,
     selectedExample,
+    selectedTabName = $bindable(),
     showGrid,
     showInspector,
     showDistanceMeasure,
@@ -26,6 +28,7 @@
     stageStyle,
     stageWidth,
     activeTheme,
+    inspectorElements,
     onSetStageContainerHeight,
     onSetStageContainerMaxHeight,
     onSetStageContainerWidth,
@@ -153,10 +156,10 @@
 
   function createTabs(das) {
     const tabs = []
-    if (das.description) {
-      tabs.push({ name: 'Notes', props: { das }, page: PanelDescription })
-    }
     if (das.examples?.length) {
+      if (das.description) {
+        tabs.push({ name: 'Notes', props: { das }, page: PanelDescription })
+      }
       tabs.push({
         name: 'Examples',
         props: {
@@ -183,6 +186,17 @@
         page: PanelCode,
       })
     }
+    if (showInspector && inspectorElements.length > 0) {
+      tabs.push({
+        name: 'Inspector',
+        props: {
+          inspectorElements,
+          appTheme,
+          onUnpinInspectorElement: handleUnpinInspectorElement,
+        },
+        page: PanelInspector,
+      })
+    }
     return tabs
   }
 
@@ -202,24 +216,33 @@
       ) {
         window.location.reload
       }
-      myframe.contentWindow.postMessage(
-        {
-          selectedExample,
-          componentName,
-          stageSize,
-          activeTheme,
-          appTheme,
-          showInspector,
-          showDistanceMeasure,
-          showGrid,
-          paramValues: paramValuesForPostMessage,
-        },
-        window.location
-      )
+      updateFrame()
     }
   })
 
   const tabs = $derived(createTabs(das))
+
+  function handleUnpinInspectorElement(id) {
+    updateFrame({ unpinInspectorElement: id })
+  }
+
+  function updateFrame(additionalValues) {
+    myframe.contentWindow.postMessage(
+      {
+        selectedExample,
+        componentName,
+        stageSize,
+        activeTheme,
+        appTheme,
+        showInspector,
+        showDistanceMeasure,
+        showGrid,
+        paramValues: paramValuesForPostMessage,
+        ...additionalValues,
+      },
+      window.location
+    )
+  }
 </script>
 
 <HorizontalSplitPane
@@ -251,7 +274,12 @@
   {#snippet bottom()}
     <div class="panel">
       {#if panelExpanded}
-        <PanelComponent {tabs} {onToggleExpandPanel} children={undefined} />
+        <PanelComponent
+          bind:selectedTabName
+          {tabs}
+          {onToggleExpandPanel}
+          children={undefined}
+        />
       {/if}
     </div>
   {/snippet}
